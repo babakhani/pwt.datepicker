@@ -1,0 +1,38 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Persian Calendar</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		
+		<link href="css/pwt.datepicker.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery.js"></script>		
+		<script type="text/javascript" src="js/persianDate.js"></script>
+		<script type="text/javascript" src="js/pwt.datepicker.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+                  $(document).ready(function() {
+                        $(".datePicker").pDatepicker({
+                              viewFormat : "YYYY/ MM / DD   HH:mm:ss",
+                              daysTitleFormat : "YYYY MMMM",
+                              sendOption : "p",
+                              position : [-10, 100],
+                              autoclose : true, 
+                              toolbox : false
+                        });
+                  });
+		</script>
+		<div class="container" >
+			<input type="text" class="datePicker" name="startDate"  value="08-22-2011" />
+			<br/>
+			<br/>
+			<input type="text" class="datePicker" name="endDate"  value="08-22-2011" />
+			<br/>
+			<br/>
+			<input type="text" class="datePicker" name="endDate"   />
+			<br/>
+			<br/>
+			<input type="text" class="datePicker" name="endDate"  value="09-10-2012"  />
+		</div>
+	</body>
+</html>
