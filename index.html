@@ -8,13 +8,21 @@
 		<script type="text/javascript" src="js/jquery.js"></script>		
 		<script type="text/javascript" src="js/persianDate.js"></script>
 		<script type="text/javascript" src="js/pwt.datepicker.js"></script>
+		<style>
+			input{
+				width:220px;
+				
+			}
+			
+		</style>
+		
 	</head>
 	<body>
 		<script type="text/javascript">
 			// Script
                   $(document).ready(function() {
                         $(".datePicker").pDatepicker({
-                              viewFormat : "YYYY/ MM / DD   HH:mm:ss",
+                              viewFormat : "YYYY- MM - DD dddd  HH:mm:ss",
                               daysTitleFormat : "YYYY MMMM",
                               sendOption : "p",
                               position : [-10, 100],
@@ -23,7 +31,7 @@
                         });
                   });
 		</script>
-		<div class="container" >
+		<div class="input" >
 			<input type="text" class="datePicker" name="startDate"  value="08-22-2011" />
 			<br/>
 			<br/>

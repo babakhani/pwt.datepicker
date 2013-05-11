@@ -3,7 +3,7 @@
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // babakhani reza@gmail.com
 // babakhani.github.io/PersianWTK
-// Version Beta 0.0.1
+// Beta Version 0.0.2
 
 // Dependency :  Jquery.js , persianDate.js
 

@@ -3,11 +3,9 @@
 
 .project
 
-js/persianDatepicker.html
+.pydevproject
 
-js/persianDatepicker.jade
-
-doc.txt
+*.prefs
 
 js/pwt.datepicker.html
 
