@@ -3,45 +3,36 @@
 	<head>
 		<title>Persian Calendar</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		
+
 		<link href="css/pwt-datepicker.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="js/jquery.js"></script>		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.mustache.js"></script>
+		
 		<script type="text/javascript" src="js/pwt-date.js"></script>
 		<script type="text/javascript" src="js/pwt-datepicker.js"></script>
 		<style>
-			input{
-				width:220px;
-			}
+                  input {
+                        width: 220px;
+                  }
 		</style>
 	</head>
 	<body>
 		<script type="text/javascript">
-			// Script
-			
-			
-			
                   $(document).ready(function() {
-                        $(".datePicker").persianDatepicker({
+                  		var options = {
                               viewFormat : "YYYY- MM - DD dddd  HH:mm:ss",
                               daysTitleFormat : "YYYY MMMM",
                               sendOption : "p",
                               position : [-10, 100],
-                              autoclose : true, 
+                              autoclose : true,
                               toolbox : false
-                        });
+                       };
+                        $(".datePicker").persianDatepicker();
                   });
 		</script>
 		<div class="input" >
 			<input type="text" class="datePicker" name="startDate"  value="08-22-2011" />
-			<br/>
-			<br/>
-			<input type="text" class="datePicker" name="endDate"  value="08-22-2011" />
-			<br/>
-			<br/>
-			<input type="text" class="datePicker" name="endDate"   />
-			<br/>
-			<br/>
-			<input type="text" class="datePicker" name="endDate"  value="09-10-2012"  />
+			
 		</div>
 	</body>
 </html>
