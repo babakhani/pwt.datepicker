@@ -38,7 +38,9 @@ String.prototype.toPersianDigit = function(a) {
             return peDigitArr.join('');
       });
 };
-var range = function(e){
+var log = function(input){
+      console.log(input);
+},range = function(e){
       r = [];
       var i=0;
       while (i<=e-1)
@@ -977,20 +979,23 @@ var range = function(e){
             this.state.selectedDay = this.state.viewDay = pd.date();
             return this;
       },
-      option:function(key,val){
-            if(val && typeof val == "object"){
-                  for(i in val ){
-                        this[i] = val;
+      option:function(options){
+           var key = options[0],val = options[1];
+           // is array
+            if(typeof options[0] === "object"){
+                  for(o in key ){
+                        this[o] = key[o];
                   }
+                  return this;
             }
-            else if(val && val !== "undefined"){
+            else if(val && val !== "undefined" || val == false){
                   this[key] = val;
                   return this;
             }else{
                   return this[key];
             }     
       }
-},pDatepicker = function(mainElem,options) {     
+},Datepicker = function(mainElem,options) {     
       // Prevent Duplicate 
       if (!$(mainElem).data("datepicker")){
             inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
@@ -1020,11 +1025,10 @@ var range = function(e){
                          output = dp[funcName](args);
                   }
                   else{
-                        this.pDatePicker = new pDatepicker(this, options);
+                        this.pDatePicker = new Datepicker(this, options);
                   }
             });
             return output;
-           
       };
 })(jQuery);
 
