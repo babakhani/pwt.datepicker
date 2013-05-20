@@ -858,12 +858,8 @@ var log = function(input){
       mask : false, //unix,Gregorian
       
       // Jquery Datepicker Options
-      altField:"",
-      altFormat:"",
       
-      
-      
-      viewFormatter : function(unixDate /* javascript date object*/) {
+viewFormatter : function(unixDate /* javascript date object*/) {
             var self = this;
             var pdate = new persianDate(unixDate);
             return self._formatDigit(pdate.format(self.viewFormat));
@@ -1017,12 +1013,11 @@ var log = function(input){
                   $.error("Invalid selector");
             }
             $(this).each(function() {
-                  // $(object).("methud",args);
-                  if(typeof args[0] == "string"){
-                         var dp = $(this).data("datepicker")
-                         ,funcName = args[0]
-                         ,funcArgs = args.splice(0,1);
-                         output = dp[funcName](args);
+                  // encapsulation Args
+                   var emptyArr = new Array,tempArg = args.concat(emptyArr),dp = $(this).data("datepicker");
+                   if(dp && typeof tempArg[0] == "string"){
+                         var funcName = tempArg[0],funcArgs = tempArg.splice(0,1);
+                         output = dp[funcName](tempArg);
                   }
                   else{
                         this.pDatePicker = new Datepicker(this, options);
