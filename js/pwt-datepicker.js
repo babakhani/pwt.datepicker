@@ -10,7 +10,6 @@
       0.0.3 remove jquery tmpl
 */
 (function(){
- 
 $.tmpl = function(input,dict) {
     // Micro Mustache Template engine
     String.prototype.format = function string_format(arrayInput) {
@@ -855,6 +854,13 @@ var range = function(e){
       autoClose : false,
       toolbox : true,
       mask : false, //unix,Gregorian
+      
+      // Jquery Datepicker Options
+      altField:"",
+      altFormat:"",
+      
+      
+      
       viewFormatter : function(unixDate /* javascript date object*/) {
             var self = this;
             var pdate = new persianDate(unixDate);
@@ -899,6 +905,12 @@ var range = function(e){
                   self._appendMaskInput()
             };
             return this
+      },
+      // Removes the datepicker functionality completely. 
+      destroy:function(){
+            this.inputElem.removeClass(self.cssClass);
+            this.element.main.remove();
+            return this;
       },
       _formatDigit : function(digit) {
             if (this.persianDigit)
@@ -964,28 +976,55 @@ var range = function(e){
             this.state.selectedMonth = this.state.viewMonth = pd.month();
             this.state.selectedDay = this.state.viewDay = pd.date();
             return this;
+      },
+      option:function(key,val){
+            if(val && typeof val == "object"){
+                  for(i in val ){
+                        this[i] = val;
+                  }
+            }
+            else if(val && val !== "undefined"){
+                  this[key] = val;
+                  return this;
+            }else{
+                  return this[key];
+            }     
       }
-},pDatepicker = function(options, mainElem) {
-      inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
-            inputElem : $(mainElem)
-      }]);
-      this._defineCurrentState();
-      var viewName = 'default';
-      this.view = this.views[viewName];
-      this.raiseEvent('render');
-      this.view.render(this);
+},pDatepicker = function(mainElem,options) {     
+      // Prevent Duplicate 
+      if (!$(mainElem).data("datepicker")){
+            inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
+                  inputElem : $(mainElem)
+            }]);
+            this._defineCurrentState();
+            var viewName = 'default';
+            this.view = this.views[viewName];
+            this.raiseEvent('render');
+            this.view.render(this);
+            this.inputElem.data("datepicker",this);
+      }
       return this;
 };
 (function($) {
-      $.fn.persianDatepicker  = $.fn.pDatepicker = function(options) {
+      $.fn.persianDatepicker = $.fn.pDatepicker = function(options) {
+            var args = Array.prototype.slice.call(arguments),output = this;
             if (!this) {
                   $.error("Invalid selector");
             }
-            rootElement = this[0];
             $(this).each(function() {
-                  this.pDatePicker = new pDatepicker(options, this);
+                  // $(object).("methud",args);
+                  if(typeof args[0] == "string"){
+                         var dp = $(this).data("datepicker")
+                         ,funcName = args[0]
+                         ,funcArgs = args.splice(0,1);
+                         output = dp[funcName](args);
+                  }
+                  else{
+                        this.pDatePicker = new pDatepicker(this, options);
+                  }
             });
-            return this;
+            return output;
+           
       };
 })(jQuery);
 

@@ -6,8 +6,6 @@
 
 		<link href="css/pwt-datepicker.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/jquery.mustache.js"></script>
-		
 		<script type="text/javascript" src="js/pwt-date.js"></script>
 		<script type="text/javascript" src="js/pwt-datepicker.js"></script>
 		<style>
@@ -18,20 +16,23 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+                  var dp;
                   $(document).ready(function() {
                   		var options = {
                               viewFormat : "YYYY- MM - DD dddd  HH:mm:ss",
                               daysTitleFormat : "YYYY MMMM",
                               sendOption : "p",
-                              position : [-10, 100],
+                             // position : [-10, 100],
                               autoclose : true,
                               toolbox : false
                        };
-                        $(".datePicker").persianDatepicker();
+                       $(".datePicker").persianDatepicker(options);
+                       dp =  $(".datePicker").data("datepicker");
                   });
 		</script>
 		<div class="input" >
 			<input type="text" class="datePicker" name="startDate"  value="08-22-2011" />
+			
 			
 		</div>
 	</body>
