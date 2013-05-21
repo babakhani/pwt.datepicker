@@ -32,7 +32,10 @@
                               altField: "#alternateField",
                               altFormat: "u",
                               altFieldFormatter:function(unix){
-                              		return unix;
+                              		var pdate = new persianDate(unix);
+                              		pdate.formatPersian
+                              		pdate.formatPersian = false;
+						return pdate.format("YYYY MM DD");
                               },
                               onShow:function(){
                               		//console.log("user config onShow event ")
@@ -48,8 +51,9 @@
                   });
 		</script>
 		<div class="input" >
-			<input type="text" class="datePicker" name="startDate"  value="08-22-2011" />
-			<input type="text" id="alternateField"  />
+			
+			<input type="text" class="datePicker"  value="08-22-2011" />
+			<input type="text" id="alternateField" name="startDate"  />
 			<br/>
 			
 			
