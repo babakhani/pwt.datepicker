@@ -1034,6 +1034,13 @@ var log = function(input){
       onHide:function(self){},
       onSelect: function(unixDate){
       },
+      updateStaff:function(){
+            this._syncViewWidthSelected()
+           this.dayPickerView.updateView()
+            this.monthPickerView.updateView()
+            this.yearPickerView.updateView()
+            return this;
+      },
       _observer: function(){
            var self = this;
            self.inputElem.bind("textchange",function(){
@@ -1042,6 +1049,7 @@ var log = function(input){
                        if(newDate != "Invalid Date"){
                             var newPersainDate = new persianDate(newDate);
                             self._updateState("unix",newPersainDate.valueOf());
+                            self.updateStaff();
                        }
                  }
            })    
@@ -1051,6 +1059,7 @@ var log = function(input){
                        if(newDate != "Invalid Date"){
                             var newPersainDate = new persianDate(newDate);
                             self._updateState("unix",newPersainDate.valueOf());
+                             self.updateStaff();
                        }
                  }
            })           
