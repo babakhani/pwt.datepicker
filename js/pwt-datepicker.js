@@ -16,13 +16,14 @@
      0.0.3 remove jquery tmpl
 */
 (function ($) {
+      
+   
       $.event.special.textchange = {
             setup: function (data, namespaces) {
                   $.event.special.textchange.saveLastValue(this);
                   $(this).bind('keyup.textchange', $.event.special.textchange.handler);
                   $(this).bind('cut.textchange paste.textchange input.textchange', $.event.special.textchange.delayedHandler);
             },
-            
             teardown: function (namespaces) {
                   $(this).unbind('.textchange');
             },
@@ -39,7 +40,8 @@
               var current = element[0].contentEditable === 'true' ? element.html() : element.val();
                   if (current !== element.data('lastValue')) {
                         element.trigger('textchange',  element.data('lastValue'));
-                        element.data('lastValue', current);
+                       
+                       // element.data('lastValue', current);
                   }
             },
             saveLastValue: function (element) {
@@ -935,7 +937,7 @@ var log = function(input){
       toolbox : true,
       // 0.0.4      
       format: false, 
-      obeserver: false,      
+      observer: false,      
       altField : false,
       altFormat: "unix",
       
@@ -1000,7 +1002,7 @@ var log = function(input){
             var self = this;
             this.inputElem.addClass(self.cssClass);
             if (self.mask) {self._appendMaskInput();};
-            if(self.obeserver){self._observer();}
+            if(self.observer){self._observer();}
             // TODO:  Must Remove Before Release 0.1.0
             if(self.format){self.viewFormat = self.format}
             if (self.viewFormatter){self.formatter = self.viewFormatter}
@@ -1035,14 +1037,26 @@ var log = function(input){
       _observer: function(){
            var self = this;
            self.inputElem.bind("textchange",function(){
-                 var newDate = new Date(self.inputElem.val());
-                 if(newDate != "Invalid Date"){
-                      var newPersainDate = new persianDate(newDate);
-                        self._updateState("unix",newPersainDate.valueOf());
+                if(!self._flagSelfManipulate){
+                       var newDate = new Date(self.inputElem.val());
+                       if(newDate != "Invalid Date"){
+                            var newPersainDate = new persianDate(newDate);
+                            self._updateState("unix",newPersainDate.valueOf());
+                       }
                  }
-           })
+           })    
+           $(self.altField).bind("textchange",function(){
+                 if(!self._flagSelfManipulate){
+                       var newDate = new Date($(this).val());                
+                       if(newDate != "Invalid Date"){
+                            var newPersainDate = new persianDate(newDate);
+                            self._updateState("unix",newPersainDate.valueOf());
+                       }
+                 }
+           })           
            return this;
       },
+      _flagSelfManipulate : true,
       _selectDate:function(key,unixDate){
             var self = this;                                          
             self._updateState("unix",unixDate);
@@ -1093,6 +1107,7 @@ var log = function(input){
       },
       _updateInputElement : function() {
             var self = this;
+            self._flagSelfManipulate = true;
             if (self.mask) {
                   self.visualInput.val(self.maskFormatter(self.state.unixDate));
             }
@@ -1101,7 +1116,8 @@ var log = function(input){
                   $(self.altField).val(self.altFieldFormatter(self.state.unixDate));
                   
             }
-            this.inputElem.val(self.formatter(self.state.unixDate));
+            this.inputElem.val(self.formatter(self.state.unixDate)).data({"lastValue":""});
+            self._flagSelfManipulate = false;
             return this;
       },
       // one time run
