@@ -4,11 +4,96 @@
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // babakhani reza@gmail.com
 // babakhani.github.io/PersianWebToolkit
-// Beta Version 0.0.3
+// Beta Version 0.0.4
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
-      0.0.3 remove jquery tmpl
+      0.0.4
+            Implement Jquery plugin manifest
+            Add Observer Option
+            Add : format,formatter, altField,altFormat,altFieldFormatter 
+                        show(),hide(),destroy()
+            deprecate: viewFormat ,mask,maskFormatter,viewFormatter
+     0.0.3 remove jquery tmpl
 */
+(function ($) {
+      $.event.special.textchange = {
+            setup: function (data, namespaces) {
+                  $.event.special.textchange.saveLastValue(this);
+                  $(this).bind('keyup.textchange', $.event.special.textchange.handler);
+                  $(this).bind('cut.textchange paste.textchange input.textchange', $.event.special.textchange.delayedHandler);
+            },
+            
+            teardown: function (namespaces) {
+                  $(this).unbind('.textchange');
+            },
+            handler: function (event) {
+                  $.event.special.textchange.triggerIfChanged($(this));
+            },
+            delayedHandler: function (event) {
+                  var element = $(this);
+                  setTimeout(function () {
+                        $.event.special.textchange.triggerIfChanged(element);
+                  }, 25);
+            },
+            triggerIfChanged: function (element) {
+              var current = element[0].contentEditable === 'true' ? element.html() : element.val();
+                  if (current !== element.data('lastValue')) {
+                        element.trigger('textchange',  element.data('lastValue'));
+                        element.data('lastValue', current);
+                  }
+            },
+            saveLastValue: function (element) {
+                  $(element).data('lastValue', element.contentEditable === 'true' ? $(element).html() : $(element).val());
+            }
+      };
+      
+      $.event.special.hastext = {
+            
+            setup: function (data, namespaces) {
+                  $(this).bind('textchange', $.event.special.hastext.handler);
+            },
+            
+            teardown: function (namespaces) {
+                  $(this).unbind('textchange', $.event.special.hastext.handler);
+            },
+            
+            handler: function (event, lastValue) {
+                  if ((lastValue === '') && lastValue !== $(this).val()) {
+                        $(this).trigger('hastext');
+                  }
+            }
+      };
+      
+      $.event.special.notext = {
+            
+            setup: function (data, namespaces) {
+                  $(this).bind('textchange', $.event.special.notext.handler);
+            },
+            
+            teardown: function (namespaces) {
+                  $(this).unbind('textchange', $.event.special.notext.handler);
+            },
+            
+            handler: function (event, lastValue) {
+                  if ($(this).val() === '' && $(this).val() !== lastValue) {
+                        $(this).trigger('notext');
+                  }
+            }
+      };    
+      // Enhance val() so that this plugin is aware of programmatic changes to
+      // text using val().
+      var origValFn = $.fn.val;
+      $.fn.val = function () {
+            var returnValue = origValFn.apply(this, arguments);
+            if (arguments.length) {
+                  this.each(function () {
+                        $.event.special.textchange.triggerIfChanged($(this));
+                  });
+            }
+            return returnValue;
+      };
+})(jQuery);
+
 (function(){
 $.tmpl = function(input,dict) {
     // Micro Mustache Template engine
@@ -22,7 +107,7 @@ $.tmpl = function(input,dict) {
                          return arrayInput[firstKey];
                    }
             }
-            return output = this.replace(/{{\s*[\w\.]+\s*}}/g,replacer);  
+            return this.replace(/{{\s*[\w\.]+\s*}}/g,replacer);  
       };
      return $(input.format(dict));
 };
@@ -444,7 +529,6 @@ var log = function(input){
             selectedYear : "selected",
             toolbox : "toolbox ",
             btnToday : "btn-today"
-
       },
       container : {},
       views : {
@@ -485,18 +569,18 @@ var log = function(input){
                         }
                         // SHow Hide Picker ------------------------
                         self.inputElem.focus(function() {
-                              self.element.main.show();
+                              self.show();
                         });
                         self.inputElem.click(function(e) {
                               e.stopPropagation();
                               return false;
                         });
                         self.inputElem.blur(function() {
-                              self.element.main.hide();
+                              self.hide();
                         });
                         $(document).click(function() {
                               self.inputElem.blur();
-                              self.element.main.hide();
+                              self.hide();
                         });
                         $(self.element.main).mousedown(function(e) {
                               e.stopPropagation();
@@ -590,11 +674,7 @@ var log = function(input){
                               year : pd.year(),
                               persianDigit :  self.persianDigit
                         }).selectDate(self.state.unixDate).attachEvent("selectDay", function(x) {
-                              self._updateState("unix", x);
-                              self.dayPickerView.updateView();
-                              if (self.autoClose) {
-                                    self.element.main.hide();
-                              }
+                              self._selectDate("unix",x);
                         });
                         this.updateView = function() {
                               self.dayPickerView.mGrid.updateAs(self.state.viewYear, self.state.viewMonth);
@@ -617,7 +697,6 @@ var log = function(input){
                               btnPrevText : ">"
                         };
                         self.element.monthBox = $.tmpl(self.tmpl.header,self.view_data).appendTo(self.container.monthView);
-
                         self.element.monthBox.children("." + self.cssClass.btnSwitch).click(function() {
                               self.view.changeView(self, "year")
                               return false;
@@ -670,9 +749,10 @@ var log = function(input){
                         };
                         self.element.yearHeaderBox = $.tmpl(self.tmpl.header,self.view_data).appendTo(self.container.yearView);
                         this.applyYearList = function() {
-                              var pd = new persianDate(self.state.unixDate);
-                              var year = self.state.viewYear;
-                              var remaining = parseInt(year / 12) * 12;
+                              var pd = new persianDate(self.state.unixDate)
+                              ,year = self.state.viewYear
+                              ,remaining = parseInt(year / 12) * 12;
+                              
                               self.container.yearView.children("." + self.cssClass.yearItem).remove();
                               // Apply Year
                               for (i in range(12)) {
@@ -830,7 +910,6 @@ var log = function(input){
         self.state.year = year;
         self.state.month = month;
         self.view.renderDays(self);
-        
         return this;
     },
     goToYear : function(year) {
@@ -850,20 +929,35 @@ var log = function(input){
       daysTitleFormat : "YYYY MMMM",
       persianDigit : true,
       // Released Do not Any Change
-      viewFormat : "YYYY-MM-DD",
       viewMode : "day", /// day,month,year
       position : "auto", // [x,y]
       autoClose : false,
       toolbox : true,
+      // 0.0.4      
+      format: false, 
+      obeserver: false,      
+      altField : false,
+      altFormat: "unix",
+      
+      // Deprecated In 0.0.4
       mask : false, //unix,Gregorian
+      viewFormat : "YYYY / MM / DD",
       
-      // Jquery Datepicker Options
-      
-viewFormatter : function(unixDate /* javascript date object*/) {
+      formatter : function(unixDate /* javascript date object*/) {
             var self = this;
             var pdate = new persianDate(unixDate);
             return self._formatDigit(pdate.format(self.viewFormat));
       },
+      altFieldFormatter:function(unixDate){
+             var self = this;
+             if (self.altFormat.toLowerCase() == "gregorian" | self.altFormat.toLowerCase() == "g" )
+                  return new Date(self.state.unixDate);
+            if (self.altFormat.toLowerCase() == "unix" | self.altFormat.toLowerCase() == "u")
+                   return self.state.unixDate;
+            else
+                   return new persianDate(self.state.unixDate).format(self.altFormat);
+      },
+      // Deprecated In 0.0.4
       maskFormatter : function(unixDate /* javascript date object*/) {
             var self = this;
             if (self.mask.toLowerCase() == "gregorian")
@@ -885,29 +979,78 @@ viewFormatter : function(unixDate /* javascript date object*/) {
             viewMonth : 0,
             viewDay : 0
       },
-      events : {
-      },
-      // Public Methud
+      events : {},
+      _viewed: false,
+      // ------------------------------------------------------------------------ Public Methud
       show : function() {
             this.element.main.show();
+            this.onShow(this);
+            this._viewed = true;
             return this;
       },
       hide : function() {
-            this.element.main.hide();
+            if(this._viewed){
+                  this.element.main.hide();
+                  this.onHide(this);
+                  this._viewed = false;
+            }
             return this;
       },
       init : function() {
             var self = this;
             this.inputElem.addClass(self.cssClass);
-            if (self.mask) {
-                  self._appendMaskInput()
-            };
+            if (self.mask) {self._appendMaskInput();};
+            if(self.obeserver){self._observer();}
+            // TODO:  Must Remove Before Release 0.1.0
+            if(self.format){self.viewFormat = self.format}
+            if (self.viewFormatter){self.formatter = self.viewFormatter}
             return this
       },
       // Removes the datepicker functionality completely. 
       destroy:function(){
             this.inputElem.removeClass(self.cssClass);
             this.element.main.remove();
+            return this;
+      },
+      option:function(options){
+           var key = options[0],val = options[1];
+           // is array
+            if(typeof options[0] === "object"){
+                  for(o in key ){
+                        this[o] = key[o];
+                  }
+                  return this;
+            }
+            else if(val && val !== "undefined" || val == false){
+                  this[key] = val;
+                  return this;
+            }else{
+                  return this[key];
+            }     
+      },
+      onShow:function(self){},
+      onHide:function(self){},
+      onSelect: function(unixDate){
+      },
+      _observer: function(){
+           var self = this;
+           self.inputElem.bind("textchange",function(){
+                 var newDate = new Date(self.inputElem.val());
+                 if(newDate != "Invalid Date"){
+                      var newPersainDate = new persianDate(newDate);
+                        self._updateState("unix",newPersainDate.valueOf());
+                 }
+           })
+           return this;
+      },
+      _selectDate:function(key,unixDate){
+            var self = this;                                          
+            self._updateState("unix",unixDate);
+            self.dayPickerView.updateView();
+            self.onSelect(unixDate,this)
+            if (self.autoClose) {
+                  self.element.main.hide();
+            }
             return this;
       },
       _formatDigit : function(digit) {
@@ -926,7 +1069,9 @@ viewFormatter : function(unixDate /* javascript date object*/) {
             }).removeAttr("class");
             self.visualInput.attr("id", "");
             this.inputElem.after(self.visualInput);
+            return this;
       },
+      // Update Every Thing This Update All State
       _updateState : function(key, val) {
             var self = this;
             if (key == "year") {
@@ -951,7 +1096,12 @@ viewFormatter : function(unixDate /* javascript date object*/) {
             if (self.mask) {
                   self.visualInput.val(self.maskFormatter(self.state.unixDate));
             }
-            this.inputElem.val(self.viewFormatter(self.state.unixDate));
+            
+            if(self.altField && $(self.altField).length >= 1 ){
+                  $(self.altField).val(self.altFieldFormatter(self.state.unixDate));
+                  
+            }
+            this.inputElem.val(self.formatter(self.state.unixDate));
             return this;
       },
       // one time run
@@ -974,36 +1124,18 @@ viewFormatter : function(unixDate /* javascript date object*/) {
             this.state.selectedMonth = this.state.viewMonth = pd.month();
             this.state.selectedDay = this.state.viewDay = pd.date();
             return this;
-      },
-      option:function(options){
-           var key = options[0],val = options[1];
-           // is array
-            if(typeof options[0] === "object"){
-                  for(o in key ){
-                        this[o] = key[o];
-                  }
-                  return this;
-            }
-            else if(val && val !== "undefined" || val == false){
-                  this[key] = val;
-                  return this;
-            }else{
-                  return this[key];
-            }     
       }
 },Datepicker = function(mainElem,options) {     
       // Prevent Duplicate 
-      if (!$(mainElem).data("datepicker")){
-            inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
-                  inputElem : $(mainElem)
-            }]);
-            this._defineCurrentState();
-            var viewName = 'default';
-            this.view = this.views[viewName];
-            this.raiseEvent('render');
-            this.view.render(this);
-            this.inputElem.data("datepicker",this);
-      }
+      inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
+            inputElem : $(mainElem)
+      }]);
+      this._defineCurrentState();
+      var viewName = 'default';
+      this.view = this.views[viewName];
+      this.raiseEvent('render');
+      this.view.render(this);
+      this.inputElem.data("datepicker",this);
       return this;
 };
 (function($) {

@@ -19,12 +19,24 @@
                   var dp;
                   $(document).ready(function() {
                   		var options = {
-                              viewFormat : "YYYY- MM - DD dddd  HH:mm:ss",
+                  			format:"YY- MM - DD dddd  HH:mm:ss",
+                  			// Deprecated
+                              //viewFormat : "YYYY- MM - DD dddd  HH:mm:ss",
                               daysTitleFormat : "YYYY MMMM",
                               sendOption : "p",
-                             // position : [-10, 100],
+                              //position : [2, 2],
                               autoclose : true,
-                              toolbox : false
+                              toolbox : false,
+                              altField: "#alternateField",
+                              altFormat: "u",
+                              onShow:function(){
+                              		console.log("user config onShow event ")
+                              },onHide:function(){
+                        			console.log("user config onHide event ")
+                              },onSelect:function(unix){
+                        			console.log("user config onSelect event as : "+unix)
+                              	
+                              }
                        };
                        $(".datePicker").persianDatepicker(options);
                        dp =  $(".datePicker").data("datepicker");
@@ -32,7 +44,8 @@
 		</script>
 		<div class="input" >
 			<input type="text" class="datePicker" name="startDate"  value="08-22-2011" />
-			<input type="text" class="datePicker" name="startDate"  value="08-22-2021" />
+			<input type="text" id="alternateField"  />
+			<br/>
 			
 			
 		</div>
