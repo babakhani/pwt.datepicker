@@ -9,53 +9,61 @@
 		<script type="text/javascript" src="js/pwt-date.js"></script>
 		<script type="text/javascript" src="js/pwt-datepicker.js"></script>
 		<style>
-                  input {
-                        width: 220px;
-                  }
+			.center-content {
+				display: block;
+				width: 700px;
+				margin: 0px auto 0px auto;
+				min-height: 300px;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 	<body>
 		<script type="text/javascript">
-                  var dp;
-                  $(document).ready(function() {
-                  		var options = {
-                  			format:"YYYY- MM - DD dddd  HH:mm:ss",
-                              formatter:function(unix){
-                              		return new persianDate(unix).format("YYYY- MM - DD dddd  HH:mm:ss");
-                              },
-                              daysTitleFormat : "YYYY MMMM",
-                              observer:true,
-                              sendOption : "p",
-                              //position : [2, 2],
-                              autoclose : true,
-                              toolbox : false,
-                              altField: "#alternateField",
-                              altFormat: "u",
-                              altFieldFormatter:function(unix){
-                              		var pdate = new persianDate(unix);
-                              		pdate.formatPersian
-                              		pdate.formatPersian = false;
-						return pdate.format("YYYY MM DD");
-                              },
-                              onShow:function(){
-                              		//console.log("user config onShow event ")
-                              },onHide:function(){
-                        			//console.log("user config onHide event ")
-                              },onSelect:function(unix){
-                        			//console.log("user config onSelect event as : "+unix)
-                              	
-                              }
-                       };
-                       $(".datePicker").persianDatepicker(options);
-                       dp =  $(".datePicker").data("datepicker");
-                  });
+            var dp;
+            $(document).ready(function() {
+                var options = {
+                    format : "YYYY/MM/DD",
+                    formatter : function(unix) {
+                        var pdate = new persianDate(unix);
+                        pdate.formatPersian = false;
+                        return pdate.format("YYYY/MM/DD");
+                        //return new persinDate(unix).format("YYYY/MM/DD");
+                    },
+                    daysTitleFormat : "YYYY MMMM",
+                    observer : true,
+                    sendOption : "p",
+                    //position : [2, 2],
+                    autoclose : true,
+                    toolbox : true,
+                    altField : "#alternateField",
+                    altFormat : "u",
+                    altFieldFormatter : function(unix) {
+                        var pdate = new persianDate(unix);
+                        pdate.formatPersian
+                        pdate.formatPersian = false;
+                        return pdate.format("YYYY MM DD");
+                    },
+                    onShow : function() {
+                        //console.log("user config onShow event ")
+                    },
+                    onHide : function() {
+                        //console.log("user config onHide event ")
+                    },
+                    onSelect : function(unix) {
+                        //console.log("user config onSelect event as : "+unix)
+
+                    }
+                };
+                $(".datePicker").persianDatepicker(options);
+                dp = $(".datePicker").data("datepicker");
+            });
 		</script>
-		<div class="input" >
-			
+		<div class="center-content" >
 			<input type="text" class="datePicker"  value="08-22-2011" />
-			<input type="text" id="alternateField" name="startDate"  />
+			<input type="hidden" id="alternateField" name="startDate"  />
+			<input type="text" />
 			<br/>
-			
 			
 		</div>
 	</body>

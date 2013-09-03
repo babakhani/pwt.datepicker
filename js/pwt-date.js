@@ -325,9 +325,9 @@
                   gDate.setYear(pd[0]);
                   gDate.setMonth(pd[1]);
                   gDate.setDate(pd[2]);
-                  // TODO:
+                  // TODO: Fix Hourse Important
 
-                  gDate.setHours(parray[3] ? parray[3] : 0);
+                  gDate.setHours(parray[3] ? parray[3] : 1);
                   gDate.setMinutes(parray[4] ? parray[4] : 0);
                   gDate.setSeconds(parray[5] ? parray[5] : 0);
                   return gDate;
