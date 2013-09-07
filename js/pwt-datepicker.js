@@ -7,6 +7,10 @@
 // Beta Version 0.0.4
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
+       0.0.6
+            Add manual entry
+            rename $.tmpl 
+ 
       0.0.5
             Fix Datepicker position on window.resize
             Add manual text change 
