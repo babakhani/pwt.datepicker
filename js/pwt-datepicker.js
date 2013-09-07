@@ -100,7 +100,7 @@
 })(jQuery);
 
 (function () {
-    $.tmpl = function (input, dict) {
+    $.tmplMustache = function (input, dict) {
         // Micro Mustache Template engine
         String.prototype.format = function string_format(arrayInput) {
             function replacer(key) {
@@ -465,7 +465,7 @@
                                                       </div>\
                                                       <table cellspacing='0' class='{{css.daysTable}}'  ><tbody><tr><td /><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr></tbody></table>\
                                                 </div>";
-                          self.element = $.tmpl(self.tmpl.main, self.view_data).appendTo(self.container);
+                          self.element = $.tmplMustache(self.tmpl.main, self.view_data).appendTo(self.container);
                           self.header = self.createElementByClass(self.cssClass.header);
                           self.headerRow = self.createElementByClass(self.cssClass.headerRow);
                           for (weekDay in self.weekRange) {
@@ -569,7 +569,7 @@
                            "<div class='{{css.yearView}}' ></div>" + //
                            "<div class='{{css.toolbox}}' ></div>" + //
                            "</div>";
-                          self.element.main = $.tmpl(self.tmpl.main, self.view_data).hide().appendTo($("body"));
+                          self.element.main = $.tmplMustache(self.tmpl.main, self.view_data).hide().appendTo($("body"));
                           // Define Elements
                           self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
                           self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView).hide();
@@ -661,7 +661,7 @@
                               btnSwitchText: self._formatDigit(pd.format(self.daysTitleFormat)),
                               btnPrevText: ">"
                           };
-                          self.element.dayBox = $.tmpl(self.tmpl.header, self.view_data).appendTo(this.container);
+                          self.element.dayBox = $.tmplMustache(self.tmpl.header, self.view_data).appendTo(this.container);
                           self.element.dayBox.children("." + self.cssClass.btnSwitch).click(function () {
                               self.view.changeView(self, "month");
 
@@ -716,7 +716,7 @@
                               btnSwitchText: pd.format("YYYY"),
                               btnPrevText: ">"
                           };
-                          self.element.monthBox = $.tmpl(self.tmpl.header, self.view_data).appendTo(self.container.monthView);
+                          self.element.monthBox = $.tmplMustache(self.tmpl.header, self.view_data).appendTo(self.container.monthView);
                           self.element.monthBox.children("." + self.cssClass.btnSwitch).click(function () {
                               self.view.changeView(self, "year")
                               return false;
@@ -767,7 +767,7 @@
                               btnSwitchText: self._formatDigit(remaining) + "-" + self._formatDigit(remaining + 11),
                               btnPrevText: ">"
                           };
-                          self.element.yearHeaderBox = $.tmpl(self.tmpl.header, self.view_data).appendTo(self.container.yearView);
+                          self.element.yearHeaderBox = $.tmplMustache(self.tmpl.header, self.view_data).appendTo(self.container.yearView);
                           this.applyYearList = function () {
                               var pd = new persianDate(self.state.unixDate)
                               , year = self.state.viewYear
