@@ -4,9 +4,10 @@
 .project
 
 .pydevproject
-
+.gitignore
 *.prefs
 
 js/pwt.datepicker.html
-
+.settings
 js/pwt.datepicker.jade
+
