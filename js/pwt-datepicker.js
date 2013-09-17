@@ -877,7 +877,7 @@ var log = function(input){
     _updateState : function() {
         var self = this;
         var t = new persianDate();
-        self.daysCount = t.getDaysInMonth(self.state.year, self.state.month);
+        self.daysCount = t.daysInMonth(self.state.year, self.state.month);
         self.firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(self.state.year, self.state.month);
         return this;
     },
