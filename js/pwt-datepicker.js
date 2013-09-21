@@ -7,6 +7,8 @@
 // Beta Version 0.0.4
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
+       0.2.0
+            Add jquery manifest some version
        0.0.6
             Add manual entry
             rename $.tmpl 
