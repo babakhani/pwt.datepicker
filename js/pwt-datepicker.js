@@ -4,7 +4,7 @@
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // babakhani reza@gmail.com
 // babakhani.github.io/PersianWebToolkit
-// Beta Version 0.2.1
+// Beta Version 0.2.2
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
       0.2.2
