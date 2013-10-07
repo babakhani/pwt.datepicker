@@ -4,9 +4,15 @@
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // babakhani reza@gmail.com
 // babakhani.github.io/PersianWebToolkit
-// Beta Version 0.0.4
+// Beta Version 0.2.1
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
+      0.2.2
+          Fix Ie8 
+      0.2.1
+            Fix manual entry
+       0.2.0
+            Add jquery manifest some version
        0.0.6
             Add manual entry
             rename $.tmpl 
@@ -24,6 +30,32 @@
      0.0.3 remove jquery tmpl
 */
 (function ($) {
+          
+Object.keys = Object.keys || (function() {
+          var hasOwnProperty = Object.prototype.hasOwnProperty, hasDontEnumBug = ! {
+                    toString : null
+          }.propertyIsEnumerable("toString"), DontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'], DontEnumsLength = DontEnums.length;
+
+          return function(o) {
+                    if ( typeof o != "object" && typeof o != "function" || o === null)
+                              throw new TypeError("Object.keys called on a non-object");
+
+                    var result = [];
+                    for (var name in o) {
+                              if (hasOwnProperty.call(o, name))
+                                        result.push(name);
+                    }
+
+                    if (hasDontEnumBug) {
+                              for (var i = 0; i < DontEnumsLength; i++) {
+                                        if (hasOwnProperty.call(o, DontEnums[i]))
+                                                  result.push(DontEnums[i]);
+                              }
+                    }
+
+                    return result;
+          };
+})();
 
 
     $.event.special.textchange = {
@@ -148,7 +180,7 @@
 
 
     var log = function (input) {
-        console.log(input);
+        //console.log(input);
     }, range = function (e) {
         r = [];
         var i = 0;
@@ -232,14 +264,18 @@
             if (!eventName || !this.events) {
                 return;
             }
+            if(args){
+            }else{
+                  args = [];
+            }
             var currentObject = this.events[eventName];
             if (!currentObject) {
                 return;
             } else if (typeof currentObject == 'function') {
-                currentObject.apply(this, args);
+                      currentObject.apply(this, args);
             } else {
                 for (e in currentObject) {
-                    currentObject[e].apply(this, args);
+                          currentObject[e].apply(this, args);
                 }
             }
             return this;
@@ -600,7 +636,9 @@
                               return false;
                           });
                           self.inputElem.blur(function () {
-                              self.hide();
+                             if ( !$.browser.msie ) {
+                                    self.hide();
+                             }
                           });
                           $(document).click(function () {
                               self.inputElem.blur();
@@ -611,20 +649,16 @@
                               return false;
                           });
                           // ----------------------------------------
-
                           self.view.changeView(self, self.viewMode);
-
-
                           return this;
                       },
 
                       fixPosition: function (self) {
                           var inputX = self.inputElem.offset().top;
                           var inputY = self.inputElem.offset().left;
-
                           if (self.position == "auto") {
-
-                              var inputHeight = self.fullHeight(self.inputElem);
+                                // TODO: fuulheight has problem in ie8 and temporary fixed
+                              var inputHeight = self.inputElem.height();
                               self.element.main.css({
                                   top: (inputX + inputHeight) + 'px',
                                   left: inputY + 'px'
@@ -1097,8 +1131,6 @@
 
                   self.inputElem.bind("keyup", function (e) {
                       if (!self._flagSelfManipulate) {
-
-
                           var trueKey;
                           if (e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || e.keyCode == cKey))) {
                               trueKey = true;
@@ -1119,6 +1151,7 @@
                                   var newPersainDate = new persianDate(inputArray);
                                   self._updateState("unix", newPersainDate.valueOf(), false);
                                   self.updateStaff();
+                                  self._updateInputElement();
                               }, 800)
                           }
                           return true;
@@ -1199,14 +1232,12 @@
                   if (self.altField && $(self.altField).length >= 1) {
                       $(self.altField).val(self.altFieldFormatter(self.state.unixDate));
                   }
-
                   // Update Display Field
                   this.inputElem.val(self.formatter(self.state.unixDate)).data({ "lastValue": "" });
                   // Update Display Field MetaData
                   var peDate = new pDate(self.state.unixDate);
                   peDate.formatPersian = false;
                   this.inputElem.attr("pDateEnChar", peDate.format("YYYY/MM/DD"));
-
                   self._flagSelfManipulate = false;
                   return this;
               },
