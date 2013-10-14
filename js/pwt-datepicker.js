@@ -999,8 +999,7 @@ Object.keys = Object.keys || (function() {
 
               // Deprecated In 0.0.4
               mask: false, //unix,Gregorian
-              viewFormat: "YYYY / MM / DD",
-
+              viewFormat: "YYYY/MM/DD",
               formatter: function (unixDate /* javascript date object*/) {
                   var self = this;
                   var pdate = new persianDate(unixDate);
