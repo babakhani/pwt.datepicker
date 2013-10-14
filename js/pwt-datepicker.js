@@ -4,7 +4,7 @@
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // babakhani reza@gmail.com
 // babakhani.github.io/PersianWebToolkit
-// Beta Version 0.2.1
+// Beta Version 0.2.2
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
       0.2.2
@@ -229,8 +229,8 @@ Object.keys = Object.keys || (function() {
             return $(element).height()
             + parseInt($(element).css("padding-top"))
             + parseInt($(element).css("padding-bottom"))
-            + parseInt($(element).css("border-top"))
-            + parseInt($(element).css("border-bottom"))
+            + parseInt($(element).css("borderTopWidth"))
+            + parseInt($(element).css("borderBottomWidth"));
         },
         // Event Management
         attachEvent: function (eventName, func) {
@@ -652,13 +652,11 @@ Object.keys = Object.keys || (function() {
                           self.view.changeView(self, self.viewMode);
                           return this;
                       },
-
                       fixPosition: function (self) {
                           var inputX = self.inputElem.offset().top;
                           var inputY = self.inputElem.offset().left;
                           if (self.position == "auto") {
-                                // TODO: fuulheight has problem in ie8 and temporary fixed
-                              var inputHeight = self.inputElem.height();
+                              var inputHeight   = self.fullHeight(self.inputElem);
                               self.element.main.css({
                                   top: (inputX + inputHeight) + 'px',
                                   left: inputY + 'px'
@@ -999,8 +997,7 @@ Object.keys = Object.keys || (function() {
 
               // Deprecated In 0.0.4
               mask: false, //unix,Gregorian
-              viewFormat: "YYYY / MM / DD",
-
+              viewFormat: "YYYY/MM/DD",
               formatter: function (unixDate /* javascript date object*/) {
                   var self = this;
                   var pdate = new persianDate(unixDate);
