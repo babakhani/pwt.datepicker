@@ -7,6 +7,8 @@
 // Beta Version 0.2.2
 // Dependency :  Jquery.js , pwt-date.js
  Chnage Log:
+      0.2.3
+          Fix Paste An cntl+v Event
       0.2.2
           Fix Ie8 
       0.2.1
@@ -177,10 +179,11 @@ Object.keys = Object.keys || (function() {
             return enDigitArr.join('');
         });
     };
-
-
-    var log = function (input) {
-        //console.log(input);
+var delay = function(callback,ms){
+          clearTimeout(window.datepickerTimer);
+          window.datepickerTimer = setTimeout(callback, ms);
+    },log = function (input) {
+       // console.log(input);
     }, range = function (e) {
         r = [];
         var i = 0;
@@ -928,13 +931,13 @@ Object.keys = Object.keys || (function() {
                   });
                   return this;
               },
-              _updateState: function () {
+            _updateState: function () {
                   var self = this;
                   var t = new persianDate();
                   self.daysCount = t.daysInMonth(self.state.year, self.state.month);
                   self.firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(self.state.year, self.state.month);
                   return this;
-              },
+            },
               selectDate: function (unixDate) {
                   var self = this, reRenderFlag;
                   var sDate = new persianDate(unixDate);
@@ -994,7 +997,9 @@ Object.keys = Object.keys || (function() {
               observer: false,
               altField: false,
               altFormat: "unix",
-
+              
+              
+              inputDelay: 800,
               // Deprecated In 0.0.4
               mask: false, //unix,Gregorian
               viewFormat: "YYYY/MM/DD",
@@ -1048,202 +1053,198 @@ Object.keys = Object.keys || (function() {
                   this._viewed = true;
                   return this;
               },
-              hide: function () {
+             
+            hide: function () {
                   if (this._viewed) {
-                      this.element.main.hide();
-                      this.onHide(this);
-                      this._viewed = false;
+                        this.element.main.hide();
+                        this.onHide(this);
+                        this._viewed = false;
                   }
                   return this;
-              },
-              init: function () {
+            }, init: function () {
                   var self = this;
-                  this.inputElem.addClass(self.cssClass);
-                  if (self.mask) { self._appendMaskInput(); };
-                  if (self.observer) { self._observer(); }
-                  // TODO:  Must Remove Before Release 0.1.0
-                  if (self.format) { self.viewFormat = self.format };
-                  if (self.viewFormatter) { self.formatter = self.viewFormatter };
 
-                  $(window).resize(function () {
-                      self.view.fixPosition(self);
+                  this.inputElem.addClass(self.cssClass);
+                  if (self.mask) {
+                        self._appendMaskInput();
+                  };
+                  if (self.observer) {
+                        self._observer();
+                  }
+                  // TODO:  Must Remove Before Release 0.1.0
+                  if (self.format) {
+                        self.viewFormat = self.format
+                  };
+                  if (self.viewFormatter) {
+                        self.formatter = self.viewFormatter
+                  };
+
+                  $(window).resize(function() {
+                        self.view.fixPosition(self);
                   });
                   return this
-              },
-              // Removes the datepicker functionality completely. 
-              destroy: function () {
+            },
+            // Removes the datepicker functionality completely.
+            destroy: function () {
                   this.inputElem.removeClass(self.cssClass);
                   this.element.main.remove();
                   return this;
-              },
-              option: function (options) {
+            }, option: function (options) {
                   var key = options[0], val = options[1];
                   // is array
-                  if (typeof options[0] === "object") {
-                      for (o in key) {
-                          this[o] = key[o];
-                      }
-                      return this;
-                  }
-                  else if (val && val !== "undefined" || val == false) {
-                      this[key] = val;
-                      return this;
+                  if ( typeof options[0] === "object") {
+                        for (o in key) {
+                              this[o] = key[o];
+                        }
+                        return this;
+                  } else if (val && val !== "undefined" || val == false) {
+                        this[key] = val;
+                        return this;
                   } else {
-                      return this[key];
+                        return this[key];
                   }
-              },
-              onShow: function (self) { },
-              onHide: function (self) { },
-              onSelect: function (unixDate) {
-              },
-              updateStaff: function () {
+            }, onShow: function (self) { }, onHide: function (self) { }, onSelect: function (unixDate) {
+            }, updateStaff: function () {
                   this._syncViewWidthSelected()
                   this.dayPickerView.updateView()
                   this.monthPickerView.updateView()
                   this.yearPickerView.updateView()
                   return this;
-              },
-              _observer: function () {
-
+            }, _observer: function () {
                   var self = this;
-
-
                   var ctrlDown = false;
-                  var ctrlKey = 17, vKey = 86, cKey = 67;
-
-                  $(document).keydown(function (e) {
-                      if (e.keyCode == ctrlKey)
-                          ctrlDown = true;
-                  }).keyup(function (e) {
-                      if (e.keyCode == ctrlKey)
-                          ctrlDown = false;
+                  var ctrlKey = [17, 91], vKey = 86, cKey = 67;
+                  $(document).keydown(function(e) {
+                        if ($.inArray(e.keyCode, ctrlKey) > 0)
+                              ctrlDown = true;
+                  }).keyup(function(e) {
+                        if ($.inArray(e.keyCode, ctrlKey) > 0)
+                              ctrlDown = false;
                   });
-                  var delay = (function () {
-                      var timer = 0;
-                      return function (callback, ms) {
-                          clearTimeout(timer);
-                          timer = setTimeout(callback, ms);
-                      };
-                  })();
-
-                  self.inputElem.bind("keyup", function (e) {
-                      if (!self._flagSelfManipulate) {
-                          var trueKey;
-                          if (e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || e.keyCode == cKey))) {
-                              trueKey = true;
-                          }
-                          var newDate = new Date(self.inputElem.val());
-                          var inputText = self.inputElem.val();
-                          var inputArray = self.inputElem.val().split("/");
-                          if (inputArray.length == 3) {
-                              var trueYear = inputArray[0].toString().length <= 4;
-                              var trueMonth = inputArray[1].toString().length <= 2;
-                              var trueDay = inputArray[2].toString().length <= 2;
-                          }
-                          $.each(inputArray, function (index, key) {
-                              inputArray[index] = parseInt(key);
-                          });
-                          if (trueKey && trueYear && trueMonth && trueDay && newDate != "Invalid Date") {
-                              delay(function () {
-                                  var newPersainDate = new persianDate(inputArray);
-                                  self._updateState("unix", newPersainDate.valueOf(), false);
-                                  self.updateStaff();
-                                  self._updateInputElement();
-                              }, 800)
-                          }
-                          return true;
-                      }
+                  self.inputElem.bind("keyup", function(e) {
+                        if (!self._flagSelfManipulate) {
+                              var trueKey = false;
+                              if (e.keyCode == 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {
+                                    trueKey = true;
+                              }
+                              if (trueKey) {
+                                    self._syncWithImportData();
+                              }
+                        }
                   });
-
-                  $(self.altField).bind("textchange", function () {
-                      if (!self._flagSelfManipulate) {
-                          var newDate = new Date($(this).val());
-                          if (newDate != "Invalid Date") {
-                              var newPersainDate = new persianDate(newDate);
-                              self._updateState("unix", newPersainDate.valueOf(), true);
-                              self.updateStaff();
-                          }
-                      }
+                  self.inputElem.bind('paste', function(e) {
+                        delay(function(){self._syncWithImportData(true)},60);
+                  });
+                  $(self.altField).bind("textchange", function() {
+                        if (!self._flagSelfManipulate) {
+                              var newDate = new Date($(this).val());
+                              if (newDate != "Invalid Date") {
+                                    var newPersainDate = new persianDate(newDate);
+                                    self._updateState("unix", newPersainDate.valueOf(), true);
+                                    self.updateStaff();
+                              }
+                        }
                   });
                   return this;
-              },
-              _flagSelfManipulate: true,
-              _selectDate: function (key, unixDate) {
+            }, _syncWithImportData : function(pasted) {
+                  var self = this;
+                  var newDate = new Date(self.inputElem.val());
+                  var inputText = self.inputElem.val();
+                  var inputArray = self.inputElem.val().split("/");
+                  if (inputArray.length == 3) {
+                        var trueYear = inputArray[0].toString().length <= 4 && inputArray[0].toString().length >= 1;
+                        var trueMonth = inputArray[1].toString().length <= 2 && inputArray[1].toString().length >= 1;
+                        var trueDay = inputArray[2].toString().length <= 2 && inputArray[2].toString().length >= 1;
+                  }
+                  $.each(inputArray, function(index, key) {
+                        inputArray[index] = parseInt(key);
+                  });
+                  if (trueYear && trueMonth && trueDay && newDate != "Invalid Date" && (self.inputVal  !=  self.inputElem.val() || pasted == true ) ) {
+                        delay(function() {
+                              var newPersainDate = new persianDate(inputArray);
+                              self._updateState("unix", newPersainDate.valueOf(), false);
+                              self.updateStaff();
+                              self._updateInputElement();
+                        }, self.inputDelay)
+                  }
+                  return self;
+            }, _flagSelfManipulate: true,
+            _selectDate: function(key, unixDate) {
                   var self = this;
                   self._updateState("unix", unixDate, true);
                   self.dayPickerView.updateView();
                   self.onSelect(unixDate, this)
                   if (self.autoClose) {
-                      self.element.main.hide();
+                        self.element.main.hide();
                   }
                   return this;
-              },
-              _formatDigit: function (digit) {
+            }, _formatDigit: function (digit) {
                   if (this.persianDigit)
-                      return digit.toString().toPersianDigit();
+                        return digit.toString().toPersianDigit();
                   else
-                      return digit;
-              },
-              _appendMaskInput: function () {
+                        return digit;
+            }, _appendMaskInput: function () {
                   var self = this;
                   var inputName = this.inputElem.attr("name");
                   this.inputElem.attr("name", "");
                   self.visualInput = this.inputElem.clone().attr({
-                      "type": "hidden",
-                      "name": inputName
+                        "type" : "hidden",
+                        "name" : inputName
                   }).removeAttr("class");
                   self.visualInput.attr("id", "");
                   this.inputElem.after(self.visualInput);
                   return this;
-              },
-              // Update Every Thing This Update All State
-              _updateState: function (key, val, updateDisplayInput) {
+            },
+            // Update Every Thing This Update All State
+            _updateState: function (key, val, updateDisplayInput) {
                   var self = this;
                   if (key == "year") {
-                      this.state.selectedYear = val;
-                      this.state.unixDate = new persianDate([self.state.selectedYear, self.state.selectedMonth, self.state.selectedDay]).valueOf();
+                        this.state.selectedYear = val;
+                        this.state.unixDate = new persianDate([self.state.selectedYear, self.state.selectedMonth, self.state.selectedDay]).valueOf();
                   } else if (key == "unix") {
-                      this.state.unixDate = val;
-                      var pd = new persianDate(this.state.unixDate);
-                      this.state.selectedYear = pd.year();
-                      this.state.selectedMonth = pd.month();
-                      this.state.selectedDay = pd.date();
+                        this.state.unixDate = val;
+                        var pd = new persianDate(this.state.unixDate);
+                        this.state.selectedYear = pd.year();
+                        this.state.selectedMonth = pd.month();
+                        this.state.selectedDay = pd.date();
 
-                  } else if (key = "month") {
-                      this.state.selectedMonth = val;
-                      this.state.unixDate = new persianDate([self.state.selectedYear, self.state.selectedMonth, self.state.selectedDay]).valueOf();
+                  } else if ( key = "month") {
+                        this.state.selectedMonth = val;
+                        this.state.unixDate = new persianDate([self.state.selectedYear, self.state.selectedMonth, self.state.selectedDay]).valueOf();
                   }
                   if (updateDisplayInput == true) {
-                      self._updateInputElement();
+                        self._updateInputElement();
                   }
                   return this;
-              },
-              _updateInputElement: function () {
+            }, _updateInputElement: function () {
                   var self = this;
                   self._flagSelfManipulate = true;
                   // Update MAsk Field
                   if (self.mask) {
-                      self.visualInput.val(self.maskFormatter(self.state.unixDate));
+                        self.visualInput.val(self.maskFormatter(self.state.unixDate));
                   }
                   // Update Alt Field
                   if (self.altField && $(self.altField).length >= 1) {
-                      $(self.altField).val(self.altFieldFormatter(self.state.unixDate));
+                        $(self.altField).val(self.altFieldFormatter(self.state.unixDate));
                   }
                   // Update Display Field
-                  this.inputElem.val(self.formatter(self.state.unixDate)).data({ "lastValue": "" });
+                  this.inputElem.val(self.formatter(self.state.unixDate)).data({
+                        "lastValue" : ""
+                  });
+                  self.inputVal = this.inputElem.val();
                   // Update Display Field MetaData
                   var peDate = new pDate(self.state.unixDate);
                   peDate.formatPersian = false;
                   this.inputElem.attr("pDateEnChar", peDate.format("YYYY/MM/DD"));
                   self._flagSelfManipulate = false;
                   return this;
-              },
-              // one time run
-              _defineCurrentState: function () {
+            },
+            // one time run
+            _defineCurrentState: function () {
                   if (this.inputElem.val() && new Date(this.inputElem.val()) != "Invalid Date" && new Date(this.inputElem.val()) != "undefined") {
-                      this.state.unixDate = new Date(this.inputElem.val()).valueOf();
+                        this.state.unixDate = new Date(this.inputElem.val()).valueOf();
                   } else {
-                      this.state.unixDate = new Date().valueOf();
+                        this.state.unixDate = new Date().valueOf();
                   }
                   var pd = new persianDate(this.state.unixDate);
                   this.state.selectedYear = this.state.viewYear = pd.year();
@@ -1251,47 +1252,45 @@ Object.keys = Object.keys || (function() {
                   this.state.selectedDay = this.state.viewDay = pd.date();
                   this._updateInputElement();
                   return this;
-              },
-              _syncViewWidthSelected: function () {
+            }, _syncViewWidthSelected: function () {
                   var pd = new persianDate(this.state.unixDate);
                   this.state.selectedYear = this.state.viewYear = pd.year();
                   this.state.selectedMonth = this.state.viewMonth = pd.month();
                   this.state.selectedDay = this.state.viewDay = pd.date();
                   return this;
-              }
-          }, Datepicker = function (mainElem, options) {
-              // Prevent Duplicate 
-              inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
-                  inputElem: $(mainElem)
-              }]);
-              this._defineCurrentState();
-              var viewName = 'default';
-              this.view = this.views[viewName];
-              this.raiseEvent('render');
-              this.view.render(this);
-              this.inputElem.data("datepicker", this);
-              return this;
-          };
-    (function ($) {
-        $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
-            var args = Array.prototype.slice.call(arguments), output = this;
-            if (!this) {
-                $.error("Invalid selector");
             }
-            $(this).each(function () {
-                // encapsulation Args
-                var emptyArr = new Array, tempArg = args.concat(emptyArr), dp = $(this).data("datepicker");
-                if (dp && typeof tempArg[0] == "string") {
-                    var funcName = tempArg[0], funcArgs = tempArg.splice(0, 1);
-                    output = dp[funcName](tempArg);
-                }
-                else {
-                    this.pDatePicker = new Datepicker(this, options);
-                }
-            });
-            return output;
-        };
-    })(jQuery);
+            },
+            Datepicker = function(mainElem, options) {
+                  // Prevent Duplicate
+                  inherit(this, [Class_Sprite, Class_pDatepicker, Views_pDatePicker, options, {
+                        inputElem : $(mainElem)
+                  }]);
+                  this._defineCurrentState();
+                  var viewName = 'default';
+                  this.view = this.views[viewName];
+                  this.raiseEvent('render');
+                  this.view.render(this);
+                  this.inputElem.data("datepicker", this);
+                  return this;
+            }; 
 
-
+      (function($) {
+            $.fn.persianDatepicker = $.fn.pDatepicker = function(options) {
+                  var args = Array.prototype.slice.call(arguments), output = this;
+                  if (!this) {
+                        $.error("Invalid selector");
+                  }
+                  $(this).each(function() {
+                        // encapsulation Args
+                        var emptyArr = new Array, tempArg = args.concat(emptyArr), dp = $(this).data("datepicker");
+                        if (dp && typeof tempArg[0] == "string") {
+                              var funcName = tempArg[0], funcArgs = tempArg.splice(0, 1);
+                              output = dp[funcName](tempArg);
+                        } else {
+                              this.pDatePicker = new Datepicker(this, options);
+                        }
+                  });
+                  return output;
+            };
+      })(jQuery);
 })();
