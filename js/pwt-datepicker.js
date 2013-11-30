@@ -4,9 +4,12 @@
 // Dual licensed under the MIT or GPL Version 2 licenses.
 // babakhani reza@gmail.com
 // babakhani.github.io/PersianWebToolkit
-// Beta Version 0.2.2
+// Beta Version 0.2.3
 // Dependency :  Jquery.js , pwt-date.js
- Chnage Log:
+ Chnage Log:      
+      0.2.4
+           Issue #14
+           Show All ( After Before ) Days in month view
       0.2.3
           Fix Paste An cntl+v Event
       0.2.2
@@ -183,7 +186,7 @@ var delay = function(callback,ms){
           clearTimeout(window.datepickerTimer);
           window.datepickerTimer = setTimeout(callback, ms);
     },log = function (input) {
-       // console.log(input);
+        console.log(input);
     }, range = function (e) {
         r = [];
         var i = 0;
@@ -306,16 +309,6 @@ var delay = function(callback,ms){
         },
         createElementByClass: function (className) {
             return this.element.find('.' + className);
-        },
-        createStaffElement: function () {
-            var mainElement = this.element.main
-            for (c in this.cssClass) {
-                if (c != 'main') {
-                    var staffElement = mainElement.find('.' + this.cssClass[c]);
-                    this.element[c] = staffElement;
-                }
-            };
-            return this;
         },
         render: function (viewName) {
             if (!viewName) {
@@ -520,59 +513,65 @@ var delay = function(callback,ms){
                       renderDays: function (self) {
                           self._updateState();
                           self.daysList = [];
-                          var i = 1;
-                          var addSpan = function (i) {
-                              var dayPartPersianDate = new persianDate([self.state.year, self.state.month, i]);
-                              var dayPartUnixTime = dayPartPersianDate.valueOf();
-                              self.daysList.push($("<span/>").text(self._formatDigit(i)).data({ day: i, unixDate: dayPartUnixTime }).appendTo($(this))[0]);
+                         // New Code
+                         var addSpan = function (day,month,year,cssClass) {
+                              var dayPartUnixTime = new persianDate([year,month,day]).valueOf();
+                              var span  = $("<span/>")
+                                .text(self._formatDigit(day))
+                                .attr("unixDate" , dayPartUnixTime)
+                                .data({ day: day ,month : month,year:year, unixDate: dayPartUnixTime})
+                                .addClass(cssClass)
+                                .appendTo($(this))[0];
+                              self.daysList.push(span);
                           }
-                          $(self.daysBox).find("td").each(function (index) {
-                              $(this).empty();
-                              if (self.firstWeekDayOfMonth == 0) {
-                                  addSpan.apply(this, [i]);
-                                  i++;
-                                  self.firstWeekDayOfMonth += 2;
-                              } else if (index + 1 == self.firstWeekDayOfMonth && i <= self.daysCount) {
-                                  addSpan.apply(this, [i]);
-                                  i++;
-                                  self.firstWeekDayOfMonth += 1;
+                         var t = new persianDate();
+                        self.daysCount = t.daysInMonth(self.state.year, self.state.month);
+                        self.firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(self.state.year, self.state.month);
+                        var currentMonthIndex = 1;
+                        var nextMonthIndex = 1;          
+                          $(self.daysBox).find("td").each(function(index) {
+                            $(this).empty();
+                            if (self.firstWeekDayOfMonth > 1 && index + 1 < self.firstWeekDayOfMonth) {
+                              if (self.state.month == 1) {
+                                var prevMonth = 12;
+                                var prevYear = parseInt(self.state.year) - 1;
+                              } else {
+                                var prevMonth = parseInt(self.state.month) - 1;
+                                var prevYear = parseInt(self.state.year);
                               }
-                          });
-                          // Select Day
+                           //   log("prevYear : " + prevYear)
+                             // log("prevMonth : " + prevMonth)
+                              var prevMonthDaysCount = t.daysInMonth(prevYear, prevMonth);
+                              var day = parseInt((prevMonthDaysCount - self.firstWeekDayOfMonth) + (index + 2));
+                              addSpan.apply(this, [day,prevMonth, prevYear, "other-month"])
+                            } else if (index + 2 == (currentMonthIndex + self.firstWeekDayOfMonth) && currentMonthIndex <= self.daysCount) {
+                         //    log( "self.state.year : " + self.state.year)
+                              var day = currentMonthIndex;
+                              addSpan.apply(this, [day, parseInt(self.state.month), parseInt(self.state.year)])
+                              currentMonthIndex++;
+                            } else {
+                              
+                               if (self.state.month == 12) {
+                                var nextMonth = 1;
+                                var nextYear = parseInt(self.state.year) + 1;
+                              } else {
+                                var nextMonth = parseInt(self.state.month) + 1;
+                                var nextYear = self.state.year;
+                              }
+                              
+                              
+                              var day = nextMonthIndex;
+                              addSpan.apply(this, [day, nextMonth, nextYear, "other-month"])
+                              nextMonthIndex++;
+                            }
+                          }); 
+                          // Select Day -----------
                           $(self.daysBox).find("td").children("span").click(function () {
                               $thisUnixDate = $(this).data("unixDate");
                               self.raiseEvent("selectDay", [$thisUnixDate]);
                               return false;
                           });
                           self.raiseEvent("reRender");
-                      },
-                      applyStory: function (self) {
-                          if (self.pcal.dataService) {
-                              $(self.daysBox).find("td").children("span").each(function () {
-                                  var unixDate = $(this).data("unixDate");
-                                  var storyList = self.pcal.dataService.getDayStory(unixDate);
-                                  var storyLength = storyList.length;
-                                  switch (true) {
-                                      case (storyLength == 0):
-                                          $(this).removeClass("busy-day");
-                                          $(this).removeClass("orange-day");
-                                          $(this).removeClass("normal-day");
-                                          break;
-                                      case (storyLength >= 5):
-                                          $(this).addClass("busy-day");
-                                          break;
-                                      case (storyLength >= 3):
-                                          $(this).addClass("orange-day");
-                                          break;
-                                      case (storyLength >= 2):
-                                          $(this).addClass("work-day");
-                                          break;
-                                      case (storyLength == 1):
-                                          $(this).addClass("normal-day");
-                                          break;
-                                  }
-                              });
-                          }
                       }
                   }//------- End of Default view
               }
@@ -714,7 +713,6 @@ var delay = function(callback,ms){
                                   self.state.viewMonth++;
                               }
                               self.dayPickerView.updateView();
-
                               return false;
                           });
                           self.element.dayBox.children("." + self.cssClass.btnPrev).click(function () {
@@ -737,9 +735,7 @@ var delay = function(callback,ms){
                           });
                           this.updateView = function () {
                               self.dayPickerView.mGrid.updateAs(self.state.viewYear, self.state.viewMonth);
-                              if (self.state.viewYear == self.state.selectedYear && self.state.viewMonth == self.state.selectedMonth) {
-                                  self.dayPickerView.mGrid.selectDate(self.state.unixDate);
-                              }
+                              self.dayPickerView.mGrid.markSelectedDate(self.state.unixDate)
                               var pdateStr = new persianDate([self.state.viewYear, self.state.viewMonth]).format(self.daysTitleFormat);
                               self.element.dayBox.children("." + self.cssClass.btnSwitch).text(self._formatDigit(pdateStr))
                           };
@@ -912,7 +908,6 @@ var delay = function(callback,ms){
                       this.state.year = this.year;
                   },
                   reRender: function () {
-                      // this.view.applyStory(this);
                       this._markToday();
                   },
                   selectDay: function (x) {
@@ -924,13 +919,16 @@ var delay = function(callback,ms){
                   $(self.element).removeClass(self.cssClass.today);
                   $.each(self.daysList, function (index, value) {
                       var htmlItemDay = $(this).data().day;
-                      if (htmlItemDay == todate.date() && self.state.month == todate.month() && self.state.year == todate.year()) {
+                      var htmlItemMonth = $(this).data().month;
+                      var htmlItemYear = $(this).data().year;
+                      if (htmlItemDay == todate.date() && htmlItemMonth == todate.month() && htmlItemYear == todate.year()) {
                           $(this).addClass(self.cssClass.today);
                           $(self.element).addClass(self.cssClass.today);
                       }
                   });
                   return this;
               },
+              // TODO : must remove
             _updateState: function () {
                   var self = this;
                   var t = new persianDate();
@@ -952,17 +950,22 @@ var delay = function(callback,ms){
                   if (reRenderFlag) {
                       self.view.renderDays(self);
                   }
-                  // Reset Class
+                  self.markSelectedDate(unixDate);
+                  return this;
+              },
+              markSelectedDate : function(unixDate){
+                  var self = this;
+               // log(unixDate)
+                 //log("--------------------------------")
                   $.each(self.daysList, function (index, value) {
-                      var htmlItemDay = $(this).data().day;
-                      //print("htmlItemDay : "+htmlItemDay)
-                      if (htmlItemDay == self.state.date) {
+                      
+                    //  log($(this).attr("unixDate"))
+                      if($(this).attr("unixDate") && $(this).attr("unixDate") ==  unixDate.toString()){
                           $(this).addClass(self.cssClass.selected);
-                      } else {
+                      }else{
                           $(this).removeClass(self.cssClass.selected);
                       }
                   });
-                  return this;
               },
               updateAs: function (year, month) {
                   var self = this;
@@ -971,6 +974,20 @@ var delay = function(callback,ms){
                   self.view.renderDays(self);
                   return this;
               },
+              goToNextMonth : function(){
+                   var self = this;
+                   if (self.state.month == 12) {
+                        self.state.month = 1;
+                        self.state.viewYear++;
+                    } else {
+                        self.state.month++;
+                    }
+                    self.updateAs(self.state.year,self.state.month)
+                    return false;
+              },
+              goToPrevMonth : function(){
+                
+              },
               goToYear: function (year) {
                   this.updateAs(year, this.state.month);
               },
@@ -978,6 +995,8 @@ var delay = function(callback,ms){
                   //this.view.applyStory(this);
               }
           }, MonthGrid = function (options) {
+            
+            
               // Change !!
               //this.pcal = options.parent.pcal;
               inherit(this, [Class_Sprite, Views_MonthGrid, Class_DateRange, Class_MonthGrid, options]);
@@ -1035,7 +1054,7 @@ var delay = function(callback,ms){
 
               //--------------------------------------------------------
               state: {
-                  unixDate: new persianDate().valueOf(),
+                  unixDate: null,
                   selectedYear: 0,
                   selectedMonth: 0,
                   selectedDay: 0,
@@ -1217,9 +1236,13 @@ var delay = function(callback,ms){
                   }
                   return this;
             }, _updateInputElement: function () {
-                  var self = this;
+                  var self = this;                  
+                  if(this.state.unixDate == null){
+                      return this;
+                  }
                   self._flagSelfManipulate = true;
                   // Update MAsk Field
+                  // TODO: Deprecated Remove This 
                   if (self.mask) {
                         self.visualInput.val(self.maskFormatter(self.state.unixDate));
                   }
@@ -1240,16 +1263,20 @@ var delay = function(callback,ms){
                   return this;
             },
             // one time run
+            // Single Run 
             _defineCurrentState: function () {
                   if (this.inputElem.val() && new Date(this.inputElem.val()) != "Invalid Date" && new Date(this.inputElem.val()) != "undefined") {
                         this.state.unixDate = new Date(this.inputElem.val()).valueOf();
+                        var pd = new persianDate(this.state.unixDate);
+                        this.state.selectedYear = this.state.viewYear = pd.year();
+                        this.state.selectedMonth = this.state.viewMonth = pd.month();
+                        this.state.selectedDay = this.state.viewDay = pd.date();
                   } else {
-                        this.state.unixDate = new Date().valueOf();
+                        this.state.unixDate = null;
+                        this.state.selectedYear = this.state.viewYear = 0;
+                        this.state.selectedMonth = this.state.viewMonth = 0;
+                        this.state.selectedDay = this.state.viewDay = 0;
                   }
-                  var pd = new persianDate(this.state.unixDate);
-                  this.state.selectedYear = this.state.viewYear = pd.year();
-                  this.state.selectedMonth = this.state.viewMonth = pd.month();
-                  this.state.selectedDay = this.state.viewDay = pd.date();
                   this._updateInputElement();
                   return this;
             }, _syncViewWidthSelected: function () {
@@ -1266,6 +1293,13 @@ var delay = function(callback,ms){
                         inputElem : $(mainElem)
                   }]);
                   this._defineCurrentState();
+                  if(this.state.unixDate == null){
+                     this.state.unixDate = new Date().valueOf();
+                      var pd = new persianDate();
+                      this.state.selectedYear = this.state.viewYear = pd.year();
+                      this.state.selectedMonth = this.state.viewMonth = pd.month();
+                      this.state.selectedDay = this.state.viewDay = pd.date();
+                  }
                   var viewName = 'default';
                   this.view = this.views[viewName];
                   this.raiseEvent('render');
