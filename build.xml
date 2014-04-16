@@ -8,13 +8,11 @@
 	<property name="DIST_JS_DIR" value="${DIST_DIR}/js" description="Output folder for JavaScript files" />
 	<property name="BUILD_DIR" value="build" description="Files needed to build" />
 	<property name="YUI" value="${BUILD_DIR}/yuicompressor-2.4.2.jar" description="YUICompressor" />
-
 	<!-- Files names for distribution -->
-	<property name="CSS" value="${DIST_CSS_DIR}/style.css" />
-	<property name="CSS_MIN" value="${DIST_CSS_DIR}/style.min.css" />
+	<property name="CSS" value="${DIST_CSS_DIR}/pwt-datepicker.css" />
+	<property name="CSS_MIN" value="${DIST_CSS_DIR}/pwt-datepicker.min.css" />
 	<property name="JS" value="${DIST_JS_DIR}/pwt-datepicker.js" />
 	<property name="JS_MIN" value="${DIST_JS_DIR}/pwt-datepicker.min.js" />
-
 	<!-- Targets -->
 	<target name="html" description="Copy HTML files to the output folder">
 		<mkdir dir="${DIST_DIR}" />
@@ -28,7 +26,8 @@
 	<target name="css" depends="html" description="Concatenate CSS source files">
 		<echo message="Building ${CSS}" />
 		<concat destfile="${CSS}">
-			<fileset dir="${SRC_CSS_DIR}" includes="dashboard.control.css" />
+			<fileset dir="${SRC_CSS_DIR}" includes="pwt-datepicker.css" />
+		</concat>
 		<echo message="${CSS} built." />
 	</target>
 
@@ -36,7 +35,7 @@
 		<echo message="Building ${CSS_MIN}" />
 		<apply executable="java" parallel="false" verbose="true" dest="${DIST_CSS_DIR}">
 			<fileset dir="${DIST_CSS_DIR}">
-				<include name="style.css" />
+				<include name="pwt-datepicker.css" />
 			</fileset>
 			<arg line="-jar" />
 			<arg path="${YUI}" />
@@ -44,7 +43,7 @@
 			<arg value="ANSI" />
 			<arg value="-o" />
 			<targetfile />
-			<mapper type="glob" from="style.css" to="style.min.css" />
+			<mapper type="glob" from="pwt-datepicker.css" to="pwt-datepicker.min.css" />
 		</apply>
 		<echo message="${CSS_MIN} built." />
 	</target>
@@ -52,13 +51,12 @@
 	<target name="js" depends="html" description="Concatenate JavaScript source files">
 		<echo message="Building ${JS}" />
 		<concat destfile="${JS}">
-			<fileset dir="${SRC_JS_DIR}" includes="common.js" />
-			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker.js" />
 			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker-base.js" />
 			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker-helper.js" />
 			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker-monthgrid.js" />
 			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker-monthgrid-view.js" />
-			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker-view.js" />
+		    	<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker-view.js" />
+			<fileset dir="${SRC_JS_DIR}" includes="pwt-datepicker.js" />
 		</concat>
 		<echo message="${JS} built." />
 	</target>
