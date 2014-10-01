@@ -639,7 +639,7 @@ var delay = function(callback,ms){
                               return false;
                           });
                           self.inputElem.blur(function () {
-                             if ( !$.browser.msie ) {
+                             if (!$.browser || !$.browser.msie ) {
                                     self.hide();
                              }
                           });
