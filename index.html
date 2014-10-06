@@ -5,9 +5,13 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
 		<link href="css/pwt-datepicker.css" rel="stylesheet" type="text/css" />
+		<link href="css/jqueryui/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
 		<script type="text/javascript" src="js/pwt-date.js"></script>
 		<script type="text/javascript" src="js/pwt-datepicker.js"></script>
+		<script type="text/javascript" src="js/pwt-datepicker-timepicker-addon.js"></script>
 		<style>
 			.center-content {
 				display: block;
@@ -19,50 +23,90 @@
 		</style>
 	</head>
 	<body>
-		<script type="text/javascript">
-            var dp;
+        <script type="text/javascript">
             $(document).ready(function() {
                 var options = {
-                    format : "YYYY/MM/DD",
-                    formatter : function(unix) {
+                    format: "YYYY/MM/DD",
+                    formatter: function(unix) {
                         var pdate = new persianDate(unix);
                         pdate.formatPersian = false;
                         return pdate.format("YYYY/MM/DD");
                         //return new persinDate(unix).format("YYYY/MM/DD");
                     },
-                    daysTitleFormat : "YYYY MMMM",
-                    observer : true,
-                    sendOption : "p",
+                    daysTitleFormat: "YYYY MMMM",
+                    observer: true,
+                    sendOption: "p",
                     //position : [2, 2],
-                    autoclose : true,
-                    toolbox : true,
-                    altField : "#alternateField",
-                    altFormat : "u",
-                    altFieldFormatter : function(unix) {
+                    autoclose: true,
+                    toolbox: true,
+                    altField: "#alternateField",
+                    altFormat: "u",
+                    altFieldFormatter: function(unix) {
                         var pdate = new persianDate(unix);
                         pdate.formatPersian
                         pdate.formatPersian = false;
                         return pdate.format("YYYY MM DD");
                     },
-                    onShow : function() {
+                    onShow: function() {
                         //console.log("user config onShow event ")
                     },
-                    onHide : function() {
+                    onHide: function() {
                         //console.log("user config onHide event ")
                     },
-                    onSelect : function(unix) {
+                    onSelect: function(unix) {
                         //console.log("user config onSelect event as : "+unix)
                     }
                 };
                 $(".datePicker").persianDatepicker(options);
-                dp = $(".datePicker").data("datepicker");
+                window.dp = $(".datePicker").data("datepicker");
+
+                /* ================ datetime picker =================== */
+                options = {
+                    format: "YYYY/MM/DD HH:mm",
+                    formatter: function(unix) {
+                        var pdate = new persianDate(unix);
+                        pdate.formatPersian = false;
+                        return pdate.format("YYYY/MM/DD HH:mm");
+                        //return new persinDate(unix).format("YYYY/MM/DD");
+                    },
+                    daysTitleFormat: "YYYY MMMM",
+                    observer: true,
+                    sendOption: "p",
+                    //position : [2, 2],
+                    autoclose: false,
+                    toolbox: true,
+                    altField: "#alternateDateTimeField",
+                    altFormat: "u",                    
+                    altFieldFormatter: function(unix) {
+                        var pdate = new persianDate(unix);
+                        pdate.formatPersian
+                        pdate.formatPersian = false;
+                        return pdate.format("YYYY MM DD HH:mm");
+                    },
+                    onShow: function() {
+                        //console.log("user config onShow event ")
+                    },
+                    onHide: function() {
+                        //console.log("user config onHide event ")
+                    },
+                    onSelect: function(unix) {
+                        //console.log("user config onSelect event as : "+unix)
+                    }
+                };
+                $(".dateTimePicker").persianDatetimepicker(options);
+                window.dtp = $(".dateTimePicker").data("datepicker");
+                
             });
-		</script>
-		<div class="center-content" >
-			<input type="text" class="datePicker"  value="08-22-2011" />
-			<input type="text" id="alternateField" name="startDate"  />
-			<br/>
-			
-		</div>
-	</body>
+        </script>
+        <div class="center-content" >
+            <input type="text" class="datePicker"  value="08-22-2011" />
+            <input type="text" id="alternateField" name="startDate"  />
+            <br/>
+
+            <input type="text" class="dateTimePicker"  value="08-22-2011" />
+            <input type="text" id="alternateDateTimeField" name="startDate"  />
+            <br/>
+
+        </div>
+    </body>
 </html>
