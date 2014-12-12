@@ -1,0 +1,9 @@
+{
+    "name": "pwt-datepicker",
+    "version": "0.2.3",
+    "devDependencies": {
+        "grunt": "0.4.4",
+        "grunt-cli": "0.1.13",
+        "grunt-contrib-concat": "^0.5.0"
+    }
+}

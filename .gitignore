@@ -11,3 +11,5 @@ js/pwt.datepicker.html
 .settings
 js/pwt.datepicker.jade
 
+.idea
+node_modules
