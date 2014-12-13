@@ -4,58 +4,25 @@ var Views_pDatePicker = {
         dayView: "datepicker-day-view",
         monthView: "datepicker-month-view",
         yearView: "datepicker-year-view",
-        datpickerHeader: "datepicker-header",
-        btnNext: "btn-next",
-        btnSwitch: "btn-switch",
-        btnPrev: "btn-prev",
+        navigator: "navigator",
         monthItem: "month-item",
         selectedMonth: "selected",
         yearItem: "year-item",
         selectedYear: "selected",
-        toolbox: "toolbox ",
-        btnToday: "btn-today"
+        toolbox: "toolbox "
     },
     container: {},
     views: {
         "default": {
             render: function (self) {
-                self.element = {};
                 self.view_data = {
                     css: self.cssClass
                 };
-                self.tmpl.header = "<div class='{{css.datpickerHeader}}' >" + //
-                    "<div class='{{css.btnNext}}' >{{btnNextText}}</div>" + //
-                    "<div class='{{css.btnSwitch}}' >{{btnSwitchText}}</div>" + //
-                    "<div class='{{css.btnPrev}}' >{{btnPrevText}}</div>" + //
-                    "</div>";
-                self.tmpl.main = "<div class='{{css.datePickerPlotArea}}' >" + //
-                    " <div class='{{css.dayView}}' ></div>" + //
-                    "<div class='{{css.monthView}}' ></div>" + //
-                    "<div class='{{css.yearView}}' ></div>" + //
-                    "<div class='{{css.toolbox}}' ></div>" + //
-                    "</div>";
-                self.element.main = $.tmplMustache(self.tmpl.main, self.view_data).hide().appendTo($("body"));
-                // Define Elements
-                self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
-                self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView).hide();
-                self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView).hide();
-                self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
+                self.element = {};
+                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo($("body"));
                 self.view.fixPosition(self);
-
-                // Append Satff
-                self.dayPickerView = new Daypicker();
-
-
-                self.dayPickerView = new self.view.DayPicker(self);
-                self.monthPickerView = new self.view.MonthPicker(self);
-                self.yearPickerView = new self.view.YearPicker(self);
-
-                if (self.toolbox) {
-                    self.toolbox = new self.view.Toolbox(self);
-                } else {
-                    self.container.toolbox.remove();
-                }
-                // SHow Hide Picker ------------------------
+                // SHow Hide Picker
+                ///////////////////////////////////////////////
                 self.inputElem.focus(function () {
                     self.show();
                 });
@@ -76,96 +43,52 @@ var Views_pDatePicker = {
                     e.stopPropagation();
                     return false;
                 });
-                // ----------------------------------------
-                self.view.changeView(self, self.viewMode);
-
-                self._syncWithImportData(self.state.unixDate);
-
-                return this;
-            },
-            fixPosition: function (self) {
-                var inputX = self.inputElem.offset().top;
-                var inputY = self.inputElem.offset().left;
-                if (self.position == "auto") {
-                    var inputHeight = self.fullHeight(self.inputElem);
-                    self.element.main.css({
-                        top: (inputX + inputHeight) + 'px',
-                        left: inputY + 'px'
-                    });
+                // Define Containers
+                self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
+                self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView).hide();
+                self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView).hide();
+                self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
+                self.container.navigator = $(self.element.main).children('.' + self.cssClass.navigator);
+                // Append Navigator
+                ///////////////////////////////////////////////
+                self.navigator = new Navigator({datepicker: self}, self.container.navigator);
+                // Append Toolbox
+                ///////////////////////////////////////////////
+                if (self.toolbox) {
+                    self.toolbox = new Toolbox({}, self.container.toolbox);
                 } else {
-                    self.element.main.css({
-                        top: (inputX + self.position[0]) + 'px',
-                        left: (inputY + self.position[1]) + 'px'
-                    });
+                    self.container.toolbox.remove();
                 }
+                // Day Picker
+                ///////////////////////////////////////////////
+                self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
+                self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
+                self.view.changeView(self, self.viewMode);
+                //self.yearPickerView = new self.view.YearPicker(self);
+                self._syncWithImportData(self.state.unixDate);
                 return this;
             },
-            updateAllViews: function (self) {
-                self.dayPickerView.updateView();
-                self.monthPickerView.updateView();
-                self.yearPickerView.updateView();
-                return self;
-            },
-            // --------------------------------------------------------------------------- Toolbox
-            Toolbox: function (self) {
-                this.container = self.container.toolbox;
-                var todayUnix = new Date().valueOf();
-                $("<div>امروز</div>").addClass(self.cssClass.btnToday).click(function () {
-                    self._updateState("unix", todayUnix, true);
-                    self.view.updateAllViews(self);
-                    return false;
-                }).appendTo(this.container);
-            },
-            // --------------------------------------------------------------------------- Day View
-            DayPicker: function (self) {
+            changeView: function (self, viewName) {
                 var pd = new persianDate(self.state.unixDate);
-                this.container = self.container.dayView;
-                ///////////////////////////////////  Navigator
-                self.view_data = {
-                    css: self.cssClass,
-                    btnNextText: "<",
-                    btnSwitchText: self._formatDigit(pd.format(self.daysTitleFormat)),
-                    btnPrevText: ">"
-                };
-                self.element.dayBox = $.tmplMustache(self.tmpl.header, self.view_data).appendTo(this.container);
-                self.element.dayBox.children("." + self.cssClass.btnSwitch).click(function () {
-                    self.view.changeView(self, "month");
-                    return false;
-                });
-                self.element.dayBox.children("." + self.cssClass.btnNext).click(function () {
-                    if (self.state.viewMonth == 12) {
-                        self.state.viewMonth = 1;
-                        self.state.viewYear++;
-                    } else {
-                        self.state.viewMonth++;
-                    }
-                    self.dayPickerView.updateView();
-                    return false;
-                });
-                self.element.dayBox.children("." + self.cssClass.btnPrev).click(function () {
-                    if (self.state.viewMonth == 1) {
-                        self.state.viewMonth = 12;
-                        self.state.viewYear--;
-                    } else {
-                        self.state.viewMonth--;
-                    }
-                    self.dayPickerView.updateView();
-                    return false;
-                });
-                this.mGrid = new MonthGrid({
-                    container: self.container.dayView,
-                    month: pd.month(),
-                    year: pd.year(),
-                    persianDigit: self.persianDigit
-                }).selectDate(self.state.unixDate).attachEvent("selectDay", function (x) {
-                        self._selectDate("unix", x);
-                    });
-                this.updateView = function () {
-                    self.dayPickerView.mGrid.updateAs(self.state.viewYear, self.state.viewMonth);
-                    self.dayPickerView.mGrid.markSelectedDate(self.state.unixDate)
-                    var pdateStr = new persianDate([self.state.viewYear, self.state.viewMonth]).format(self.daysTitleFormat);
-                    self.element.dayBox.children("." + self.cssClass.btnSwitch).text(self._formatDigit(pdateStr))
-                };
+                self.navigator.switchRelation(viewName);
+                switch (viewName) {
+                    case ('month'):
+                        self.container.yearView.hide();
+                        self.container.dayView.hide();
+                        self.container.monthView.show();
+                        break;
+                    case ('year'):
+                        self.container.dayView.hide();
+                        self.container.monthView.hide();
+                        self.container.yearView.show();
+                        break;
+                    case ('day'):
+                        self.container.yearView.hide();
+                        self.container.monthView.hide();
+                        self.container.dayView.show();
+                        break;
+                }
+                //self.dayPickerView.updateView();
                 return this;
             },
             // ---------------------------------------------------------------------------  Month View
@@ -214,7 +137,6 @@ var Views_pDatePicker = {
                 this.defineSelectedMonth();
                 this.updateView = function () {
                     this.defineSelectedMonth();
-
                     self.element.monthBox.children("." + self.cssClass.btnSwitch).text(self._formatDigit(self.state.viewYear))
                 }
                 return this;
@@ -287,28 +209,28 @@ var Views_pDatePicker = {
                 }
                 return this;
             },
-            changeView: function (self, viewName) {
-                switch (viewName) {
-                    case ('month'):
-                        self.container.yearView.hide();
-                        self.container.dayView.hide();
-                        self.monthPickerView.updateView();
-                        self.container.monthView.show();
-                        break;
-                    case ('year'):
-                        self.container.dayView.hide();
-                        self.container.monthView.hide();
-                        self.yearPickerView.updateView()
-                        self.container.yearView.show();
-                        break;
-                    case ('day'):
-                        self.container.yearView.hide();
-                        self.container.monthView.hide();
-                        self.dayPickerView.updateView();
-                        self.container.dayView.show();
-                        break;
+            fixPosition: function (self) {
+                var inputX = self.inputElem.offset().top;
+                var inputY = self.inputElem.offset().left;
+                if (self.position == "auto") {
+                    var inputHeight = self.fullHeight(self.inputElem);
+                    self.element.main.css({
+                        top: (inputX + inputHeight) + 'px',
+                        left: inputY + 'px'
+                    });
+                } else {
+                    self.element.main.css({
+                        top: (inputX + self.position[0]) + 'px',
+                        left: (inputY + self.position[1]) + 'px'
+                    });
                 }
                 return this;
+            },
+            updateAllViews: function (self) {
+                self.dayPickerView.updateView();
+                self.monthPickerView.updateView();
+                self.yearPickerView.updateView();
+                return self;
             }
         }
     }
