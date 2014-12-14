@@ -57,7 +57,7 @@ var Class_MonthPicker = {
             }).addClass("month" + m).addClass(self.cssClass.monthItem).text(self.monthRange[m].name.fa).appendTo(self.container)
                 .click(function () {
                     self.datepicker.state.viewMonth = $(this).data().monthIndex;
-                    self.datepicker.updateState("month", $(this).data().monthIndex);
+                    self.datepicker.updateState("month", $(this).data().monthIndex, true);
                     self.datepicker.changeView('day');
                     return false;
                 });

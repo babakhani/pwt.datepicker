@@ -21,9 +21,9 @@ var Class_pDatepicker = {
     // Update Every Thing This Update All State
     _updateStateFromUnixDate: function (unixDate) {
         var pd = new persianDate(this.state.unixDate);
-        this.state.year = pd.year();
-        this.state.month = pd.month();
-        this.state.day = pd.date();
+        this.state.year = this.state.viewYear = this.state.selectedYear = pd.year();
+        this.state.month = this.state.viewMonth = this.state.selectedMonth = pd.month();
+        this.state.day = this.state.viewMonth = this.state.selectedDay = pd.date();
         return this;
     },
     _updateStateUnixDate: function () {
@@ -39,7 +39,7 @@ var Class_pDatepicker = {
         var self = this;
         self.dayPicker.updateView();
         self.monthPicker.updateView();
-        //self.yearPicker.updateView();
+        self.yearPicker.updateView();
         return self;
     },
     changeView: function (viewName) {
@@ -47,19 +47,19 @@ var Class_pDatepicker = {
         self.navigator.switchRelation(viewName);
         switch (viewName) {
             case ('month'):
-                //self.yearView.hide();
-                self.dayPicker.hide();
+                self.yearPicker.hide();
                 self.monthPicker.show();
+                self.dayPicker.hide();
                 break;
             case ('year'):
-                self.container.dayView.hide();
-                self.container.monthView.hide();
-                self.container.yearView.show();
+                self.yearPicker.show();
+                self.monthPicker.hide();
+                self.dayPicker.hide();
                 break;
             case ('day'):
-                self.container.yearView.hide();
-                self.container.monthView.hide();
-                self.container.dayView.show();
+                self.yearPicker.hide();
+                self.monthPicker.hide();
+                self.dayPicker.show();
                 break;
         }
         return this;
@@ -81,7 +81,6 @@ var Class_pDatepicker = {
             this._updateStateUnixDate();
         }
         this._syncViewStateWidthSelected();
-        //this._updateView();
         if (updateDisplayInput == true) {
             self._updateInputElement();
         }

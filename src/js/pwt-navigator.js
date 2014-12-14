@@ -25,7 +25,9 @@ var Class_Navigator = {
     },
     _switch: function () {
         if (this.relation == 'day') {
-            this.datepicker.changeView("month");
+            this.datepicker.changeView('month');
+        }else if(this.relation == 'month'){
+            this.datepicker.changeView('year');
         }
         return this;
     },

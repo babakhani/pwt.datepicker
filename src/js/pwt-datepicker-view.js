@@ -1,12 +1,10 @@
 var Views_pDatePicker = {
     cssClass: {
         datePickerPlotArea: "datepicker-plot-area",
-        dayView: "datepicker-day-view",
-        monthView: "datepicker-month-view",
         yearView: "datepicker-year-view",
+        monthView: "datepicker-month-view",
+        dayView: "datepicker-day-view",
         navigator: "navigator",
-        yearItem: "year-item",
-        selectedYear: "selected",
         toolbox: "toolbox "
     },
     container: {},
@@ -61,104 +59,17 @@ var Views_pDatePicker = {
                 ///////////////////////////////////////////////
                 self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
                 self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
+                self.yearPicker = new YearPicker({datepicker: self}, self.container.yearView);
                 self.changeView(self.viewMode);
                 //self.yearPickerView = new self.view.YearPicker(self);
                 self._syncWithImportData(self.state.unixDate);
                 return this;
             },
-
-            // ---------------------------------------------------------------------------  Month View
-            MonthPicker: function (self) {
-                var pd = new persianDate(self.state.unixDate),
-                    monthRaneg = Class_DateRange.monthRange
-                self.view_data = {
-                    css: self.cssClass,
-                    btnNextText: "<",
-                    btnSwitchText: pd.format("YYYY"),
-                    btnPrevText: ">"
-                };
-                self.element.monthBox = $.tmplMustache(self.tmpl.header, self.view_data).appendTo(self.container.monthView);
-                self.element.monthBox.children("." + self.cssClass.btnSwitch).click(function () {
-                    self.view.changeView(self, "year")
-                    return false;
-                });
-                for (m in monthRaneg) {
-                    $("<div/>").data({
-                        monthIndex: m
-                    }).addClass("month" + m).addClass(self.cssClass.monthItem).text(monthRaneg[m].name.fa).appendTo(self.container.monthView).click(function () {
-                        self.state.viewMonth = $(this).data().monthIndex;
-                        self._updateState("month", $(this).data().monthIndex);
-                        self.view.changeView(self, "day");
-                        return false;
-                    });
-                }
-                ;
-                self.element.monthBox.children("." + self.cssClass.btnNext).click(function () {
-                    self.state.viewYear++;
-                    self.monthPickerView.updateView();
-                    return false;
-                });
-                self.element.monthBox.children("." + self.cssClass.btnPrev).click(function () {
-                    self.state.viewYear--;
-                    self.monthPickerView.updateView();
-                    return false;
-                });
-                this.defineSelectedMonth = function () {
-                    self.container.monthView.children('.' + self.cssClass.monthItem).removeClass(self.cssClass.selectedMonth);
-                    if (self.state.viewYear == self.state.selectedYear) {
-                        self.container.monthView.children(".month" + self.state.selectedMonth).addClass(self.cssClass.selectedMonth)
-                    }
-                    return this;
-                };
-                this.defineSelectedMonth();
-                this.updateView = function () {
-                    this.defineSelectedMonth();
-                    self.element.monthBox.children("." + self.cssClass.btnSwitch).text(self._formatDigit(self.state.viewYear))
-                }
-                return this;
-            },
             // ---------------------------------------------------------------------------  Year View
             YearPicker: function (self) {
-                var pd = new persianDate(self.state.unixDate);
-                var year = pd.year();
-                var remaining = parseInt(year / 12) * 12;
-                self.view_data = {
-                    css: self.cssClass,
-                    btnNextText: "<",
-                    btnSwitchText: self._formatDigit(remaining) + "-" + self._formatDigit(remaining + 11),
-                    btnPrevText: ">"
-                };
-                self.element.yearHeaderBox = $.tmplMustache(self.tmpl.header, self.view_data).appendTo(self.container.yearView);
-                this.applyYearList = function () {
-                    var pd = new persianDate(self.state.unixDate)
-                        , year = self.state.viewYear
-                        , remaining = parseInt(year / 12) * 12;
 
-                    self.container.yearView.children("." + self.cssClass.yearItem).remove();
-                    // Apply Year
-                    for (i in range(12)) {
-                        var yearItem = $("<div/>").addClass(self.cssClass.yearItem).data({
-                            year: (remaining + parseInt(i))
-                        }).text(self._formatDigit(remaining + parseInt(i)))
-                            .appendTo(self.container.yearView)
-                        if (year == remaining + parseInt(i)) {
-                            yearItem.addClass(self.cssClass.selectedYear)
-                        }
-                    }
-                    self.container.yearView.children("." + self.cssClass.yearItem).click(function () {
-                        var y = $(this).data().year;
-                        self.state.viewYear = y;
-                        self._updateState("year", y);
-                        self.view.changeView(self, "month");
-                        return false;
-                    });
-                    return this;
-                };
-                this.applyYearList();
 
-                self.element.yearHeaderBox.children("." + self.cssClass.btnSwitch).click(function () {
-                    return false;
-                });
+
                 self.element.yearHeaderBox.children("." + self.cssClass.btnNext).click(function () {
                     self.state.viewYear += 12;
                     self.yearPickerView.applyYearList().updateView();
