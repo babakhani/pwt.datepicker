@@ -50,7 +50,8 @@ var Class_Daypicker = {
         });
         this.mGrid.selectDate(self.datepicker.state.unixDate);
         this.mGrid.attachEvent("selectDay", function (x) {
-            self._selectDate("unix", x);
+            self.datepicker._selectDate("unix", x);
+            self.mGrid.selectDate(self.datepicker.state.unixDate);
         });
     },
     init: function () {

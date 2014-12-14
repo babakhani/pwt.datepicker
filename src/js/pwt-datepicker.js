@@ -74,7 +74,6 @@ var Class_pDatepicker = {
     _selectDate: function (key, unixDate) {
         var self = this;
         self._updateState("unix", unixDate, true);
-        self.dayPickerView.updateView();
         self.onSelect(unixDate, this);
         if (self.autoClose) {
             self.element.main.hide();
