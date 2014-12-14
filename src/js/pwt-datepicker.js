@@ -18,14 +18,6 @@ var Class_pDatepicker = {
         viewMonth: 0,
         viewDay: 0
     },
-    // Update Every Thing This Update All State
-    _updateStateFromUnixDate: function (unixDate) {
-        var pd = new persianDate(this.state.unixDate);
-        this.state.year = this.state.viewYear = this.state.selectedYear = pd.year();
-        this.state.month = this.state.viewYear = this.state.selectedMonth = pd.month();
-        this.state.day = this.state.selectedDay = pd.date();
-        return this;
-    },
     _updateStateUnixDate: function () {
         var self = this;
         this.state.unixDate = new persianDate([self.state.selectedYear, self.state.selectedMonth, self.state.selectedDay]).valueOf();
@@ -46,7 +38,6 @@ var Class_pDatepicker = {
             this._updateStateUnixDate();
         } else if (key == "unix") {
             this.state.unixDate = val;
-            self._updateStateFromUnixDate(this.state.unixDate);
         } else if (key = "month") {
             this.state.selectedMonth = val;
             this._updateStateUnixDate();
@@ -185,9 +176,9 @@ var Class_pDatepicker = {
         var self = this;
         self._flagSelfManipulate = true;
         // Update Alt Field
-        $(self.altField).val(self.altFieldFormatter(self.state.unixDate));
+        $(self.altField).val(self.altFieldFormatter(self.state.selected.unixDate));
         // Update Display Field
-        self.inputElem.val(self.formatter(self.state.unixDate));
+        self.inputElem.val(self.formatter(self.state.selected.unixDate));
         self._flagSelfManipulate = false;
         return self;
     },
@@ -199,11 +190,13 @@ var Class_pDatepicker = {
         else {
             this.state.unixDate = new Date().valueOf();
         }
-        this._updateStateFromUnixDate(this.state.unixDate);
+        this.state.setSelected(this.state.unixDate, 'unix');
+        this.state.setView(this.state.unixDate, 'unix');
         return this;
     },
     init: function () {
         var self = this;
+        this.state = new State({datepicker: self});
         this._defineOnInitState();
         this._updateInputElement();
         this.view = this.views['default'];

@@ -65,37 +65,6 @@ var Views_pDatePicker = {
                 self._syncWithImportData(self.state.unixDate);
                 return this;
             },
-            // ---------------------------------------------------------------------------  Year View
-            YearPicker: function (self) {
-
-
-
-                self.element.yearHeaderBox.children("." + self.cssClass.btnNext).click(function () {
-                    self.state.viewYear += 12;
-                    self.yearPickerView.applyYearList().updateView();
-                    return false;
-                });
-                self.element.yearHeaderBox.children("." + self.cssClass.btnPrev).click(function () {
-                    self.state.viewYear -= 12;
-                    self.yearPickerView.applyYearList().updateView();
-                    return false;
-                });
-                this.updateView = function () {
-                    self.yearPickerView.applyYearList();
-                    self.container.yearView.children("." + self.cssClass.yearItem).each(function () {
-                        $(this).removeClass(self.cssClass.selectedYear)
-                        if ($(this).data().year == self.state.selectedYear) {
-                            $(this).addClass(self.cssClass.selectedYear)
-                        }
-                    });
-                    var pd = new persianDate([self.state.viewYear, self.state.viewMonth]);
-                    var year = pd.year();
-                    var remaining = parseInt(year / 12) * 12;
-                    self.element.yearHeaderBox.children("." + self.cssClass.btnSwitch).text(self._formatDigit(remaining) + "-" + self._formatDigit(remaining + 11));
-                    return this;
-                }
-                return this;
-            },
             fixPosition: function (self) {
                 var inputX = self.inputElem.offset().top;
                 var inputY = self.inputElem.offset().left;

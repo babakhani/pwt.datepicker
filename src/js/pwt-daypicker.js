@@ -1,37 +1,31 @@
 var Class_Daypicker = {
-    events: {
-        select: function () {
-        }
-    },
-    updateNavigatorSwitchBtn: function () {
-    },
     next: function () {
         var self = this;
-        if (self.datepicker.state.viewMonth == 12) {
-            self.datepicker.state.viewMonth = 1;
-            self.datepicker.state.viewYear++;
+        if (self.datepicker.state.view.month == 12) {
+            self.datepicker.state.view.month = 1;
+            self.datepicker.state.view.year++;
         } else {
-            self.datepicker.state.viewMonth++;
+            self.datepicker.state.view.month++;
         }
         self.updateView();
         return this;
     },
     prev: function () {
         var self = this;
-        if (self.datepicker.state.viewMonth == 1) {
-            self.datepicker.state.viewMonth = 12;
-            self.datepicker.state.viewYear--;
+        if (self.datepicker.state.view.month == 1) {
+            self.datepicker.state.view.month = 12;
+            self.datepicker.state.view.year--;
         } else {
-            self.datepicker.state.viewMonth--;
+            self.datepicker.state.view.month--;
         }
         self.updateView();
         return this;
     },
     updateView: function () {
         var self = this;
-        self.mGrid.updateAs(self.datepicker.state.viewYear, self.datepicker.state.viewMonth);
-        self.mGrid.markSelectedDate(self.datepicker.state.unixDate);
-        this._updateNavigator(self.datepicker.state.viewYear, self.datepicker.state.viewMonth);
+        self.mGrid.updateAs(self.datepicker.state.view.year, self.datepicker.state.view.month);
+        self.mGrid.markSelectedDate(self.datepicker.state.selected.unixDate);
+        this._updateNavigator(self.datepicker.state.view.year, self.datepicker.state.view.month);
         return this;
     },
     _updateNavigator: function (year, month) {
@@ -39,15 +33,14 @@ var Class_Daypicker = {
         var pdateStr = new persianDate([year, month]).format(self.datepicker.daysTitleFormat);
         self.datepicker.navigator.updateSwitchBtn(self.datepicker._formatDigit(pdateStr));
     },
-    hide:function(){
+    hide: function () {
         this.container.hide();
         return this;
     },
-    show:function(){
+    show: function () {
         var self = this;
         this.container.show();
-
-        this._updateNavigator(self.datepicker.state.viewYear, self.datepicker.state.viewMonth);
+        this.updateView();
         return this;
     },
     _render: function () {
@@ -58,16 +51,17 @@ var Class_Daypicker = {
             month: pd.month(),
             year: pd.year()
         });
-        this.mGrid.selectDate(self.datepicker.state.unixDate);
+        log(self.datepicker.state.selected.unixDate)
+        this.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         this.mGrid.attachEvent("selectDay", function (x) {
             self.datepicker._selectDate("unix", x);
-            self.mGrid.selectDate(self.datepicker.state.unixDate);
+            self.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         });
     },
     init: function () {
         var self = this;
         this._render();
-        this._updateNavigator(self.datepicker.state.viewYear, self.datepicker.state.viewMonth);
+        this._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         return this;
     }
 };
