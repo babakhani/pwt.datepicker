@@ -46,7 +46,8 @@ var Class_Daypicker = {
     show:function(){
         var self = this;
         this.container.show();
-        this._updateNavigator(self.datepicker.state.year, self.datepicker.state.month);
+
+        this._updateNavigator(self.datepicker.state.viewYear, self.datepicker.state.viewMonth);
         return this;
     },
     _render: function () {
@@ -66,7 +67,7 @@ var Class_Daypicker = {
     init: function () {
         var self = this;
         this._render();
-        this._updateNavigator(self.datepicker.state.year, self.datepicker.state.month);
+        this._updateNavigator(self.datepicker.state.viewYear, self.datepicker.state.viewMonth);
         return this;
     }
 };
