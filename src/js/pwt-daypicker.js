@@ -39,6 +39,15 @@ var Class_Daypicker = {
         var pdateStr = new persianDate([year, month]).format(self.datepicker.daysTitleFormat);
         self.datepicker.navigator.updateSwitchBtn(self.datepicker._formatDigit(pdateStr));
     },
+    hide:function(){
+        this.container.hide();
+        return this;
+    },
+    show:function(){
+        this.container.show();
+        this._updateNavigator(self.datepicker.state.year, self.datepicker.state.month);
+        return this;
+    },
     _render: function () {
         var self = this;
         var pd = new pDate();

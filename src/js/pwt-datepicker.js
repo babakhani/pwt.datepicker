@@ -47,9 +47,9 @@ var Class_pDatepicker = {
         self.navigator.switchRelation(viewName);
         switch (viewName) {
             case ('month'):
-                self.container.yearView.hide();
-                self.container.dayView.hide();
-                self.container.monthView.show();
+                //self.yearView.hide();
+                self.dayPicker.hide();
+                self.monthPicker.show();
                 break;
             case ('year'):
                 self.container.dayView.hide();

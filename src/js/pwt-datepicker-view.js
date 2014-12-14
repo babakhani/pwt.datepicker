@@ -5,8 +5,6 @@ var Views_pDatePicker = {
         monthView: "datepicker-month-view",
         yearView: "datepicker-year-view",
         navigator: "navigator",
-        monthItem: "month-item",
-        selectedMonth: "selected",
         yearItem: "year-item",
         selectedYear: "selected",
         toolbox: "toolbox "
