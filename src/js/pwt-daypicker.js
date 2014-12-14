@@ -51,11 +51,10 @@ var Class_Daypicker = {
             month: pd.month(),
             year: pd.year()
         });
-        log(self.datepicker.state.selected.unixDate)
         this.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         this.mGrid.attachEvent("selectDay", function (x) {
-            self.datepicker._selectDate("unix", x);
             self.mGrid.selectDate(self.datepicker.state.selected.unixDate);
+            self.datepicker._selectDate("unix", x);
         });
     },
     init: function () {

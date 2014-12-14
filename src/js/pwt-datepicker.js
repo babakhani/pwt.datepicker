@@ -20,7 +20,7 @@ var Class_pDatepicker = {
     },
     _updateState: function (key, val, updateDisplayInput) {
         var self = this;
-        self.state.setSelected(val,key)
+        self.state.setSelected(val,key);
         if (updateDisplayInput == true) {
             self._updateInputElement();
         }
@@ -67,7 +67,7 @@ var Class_pDatepicker = {
         return this;
     },
     _formatDigit: function (digit) {
-        if (this.persianDigit)
+        if (this.persianDigit && digit)
             return digit.toString().toPersianDigit();
         else
             return digit;
