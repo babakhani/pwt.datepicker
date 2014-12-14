@@ -9,19 +9,6 @@
  */
 
 var Class_pDatepicker = {
-    state: {
-        unixDate: null,
-        selectedYear: 0,
-        selectedMonth: 0,
-        selectedDay: 0,
-        viewYear: 0,
-        viewMonth: 0,
-        viewDay: 0
-    },
-    _updateStateUnixDate: function () {
-        var self = this;
-        this.state.unixDate = new persianDate([self.state.selectedYear, self.state.selectedMonth, self.state.selectedDay]).valueOf();
-    },
     _updateView: function () {
         this.dayPickerView.updateView();
         this.monthPickerView.updateView();
@@ -33,16 +20,7 @@ var Class_pDatepicker = {
     },
     _updateState: function (key, val, updateDisplayInput) {
         var self = this;
-        if (key == "year") {
-            this.state.selectedYear = val;
-            this._updateStateUnixDate();
-        } else if (key == "unix") {
-            this.state.unixDate = val;
-        } else if (key = "month") {
-            this.state.selectedMonth = val;
-            this._updateStateUnixDate();
-        }
-        this._syncViewStateWidthSelected();
+        self.state.setSelected(val,key)
         if (updateDisplayInput == true) {
             self._updateInputElement();
         }
@@ -77,27 +55,11 @@ var Class_pDatepicker = {
         }
         return this;
     },
-
-    _syncWithImportData: function (pasted) {
-        var self = this;
-        if (jQuery.isNumeric(pasted)) {
-            var newPersainDate = new persianDate(pasted);
-            self._updateState("unix", newPersainDate.valueOf(), true);
-        } else {
-            var persianDateArray = self.validatePersianDateString(pasted);
-            if (persianDateArray != null) {
-                delay(function () {
-                    var newPersainDate = new persianDate(persianDateArray);
-                    self._updateState("unix", newPersainDate.valueOf(), true);
-                }, self.inputDelay)
-            }
-        }
-        return this;
-    },
     _flagSelfManipulate: true,
     _selectDate: function (key, unixDate) {
         var self = this;
-        self._updateState("unix", unixDate, true);
+        self.state.setSelected(unixDate, 'unix');
+        self._updateInputElement();
         self.onSelect(unixDate, this);
         if (self.autoClose) {
             self.element.main.hide();
@@ -110,18 +72,30 @@ var Class_pDatepicker = {
         else
             return digit;
     },
-    _syncViewStateWidthSelected: function () {
-        var pd = new persianDate(this.state.unixDate);
-        this.state.selectedYear = this.state.viewYear = pd.year();
-        this.state.selectedMonth = this.state.viewMonth = pd.month();
-        this.state.selectedDay = this.state.viewDay = pd.date();
-        return this;
-    },
     // Removes the datepicker functionality completely.
     destroy: function () {
-        this.inputElem.removeCla_syncWithImportData
-        s(self.cssClass);
+        this.inputElem.removeClass(self.cssClass);
         this.element.main.remove();
+        return this;
+    },
+    // Handle Pasted Data
+    _syncWithImportData: function (pasted) {
+        var self = this;
+        if (jQuery.isNumeric(pasted)) {
+            var newPersainDate = new persianDate(pasted);
+            self.state.setSelected(newPersainDate, 'unix');
+            self._updateInputElement();
+        } else {
+            var persianDateArray = self.validatePersianDateString(pasted);
+            if (persianDateArray != null) {
+                delay(function () {
+                    var newPersainDate = new persianDate(persianDateArray);
+                    self.state.setSelected(newPersainDate, 'unix');
+                    self._updateInputElement();
+
+                }, self.inputDelay)
+            }
+        }
         return this;
     },
     attachEvents: function () {

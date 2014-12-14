@@ -41,8 +41,8 @@ var Views_pDatePicker = {
                 });
                 // Define Containers
                 self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
-                self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView).hide();
-                self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView).hide();
+                self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView);
+                self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView);
                 self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
                 self.container.navigator = $(self.element.main).children('.' + self.cssClass.navigator);
                 // Append Navigator
