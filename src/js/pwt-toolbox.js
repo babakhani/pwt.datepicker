@@ -5,7 +5,7 @@ var Class_Toolbox = {
     _goToday: function () {
         var self = this;
         var todayUnix = new Date().valueOf();
-        self.datepicker._updateState("unix", todayUnix, true);
+        self.datepicker.updateState("unix", todayUnix, true);
         self.datepicker.updateAllViews(self);
     },
     _render: function () {

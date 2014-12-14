@@ -51,8 +51,6 @@ var Class_MonthGrid = {
             return this;
       },
       selectDate : function(unixDate) {
-            
-            
             var self = this, reRenderFlag;
             var sDate = new persianDate(unixDate);
             if (self.state.year == sDate.year() && self.state.month == sDate.month()) {

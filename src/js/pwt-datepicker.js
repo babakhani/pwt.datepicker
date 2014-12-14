@@ -22,8 +22,8 @@ var Class_pDatepicker = {
     _updateStateFromUnixDate: function (unixDate) {
         var pd = new persianDate(this.state.unixDate);
         this.state.year = this.state.viewYear = this.state.selectedYear = pd.year();
-        this.state.month = this.state.viewMonth = this.state.selectedMonth = pd.month();
-        this.state.day = this.state.viewMonth = this.state.selectedDay = pd.date();
+        this.state.month = this.state.viewYear = this.state.selectedMonth = pd.month();
+        this.state.day = this.state.selectedDay = pd.date();
         return this;
     },
     _updateStateUnixDate: function () {
@@ -34,6 +34,28 @@ var Class_pDatepicker = {
         this.dayPickerView.updateView();
         this.monthPickerView.updateView();
         this.yearPickerView.updateView();
+    },
+    updateState: function (key, val, updateDisplayInput) {
+        this._updateState(key, val, updateDisplayInput);
+        return this;
+    },
+    _updateState: function (key, val, updateDisplayInput) {
+        var self = this;
+        if (key == "year") {
+            this.state.selectedYear = val;
+            this._updateStateUnixDate();
+        } else if (key == "unix") {
+            this.state.unixDate = val;
+            self._updateStateFromUnixDate(this.state.unixDate);
+        } else if (key = "month") {
+            this.state.selectedMonth = val;
+            this._updateStateUnixDate();
+        }
+        this._syncViewStateWidthSelected();
+        if (updateDisplayInput == true) {
+            self._updateInputElement();
+        }
+        return this;
     },
     updateAllViews: function () {
         var self = this;
@@ -64,28 +86,7 @@ var Class_pDatepicker = {
         }
         return this;
     },
-    updateState: function (key, val, updateDisplayInput) {
-        this._updateState(key, val, updateDisplayInput);
-        return this;
-    },
-    _updateState: function (key, val, updateDisplayInput) {
-        var self = this;
-        if (key == "year") {
-            this.state.selectedYear = val;
-            this._updateStateUnixDate();
-        } else if (key == "unix") {
-            this.state.unixDate = val;
-            self._updateStateFromUnixDate(this.state.unixDate);
-        } else if (key = "month") {
-            this.state.selectedMonth = val;
-            this._updateStateUnixDate();
-        }
-        this._syncViewStateWidthSelected();
-        if (updateDisplayInput == true) {
-            self._updateInputElement();
-        }
-        return this;
-    },
+
     _syncWithImportData: function (pasted) {
         var self = this;
         if (jQuery.isNumeric(pasted)) {
