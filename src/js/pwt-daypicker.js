@@ -55,8 +55,7 @@ var Class_Daypicker = {
         this.mGrid = new MonthGrid({
             container: self.container,
             month: pd.month(),
-            year: pd.year(),
-            //persianDigit : self.persianDigit
+            year: pd.year()
         });
         this.mGrid.selectDate(self.datepicker.state.unixDate);
         this.mGrid.attachEvent("selectDay", function (x) {
