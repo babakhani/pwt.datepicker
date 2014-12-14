@@ -35,6 +35,39 @@ var Class_pDatepicker = {
         this.monthPickerView.updateView();
         this.yearPickerView.updateView();
     },
+    updateAllViews: function () {
+        var self = this;
+        self.dayPicker.updateView();
+        self.monthPicker.updateView();
+        //self.yearPicker.updateView();
+        return self;
+    },
+    changeView: function (viewName) {
+        var self = this;
+        self.navigator.switchRelation(viewName);
+        switch (viewName) {
+            case ('month'):
+                self.container.yearView.hide();
+                self.container.dayView.hide();
+                self.container.monthView.show();
+                break;
+            case ('year'):
+                self.container.dayView.hide();
+                self.container.monthView.hide();
+                self.container.yearView.show();
+                break;
+            case ('day'):
+                self.container.yearView.hide();
+                self.container.monthView.hide();
+                self.container.dayView.show();
+                break;
+        }
+        return this;
+    },
+    updateState: function (key, val, updateDisplayInput) {
+        this._updateState(key, val, updateDisplayInput);
+        return this;
+    },
     _updateState: function (key, val, updateDisplayInput) {
         var self = this;
         if (key == "year") {
@@ -175,10 +208,8 @@ var Class_pDatepicker = {
         this._updateInputElement();
         this.view = this.views['default'];
         this.view.render(this);
-
         this.inputElem.data("datepicker", this);
         this.inputElem.addClass(self.cssClass);
-
         this.attachEvents();
         return this;
     }

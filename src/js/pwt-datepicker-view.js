@@ -55,7 +55,7 @@ var Views_pDatePicker = {
                 // Append Toolbox
                 ///////////////////////////////////////////////
                 if (self.toolbox) {
-                    self.toolbox = new Toolbox({}, self.container.toolbox);
+                    self.toolbox = new Toolbox({datepicker: self}, self.container.toolbox);
                 } else {
                     self.container.toolbox.remove();
                 }
@@ -63,34 +63,12 @@ var Views_pDatePicker = {
                 ///////////////////////////////////////////////
                 self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
                 self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
-                self.view.changeView(self, self.viewMode);
+                self.changeView(self.viewMode);
                 //self.yearPickerView = new self.view.YearPicker(self);
                 self._syncWithImportData(self.state.unixDate);
                 return this;
             },
-            changeView: function (self, viewName) {
-                var pd = new persianDate(self.state.unixDate);
-                self.navigator.switchRelation(viewName);
-                switch (viewName) {
-                    case ('month'):
-                        self.container.yearView.hide();
-                        self.container.dayView.hide();
-                        self.container.monthView.show();
-                        break;
-                    case ('year'):
-                        self.container.dayView.hide();
-                        self.container.monthView.hide();
-                        self.container.yearView.show();
-                        break;
-                    case ('day'):
-                        self.container.yearView.hide();
-                        self.container.monthView.hide();
-                        self.container.dayView.show();
-                        break;
-                }
-                //self.dayPickerView.updateView();
-                return this;
-            },
+
             // ---------------------------------------------------------------------------  Month View
             MonthPicker: function (self) {
                 var pd = new persianDate(self.state.unixDate),
@@ -225,12 +203,6 @@ var Views_pDatePicker = {
                     });
                 }
                 return this;
-            },
-            updateAllViews: function (self) {
-                self.dayPickerView.updateView();
-                self.monthPickerView.updateView();
-                self.yearPickerView.updateView();
-                return self;
             }
         }
     }

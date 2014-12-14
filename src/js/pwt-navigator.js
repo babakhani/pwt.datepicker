@@ -16,15 +16,18 @@ var Class_Navigator = {
         return this;
     },
     _next: function () {
-        this.datepicker[this.relation+'Picker'].next();
+        this.datepicker[this.relation + 'Picker'].next();
         return this;
     },
     _prev: function () {
-        this.datepicker[this.relation+'Picker'].prev();
+        this.datepicker[this.relation + 'Picker'].prev();
         return this;
     },
     _switch: function () {
-        console.log("navigator _switch");
+        if (this.relation == 'day') {
+            this.datepicker.changeView("month");
+        }
+        return this;
     },
     _render: function () {
         var self = this;

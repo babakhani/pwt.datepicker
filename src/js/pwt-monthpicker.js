@@ -6,10 +6,8 @@ var Class_MonthPicker = {
     updateNavigatorSwitchBtn: function () {
     },
     next: function () {
-
     },
     prev: function () {
-
     },
     updateView: function () {
     },
