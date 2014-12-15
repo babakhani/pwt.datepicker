@@ -22,12 +22,6 @@ var Class_MonthPicker = {
     defineSelectedMonth: function () {
         var self = this;
         self.container.children('.' + self.cssClass.monthItem).removeClass(self.cssClass.selectedMonth);
-
-        log("--------")
-        log("view " + self.datepicker.state.view.year)
-        log("selected " + self.datepicker.state.selected.year)
-
-
         if (self.datepicker.state.view.year == self.datepicker.state.selected.year) {
             self.container.children(".month" + self.datepicker.state.selected.month).addClass(self.cssClass.selectedMonth)
         }

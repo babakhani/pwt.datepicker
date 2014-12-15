@@ -9,7 +9,7 @@ var Class_YearPicker = {
     },
     _updateNavigator: function () {
         var self = this;
-        var pd = new persianDate([self.datepicker.state.viewYear, self.datepicker.state.viewMonth]);
+        var pd = new persianDate([self.datepicker.state.view.year, self.datepicker.state.view.month]);
         var year = pd.year();
         var remaining = parseInt(year / 12) * 12;
         self.datepicker.navigator.updateSwitchBtn(self.datepicker._formatDigit(remaining) + "-" + self.datepicker._formatDigit(remaining + 11));
@@ -20,18 +20,18 @@ var Class_YearPicker = {
     },
     show: function () {
         this.container.show();
-        this._updateNavigator();
+        this.updateView();
         return this;
     },
     next: function () {
         var self = this;
-        self.datepicker.state.viewYear += 12;
+        self.datepicker.state.view.year += 12;
         self._render().updateView();
         return this;
     },
     prev: function () {
         var self = this;
-        self.datepicker.state.viewYear -= 12;
+        self.datepicker.state.view.year -= 12;
         self._render().updateView();
         return this;
     },
@@ -40,7 +40,7 @@ var Class_YearPicker = {
         self._render();
         self.container.children("." + self.cssClass.yearItem).each(function () {
             $(this).removeClass(self.cssClass.selectedYear)
-            if ($(this).data().year == self.datepicker.state.selectedYear) {
+            if ($(this).data().year == self.datepicker.state.selected.year) {
                 $(this).addClass(self.cssClass.selectedYear)
             }
         });
@@ -49,8 +49,8 @@ var Class_YearPicker = {
     },
     _render: function () {
         var self = this;
-        var pd = new persianDate(self.datepicker.state.unixDate)
-            , year = self.datepicker.state.viewYear
+        var pd = new persianDate(self.datepicker.state.selected.unixDate)
+            , year = self.datepicker.state.view.year
             , remaining = parseInt(year / 12) * 12;
         self.container.children("." + self.cssClass.yearItem).remove();
         // Apply Year
@@ -65,9 +65,7 @@ var Class_YearPicker = {
         }
         self.container.children("." + self.cssClass.yearItem).click(function () {
             var y = $(this).data().year;
-            self.datepicker.state.viewYear = y;
-            self.datepicker.updateState("year", y, true);
-            self.datepicker.changeView("month");
+            self.datepicker.selectYear(y);
             return false;
         });
         return this;

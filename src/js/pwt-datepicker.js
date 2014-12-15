@@ -63,6 +63,12 @@ var Class_pDatepicker = {
         self.changeView('day');
         return this;
     },
+    selectYear:function(yearNum){
+        var self = this;
+        self.state.setView('year', yearNum);
+        self.changeView('month');
+        return this;
+    },
     _formatDigit: function (digit) {
         if (this.persianDigit && digit)
             return digit.toString().toPersianDigit();
@@ -80,14 +86,14 @@ var Class_pDatepicker = {
         var self = this;
         if (jQuery.isNumeric(pasted)) {
             var newPersainDate = new persianDate(pasted);
-            self.state.setSelected(newPersainDate, 'unix');
+            self.state.setSelected('unix',newPersainDate);
             self._updateInputElement();
         } else {
             var persianDateArray = self.validatePersianDateString(pasted);
             if (persianDateArray != null) {
                 delay(function () {
                     var newPersainDate = new persianDate(persianDateArray);
-                    self.state.setSelected(newPersainDate, 'unix');
+                    self.state.setSelected('unix',newPersainDate);
                     self._updateInputElement();
 
                 }, self.inputDelay)
