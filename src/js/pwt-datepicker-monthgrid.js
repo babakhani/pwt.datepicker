@@ -51,8 +51,8 @@ var Class_MonthGrid = {
             return this;
       },
       selectDate : function(unixDate) {
-            
-            
+
+
             var self = this, reRenderFlag;
             var sDate = new persianDate(unixDate);
             if (self.state.year == sDate.year() && self.state.month == sDate.month()) {
@@ -72,9 +72,9 @@ var Class_MonthGrid = {
       markSelectedDate : function(unixDate) {
             var self = this;
             $.each(self.daysList, function(index, value) {
-                  var viewItemUnix= parseInt($(value).attr("unixDate"));   
+                  var viewItemUnix= parseInt($(value).attr("unixDate"));
                   if (self.isSameDay(viewItemUnix,unixDate)  ) {
-                        $(this).addClass(self.cssClass.selected);
+                      $(this).addClass(self.cssClass.selected);
                   } else {
                         $(this).removeClass(self.cssClass.selected);
                   }

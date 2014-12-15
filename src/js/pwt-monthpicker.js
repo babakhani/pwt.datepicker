@@ -22,6 +22,12 @@ var Class_MonthPicker = {
     defineSelectedMonth: function () {
         var self = this;
         self.container.children('.' + self.cssClass.monthItem).removeClass(self.cssClass.selectedMonth);
+
+        log("--------")
+        log("view " + self.datepicker.state.view.year)
+        log("selected " + self.datepicker.state.selected.year)
+
+
         if (self.datepicker.state.view.year == self.datepicker.state.selected.year) {
             self.container.children(".month" + self.datepicker.state.selected.month).addClass(self.cssClass.selectedMonth)
         }
@@ -52,9 +58,7 @@ var Class_MonthPicker = {
                 monthIndex: m
             }).addClass("month" + m).addClass(self.cssClass.monthItem).text(self.monthRange[m].name.fa).appendTo(self.container)
                 .click(function () {
-                    self.datepicker.state.viewMonth = $(this).data().monthIndex;
-                    self.datepicker.updateState('month', $(this).data().monthIndex, true);
-                    self.datepicker.changeView('day');
+                    self.datepicker.selectMonth($(this).data().monthIndex);
                     return false;
                 });
         }

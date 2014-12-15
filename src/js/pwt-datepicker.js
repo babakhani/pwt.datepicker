@@ -14,18 +14,6 @@ var Class_pDatepicker = {
         this.monthPickerView.updateView();
         this.yearPickerView.updateView();
     },
-    updateState: function (key, val, updateDisplayInput) {
-        this._updateState(key, val, updateDisplayInput);
-        return this;
-    },
-    _updateState: function (key, val, updateDisplayInput) {
-        var self = this;
-        self.state.setSelected(val,key);
-        if (updateDisplayInput == true) {
-            self._updateInputElement();
-        }
-        return this;
-    },
     updateAllViews: function () {
         var self = this;
         self.dayPicker.updateView();
@@ -56,14 +44,23 @@ var Class_pDatepicker = {
         return this;
     },
     _flagSelfManipulate: true,
-    _selectDate: function (key, unixDate) {
+    selectDate: function (key, unixDate) {
         var self = this;
-        self.state.setSelected(unixDate, 'unix');
+        self.state.setSelected('unix', unixDate);
+        this.state.syncViewWithelected();
+        self.dayPicker.selectDay();
         self._updateInputElement();
-        self.onSelect(unixDate, this);
+        //self.onSelect(unixDate, this);
         if (self.autoClose) {
             self.element.main.hide();
         }
+        return this;
+    },
+    selectMonth: function (monthNum) {
+        var self = this;
+        self.state.setView('month', monthNum);
+        self.dayPicker.updateView();
+        self.changeView('day');
         return this;
     },
     _formatDigit: function (digit) {
@@ -116,7 +113,7 @@ var Class_pDatepicker = {
                     var newDate = new Date($(this).val());
                     if (newDate != "Invalid Date") {
                         var newPersainDate = new persianDate(newDate);
-                        self._updateState("unix", newPersainDate.valueOf(), true);
+                        self.selectDate("unix", newPersainDate.valueOf());
                     }
                 }
             });
@@ -164,8 +161,8 @@ var Class_pDatepicker = {
         else {
             this.state.unixDate = new Date().valueOf();
         }
-        this.state.setSelected(this.state.unixDate, 'unix');
-        this.state.setView(this.state.unixDate, 'unix');
+        this.state.setSelected('unix', this.state.unixDate);
+        this.state.setView('unix', this.state.unixDate);
         return this;
     },
     init: function () {

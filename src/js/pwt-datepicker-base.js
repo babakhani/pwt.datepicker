@@ -4,12 +4,24 @@ var Class_Base = {
         this.raiseEvent('init');
     },
     isSameDay: function (unix1, unix2) {
-        var d1 = new Date(unix1);
-        var d2 = new Date(unix2);
+
+//        log(pDate(unix1).format("YYYY-MM-DD")+" == "+pDate(unix2).format("YYYY-MM-DD"))
+        var d1 = new pDate(unix1);
+        var d2 = new pDate(unix2);
+//        log(d1.year())
+//        log(d1.month())
+//        log(d1.date())
+//        log(d2.year())
+//        log(d2.month())
+//        log(d2.date())
+//        log(d1 && d2 &&
+//            d1.year() == d2.year() &&
+//            d1.month() == d2.month() &&
+//            d1.date() == d2.date())
         return d1 && d2 &&
-            d1.getFullYear() == d2.getFullYear() &&
-            d1.getMonth() == d2.getMonth() &&
-            d1.getDate() == d2.getDate();
+            d1.year() == d2.year() &&
+            d1.month() == d2.month() &&
+            d1.date() == d2.date();
     },
     isValidGreguranDate: function (inputDate) {
         return inputDate && new Date(inputDate) != "Invalid Date" && new Date(inputDate) != "undefined";

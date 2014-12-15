@@ -7,7 +7,7 @@ var Class_Daypicker = {
         } else {
             self.datepicker.state.view.month++;
         }
-        self.updateView();
+        self._updateView();
         return this;
     },
     prev: function () {
@@ -18,14 +18,27 @@ var Class_Daypicker = {
         } else {
             self.datepicker.state.view.month--;
         }
-        self.updateView();
+        self._updateView();
         return this;
     },
     updateView: function () {
+        this._updateView();
+    },
+    _updateView: function () {
         var self = this;
         self.mGrid.updateAs(self.datepicker.state.view.year, self.datepicker.state.view.month);
-        self.mGrid.markSelectedDate(self.datepicker.state.selected.unixDate);
-        this._updateNavigator(self.datepicker.state.view.year, self.datepicker.state.view.month);
+        self._updateNavigator(self.datepicker.state.view.year, self.datepicker.state.view.month);
+        self._updateNavigator(self.datepicker.state.view.year, self.datepicker.state.view.month);
+        this._updateSelectedDay(self.datepicker.state.selected.unixDate);
+        return this;
+    },
+    selectDay: function () {
+        var self = this;
+        self.mGrid.updateAs(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
+        self._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
+        self._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
+        this._updateSelectedDay(self.datepicker.state.selected.unixDate);
+        this._updateView();
         return this;
     },
     _updateNavigator: function (year, month) {
@@ -40,7 +53,12 @@ var Class_Daypicker = {
     show: function () {
         var self = this;
         this.container.show();
-        this.updateView();
+        this._updateView();
+        return this;
+    },
+    _updateSelectedDay: function (unix) {
+        var self = this;
+        this.mGrid.markSelectedDate(unix);
         return this;
     },
     _render: function () {
@@ -48,14 +66,14 @@ var Class_Daypicker = {
         var pd = new pDate();
         this.mGrid = new MonthGrid({
             container: self.container,
-            month: pd.month(),
-            year: pd.year()
+            month: self.datepicker.state.selected.month,
+            year: self.datepicker.state.selected.year
         });
-        this.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         this.mGrid.attachEvent("selectDay", function (x) {
+            self.datepicker.selectDate('unix', x);
             self.mGrid.selectDate(self.datepicker.state.selected.unixDate);
-            self.datepicker._selectDate("unix", x);
         });
+        this._updateSelectedDay(self.datepicker.state.selected.unixDate);
     },
     init: function () {
         var self = this;
