@@ -9,11 +9,6 @@
  */
 
 var Class_pDatepicker = {
-    _updateView: function () {
-        this.dayPickerView.updateView();
-        this.monthPickerView.updateView();
-        this.yearPickerView.updateView();
-    },
     updateAllViews: function () {
         var self = this;
         self.dayPicker.updateView();
@@ -24,6 +19,7 @@ var Class_pDatepicker = {
     changeView: function (viewName) {
         var self = this;
         self.navigator.switchRelation(viewName);
+        self.currentView = viewName;
         switch (viewName) {
             case ('month'):
                 self.yearPicker.hide();
@@ -48,9 +44,20 @@ var Class_pDatepicker = {
         var self = this;
         self.state.setSelected('unix', unixDate);
         this.state.syncViewWithelected();
-        self.dayPicker.selectDay();
+
+        switch (self.currentView) {
+            case ('month'):
+                self.monthPicker.selectMonth();
+                break;
+            case ('year'):
+                self.yearPicker.selectYear();
+                break;
+            case ('day'):
+                self.dayPicker.selectDay();
+                break;
+        }
         self._updateInputElement();
-        //self.onSelect(unixDate, this);
+        self.onSelect(unixDate, this);
         if (self.autoClose) {
             self.element.main.hide();
         }
@@ -112,7 +119,7 @@ var Class_pDatepicker = {
                 }, 60);
             });
             /////////////////   Manipulate by alt changes
-            $(self.altField).bind("textchange", function () {
+            $(self.altField).bind("change", function () {
                 if (!self._flagSelfManipulate) {
                     var newDate = new Date($(this).val());
                     if (newDate != "Invalid Date") {

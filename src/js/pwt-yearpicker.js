@@ -35,6 +35,9 @@ var Class_YearPicker = {
         self._render().updateView();
         return this;
     },
+    selectYear:function(){
+        this.updateView();
+    },
     updateView: function () {
         var self = this;
         self._render();

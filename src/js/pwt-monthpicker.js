@@ -19,6 +19,10 @@ var Class_MonthPicker = {
         this.defineSelectedMonth();
         return this;
     },
+    selectMonth: function () {
+        this.defineSelectedMonth();
+        this._updateNavigator();
+    },
     defineSelectedMonth: function () {
         var self = this;
         self.container.children('.' + self.cssClass.monthItem).removeClass(self.cssClass.selectedMonth);
