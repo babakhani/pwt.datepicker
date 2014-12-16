@@ -4,6 +4,7 @@ var Views_pDatePicker = {
         yearView: "datepicker-year-view",
         monthView: "datepicker-month-view",
         dayView: "datepicker-day-view",
+        timeView: "datepicker-time-view",
         navigator: "navigator",
         toolbox: "toolbox "
     },
@@ -15,7 +16,7 @@ var Views_pDatePicker = {
                     css: self.cssClass
                 };
                 self.element = {};
-                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).hide().appendTo($("body"));
+                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo($("body"));
                 self.view.fixPosition(self);
                 // SHow Hide Picker
                 ///////////////////////////////////////////////
@@ -40,11 +41,12 @@ var Views_pDatePicker = {
                     return false;
                 });
                 // Define Containers
+                self.container.navigator = $(self.element.main).children('.' + self.cssClass.navigator);
                 self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
                 self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView);
                 self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView);
+                self.container.timeView = $(self.element.main).children('.' + self.cssClass.timeView);
                 self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
-                self.container.navigator = $(self.element.main).children('.' + self.cssClass.navigator);
                 // Append Navigator
                 ///////////////////////////////////////////////
                 self.navigator = new Navigator({datepicker: self}, self.container.navigator);
@@ -55,11 +57,13 @@ var Views_pDatePicker = {
                 } else {
                     self.container.toolbox.remove();
                 }
-                // Day Picker
                 ///////////////////////////////////////////////
                 self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
                 self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
                 self.yearPicker = new YearPicker({datepicker: self}, self.container.yearView);
+
+                self.timePicker = new TimePicker({datepicker: self}, self.container.timeView);
+
                 self.changeView(self.viewMode);
                 //self.yearPickerView = new self.view.YearPicker(self);
                 self._syncWithImportData(self.state.unixDate);

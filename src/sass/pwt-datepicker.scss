@@ -2,7 +2,7 @@
 .datepicker-plot-area table,
 .datepicker-plot-area th,
 .datepicker-plot-area td {
-  border: none;
+  border: block !important;
 }
 
 .datepicker-plot-area {
@@ -88,7 +88,7 @@
 .datepicker-plot-area .datepicker-year-view {
   display: block;
   float: left;
-  min-height: 220px !important;
+  min-height: 200px !important;
   margin: 0px 2px 0px 2px;
 }
 
@@ -329,6 +329,70 @@
   background: linear-gradient(to bottom, #fefcea 0%, #f1da36 100%); /* W3C */
   //	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 ); /* IE6-9 */
 
+}
+
+// Timepicker
+//////////////
+
+.datepicker-plot-area .datepicker-time-view {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 60px;
+  & > div {
+    display: block;
+    width: 25%;
+    height: 60px;
+    float: left;
+    overflow: hidden;
+  }
+  .down-btn,
+  .up-btn {
+    display: block;
+    float: left;
+    width: 90%;
+    margin: 0px 5%;
+    height: 20px;
+    line-height: 18px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    background: #f1f1f1;
+    color: #999;
+    font-weight: bold;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .down-btn {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .down-btn:hover,
+  .up-btn:hover {
+    background: #cccccc;
+    color: #ffffff;
+  }
+  input {
+    display: block;
+    width: 90%;
+    margin: 0px 5%;
+    border: none;
+    background: #f9f9f9;
+    height: 20px;
+    padding: 0px;
+    text-align: center;
+  }
 }
 
 
