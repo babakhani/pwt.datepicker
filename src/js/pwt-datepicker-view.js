@@ -15,7 +15,7 @@ var Views_pDatePicker = {
                     css: self.cssClass
                 };
                 self.element = {};
-                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo($("body"));
+                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).hide().appendTo($("body"));
                 self.view.fixPosition(self);
                 // SHow Hide Picker
                 ///////////////////////////////////////////////
