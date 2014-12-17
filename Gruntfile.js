@@ -9,23 +9,52 @@ module.exports = function (grunt) {
                 footer: '}());'
             },
             dist: {
-                src: ['src/js/pwt-datepicker.base.js', 'src/js/pwt-datepicker-helper.js',
-                    'src/js/pwt-datepicker-monthgrid.js'
-                    , 'src/js/pwt-datepicker-monthgrid-view.js',
-                    'src/js/pwt-daypicker.js',
-                    'src/js/pwt-datepicker-view.js',
-                    'src/js/pwt-datepicker.js'],
-                dest: 'dist/<%= pkg.name %>.js'
+                src: [
+                    'source/js/plugin.js',
+                    'source/js/config.js',
+                    'source/js/template.js',
+                    'source/js/datepicker-base.js',
+                    'source/js/datepicker-helper.js',
+                    'source/js/datepicker-monthgrid.js',
+                    'source/js/datepicker-monthgrid-view.js',
+                    'source/js/datepicker-view.js',
+                    'source/js/datepicker.js',
+                    'source/js/navigator.js',
+                    'source/js/daypicker.js',
+                    'source/js/monthpicker.js',
+                    'source/js/yearpicker.js',
+                    'source/js/toolbox.js',
+                    'source/js/timepicker.js',
+                    'source/js/state.js'
+                ],
+                dest: 'build/<%= pkg.version %>/<%= pkg.name %>.js'
             }
         },
         uglify: {
             build: {
-                src: 'dist/<%= pkg.name %>.js',
-                dest: 'dist/<%= pkg.name %>.min.js'
+                src: 'build/<%= pkg.version %>/<%= pkg.name %>.js',
+                dest: 'build/<%= pkg.version %>/<%= pkg.name %>.min.js'
+            }
+        },
+        cssmin: {
+            combine: {
+                files: {
+                    'build/<%= pkg.version %>/<%= pkg.name %>.min.css': ['build/<%= pkg.version %>/<%= pkg.name %>.css']
+                }
+            }
+        },
+        copy: {
+            main: {
+                files: [
+                    // includes files within path
+                    { src: ['source/css/**'], dest: 'build/<%= pkg.version %>/<%= pkg.name %>.css', filter: 'isFile'}
+                ]
             }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.registerTask('default', ['concat', 'copy','cssmin', 'uglify']);
 };
