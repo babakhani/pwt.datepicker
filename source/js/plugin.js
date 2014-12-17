@@ -1,4 +1,7 @@
-// Plugin Code
+/**
+ * Persian-Datepicker
+ * @author Reza Babakhani
+ */
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments), output = this;
