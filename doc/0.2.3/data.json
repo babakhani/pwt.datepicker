@@ -1,0 +1,65 @@
+{
+    "project": {
+        "name": "persian-datepicker",
+        "description": "",
+        "version": "0.2.3",
+        "url": ""
+    },
+    "files": {
+        "source\\js\\datepicker.js": {
+            "name": "source\\js\\datepicker.js",
+            "modules": {},
+            "classes": {
+                "Datepicker": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "source\\js\\plugin.js": {
+            "name": "source\\js\\plugin.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Datepicker": {
+            "name": "Datepicker",
+            "shortname": "Datepicker",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "source\\js\\datepicker.js",
+            "line": 3,
+            "description": "This is the description for my class.",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "source\\js\\datepicker.js",
+            "line": 190,
+            "description": "My Datepicker method description.  Like other pieces of your comment blocks,\nthis can span multiple lines.",
+            "itemtype": "method",
+            "name": "datepiker",
+            "class": "Datepicker"
+        },
+        {
+            "file": "source\\js\\plugin.js",
+            "line": 1,
+            "description": "Persian-Datepicker",
+            "author": "Reza Babakhani",
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nPersian-Datepicker",
+            "line": " source\\js\\plugin.js:1"
+        }
+    ]
+}
