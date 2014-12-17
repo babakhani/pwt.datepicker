@@ -50,11 +50,24 @@ module.exports = function (grunt) {
                     { src: ['source/css/**'], dest: 'build/<%= pkg.version %>/<%= pkg.name %>.css', filter: 'isFile'}
                 ]
             }
+        },
+        yuidoc: {
+            compile: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
+                options: {
+                    paths: 'source/js/',
+                    outdir: 'doc/<%= pkg.version %>/'
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.registerTask('default', ['concat', 'copy','cssmin', 'uglify']);
+    grunt.loadNpmTasks('grunt-contrib-yuidoc');
+    grunt.registerTask('default', ['concat', 'copy', 'cssmin', 'uglify', 'yuidoc']);
 };

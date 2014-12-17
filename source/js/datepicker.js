@@ -1,13 +1,11 @@
-/*
- // Jquery Persian Datepicker
- // Copyright 2011, Software Freedom Conservancy, Inc.
- // Dual licensed under the MIT or GPL Version 2 licenses.
- // babakhani.reza@gmail.com
- // babakhani.github.io/PersianWebToolkit
- // Beta Version 0.2.3
- // Dependency :  Jquery.js , persian-date.js
- */
 
+
+/**
+* This is the description for my class.
+*
+* @class Datepicker
+* @constructor
+*/
 var Class_pDatepicker = {
     updateAllViews: function () {
         var self = this;
@@ -189,6 +187,12 @@ var Class_pDatepicker = {
         return this;
     }
 };
+/**
+* My Datepicker method description.  Like other pieces of your comment blocks,
+* this can span multiple lines.
+*
+* @method datepiker
+*/
 var Datepicker = function (mainElem, options) {
     return inherit(this, [Class_Sprite, Class_pDatepicker, Class_DatepickerConfig, Views_pDatePicker, options, {
         inputElem: $(mainElem),
