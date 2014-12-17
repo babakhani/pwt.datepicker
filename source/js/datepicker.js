@@ -1,12 +1,15 @@
-
-
 /**
-* This is the description for my class.
-*
-* @class Datepicker
-* @constructor
-*/
-var Class_pDatepicker = {
+ * Datepicker Class
+ * @class ClassDatepicker
+ * @constructor Datepicker
+ */
+var ClassDatepicker = {
+    /**
+     * Update All View's Part
+     *
+     * @method updateAllViews
+     * @return Datepicker
+     */
     updateAllViews: function () {
         var self = this;
         self.dayPicker.updateView();
@@ -14,6 +17,12 @@ var Class_pDatepicker = {
         self.yearPicker.updateView();
         return self;
     },
+    /**
+     * Change View
+     * @param {String} viewName
+     * @method changeView
+     * @return Datepicker
+     */
     changeView: function (viewName) {
         var self = this;
         self.navigator.switchRelation(viewName);
@@ -37,12 +46,23 @@ var Class_pDatepicker = {
         }
         return this;
     },
+    /**
+     * Use As Flag For Define Self Manipulation
+     * @private
+     * @property flagSelfManipulate
+     */
     _flagSelfManipulate: true,
+    /**
+     * selectDate
+     * @param {string} key
+     * @param {number} unixDate
+     * @method selectDate
+     * @return Datepicker
+     */
     selectDate: function (key, unixDate) {
         var self = this;
         self.state.setSelected('unix', unixDate);
         this.state.syncViewWithelected();
-
         switch (self.currentView) {
             case ('month'):
                 self.monthPicker.selectMonth();
@@ -61,6 +81,12 @@ var Class_pDatepicker = {
         }
         return this;
     },
+    /**
+     * selectMonth
+     * @param {number} monthNum
+     * @method selectMonth
+     * @return Datepicker
+     */
     selectMonth: function (monthNum) {
         var self = this;
         self.state.setView('month', monthNum);
@@ -68,25 +94,47 @@ var Class_pDatepicker = {
         self.changeView('day');
         return this;
     },
+    /**
+     * selectYear
+     * @param {number} yearNum
+     * @method selectYear
+     * @return Datepicker
+     */
     selectYear: function (yearNum) {
         var self = this;
         self.state.setView('year', yearNum);
         self.changeView('month');
         return this;
     },
+    /**
+     * _formatDigit
+     * @param {number} digit
+     * @private
+     * @method _formatDigit
+     * @return formatted Digit
+     */
     _formatDigit: function (digit) {
         if (this.persianDigit && digit)
             return digit.toString().toPersianDigit();
         else
             return digit;
     },
-    // Removes the datepicker functionality completely.
+    /**
+     * destroy instant of plugin and remove dom element
+     * @method destroy
+     * @return Datepicker
+     */
     destroy: function () {
         this.inputElem.removeClass(self.cssClass);
         this.element.main.remove();
         return this;
     },
-    // Handle Pasted Data
+    /**
+     * Sync Datepicker With Pasted Data
+     * @method _syncWithImportData
+     * @private
+     * @return Datepicker
+     */
     _syncWithImportData: function (pasted) {
         var self = this;
         if (jQuery.isNumeric(pasted)) {
@@ -104,7 +152,13 @@ var Class_pDatepicker = {
         }
         return this;
     },
-    attachEvents: function () {
+    /**
+     * Bind Evenet
+     * @method _attachEvents
+     * @private
+     * @return Datepicker
+     */
+    _attachEvents: function () {
         var self = this;
         $(window).resize(function () {
             self.view.fixPosition(self);
@@ -151,7 +205,12 @@ var Class_pDatepicker = {
         }
         return this;
     },
-    // Update Input elements
+    /**
+     * Update Input Element
+     * @method _updateInputElement
+     * @private
+     * @return Datepicker
+     */
     _updateInputElement: function () {
         var self = this;
         self._flagSelfManipulate = true;
@@ -162,7 +221,12 @@ var Class_pDatepicker = {
         self._flagSelfManipulate = false;
         return self;
     },
-    // one time run single Run
+    /**
+     * On Init Plugin run and define default date of datepicker
+     * @method _defineOnInitState
+     * @private
+     * @return Datepicker
+     */
     _defineOnInitState: function () {
         if (this.isValidGreguranDate(this.inputElem.val())) {
             this.state.unixDate = new Date(this.inputElem.val()).valueOf();
@@ -174,6 +238,12 @@ var Class_pDatepicker = {
         this.state.setView('unix', this.state.unixDate);
         return this;
     },
+    /**
+     * Initilize Datepicler
+     * @method init
+     * @private
+     * @return Datepicker
+     */
     init: function () {
         var self = this;
         this.state = new State({datepicker: self});
@@ -183,18 +253,17 @@ var Class_pDatepicker = {
         this.view.render(this);
         this.inputElem.data("datepicker", this);
         this.inputElem.addClass(self.cssClass);
-        this.attachEvents();
+        this._attachEvents();
         return this;
     }
 };
 /**
-* My Datepicker method description.  Like other pieces of your comment blocks,
-* this can span multiple lines.
-*
-* @method datepiker
-*/
+ * My Datepicker Constructor
+ *
+ * @method datepiker
+ */
 var Datepicker = function (mainElem, options) {
-    return inherit(this, [Class_Sprite, Class_pDatepicker, Class_DatepickerConfig, Views_pDatePicker, options, {
+    return inherit(this, [Class_Sprite, ClassDatepicker, ClassConfig, Views_pDatePicker, options, {
         inputElem: $(mainElem),
         inputAltElem: $(options.altField)
     }]);

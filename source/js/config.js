@@ -1,27 +1,110 @@
-var Class_DatepickerConfig = {
+/**
+ * Default Plugin Config Class
+ * @class Config
+ */
+var ClassConfig = {
+    /**
+     * @property cssClass
+     * @type String
+     * @default 'datepicker-container'
+     */
     cssClass: 'datepicker-container',
+    /**
+     * @property daysTitleFormat
+     * @type String
+     * @default "YYYY MMMM"
+     */
     daysTitleFormat: "YYYY MMMM",
+    /**
+     * @property persianDigit
+     * @type boolean
+     * @default true
+     */
     persianDigit: true,
-    // Released Do not Any Change
-    viewMode: "day", /// day,month,year
-    position: "auto", // [x,y]
+    /** day, month, year
+     * @property viewMode
+     * @type string
+     * @default "day"
+     */
+    viewMode: "day",
+    /**
+     * Array of position [x,y], relative to current position of plugin
+     * @property position
+     * @type string / array
+     * @default "auto"
+     */
+    position: "auto",
+    /**
+     * @property autoClose
+     * @type boolean
+     * @default false
+     */
     autoClose: false,
+    /**
+     * Show Toolbox
+     * @property toolbox
+     * @type boolean
+     * @default true
+     */
     toolbox: true,
-    // 0.0.4
+    /**
+     * Show Toolbox
+     * @property format
+     * @type boolean
+     * @default false
+     */
     format: false,
+    /**
+     * if set true, pasted date sync with datepicker
+     * @property observer
+     * @type boolean
+     * @default false
+     */
     observer: false,
+    /**
+     * @property altField
+     * @type boolean
+     * @default false
+     * @deprecated
+     */
     altField: false,
+    /**
+     * @property altFormat
+     * @type string
+     * @default 'unix'
+     * @deprecated
+     */
     altFormat: "unix",
+    /**
+     * @property inputDelay
+     * @type number
+     * @default 800
+     */
     inputDelay: 800,
     // Deprecated In 0.0.4
     //=mask : false, //unix,Gregorian
+    /**
+     * @property viewFormat
+     * @type string
+     * @default 'YYYY/MM/DD'
+     */
     viewFormat: "YYYY/MM/DD",
+    /**
+     * @method formatter
+     * @type string
+     * @param [number] unixDate
+     */
     formatter: function (unixDate) {
         var self = this;
         var pdate = new persianDate(unixDate);
         pdate.formatPersian = false;
         return pdate.format(self.viewFormat);
     },
+    /**
+     * @method altFieldFormatter
+     * @type string
+     * @param [number] unixDate
+     */
     altFieldFormatter: function (unixDate) {
         var self = this;
         if (self.altFormat.toLowerCase() == "gregorian" | self.altFormat.toLowerCase() == "g")
@@ -31,10 +114,22 @@ var Class_DatepickerConfig = {
         else
             return new persianDate(self.state.unixDate).format(self.altFormat);
     },
-    //--------------------------------------------------------
+    /**
+     * @property events
+     * @type object
+     */
     events: {},
+    /**
+     * @property _viewed
+     * @type boolean
+     * @default false
+     */
     _viewed: false,
-    // ------------------------------------------------------------------------ Public Methud
+
+    /**
+     * Show datepicker element
+     * @method show
+     */
     show: function () {
         this.view.fixPosition(this);
         this.element.main.show();
@@ -42,6 +137,10 @@ var Class_DatepickerConfig = {
         this._viewed = true;
         return this;
     },
+    /**
+     * Hide datepicker element
+     * @method hide
+     */
     hide: function () {
         if (this._viewed) {
             this.element.main.hide();
@@ -50,10 +149,25 @@ var Class_DatepickerConfig = {
         }
         return this;
     },
+    /**
+     * Event Called On show Datepicker
+     * @method onShow
+     * @param [object] Datepicker
+     */
     onShow: function (self) {
     },
+    /**
+     * Event Called On hide Datepicker
+     * @method onHide
+     * @param [object] Datepicker
+     */
     onHide: function (self) {
     },
+    /**
+     * Event Called On Select Date
+     * @method onSelect
+     * @param [object] Datepicker
+     */
     // TODO: add this to documentation
     onSelect: function (unixDate) {
     }
