@@ -15,6 +15,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "source\\js\\datepicker-view.js": {
+            "name": "source\\js\\datepicker-view.js",
+            "modules": {},
+            "classes": {
+                "ViewsDatePicker": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "source\\js\\datepicker.js": {
             "name": "source\\js\\datepicker.js",
             "modules": {},
@@ -45,6 +54,18 @@
             "file": "source\\js\\config.js",
             "line": 1,
             "description": "Default Plugin Config Class"
+        },
+        "ViewsDatePicker": {
+            "name": "ViewsDatePicker",
+            "shortname": "ViewsDatePicker",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "source\\js\\datepicker-view.js",
+            "line": 1,
+            "description": "Datepicker View Class"
         },
         "ClassDatepicker": {
             "name": "ClassDatepicker",
@@ -217,23 +238,6 @@
         {
             "file": "source\\js\\config.js",
             "line": 117,
-            "itemtype": "property",
-            "name": "events",
-            "type": "object",
-            "class": "Config"
-        },
-        {
-            "file": "source\\js\\config.js",
-            "line": 122,
-            "itemtype": "property",
-            "name": "_viewed",
-            "type": "boolean",
-            "default": "false",
-            "class": "Config"
-        },
-        {
-            "file": "source\\js\\config.js",
-            "line": 129,
             "description": "Show datepicker element",
             "itemtype": "method",
             "name": "show",
@@ -241,7 +245,7 @@
         },
         {
             "file": "source\\js\\config.js",
-            "line": 140,
+            "line": 128,
             "description": "Hide datepicker element",
             "itemtype": "method",
             "name": "hide",
@@ -249,7 +253,7 @@
         },
         {
             "file": "source\\js\\config.js",
-            "line": 152,
+            "line": 140,
             "description": "Event Called On show Datepicker",
             "itemtype": "method",
             "name": "onShow",
@@ -264,7 +268,7 @@
         },
         {
             "file": "source\\js\\config.js",
-            "line": 159,
+            "line": 147,
             "description": "Event Called On hide Datepicker",
             "itemtype": "method",
             "name": "onHide",
@@ -279,7 +283,7 @@
         },
         {
             "file": "source\\js\\config.js",
-            "line": 166,
+            "line": 154,
             "description": "Event Called On Select Date",
             "itemtype": "method",
             "name": "onSelect",
@@ -291,6 +295,15 @@
                 }
             ],
             "class": "Config"
+        },
+        {
+            "file": "source\\js\\datepicker-view.js",
+            "line": 6,
+            "description": "All Css Class Define Here",
+            "itemtype": "property",
+            "name": "cssClass",
+            "type": "object",
+            "class": "ViewsDatePicker"
         },
         {
             "file": "source\\js\\datepicker.js",
@@ -328,7 +341,7 @@
             "access": "private",
             "tagname": "",
             "itemtype": "property",
-            "name": "flagSelfManipulate",
+            "name": "_flagSelfManipulate",
             "class": "ClassDatepicker"
         },
         {
@@ -476,6 +489,25 @@
         {
             "file": "source\\js\\datepicker.js",
             "line": 241,
+            "itemtype": "property",
+            "name": "events",
+            "type": "object",
+            "class": "ClassDatepicker"
+        },
+        {
+            "file": "source\\js\\datepicker.js",
+            "line": 246,
+            "itemtype": "property",
+            "name": "_viewed",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "ClassDatepicker"
+        },
+        {
+            "file": "source\\js\\datepicker.js",
+            "line": 253,
             "description": "Initilize Datepicler",
             "itemtype": "method",
             "name": "init",
@@ -488,10 +520,22 @@
         },
         {
             "file": "source\\js\\datepicker.js",
-            "line": 260,
+            "line": 272,
             "description": "My Datepicker Constructor",
             "itemtype": "method",
-            "name": "datepiker",
+            "name": "Datepicker",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "mainElem",
+                    "optional": true
+                },
+                {
+                    "name": "object",
+                    "description": "option",
+                    "optional": true
+                }
+            ],
             "class": "ClassDatepicker"
         },
         {

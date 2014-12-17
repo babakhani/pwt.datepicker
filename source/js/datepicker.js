@@ -49,7 +49,7 @@ var ClassDatepicker = {
     /**
      * Use As Flag For Define Self Manipulation
      * @private
-     * @property flagSelfManipulate
+     * @property _flagSelfManipulate
      */
     _flagSelfManipulate: true,
     /**
@@ -239,6 +239,18 @@ var ClassDatepicker = {
         return this;
     },
     /**
+     * @property events
+     * @type object
+     */
+    events: {},
+    /**
+     * @property _viewed
+     * @type boolean
+     * @default false
+     * @private
+     */
+    _viewed: false,
+    /**
      * Initilize Datepicler
      * @method init
      * @private
@@ -260,10 +272,12 @@ var ClassDatepicker = {
 /**
  * My Datepicker Constructor
  *
- * @method datepiker
+ * @method Datepicker
+ * @param [object] mainElem
+ * @param [object] option
  */
 var Datepicker = function (mainElem, options) {
-    return inherit(this, [Class_Sprite, ClassDatepicker, ClassConfig, Views_pDatePicker, options, {
+    return inherit(this, [Class_Sprite, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
         inputElem: $(mainElem),
         inputAltElem: $(options.altField)
     }]);

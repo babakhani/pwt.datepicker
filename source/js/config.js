@@ -115,18 +115,6 @@ var ClassConfig = {
             return new persianDate(self.state.unixDate).format(self.altFormat);
     },
     /**
-     * @property events
-     * @type object
-     */
-    events: {},
-    /**
-     * @property _viewed
-     * @type boolean
-     * @default false
-     */
-    _viewed: false,
-
-    /**
      * Show datepicker element
      * @method show
      */

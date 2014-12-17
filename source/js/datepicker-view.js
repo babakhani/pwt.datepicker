@@ -1,4 +1,13 @@
-var Views_pDatePicker = {
+/**
+ * Datepicker View Class
+ * @class ViewsDatePicker
+ */
+var ViewsDatePicker = {
+    /**
+     * All Css Class Define Here
+     * @property cssClass
+     * @type object
+     */
     cssClass: {
         datePickerPlotArea: "datepicker-plot-area",
         yearView: "datepicker-year-view",
@@ -8,7 +17,17 @@ var Views_pDatePicker = {
         navigator: "navigator",
         toolbox: "toolbox "
     },
+     /**
+     * All Conatiner Element push to this
+     * @property container
+     * @type object
+     */
     container: {},
+    /**
+     * View Definition
+     * @property views
+     * @type object
+     */
     views: {
         "default": {
             render: function (self) {
