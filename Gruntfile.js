@@ -10,36 +10,36 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: [
-                    'source/js/plugin.js',
-                    'source/js/config.js',
-                    'source/js/template.js',
-                    'source/js/datepicker-base.js',
-                    'source/js/datepicker-helper.js',
-                    'source/js/datepicker-monthgrid.js',
-                    'source/js/datepicker-monthgrid-view.js',
-                    'source/js/datepicker-view.js',
-                    'source/js/datepicker.js',
-                    'source/js/navigator.js',
-                    'source/js/daypicker.js',
-                    'source/js/monthpicker.js',
-                    'source/js/yearpicker.js',
-                    'source/js/toolbox.js',
-                    'source/js/timepicker.js',
-                    'source/js/state.js'
+                    'src/js/plugin.js',
+                    'src/js/config.js',
+                    'src/js/template.js',
+                    'src/js/datepicker-base.js',
+                    'src/js/datepicker-helper.js',
+                    'src/js/datepicker-monthgrid.js',
+                    'src/js/datepicker-monthgrid-view.js',
+                    'src/js/datepicker-view.js',
+                    'src/js/datepicker.js',
+                    'src/js/navigator.js',
+                    'src/js/daypicker.js',
+                    'src/js/monthpicker.js',
+                    'src/js/yearpicker.js',
+                    'src/js/toolbox.js',
+                    'src/js/timepicker.js',
+                    'src/js/state.js'
                 ],
-                dest: 'build/<%= pkg.version %>/<%= pkg.name %>.js'
+                dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.js'
             }
         },
         uglify: {
             build: {
-                src: 'build/<%= pkg.version %>/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.version %>/<%= pkg.name %>.min.js'
+                src: 'dist/<%= pkg.version %>/<%= pkg.name %>.js',
+                dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.min.js'
             }
         },
         cssmin: {
             combine: {
                 files: {
-                    'build/<%= pkg.version %>/<%= pkg.name %>.min.css': ['build/<%= pkg.version %>/<%= pkg.name %>.css']
+                    'build/<%= pkg.version %>/<%= pkg.name %>.min.css': ['dist/<%= pkg.version %>/<%= pkg.name %>.css']
                 }
             }
         },
@@ -47,19 +47,15 @@ module.exports = function (grunt) {
             main: {
                 files: [
                     // includes files within path
-                    { src: ['source/css/**'], dest: 'build/<%= pkg.version %>/<%= pkg.name %>.css', filter: 'isFile'}
+                    { src: ['src/css/**'], dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.css', filter: 'isFile'}
                 ]
             }
         },
-        yuidoc: {
-            compile: {
-                name: '<%= pkg.name %>',
-                description: '<%= pkg.description %>',
-                version: '<%= pkg.version %>',
-                url: '<%= pkg.homepage %>',
+        jsdoc: {
+            dist: {
+                src: 'src/css',
                 options: {
-                    paths: 'source/js/',
-                    outdir: 'doc/<%= pkg.version %>/'
+                    destination: 'doc/<%= pkg.version %>'
                 }
             }
         }
@@ -68,6 +64,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-yuidoc');
-    grunt.registerTask('default', ['concat', 'copy', 'cssmin', 'uglify', 'yuidoc']);
+    grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.registerTask('default', ['concat', 'copy', 'cssmin', 'uglify', 'jsdoc']);
 };

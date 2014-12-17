@@ -4,6 +4,8 @@
  * @constructor Datepicker
  */
 var ClassDatepicker = {
+
+
     /**
      * Update All View's Part
      *
@@ -17,6 +19,8 @@ var ClassDatepicker = {
         self.yearPicker.updateView();
         return self;
     },
+
+
     /**
      * Change View
      * @param {String} viewName
@@ -46,6 +50,8 @@ var ClassDatepicker = {
         }
         return this;
     },
+
+
     /**
      * Use As Flag For Define Self Manipulation
      * @private
