@@ -337,12 +337,39 @@
 .datepicker-plot-area .datepicker-time-view {
   display: block;
   float: left;
-  width: 100%;
+  width: 96%;
+  padding: 5px 2%;
   height: 60px;
-  & > div {
+  background: #f6f6f6;
+  border-top:1px solid #f1f1f1;
+  & > div.time-segment {
     display: block;
-    width: 25%;
+    width: 22%;
     height: 60px;
+    float: left;
+    overflow: hidden;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover .down-btn,
+    &:hover .up-btn {
+      background: #ccc;
+      -webkit-transition: all 100ms ease;
+      -moz-transition: all 100ms ease;
+      -ms-transition: all 100ms ease;
+      -o-transition: all 100ms ease;
+      transition: all 100ms ease;
+    }
+  }
+  & > .divider {
+    display: block;
+    width: 3%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
     float: left;
     overflow: hidden;
   }
@@ -350,15 +377,15 @@
   .up-btn {
     display: block;
     float: left;
-    width: 90%;
-    margin: 0px 5%;
+    width: 100%;
+    margin: 0px 0%;
     height: 20px;
     line-height: 18px;
-    font-size: 20px;
+    font-size: 12px;
     text-align: center;
     cursor: pointer;
     background: #f1f1f1;
-    color: #999;
+    color: #bbbbbb;
     font-weight: bold;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
@@ -392,6 +419,7 @@
     height: 20px;
     padding: 0px;
     text-align: center;
+    cursor: pointer;
   }
 }
 

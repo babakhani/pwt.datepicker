@@ -58,12 +58,22 @@ module.exports = function (grunt) {
                     destination: 'doc/<%= pkg.version %>'
                 }
             }
+        },
+        sass: {
+            dist: {
+                files: [
+                    {
+                        'src/css/pwt-datepicker.css': 'src/sass/pwt-datepicker.scss'
+                    }
+                ]
+            }
         }
     });
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-jsdoc');
-    grunt.registerTask('default', ['concat', 'copy', 'cssmin', 'uglify', 'jsdoc']);
+    grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'jsdoc']);
 };

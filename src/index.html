@@ -7,6 +7,8 @@
     <script type="text/javascript" src="../lib/jquery.js"></script>
     <script type="text/javascript" src="../lib/persian-date.js"></script>
 
+
+    <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/plugin.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/template.js"></script>
@@ -30,6 +32,11 @@
             margin: 0px auto 0px auto;
             min-height: 300px;
             overflow: hidden;
+        }
+
+        input {
+            width: 300px;
+            height: 24px;
         }
     </style>
 </head>
@@ -58,7 +65,7 @@
                 var pdate = new persianDate(unix);
                 pdate.formatPersian
                 pdate.formatPersian = false;
-                return pdate.format("YYYY MM DD");
+                return pdate.format("YYYY-MM-DD hh:mm:ss a");
             },
             onShow: function () {
                 //console.log("user config onShow event ")
@@ -75,7 +82,7 @@
     });
 </script>
 <div class="center-content">
-    <input type="text" class="datePicker" value="15-11-2014"/>
+    <input type="text" class="datePicker" value="10-10-2014 21:58:1"/>
     <input type="text" id="alternateField" name="startDate"/>
     <br/>
 

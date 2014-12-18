@@ -18,8 +18,48 @@ var Class_DatepickerState = {
         unixDate: 0
     },
     _updateSelectedUnix: function () {
+        this.selected.dateObj =  new persianDate([this.selected.year,
+            this.selected.month,
+            this.selected.date,
+            this.selected.hour,
+            this.selected.minute,
+            this.selected.second
+        ])
+        this.selected.unixDate = this.selected.dateObj.valueOf();
+        return this;
+    },
+    setTime: function (key, value) {
         var self = this;
-        this.selected.unixDate = new persianDate([this.selected.year ? this.selected.year : 0, this.selected.month, this.selected.date ]).valueOf();
+        switch (key) {
+            case 'unix':
+            {
+                self.selected.unixDate = value;
+                var pd = new persianDate(value);
+                self.selected.hour = pd.hour();
+                self.selected.minute = pd.minute();
+                self.selected.second = pd.second();
+                self._updateSelectedUnix();
+                break;
+            }
+            case 'hour':
+            {
+                this.selected.hour = value;
+                self._updateSelectedUnix();
+                break;
+            }
+            case 'minute':
+            {
+                this.selected.minute = value;
+                self._updateSelectedUnix();
+                break;
+            }
+            case 'second':
+            {
+                this.selected.second = value;
+                self._updateSelectedUnix();
+                break;
+            }
+        }
         return this;
     },
     setSelected: function (key, value) {
@@ -32,6 +72,7 @@ var Class_DatepickerState = {
                 self.selected.year = pd.year();
                 self.selected.month = pd.month();
                 self.selected.date = pd.date();
+                self._updateSelectedUnix();
                 break;
             }
             case 'year':

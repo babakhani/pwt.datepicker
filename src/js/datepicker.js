@@ -58,6 +58,16 @@ var ClassDatepicker = {
      * @property _flagSelfManipulate
      */
     _flagSelfManipulate: true,
+
+    selectTime: function (key, val) {
+        this.state.setTime(key, val);
+        this.state.syncViewWithelected();
+        this._updateInputElement();
+        this.onSelect(key, this);
+        return this;
+    },
+
+
     /**
      * selectDate
      * @param {string} key
@@ -87,6 +97,8 @@ var ClassDatepicker = {
         }
         return this;
     },
+
+
     /**
      * selectMonth
      * @param {number} monthNum
@@ -100,6 +112,8 @@ var ClassDatepicker = {
         self.changeView('day');
         return this;
     },
+
+
     /**
      * selectYear
      * @param {number} yearNum
@@ -112,6 +126,8 @@ var ClassDatepicker = {
         self.changeView('month');
         return this;
     },
+
+
     /**
      * _formatDigit
      * @param {number} digit
@@ -125,6 +141,8 @@ var ClassDatepicker = {
         else
             return digit;
     },
+
+
     /**
      * destroy instant of plugin and remove dom element
      * @method destroy
@@ -135,6 +153,8 @@ var ClassDatepicker = {
         this.element.main.remove();
         return this;
     },
+
+
     /**
      * Sync Datepicker With Pasted Data
      * @method _syncWithImportData
@@ -158,6 +178,8 @@ var ClassDatepicker = {
         }
         return this;
     },
+
+
     /**
      * Bind Evenet
      * @method _attachEvents
@@ -211,6 +233,8 @@ var ClassDatepicker = {
         }
         return this;
     },
+
+
     /**
      * Update Input Element
      * @method _updateInputElement
@@ -241,14 +265,18 @@ var ClassDatepicker = {
             this.state.unixDate = new Date().valueOf();
         }
         this.state.setSelected('unix', this.state.unixDate);
+        this.state.setTime('unix', this.state.unixDate);
         this.state.setView('unix', this.state.unixDate);
         return this;
     },
+
     /**
      * @property events
      * @type object
      */
     events: {},
+
+
     /**
      * @property _viewed
      * @type boolean
@@ -256,6 +284,8 @@ var ClassDatepicker = {
      * @private
      */
     _viewed: false,
+
+
     /**
      * Initilize Datepicler
      * @method init
@@ -275,6 +305,8 @@ var ClassDatepicker = {
         return this;
     }
 };
+
+
 /**
  * My Datepicker Constructor
  *
