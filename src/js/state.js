@@ -18,7 +18,7 @@ var Class_DatepickerState = {
         unixDate: 0
     },
     _updateSelectedUnix: function () {
-        this.selected.dateObj =  new persianDate([this.selected.year,
+        this.selected.dateObj = new persianDate([this.selected.year,
             this.selected.month,
             this.selected.date,
             this.selected.hour,

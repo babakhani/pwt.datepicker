@@ -28,14 +28,12 @@ var Class_Daypicker = {
         var self = this;
         self.mGrid.updateAs(self.datepicker.state.view.year, self.datepicker.state.view.month);
         self._updateNavigator(self.datepicker.state.view.year, self.datepicker.state.view.month);
-        self._updateNavigator(self.datepicker.state.view.year, self.datepicker.state.view.month);
         this._updateSelectedDay(self.datepicker.state.selected.unixDate);
         return this;
     },
     selectDay: function () {
         var self = this;
         self.mGrid.updateAs(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
-        self._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         self._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         this._updateSelectedDay(self.datepicker.state.selected.unixDate);
         this._updateView();

@@ -1,8 +1,15 @@
-
 var Class_Base = {
     init: function () {
         this.isInstance = true;
         this.raiseEvent('init');
+    },
+    publishInDic: function (objectList, methodName) {
+        $.each(objectList, function (key, item) {
+            item[methodName]();
+        });
+        return objectList;
+    },
+    callOfDict: function (objectList, key, methodName) {
     },
     isSameDay: function (unix1, unix2) {
         var d1 = new pDate(unix1);

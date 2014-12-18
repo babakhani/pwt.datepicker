@@ -11,7 +11,6 @@ var Class_Navigator = {
         return this;
     },
     updateSwitchBtn: function (val) {
-        var self = this;
         $(this.element).children('.' + this.cssClass.btnSwitch).text(val);
         return this;
     },
@@ -24,11 +23,7 @@ var Class_Navigator = {
         return this;
     },
     _switch: function () {
-        if (this.relation == 'day') {
-            this.datepicker.changeView('month');
-        }else if(this.relation == 'month'){
-            this.datepicker.changeView('year');
-        }
+        this.datepicker.changeView(this.relation, 'prev');
         return this;
     },
     _render: function () {

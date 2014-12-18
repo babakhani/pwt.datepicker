@@ -17,7 +17,7 @@ var ViewsDatePicker = {
         navigator: "navigator",
         toolbox: "toolbox "
     },
-     /**
+    /**
      * All Conatiner Element push to this
      * @property container
      * @type object
@@ -31,6 +31,7 @@ var ViewsDatePicker = {
     views: {
         "default": {
             render: function (self) {
+                'use strict';
                 self.view_data = {
                     css: self.cssClass
                 };
@@ -77,14 +78,38 @@ var ViewsDatePicker = {
                     self.container.toolbox.remove();
                 }
                 ///////////////////////////////////////////////
-                self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
-                self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
-                self.yearPicker = new YearPicker({datepicker: self}, self.container.yearView);
 
-                self.timePicker = new TimePicker({datepicker: self}, self.container.timeView);
+                if (self.dayPicker.enabled) {
+                    self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
+                    self._pickers.day = self.dayPicker;
+                } else {
+                    self.container.dayView.hide();
+                    self.dayPicker = false;
+                }
+                if (self.monthPicker.enabled) {
+                    self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
+                    self._pickers.month = self.monthPicker;
+                } else {
+                    self.monthPicker = false;
+                    self.container.monthView.hide();
+                }
+                if (self.yearPicker.enabled) {
+                    self.yearPicker = new YearPicker({datepicker: self}, self.container.yearView);
+                    self._pickers.year = self.yearPicker;
+
+                } else {
+                    self.yearPicker = false;
+                    self.container.yearView.hide();
+                }
+                if (self.timePicker.enabled) {
+                    self.timePicker = new TimePicker($.extend(true, {datepicker: self}, self.timepicker),
+                        self.container.timeView);
+                    //self._pickers.template = self.timePicker;
+                } else {
+                    self.container.timeView.hide();
+                }
 
                 self.changeView(self.viewMode);
-                //self.yearPickerView = new self.view.YearPicker(self);
                 self._syncWithImportData(self.state.unixDate);
                 return this;
             },

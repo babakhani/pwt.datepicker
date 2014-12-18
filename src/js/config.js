@@ -158,5 +158,24 @@ var ClassConfig = {
      */
     // TODO: add this to documentation
     onSelect: function (unixDate) {
+    },
+
+    // Version 3
+    /**
+     * Event Called On Select Date
+     * @method onSelect
+     * @param [object] Datepicker
+     */
+    timePicker: {
+        enabled: true
+    },
+    dayPicker: {
+        enabled: true
+    },
+    monthPicker: {
+        enabled: true
+    },
+    yearPicker: {
+        enabled: true
     }
 }

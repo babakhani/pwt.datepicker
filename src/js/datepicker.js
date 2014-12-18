@@ -5,21 +5,7 @@
  */
 var ClassDatepicker = {
 
-
-    /**
-     * Update All View's Part
-     *
-     * @method updateAllViews
-     * @return Datepicker
-     */
-    updateAllViews: function () {
-        var self = this;
-        self.dayPicker.updateView();
-        self.monthPicker.updateView();
-        self.yearPicker.updateView();
-        return self;
-    },
-
+    _pickers: {},
 
     /**
      * Change View
@@ -27,31 +13,54 @@ var ClassDatepicker = {
      * @method changeView
      * @return Datepicker
      */
-    changeView: function (viewName) {
-        var self = this;
-        self.navigator.switchRelation(viewName);
-        self.currentView = viewName;
-        switch (viewName) {
-            case ('month'):
-                self.yearPicker.hide();
-                self.monthPicker.show();
-                self.dayPicker.hide();
-                break;
-            case ('year'):
-                self.yearPicker.show();
-                self.monthPicker.hide();
-                self.dayPicker.hide();
-                break;
-            case ('day'):
-                self.yearPicker.hide();
-                self.monthPicker.hide();
-                self.dayPicker.show();
-                break;
+    _getNextState: function (action) {
+        var currentState = this.currentView;
+        var nextState = this.currentView;
+        if (action == 'next') {
+            if (currentState == 'month' && this.dayPicker) {
+                nextState = 'day';
+            }
+            if (currentState == 'year') {
+                if (this.monthPicker) {
+                    nextState = 'month';
+                } else {
+                    if (this.dayPicker) {
+                        nextState = 'day';
+                    }
+                }
+            }
         }
+        else if (action == 'prev') {
+            if (currentState == 'month' && this.yearPicker) {
+                nextState = 'year';
+            }
+            if (currentState == 'day') {
+                if (this.monthPicker) {
+                    nextState = 'month';
+                } else {
+                    if (this.yearPicker) {
+                        nextState = 'year';
+                    }
+                }
+            }
+        }
+        return nextState;
+    },
+    changeView: function (state, action) {
+        'use strict';
+        var self = this;
+        var newState;
+        if (!action) {
+            newState = state;
+        } else {
+            newState = this._getNextState(action);
+        }
+        self.publishInDic(self._pickers, 'hide');
+        self._pickers[newState].show();
+        self.navigator.switchRelation(newState);
+        self.currentView = newState;
         return this;
     },
-
-
     /**
      * Use As Flag For Define Self Manipulation
      * @private
@@ -60,11 +69,10 @@ var ClassDatepicker = {
     _flagSelfManipulate: true,
 
     selectTime: function (key, val) {
+        'use strict';
         this.state.setTime(key, val);
-        this.state.syncViewWithelected();
         this._updateInputElement();
         this.onSelect(key, this);
-        return this;
     },
 
 
@@ -76,6 +84,7 @@ var ClassDatepicker = {
      * @return Datepicker
      */
     selectDate: function (key, unixDate) {
+        'use strict';
         var self = this;
         self.state.setSelected('unix', unixDate);
         this.state.syncViewWithelected();
@@ -98,7 +107,6 @@ var ClassDatepicker = {
         return this;
     },
 
-
     /**
      * selectMonth
      * @param {number} monthNum
@@ -106,13 +114,15 @@ var ClassDatepicker = {
      * @return Datepicker
      */
     selectMonth: function (monthNum) {
+        'use strict';
         var self = this;
-        self.state.setView('month', monthNum);
-        self.dayPicker.updateView();
-        self.changeView('day');
+        self.state.setSelected('month', monthNum);
+        self.state.syncViewWithelected();
+        self.state.setSelected('year', self.state.view.year);
+        self._updateInputElement();
+        self.changeView(self.currentView, 'next');
         return this;
     },
-
 
     /**
      * selectYear
@@ -122,8 +132,11 @@ var ClassDatepicker = {
      */
     selectYear: function (yearNum) {
         var self = this;
-        self.state.setView('year', yearNum);
-        self.changeView('month');
+
+        self.state.setSelected('year', yearNum);
+        self.state.syncViewWithelected();
+        self._updateInputElement();
+        self.changeView(self.currentView, 'next');
         return this;
     },
 
