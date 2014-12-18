@@ -1,26 +1,28 @@
+'use strict';
+
+
 /**
- * Datepicker Class
- * @class ClassDatepicker
- * @constructor Datepicker
+ *
+ * @type {{_pickers: {}, _getNextState: _getNextState, _checkNextStateAvalibility: _checkNextStateAvalibility, changeView: changeView, _flagSelfManipulate: boolean, selectTime: selectTime, selectDate: selectDate, selectMonth: selectMonth, selectYear: selectYear, _formatDigit: _formatDigit, destroy: destroy, _syncWithImportData: _syncWithImportData, _attachEvents: _attachEvents, _updateInputElement: _updateInputElement, _defineOnInitState: _defineOnInitState, events: {}, _viewed: boolean, init: init}}
  */
 var ClassDatepicker = {
-
     _pickers: {},
 
+
     /**
-     * Change View
-     * @param {String} viewName
-     * @method changeView
-     * @return Datepicker
+     *
+     * @param action
+     * @returns {*}
+     * @private
      */
     _getNextState: function (action) {
         var currentState = this.currentView;
         var nextState = this.currentView;
-        if (action == 'next') {
-            if (currentState == 'month' && this.dayPicker) {
+        if (action === 'next') {
+            if (currentState === 'month' && this.dayPicker) {
                 nextState = 'day';
             }
-            if (currentState == 'year') {
+            if (currentState === 'year') {
                 if (this.monthPicker) {
                     nextState = 'month';
                 } else {
@@ -30,11 +32,11 @@ var ClassDatepicker = {
                 }
             }
         }
-        else if (action == 'prev') {
-            if (currentState == 'month' && this.yearPicker) {
+        else if (action === 'prev') {
+            if (currentState === 'month' && this.yearPicker) {
                 nextState = 'year';
             }
-            if (currentState == 'day') {
+            if (currentState === 'day') {
                 if (this.monthPicker) {
                     nextState = 'month';
                 } else {
@@ -46,6 +48,14 @@ var ClassDatepicker = {
         }
         return this._checkNextStateAvalibility(nextState);
     },
+
+
+    /**
+     *
+     * @param state
+     * @returns {*}
+     * @private
+     */
     _checkNextStateAvalibility: function (state) {
         if (!this._pickers[state]) {
             this.element.main.hide();
@@ -53,8 +63,15 @@ var ClassDatepicker = {
         }
         return state;
     },
+
+
+    /**
+     *
+     * @param state
+     * @param action
+     * @returns {ClassDatepicker}
+     */
     changeView: function (state, action) {
-        'use strict';
         var self = this;
         var newState;
         if (!action) {
@@ -68,15 +85,17 @@ var ClassDatepicker = {
         self.currentView = newState;
         return this;
     },
-    /**
-     * Use As Flag For Define Self Manipulation
-     * @private
-     * @property _flagSelfManipulate
-     */
+
+
     _flagSelfManipulate: true,
 
+
+    /**
+     *
+     * @param key
+     * @param val
+     */
     selectTime: function (key, val) {
-        'use strict';
         this.state.setTime(key, val);
         this._updateInputElement();
         this.onSelect(key, this);
@@ -84,14 +103,12 @@ var ClassDatepicker = {
 
 
     /**
-     * selectDate
-     * @param {string} key
-     * @param {number} unixDate
-     * @method selectDate
-     * @return Datepicker
+     *
+     * @param key
+     * @param unixDate
+     * @returns {ClassDatepicker}
      */
     selectDate: function (key, unixDate) {
-        'use strict';
         var self = this;
         self.state.setSelected('unix', unixDate);
         this.state.syncViewWithelected();
@@ -114,14 +131,13 @@ var ClassDatepicker = {
         return this;
     },
 
+
     /**
-     * selectMonth
-     * @param {number} monthNum
-     * @method selectMonth
-     * @return Datepicker
+     *
+     * @param monthNum
+     * @returns {ClassDatepicker}
      */
     selectMonth: function (monthNum) {
-        'use strict';
         var self = this;
         self.state.setSelected('month', monthNum);
         self.state.setSelected('year', self.state.view.year);
@@ -131,11 +147,11 @@ var ClassDatepicker = {
         return this;
     },
 
+
     /**
-     * selectYear
-     * @param {number} yearNum
-     * @method selectYear
-     * @return Datepicker
+     *
+     * @param yearNum
+     * @returns {ClassDatepicker}
      */
     selectYear: function (yearNum) {
         var self = this;
@@ -148,24 +164,24 @@ var ClassDatepicker = {
 
 
     /**
-     * _formatDigit
-     * @param {number} digit
+     *
+     * @param digit
+     * @returns {*}
      * @private
-     * @method _formatDigit
-     * @return formatted Digit
      */
     _formatDigit: function (digit) {
-        if (this.persianDigit && digit)
+        if (this.persianDigit && digit) {
             return digit.toString().toPersianDigit();
-        else
+        }
+        else {
             return digit;
+        }
     },
 
 
     /**
-     * destroy instant of plugin and remove dom element
-     * @method destroy
-     * @return Datepicker
+     *
+     * @returns {ClassDatepicker}
      */
     destroy: function () {
         this.inputElem.removeClass(self.cssClass);
@@ -175,10 +191,10 @@ var ClassDatepicker = {
 
 
     /**
-     * Sync Datepicker With Pasted Data
-     * @method _syncWithImportData
+     *
+     * @param pasted
+     * @returns {ClassDatepicker}
      * @private
-     * @return Datepicker
      */
     _syncWithImportData: function (pasted) {
         var self = this;
@@ -200,10 +216,9 @@ var ClassDatepicker = {
 
 
     /**
-     * Bind Evenet
-     * @method _attachEvents
+     *
+     * @returns {ClassDatepicker}
      * @private
-     * @return Datepicker
      */
     _attachEvents: function () {
         var self = this;
@@ -255,10 +270,9 @@ var ClassDatepicker = {
 
 
     /**
-     * Update Input Element
-     * @method _updateInputElement
+     *
+     * @returns {ClassDatepicker}
      * @private
-     * @return Datepicker
      */
     _updateInputElement: function () {
         var self = this;
@@ -270,11 +284,12 @@ var ClassDatepicker = {
         self._flagSelfManipulate = false;
         return self;
     },
+
+
     /**
-     * On Init Plugin run and define default date of datepicker
-     * @method _defineOnInitState
+     *
+     * @returns {ClassDatepicker}
      * @private
-     * @return Datepicker
      */
     _defineOnInitState: function () {
         if (this.isValidGreguranDate(this.inputElem.val())) {
@@ -289,27 +304,17 @@ var ClassDatepicker = {
         return this;
     },
 
-    /**
-     * @property events
-     * @type object
-     */
+
     events: {},
 
 
-    /**
-     * @property _viewed
-     * @type boolean
-     * @default false
-     * @private
-     */
     _viewed: false,
-    /**
-     * Initilize Datepicler
-     * @method init
-     * @private
-     * @return Datepicker
-     */
 
+
+    /**
+     *
+     * @returns {ClassDatepicker}
+     */
     init: function () {
         var self = this;
         this.state = new State({datepicker: self});
@@ -326,11 +331,11 @@ var ClassDatepicker = {
 
 
 /**
- * My Datepicker Constructor
  *
- * @method Datepicker
- * @param [object] mainElem
- * @param [object] option
+ * @param mainElem
+ * @param options
+ * @returns {*}
+ * @constructor
  */
 var Datepicker = function (mainElem, options) {
     return inherit(this, [Class_Sprite, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {

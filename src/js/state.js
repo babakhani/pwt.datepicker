@@ -1,4 +1,11 @@
+/**
+ *
+ * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
+ */
 var Class_DatepickerState = {
+    /**
+     * view
+     */
     view: {
         year: 0,
         month: 0,
@@ -8,6 +15,11 @@ var Class_DatepickerState = {
         second: 0,
         unixDate: 0
     },
+
+
+    /**
+     * selected
+     */
     selected: {
         year: 0,
         month: 0,
@@ -17,6 +29,13 @@ var Class_DatepickerState = {
         second: 0,
         unixDate: 0
     },
+
+
+    /**
+     *
+     * @returns {Class_DatepickerState}
+     * @private
+     */
     _updateSelectedUnix: function () {
         this.selected.dateObj = new persianDate([this.selected.year,
             this.selected.month,
@@ -28,6 +47,14 @@ var Class_DatepickerState = {
         this.selected.unixDate = this.selected.dateObj.valueOf();
         return this;
     },
+
+
+    /**
+     *
+     * @param key
+     * @param value
+     * @returns {Class_DatepickerState}
+     */
     setTime: function (key, value) {
         var self = this;
         switch (key) {
@@ -62,6 +89,14 @@ var Class_DatepickerState = {
         }
         return this;
     },
+
+
+    /**
+     *
+     * @param key
+     * @param value
+     * @returns {Class_DatepickerState}
+     */
     setSelected: function (key, value) {
         var self = this;
         switch (key) {
@@ -96,6 +131,12 @@ var Class_DatepickerState = {
         }
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_DatepickerState}
+     */
     syncViewWithelected: function () {
         this.view.year = this.selected.year;
         this.view.month = this.selected.month;
@@ -103,6 +144,14 @@ var Class_DatepickerState = {
         this.view.unixDate = this.selected.unixDate;
         return this;
     },
+
+
+    /**
+     *
+     * @param key
+     * @param value
+     * @returns {Class_DatepickerState}
+     */
     setView: function (key, value) {
         var self = this;
         switch (key) {
@@ -132,6 +181,14 @@ var Class_DatepickerState = {
         return this;
     }
 };
+
+
+/**
+ *
+ * @param options
+ * @returns {*}
+ * @constructor
+ */
 var State = function (options) {
     return inherit(this, [Class_DatepickerState, options]);
 };

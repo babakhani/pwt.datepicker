@@ -1,4 +1,11 @@
+/**
+ *
+ * @type {{cssClass: {main: string, header: string, headerTitle: string, headerRow: string, headerRowCell: string, daysTable: string, currentMonth: string, today: string, selected: string}, views: {default: {render: render, renderDays: renderDays}}}}
+ */
 var Views_MonthGrid = {
+    /**
+     * cssClass
+     */
     cssClass: {
         main: "month-grid-box",
         header: "header",
@@ -10,8 +17,17 @@ var Views_MonthGrid = {
         today: "today",
         selected: 'selected'
     },
+
+
+    /**
+     *  views
+     */
     views: {
         "default": {
+            /**
+             *
+             * @param self
+             */
             render: function (self) {
                 self.view_data = {
                     css: self.cssClass
@@ -33,10 +49,15 @@ var Views_MonthGrid = {
                 self.daysBox = self.createElementByClass(self.cssClass.daysTable);
                 this.renderDays(self);
             },
+
+
+            /**
+             *
+             * @param self
+             */
             renderDays: function (self) {
                 self._updateState();
                 self.daysList = [];
-                // New Code
                 var addSpan = function (day, month, year, cssClass) {
                     var dayPartUnixTime = new persianDate([year, month, day]).valueOf();
                     var span = $("<span/>")
@@ -62,13 +83,10 @@ var Views_MonthGrid = {
                             var prevMonth = parseInt(self.state.month) - 1;
                             var prevYear = parseInt(self.state.year);
                         }
-                        //   log("prevYear : " + prevYear)
-                        // log("prevMonth : " + prevMonth)
                         var prevMonthDaysCount = t.daysInMonth(prevYear, prevMonth);
                         var day = parseInt((prevMonthDaysCount - self.firstWeekDayOfMonth) + (index + 2));
                         addSpan.apply(this, [day, prevMonth, prevYear, "other-month"])
                     } else if (index + 2 == (currentMonthIndex + self.firstWeekDayOfMonth) && currentMonthIndex <= self.daysCount) {
-                        //    log( "self.state.year : " + self.state.year)
                         var day = currentMonthIndex;
                         addSpan.apply(this, [day, parseInt(self.state.month), parseInt(self.state.year)])
                         currentMonthIndex++;
@@ -86,7 +104,6 @@ var Views_MonthGrid = {
                         nextMonthIndex++;
                     }
                 });
-                // Select Day -----------
                 $(self.daysBox).find("td").children("span").click(function () {
                     $thisUnixDate = $(this).data("unixDate");
                     self.raiseEvent("selectDay", [$thisUnixDate]);
@@ -94,6 +111,6 @@ var Views_MonthGrid = {
                 });
                 self.raiseEvent("reRender");
             }
-        }//------- End of Default view
+        }
     }
 };

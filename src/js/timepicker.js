@@ -1,20 +1,46 @@
+/**
+ *
+ * @type {{showSeconds: boolean, showMeridian: boolean, minuteStep: number, cssClss: {timepicker: string}, show: show, hide: hide, _render: _render, _currentMeridian: null, convert24hTo12: convert24hTo12, convert12hTo24: convert12hTo24, _updateTime: _updateTime, _updateMeridian: _updateMeridian, _toggleMeridian: _toggleMeridian, _movehour: _movehour, _moveminute: _moveminute, _movesecond: _movesecond, _movemeridian: _movemeridian, _updateState: _updateState, _attachEvent: _attachEvent, _bootstrap: _bootstrap, init: init}}
+ */
 var Class_Timepicker = {
+    /**
+     * showSecond
+     */
     showSeconds: true,
     showMeridian: true,
     minuteStep: 1,
     cssClss: {
         timepicker: "viewModel"
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     */
     show: function () {
         'use strict';
         this.container.show();
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     */
     hide: function () {
         'use strict';
         this.container.hide();
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _render: function () {
         'use strict';
         var self = this;
@@ -24,7 +50,18 @@ var Class_Timepicker = {
         $.tmplMustache(TEMPLATE.timepicker, viewModel).appendTo(this.container);
         return this;
     },
+
+
+    /**
+     * _currentMeridian
+     */
     _currentMeridian: null,
+
+
+    /**
+     *
+     * @param hour
+     */
     convert24hTo12: function (hour) {
         'use strict';
         var output = hour, meridian = 'AM';
@@ -37,6 +74,13 @@ var Class_Timepicker = {
         }
         return [output, meridian];
     },
+
+
+    /**
+     *
+     * @param hour
+     * @returns {*}
+     */
     convert12hTo24: function (hour) {
         'use strict';
         var output = hour;
@@ -48,6 +92,14 @@ var Class_Timepicker = {
         }
         return output;
     },
+
+
+    /**
+     *
+     * @param state
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _updateTime: function (state) {
         'use strict';
         var timeStateObject = state.selected;
@@ -60,11 +112,26 @@ var Class_Timepicker = {
         this.meridianInput.attr({'data-meridian-mode': this._currentMeridian});
         return this;
     },
+
+
+    /**
+     *
+     * @param state
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _updateMeridian: function (state) {
         var timeStateObject = state.selected;
         this.meridianInput.val(timeStateObject.dateObj.format('a'))
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _toggleMeridian: function () {
         if (this._currentMeridian === 'AM') {
             this._currentMeridian = 'PM';
@@ -75,6 +142,14 @@ var Class_Timepicker = {
         }
         return this;
     },
+
+
+    /**
+     *
+     * @param mode
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _movehour: function (mode) {
         'use strict';
         var currentVal = parseInt(this.hourInput.val());
@@ -95,6 +170,14 @@ var Class_Timepicker = {
         this._updateState('hour', this.convert12hTo24(currentVal));
         return this;
     },
+
+
+    /**
+     *
+     * @param mode
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _moveminute: function (mode) {
         'use strict';
         var currentVal = parseInt(this.minuteInput.val());
@@ -115,6 +198,14 @@ var Class_Timepicker = {
         this._updateState('minute', currentVal);
         return this;
     },
+
+
+    /**
+     *
+     * @param mode
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _movesecond: function (mode) {
         var currentVal = parseInt(this.secondInput.val());
         if (mode == 'up') {
@@ -134,16 +225,39 @@ var Class_Timepicker = {
         this._updateState('second', currentVal);
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _movemeridian: function () {
         this._toggleMeridian();
         this._updateState('hour', this.convert12hTo24(parseInt(this.hourInput.val())));
         return this;
     },
+
+
+    /**
+     *
+     * @param key
+     * @param val
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _updateState: function (key, val) {
         this.datepicker.selectTime(key, val);
         this._updateMeridian(this.datepicker.state);
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _attachEvent: function () {
         var self = this;
         $('.up-btn', this.container).click(function () {
@@ -162,6 +276,13 @@ var Class_Timepicker = {
         });
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     * @private
+     */
     _bootstrap: function () {
         if (this.showMeridian == false) {
             $('.meridian', this.container).hide();
@@ -176,11 +297,26 @@ var Class_Timepicker = {
         this._updateTime(this.datepicker.state);
         return this;
     },
+
+
+    /**
+     *
+     * @returns {Class_Timepicker}
+     */
     init: function () {
         this._render()._bootstrap()._attachEvent();
         return this;
     }
 };
+
+
+/**
+ *
+ * @param options
+ * @param container
+ * @returns {*}
+ * @constructor
+ */
 var TimePicker = function (options, container) {
     return inherit(this, [Class_Sprite, Class_Timepicker, options, {
         container: container

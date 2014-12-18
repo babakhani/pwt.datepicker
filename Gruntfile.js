@@ -53,7 +53,7 @@ module.exports = function (grunt) {
         },
         jsdoc: {
             dist: {
-                src: 'src/css',
+                src: 'src/js',
                 options: {
                     destination: 'doc/<%= pkg.version %>'
                 }

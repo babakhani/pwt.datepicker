@@ -1,16 +1,42 @@
+/**
+ *
+ * @type {{init: init, publishInDic: publishInDic, callOfDict: callOfDict, isSameDay: isSameDay, isValidGreguranDate: isValidGreguranDate, validatePersianDateString: validatePersianDateString, fullHeight: fullHeight, attachEvent: attachEvent, dettachEvent: dettachEvent, clearEvent: clearEvent, raiseEvent: raiseEvent, events: {init: null}}}
+ */
 var Class_Base = {
     init: function () {
         this.isInstance = true;
         this.raiseEvent('init');
     },
+
+    /**
+     *
+     * @param objectList
+     * @param methodName
+     * @returns {*}
+     */
     publishInDic: function (objectList, methodName) {
         $.each(objectList, function (key, item) {
             item[methodName]();
         });
         return objectList;
     },
+
+    /**
+     *
+     * @param objectList
+     * @param key
+     * @param methodName
+     */
     callOfDict: function (objectList, key, methodName) {
     },
+
+
+    /**
+     *
+     * @param unix1
+     * @param unix2
+     * @returns {pDate|boolean}
+     */
     isSameDay: function (unix1, unix2) {
         var d1 = new pDate(unix1);
         var d2 = new pDate(unix2);
@@ -19,9 +45,22 @@ var Class_Base = {
             d1.month() == d2.month() &&
             d1.date() == d2.date();
     },
+
+
+    /**
+     *
+     * @param inputDate
+     * @returns {*|boolean}
+     */
     isValidGreguranDate: function (inputDate) {
         return inputDate && new Date(inputDate) != "Invalid Date" && new Date(inputDate) != "undefined";
     },
+
+    /**
+     *
+     * @param pasted
+     * @returns {*}
+     */
     validatePersianDateString: function (pasted) {
         var newDate = new Date(pasted);
         var inputArray = pasted.split("/");
@@ -39,10 +78,24 @@ var Class_Base = {
             return null;
         }
     },
+
+
+    /**
+     *
+     * @param element
+     * @returns {*}
+     */
     fullHeight: function (element) {
         return $(element).height() + parseInt($(element).css("padding-top")) + parseInt($(element).css("padding-bottom")) + parseInt($(element).css("borderTopWidth")) + parseInt($(element).css("borderBottomWidth"));
     },
-    // Event Management
+
+
+    /**
+     *
+     * @param eventName
+     * @param func
+     * @returns {Class_Base}
+     */
     attachEvent: function (eventName, func) {
         if (!this.events[eventName]) {
             this.events[eventName] = [];
@@ -55,6 +108,14 @@ var Class_Base = {
         this.events[eventName].push(func)
         return this;
     },
+
+
+    /**
+     *
+     * @param eventName
+     * @param func
+     * @returns {Class_Base}
+     */
     dettachEvent: function (eventName, func) {
         if (!this.events[eventName]) {
             $.error("The event's chain is empty.");
@@ -66,10 +127,25 @@ var Class_Base = {
         }
         return this;
     },
+
+
+    /**
+     *
+     * @param eventName
+     * @returns {Class_Base}
+     */
     clearEvent: function (eventName) {
         this.events[eventName] = null;
         return this;
     },
+
+
+    /**
+     *
+     * @param eventName
+     * @param args
+     * @returns {Class_Base}
+     */
     raiseEvent: function (eventName, args) {
         if (!eventName || !this.events) {
             return;
@@ -90,31 +166,73 @@ var Class_Base = {
         }
         return this;
     },
+
+
     events: {
         init: null // e
     }
 };
+
+
+/**
+ *
+ * @type {{defaultView: string, events: {init: init, render: null}, views: {default: {render: render}}, element: {main: null}, createElementByClass: createElementByClass, render: render, tmpl: {}}}
+ */
 var Class_Sprite = {
     defaultView: "default",
-    // Views Interfcae
+
+
+
     events: {
+
+
+
         init: function () {
             this.render();
         },
+
+
+        /**
+         * render
+         */
         render: null
     },
+
+
+    /**
+     * Views
+     */
     views: {
         'default': {
             render: function () {
             }
         }
     },
+
+
+    /**
+     * element
+     */
     element: {
         main: null// Root Element Of Sprite
     },
+
+
+    /**
+     *
+     * @param className
+     * @returns {*}
+     */
     createElementByClass: function (className) {
         return this.element.find('.' + className);
     },
+
+
+    /**
+     *
+     * @param viewName
+     * @returns {*}
+     */
     render: function (viewName) {
         if (!viewName) {
             viewName = 'default';
@@ -125,6 +243,7 @@ var Class_Sprite = {
     },
     tmpl: {}
 };
+
 var Class_DateRange = {
     monthRange: {
         1: {
@@ -287,6 +406,11 @@ var Class_DateRange = {
 };
 
 
+/**
+ *
+ * @param ua
+ * @returns {{browser: (*|string), version: (*|string)}}
+ */
 jQuery.uaMatch = function (ua) {
     ua = ua.toLowerCase();
 
@@ -302,6 +426,8 @@ jQuery.uaMatch = function (ua) {
         version: match[ 2 ] || "0"
     };
 };
+
+
 
 // Don't clobber any existing jQuery.browser in case it's different
 if (!jQuery.browser) {

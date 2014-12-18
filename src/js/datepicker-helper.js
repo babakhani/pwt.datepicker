@@ -1,205 +1,206 @@
+
 /*#########################################################
  Extend javascript Object
  #########################################################*/
-Object.keys = Object.keys || (function() {
-      var hasOwnProperty = Object.prototype.hasOwnProperty, hasDontEnumBug = ! {
-            toString : null
-      }.propertyIsEnumerable("toString"), DontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'], DontEnumsLength = DontEnums.length;
+Object.keys = Object.keys || (function () {
+    var hasOwnProperty = Object.prototype.hasOwnProperty, hasDontEnumBug = !{
+        toString: null
+    }.propertyIsEnumerable("toString"), DontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'], DontEnumsLength = DontEnums.length;
 
-      return function(o) {
-            if ( typeof o != "object" && typeof o != "function" || o === null)
-                  throw new TypeError("Object.keys called on a non-object");
+    return function (o) {
+        if (typeof o != "object" && typeof o != "function" || o === null)
+            throw new TypeError("Object.keys called on a non-object");
 
-            var result = [];
-            for (var name in o) {
-                  if (hasOwnProperty.call(o, name))
-                        result.push(name);
+        var result = [];
+        for (var name in o) {
+            if (hasOwnProperty.call(o, name))
+                result.push(name);
+        }
+
+        if (hasDontEnumBug) {
+            for (var i = 0; i < DontEnumsLength; i++) {
+                if (hasOwnProperty.call(o, DontEnums[i]))
+                    result.push(DontEnums[i]);
             }
-
-            if (hasDontEnumBug) {
-                  for (var i = 0; i < DontEnumsLength; i++) {
-                        if (hasOwnProperty.call(o, DontEnums[i]))
-                              result.push(DontEnums[i]);
-                  }
-            }
-            return result;
-      };
+        }
+        return result;
+    };
 })();
 /*#########################################################
  Extend javascript Event
  #########################################################*/
 $.event.special.textchange = {
-      setup : function(data, namespaces) {
-            $.event.special.textchange.saveLastValue(this);
-            $(this).bind('keyup.textchange', $.event.special.textchange.handler);
-            $(this).bind('cut.textchange paste.textchange input.textchange', $.event.special.textchange.delayedHandler);
-      },
-      teardown : function(namespaces) {
-            $(this).unbind('.textchange');
-      },
-      handler : function(event) {
-            $.event.special.textchange.triggerIfChanged($(this));
-      },
-      delayedHandler : function(event) {
-            var element = $(this);
-            setTimeout(function() {
-                  $.event.special.textchange.triggerIfChanged(element);
-            }, 25);
-      },
-      triggerIfChanged : function(element) {
-            var current = element[0].contentEditable === 'true' ? element.html() : element.val();
-            if (current !== element.data('lastValue')) {
-                  element.trigger('textchange', element.data('lastValue'));
+    setup: function (data, namespaces) {
+        $.event.special.textchange.saveLastValue(this);
+        $(this).bind('keyup.textchange', $.event.special.textchange.handler);
+        $(this).bind('cut.textchange paste.textchange input.textchange', $.event.special.textchange.delayedHandler);
+    },
+    teardown: function (namespaces) {
+        $(this).unbind('.textchange');
+    },
+    handler: function (event) {
+        $.event.special.textchange.triggerIfChanged($(this));
+    },
+    delayedHandler: function (event) {
+        var element = $(this);
+        setTimeout(function () {
+            $.event.special.textchange.triggerIfChanged(element);
+        }, 25);
+    },
+    triggerIfChanged: function (element) {
+        var current = element[0].contentEditable === 'true' ? element.html() : element.val();
+        if (current !== element.data('lastValue')) {
+            element.trigger('textchange', element.data('lastValue'));
 
-                  // element.data('lastValue', current);
-            }
-      },
-      saveLastValue : function(element) {
-            $(element).data('lastValue', element.contentEditable === 'true' ? $(element).html() : $(element).val());
-      }
+            // element.data('lastValue', current);
+        }
+    },
+    saveLastValue: function (element) {
+        $(element).data('lastValue', element.contentEditable === 'true' ? $(element).html() : $(element).val());
+    }
 };
 $.event.special.hastext = {
 
-      setup : function(data, namespaces) {
-            $(this).bind('textchange', $.event.special.hastext.handler);
-      },
+    setup: function (data, namespaces) {
+        $(this).bind('textchange', $.event.special.hastext.handler);
+    },
 
-      teardown : function(namespaces) {
-            $(this).unbind('textchange', $.event.special.hastext.handler);
-      },
+    teardown: function (namespaces) {
+        $(this).unbind('textchange', $.event.special.hastext.handler);
+    },
 
-      handler : function(event, lastValue) {
-            if ((lastValue === '') && lastValue !== $(this).val()) {
-                  $(this).trigger('hastext');
-            }
-      }
+    handler: function (event, lastValue) {
+        if ((lastValue === '') && lastValue !== $(this).val()) {
+            $(this).trigger('hastext');
+        }
+    }
 };
 
 $.event.special.notext = {
 
-      setup : function(data, namespaces) {
-            $(this).bind('textchange', $.event.special.notext.handler);
-      },
+    setup: function (data, namespaces) {
+        $(this).bind('textchange', $.event.special.notext.handler);
+    },
 
-      teardown : function(namespaces) {
-            $(this).unbind('textchange', $.event.special.notext.handler);
-      },
+    teardown: function (namespaces) {
+        $(this).unbind('textchange', $.event.special.notext.handler);
+    },
 
-      handler : function(event, lastValue) {
-            if ($(this).val() === '' && $(this).val() !== lastValue) {
-                  $(this).trigger('notext');
-            }
-      }
+    handler: function (event, lastValue) {
+        if ($(this).val() === '' && $(this).val() !== lastValue) {
+            $(this).trigger('notext');
+        }
+    }
 };
 // Enhance val() so that this plugin is aware of programmatic changes to
 // text using val().
 var origValFn = $.fn.val;
-$.fn.val = function() {
-      var returnValue = origValFn.apply(this, arguments);
-      if (arguments.length) {
-            this.each(function() {
-                  $.event.special.textchange.triggerIfChanged($(this));
-            });
-      }
-      return returnValue;
+$.fn.val = function () {
+    var returnValue = origValFn.apply(this, arguments);
+    if (arguments.length) {
+        this.each(function () {
+            $.event.special.textchange.triggerIfChanged($(this));
+        });
+    }
+    return returnValue;
 };
 
 /*#########################################################
  Micro Mustcahe Template
  #########################################################*/
 
-$.tmplMustache = function(input, dict) {
-      // Micro Mustache Template engine
-      String.prototype.format = function string_format(arrayInput) {
-            function replacer(key) {
-                  var keyArr = key.slice(2, -2).split("."), firstKey = keyArr[0], SecondKey = keyArr[1];
-                  if (arrayInput[firstKey] instanceof Object) {
-                        return arrayInput[firstKey][SecondKey];
-                  } else {
-                        return arrayInput[firstKey];
-                  }
+$.tmplMustache = function (input, dict) {
+    // Micro Mustache Template engine
+    String.prototype.format = function string_format(arrayInput) {
+        function replacer(key) {
+            var keyArr = key.slice(2, -2).split("."), firstKey = keyArr[0], SecondKey = keyArr[1];
+            if (arrayInput[firstKey] instanceof Object) {
+                return arrayInput[firstKey][SecondKey];
+            } else {
+                return arrayInput[firstKey];
             }
+        }
 
-            return this.replace(/{{\s*[\w\.]+\s*}}/g, replacer);
-      };
-      return $(input.format(dict));
+        return this.replace(/{{\s*[\w\.]+\s*}}/g, replacer);
+    };
+    return $(input.format(dict));
 };
 /*#########################################################
  Extend String Proto with toPersianDigit & toEnglishDigit
  #########################################################*/
-String.prototype.toPersianDigit = function(a) {
-      return this.replace(/\d+/g, function(digit) {
-            var enDigitArr = [], peDigitArr = [];
-            for (var i = 0; i < digit.length; i++) {
-                  enDigitArr.push(digit.charCodeAt(i));
-            }
-            for (var j = 0; j < enDigitArr.length; j++) {
-                  peDigitArr.push(String.fromCharCode(enDigitArr[j] + ((!!a && a == true) ? 1584 : 1728)));
-            }
-            return peDigitArr.join('');
-      });
+String.prototype.toPersianDigit = function (a) {
+    return this.replace(/\d+/g, function (digit) {
+        var enDigitArr = [], peDigitArr = [];
+        for (var i = 0; i < digit.length; i++) {
+            enDigitArr.push(digit.charCodeAt(i));
+        }
+        for (var j = 0; j < enDigitArr.length; j++) {
+            peDigitArr.push(String.fromCharCode(enDigitArr[j] + ((!!a && a == true) ? 1584 : 1728)));
+        }
+        return peDigitArr.join('');
+    });
 };
-String.prototype.toEngilshDigit = function(a) {
-      return this.replace(/\d+/g, function(digit) {
-            var enDigitArr = [], peDigitArr = [];
-            for (var i = 0; i < digit.length; i++) {
-                  enDigitArr.push(digit.charCodeAt(i));
-            }
-            for (var j = 0; j < enDigitArr.length; j++) {
-                  peDigitArr.push(String.fromCharCode(enDigitArr[j] - ((!!a && a == true) ? 1584 : 1728)));
-            }
-            return enDigitArr.join('');
-      });
+String.prototype.toEngilshDigit = function (a) {
+    return this.replace(/\d+/g, function (digit) {
+        var enDigitArr = [], peDigitArr = [];
+        for (var i = 0; i < digit.length; i++) {
+            enDigitArr.push(digit.charCodeAt(i));
+        }
+        for (var j = 0; j < enDigitArr.length; j++) {
+            peDigitArr.push(String.fromCharCode(enDigitArr[j] - ((!!a && a == true) ? 1584 : 1728)));
+        }
+        return enDigitArr.join('');
+    });
 };
 
 /*#########################################################
  Helper Methuds
  #########################################################*/
-var delay = function(callback, ms) {
-      clearTimeout(window.datepickerTimer);
-      window.datepickerTimer = setTimeout(callback, ms);
+var delay = function (callback, ms) {
+    clearTimeout(window.datepickerTimer);
+    window.datepickerTimer = setTimeout(callback, ms);
 };
-var log = function(input) {
-      console.log(input);
+var log = function (input) {
+    console.log(input);
 };
-var range = function(e) {
-      r = [];
-      var i = 0;
-      while (i <= e - 1) {
-            r.push(i);
-            i++;
-      }
-      return r;
+var range = function (e) {
+    r = [];
+    var i = 0;
+    while (i <= e - 1) {
+        r.push(i);
+        i++;
+    }
+    return r;
 };
-var inherit = function(self, baseClasses) {
-      copyObject = function(o) {
-            return $.extend(true, {}, o);
-      }
-      var args = [true, self, copyObject(Class_Base)];
-      var events = [];
-      for (index in baseClasses) {
-            var cls = copyObject(baseClasses[index]);
-            if (!cls) {
-                  continue;
+var inherit = function (self, baseClasses) {
+    copyObject = function (o) {
+        return $.extend(true, {}, o);
+    }
+    var args = [true, self, copyObject(Class_Base)];
+    var events = [];
+    for (index in baseClasses) {
+        var cls = copyObject(baseClasses[index]);
+        if (!cls) {
+            continue;
+        }
+        if (cls['events'] && Object.keys(cls['events']).length > 0) {
+            events.push(cls['events']);
+        }
+        cls.events = {};
+        args.push(cls);
+    }
+    $.extend.apply(self, args);
+    for (index in events) {
+        var eventsObject = events[index];
+        var eventKeys = Object.keys(eventsObject)
+        for (keyIndex in eventKeys) {
+            var key = eventKeys[keyIndex]
+            var val = eventsObject[key];
+            if (key && val) {
+                self.attachEvent(key, val);
             }
-            if (cls['events'] && Object.keys(cls['events']).length > 0) {
-                  events.push(cls['events']);
-            }
-            cls.events = {};
-            args.push(cls);
-      }
-      $.extend.apply(self, args);
-      for (index in events) {
-            var eventsObject = events[index];
-            var eventKeys = Object.keys(eventsObject)
-            for (keyIndex in eventKeys) {
-                  var key = eventKeys[keyIndex]
-                  var val = eventsObject[key];
-                  if (key && val) {
-                        self.attachEvent(key, val);
-                  }
-            }
-      }
-      self.init();
-      return self;
+        }
+    }
+    self.init();
+    return self;
 }

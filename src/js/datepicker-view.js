@@ -1,12 +1,10 @@
 /**
- * Datepicker View Class
- * @class ViewsDatePicker
+ *
+ * @type {{cssClass: {datePickerPlotArea: string, yearView: string, monthView: string, dayView: string, timeView: string, navigator: string, toolbox: string}, container: {}, views: {default: {render: render, fixPosition: fixPosition}}}}
  */
 var ViewsDatePicker = {
     /**
-     * All Css Class Define Here
-     * @property cssClass
-     * @type object
+     * cssClass
      */
     cssClass: {
         datePickerPlotArea: "datepicker-plot-area",
@@ -17,19 +15,24 @@ var ViewsDatePicker = {
         navigator: "navigator",
         toolbox: "toolbox "
     },
+
+
     /**
-     * All Conatiner Element push to this
-     * @property container
-     * @type object
+     * conatiner
      */
     container: {},
+
+
     /**
-     * View Definition
-     * @property views
-     * @type object
+     * views
      */
     views: {
         "default": {
+            /**
+             *
+             * @param self
+             * @returns {ViewsDatePicker}
+             */
             render: function (self) {
                 'use strict';
                 self.view_data = {
@@ -38,8 +41,7 @@ var ViewsDatePicker = {
                 self.element = {};
                 self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo($("body"));
                 self.view.fixPosition(self);
-                // SHow Hide Picker
-                ///////////////////////////////////////////////
+
                 self.inputElem.focus(function () {
                     self.show();
                 });
@@ -60,25 +62,18 @@ var ViewsDatePicker = {
                     e.stopPropagation();
                     return false;
                 });
-                // Define Containers
                 self.container.navigator = $(self.element.main).children('.' + self.cssClass.navigator);
                 self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
                 self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView);
                 self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView);
                 self.container.timeView = $(self.element.main).children('.' + self.cssClass.timeView);
                 self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
-                // Append Navigator
-                ///////////////////////////////////////////////
                 self.navigator = new Navigator({datepicker: self}, self.container.navigator);
-                // Append Toolbox
-                ///////////////////////////////////////////////
                 if (self.toolbox) {
                     self.toolbox = new Toolbox({datepicker: self}, self.container.toolbox);
                 } else {
                     self.container.toolbox.remove();
                 }
-                ///////////////////////////////////////////////
-
                 if (self.dayPicker.enabled) {
                     self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
                     self._pickers.day = self.dayPicker;
@@ -104,7 +99,6 @@ var ViewsDatePicker = {
                 if (self.timePicker.enabled) {
                     self.timePicker = new TimePicker($.extend(true, {datepicker: self}, self.timepicker),
                         self.container.timeView);
-                    //self._pickers.template = self.timePicker;
                 } else {
                     self.container.timeView.hide();
                 }
@@ -113,6 +107,13 @@ var ViewsDatePicker = {
                 self._syncWithImportData(self.state.unixDate);
                 return this;
             },
+
+
+            /**
+             *
+             * @param self
+             * @returns {ViewsDatePicker}
+             */
             fixPosition: function (self) {
                 var inputX = self.inputElem.offset().top;
                 var inputY = self.inputElem.offset().left;

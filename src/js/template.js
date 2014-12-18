@@ -1,4 +1,11 @@
+/**
+ *
+ * @type {{datepciker: string, navigator: string, timepicker: string}}
+ */
 var TEMPLATE = {
+    /**
+     * datepicker
+     */
     datepciker: "<div class='{{css.datePickerPlotArea}}' >" + //
         "<div class='{{css.navigator}}' ></div>" +//
         " <div class='{{css.dayView}}' ></div>" + //
@@ -7,11 +14,21 @@ var TEMPLATE = {
         "<div class='{{css.timeView}}' ></div>" + //
         "<div class='{{css.toolbox}}' ></div>" + //
         "</div>",
+
+
+    /**
+     * navigator
+     */
     navigator: "<div class='{{css.datpickerHeader}}' >" + //
         "<div class='{{css.btnNext}}' >{{btnNextText}}</div>" + //
         "<div class='{{css.btnSwitch}}' >{{btnSwitchText}}</div>" + //
         "<div class='{{css.btnPrev}}' >{{btnPrevText}}</div>" + //
         "</div>",
+
+
+    /**
+     * timepicker
+     */
     timepicker: "<div class='hour time-segment' data-time-key='hour' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='hour' class='hour-input' />" + //
