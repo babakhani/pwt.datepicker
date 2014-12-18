@@ -170,7 +170,7 @@ var ClassConfig = {
         enabled: true
     },
     dayPicker: {
-        enabled: true
+        enabled: false
     },
     monthPicker: {
         enabled: true

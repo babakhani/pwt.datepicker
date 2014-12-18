@@ -44,14 +44,21 @@ var ClassDatepicker = {
                 }
             }
         }
-        return nextState;
+        return this._checkNextStateAvalibility(nextState);
+    },
+    _checkNextStateAvalibility: function (state) {
+        if (!this._pickers[state]) {
+            this.element.main.hide();
+            $.error(state + "Picker Set as {enabled:false} and dos not exist!! Set viewMode to Enabled view Check Configuration");
+        }
+        return state;
     },
     changeView: function (state, action) {
         'use strict';
         var self = this;
         var newState;
         if (!action) {
-            newState = state;
+            newState = this._checkNextStateAvalibility(state);
         } else {
             newState = this._getNextState(action);
         }
@@ -117,8 +124,8 @@ var ClassDatepicker = {
         'use strict';
         var self = this;
         self.state.setSelected('month', monthNum);
-        self.state.syncViewWithelected();
         self.state.setSelected('year', self.state.view.year);
+        self.state.syncViewWithelected();
         self._updateInputElement();
         self.changeView(self.currentView, 'next');
         return this;
@@ -132,7 +139,6 @@ var ClassDatepicker = {
      */
     selectYear: function (yearNum) {
         var self = this;
-
         self.state.setSelected('year', yearNum);
         self.state.syncViewWithelected();
         self._updateInputElement();
@@ -297,14 +303,13 @@ var ClassDatepicker = {
      * @private
      */
     _viewed: false,
-
-
     /**
      * Initilize Datepicler
      * @method init
      * @private
      * @return Datepicker
      */
+
     init: function () {
         var self = this;
         this.state = new State({datepicker: self});
