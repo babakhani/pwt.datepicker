@@ -1,5 +1,5 @@
 /**
- *
+ * @class ViewsDatePicker
  * @type {{cssClass: {datePickerPlotArea: string, yearView: string, monthView: string, dayView: string, timeView: string, navigator: string, toolbox: string}, container: {}, views: {default: {render: render, fixPosition: fixPosition}}}}
  */
 var ViewsDatePicker = {

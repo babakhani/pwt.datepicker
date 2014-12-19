@@ -1,8 +1,13 @@
 /**
- *
+ * @class Base
  * @type {{init: init, publishInDic: publishInDic, callOfDict: callOfDict, isSameDay: isSameDay, isValidGreguranDate: isValidGreguranDate, validatePersianDateString: validatePersianDateString, fullHeight: fullHeight, attachEvent: attachEvent, dettachEvent: dettachEvent, clearEvent: clearEvent, raiseEvent: raiseEvent, events: {init: null}}}
  */
-var Class_Base = {
+var ClassBase = {
+    /**
+     *  Call init method
+     * init;
+     * @private
+     */
     init: function () {
         this.isInstance = true;
         this.raiseEvent('init');

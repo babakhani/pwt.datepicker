@@ -1,8 +1,8 @@
 /**
- *
+ * @class ClassDatepickerState
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
  */
-var Class_DatepickerState = {
+var ClassDatepickerState = {
     /**
      * view
      */
@@ -190,6 +190,6 @@ var Class_DatepickerState = {
  * @constructor
  */
 var State = function (options) {
-    return inherit(this, [Class_DatepickerState, options]);
+    return inherit(this, [ClassDatepickerState, options]);
 };
 

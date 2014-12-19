@@ -1,9 +1,9 @@
 'use strict';
 /**
- *
+ * @class ClassYearPicker
  * @type {{cssClass: {selectedYear: string, yearItem: string}, events: {select: select}, _updateNavigator: _updateNavigator, hide: hide, show: show, next: next, prev: prev, selectYear: selectYear, updateView: updateView, _render: _render, init: init}}
  */
-var Class_YearPicker = {
+var ClassYearPicker = {
     /**
      * cssClass
      */
@@ -146,7 +146,7 @@ var Class_YearPicker = {
  * @constructor
  */
 var YearPicker = function (options, container) {
-    return inherit(this, [Class_Sprite, Class_YearPicker, options, {
+    return inherit(this, [Class_Sprite, ClassYearPicker, options, {
         container: container
     }]);
 };

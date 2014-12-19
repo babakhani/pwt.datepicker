@@ -5,7 +5,8 @@ module.exports = function (grunt) {
         concat: {
             options: {
                 stripBanners: true,
-                banner: '/* <%= pkg.name %> - v<%= pkg.version %> */ ( function () {',
+                banner: '/* <%= pkg.name %> - v<%= pkg.version %> */ ' +
+                    '( function () {',
                 footer: '}());'
             },
             dist: {
@@ -55,7 +56,9 @@ module.exports = function (grunt) {
             dist: {
                 src: 'src/js',
                 options: {
-                    destination: 'doc/<%= pkg.version %>'
+                    destination: 'doc/<%= pkg.version %>',
+//                    configure: 'doc/conf.json',
+//                    template: 'node_modules/ink-docstrap/template',
                 }
             }
         },

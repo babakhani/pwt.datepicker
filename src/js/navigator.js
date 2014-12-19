@@ -1,8 +1,9 @@
 /**
  *
+ * @class
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */
-var Class_Navigator = {
+var ClassNavigator = {
     /**
      * cssClass
      */
@@ -132,7 +133,7 @@ var Class_Navigator = {
  * @constructor
  */
 var Navigator = function (options, container) {
-    return inherit(this, [Class_Sprite, Class_Navigator, options, {
+    return inherit(this, [Class_Sprite, ClassNavigator, options, {
         $container: container
     }]);
 };

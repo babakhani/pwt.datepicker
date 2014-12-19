@@ -1,5 +1,5 @@
 /**
- *
+ * @class Class_MonthGrid
  * @type {{state: {year: null, month: null, date: null, firstWeekDayOfMonth: null, daysCount: null}, persianDigit: boolean, _formatDigit: _formatDigit, events: {init: init, render: render, reRender: reRender, selectDay: selectDay}, _markToday: _markToday, _updateState: _updateState, selectDate: selectDate, markSelectedDate: markSelectedDate, updateAs: updateAs, goToNextMonth: goToNextMonth, goToPrevMonth: goToPrevMonth, goToYear: goToYear, applyStory: applyStory}}
  */
 var Class_MonthGrid = {

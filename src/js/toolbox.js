@@ -1,8 +1,8 @@
 /**
- *
+ * @class ClassToolbox
  * @type {{cssClass: {btnToday: string}, _goToday: _goToday, _render: _render, init: init}}
  */
-var Class_Toolbox = {
+var ClassToolbox = {
     /**
      * cssClass
      */
@@ -55,7 +55,7 @@ var Class_Toolbox = {
  * @constructor
  */
 var Toolbox = function (options, container) {
-    return inherit(this, [Class_Sprite, Class_Toolbox, options, {
+    return inherit(this, [Class_Sprite, ClassToolbox, options, {
         $container: container
     }]);
 };

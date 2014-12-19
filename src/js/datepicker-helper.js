@@ -176,7 +176,7 @@ var inherit = function (self, baseClasses) {
     copyObject = function (o) {
         return $.extend(true, {}, o);
     }
-    var args = [true, self, copyObject(Class_Base)];
+    var args = [true, self, copyObject(ClassBase)];
     var events = [];
     for (index in baseClasses) {
         var cls = copyObject(baseClasses[index]);

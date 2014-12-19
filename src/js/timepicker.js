@@ -1,8 +1,8 @@
 /**
- *
+ * @class ClassTimepicker
  * @type {{showSeconds: boolean, showMeridian: boolean, minuteStep: number, cssClss: {timepicker: string}, show: show, hide: hide, _render: _render, _currentMeridian: null, convert24hTo12: convert24hTo12, convert12hTo24: convert12hTo24, _updateTime: _updateTime, _updateMeridian: _updateMeridian, _toggleMeridian: _toggleMeridian, _movehour: _movehour, _moveminute: _moveminute, _movesecond: _movesecond, _movemeridian: _movemeridian, _updateState: _updateState, _attachEvent: _attachEvent, _bootstrap: _bootstrap, init: init}}
  */
-var Class_Timepicker = {
+var ClassTimepicker = {
     /**
      * showSecond
      */
@@ -318,7 +318,7 @@ var Class_Timepicker = {
  * @constructor
  */
 var TimePicker = function (options, container) {
-    return inherit(this, [Class_Sprite, Class_Timepicker, options, {
+    return inherit(this, [Class_Sprite, ClassTimepicker, options, {
         container: container
     }]);
 };
