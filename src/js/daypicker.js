@@ -88,7 +88,8 @@ var ClassDaypicker = {
     _updateNavigator: function (year, month) {
         var self = this;
         var pdateStr = new persianDate([year, month]).format(self.datepicker.daysTitleFormat);
-        self.datepicker.navigator.updateSwitchBtn(self.datepicker._formatDigit(pdateStr));
+        self.datepicker.updateNavigator(pdateStr);
+        return this;
     },
 
 

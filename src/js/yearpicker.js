@@ -31,7 +31,8 @@ var ClassYearPicker = {
         var pd = new persianDate([self.datepicker.state.view.year, self.datepicker.state.view.month]);
         var year = pd.year();
         var remaining = parseInt(year / 12) * 12;
-        self.datepicker.navigator.updateSwitchBtn(self.datepicker._formatDigit(remaining) + "-" + self.datepicker._formatDigit(remaining + 11));
+        self.datepicker.updateNavigator(remaining + "-" + (remaining + 11));
+        return this;
     },
 
     /**

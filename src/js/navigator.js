@@ -4,6 +4,8 @@
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */
 var ClassNavigator = {
+    
+
     /**
      * cssClass
      */
@@ -24,7 +26,7 @@ var ClassNavigator = {
     /**
      *
      * @param string
-     * @returns {Class_Navigator}
+     * @returns {ClassNavigator}
      */
     switchRelation: function (string) {
         this.relation = string;
@@ -35,7 +37,7 @@ var ClassNavigator = {
     /**
      *
      * @param val
-     * @returns {Class_Navigator}
+     * @returns {ClassNavigator}
      */
     updateSwitchBtn: function (val) {
         $(this.element).children('.' + this.cssClass.btnSwitch).text(val);
@@ -45,7 +47,7 @@ var ClassNavigator = {
 
     /**
      *
-     * @returns {Class_Navigator}
+     * @returns {ClassNavigator}
      * @private
      */
     _next: function () {
@@ -56,7 +58,7 @@ var ClassNavigator = {
 
     /**
      *
-     * @returns {Class_Navigator}
+     * @returns {ClassNavigator}
      * @private
      */
     _prev: function () {
@@ -67,7 +69,7 @@ var ClassNavigator = {
 
     /**
      *
-     * @returns {Class_Navigator}
+     * @returns {ClassNavigator}
      * @private
      */
     _switch: function () {
@@ -114,7 +116,7 @@ var ClassNavigator = {
 
     /**
      *
-     * @returns {Class_Navigator}
+     * @returns {ClassNavigator}
      */
     init: function () {
         var self = this;

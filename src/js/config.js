@@ -53,14 +53,6 @@ var ClassConfig = {
 
 
     /**
-     * @property toolbox
-     * @type {boolean}
-     * @default true
-     */
-    toolbox: true,
-
-
-    /**
      * @format format
      * @type {boolean}
      * @default false
@@ -191,6 +183,27 @@ var ClassConfig = {
      */
     onSelect: function (unixDate) {
         return this;
+    },
+
+
+    /**
+     * @property navigator
+     * @type {boolean}
+     * @default true
+     */
+    navigator: {
+        enabled: false
+    },
+
+
+    /**
+     * @property toolbox
+     * @type {boolean}
+     * @default true
+     * @deprecated 0.2.3
+     */
+    toolbox: {
+        enabled: true
     },
 
 

@@ -68,6 +68,32 @@ var ClassDatepicker = {
 
 
     /**
+     * @param switchStr
+     * @public
+     * @returns {ClassDatepicker}
+     */
+    updateNavigator: function (switchStr) {
+        if (this.navigator) {
+            this.navigator.updateSwitchBtn(switchStr);
+        }
+        return this;
+    },
+
+
+    /**
+     * @param switchStr
+     * @public
+     * @returns {ClassDatepicker}
+     */
+    switchNavigatorRelation: function (newState) {
+        if (this.navigator) {
+            this.navigator.switchRelation(newState);
+        }
+        return this;
+    },
+
+
+    /**
      *
      * @param state
      * @param action
@@ -83,7 +109,7 @@ var ClassDatepicker = {
         }
         self.publishInDic(self._pickers, 'hide');
         self._pickers[newState].show();
-        self.navigator.switchRelation(newState);
+        self.switchNavigatorRelation(newState);
         self.currentView = newState;
         return this;
     },
@@ -270,6 +296,27 @@ var ClassDatepicker = {
                 }
             });
         }
+
+        self.inputElem.focus(function () {
+            self.show();
+        });
+        self.inputElem.click(function (e) {
+            e.stopPropagation();
+            return false;
+        });
+        self.inputElem.blur(function () {
+            if (!$.browser.msie) {
+                self.hide();
+            }
+        });
+        $(document).click(function () {
+            self.inputElem.blur();
+            self.hide();
+        });
+        $(self.element.main).mousedown(function (e) {
+            e.stopPropagation();
+            return false;
+        });
         return this;
     },
 

@@ -25,8 +25,8 @@ var ClassMonthPicker = {
      */
     _updateNavigator: function () {
         var self = this;
-        var pdateStr = self.datepicker._formatDigit(self.datepicker.state.view.year);
-        self.datepicker.navigator.updateSwitchBtn(pdateStr);
+        self.datepicker.updateNavigator(self.datepicker.state.view.year);
+        return this;
     },
 
 
@@ -104,7 +104,6 @@ var ClassMonthPicker = {
      * @returns {Class_MonthPicker}
      */
     updateView: function () {
-        var self = this;
         this.defineSelectedMonth();
         this._updateNavigator();
         return this;

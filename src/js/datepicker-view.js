@@ -43,34 +43,21 @@ var ViewsDatePicker = {
                 self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo($("body"));
                 self.view.fixPosition(self);
 
-                self.inputElem.focus(function () {
-                    self.show();
-                });
-                self.inputElem.click(function (e) {
-                    e.stopPropagation();
-                    return false;
-                });
-                self.inputElem.blur(function () {
-                    if (!$.browser.msie) {
-                        self.hide();
-                    }
-                });
-                $(document).click(function () {
-                    self.inputElem.blur();
-                    self.hide();
-                });
-                $(self.element.main).mousedown(function (e) {
-                    e.stopPropagation();
-                    return false;
-                });
+
                 self.container.navigator = $(self.element.main).children('.' + self.cssClass.navigator);
                 self.container.dayView = $(self.element.main).children('.' + self.cssClass.dayView);
                 self.container.monthView = $(self.element.main).children('.' + self.cssClass.monthView);
                 self.container.yearView = $(self.element.main).children('.' + self.cssClass.yearView);
                 self.container.timeView = $(self.element.main).children('.' + self.cssClass.timeView);
                 self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
-                self.navigator = new Navigator({datepicker: self}, self.container.navigator);
-                if (self.toolbox) {
+
+                if (self.navigator.enabled) {
+                    self.navigator = new Navigator({datepicker: self}, self.container.navigator);
+                } else {
+                    self.container.navigator.remove();
+                    self.navigator = false;
+                }
+                if (self.toolbox.enabled) {
                     self.toolbox = new Toolbox({datepicker: self}, self.container.toolbox);
                 } else {
                     self.container.toolbox.remove();
