@@ -36,15 +36,16 @@ var ViewsDatePicker = {
              * @returns {ViewsDatePicker}
              */
             render: function (self) {
-                self.view_data = {
+                var viewData = {
                     css: self.cssClass
                 };
                 self.element = {};
-                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo(self.$container);
+                self.element.main = $.tmplMustache(TEMPLATE.datepciker, viewData).appendTo(self.$container);
 
                 if (!self._inlineView) {
                     self.element.main.hide();
-                } else {
+                }
+                else {
                     self.element.main.show();
                 }
 

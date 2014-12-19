@@ -350,7 +350,7 @@ var ClassDatepicker = {
      * @private
      */
     _defineOnInitState: function () {
-        if ($(this.$container).nodeName == 'INPUT') {
+        if ($(this.$container)[0].nodeName == 'INPUT') {
             if (this.isValidGreguranDate(this.inputElem.val())) {
                 this.state.unixDate = new Date(this.inputElem.val()).valueOf();
             }
