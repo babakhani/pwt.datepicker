@@ -52,42 +52,44 @@ var ViewsDatePicker = {
                 self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
 
                 if (self.navigator.enabled) {
-                    self.navigator = new Navigator({datepicker: self}, self.container.navigator);
+                    self.navigator = new Navigator($.extend(true, self.navigator, {datepicker: self}), self.container.navigator);
                 } else {
                     self.container.navigator.remove();
                     self.navigator = false;
                 }
+
                 if (self.toolbox.enabled) {
-                    self.toolbox = new Toolbox({datepicker: self}, self.container.toolbox);
+                    self.toolbox = new Toolbox($.extend(true, self.toolbox, {datepicker: self}), self.container.toolbox);
                 } else {
                     self.container.toolbox.remove();
+                    self.toolbox = false;
                 }
                 if (self.dayPicker.enabled) {
-                    self.dayPicker = new Daypicker({datepicker: self}, self.container.dayView);
+                    self.dayPicker = new Daypicker($.extend(true, self.dayPicker, {datepicker: self}), self.container.dayView);
                     self._pickers.day = self.dayPicker;
                 } else {
                     self.container.dayView.hide();
                     self.dayPicker = false;
                 }
                 if (self.monthPicker.enabled) {
-                    self.monthPicker = new MonthPicker({datepicker: self}, self.container.monthView);
+                    self.monthPicker = new MonthPicker($.extend(true, self.monthPicker, {datepicker: self}), self.container.monthView);
                     self._pickers.month = self.monthPicker;
                 } else {
                     self.monthPicker = false;
                     self.container.monthView.hide();
                 }
                 if (self.yearPicker.enabled) {
-                    self.yearPicker = new YearPicker({datepicker: self}, self.container.yearView);
+                    self.yearPicker = new YearPicker($.extend(true, self.yearPicker, {datepicker: self}), self.container.yearView);
                     self._pickers.year = self.yearPicker;
-
-                } else {
+                }
+                else {
                     self.yearPicker = false;
                     self.container.yearView.hide();
                 }
                 if (self.timePicker.enabled) {
-                    self.timePicker = new TimePicker($.extend(true, {datepicker: self}, self.timepicker),
-                        self.container.timeView);
-                } else {
+                    self.timePicker = new TimePicker($.extend(true, self.timePicker, {datepicker: self}), self.container.timeView);
+                }
+                else {
                     self.container.timeView.hide();
                 }
 

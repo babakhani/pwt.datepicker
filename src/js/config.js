@@ -17,6 +17,7 @@ var ClassConfig = {
      * @property daysTitleFormat
      * @type {string}
      * @default YYYY MMMM
+     * @deprecated 0.2.4
      */
     daysTitleFormat: 'YYYY MMMM',
 
@@ -192,9 +193,21 @@ var ClassConfig = {
      * @default true
      */
     navigator: {
-        enabled: false
+        enabled: true,
+        text: {
+            btnNextText: "<<",
+            btnPrevText: ">>"
+        },
+        onNext: function (navigator) {
+            //log("navigator next ");
+        },
+        onPrev: function (navigator) {
+            //log("navigator prev ");
+        },
+        onSwitch: function (state) {
+            // console.log("navigator switch ");
+        }
     },
-
 
     /**
      * @property toolbox
@@ -203,7 +216,13 @@ var ClassConfig = {
      * @deprecated 0.2.3
      */
     toolbox: {
-        enabled: true
+        enabled: true,
+        text: {
+            btnToday: "امروز"
+        },
+        onToday: function (toolbox) {
+            //log("toolbox today btn");
+        }
     },
 
 
@@ -212,7 +231,9 @@ var ClassConfig = {
      * @type {object}
      */
     timePicker: {
-        enabled: true
+        enabled: true,
+        showSeconds: true,
+        showMeridian: true
     },
 
 
@@ -221,16 +242,30 @@ var ClassConfig = {
      * @type {object}
      */
     dayPicker: {
-        enabled: true
-    },
+        enabled: true,
+        titleFormat: 'YYYY MMMM',
+        titleFormatter: function (year, month) {
+            return new persianDate([year, month]).format(this.titleFormat);
+        },
+        onSelect: function (selectedDayUnix) {
+            //log("daypicker month day :" + selectedDayUnix);
+        }
 
+    },
 
     /**
      * @property monthPicker
      * @type {object}
      */
     monthPicker: {
-        enabled: true
+        enabled: true,
+        titleFormat: 'YYYY',
+        titleFormatter: function (unix) {
+            return new persianDate(unix).format(this.titleFormat);
+        },
+        onSelect: function (monthIndex) {
+            //log("daypicker select day :" + monthIndex);
+        }
     },
 
 
@@ -239,6 +274,14 @@ var ClassConfig = {
      * @type {object}
      */
     yearPicker: {
-        enabled: true
+        enabled: true,
+        titleFormat: 'YYYY',
+        titleFormatter: function (year) {
+            var remaining = parseInt(year / 12) * 12;
+            return remaining + "-" + (remaining + 11);
+        },
+        onSelect: function (monthIndex) {
+            //log("daypicker select Year :" + monthIndex);
+        }
     }
 }

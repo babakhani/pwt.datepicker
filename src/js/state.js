@@ -132,6 +132,24 @@ var ClassDatepickerState = {
 
 
     /**
+     *
+     * @returns {Class_DatepickerState}
+     * @private
+     */
+    _updateViewUnix: function () {
+        this.view.dateObj = new persianDate([
+            this.view.year,
+            this.view.month,
+            this.view.date,
+            this.view.hour,
+            this.view.minute,
+            this.view.second
+        ])
+        this.view.unixDate = this.view.dateObj.valueOf();
+        return this;
+    },
+
+    /**
      * @public
      * @param key
      * @param value
@@ -149,12 +167,15 @@ var ClassDatepickerState = {
                 break;
             case 'year':
                 this.view.year = value;
+                this._updateViewUnix();
                 break;
             case 'month':
                 this.view.month = value;
+                this._updateViewUnix();
                 break;
             case 'date':
                 this.view.month = value;
+                this._updateViewUnix();
                 break;
         }
         return this;

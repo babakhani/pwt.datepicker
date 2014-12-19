@@ -5,6 +5,19 @@
  */
 var ClassToolbox = {
     /**
+     * Text
+     */
+    text: {
+        btnToday: "امروز"
+    },
+
+
+    /**
+     * enabled
+     */
+    enabled: true,
+
+    /**
      * cssClass
      */
     cssClass: {
@@ -19,7 +32,9 @@ var ClassToolbox = {
     _goToday: function () {
         var self = this;
         var todayUnix = new Date().valueOf();
-        self.datepicker.selectDate('unix',todayUnix);
+        self.datepicker.selectDate('unix', todayUnix);
+        this.onToday(this);
+        return this;
     },
 
 
@@ -30,10 +45,12 @@ var ClassToolbox = {
      */
     _render: function () {
         var self = this;
-        $("<div>امروز</div>").addClass(self.cssClass.btnToday).click(function () {
-            self._goToday();
-            return false;
-        }).appendTo(this.$container);
+        this.todayBtn = $("<div></div>")
+            .text(self.text.btnToday)
+            .addClass(self.cssClass.btnToday).click(function () {
+                self._goToday();
+                return false;
+            }).appendTo(this.$container);
         return this;
     },
 

@@ -74,7 +74,7 @@ var ClassDatepicker = {
      */
     updateNavigator: function (switchStr) {
         if (this.navigator) {
-            this.navigator.updateSwitchBtn(switchStr);
+            this.navigator.updateSwitchBtn(this._formatDigit(switchStr));
         }
         return this;
     },

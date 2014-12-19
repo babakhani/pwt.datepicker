@@ -153,13 +153,13 @@ var ClassTimepicker = {
             if (currentVal === 12) {
                 currentVal = 1;
             } else {
-                currentVal+1;
+                currentVal += 1;
             }
         } else {
             if (currentVal === 1) {
                 currentVal = 12;
             } else {
-                currentVal-=1;
+                currentVal -= 1;
             }
         }
         this.hourInput.val(currentVal);

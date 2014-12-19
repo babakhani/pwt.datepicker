@@ -28,10 +28,8 @@ var ClassYearPicker = {
      */
     _updateNavigator: function () {
         var self = this;
-        var pd = new persianDate([self.datepicker.state.view.year, self.datepicker.state.view.month]);
-        var year = pd.year();
-        var remaining = parseInt(year / 12) * 12;
-        self.datepicker.updateNavigator(remaining + "-" + (remaining + 11));
+        var year = self.datepicker.state.view.year;
+        self.datepicker.updateNavigator(self.titleFormatter(year));
         return this;
     },
 
@@ -125,7 +123,6 @@ var ClassYearPicker = {
                 .data({year: (remaining + parseInt(i))})
                 .text(self.datepicker._formatDigit(remaining + parseInt(i)))
                 .appendTo(self.container);
-
             if (year === remaining + parseInt(i)) {
                 yearItem.addClass(self.cssClass.selectedYear);
             }
@@ -133,6 +130,7 @@ var ClassYearPicker = {
         self.container.children("." + self.cssClass.yearItem).click(function () {
             var y = $(this).data().year;
             self.datepicker.selectYear(y);
+            self.onSelect(y);
             return false;
         });
         return this;

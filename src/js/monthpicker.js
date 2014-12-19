@@ -25,7 +25,7 @@ var ClassMonthPicker = {
      */
     _updateNavigator: function () {
         var self = this;
-        self.datepicker.updateNavigator(self.datepicker.state.view.year);
+        self.datepicker.updateNavigator(this.titleFormatter(self.datepicker.state.view.unixDate));
         return this;
     },
 
@@ -81,7 +81,8 @@ var ClassMonthPicker = {
      */
     next: function () {
         var self = this;
-        self.datepicker.state.view.year += 1;
+        log('next')
+        self.datepicker.state.setView('year', self.datepicker.state.view.year + 1);
         self.updateView();
         return this;
     },
@@ -93,7 +94,8 @@ var ClassMonthPicker = {
      */
     prev: function () {
         var self = this;
-        self.datepicker.state.view.year -= 1;
+        log('prev')
+        self.datepicker.state.setView('year', self.datepicker.state.view.year - 1);
         self.updateView();
         return this;
     },
@@ -122,6 +124,7 @@ var ClassMonthPicker = {
                 monthIndex: m
             }).addClass("month" + m).addClass(self.cssClass.monthItem).text(self.monthRange[m].name.fa).appendTo(self.container)
                 .click(function () {
+                    self.onSelect($(this).data().monthIndex);
                     self.datepicker.selectMonth($(this).data().monthIndex);
                     return false;
                 });

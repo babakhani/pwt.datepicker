@@ -87,7 +87,8 @@ var ClassDaypicker = {
      */
     _updateNavigator: function (year, month) {
         var self = this;
-        var pdateStr = new persianDate([year, month]).format(self.datepicker.daysTitleFormat);
+        var pdateStr = this.titleFormatter(year, month);
+
         self.datepicker.updateNavigator(pdateStr);
         return this;
     },
@@ -139,6 +140,7 @@ var ClassDaypicker = {
         });
         this.mGrid.attachEvent("selectDay", function (x) {
             self.datepicker.selectDate('unix', x);
+            self.onSelect(x);
             self.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         });
         this._updateSelectedDay(self.datepicker.state.selected.unixDate);

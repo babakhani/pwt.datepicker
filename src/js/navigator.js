@@ -4,7 +4,15 @@
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */
 var ClassNavigator = {
-    
+    enabled: true,
+
+    /**
+     * text
+     */
+    text: {
+        btnNextText: "<",
+        btnPrevText: ">"
+    },
 
     /**
      * cssClass
@@ -30,6 +38,7 @@ var ClassNavigator = {
      */
     switchRelation: function (string) {
         this.relation = string;
+        this.onSwitch(string);
         return this;
     },
 
@@ -52,6 +61,7 @@ var ClassNavigator = {
      */
     _next: function () {
         this.datepicker[this.relation + 'Picker'].next();
+        this.onNext(this);
         return this;
     },
 
@@ -63,6 +73,7 @@ var ClassNavigator = {
      */
     _prev: function () {
         this.datepicker[this.relation + 'Picker'].prev();
+        this.onPrev(this);
         return this;
     },
 
@@ -86,8 +97,8 @@ var ClassNavigator = {
         var self = this;
         self.viewData = {
             css: self.cssClass,
-            btnNextText: "<",
-            btnPrevText: ">"
+            btnNextText: self.text.btnNextText,
+            btnPrevText: self.text.btnPrevText
         };
         self.element = $.tmplMustache(TEMPLATE.navigator, self.viewData).appendTo(self.$container);
     },
