@@ -2,7 +2,7 @@
 .datepicker-plot-area table,
 .datepicker-plot-area th,
 .datepicker-plot-area td {
-  border: block !important; }
+  border: none; }
 
 .datepicker-plot-area {
   font-size: 12px;

@@ -81,7 +81,6 @@ var ClassMonthPicker = {
      */
     next: function () {
         var self = this;
-        log('next')
         self.datepicker.state.setView('year', self.datepicker.state.view.year + 1);
         self.updateView();
         return this;
@@ -94,7 +93,6 @@ var ClassMonthPicker = {
      */
     prev: function () {
         var self = this;
-        log('prev')
         self.datepicker.state.setView('year', self.datepicker.state.view.year - 1);
         self.updateView();
         return this;

@@ -40,7 +40,14 @@ var ViewsDatePicker = {
                     css: self.cssClass
                 };
                 self.element = {};
-                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo($("body"));
+                self.element.main = $.tmplMustache(TEMPLATE.datepciker, self.view_data).appendTo(self.$container);
+
+                if (!self._inlineView) {
+                    self.element.main.hide();
+                } else {
+                    self.element.main.show();
+                }
+
                 self.view.fixPosition(self);
 
 

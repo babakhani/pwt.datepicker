@@ -180,7 +180,7 @@ var ClassBase = {
     },
 
     /**
-     *
+     * evenets
      */
     events: {
         init: null // e

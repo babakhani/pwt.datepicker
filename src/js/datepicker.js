@@ -228,18 +228,20 @@ var ClassDatepicker = {
      * @private
      */
     _syncWithImportData: function (pasted) {
-        var self = this;
-        if (jQuery.isNumeric(pasted)) {
-            var newPersainDate = new persianDate(pasted);
-            self.state.setSelected('unix', newPersainDate);
-            self._updateInputElement();
-        } else {
-            var persianDateArray = self.validatePersianDateString(pasted);
-            if (persianDateArray != null) {
-                delay(function () {
-                    var newPersainDate = new persianDate(persianDateArray);
-                    self.selectDate('unix', newPersainDate.valueOf());
-                }, self.inputDelay)
+        if (pasted) {
+            var self = this;
+            if (jQuery.isNumeric(pasted)) {
+                var newPersainDate = new persianDate(pasted);
+                self.state.setSelected('unix', newPersainDate);
+                self._updateInputElement();
+            } else {
+                var persianDateArray = self.validatePersianDateString(pasted);
+                if (persianDateArray != null) {
+                    delay(function () {
+                        var newPersainDate = new persianDate(persianDateArray);
+                        self.selectDate('unix', newPersainDate.valueOf());
+                    }, self.inputDelay)
+                }
             }
         }
         return this;
@@ -330,13 +332,17 @@ var ClassDatepicker = {
         var self = this;
         self._flagSelfManipulate = true;
         // Update Alt Field
-        $(self.altField).val(self.altFieldFormatter(self.state.selected.unixDate));
+        self.altField.val(self.altFieldFormatter(self.state.selected.unixDate));
         // Update Display Field
         self.inputElem.val(self.formatter(self.state.selected.unixDate));
         self._flagSelfManipulate = false;
         return self;
     },
 
+    /**
+     * @private
+     */
+    _inlineView: false,
 
     /**
      *
@@ -344,12 +350,20 @@ var ClassDatepicker = {
      * @private
      */
     _defineOnInitState: function () {
-        if (this.isValidGreguranDate(this.inputElem.val())) {
-            this.state.unixDate = new Date(this.inputElem.val()).valueOf();
+        if ($(this.$container).nodeName == 'INPUT') {
+            if (this.isValidGreguranDate(this.inputElem.val())) {
+                this.state.unixDate = new Date(this.inputElem.val()).valueOf();
+            }
+            else {
+                this.state.unixDate = new Date().valueOf();
+            }
+            this.$container = $('body');
         }
         else {
-            this.state.unixDate = new Date().valueOf();
+            this._inlineView = true;
+
         }
+        this.altField = $(this.altField);
         this.state.setSelected('unix', this.state.unixDate);
         this.state.setTime('unix', this.state.unixDate);
         this.state.setView('unix', this.state.unixDate);
@@ -396,8 +410,8 @@ var ClassDatepicker = {
  */
 var Datepicker = function (mainElem, options) {
     return inherit(this, [ClassSprite, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
-        inputElem: $(mainElem),
-        inputAltElem: $(options.altField)
+        $container: mainElem,
+        inputElem: $(mainElem)
     }]);
 };
 

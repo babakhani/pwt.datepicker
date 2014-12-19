@@ -78,14 +78,6 @@ var ClassConfig = {
 
 
     /**
-     * @format altField
-     * @type {string}
-     * @default unix
-     */
-    altFormat: 'unix',
-
-
-    /**
      * @format inputDelay
      * @type {number}
      * @default 800
@@ -115,6 +107,14 @@ var ClassConfig = {
 
 
     /**
+     * @format altField
+     * @type {string}
+     * @default unix
+     */
+    altFormat: 'unix',
+
+
+    /**
      * @method
      * @param unixDate
      * @returns {*}
@@ -123,15 +123,14 @@ var ClassConfig = {
         var self = this;
         var thisAltFormat = self.altFormat.toLowerCase();
         if (thisAltFormat === "gregorian" | thisAltFormat === "g") {
-            return new Date(self.state.unixDate);
+            return new Date(unixDate);
         }
         if (thisAltFormat === "unix" | thisAltFormat === "u") {
-            return self.state.unixDate;
+            return unixDate;
         }
         else {
-            return new persianDate(self.state.unixDate).format(self.altFormat);
+            return new persianDate(unixDate).format(self.altFormat);
         }
-
     },
 
 
@@ -185,7 +184,6 @@ var ClassConfig = {
     onSelect: function (unixDate) {
         return this;
     },
-
 
     /**
      * @property navigator
@@ -284,4 +282,5 @@ var ClassConfig = {
             //log("daypicker select Year :" + monthIndex);
         }
     }
+
 }
