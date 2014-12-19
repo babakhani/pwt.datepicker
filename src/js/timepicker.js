@@ -5,11 +5,24 @@
  */
 var ClassTimepicker = {
     /**
-     * showSecond
+     * secondStep
      */
-    showSeconds: true,
-    showMeridian: true,
+    secondStep: 1,
+
+
+    /**
+     * minuteStep
+     */
     minuteStep: 1,
+
+    /**
+     * hourStep
+     */
+    hourStep: 1,
+
+    /**
+     * cssClass
+     */
     cssClss: {
         timepicker: "viewModel"
     },
@@ -150,16 +163,16 @@ var ClassTimepicker = {
     _movehour: function (mode) {
         var currentVal = parseInt(this.hourInput.val());
         if (mode === 'up') {
-            if (currentVal === 12) {
-                currentVal = 1;
+            if (currentVal >= 12) {
+                currentVal = this.hourStep;
             } else {
-                currentVal += 1;
+                currentVal += this.hourStep;
             }
         } else {
-            if (currentVal === 1) {
+            if (currentVal <= 1) {
                 currentVal = 12;
             } else {
-                currentVal -= 1;
+                currentVal -= this.hourStep;
             }
         }
         this.hourInput.val(currentVal);
@@ -180,13 +193,13 @@ var ClassTimepicker = {
             if (currentVal === 59) {
                 currentVal = 0;
             } else {
-                currentVal += 1;
+                currentVal += this.minuteStep;
             }
         } else {
             if (currentVal === 0) {
                 currentVal = 59;
             } else {
-                currentVal -= 1;
+                currentVal -= this.minuteStep;
             }
         }
         this.minuteInput.val(currentVal);
@@ -207,13 +220,13 @@ var ClassTimepicker = {
             if (currentVal === 59) {
                 currentVal = 0;
             } else {
-                currentVal += 1;
+                currentVal += this.secondStep;
             }
         } else {
             if (currentVal === 0) {
                 currentVal = 59;
             } else {
-                currentVal -= 1;
+                currentVal -= this.secondStep;
             }
         }
         this.secondInput.val(currentVal);

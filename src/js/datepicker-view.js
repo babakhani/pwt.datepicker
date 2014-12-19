@@ -5,6 +5,7 @@
  */
 var ViewsDatePicker = {
 
+
     /**
      * cssClass
      */
@@ -43,7 +44,7 @@ var ViewsDatePicker = {
                 self.element.main = $.tmplMustache(TEMPLATE.datepciker, viewData).appendTo(self.$container);
 
                 if (!self._inlineView) {
-                    self.element.main.hide();
+                    //self.element.main.hide();
                 }
                 else {
                     self.element.main.show();
