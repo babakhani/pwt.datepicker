@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @class ViewsMonthGrid
  * @type {{cssClass: {main: string, header: string, headerTitle: string, headerRow: string, headerRowCell: string, daysTable: string, currentMonth: string, today: string, selected: string}, views: {default: {render: render, renderDays: renderDays}}}}
@@ -29,19 +30,13 @@ var ViewsMonthGrid = {
              * @param self
              */
             render: function (self) {
-                self.view_data = {
+                self.viewData = {
                     css: self.cssClass
                 };
-                self.tmpl.main = "<div class='{{css.main}}' >\
-                                                      <div class='{{css.header}}' > \
-                                                            <div class='{{css.headerTitle}}' ></div>\
-                                                            <div class='{{css.headerRow}}' ></div>\
-                                                      </div>\
-                                                      <table cellspacing='0' class='{{css.daysTable}}'  ><tbody><tr><td /><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr></tbody></table>\
-                                                </div>";
-                self.element = $.tmplMustache(self.tmpl.main, self.view_data).appendTo(self.container);
+                self.element = $.tmplMustache(TEMPLATE.monthGrid, self.viewData).appendTo(self.container);
                 self.header = self.createElementByClass(self.cssClass.header);
                 self.headerRow = self.createElementByClass(self.cssClass.headerRow);
+                var weekDay;
                 for (weekDay in self.weekRange) {
                     $("<div/>").text(self.weekRange[weekDay].abbr.fa).addClass(self.cssClass.headerRowCell).appendTo(self.headerRow)[0];
                 }
@@ -76,7 +71,7 @@ var ViewsMonthGrid = {
                 $(self.daysBox).find("td").each(function (index) {
                     $(this).empty();
                     if (self.firstWeekDayOfMonth > 1 && index + 1 < self.firstWeekDayOfMonth) {
-                        if (self.state.month == 1) {
+                        if (self.state.month === 1) {
                             var prevMonth = 12;
                             var prevYear = parseInt(self.state.year) - 1;
                         } else {
@@ -86,13 +81,13 @@ var ViewsMonthGrid = {
                         var prevMonthDaysCount = t.daysInMonth(prevYear, prevMonth);
                         var day = parseInt((prevMonthDaysCount - self.firstWeekDayOfMonth) + (index + 2));
                         addSpan.apply(this, [day, prevMonth, prevYear, "other-month"])
-                    } else if (index + 2 == (currentMonthIndex + self.firstWeekDayOfMonth) && currentMonthIndex <= self.daysCount) {
+                    } else if (index + 2 === (currentMonthIndex + self.firstWeekDayOfMonth) && currentMonthIndex <= self.daysCount) {
                         var day = currentMonthIndex;
                         addSpan.apply(this, [day, parseInt(self.state.month), parseInt(self.state.year)])
                         currentMonthIndex++;
                     } else {
 
-                        if (self.state.month == 12) {
+                        if (self.state.month === 12) {
                             var nextMonth = 1;
                             var nextYear = parseInt(self.state.year) + 1;
                         } else {
@@ -101,11 +96,11 @@ var ViewsMonthGrid = {
                         }
                         var day = nextMonthIndex;
                         addSpan.apply(this, [day, nextMonth, nextYear, "other-month"])
-                        nextMonthIndex++;
+                        nextMonthIndex += 1;
                     }
                 });
                 $(self.daysBox).find("td").children("span").click(function () {
-                    $thisUnixDate = $(this).data("unixDate");
+                    var $thisUnixDate = $(this).data("unixDate");
                     self.raiseEvent("selectDay", [$thisUnixDate]);
                     return false;
                 });

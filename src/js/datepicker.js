@@ -89,6 +89,9 @@ var ClassDatepicker = {
     },
 
 
+    /**
+     * @private
+     */
     _flagSelfManipulate: true,
 
 
@@ -231,7 +234,7 @@ var ClassDatepicker = {
             /////////////////   Manipulate by Copy And paste
             self.inputElem.bind('paste', function (e) {
                 delay(function () {
-                    self._syncWithImportData(e.target.value)
+                    self._syncWithImportData(e.target.value);
                 }, 60);
             });
             /////////////////   Manipulate by alt changes
@@ -307,9 +310,15 @@ var ClassDatepicker = {
     },
 
 
+    /**
+     * @private
+     */
     events: {},
 
 
+    /**
+     * @private
+     */
     _viewed: false,
 
 
@@ -330,7 +339,6 @@ var ClassDatepicker = {
         return this;
     }
 };
-
 
 /**
  *

@@ -270,7 +270,7 @@ jQuery.uaMatch = function (ua) {
 };
 
 
-// Don't clobber any existing jQuery.browser in case it's different
+// cDon't clobber any existing jQuery.browser in case it's different
 if (!jQuery.browser) {
     var matched = jQuery.uaMatch(window.navigator.userAgent);
     var browser = {};

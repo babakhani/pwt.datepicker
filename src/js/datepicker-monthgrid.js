@@ -154,11 +154,11 @@ var ClassMonthGrid = {
      */
     goToNextMonth: function () {
         var self = this;
-        if (self.state.month == 12) {
+        if (self.state.month === 12) {
             self.state.month = 1;
-            self.state.viewYear++;
+            self.state.viewYear += 1;
         } else {
-            self.state.month++;
+            self.state.month += 1;
         }
         self.updateAs(self.state.year, self.state.month)
         return false;

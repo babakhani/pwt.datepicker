@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @class ClassToolbox
  * @type {{cssClass: {btnToday: string}, _goToday: _goToday, _render: _render, init: init}}

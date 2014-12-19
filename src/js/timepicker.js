@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @class ClassTimepicker
  * @type {{showSeconds: boolean, showMeridian: boolean, minuteStep: number, cssClss: {timepicker: string}, show: show, hide: hide, _render: _render, _currentMeridian: null, convert24hTo12: convert24hTo12, convert12hTo24: convert12hTo24, _updateTime: _updateTime, _updateMeridian: _updateMeridian, _toggleMeridian: _toggleMeridian, _movehour: _movehour, _moveminute: _moveminute, _movesecond: _movesecond, _movemeridian: _movemeridian, _updateState: _updateState, _attachEvent: _attachEvent, _bootstrap: _bootstrap, init: init}}
@@ -42,7 +43,6 @@ var ClassTimepicker = {
      * @private
      */
     _render: function () {
-        'use strict';
         var self = this;
         var viewModel = {
             css: self.cssClass
@@ -63,7 +63,6 @@ var ClassTimepicker = {
      * @param hour
      */
     convert24hTo12: function (hour) {
-        'use strict';
         var output = hour, meridian = 'AM';
         if (hour >= 12) {
             output = hour - 12;
@@ -82,7 +81,6 @@ var ClassTimepicker = {
      * @returns {*}
      */
     convert12hTo24: function (hour) {
-        'use strict';
         var output = hour;
         if (this._currentMeridian === "PM" && hour < 12) {
             output = hour + 12;
@@ -101,7 +99,6 @@ var ClassTimepicker = {
      * @private
      */
     _updateTime: function (state) {
-        'use strict';
         var timeStateObject = state.selected;
         var hourArray = this.convert24hTo12(timeStateObject['hour']);
         this.hourInput.val(hourArray[0]);
@@ -151,19 +148,18 @@ var ClassTimepicker = {
      * @private
      */
     _movehour: function (mode) {
-        'use strict';
         var currentVal = parseInt(this.hourInput.val());
         if (mode === 'up') {
             if (currentVal === 12) {
                 currentVal = 1;
             } else {
-                currentVal++;
+                currentVal+1;
             }
         } else {
             if (currentVal === 1) {
                 currentVal = 12;
             } else {
-                currentVal--;
+                currentVal-=1;
             }
         }
         this.hourInput.val(currentVal);
@@ -179,19 +175,18 @@ var ClassTimepicker = {
      * @private
      */
     _moveminute: function (mode) {
-        'use strict';
         var currentVal = parseInt(this.minuteInput.val());
-        if (mode == 'up') {
-            if (currentVal == 59) {
+        if (mode === 'up') {
+            if (currentVal === 59) {
                 currentVal = 0;
             } else {
-                currentVal++;
+                currentVal += 1;
             }
         } else {
-            if (currentVal == 0) {
+            if (currentVal === 0) {
                 currentVal = 59;
             } else {
-                currentVal--;
+                currentVal -= 1;
             }
         }
         this.minuteInput.val(currentVal);
@@ -208,17 +203,17 @@ var ClassTimepicker = {
      */
     _movesecond: function (mode) {
         var currentVal = parseInt(this.secondInput.val());
-        if (mode == 'up') {
-            if (currentVal == 59) {
+        if (mode === 'up') {
+            if (currentVal === 59) {
                 currentVal = 0;
             } else {
-                currentVal++;
+                currentVal += 1;
             }
         } else {
-            if (currentVal == 0) {
+            if (currentVal === 0) {
                 currentVal = 59;
             } else {
-                currentVal--;
+                currentVal -= 1;
             }
         }
         this.secondInput.val(currentVal);
@@ -268,7 +263,7 @@ var ClassTimepicker = {
         });
 
         $('> div.time-segment', this.container).mousewheel(function (event) {
-            moveMode = 'down';
+            var moveMode = 'down';
             if (event.deltaY > 0) {
                 moveMode = 'up';
             }
@@ -284,10 +279,10 @@ var ClassTimepicker = {
      * @private
      */
     _bootstrap: function () {
-        if (this.showMeridian == false) {
+        if (this.showMeridian === false) {
             $('.meridian', this.container).hide();
         }
-        if (this.showSeconds == false) {
+        if (this.showSeconds === false) {
             $('.second', this.container).hide();
         }
         this.hourInput = $('.hour-input', this.container);

@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @class ClassDaypicker
  * @type {{next: next, prev: prev, updateView: updateView, _updateView: _updateView, selectDay: selectDay, _updateNavigator: _updateNavigator, hide: hide, show: show, _updateSelectedDay: _updateSelectedDay, _render: _render, init: init}}
@@ -12,9 +13,9 @@ var ClassDaypicker = {
         var self = this;
         if (self.datepicker.state.view.month === 12) {
             self.datepicker.state.view.month = 1;
-            self.datepicker.state.view.year++;
+            self.datepicker.state.view.year += 1;
         } else {
-            self.datepicker.state.view.month++;
+            self.datepicker.state.view.month += 1;
         }
         self._updateView();
         return this;
@@ -28,11 +29,11 @@ var ClassDaypicker = {
      */
     prev: function () {
         var self = this;
-        if (self.datepicker.state.view.month == 1) {
+        if (self.datepicker.state.view.month === 1) {
             self.datepicker.state.view.month = 12;
-            self.datepicker.state.view.year--;
+            self.datepicker.state.view.year -= 1;
         } else {
-            self.datepicker.state.view.month--;
+            self.datepicker.state.view.month -= 1;
         }
         self._updateView();
         return this;
@@ -106,7 +107,6 @@ var ClassDaypicker = {
      * @returns {ClassDaypicker}
      */
     show: function () {
-        var self = this;
         this.container.show();
         this._updateView();
         return this;
@@ -120,7 +120,6 @@ var ClassDaypicker = {
      * @private
      */
     _updateSelectedDay: function (unix) {
-        var self = this;
         this.mGrid.markSelectedDate(unix);
         return this;
     },
@@ -132,7 +131,6 @@ var ClassDaypicker = {
      */
     _render: function () {
         var self = this;
-        var pd = new pDate();
         this.mGrid = new MonthGrid({
             container: self.container,
             month: self.datepicker.state.selected.month,

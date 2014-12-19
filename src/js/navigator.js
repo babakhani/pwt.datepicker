@@ -1,5 +1,5 @@
+'use strict';
 /**
- *
  * @class
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */
@@ -82,12 +82,12 @@ var ClassNavigator = {
      */
     _render: function () {
         var self = this;
-        self.view_data = {
+        self.viewData = {
             css: self.cssClass,
             btnNextText: "<",
             btnPrevText: ">"
         };
-        self.element = $.tmplMustache(TEMPLATE.navigator, self.view_data).appendTo(self.$container);
+        self.element = $.tmplMustache(TEMPLATE.navigator, self.viewData).appendTo(self.$container);
     },
 
 

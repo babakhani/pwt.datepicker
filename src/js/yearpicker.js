@@ -35,7 +35,7 @@ var ClassYearPicker = {
     },
 
     /**
-     *
+     * @public
      * @returns {Class_YearPicker}
      */
     hide: function () {
@@ -45,7 +45,7 @@ var ClassYearPicker = {
 
 
     /**
-     *
+     * @public
      * @returns {Class_YearPicker}
      */
     show: function () {
@@ -56,7 +56,7 @@ var ClassYearPicker = {
 
 
     /**
-     *
+     * @public
      * @returns {Class_YearPicker}
      */
     next: function () {
@@ -68,7 +68,7 @@ var ClassYearPicker = {
 
 
     /**
-     *
+     * @public
      * @returns {Class_YearPicker}
      */
     prev: function () {
@@ -79,22 +79,26 @@ var ClassYearPicker = {
     },
 
 
+    /**
+     * @public
+     */
     selectYear: function () {
         this.updateView();
     },
 
 
     /**
-     *
+     * @public
      * @returns {Class_YearPicker}
      */
     updateView: function () {
         var self = this;
         self._render();
         self.container.children("." + self.cssClass.yearItem).each(function () {
-            $(this).removeClass(self.cssClass.selectedYear)
-            if ($(this).data().year == self.datepicker.state.selected.year) {
-                $(this).addClass(self.cssClass.selectedYear)
+            $(this).removeClass(self.cssClass.selectedYear);
+
+            if ($(this).data().year === self.datepicker.state.selected.year) {
+                $(this).addClass(self.cssClass.selectedYear);
             }
         });
         self._updateNavigator();
@@ -109,18 +113,20 @@ var ClassYearPicker = {
      */
     _render: function () {
         var self = this;
-        var pd = new persianDate(self.datepicker.state.selected.unixDate)
+        var yearItem
             , year = self.datepicker.state.view.year
             , remaining = parseInt(year / 12) * 12;
         self.container.children("." + self.cssClass.yearItem).remove();
         var i;
         for (i in range(12)) {
-            var yearItem = $("<div/>").addClass(self.cssClass.yearItem).data({
-                year: (remaining + parseInt(i))
-            }).text(self.datepicker._formatDigit(remaining + parseInt(i)))
-                .appendTo(self.container)
-            if (year == remaining + parseInt(i)) {
-                yearItem.addClass(self.cssClass.selectedYear)
+            yearItem = $("<div/>")
+                .addClass(self.cssClass.yearItem)
+                .data({year: (remaining + parseInt(i))})
+                .text(self.datepicker._formatDigit(remaining + parseInt(i)))
+                .appendTo(self.container);
+
+            if (year === remaining + parseInt(i)) {
+                yearItem.addClass(self.cssClass.selectedYear);
             }
         }
         self.container.children("." + self.cssClass.yearItem).click(function () {
@@ -131,7 +137,9 @@ var ClassYearPicker = {
         return this;
     },
 
-
+    /**
+     * @private
+     */
     init: function () {
         this._render();
     }

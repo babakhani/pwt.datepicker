@@ -49,9 +49,9 @@ var ClassBase = {
         var d1 = new pDate(unix1);
         var d2 = new pDate(unix2);
         return d1 && d2 &&
-            d1.year() == d2.year() &&
-            d1.month() == d2.month() &&
-            d1.date() == d2.date();
+            d1.year() === d2.year() &&
+            d1.month() === d2.month() &&
+            d1.date() === d2.date();
     },
 
 
@@ -73,7 +73,7 @@ var ClassBase = {
     validatePersianDateString: function (pasted) {
         var newDate = new Date(pasted);
         var inputArray = pasted.split("/");
-        if (inputArray.length == 3) {
+        if (inputArray.length === 3) {
             var trueYear = inputArray[0].toString().length <= 4 && inputArray[0].toString().length >= 1;
             var trueMonth = inputArray[1].toString().length <= 2 && inputArray[1].toString().length >= 1;
             var trueDay = inputArray[2].toString().length <= 2 && inputArray[2].toString().length >= 1;
@@ -81,7 +81,7 @@ var ClassBase = {
         $.each(inputArray, function (index, key) {
             inputArray[index] = parseInt(key);
         });
-        if (trueYear && trueMonth && trueDay && newDate != "Invalid Date") {
+        if (trueYear && trueMonth && trueDay && newDate !== "Invalid Date") {
             return inputArray;
         } else {
             return null;
@@ -168,7 +168,7 @@ var ClassBase = {
         var currentObject = this.events[eventName];
         if (!currentObject) {
             return;
-        } else if (typeof currentObject == 'function') {
+        } else if (typeof currentObject === 'function') {
             currentObject.apply(this, args);
         } else {
             var e;
@@ -179,7 +179,9 @@ var ClassBase = {
         return this;
     },
 
-
+    /**
+     *
+     */
     events: {
         init: null // e
     }

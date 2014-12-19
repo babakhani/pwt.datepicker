@@ -114,7 +114,6 @@ var ClassConfig = {
      * @returns {*}
      */
     formatter: function (unixDate) {
-        'use strict';
         var self = this;
         var pdate = new persianDate(unixDate);
         pdate.formatPersian = false;
@@ -128,12 +127,12 @@ var ClassConfig = {
      * @returns {*}
      */
     altFieldFormatter: function (unixDate) {
-        'use strict';
         var self = this;
-        if (self.altFormat.toLowerCase() === "gregorian" | self.altFormat.toLowerCase() === "g") {
+        var thisAltFormat = self.altFormat.toLowerCase();
+        if (thisAltFormat === "gregorian" | thisAltFormat === "g") {
             return new Date(self.state.unixDate);
         }
-        if (self.altFormat.toLowerCase() === "unix" | self.altFormat.toLowerCase() === "u") {
+        if (thisAltFormat === "unix" | thisAltFormat === "u") {
             return self.state.unixDate;
         }
         else {
@@ -148,7 +147,6 @@ var ClassConfig = {
      * @returns {ClassConfig}
      */
     show: function () {
-        'use strict';
         this.view.fixPosition(this);
         this.element.main.show();
         this.onShow(this);
@@ -162,7 +160,6 @@ var ClassConfig = {
      * @returns {ClassConfig}
      */
     hide: function () {
-        'use strict';
         if (this._viewed) {
             this.element.main.hide();
             this.onHide(this);
@@ -193,6 +190,7 @@ var ClassConfig = {
      * @param unixDate
      */
     onSelect: function (unixDate) {
+        return this;
     },
 
 

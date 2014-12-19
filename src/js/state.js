@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @class
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
@@ -59,7 +60,6 @@ var ClassDatepickerState = {
         var self = this;
         switch (key) {
             case 'unix':
-            {
                 self.selected.unixDate = value;
                 var pd = new persianDate(value);
                 self.selected.hour = pd.hour();
@@ -67,25 +67,18 @@ var ClassDatepickerState = {
                 self.selected.second = pd.second();
                 self._updateSelectedUnix();
                 break;
-            }
             case 'hour':
-            {
                 this.selected.hour = value;
                 self._updateSelectedUnix();
                 break;
-            }
             case 'minute':
-            {
                 this.selected.minute = value;
                 self._updateSelectedUnix();
                 break;
-            }
             case 'second':
-            {
                 this.selected.second = value;
                 self._updateSelectedUnix();
                 break;
-            }
         }
         return this;
     },
@@ -101,7 +94,6 @@ var ClassDatepickerState = {
         var self = this;
         switch (key) {
             case 'unix':
-            {
                 self.selected.unixDate = value;
                 var pd = new persianDate(value);
                 self.selected.year = pd.year();
@@ -109,25 +101,18 @@ var ClassDatepickerState = {
                 self.selected.date = pd.date();
                 self._updateSelectedUnix();
                 break;
-            }
             case 'year':
-            {
                 this.selected.year = value;
                 self._updateSelectedUnix();
                 break;
-            }
             case 'month':
-            {
                 this.selected.month = value
                 self._updateSelectedUnix();
                 break;
-            }
             case 'date':
-            {
                 this.selected.month = value
                 self._updateSelectedUnix();
                 break;
-            }
         }
         return this;
     },
@@ -156,27 +141,21 @@ var ClassDatepickerState = {
         var self = this;
         switch (key) {
             case 'unix':
-            {
                 var pd = new persianDate(value);
                 self.view.year = pd.year();
                 self.view.month = pd.month();
                 self.view.date = pd.date();
                 self.view.unixDate = value;
                 break;
-            }
             case 'year':
-            {
                 this.view.year = value;
-
-            }
+                break;
             case 'month':
-            {
                 this.view.month = value;
-            }
+                break;
             case 'date':
-            {
                 this.view.month = value;
-            }
+                break;
         }
         return this;
     }

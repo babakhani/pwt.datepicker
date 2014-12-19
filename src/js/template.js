@@ -51,5 +51,16 @@ var TEMPLATE = {
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='meridian&' class='meridian-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
+        "</div>",
+
+    /**
+     * Month Grid
+     */
+    monthGrid: "<div class='{{css.main}}' >" + //
+        "<div class='{{css.header}}' >" + //
+        "<div class='{{css.headerTitle}}' ></div>" + //
+        "<div class='{{css.headerRow}}' ></div>" + //
+        "</div>" + //
+        "<table cellspacing='0' class='{{css.daysTable}}'  ><tbody><tr><td /><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr></tbody></table>" + //
         "</div>"
 }

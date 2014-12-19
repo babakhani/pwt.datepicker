@@ -5,7 +5,7 @@ var ClassDateRange = {
 
 
     /**
-     * @property
+     * @property monthRange
      */
     monthRange: {
         1: {
@@ -109,7 +109,7 @@ var ClassDateRange = {
 
 
     /**
-     * @property
+     * @property weekRange
      */
     weekRange: {
         0: {
@@ -172,7 +172,7 @@ var ClassDateRange = {
 
 
     /**
-     * @property
+     * @property persianDaysName
      */
     persianDaysName: ["اورمزد", "بهمن", "اوردیبهشت", "شهریور", "سپندارمذ", "خورداد", "امرداد", "دی به آذز", "آذز", "آبان", "خورشید", "ماه", "تیر", "گوش", "دی به مهر", "مهر", "سروش", "رشن", "فروردین", "بهرام", "رام", "باد", "دی به دین", "دین", "ارد", "اشتاد", "آسمان", "زامیاد", "مانتره سپند", "انارام", "زیادی"]
 };

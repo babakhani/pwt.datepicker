@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @class ViewsDatePicker
  * @type {{cssClass: {datePickerPlotArea: string, yearView: string, monthView: string, dayView: string, timeView: string, navigator: string, toolbox: string}, container: {}, views: {default: {render: render, fixPosition: fixPosition}}}}
@@ -35,7 +36,6 @@ var ViewsDatePicker = {
              * @returns {ViewsDatePicker}
              */
             render: function (self) {
-                'use strict';
                 self.view_data = {
                     css: self.cssClass
                 };
@@ -118,7 +118,7 @@ var ViewsDatePicker = {
             fixPosition: function (self) {
                 var inputX = self.inputElem.offset().top;
                 var inputY = self.inputElem.offset().left;
-                if (self.position == "auto") {
+                if (self.position === "auto") {
                     var inputHeight = self.fullHeight(self.inputElem);
                     self.element.main.css({
                         top: (inputX + inputHeight) + 'px',
