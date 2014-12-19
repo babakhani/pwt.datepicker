@@ -1,11 +1,13 @@
 'use strict';
-
-
 /**
  * @class ClassDatepicker
  * @type {{_pickers: {}, _getNextState: _getNextState, _checkNextStateAvalibility: _checkNextStateAvalibility, changeView: changeView, _flagSelfManipulate: boolean, selectTime: selectTime, selectDate: selectDate, selectMonth: selectMonth, selectYear: selectYear, _formatDigit: _formatDigit, destroy: destroy, _syncWithImportData: _syncWithImportData, _attachEvents: _attachEvents, _updateInputElement: _updateInputElement, _defineOnInitState: _defineOnInitState, events: {}, _viewed: boolean, init: init}}
  */
 var ClassDatepicker = {
+    /**
+     *
+     * @private
+     */
     _pickers: {},
 
 
@@ -236,7 +238,7 @@ var ClassDatepicker = {
             $(self.altField).bind("change", function () {
                 if (!self._flagSelfManipulate) {
                     var newDate = new Date($(this).val());
-                    if (newDate != "Invalid Date") {
+                    if (newDate !== "Invalid Date") {
                         var newPersainDate = new persianDate(newDate);
                         self.selectDate('unix', newPersainDate.valueOf());
                     }
@@ -256,7 +258,7 @@ var ClassDatepicker = {
                 var $self = $(this);
                 if (!self._flagSelfManipulate) {
                     var trueKey = false;
-                    if (e.keyCode == 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {
+                    if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {
                         trueKey = true;
                     }
                     if (trueKey) {
@@ -335,10 +337,10 @@ var ClassDatepicker = {
  * @param mainElem
  * @param options
  * @returns {*}
- * @constructor
+ * @constructs ClassDatepicker
  */
 var Datepicker = function (mainElem, options) {
-    return inherit(this, [Class_Sprite, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
+    return inherit(this, [ClassSprite, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
         inputElem: $(mainElem),
         inputAltElem: $(options.altField)
     }]);

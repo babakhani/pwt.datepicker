@@ -15,6 +15,7 @@ module.exports = function (grunt) {
                     'src/js/config.js',
                     'src/js/template.js',
                     'src/js/datepicker-base.js',
+                    'src/js/constant.js',
                     'src/js/datepicker-helper.js',
                     'src/js/datepicker-monthgrid.js',
                     'src/js/datepicker-monthgrid-view.js',
@@ -62,6 +63,18 @@ module.exports = function (grunt) {
                 }
             }
         },
+        yuidoc: {
+            all: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
+                options: {
+                    paths: ['src/js'],
+                    outdir: 'doc/yui/'
+                }
+            }
+        },
         sass: {
             dist: {
                 files: [
@@ -78,5 +91,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-jsdoc');
+
     grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'jsdoc']);
 };

@@ -1,5 +1,6 @@
+'use strict';
 /**
- * @class Base
+ * @abstract
  * @type {{init: init, publishInDic: publishInDic, callOfDict: callOfDict, isSameDay: isSameDay, isValidGreguranDate: isValidGreguranDate, validatePersianDateString: validatePersianDateString, fullHeight: fullHeight, attachEvent: attachEvent, dettachEvent: dettachEvent, clearEvent: clearEvent, raiseEvent: raiseEvent, events: {init: null}}}
  */
 var ClassBase = {
@@ -13,6 +14,7 @@ var ClassBase = {
         this.raiseEvent('init');
     },
 
+
     /**
      *
      * @param objectList
@@ -25,6 +27,7 @@ var ClassBase = {
         });
         return objectList;
     },
+
 
     /**
      *
@@ -60,6 +63,7 @@ var ClassBase = {
     isValidGreguranDate: function (inputDate) {
         return inputDate && new Date(inputDate) != "Invalid Date" && new Date(inputDate) != "undefined";
     },
+
 
     /**
      *
@@ -105,6 +109,7 @@ var ClassBase = {
         if (!this.events[eventName]) {
             this.events[eventName] = [];
         }
+        var f;
         for (f in this.events[eventName]) {
             if (this.events[eventName][f].toString() == func.toString()) {
                 $.error("The function {0} was already added to event's chain.".format(func.toString));
@@ -125,6 +130,7 @@ var ClassBase = {
         if (!this.events[eventName]) {
             $.error("The event's chain is empty.");
         }
+        var f;
         for (f in this.events[eventName]) {
             if (this.events[eventName][f].toString() == func.toString()) {
                 delete this.events[eventName][f];
@@ -165,6 +171,7 @@ var ClassBase = {
         } else if (typeof currentObject == 'function') {
             currentObject.apply(this, args);
         } else {
+            var e;
             for (e in currentObject) {
                 currentObject[e].apply(this, args);
             }
@@ -180,18 +187,12 @@ var ClassBase = {
 
 
 /**
- *
+ * @abstract
  * @type {{defaultView: string, events: {init: init, render: null}, views: {default: {render: render}}, element: {main: null}, createElementByClass: createElementByClass, render: render, tmpl: {}}}
  */
-var Class_Sprite = {
+var ClassSprite = {
     defaultView: "default",
-
-
-
     events: {
-
-
-
         init: function () {
             this.render();
         },
@@ -249,207 +250,3 @@ var Class_Sprite = {
     tmpl: {}
 };
 
-var Class_DateRange = {
-    monthRange: {
-        1: {
-            name: {
-                fa: "فروردین"
-            },
-            abbr: {
-                fa: "فرو"
-            }
-        },
-        2: {
-            name: {
-                fa: "اردیبهشت"
-            },
-            abbr: {
-                fa: "ارد"
-            }
-        },
-        3: {
-            name: {
-                fa: "خرداد"
-            },
-            abbr: {
-                fa: "خرد"
-            }
-        },
-        4: {
-            name: {
-                fa: "تیر"
-            },
-            abbr: {
-                fa: "تیر"
-            }
-        },
-        5: {
-            name: {
-                fa: "مرداد"
-            },
-            abbr: {
-                fa: "مرد"
-            }
-        },
-        6: {
-            name: {
-                fa: "شهریور"
-            },
-            abbr: {
-                fa: "شهر"
-            }
-        },
-        7: {
-            name: {
-                fa: "مهر"
-            },
-            abbr: {
-                fa: "مهر"
-            }
-        },
-        8: {
-            name: {
-                fa: "آبان"
-            },
-            abbr: {
-                fa: "آبا"
-            }
-
-        },
-        9: {
-            name: {
-                fa: "آذر"
-            },
-            abbr: {
-                fa: "آذر"
-            }
-        },
-        10: {
-            name: {
-                fa: "دی"
-            },
-            abbr: {
-                fa: "دی"
-            }
-        },
-        11: {
-            name: {
-                fa: "بهمن"
-            },
-            abbr: {
-                fa: "بهم"
-            }
-        },
-        12: {
-            name: {
-                fa: "اسفند"
-            },
-            abbr: {
-                fa: "اسف"
-            }
-        }
-    },
-    weekRange: {
-        0: {
-            name: {
-                fa: "شنبه"
-            },
-            abbr: {
-                fa: "ش"
-            }
-        },
-        1: {
-            name: {
-                fa: "یکشنبه"
-            },
-            abbr: {
-                fa: "ی"
-            }
-        },
-        2: {
-            name: {
-                fa: "دوشنبه"
-            },
-            abbr: {
-                fa: "د"
-            }
-        },
-        3: {
-            name: {
-                fa: "سه شنبه"
-            },
-            abbr: {
-                fa: "س"
-            }
-        },
-        4: {
-            name: {
-                fa: "چهار شنبه"
-            },
-            abbr: {
-                fa: "چ"
-            }
-        },
-        5: {
-            name: {
-                fa: "پنج شنبه"
-            },
-            abbr: {
-                fa: "پ"
-            }
-        },
-        6: {
-            name: {
-                fa: "جمعه"
-            },
-            abbr: {
-                fa: "ج"
-            }
-        }
-    },
-    persianDaysName: ["اورمزد", "بهمن", "اوردیبهشت", "شهریور", "سپندارمذ", "خورداد", "امرداد", "دی به آذز", "آذز", "آبان", "خورشید", "ماه", "تیر", "گوش", "دی به مهر", "مهر", "سروش", "رشن", "فروردین", "بهرام", "رام", "باد", "دی به دین", "دین", "ارد", "اشتاد", "آسمان", "زامیاد", "مانتره سپند", "انارام", "زیادی"]
-};
-
-
-/**
- *
- * @param ua
- * @returns {{browser: (*|string), version: (*|string)}}
- */
-jQuery.uaMatch = function (ua) {
-    ua = ua.toLowerCase();
-
-    var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
-        /(webkit)[ \/]([\w.]+)/.exec(ua) ||
-        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
-        /(msie) ([\w.]+)/.exec(ua) ||
-        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
-        [];
-
-    return {
-        browser: match[ 1 ] || "",
-        version: match[ 2 ] || "0"
-    };
-};
-
-
-
-// Don't clobber any existing jQuery.browser in case it's different
-if (!jQuery.browser) {
-    matched = jQuery.uaMatch(window.navigator.userAgent);
-    browser = {};
-
-    if (matched.browser) {
-        browser[ matched.browser ] = true;
-        browser.version = matched.version;
-    }
-
-    // Chrome is Webkit, but Webkit is also Safari.
-    if (browser.chrome) {
-        browser.webkit = true;
-    } else if (browser.webkit) {
-        browser.safari = true;
-    }
-
-    jQuery.browser = browser;
-}

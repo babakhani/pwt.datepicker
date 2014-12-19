@@ -1,36 +1,115 @@
+'use strict';
+
 /**
- *
+ * @class
  * @type {{cssClass: string, daysTitleFormat: string, persianDigit: boolean, viewMode: string, position: string, autoClose: boolean, toolbox: boolean, format: boolean, observer: boolean, altField: boolean, altFormat: string, inputDelay: number, viewFormat: string, formatter: formatter, altFieldFormatter: altFieldFormatter, show: show, hide: hide, onShow: onShow, onHide: onHide, onSelect: onSelect, timePicker: {enabled: boolean}, dayPicker: {enabled: boolean}, monthPicker: {enabled: boolean}, yearPicker: {enabled: boolean}}}
  */
 var ClassConfig = {
-
+    /**
+     * @property cssClass
+     * @type {string}
+     * @default datepicker-container
+     */
     cssClass: 'datepicker-container',
 
-    daysTitleFormat: "YYYY MMMM",
 
+    /**
+     * @property daysTitleFormat
+     * @type {string}
+     * @default YYYY MMMM
+     */
+    daysTitleFormat: 'YYYY MMMM',
+
+    /**
+     * @property persianDigit
+     * @type {boolean}
+     * @default true
+     */
     persianDigit: true,
 
-    viewMode: "day",
 
+    /**
+     * @property viewMode
+     * @type {string}
+     * @default day
+     */
+    viewMode: 'day',
+
+
+    /**
+     * @property position
+     * @type {string|Array}
+     * @default auto
+     */
     position: "auto",
 
+
+    /**
+     * @property autoClose
+     * @type {boolean}
+     * @default false
+     */
     autoClose: false,
 
+
+    /**
+     * @property toolbox
+     * @type {boolean}
+     * @default true
+     */
     toolbox: true,
 
+
+    /**
+     * @format format
+     * @type {boolean}
+     * @default false
+     */
     format: false,
 
+
+    /**
+     * @format observer
+     * @type {boolean}
+     * @default false
+     */
     observer: false,
 
+
+    /**
+     * @format altField
+     * @type {boolean}
+     * @default false
+     */
     altField: false,
 
-    altFormat: "unix",
 
+    /**
+     * @format altField
+     * @type {string}
+     * @default unix
+     */
+    altFormat: 'unix',
+
+
+    /**
+     * @format inputDelay
+     * @type {number}
+     * @default 800
+     */
     inputDelay: 800,
 
-    viewFormat: "YYYY/MM/DD",
+
     /**
-     *
+     * @format viewFormat
+     * @type {string}
+     * @default YYYY/MM/DD
+     */
+    viewFormat: "YYYY/MM/DD",
+
+
+    /**
+     * @method
      * @param unixDate
      * @returns {*}
      */
@@ -41,8 +120,10 @@ var ClassConfig = {
         pdate.formatPersian = false;
         return pdate.format(self.viewFormat);
     },
+
+
     /**
-     *
+     * @method
      * @param unixDate
      * @returns {*}
      */
@@ -60,8 +141,10 @@ var ClassConfig = {
         }
 
     },
+
+
     /**
-     *
+     * @method
      * @returns {ClassConfig}
      */
     show: function () {
@@ -72,8 +155,10 @@ var ClassConfig = {
         this._viewed = true;
         return this;
     },
+
+
     /**
-     *
+     * @method
      * @returns {ClassConfig}
      */
     hide: function () {
@@ -85,33 +170,63 @@ var ClassConfig = {
         }
         return this;
     },
+
+
     /**
-     *
+     * @method
      * @param self
      */
     onShow: function (self) {
     },
+
+
     /**
-     *
+     * @method
      * @param self
      */
     onHide: function (self) {
     },
+
+
     /**
-     *
+     * @method
      * @param unixDate
      */
     onSelect: function (unixDate) {
     },
+
+
+    /**
+     * @property timePicker
+     * @type {object}
+     */
     timePicker: {
         enabled: true
     },
+
+
+    /**
+     * @property dayPicker
+     * @type {object}
+     */
     dayPicker: {
         enabled: true
     },
+
+
+    /**
+     * @property monthPicker
+     * @type {object}
+     */
     monthPicker: {
         enabled: true
     },
+
+
+    /**
+     * @property yearPicker
+     * @type {object}
+     */
     yearPicker: {
         enabled: true
     }

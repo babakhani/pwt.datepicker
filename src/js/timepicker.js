@@ -315,10 +315,10 @@ var ClassTimepicker = {
  * @param options
  * @param container
  * @returns {*}
- * @constructor
+ * @constructs ClassTimepicker
  */
 var TimePicker = function (options, container) {
-    return inherit(this, [Class_Sprite, ClassTimepicker, options, {
+    return inherit(this, [ClassSprite, ClassTimepicker, options, {
         container: container
     }]);
 };

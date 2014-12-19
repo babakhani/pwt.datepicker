@@ -1,14 +1,15 @@
-
-/*#########################################################
- Extend javascript Object
- #########################################################*/
+'use strict';
+/**
+ * Extend javascript Object
+ * @type {Function}
+ */
 Object.keys = Object.keys || (function () {
     var hasOwnProperty = Object.prototype.hasOwnProperty, hasDontEnumBug = !{
         toString: null
     }.propertyIsEnumerable("toString"), DontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'], DontEnumsLength = DontEnums.length;
 
     return function (o) {
-        if (typeof o != "object" && typeof o != "function" || o === null)
+        if (typeof o !== "object" && typeof o !== "function" || o === null)
             throw new TypeError("Object.keys called on a non-object");
 
         var result = [];
@@ -26,9 +27,12 @@ Object.keys = Object.keys || (function () {
         return result;
     };
 })();
-/*#########################################################
- Extend javascript Event
- #########################################################*/
+
+
+/**
+ * Extend javascript Event
+ * @type {{setup: setup, teardown: teardown, handler: handler, delayedHandler: delayedHandler, triggerIfChanged: triggerIfChanged, saveLastValue: saveLastValue}}
+ */
 $.event.special.textchange = {
     setup: function (data, namespaces) {
         $.event.special.textchange.saveLastValue(this);
@@ -105,10 +109,13 @@ $.fn.val = function () {
     return returnValue;
 };
 
-/*#########################################################
- Micro Mustcahe Template
- #########################################################*/
 
+/**
+ * Micro Mustcahe Template
+ * @param input
+ * @param dict
+ * @returns {*|jQuery|HTMLElement}
+ */
 $.tmplMustache = function (input, dict) {
     // Micro Mustache Template engine
     String.prototype.format = function string_format(arrayInput) {
@@ -125,9 +132,13 @@ $.tmplMustache = function (input, dict) {
     };
     return $(input.format(dict));
 };
-/*#########################################################
- Extend String Proto with toPersianDigit & toEnglishDigit
- #########################################################*/
+
+
+/**
+ * Extend String Proto with toPersianDigit & toEnglishDigit
+ * @param a
+ * @returns {string}
+ */
 String.prototype.toPersianDigit = function (a) {
     return this.replace(/\d+/g, function (digit) {
         var enDigitArr = [], peDigitArr = [];
@@ -140,6 +151,13 @@ String.prototype.toPersianDigit = function (a) {
         return peDigitArr.join('');
     });
 };
+
+
+/**
+ *
+ * @param a
+ * @returns {string}
+ */
 String.prototype.toEngilshDigit = function (a) {
     return this.replace(/\d+/g, function (digit) {
         var enDigitArr = [], peDigitArr = [];
@@ -153,18 +171,34 @@ String.prototype.toEngilshDigit = function (a) {
     });
 };
 
-/*#########################################################
- Helper Methuds
- #########################################################*/
+
+/**
+ * Helper Methuds
+ * @param callback
+ * @param ms
+ */
 var delay = function (callback, ms) {
     clearTimeout(window.datepickerTimer);
     window.datepickerTimer = setTimeout(callback, ms);
 };
+
+
+/**
+ *
+ * @param input
+ */
 var log = function (input) {
     console.log(input);
 };
+
+
+/**
+ *
+ * @param e
+ * @returns {Array}
+ */
 var range = function (e) {
-    r = [];
+    var r = [];
     var i = 0;
     while (i <= e - 1) {
         r.push(i);
@@ -172,13 +206,21 @@ var range = function (e) {
     }
     return r;
 };
+
+
+/**
+ *
+ * @param self
+ * @param baseClasses
+ * @returns {*}
+ */
 var inherit = function (self, baseClasses) {
-    copyObject = function (o) {
+    var copyObject = function (o) {
         return $.extend(true, {}, o);
     }
     var args = [true, self, copyObject(ClassBase)];
     var events = [];
-    for (index in baseClasses) {
+    for (var index in baseClasses) {
         var cls = copyObject(baseClasses[index]);
         if (!cls) {
             continue;
@@ -190,10 +232,10 @@ var inherit = function (self, baseClasses) {
         args.push(cls);
     }
     $.extend.apply(self, args);
-    for (index in events) {
+    for (var index in events) {
         var eventsObject = events[index];
         var eventKeys = Object.keys(eventsObject)
-        for (keyIndex in eventKeys) {
+        for (var keyIndex in eventKeys) {
             var key = eventKeys[keyIndex]
             var val = eventsObject[key];
             if (key && val) {
@@ -203,4 +245,47 @@ var inherit = function (self, baseClasses) {
     }
     self.init();
     return self;
+}
+
+
+/**
+ *
+ * @param ua
+ * @returns {{browser: (*|string), version: (*|string)}}
+ */
+jQuery.uaMatch = function (ua) {
+    ua = ua.toLowerCase();
+
+    var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+        /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+        /(msie) ([\w.]+)/.exec(ua) ||
+        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+        [];
+
+    return {
+        browser: match[ 1 ] || "",
+        version: match[ 2 ] || "0"
+    };
+};
+
+
+// Don't clobber any existing jQuery.browser in case it's different
+if (!jQuery.browser) {
+    var matched = jQuery.uaMatch(window.navigator.userAgent);
+    var browser = {};
+
+    if (matched.browser) {
+        browser[ matched.browser ] = true;
+        browser.version = matched.version;
+    }
+
+    // Chrome is Webkit, but Webkit is also Safari.
+    if (browser.chrome) {
+        browser.webkit = true;
+    } else if (browser.webkit) {
+        browser.safari = true;
+    }
+
+    jQuery.browser = browser;
 }

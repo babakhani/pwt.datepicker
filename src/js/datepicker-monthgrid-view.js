@@ -1,8 +1,8 @@
 /**
- * @class Views_MonthGrid
+ * @class ViewsMonthGrid
  * @type {{cssClass: {main: string, header: string, headerTitle: string, headerRow: string, headerRowCell: string, daysTable: string, currentMonth: string, today: string, selected: string}, views: {default: {render: render, renderDays: renderDays}}}}
  */
-var Views_MonthGrid = {
+var ViewsMonthGrid = {
     /**
      * cssClass
      */

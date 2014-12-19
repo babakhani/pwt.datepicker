@@ -130,10 +130,10 @@ var ClassNavigator = {
  * @param options
  * @param container
  * @returns {*}
- * @constructor
+ * @constructs ClassNavigator
  */
 var Navigator = function (options, container) {
-    return inherit(this, [Class_Sprite, ClassNavigator, options, {
+    return inherit(this, [ClassSprite, ClassNavigator, options, {
         $container: container
     }]);
 };

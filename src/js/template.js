@@ -1,5 +1,4 @@
 /**
- * @class TEMPLATE
  * @type {{datepciker: string, navigator: string, timepicker: string}}
  */
 var TEMPLATE = {

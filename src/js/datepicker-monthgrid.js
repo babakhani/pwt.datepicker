@@ -1,8 +1,8 @@
 /**
- * @class Class_MonthGrid
+ * @class ClassMonthGrid
  * @type {{state: {year: null, month: null, date: null, firstWeekDayOfMonth: null, daysCount: null}, persianDigit: boolean, _formatDigit: _formatDigit, events: {init: init, render: render, reRender: reRender, selectDay: selectDay}, _markToday: _markToday, _updateState: _updateState, selectDate: selectDate, markSelectedDate: markSelectedDate, updateAs: updateAs, goToNextMonth: goToNextMonth, goToPrevMonth: goToPrevMonth, goToYear: goToYear, applyStory: applyStory}}
  */
-var Class_MonthGrid = {
+var ClassMonthGrid = {
     /**
      * state
      */
@@ -194,12 +194,12 @@ var Class_MonthGrid = {
  *
  * @param options
  * @returns {MonthGrid}
- * @constructor
+ * @constructs ClassMonthGrid
  */
 MonthGrid = function (options) {
     // Change !!
     //this.pcal = options.parent.pcal;
-    inherit(this, [Class_Sprite, Views_MonthGrid, Class_DateRange, Class_MonthGrid, options]);
+    inherit(this, [ClassSprite, ViewsMonthGrid, ClassDateRange, ClassMonthGrid, options]);
     var self = this;
     return this;
 }

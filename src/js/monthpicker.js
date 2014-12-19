@@ -1,6 +1,6 @@
 /**
  * @class ClassMonthPicker
-  * @type {{cssClass: {selectedMonth: string, monthItem: string}, monthRange: (Class_DateRange.monthRange|*), _updateNavigator: _updateNavigator, hide: hide, show: show, selectMonth: selectMonth, defineSelectedMonth: defineSelectedMonth, next: next, prev: prev, updateView: updateView, _render: _render, init: init}}
+ * @type {{cssClass: {selectedMonth: string, monthItem: string}, monthRange: (ClassDateRange.monthRange|*), _updateNavigator: _updateNavigator, hide: hide, show: show, selectMonth: selectMonth, defineSelectedMonth: defineSelectedMonth, next: next, prev: prev, updateView: updateView, _render: _render, init: init}}
  */
 var ClassMonthPicker = {
     /**
@@ -15,7 +15,7 @@ var ClassMonthPicker = {
     /**
      * monthRange
      */
-    monthRange: Class_DateRange.monthRange,
+    monthRange: ClassDateRange.monthRange,
 
 
     /**
@@ -145,10 +145,10 @@ var ClassMonthPicker = {
  * @param options
  * @param container
  * @returns {*}
- * @constructor
+ * @constructs ClassMonthPicker
  */
 var MonthPicker = function (options, container) {
-    return inherit(this, [Class_Sprite, ClassMonthPicker, options, {
+    return inherit(this, [ClassSprite, ClassMonthPicker, options, {
         container: container
     }]);
 };

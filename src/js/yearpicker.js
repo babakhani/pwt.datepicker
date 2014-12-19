@@ -143,10 +143,10 @@ var ClassYearPicker = {
  * @param options
  * @param container
  * @returns {*}
- * @constructor
+ * @constructs ClassYearPicker
  */
 var YearPicker = function (options, container) {
-    return inherit(this, [Class_Sprite, ClassYearPicker, options, {
+    return inherit(this, [ClassSprite, ClassYearPicker, options, {
         container: container
     }]);
 };

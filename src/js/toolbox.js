@@ -52,10 +52,10 @@ var ClassToolbox = {
  * @param options
  * @param container
  * @returns {*}
- * @constructor
+ * @constructs ClassToolbox
  */
 var Toolbox = function (options, container) {
-    return inherit(this, [Class_Sprite, ClassToolbox, options, {
+    return inherit(this, [ClassSprite, ClassToolbox, options, {
         $container: container
     }]);
 };

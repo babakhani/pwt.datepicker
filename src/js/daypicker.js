@@ -1,13 +1,12 @@
 /**
- *
- * @class Class_Daypicker
+ * @class ClassDaypicker
  * @type {{next: next, prev: prev, updateView: updateView, _updateView: _updateView, selectDay: selectDay, _updateNavigator: _updateNavigator, hide: hide, show: show, _updateSelectedDay: _updateSelectedDay, _render: _render, init: init}}
  */
-var Class_Daypicker = {
+var ClassDaypicker = {
     /**
      * Go to next Month-day view
      * @public
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      */
     next: function () {
         var self = this;
@@ -25,7 +24,7 @@ var Class_Daypicker = {
     /**
      * Go to previews Month-day view
      * @public
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      */
     prev: function () {
         var self = this;
@@ -43,7 +42,7 @@ var Class_Daypicker = {
     /**
      * Update view
      * @public
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      */
     updateView: function () {
         this._updateView();
@@ -53,7 +52,7 @@ var Class_Daypicker = {
 
     /**
      *
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      * @private
      */
     _updateView: function () {
@@ -67,7 +66,7 @@ var Class_Daypicker = {
 
     /**
      * @public
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      */
     selectDay: function () {
         var self = this;
@@ -94,7 +93,7 @@ var Class_Daypicker = {
 
     /**
      * @public
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      */
     hide: function () {
         this.container.hide();
@@ -104,7 +103,7 @@ var Class_Daypicker = {
 
     /**
      * @public
-     * @returns {Class_Daypicker}
+     * @returns {ClassDaypicker}
      */
     show: function () {
         var self = this;
@@ -117,7 +116,7 @@ var Class_Daypicker = {
     /**
      *
      * @param unix
-     * @returns {Daypicker}
+     * @returns {ClassDaypicker}
      * @private
      */
     _updateSelectedDay: function (unix) {
@@ -161,13 +160,13 @@ var Class_Daypicker = {
 
 
 /**
- *
  * @param options
  * @param container
  * @returns {*}
+ * @constructs ClassDaypicker
  */
 var Daypicker = function (options, container) {
-    return inherit(this, [Class_Sprite, Class_Daypicker, options, {
+    return inherit(this, [ClassSprite, ClassDaypicker, options, {
         container: container
     }]);
 };
