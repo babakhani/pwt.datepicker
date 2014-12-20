@@ -244,7 +244,11 @@
   color: #fff; }
 
 .datepicker-plot-area .datepicker-day-view .table-days td.disabled span {
-  color: #ccc; }
+  color: #ccc;
+  background-color: #f1f1f1;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px; }
 
 .datepicker-plot-area .datepicker-day-view .table-days td span.selected {
   background-color: #006dcc;

@@ -127,17 +127,20 @@ var ClassMonthPicker = {
             var startMonth = this.datepicker.state.filterDate.start.month;
             var endMonth = this.datepicker.state.filterDate.end.month;
             if (startYear <= y & y <= endYear) {
-                if (y === startYear && month >= startMonth) {
+                if (y === startYear && month >= startMonth && month <= endMonth) {
                     return true;
                 }
-                if (y === endYear && month <= endMonth) {
+                if (y === endYear && month <= endMonth && month >= startMonth) {
                     return true;
                 }
                 if (startYear < y & y < endYear) {
                     return true;
                 }
+            }else{
+                return false;
             }
-            return false;
+        }else{
+            return true;
         }
     },
 
@@ -155,7 +158,7 @@ var ClassMonthPicker = {
             }).addClass("month" + m)
                 .addClass(self.cssClass.monthItem)
                 .text(self.monthRange[m].name.fa)
-                .appendTo(self.container)
+                .appendTo(self.container);
 
             if (self._checkMonthAccess(m)) {
                 monthItem.click(function () {
@@ -163,7 +166,6 @@ var ClassMonthPicker = {
                     self.datepicker.selectMonth($(this).data().monthIndex);
                     return false;
                 });
-
             } else {
                 monthItem.addClass(self.cssClass.disbaleItem);
                 monthItem.click(function () {

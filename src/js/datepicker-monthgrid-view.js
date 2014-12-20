@@ -98,11 +98,20 @@ var ViewsMonthGrid = {
                         nextMonthIndex += 1;
                     }
                     var thisUnix = $(this).children("span").data("unixDate");
-                    if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
-                        $(this).removeClass(self.cssClass.disbaled);
-                    } else {
-                        $(this).addClass(self.cssClass.disbaled);
-
+                    if (self.minDate && self.maxDate) {
+                        if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
+                            $(this).removeClass(self.cssClass.disbaled);
+                        } else {
+                            $(this).addClass(self.cssClass.disbaled);
+                        }
+                    } else if (self.minDate) {
+                        if (thisUnix >= self.minDate) {
+                            $(this).removeClass(self.cssClass.disbaled);
+                        }
+                    } else if (self.maxDate) {
+                        if (thisUnix <= self.maxDate) {
+                            $(this).removeClass(self.cssClass.disbaled);
+                        }
                     }
                 });
                 $(self.daysBox).find("td").not('.disabled').children("span").click(function () {

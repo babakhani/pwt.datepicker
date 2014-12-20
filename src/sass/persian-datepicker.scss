@@ -153,10 +153,9 @@
   cursor: pointer;
 }
 
-
 .datepicker-plot-area .datepicker-year-view .year-item-disable,
-.datepicker-plot-area .datepicker-month-view .month-item-disable{
-  color:#cccccc;
+.datepicker-plot-area .datepicker-month-view .month-item-disable {
+  color: #cccccc;
   cursor: default;
 }
 
@@ -279,10 +278,13 @@
   color: #fff;
 }
 
-.datepicker-plot-area .datepicker-day-view .table-days td.disabled span{
+.datepicker-plot-area .datepicker-day-view .table-days td.disabled span {
   color: #ccc;
+  background-color: #f1f1f1;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
-
 
 .datepicker-plot-area .datepicker-day-view .table-days td span.selected {
   background-color: #006dcc;
@@ -361,7 +363,7 @@
   float: left;
   width: 98%;
   padding: 5px 1%;
-  margin:0px;
+  margin: 0px;
   height: 60px;
   background: #f6f6f6;
   border-top: 1px solid #f1f1f1;

@@ -307,11 +307,17 @@ var ClassConfig = {
 
 
     /**
-     * @implements
+     * set min date on datepicker
+     * @property minDate
      */
-
     minDate: false,
-    maxDate: 1419242667029
+
+
+    /**
+     * set max date on datepicker
+     * @property maxDate
+     */
+    maxDate: false
 
 //    minDate: 1419242667029,
 //    maxDate: false

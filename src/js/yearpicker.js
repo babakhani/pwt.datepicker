@@ -117,11 +117,14 @@ var ClassYearPicker = {
             var startYear = this.datepicker.state.filterDate.start.year;
             var endYear = this.datepicker.state.filterDate.end.year;
             if (startYear <= y & y <= endYear) {
-
                 return true;
+            } else {
+                return false;
             }
+        } else {
+            return true;
         }
-        return false;
+
     },
 
     /**
