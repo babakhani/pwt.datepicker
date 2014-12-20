@@ -106,6 +106,12 @@ var ClassYearPicker = {
     },
 
 
+    /**
+     *
+     * @param y
+     * @returns {boolean}
+     * @private
+     */
     _checkYearAccess: function (y) {
         if (this.datepicker.state._filetredDate) {
             var startYear = this.datepicker.state.filterDate.start.year;

@@ -55,6 +55,9 @@ var ClassDatepickerState = {
 
     setFilterDate: function (key, startVal, endVal) {
         var self = this;
+         if(!startVal){
+            startVal = -99999999999999;
+        }
         var pd = new persianDate(startVal);
         self.filterDate.start.unixDate = startVal;
         self.filterDate.start.hour = pd.hour();
@@ -64,6 +67,9 @@ var ClassDatepickerState = {
         self.filterDate.start.date = pd.date();
         self.filterDate.start.year = pd.year();
 
+        if(!endVal){
+            endVal = 99999999999999
+        }
         var pd = new persianDate(endVal);
         self.filterDate.end.unixDate = endVal;
         self.filterDate.end.hour = pd.hour();

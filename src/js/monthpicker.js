@@ -112,6 +112,13 @@ var ClassMonthPicker = {
         return this;
     },
 
+
+    /**
+     *
+     * @param month
+     * @returns {boolean}
+     * @private
+     */
     _checkMonthAccess: function (month) {
         if (this.datepicker.state._filetredDate) {
             var startYear = this.datepicker.state.filterDate.start.year;

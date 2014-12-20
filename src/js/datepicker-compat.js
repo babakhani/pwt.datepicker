@@ -17,6 +17,14 @@ var ClassCompat = {
                 this.justSelectOnDate = false;
             }
         }
+
+//        if (this.minDate) {
+//            this.minDate = true;
+//        }
+//        if (this.maxDate) {
+//            this.maxDate = true;
+//        }
+
         if (this.minDate | this.maxDate) {
             this.state.setFilterDate('unix', this.minDate, this.maxDate);
             this.state._filetredDate = true;
