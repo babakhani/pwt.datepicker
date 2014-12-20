@@ -270,20 +270,35 @@ var ClassTimepicker = {
         var self = this;
         $('.up-btn', this.container).click(function () {
             self['_move' + $(this).parent().attr('data-time-key')]('up');
-             return false;
+            return false;
         });
         $('.down-btn', this.container).click(function () {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
-             return false;
+            return false;
         });
+        if (this.changeOnScroll) {
+            $('> div.time-segment', this.container).mousewheel(function (event) {
+                var moveMode = 'down';
+                if (event.deltaY > 0) {
+                    moveMode = 'up';
+                }
+                self['_move' + $(this).attr('data-time-key')](moveMode);
+            });
+            $('> div.time-segment', this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
 
-        $('> div.time-segment', this.container).mousewheel(function (event) {
-            var moveMode = 'down';
-            if (event.deltaY > 0) {
-                moveMode = 'up';
-            }
-            self['_move' + $(this).attr('data-time-key')](moveMode);
-        });
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
         return this;
     },
 

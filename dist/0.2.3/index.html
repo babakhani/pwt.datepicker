@@ -80,6 +80,22 @@
          Inline
          */
         $('.inline-datepicker').persianDatepicker();
+
+        /*
+         year and month
+         */
+        $(".yearandmonthpicker").persianDatepicker({
+            format: "YYYY MM",
+            dayPicker: {
+                enabled: false
+            },
+            monthPicker: {
+                enabled: true
+            },
+            yearPicker: {
+                enabled: true
+            }
+        });
     });
 </script>
 <div class="center-block">
@@ -90,7 +106,7 @@
             <!--<h3>Default Functionlaity</h3>-->
             <div class="form-group col-xs-6">
                 <label>Select Date</label>
-                <input type="text" class="datePicker form-control" />
+                <input type="text" class="datePicker form-control"/>
             </div>
         </div>
     </div>
@@ -99,7 +115,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Time</label>
-                <input type="text" class="timepicker form-control" />
+                <input type="text" class="timepicker form-control"/>
             </div>
             <div class="form-group col-xs-6">
                 <label>alt Input</label>
@@ -112,7 +128,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Month</label>
-                <input type="text" class="monthpicker form-control" />
+                <input type="text" class="monthpicker form-control"/>
             </div>
         </div>
     </div>
@@ -121,10 +137,21 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Year</label>
-                <input type="text" class="yearpicker form-control" />
+                <input type="text" class="yearpicker form-control"/>
             </div>
         </div>
     </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Year And Month Picker</div>
+        <div class="panel-body">
+            <div class="form-group col-xs-6">
+                <label>Select Year And Month</label>
+                <input type="text" class="yearandmonthpicker form-control"/>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">inline Datepicker</div>
         <div class="panel-body">

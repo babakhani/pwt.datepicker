@@ -239,9 +239,9 @@ var ClassConfig = {
     timePicker: {
         enabled: false,
         showSeconds: true,
-        showMeridian: true
+        showMeridian: true,
+        changeOnScroll: true
     },
-
 
     /**
      * @property dayPicker
@@ -291,16 +291,28 @@ var ClassConfig = {
         }
     },
 
+
+    /**
+     * if true all pickers hide and just shpw timepicker
+     * @property justSelectOnDate
+     */
     onlyTimePicker: false,
+
+
+    /**
+     * if true date select just by click on day in month grid
+     * @property justSelectOnDate
+     */
     justSelectOnDate: true,
+
+
     /**
      * @implements
      */
     minDate: 1390358410000,
-
     //  minDate: 1418897040662,
     maxDate: 1419242667029
-
 //    minDate: false,
 //    maxDate: false
+
 }
