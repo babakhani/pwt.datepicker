@@ -45,8 +45,6 @@ var ViewsMonthGrid = {
                 self.daysBox = self.createElementByClass(self.cssClass.daysTable);
                 this.renderDays(self);
             },
-
-
             /**
              *
              * @param self
@@ -100,13 +98,13 @@ var ViewsMonthGrid = {
                         nextMonthIndex += 1;
                     }
                     var thisUnix = $(this).children("span").data("unixDate");
-
                     if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
                         $(this).removeClass(self.cssClass.disbaled);
+                        $(this).children("span").removeClass('other-month');
                     } else {
                         $(this).addClass(self.cssClass.disbaled);
-                    }
 
+                    }
                 });
                 $(self.daysBox).find("td").not('.disabled').children("span").click(function () {
                     var $thisUnixDate = $(this).data("unixDate");
