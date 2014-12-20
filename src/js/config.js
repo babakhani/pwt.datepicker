@@ -201,8 +201,8 @@ var ClassConfig = {
     navigator: {
         enabled: true,
         text: {
-            btnNextText: "<<",
-            btnPrevText: ">>"
+            btnNextText: "<",
+            btnPrevText: ">"
         },
         onNext: function (navigator) {
             //log("navigator next ");
