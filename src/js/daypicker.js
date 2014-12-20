@@ -135,6 +135,7 @@ var ClassDaypicker = {
         var self = this;
         this.mGrid = new MonthGrid({
             container: self.container,
+            persianDigit: self.datepicker.persianDigit,
             month: self.datepicker.state.selected.month,
             year: self.datepicker.state.selected.year,
             minDate: self.datepicker.state.filterDate.start.unixDate,

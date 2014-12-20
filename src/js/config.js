@@ -251,7 +251,12 @@ var ClassConfig = {
         enabled: true,
         titleFormat: 'YYYY MMMM',
         titleFormatter: function (year, month) {
-            return new persianDate([year, month]).format(this.titleFormat);
+            if (this.datepicker.persianDigit == false) {
+                window.formatPersian = false;
+            }
+            var titleStr = new persianDate([year, month]).format(this.titleFormat);
+            window.formatPersian = true;
+            return titleStr
         },
         onSelect: function (selectedDayUnix) {
             //log("daypicker month day :" + selectedDayUnix);
@@ -267,7 +272,13 @@ var ClassConfig = {
         enabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (unix) {
-            return new persianDate(unix).format(this.titleFormat);
+            if (this.datepicker.persianDigit == false) {
+                window.formatPersian = false;
+            }
+            var titleStr = new persianDate(unix).format(this.titleFormat);
+            window.formatPersian = true;
+            return titleStr
+
         },
         onSelect: function (monthIndex) {
             //log("daypicker select day :" + monthIndex);

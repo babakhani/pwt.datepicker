@@ -4,15 +4,10 @@
     <title>Persian DatePicker</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <script type="text/javascript" src="../../lib/jquery.js"></script>
-
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
     <link href="css/persian-datepicker-0.2.3.css" rel="stylesheet" type="text/css"/>
-
     <script type="text/javascript" src="../../lib/persian-date.js"></script>
-
-
     <script type="text/javascript" src="js/persian-datepicker-0.2.3.js"></script>
     <style>
         .center-block {
@@ -22,7 +17,6 @@
 </head>
 <body>
 <script type="text/javascript">
-    var dp;
     /*
      Default Functionality
      */
@@ -30,23 +24,22 @@
         /*
          Default
          */
-        $(".datePicker").persianDatepicker();
+        $("#default").persianDatepicker();
 
         /*
          timepicker
          */
-        $(".timepicker").persianDatepicker({
+        $("#timepicker").persianDatepicker({
             altFormat: "YYYY MM DD HH:mm:ss",
             altField: '#timepickerAltField',
             format: "HH:mm:ss a",
             onlyTimePicker: true
 
         });
-
         /*
          month
          */
-        $(".monthpicker").persianDatepicker({
+        $("#monthpicker").persianDatepicker({
             format: " MMMM YYYY",
 
             yearPicker: {
@@ -63,7 +56,7 @@
         /*
          year
          */
-        $(".yearpicker").persianDatepicker({
+        $("#yearpicker").persianDatepicker({
             format: "YYYY",
             dayPicker: {
                 enabled: false
@@ -79,12 +72,11 @@
         /*
          Inline
          */
-        $('.inline-datepicker').persianDatepicker();
-
+        $('#inlineDatepicker').persianDatepicker();
         /*
          year and month
          */
-        $(".yearandmonthpicker").persianDatepicker({
+        $("#yearAndMonthpicker").persianDatepicker({
             format: "YYYY MM",
             dayPicker: {
                 enabled: false
@@ -96,25 +88,30 @@
                 enabled: true
             }
         });
-
         /**
-         *
+         inline with minDate and maxDate
          */
-        $(".inline-datepicker-with-min-max").persianDatepicker({
+        $("#inlineDatepickerWithMinMax").persianDatepicker({
             minDate: 1416983467029,
             maxDate: 1419983467029
         });
+        /**
+         persianDate
+         */
+        $("#persianDigit").persianDatepicker({
+            persianDigit: false
+        })
     });
 </script>
 <div class="center-block">
-
     <div class="panel panel-default">
         <div class="panel-heading">Simple Datepicker</div>
         <div class="panel-body">
-            <!--<h3>Default Functionlaity</h3>-->
+            <h4>Default Functionlaity</h4>
+
             <div class="form-group col-xs-6">
                 <label>Select Date</label>
-                <input type="text" class="datePicker form-control"/>
+                <input id="default" type="text" class="form-control"/>
             </div>
         </div>
     </div>
@@ -123,10 +120,10 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Time</label>
-                <input type="text" class="timepicker form-control"/>
+                <input id="timepicker" type="text" class="form-control"/>
             </div>
             <div class="form-group col-xs-6">
-                <label>alt Input</label>
+                <label>Alt Input</label>
                 <input type="text" id="timepickerAltField" class="form-control"/>
             </div>
         </div>
@@ -136,7 +133,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Month</label>
-                <input type="text" class="monthpicker form-control"/>
+                <input id="monthpicker" type="text" class="form-control"/>
             </div>
         </div>
     </div>
@@ -145,7 +142,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Year</label>
-                <input type="text" class="yearpicker form-control"/>
+                <input id="yearpicker" type="text" class="form-control"/>
             </div>
         </div>
     </div>
@@ -155,7 +152,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Year And Month</label>
-                <input type="text" class="yearandmonthpicker form-control"/>
+                <input id="yearAndMonthpicker" type="text" class=" form-control"/>
             </div>
         </div>
     </div>
@@ -163,14 +160,21 @@
     <div class="panel panel-default">
         <div class="panel-heading">inline Datepicker</div>
         <div class="panel-body">
-            <div class="col-xs-6 inline-datepicker"></div>
+            <div id="inlineDatepicker" class="col-xs-6"></div>
         </div>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">With Min and Max</div>
         <div class="panel-body">
-            <div class="col-xs-6 inline-datepicker-with-min-max"></div>
+            <div id="inlineDatepickerWithMinMax" class="col-xs-6"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">English Digit</div>
+        <div class="panel-body">
+            <div id="persianDigit" class="col-xs-6"></div>
         </div>
     </div>
 </div>
