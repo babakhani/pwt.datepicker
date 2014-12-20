@@ -16,7 +16,8 @@ var ViewsMonthGrid = {
         daysTable: "table-days",
         currentMonth: "current-month",
         today: "today",
-        selected: 'selected'
+        selected: 'selected',
+        disbaled: 'disabled'
     },
 
 
@@ -95,13 +96,24 @@ var ViewsMonthGrid = {
                             var nextYear = self.state.year;
                         }
                         var day = nextMonthIndex;
-                        addSpan.apply(this, [day, nextMonth, nextYear, "other-month"])
+                        addSpan.apply(this, [day, nextMonth, nextYear, "other-month"]);
                         nextMonthIndex += 1;
                     }
+                    var thisUnix = $(this).children("span").data("unixDate");
+
+                    if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
+                        $(this).removeClass(self.cssClass.disbaled);
+                    } else {
+                        $(this).addClass(self.cssClass.disbaled);
+                    }
+
                 });
-                $(self.daysBox).find("td").children("span").click(function () {
+                $(self.daysBox).find("td").not('.disabled').children("span").click(function () {
                     var $thisUnixDate = $(this).data("unixDate");
                     self.raiseEvent("selectDay", [$thisUnixDate]);
+                    return false;
+                });
+                $(self.daysBox).find('td.disabled').children("span").click(function () {
                     return false;
                 });
                 self.raiseEvent("reRender");

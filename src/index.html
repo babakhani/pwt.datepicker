@@ -7,8 +7,8 @@
     <script type="text/javascript" src="../lib/jquery.js"></script>
     <script type="text/javascript" src="../lib/persian-date.js"></script>
 
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
 
     <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/plugin.js"></script>
@@ -71,15 +71,16 @@
          month
          */
         $(".monthpicker").persianDatepicker({
-            format: " MMMM YYYY",
+            format: "YYYY MMMM DD",
+            viewMode: "month",
             yearPicker: {
-                enabled: false
+                enabled: true
             },
             monthPicker: {
                 enabled: true
             },
             dayPicker: {
-                enabled: false
+                enabled: true
             }
         });
 
@@ -126,7 +127,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>View Input</label>
-                <input type="text" class="timepicker form-control" value="10-10-2014 13:58:1"/>
+                <input type="text" class="timepicker form-control"/>
             </div>
             <div class="form-group col-xs-6">
                 <label>alt Input</label>
@@ -139,7 +140,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>View Input</label>
-                <input type="text" class="monthpicker form-control" value="10-10-2014 13:58:1"/>
+                <input type="text" class="monthpicker form-control"/>
             </div>
         </div>
     </div>
@@ -148,7 +149,7 @@
         <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>View Input</label>
-                <input type="text" class="yearpicker form-control" value="10-10-2014 13:58:1"/>
+                <input type="text" class="yearpicker form-control"/>
             </div>
         </div>
     </div>

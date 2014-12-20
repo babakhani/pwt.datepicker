@@ -9,7 +9,8 @@ var ClassYearPicker = {
      */
     cssClass: {
         selectedYear: "selected",
-        yearItem: "year-item"
+        yearItem: "year-item",
+        disbaleItem: "year-item-disable"
     },
 
 
@@ -105,6 +106,18 @@ var ClassYearPicker = {
     },
 
 
+    _checkYearAccess: function (y) {
+        if (this.datepicker.state._filetredDate) {
+            var startYear = this.datepicker.state.filterDate.start.year;
+            var endYear = this.datepicker.state.filterDate.end.year;
+            if (startYear <= y & y <= endYear) {
+
+                return true;
+            }
+        }
+        return false;
+    },
+
     /**
      *
      * @returns {Class_YearPicker}
@@ -126,13 +139,21 @@ var ClassYearPicker = {
             if (year === remaining + parseInt(i)) {
                 yearItem.addClass(self.cssClass.selectedYear);
             }
+            if (self._checkYearAccess(remaining + parseInt(i))) {
+                yearItem.click(function () {
+                    var y = $(this).data().year;
+                    self.datepicker.selectYear(y);
+                    self.onSelect(y);
+                    return false;
+                });
+            } else {
+                yearItem.addClass(self.cssClass.disbaleItem);
+                yearItem.click(function () {
+                    return false;
+                });
+
+            }
         }
-        self.container.children("." + self.cssClass.yearItem).click(function () {
-            var y = $(this).data().year;
-            self.datepicker.selectYear(y);
-            self.onSelect(y);
-            return false;
-        });
         return this;
     },
 

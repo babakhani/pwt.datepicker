@@ -292,14 +292,14 @@ var ClassConfig = {
     },
 
     onlyTimePicker: false,
-
     /**
      * @implements
      */
-    minDate: "",
-    maxDate: "",
-    autoSize: false
+//  minDate: 1390358410000,
 
+    minDate: 1418897040662,
+    maxDate: 1419242667029
 
-
+//    minDate: false,
+//    maxDate: false
 }

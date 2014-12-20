@@ -153,6 +153,13 @@
   cursor: pointer;
 }
 
+
+.datepicker-plot-area .datepicker-year-view .year-item-disable,
+.datepicker-plot-area .datepicker-month-view .month-item-disable{
+  color:#cccccc;
+  cursor: default;
+}
+
 .datepicker-plot-area .datepicker-year-view .year-item:hover,
 .datepicker-plot-area .datepicker-month-view .month-item:hover {
   background-color: #eeeeee;
@@ -271,6 +278,11 @@
   background-color: #333;
   color: #fff;
 }
+
+.datepicker-plot-area .datepicker-day-view .table-days td.disabled span{
+  border:1px solid red;
+}
+
 
 .datepicker-plot-area .datepicker-day-view .table-days td span.selected {
   background-color: #006dcc;

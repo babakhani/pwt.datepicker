@@ -380,8 +380,6 @@ var ClassDatepicker = {
         }
         else {
             this._inlineView = true;
-
-
         }
         this.altField = $(this.altField);
         this.state.setSelected('unix', this.state.unixDate);

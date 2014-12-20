@@ -4,6 +4,28 @@
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
  */
 var ClassDatepickerState = {
+
+    filterDate: {
+        start: {
+            year: 0,
+            month: 0,
+            date: 0,
+            hour: 0,
+            minute: 0,
+            second: 0,
+            unixDate: 0
+        },
+        end: {
+            year: 0,
+            month: 0,
+            date: 0,
+            hour: 0,
+            minute: 0,
+            second: 0,
+            unixDate: 100
+        }
+    },
+
     /**
      * view
      */
@@ -31,6 +53,26 @@ var ClassDatepickerState = {
         unixDate: 0
     },
 
+    setFilterDate: function (key, startVal, endVal) {
+        var self = this;
+        var pd = new persianDate(startVal);
+        self.filterDate.start.unixDate = startVal;
+        self.filterDate.start.hour = pd.hour();
+        self.filterDate.start.minute = pd.minute();
+        self.filterDate.start.second = pd.second();
+        self.filterDate.start.month = pd.month();
+        self.filterDate.start.date = pd.date();
+        self.filterDate.start.year = pd.year();
+
+        var pd = new persianDate(endVal);
+        self.filterDate.end.unixDate = endVal;
+        self.filterDate.end.hour = pd.hour();
+        self.filterDate.end.minute = pd.minute();
+        self.filterDate.end.second = pd.second();
+        self.filterDate.end.month = pd.month();
+        self.filterDate.end.date = pd.date();
+        self.filterDate.end.year = pd.year();
+    },
 
     /**
      *

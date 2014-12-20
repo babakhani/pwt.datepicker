@@ -200,6 +200,5 @@ MonthGrid = function (options) {
     // Change !!
     //this.pcal = options.parent.pcal;
     inherit(this, [ClassSprite, ViewsMonthGrid, ClassDateRange, ClassMonthGrid, options]);
-    var self = this;
     return this;
 }

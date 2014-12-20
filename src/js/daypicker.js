@@ -136,7 +136,10 @@ var ClassDaypicker = {
         this.mGrid = new MonthGrid({
             container: self.container,
             month: self.datepicker.state.selected.month,
-            year: self.datepicker.state.selected.year
+            year: self.datepicker.state.selected.year,
+            minDate: self.datepicker.state.filterDate.start.unixDate,
+            maxDate: self.datepicker.state.filterDate.end.unixDate
+
         });
         this.mGrid.attachEvent("selectDay", function (x) {
             self.datepicker.selectDate('unix', x);
