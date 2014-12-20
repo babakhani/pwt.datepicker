@@ -77,7 +77,6 @@ var ClassNavigator = {
         return this;
     },
 
-
     /**
      *
      * @returns {ClassNavigator}

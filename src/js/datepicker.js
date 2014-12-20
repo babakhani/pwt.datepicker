@@ -12,6 +12,24 @@ var ClassDatepicker = {
 
 
     /**
+     * @private
+     */
+    events: {},
+
+
+    /**
+     * @private
+     */
+    _viewed: false,
+
+
+    /**
+     * @private
+     */
+    _inlineView: false,
+
+
+    /**
      *
      * @param action
      * @returns {*}
@@ -58,9 +76,11 @@ var ClassDatepicker = {
      * @returns {*}
      * @private
      */
+
     _checkNextStateAvalibility: function (state) {
         if (!this._pickers[state]) {
             this.element.main.hide();
+            return false;
             $.error(state + "Picker Set as {enabled:false} and dos not exist!! Set viewMode to Enabled view Check Configuration");
         }
         return state;
@@ -107,10 +127,12 @@ var ClassDatepicker = {
         } else {
             newState = this._getNextState(action);
         }
-        self.publishInDic(self._pickers, 'hide');
-        self._pickers[newState].show();
-        self.switchNavigatorRelation(newState);
-        self.currentView = newState;
+        if (newState) {
+            self.publishInDic(self._pickers, 'hide');
+            self._pickers[newState].show();
+            self.switchNavigatorRelation(newState);
+            self.currentView = newState;
+        }
         return this;
     },
 
@@ -311,9 +333,10 @@ var ClassDatepicker = {
                 self.hide();
             }
         });
-        $(document).click(function () {
+        $(document).not(".datepicker-plot-area,.datepicker-plot-area > *").click(function (e) {
             self.inputElem.blur();
             self.hide();
+
         });
         $(self.element.main).mousedown(function (e) {
             e.stopPropagation();
@@ -339,10 +362,6 @@ var ClassDatepicker = {
         return self;
     },
 
-    /**
-     * @private
-     */
-    _inlineView: false,
 
     /**
      *
@@ -362,6 +381,7 @@ var ClassDatepicker = {
         else {
             this._inlineView = true;
 
+
         }
         this.altField = $(this.altField);
         this.state.setSelected('unix', this.state.unixDate);
@@ -372,28 +392,19 @@ var ClassDatepicker = {
 
 
     /**
-     * @private
-     */
-    events: {},
-
-
-    /**
-     * @private
-     */
-    _viewed: false,
-
-
-    /**
      *
      * @returns {ClassDatepicker}
      */
     init: function () {
         var self = this;
         this.state = new State({datepicker: self});
+        this.compatConfig();
         this._defineOnInitState();
         this._updateInputElement();
         this.view = this.views['default'];
         this.view.render(this);
+
+
         this.inputElem.data("datepicker", this);
         this.inputElem.addClass(self.cssClass);
         this._attachEvents();
@@ -409,7 +420,7 @@ var ClassDatepicker = {
  * @constructs ClassDatepicker
  */
 var Datepicker = function (mainElem, options) {
-    return inherit(this, [ClassSprite, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
+    return inherit(this, [ClassSprite, ClassCompat, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
         $container: mainElem,
         inputElem: $(mainElem)
     }]);

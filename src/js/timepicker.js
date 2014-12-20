@@ -270,9 +270,11 @@ var ClassTimepicker = {
         var self = this;
         $('.up-btn', this.container).click(function () {
             self['_move' + $(this).parent().attr('data-time-key')]('up');
+             return false;
         });
         $('.down-btn', this.container).click(function () {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
+             return false;
         });
 
         $('> div.time-segment', this.container).mousewheel(function (event) {

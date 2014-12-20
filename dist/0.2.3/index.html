@@ -3,44 +3,20 @@
 <head>
     <title>Persian DatePicker</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link href="css/persian-datepicker.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../lib/jquery.js"></script>
-    <script type="text/javascript" src="../lib/persian-date.js"></script>
+    <script type="text/javascript" src="../../lib/jquery.js"></script>
 
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="js/mousewheel.js"></script>
-    <script type="text/javascript" src="js/plugin.js"></script>
-    <script type="text/javascript" src="js/constant.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/template.js"></script>
-    <script type="text/javascript" src="js/datepicker-base.js"></script>
-    <script type="text/javascript" src="js/datepicker-compat.js"></script>
-    <script type="text/javascript" src="js/datepicker-helper.js"></script>
-    <script type="text/javascript" src="js/datepicker-monthgrid.js"></script>
-    <script type="text/javascript" src="js/datepicker-monthgrid-view.js"></script>
-    <script type="text/javascript" src="js/datepicker-view.js"></script>
-    <script type="text/javascript" src="js/datepicker.js"></script>
-    <script type="text/javascript" src="js/navigator.js"></script>
-    <script type="text/javascript" src="js/daypicker.js"></script>
-    <script type="text/javascript" src="js/monthpicker.js"></script>
-    <script type="text/javascript" src="js/yearpicker.js"></script>
-    <script type="text/javascript" src="js/toolbox.js"></script>
-    <script type="text/javascript" src="js/timepicker.js"></script>
-    <script type="text/javascript" src="js/state.js"></script>
-    <style>
-        .center-content {
-            display: block;
-            width: 700px;
-            margin: 0px auto 0px auto;
-            min-height: 300px;
-            overflow: hidden;
-        }
+    <link href="css/persian-datepicker-0.2.3.css" rel="stylesheet" type="text/css"/>
 
-        input {
-            width: 300px;
-            height: 24px;
+    <script type="text/javascript" src="../../lib/persian-date.js"></script>
+
+
+    <script type="text/javascript" src="js/persian-datepicker-0.2.3.js"></script>
+    <style>
+        .center-block {
+            width: 900px;
         }
     </style>
 </head>
@@ -51,27 +27,28 @@
      Default Functionality
      */
     $(document).ready(function () {
-//        /*
-//        Default
-//        */
-//        $(".datePicker").persianDatepicker();
-//
-//        /*
-//         timepicker
-//         */
-//        $(".timepicker").persianDatepicker({
-//            altFormat: "YYYY MM DD HH:mm:ss",
-//            altField: '#timepickerAltField',
-//            format: "HH:mm:ss a",
-//            onlyTimePicker: true
-//
-//        });
+        /*
+        Default
+        */
+        $(".datePicker").persianDatepicker();
+
+        /*
+         timepicker
+         */
+        $(".timepicker").persianDatepicker({
+            altFormat: "YYYY MM DD HH:mm:ss",
+            altField: '#timepickerAltField',
+            format: "HH:mm:ss a",
+            onlyTimePicker: true
+
+        });
 
         /*
          month
          */
         $(".monthpicker").persianDatepicker({
             format: " MMMM YYYY",
+
             yearPicker: {
                 enabled: false
             },
@@ -86,23 +63,23 @@
         /*
          year
          */
-//        $(".yearpicker").persianDatepicker({
-//            format: "YYYY",
-//            dayPicker: {
-//                enabled: false
-//            },
-//            monthPicker: {
-//                enabled: false
-//            },
-//            yearPicker: {
-//                enabled: true
-//            }
-//        });
-//
-//        /*
-//         Inline
-//         */
-//        $('.inline-datepicker').persianDatepicker();
+        $(".yearpicker").persianDatepicker({
+            format: "YYYY",
+            dayPicker: {
+                enabled: false
+            },
+            monthPicker: {
+                enabled: false
+            },
+            yearPicker: {
+                enabled: true
+            }
+        });
+
+        /*
+         Inline
+         */
+        $('.inline-datepicker').persianDatepicker();
     });
 </script>
 <div class="center-block">

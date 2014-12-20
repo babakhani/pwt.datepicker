@@ -12,6 +12,7 @@
         "grunt-jsdoc": "^0.5.7",
         "jsdoc": "^3.2.0",
         "jsdoc-oblivion": "^0.2.0",
-        "grunt-contrib-sass":""
+        "grunt-contrib-sass":"",
+        "grunt-contrib-watch":""
     }
 }

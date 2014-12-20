@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         concat: {
             options: {
                 stripBanners: true,
-                banner: '/* <%= pkg.name %> - v<%= pkg.version %> */ ' +
+                banner: '/* <%= pkg.name %> - v<%= pkg.version %> */' +
                     '( function () {',
                 footer: '}());'
             },
@@ -13,8 +13,10 @@ module.exports = function (grunt) {
                 src: [
                     'src/js/plugin.js',
                     'src/js/config.js',
+                    'src/js/constant.js',
                     'src/js/template.js',
                     'src/js/datepicker-base.js',
+                    'src/js/datepicker-compat.js',
                     'src/js/constant.js',
                     'src/js/datepicker-helper.js',
                     'src/js/datepicker-monthgrid.js',
@@ -27,30 +29,46 @@ module.exports = function (grunt) {
                     'src/js/yearpicker.js',
                     'src/js/toolbox.js',
                     'src/js/timepicker.js',
-                    'src/js/state.js'
+                    'src/js/state.js',
+                    'src/js/mousewheel.js'
                 ],
-                dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.js'
+                dest: 'dist/<%= pkg.version %>/js/<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
         uglify: {
             build: {
-                src: 'dist/<%= pkg.version %>/<%= pkg.name %>.js',
-                dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.min.js'
+                src: 'dist/<%= pkg.version %>/js/<%= pkg.name %>-<%= pkg.version %>.js',
+                dest: 'dist/<%= pkg.version %>/js/<%= pkg.name %>-<%= pkg.version %>.min.js'
             }
         },
-        cssmin: {
-            combine: {
-                files: {
-                    'build/<%= pkg.version %>/<%= pkg.name %>.min.css': ['dist/<%= pkg.version %>/<%= pkg.name %>.css']
-                }
+        sass: {
+            dist: {
+                files: [
+                    {
+                        'src/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
+                    },
+                    {
+                        'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
+                    }
+                ]
             }
         },
         copy: {
             main: {
                 files: [
-                    // includes files within path
-                    { src: ['src/css/**'], dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.css', filter: 'isFile'}
+                    {
+                        expand: true,
+                        src: ['src/css/<%= pkg.name %>.css'],
+                        dest: 'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css' }
                 ]
+
+            }
+        },
+        cssmin: {
+            combine: {
+                files: {
+                    'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.min.css': ['src/css/<%= pkg.name %>.css']
+                }
             }
         },
         jsdoc: {
@@ -61,6 +79,16 @@ module.exports = function (grunt) {
 //                    configure: 'doc/conf.json',
 //                    template: 'node_modules/ink-docstrap/template',
                 }
+            }
+        },
+        watch: {
+            scripts: {
+                files: ['src/js/*.js'],
+                tasks: ['concat']
+            },
+            sass: {
+                files: ['src/sass/*.scss'],
+                tasks: ['sass', 'cssmin']
             }
         },
         yuidoc: {
@@ -74,15 +102,6 @@ module.exports = function (grunt) {
                     outdir: 'doc/yui/'
                 }
             }
-        },
-        sass: {
-            dist: {
-                files: [
-                    {
-                        'src/css/pwt-datepicker.css': 'src/sass/pwt-datepicker.scss'
-                    }
-                ]
-            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-sass');
@@ -91,6 +110,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'jsdoc']);
+    if (grunt.option("doc") === true) {
+        grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'jsdoc']);
+    } else {
+        grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'watch']);
+    }
+
 };

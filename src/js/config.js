@@ -34,7 +34,7 @@ var ClassConfig = {
      * @type {string}
      * @default day
      */
-    viewMode: 'day',
+    viewMode: false,
 
 
     /**
@@ -102,7 +102,7 @@ var ClassConfig = {
         var self = this;
         var pdate = new persianDate(unixDate);
         pdate.formatPersian = false;
-        return pdate.format(self.viewFormat);
+        return pdate.format(self.format);
     },
 
 
@@ -160,9 +160,17 @@ var ClassConfig = {
         return this;
     },
 
-
     /**
      * @method
+     * @param self
+     */
+    destroy: function () {
+        this.elmenet.main.remove();
+    },
+
+
+    /**
+     * @event
      * @param self
      */
     onShow: function (self) {
@@ -170,7 +178,7 @@ var ClassConfig = {
 
 
     /**
-     * @method
+     * @event
      * @param self
      */
     onHide: function (self) {
@@ -178,7 +186,7 @@ var ClassConfig = {
 
 
     /**
-     * @method
+     * @event
      * @param unixDate
      */
     onSelect: function (unixDate) {
@@ -229,7 +237,7 @@ var ClassConfig = {
      * @type {object}
      */
     timePicker: {
-        enabled: true,
+        enabled: false,
         showSeconds: true,
         showMeridian: true
     },
@@ -281,6 +289,17 @@ var ClassConfig = {
         onSelect: function (monthIndex) {
             //log("daypicker select Year :" + monthIndex);
         }
-    }
+    },
+
+    onlyTimePicker: false,
+
+    /**
+     * @implements
+     */
+    minDate: "",
+    maxDate: "",
+    autoSize: false
+
+
 
 }
