@@ -292,6 +292,7 @@ var ClassConfig = {
     },
 
     onlyTimePicker: false,
+    justSelectOnDate: true,
     /**
      * @implements
      */

@@ -13,15 +13,17 @@ var ClassCompat = {
             }
             if (this.dayPicker.enabled) {
                 this.viewMode = 'day';
+            } else {
+                this.justSelectOnDate = false;
             }
         }
-
         if (this.minDate | this.maxDate) {
             this.state.setFilterDate('unix', this.minDate, this.maxDate);
             this.state._filetredDate = true;
         } else {
             this.state._filetredDate = false;
         }
+
     }
 
 };

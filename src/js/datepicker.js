@@ -192,9 +192,13 @@ var ClassDatepicker = {
      */
     selectMonth: function (monthNum) {
         var self = this;
-        self.state.setSelected('month', monthNum);
-        self.state.setSelected('year', self.state.view.year);
-        self.state.syncViewWithelected();
+        if (this.justSelectOnDate) {
+            self.state.setView('month', monthNum);
+        } else {
+            self.state.setSelected('month', monthNum);
+            self.state.setSelected('year', self.state.view.year);
+            self.state.syncViewWithelected();
+        }
         self._updateInputElement();
         self.changeView(self.currentView, 'next');
         return this;
@@ -208,8 +212,12 @@ var ClassDatepicker = {
      */
     selectYear: function (yearNum) {
         var self = this;
-        self.state.setSelected('year', yearNum);
-        self.state.syncViewWithelected();
+        if (this.justSelectOnDate) {
+            self.state.setView('year', yearNum);
+        } else {
+            self.state.setSelected('year', yearNum);
+            self.state.syncViewWithelected();
+        }
         self._updateInputElement();
         self.changeView(self.currentView, 'next');
         return this;
