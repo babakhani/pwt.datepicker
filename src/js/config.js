@@ -295,9 +295,9 @@ var ClassConfig = {
     /**
      * @implements
      */
-//  minDate: 1390358410000,
+    minDate: 1390358410000,
 
-    minDate: 1418897040662,
+    //  minDate: 1418897040662,
     maxDate: 1419242667029
 
 //    minDate: false,

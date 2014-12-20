@@ -100,7 +100,6 @@ var ViewsMonthGrid = {
                     var thisUnix = $(this).children("span").data("unixDate");
                     if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
                         $(this).removeClass(self.cssClass.disbaled);
-                        $(this).children("span").removeClass('other-month');
                     } else {
                         $(this).addClass(self.cssClass.disbaled);
 

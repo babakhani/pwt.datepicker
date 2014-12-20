@@ -120,11 +120,14 @@ var ClassMonthPicker = {
             var startMonth = this.datepicker.state.filterDate.start.month;
             var endMonth = this.datepicker.state.filterDate.end.month;
             if (startYear <= y & y <= endYear) {
-                if (y === startYear && month >= startMonth && month <= endMonth) {
+                if (y === startYear && month >= startMonth) {
                     return true;
                 }
-                if (y === endYear && month >= startMonth && month <= endMonth) {
-                    return false;
+                if (y === endYear && month <= endMonth) {
+                    return true;
+                }
+                if(startYear < y & y < endYear){
+                    return true;
                 }
             }
             return false;
