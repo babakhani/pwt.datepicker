@@ -5,21 +5,6 @@
  * @type {{cssClass: string, daysTitleFormat: string, persianDigit: boolean, viewMode: string, position: string, autoClose: boolean, toolbox: boolean, format: boolean, observer: boolean, altField: boolean, altFormat: string, inputDelay: number, viewFormat: string, formatter: formatter, altFieldFormatter: altFieldFormatter, show: show, hide: hide, onShow: onShow, onHide: onHide, onSelect: onSelect, timePicker: {enabled: boolean}, dayPicker: {enabled: boolean}, monthPicker: {enabled: boolean}, yearPicker: {enabled: boolean}}}
  */
 var ClassConfig = {
-    /**
-     * @property cssClass
-     * @type {string}
-     * @default datepicker-container
-     */
-    cssClass: 'datepicker-container',
-
-
-    /**
-     * @property daysTitleFormat
-     * @type {string}
-     * @default YYYY MMMM
-     * @deprecated 0.2.4
-     */
-    daysTitleFormat: 'YYYY MMMM',
 
     /**
      * @property persianDigit
@@ -83,14 +68,6 @@ var ClassConfig = {
      * @default 800
      */
     inputDelay: 800,
-
-
-    /**
-     * @format viewFormat
-     * @type {string}
-     * @default YYYY/MM/DD
-     */
-    viewFormat: "YYYY/MM/DD",
 
 
     /**
