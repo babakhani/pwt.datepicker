@@ -12,6 +12,7 @@ js/pwt.datepicker.html
 .settings
 js/pwt.datepicker.jade
 
+bower_components
 .idea
 node_modules
 .sass-cache
