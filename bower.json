@@ -1,7 +1,7 @@
 {
     "name": "persian-datepicker",
-    "version": "0.2.3",
-    "main": "dist/persian-date.js",
+    "version": "0.3.0",
+    "main": "dist/<= pkg.version>",
     "ignore": [
         ".jshintrc",
         "**/*.txt"
