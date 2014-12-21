@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: template.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: template.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * @type {{datepciker: string, navigator: string, timepicker: string}}
+ */
+var TEMPLATE = {
+    /**
+     * datepicker
+     */
+    datepciker: "&lt;div class='{{css.datePickerPlotArea}}' >" + //
+        "&lt;div class='{{css.navigator}}' >&lt;/div>" +//
+        " &lt;div class='{{css.dayView}}' >&lt;/div>" + //
+        "&lt;div class='{{css.monthView}}' >&lt;/div>" + //
+        "&lt;div class='{{css.yearView}}' >&lt;/div>" + //
+        "&lt;div class='{{css.timeView}}' >&lt;/div>" + //
+        "&lt;div class='{{css.toolbox}}' >&lt;/div>" + //
+        "&lt;/div>",
+
+
+    /**
+     * navigator
+     */
+    navigator: "&lt;div class='{{css.datpickerHeader}}' >" + //
+        "&lt;div class='{{css.btnNext}}' >{{btnNextText}}&lt;/div>" + //
+        "&lt;div class='{{css.btnSwitch}}' >{{btnSwitchText}}&lt;/div>" + //
+        "&lt;div class='{{css.btnPrev}}' >{{btnPrevText}}&lt;/div>" + //
+        "&lt;/div>",
+
+
+    /**
+     * timepicker
+     */
+    timepicker: "&lt;div class='hour time-segment' data-time-key='hour' >" + //
+        "&lt;div class='up-btn' >&#9650;&lt;/div>" + //
+        "&lt;input type='text' placeholder='hour' class='hour-input' />" + //
+        "&lt;div class='down-btn' >&#9660;&lt;/div>" + //
+        "&lt;/div>" + //
+        "&lt;div class='divider' >:&lt;/div>" + //
+        "&lt;div class='minute time-segment' data-time-key='minute' >" + //
+        "&lt;div class='up-btn' >&#9650;&lt;/div>" + //
+        "&lt;input type='text' placeholder='minute' class='minute-input' />" + //
+        "&lt;div class='down-btn' >&#9660;&lt;/div>" + //
+        "&lt;/div>" + //
+        "&lt;div class='divider' >:&lt;/div>" + //
+        "&lt;div class='second time-segment' data-time-key='second' >" + //
+        "&lt;div class='up-btn' >&#9650;&lt;/div>" + //
+        "&lt;input type='text' placeholder='second' class='second-input' />" + //
+        "&lt;div class='down-btn' >&#9660;&lt;/div>" + //
+        "&lt;/div>" + //
+        "&lt;div class='divider' >&lt;/div>" + //
+        "&lt;div class='divider' >&lt;/div>" + //
+        "&lt;div class='meridian time-segment' data-time-key='meridian' >" + //
+        "&lt;div class='up-btn' >&#9650;&lt;/div>" + //
+        "&lt;input type='text' placeholder='meridian&' class='meridian-input' />" + //
+        "&lt;div class='down-btn' >&#9660;&lt;/div>" + //
+        "&lt;/div>",
+
+    /**
+     * Month Grid
+     */
+    monthGrid: "&lt;div class='{{css.main}}' >" + //
+        "&lt;div class='{{css.header}}' >" + //
+        "&lt;div class='{{css.headerTitle}}' >&lt;/div>" + //
+        "&lt;div class='{{css.headerRow}}' >&lt;/div>" + //
+        "&lt;/div>" + //
+        "&lt;table cellspacing='0' class='{{css.daysTable}}'  >&lt;tbody>&lt;tr>&lt;td />&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;/tr>&lt;tr>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;/tr>&lt;tr>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;/tr>&lt;tr>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;/tr>&lt;tr>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;/tr>&lt;tr>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;td/>&lt;/tr>&lt;/tbody>&lt;/table>" + //
+        "&lt;/div>"
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="ClassConfig.html">ClassConfig</a></li><li><a href="ClassDatepicker.html">ClassDatepicker</a></li><li><a href="ClassDatepickerState.html">ClassDatepickerState</a></li><li><a href="ClassDaypicker.html">ClassDaypicker</a></li><li><a href="ClassMonthGrid.html">ClassMonthGrid</a></li><li><a href="ClassMonthPicker.html">ClassMonthPicker</a></li><li><a href="ClassNavigator.html">ClassNavigator</a></li><li><a href="ClassTimepicker.html">ClassTimepicker</a></li><li><a href="ClassToolbox.html">ClassToolbox</a></li><li><a href="ClassYearPicker.html">ClassYearPicker</a></li><li><a href="ViewsDatePicker.html">ViewsDatePicker</a></li><li><a href="ViewsMonthGrid.html">ViewsMonthGrid</a></li></ul><h3>Events</h3><ul><li><a href="ClassConfig.html#event:onHide">onHide</a></li><li><a href="ClassConfig.html#event:onSelect">onSelect</a></li><li><a href="ClassConfig.html#event:onShow">onShow</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ClassBase">ClassBase</a></li><li><a href="global.html#ClassDateRange">ClassDateRange</a></li><li><a href="global.html#ClassSprite">ClassSprite</a></li><li><a href="global.html#delay">delay</a></li><li><a href="global.html#inherit">inherit</a></li><li><a href="global.html#log">log</a></li><li><a href="global.html#range">range</a></li><li><a href="global.html#TEMPLATE">TEMPLATE</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Dec 20 2014 09:55:40 GMT+0330 (IRST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
