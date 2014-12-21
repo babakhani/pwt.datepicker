@@ -1,0 +1,9 @@
+{
+    "name": "persian-datepicker",
+    "version": "0.2.3",
+    "main": "dist/persian-date.js",
+    "ignore": [
+        ".jshintrc",
+        "**/*.txt"
+    ]
+}
