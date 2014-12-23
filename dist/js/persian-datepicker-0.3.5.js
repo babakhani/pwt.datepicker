@@ -2353,9 +2353,9 @@ var ClassDaypicker = {
             $(this.container).mousewheel(function (event) {
 
                 if (event.deltaY > 0) {
-                    self.prev();
-                }else{
                     self.next();
+                }else{
+                    self.prev();
                 }
 
             });
@@ -2586,9 +2586,9 @@ var ClassMonthPicker = {
             $(this.container).mousewheel(function (event) {
 
                 if (event.deltaY > 0) {
-                    self.prev();
-                } else {
                     self.next();
+                } else {
+                    self.prev();
                 }
             });
             $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
@@ -2808,9 +2808,9 @@ var ClassYearPicker = {
             $(this.container).mousewheel(function (event) {
 
                 if (event.deltaY > 0) {
-                    self.prev();
-                } else {
                     self.next();
+                } else {
+                    self.prev();
                 }
 
             });

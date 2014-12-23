@@ -139,9 +139,9 @@ var ClassYearPicker = {
             $(this.container).mousewheel(function (event) {
 
                 if (event.deltaY > 0) {
-                    self.prev();
-                } else {
                     self.next();
+                } else {
+                    self.prev();
                 }
 
             });
