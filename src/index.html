@@ -128,7 +128,11 @@
          persianDate
          */
         $("#persianDigit").persianDatepicker({
-            onlyTimePicker: true
+            onlyTimePicker: true,
+            timePicker:{
+                showMeridian:false,
+                showSeconds:false
+            }
         })
     });
 </script>

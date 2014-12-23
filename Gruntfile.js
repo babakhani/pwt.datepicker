@@ -32,13 +32,13 @@ module.exports = function (grunt) {
                     'src/js/state.js',
                     'src/js/mousewheel.js'
                 ],
-                dest: 'dist/<%= pkg.version %>/js/<%= pkg.name %>-<%= pkg.version %>.js'
+                dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
         uglify: {
             build: {
-                src: 'dist/<%= pkg.version %>/js/<%= pkg.name %>-<%= pkg.version %>.js',
-                dest: 'dist/<%= pkg.version %>/js/<%= pkg.name %>-<%= pkg.version %>.min.js'
+                src: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js',
+                dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.min.js'
             }
         },
         sass: {
@@ -52,13 +52,13 @@ module.exports = function (grunt) {
                         'src/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
+                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'dist/<%= pkg.version %>/css/theme/<%= pkg.name %>-blue.css': 'src/sass/persian-datepicker-blue.scss'
+                        'dist/css/theme/<%= pkg.name %>-blue.css': 'src/sass/persian-datepicker-blue.scss'
                     },
                     {
-                        'dist/<%= pkg.version %>/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
+                        'dist/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
                     }
                 ]
             }
@@ -77,7 +77,7 @@ module.exports = function (grunt) {
         cssmin: {
             combine: {
                 files: {
-                    'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.min.css': ['src/css/<%= pkg.name %>.css']
+                    'dist/css/<%= pkg.name %>-<%= pkg.version %>.min.css': ['src/css/<%= pkg.name %>.css']
                 }
             }
         },
