@@ -22,11 +22,11 @@
 
     }
   }
-  & > .divider {
+  & .divider {
     display: block;
     width: 3%;
     height: 60px;
-    line-height: 60px;
+    line-height: 60px !important;
     float: left;
     overflow: hidden;
     font: $timepicker-segment-divider-font;

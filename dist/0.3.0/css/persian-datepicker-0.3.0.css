@@ -143,7 +143,7 @@
     color: #333333; }
 
 .datepicker-plot-area-inline-view {
-  display: block;
+  display: block !important;
   width: 100%;
   position: static;
   float: left; }
@@ -176,11 +176,11 @@
     .datepicker-plot-area .datepicker-time-view > div.time-segment:hover .down-btn, .datepicker-plot-area .datepicker-time-view > div.time-segment:hover .up-btn {
       font-weight: bold;
       background-color: #ffffff; }
-  .datepicker-plot-area .datepicker-time-view > .divider {
+  .datepicker-plot-area .datepicker-time-view .divider {
     display: block;
     width: 3%;
     height: 60px;
-    line-height: 60px;
+    line-height: 60px !important;
     float: left;
     overflow: hidden;
     font: 12px bold; }

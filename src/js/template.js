@@ -39,14 +39,14 @@ var TEMPLATE = {
         "<input type='text' placeholder='minute' class='minute-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
         "</div>" + //
-        "<div class='divider' >:</div>" + //
+        "<div class='divider second-divider' >:</div>" + //
         "<div class='second time-segment' data-time-key='second' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='second' class='second-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
         "</div>" + //
-        "<div class='divider' ></div>" + //
-        "<div class='divider' ></div>" + //
+        "<div class='divider meridian-divider' ></div>" + //
+        "<div class='divider meridian-divider' ></div>" + //
         "<div class='meridian time-segment' data-time-key='meridian' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='meridian&' class='meridian-input' />" + //

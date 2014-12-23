@@ -217,6 +217,9 @@ var ClassConfig = {
         showSeconds: true,
         showMeridian: true,
 
+        secondStep:1,
+        minuteStep:1,
+        hourStep:1,
 
         scrollEnabled: true,
         /**

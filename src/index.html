@@ -7,8 +7,8 @@
     <script type="text/javascript" src="../lib/jquery.js"></script>
     <script type="text/javascript" src="../lib/persian-date.js"></script>
 
-    <!--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
-    <!--<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/plugin.js"></script>
@@ -128,7 +128,7 @@
          persianDate
          */
         $("#persianDigit").persianDatepicker({
-            persianDigit: false
+            onlyTimePicker: true
         })
     });
 </script>
@@ -201,7 +201,7 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">English Digit</div>
+        <div class="panel-heading">Inline Time picker</div>
         <div class="panel-body">
             <div id="persianDigit" class="col-xs-6"></div>
         </div>

@@ -236,6 +236,9 @@ var ClassConfig = {
         showSeconds: true,
         showMeridian: true,
 
+        secondStep:1,
+        minuteStep:1,
+        hourStep:1,
 
         scrollEnabled: true,
         /**
@@ -552,14 +555,14 @@ var TEMPLATE = {
         "<input type='text' placeholder='minute' class='minute-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
         "</div>" + //
-        "<div class='divider' >:</div>" + //
+        "<div class='divider second-divider' >:</div>" + //
         "<div class='second time-segment' data-time-key='second' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='second' class='second-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
         "</div>" + //
-        "<div class='divider' ></div>" + //
-        "<div class='divider' ></div>" + //
+        "<div class='divider meridian-divider' ></div>" + //
+        "<div class='divider meridian-divider' ></div>" + //
         "<div class='meridian time-segment' data-time-key='meridian' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='meridian&' class='meridian-input' />" + //
@@ -3246,7 +3249,7 @@ var ClassTimepicker = {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
             return false;
         });
-        if (this.scrollEnabled & this.datepicker.scrollEnabled) {
+        if (this.scrollEnabled) {
             $('> div.time-segment', this.container).mousewheel(function (event) {
                 var moveMode = 'down';
                 if (event.deltaY > 0) {
@@ -3281,10 +3284,26 @@ var ClassTimepicker = {
     _bootstrap: function () {
         if (this.showMeridian === false) {
             $('.meridian', this.container).hide();
+            $('.meridian-divider', this.container).hide();
+            $('.time-segment', this.container).css({
+                width: '31%'
+            });
+
         }
         if (this.showSeconds === false) {
             $('.second', this.container).hide();
+            $('.second-divider', this.container).hide();
+            $('.time-segment', this.container).css({
+                width: '31%'
+            });
         }
+        if (this.showMeridian === false && this.showSeconds === false) {
+            $('.time-segment', this.container).css({
+                width: '47%'
+            });
+        }
+
+
         this.hourInput = $('.hour-input', this.container);
         this.minuteInput = $('.minute-input', this.container);
         this.secondInput = $('.second-input', this.container);
