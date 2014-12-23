@@ -198,7 +198,7 @@ var ClassMonthPicker = {
             if (self._checkMonthAccess(m)) {
                 monthItem.click(function () {
                     self.onSelect($(this).data().monthIndex);
-                    self.datepicker.selectMonth($(this).data().monthIndex);
+                    self.datepicker.selectMonth(parseInt($(this).data().monthIndex));
                     return false;
                 });
             } else {

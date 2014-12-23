@@ -2228,11 +2228,14 @@ var ClassDaypicker = {
      */
     next: function () {
         var self = this;
+
+        log(self.datepicker.state.view)
+
         if (self.datepicker.state.view.month === 12) {
-            self.datepicker.state.view.month = 1;
-            self.datepicker.state.view.year += 1;
+            self.datepicker.state.setView('month', 1);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) + 1);
         } else {
-            self.datepicker.state.view.month += 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) + 1);
         }
         self._updateView();
         return this;
@@ -2247,10 +2250,10 @@ var ClassDaypicker = {
     prev: function () {
         var self = this;
         if (self.datepicker.state.view.month === 1) {
-            self.datepicker.state.view.month = 12;
-            self.datepicker.state.view.year -= 1;
+            self.datepicker.state.setView('month', 12);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) - 1);
         } else {
-            self.datepicker.state.view.month -= 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) - 1);
         }
         self._updateView();
         return this;
@@ -2354,7 +2357,7 @@ var ClassDaypicker = {
 
                 if (event.deltaY > 0) {
                     self.next();
-                }else{
+                } else {
                     self.prev();
                 }
 
@@ -2628,7 +2631,7 @@ var ClassMonthPicker = {
             if (self._checkMonthAccess(m)) {
                 monthItem.click(function () {
                     self.onSelect($(this).data().monthIndex);
-                    self.datepicker.selectMonth($(this).data().monthIndex);
+                    self.datepicker.selectMonth(parseInt($(this).data().monthIndex));
                     return false;
                 });
             } else {
@@ -2856,7 +2859,7 @@ var ClassYearPicker = {
             if (self._checkYearAccess(remaining + parseInt(i))) {
                 yearItem.click(function () {
                     var y = $(this).data().year;
-                    self.datepicker.selectYear(y);
+                    self.datepicker.selectYear(parseInt(y));
                     self.onSelect(y);
                     return false;
                 });

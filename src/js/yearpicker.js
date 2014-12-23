@@ -187,7 +187,7 @@ var ClassYearPicker = {
             if (self._checkYearAccess(remaining + parseInt(i))) {
                 yearItem.click(function () {
                     var y = $(this).data().year;
-                    self.datepicker.selectYear(y);
+                    self.datepicker.selectYear(parseInt(y));
                     self.onSelect(y);
                     return false;
                 });

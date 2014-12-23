@@ -11,11 +11,14 @@ var ClassDaypicker = {
      */
     next: function () {
         var self = this;
+
+        log(self.datepicker.state.view)
+
         if (self.datepicker.state.view.month === 12) {
-            self.datepicker.state.view.month = 1;
-            self.datepicker.state.view.year += 1;
+            self.datepicker.state.setView('month', 1);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) + 1);
         } else {
-            self.datepicker.state.view.month += 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) + 1);
         }
         self._updateView();
         return this;
@@ -30,10 +33,10 @@ var ClassDaypicker = {
     prev: function () {
         var self = this;
         if (self.datepicker.state.view.month === 1) {
-            self.datepicker.state.view.month = 12;
-            self.datepicker.state.view.year -= 1;
+            self.datepicker.state.setView('month', 12);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) - 1);
         } else {
-            self.datepicker.state.view.month -= 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) - 1);
         }
         self._updateView();
         return this;
@@ -137,7 +140,7 @@ var ClassDaypicker = {
 
                 if (event.deltaY > 0) {
                     self.next();
-                }else{
+                } else {
                     self.prev();
                 }
 
