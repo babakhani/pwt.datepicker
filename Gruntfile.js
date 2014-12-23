@@ -42,6 +42,10 @@ module.exports = function (grunt) {
             }
         },
         sass: {
+            options: {
+                compress: false,
+                sourcemap: 'none'
+            },
             dist: {
                 files: [
                     {
@@ -49,6 +53,12 @@ module.exports = function (grunt) {
                     },
                     {
                         'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
+                    },
+                    {
+                        'dist/<%= pkg.version %>/css/theme/<%= pkg.name %>-blue.css': 'src/sass/persian-datepicker-blue.scss'
+                    },
+                    {
+                        'dist/<%= pkg.version %>/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
                     }
                 ]
             }
@@ -87,7 +97,7 @@ module.exports = function (grunt) {
                 tasks: ['concat']
             },
             sass: {
-                files: ['src/sass/*.scss'],
+                files: ['src/sass/**/*.scss'],
                 tasks: ['sass', 'cssmin']
             }
         },

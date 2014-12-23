@@ -1,0 +1,20 @@
+.datepicker-plot-area .toolbox {
+  display: block;
+  width: 100%;
+  float: left;
+  padding: 3px 0px;
+  .btn-today {
+    display: block;
+    width: 60px;
+    height: 20px;
+    line-height: 16px;
+    margin: 0px auto;
+
+    font-weight: $strong-font;
+    background-color: $bottom-bg;
+    &:hover {
+      background-color: $bottom-bg-hover;
+    }
+    @extend .interactive-item;
+  }
+}

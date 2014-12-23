@@ -1,0 +1,70 @@
+
+.datepicker-plot-area .datepicker-day-view {
+  .table-days {
+    width: 100%;
+    float: left;
+    direction: rtl;
+    tr {
+      width: 300px;
+    }
+    td {
+      height: 26px;
+      padding: 0px;
+      margin: 0px;
+      span {
+        display: block;
+        width: 100%;
+        height: 26px;
+        line-height: 26px;
+        padding: 0px;
+        margin: 0px;
+        @extend .date-item;
+      }
+    }
+  }
+  .month-grid-box {
+    display: block;
+    width: 100%;
+    float: right;
+    min-width: 150px;
+    height: 180px;
+    margin: 10px 1% 5px 1%;
+    .header .header-row {
+      display: block;
+      width: 100%;
+      height: 25px;
+      float: left;
+    }
+    .header .header-row-cell {
+      display: block;
+      width: 14%;
+      height: 25px;
+      float: right;
+      line-height: 25px;
+      text-indent: 6px;
+      font: $big-font;
+      font-weight: $strong-font;
+      color:$dark;
+    }
+  }
+}
+
+.datepicker-plot-area .datepicker-day-view .table-days td span:hover {
+  @extend .date-item-hover;
+}
+
+.datepicker-plot-area .datepicker-day-view .table-days td span.other-month {
+  @extend .date-item-numb;
+}
+
+.datepicker-plot-area .datepicker-day-view .table-days td span.today {
+  @extend .date-item-today;
+}
+
+.datepicker-plot-area .datepicker-day-view .table-days td.disabled span {
+  @extend .date-item-disable
+}
+
+.datepicker-plot-area .datepicker-day-view .table-days td span.selected {
+  @extend .date-item-selected;
+}
