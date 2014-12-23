@@ -12,10 +12,10 @@ var ClassDaypicker = {
     next: function () {
         var self = this;
         if (self.datepicker.state.view.month === 12) {
-            self.datepicker.state.view.month = 1;
-            self.datepicker.state.view.year += 1;
+            self.datepicker.state.setView('month', 1);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) + 1);
         } else {
-            self.datepicker.state.view.month += 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) + 1);
         }
         self._updateView();
         return this;
@@ -30,10 +30,10 @@ var ClassDaypicker = {
     prev: function () {
         var self = this;
         if (self.datepicker.state.view.month === 1) {
-            self.datepicker.state.view.month = 12;
-            self.datepicker.state.view.year -= 1;
+            self.datepicker.state.setView('month', 12);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) - 1);
         } else {
-            self.datepicker.state.view.month -= 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) - 1);
         }
         self._updateView();
         return this;
@@ -126,6 +126,40 @@ var ClassDaypicker = {
         return this;
     },
 
+    /**
+     *
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.next();
+                } else {
+                    self.prev();
+                }
+
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
+    },
+
 
     /**
      *
@@ -157,7 +191,8 @@ var ClassDaypicker = {
      */
     init: function () {
         var self = this;
-        this._render();
+        this._render()
+        this._attachEvents();
         this._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         return this;
     }

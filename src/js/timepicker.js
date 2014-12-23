@@ -276,7 +276,7 @@ var ClassTimepicker = {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
             return false;
         });
-        if (this.changeOnScroll) {
+        if (this.scrollEnabled) {
             $('> div.time-segment', this.container).mousewheel(function (event) {
                 var moveMode = 'down';
                 if (event.deltaY > 0) {
@@ -311,10 +311,26 @@ var ClassTimepicker = {
     _bootstrap: function () {
         if (this.showMeridian === false) {
             $('.meridian', this.container).hide();
+            $('.meridian-divider', this.container).hide();
+            $('.time-segment', this.container).css({
+                width: '31%'
+            });
+
         }
         if (this.showSeconds === false) {
             $('.second', this.container).hide();
+            $('.second-divider', this.container).hide();
+            $('.time-segment', this.container).css({
+                width: '31%'
+            });
         }
+        if (this.showMeridian === false && this.showSeconds === false) {
+            $('.time-segment', this.container).css({
+                width: '47%'
+            });
+        }
+
+
         this.hourInput = $('.hour-input', this.container);
         this.minuteInput = $('.minute-input', this.container);
         this.secondInput = $('.second-input', this.container);

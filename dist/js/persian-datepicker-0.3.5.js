@@ -1,4 +1,8 @@
-/* persian-datepicker - v0.2.3 */( function () {(function ($) {
+/* persian-datepicker - v0.3.5 
+  Author: reza babakhani 
+ http://babakhani.github.io/PersianWebToolkit/datepicker 
+ */
+( function () {(function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments), output = this;
         if (!this) {
@@ -24,21 +28,6 @@
  * @type {{cssClass: string, daysTitleFormat: string, persianDigit: boolean, viewMode: string, position: string, autoClose: boolean, toolbox: boolean, format: boolean, observer: boolean, altField: boolean, altFormat: string, inputDelay: number, viewFormat: string, formatter: formatter, altFieldFormatter: altFieldFormatter, show: show, hide: hide, onShow: onShow, onHide: onHide, onSelect: onSelect, timePicker: {enabled: boolean}, dayPicker: {enabled: boolean}, monthPicker: {enabled: boolean}, yearPicker: {enabled: boolean}}}
  */
 var ClassConfig = {
-    /**
-     * @property cssClass
-     * @type {string}
-     * @default datepicker-container
-     */
-    cssClass: 'datepicker-container',
-
-
-    /**
-     * @property daysTitleFormat
-     * @type {string}
-     * @default YYYY MMMM
-     * @deprecated 0.2.4
-     */
-    daysTitleFormat: 'YYYY MMMM',
 
     /**
      * @property persianDigit
@@ -102,15 +91,6 @@ var ClassConfig = {
      * @default 800
      */
     inputDelay: 800,
-
-
-    /**
-     * @format viewFormat
-     * @type {string}
-     * @default YYYY/MM/DD
-     */
-    viewFormat: "YYYY/MM/DD",
-
 
     /**
      * @method
@@ -259,6 +239,15 @@ var ClassConfig = {
         enabled: false,
         showSeconds: true,
         showMeridian: true,
+
+        secondStep: 1,
+        minuteStep: 1,
+        hourStep: 1,
+
+        scrollEnabled: true,
+        /**
+         * @deprecated 0.3.5
+         */
         changeOnScroll: true
     },
 
@@ -268,6 +257,7 @@ var ClassConfig = {
      */
     dayPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY MMMM',
         titleFormatter: function (year, month) {
             if (this.datepicker.persianDigit == false) {
@@ -289,6 +279,7 @@ var ClassConfig = {
      */
     monthPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (unix) {
             if (this.datepicker.persianDigit == false) {
@@ -296,7 +287,7 @@ var ClassConfig = {
             }
             var titleStr = new persianDate(unix).format(this.titleFormat);
             window.formatPersian = true;
-            return titleStr
+            return titleStr;
 
         },
         onSelect: function (monthIndex) {
@@ -311,6 +302,7 @@ var ClassConfig = {
      */
     yearPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (year) {
             var remaining = parseInt(year / 12) * 12;
@@ -567,14 +559,14 @@ var TEMPLATE = {
         "<input type='text' placeholder='minute' class='minute-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
         "</div>" + //
-        "<div class='divider' >:</div>" + //
+        "<div class='divider second-divider' >:</div>" + //
         "<div class='second time-segment' data-time-key='second' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='second' class='second-input' />" + //
         "<div class='down-btn' >&#9660;</div>" + //
         "</div>" + //
-        "<div class='divider' ></div>" + //
-        "<div class='divider' ></div>" + //
+        "<div class='divider meridian-divider' ></div>" + //
+        "<div class='divider meridian-divider' ></div>" + //
         "<div class='meridian time-segment' data-time-key='meridian' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
         "<input type='text' placeholder='meridian&' class='meridian-input' />" + //
@@ -872,6 +864,8 @@ var ClassCompat = {
         } else {
             this.state._filetredDate = false;
         }
+
+
         return this;
     }
 
@@ -2235,10 +2229,10 @@ var ClassDaypicker = {
     next: function () {
         var self = this;
         if (self.datepicker.state.view.month === 12) {
-            self.datepicker.state.view.month = 1;
-            self.datepicker.state.view.year += 1;
+            self.datepicker.state.setView('month', 1);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) + 1);
         } else {
-            self.datepicker.state.view.month += 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) + 1);
         }
         self._updateView();
         return this;
@@ -2253,10 +2247,10 @@ var ClassDaypicker = {
     prev: function () {
         var self = this;
         if (self.datepicker.state.view.month === 1) {
-            self.datepicker.state.view.month = 12;
-            self.datepicker.state.view.year -= 1;
+            self.datepicker.state.setView('month', 12);
+            self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) - 1);
         } else {
-            self.datepicker.state.view.month -= 1;
+            self.datepicker.state.setView('month', parseInt(self.datepicker.state.view.month) - 1);
         }
         self._updateView();
         return this;
@@ -2349,6 +2343,40 @@ var ClassDaypicker = {
         return this;
     },
 
+    /**
+     *
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.next();
+                } else {
+                    self.prev();
+                }
+
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
+    },
+
 
     /**
      *
@@ -2380,7 +2408,8 @@ var ClassDaypicker = {
      */
     init: function () {
         var self = this;
-        this._render();
+        this._render()
+        this._attachEvents();
         this._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         return this;
     }
@@ -2537,12 +2566,47 @@ var ClassMonthPicker = {
                 if (startYear < y & y < endYear) {
                     return true;
                 }
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return true;
         }
+    },
+
+
+    /**
+     *
+     * @returns {ClassMonthPicker}
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.next();
+                } else {
+                    self.prev();
+                }
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
     },
 
     /**
@@ -2564,7 +2628,7 @@ var ClassMonthPicker = {
             if (self._checkMonthAccess(m)) {
                 monthItem.click(function () {
                     self.onSelect($(this).data().monthIndex);
-                    self.datepicker.selectMonth($(this).data().monthIndex);
+                    self.datepicker.selectMonth(parseInt($(this).data().monthIndex));
                     return false;
                 });
             } else {
@@ -2584,6 +2648,8 @@ var ClassMonthPicker = {
      */
     init: function () {
         this._render();
+        this._attachEvents();
+        return this;
     }
 };
 
@@ -2730,6 +2796,42 @@ var ClassYearPicker = {
 
     },
 
+
+    /**
+     *
+     * @returns {ClassMonthPicker}
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.next();
+                } else {
+                    self.prev();
+                }
+
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
+    },
+
     /**
      *
      * @returns {Class_YearPicker}
@@ -2754,7 +2856,7 @@ var ClassYearPicker = {
             if (self._checkYearAccess(remaining + parseInt(i))) {
                 yearItem.click(function () {
                     var y = $(this).data().year;
-                    self.datepicker.selectYear(y);
+                    self.datepicker.selectYear(parseInt(y));
                     self.onSelect(y);
                     return false;
                 });
@@ -2774,6 +2876,8 @@ var ClassYearPicker = {
      */
     init: function () {
         this._render();
+        this._attachEvents();
+        return this;
     }
 };
 
@@ -3149,7 +3253,7 @@ var ClassTimepicker = {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
             return false;
         });
-        if (this.changeOnScroll) {
+        if (this.scrollEnabled) {
             $('> div.time-segment', this.container).mousewheel(function (event) {
                 var moveMode = 'down';
                 if (event.deltaY > 0) {
@@ -3184,10 +3288,26 @@ var ClassTimepicker = {
     _bootstrap: function () {
         if (this.showMeridian === false) {
             $('.meridian', this.container).hide();
+            $('.meridian-divider', this.container).hide();
+            $('.time-segment', this.container).css({
+                width: '31%'
+            });
+
         }
         if (this.showSeconds === false) {
             $('.second', this.container).hide();
+            $('.second-divider', this.container).hide();
+            $('.time-segment', this.container).css({
+                width: '31%'
+            });
         }
+        if (this.showMeridian === false && this.showSeconds === false) {
+            $('.time-segment', this.container).css({
+                width: '47%'
+            });
+        }
+
+
         this.hourInput = $('.hour-input', this.container);
         this.minuteInput = $('.minute-input', this.container);
         this.secondInput = $('.second-input', this.container);

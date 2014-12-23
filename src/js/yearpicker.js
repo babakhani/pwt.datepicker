@@ -127,6 +127,42 @@ var ClassYearPicker = {
 
     },
 
+
+    /**
+     *
+     * @returns {ClassMonthPicker}
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.next();
+                } else {
+                    self.prev();
+                }
+
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
+    },
+
     /**
      *
      * @returns {Class_YearPicker}
@@ -151,7 +187,7 @@ var ClassYearPicker = {
             if (self._checkYearAccess(remaining + parseInt(i))) {
                 yearItem.click(function () {
                     var y = $(this).data().year;
-                    self.datepicker.selectYear(y);
+                    self.datepicker.selectYear(parseInt(y));
                     self.onSelect(y);
                     return false;
                 });
@@ -171,6 +207,8 @@ var ClassYearPicker = {
      */
     init: function () {
         this._render();
+        this._attachEvents();
+        return this;
     }
 };
 

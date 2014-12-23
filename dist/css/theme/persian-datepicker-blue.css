@@ -58,9 +58,9 @@
   border-radius: 3px; }
 
 .main-box-shadow, .datepicker-plot-area {
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
 
 .interactive-item, .date-item, .datepicker-plot-area .datepicker-day-view .table-days td span, .datepicker-plot-area .datepicker-year-view .year-item,
 .datepicker-plot-area .datepicker-month-view .month-item, .date-item-disable, .datepicker-plot-area .datepicker-day-view .table-days td.disabled span, .datepicker-plot-area .datepicker-year-view .year-item-disable,
@@ -73,42 +73,42 @@
 .date-item, .datepicker-plot-area .datepicker-day-view .table-days td span, .datepicker-plot-area .datepicker-year-view .year-item,
 .datepicker-plot-area .datepicker-month-view .month-item {
   font: 14px;
-  background-color: #ffffff;
-  color: #333333;
+  background-color: #1A3347;
+  color: #ffffff;
   border: 0px;
   text-shadow: none; }
 
 .date-item-disable, .datepicker-plot-area .datepicker-day-view .table-days td.disabled span, .datepicker-plot-area .datepicker-year-view .year-item-disable,
 .datepicker-plot-area .datepicker-month-view .month-item-disable {
-  background-color: #f1f1f1 !important;
-  color: #cccccc !important;
+  background-color: #204B6E !important;
+  color: #00AAE2 !important;
   border: none !important;
   text-shadow: none !important;
   cursor: default; }
 
 .date-item-today, .datepicker-plot-area .datepicker-day-view .table-days td span.today {
-  background-color: #333333;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #1A3347;
   border: 0px;
   text-shadow: none; }
 
 .date-item-numb, .datepicker-plot-area .datepicker-day-view .table-days td span.other-month {
   background-color: "";
-  color: #cccccc;
+  color: #00AAE2;
   border: none;
   text-shadow: none; }
 
 .date-item-selected, .datepicker-plot-area .datepicker-day-view .table-days td span.selected, .datepicker-plot-area .datepicker-year-view .year-item.selected,
 .datepicker-plot-area .datepicker-month-view .month-item.selected {
-  background-color: #006dcc !important;
+  background-color: #0085B2 !important;
   color: #ffffff;
   border: none;
   text-shadow: 1px 1px 1px #000000; }
 
 .date-item-hover, .datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-year-view .year-item:hover,
 .datepicker-plot-area .datepicker-month-view .month-item:hover {
-  background-color: #eeeeee;
-  color: "";
+  background-color: #0095C6;
+  color: #ffffff;
   border: 0px;
   text-shadow: none; }
 
@@ -122,8 +122,8 @@
   position: absolute;
   top: 100px;
   font: 12px tahoma;
-  border: 1px solid #cccccc;
-  background-color: #ffffff; }
+  border: none;
+  background-color: #1A3347; }
   .datepicker-plot-area table,
   .datepicker-plot-area th,
   .datepicker-plot-area td {
@@ -131,7 +131,7 @@
     background: none; }
   .datepicker-plot-area * {
     text-align: center;
-    color: #333333; }
+    color: #ffffff; }
 
 .datepicker-plot-area-inline-view {
   display: block !important;
@@ -155,8 +155,8 @@
   padding: 5px 1%;
   margin: 0px;
   margin: 3px 0px;
-  background: #f9f9f9;
-  border-top: 1px solid #f1f1f1; }
+  background: #204B6E;
+  border-top: 1px solid #204B6E; }
   .datepicker-plot-area .datepicker-time-view > div.time-segment {
     display: block;
     width: 22%;
@@ -165,7 +165,7 @@
     overflow: hidden; }
     .datepicker-plot-area .datepicker-time-view > div.time-segment:hover .down-btn, .datepicker-plot-area .datepicker-time-view > div.time-segment:hover .up-btn {
       font-weight: bold;
-      background-color: #ffffff; }
+      background-color: #1A3347; }
   .datepicker-plot-area .datepicker-time-view .divider {
     display: block;
     width: 3%;
@@ -184,7 +184,7 @@
     line-height: 18px; }
     .datepicker-plot-area .datepicker-time-view .down-btn:hover,
     .datepicker-plot-area .datepicker-time-view .up-btn:hover {
-      background-color: #eeeeee; }
+      background-color: #0095C6; }
   .datepicker-plot-area .datepicker-time-view input {
     display: block;
     width: 90%;
@@ -192,7 +192,7 @@
     height: 20px;
     padding: 0px;
     border: none;
-    background: #f9f9f9; }
+    background: #204B6E; }
 
 .datepicker-plot-area .datepicker-day-view .table-days {
   width: 100%;
@@ -232,7 +232,7 @@
     text-indent: 6px;
     font: 14px tahoma;
     font-weight: bold;
-    color: #333333; }
+    color: #ffffff; }
 
 .datepicker-plot-area .datepicker-year-view .year-item,
 .datepicker-plot-area .datepicker-month-view .month-item {
@@ -257,12 +257,12 @@
     height: 28px;
     line-height: 28px;
     font-weight: bold;
-    background-color: #ffffff;
-    color: #333333; }
+    background-color: #1A3347;
+    color: #ffffff; }
     .datepicker-plot-area .datepicker-header .btn-next:hover,
     .datepicker-plot-area .datepicker-header .btn-switch:hover,
     .datepicker-plot-area .datepicker-header .btn-prev:hover {
-      background-color: #eeeeee; }
+      background-color: #0095C6; }
   .datepicker-plot-area .datepicker-header .btn-next {
     display: block;
     width: 15%;
@@ -289,9 +289,9 @@
     line-height: 16px;
     margin: 0px auto;
     font-weight: bold;
-    background-color: #ffffff; }
+    background-color: #1A3347; }
     .datepicker-plot-area .toolbox .btn-today:hover {
-      background-color: #eeeeee; }
+      background-color: #0095C6; }
 
 .datepicker-plot-area .datepicker-header {
   display: block;
@@ -307,12 +307,12 @@
     height: 28px;
     line-height: 28px;
     font-weight: bold;
-    background-color: #ffffff;
-    color: #333333; }
+    background-color: #1A3347;
+    color: #ffffff; }
     .datepicker-plot-area .datepicker-header .btn-next:hover,
     .datepicker-plot-area .datepicker-header .btn-switch:hover,
     .datepicker-plot-area .datepicker-header .btn-prev:hover {
-      background-color: #eeeeee; }
+      background-color: #0095C6; }
   .datepicker-plot-area .datepicker-header .btn-next {
     display: block;
     width: 15%;

@@ -7,8 +7,8 @@
     <script type="text/javascript" src="../lib/jquery.js"></script>
     <script type="text/javascript" src="../lib/persian-date.js"></script>
 
-    <!--<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
-    <!--<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/plugin.js"></script>
@@ -46,81 +46,105 @@
 </head>
 <body>
 <script type="text/javascript">
-    var dp;
     /*
      Default Functionality
      */
     $(document).ready(function () {
-//        /*
-//        Default
-//        */
-//        $(".datePicker").persianDatepicker();
-//
+        /*
+         Default
+         */
+        $("#default").persianDatepicker();
+
         /*
          timepicker
          */
-//        $(".timepicker").persianDatepicker({
-//            altFormat: "YYYY MM DD HH:mm:ss",
-//            altField: '#timepickerAltField',
-//            format: "HH:mm:ss a",
-//            onlyTimePicker: true
-//
-//        });
+        $("#timepicker").persianDatepicker({
+            altFormat: "YYYY MM DD HH:mm:ss",
+            altField: '#timepickerAltField',
+            format: "HH:mm:ss a",
+            onlyTimePicker: true
 
+        });
         /*
          month
          */
-        $(".monthpicker").persianDatepicker({
-            format: "YYYY MMMM DD",
-            viewMode: "month",
-            minDate: 1416983467029,
-            maxDate: 1419983467029,
+        $("#monthpicker").persianDatepicker({
+            format: " MMMM YYYY",
+
             yearPicker: {
-                enabled: true
+                enabled: false
             },
             monthPicker: {
                 enabled: true
             },
             dayPicker: {
-                enabled: true
+                enabled: false
             }
         });
 
         /*
          year
          */
-//        $(".yearpicker").persianDatepicker({
-//            format: "YYYY",
-//            dayPicker: {
-//                enabled: false
-//            },
-//            monthPicker: {
-//                enabled: false
-//            },
-//            yearPicker: {
-//                enabled: true
-//            }
-//        });
-//
-//        /*
-//         Inline
-//         */
-//        $('.inline-datepicker').persianDatepicker();
+        $("#yearpicker").persianDatepicker({
+            format: "YYYY",
+            dayPicker: {
+                enabled: false
+            },
+            monthPicker: {
+                enabled: false
+            },
+            yearPicker: {
+                enabled: true
+            }
+        });
+
+        /*
+         Inline
+         */
+        $('#inlineDatepicker').persianDatepicker();
+        /*
+         year and month
+         */
+        $("#yearAndMonthpicker").persianDatepicker({
+            format: "YYYY MM",
+            dayPicker: {
+                enabled: false
+            },
+            monthPicker: {
+                enabled: true
+            },
+            yearPicker: {
+                enabled: true
+            }
+        });
+        /**
+         inline with minDate and maxDate
+         */
+        $("#inlineDatepickerWithMinMax").persianDatepicker({
+            minDate: 1416983467029,
+            maxDate: 1419983467029
+        });
+        /**
+         persianDate
+         */
+        $("#persianDigit").persianDatepicker({
+            onlyTimePicker: true,
+            timePicker:{
+                showMeridian:false,
+                showSeconds:false
+            }
+        })
     });
 </script>
 <div class="center-block">
-
     <div class="panel panel-default">
         <div class="panel-heading">Simple Datepicker</div>
         <div class="panel-body">
-            <!--<h3>Default Functionlaity</h3>-->
+            <h4>Default Functionlaity</h4>
+
             <div class="form-group col-xs-6">
-                <label>View Input</label>
-                <input type="text" class="datePicker form-control" value="10-10-2014 13:58:1"/>
-            </div>
-            <div class="form-group col-xs-6">
-                <label>alt Input</label>
-                <input type="text" id="alternateField" class="form-control"/>
+                <label>Select Date</label>
+                <input id="default" type="text" class="form-control"/>
             </div>
         </div>
     </div>
@@ -128,11 +152,11 @@
         <div class="panel-heading">Time Picker</div>
         <div class="panel-body">
             <div class="form-group col-xs-6">
-                <label>View Input</label>
-                <input type="text" class="timepicker form-control"/>
+                <label>Select Time</label>
+                <input id="timepicker" type="text" class="form-control"/>
             </div>
             <div class="form-group col-xs-6">
-                <label>alt Input</label>
+                <label>Alt Input</label>
                 <input type="text" id="timepickerAltField" class="form-control"/>
             </div>
         </div>
@@ -141,8 +165,8 @@
         <div class="panel-heading">Month Picker</div>
         <div class="panel-body">
             <div class="form-group col-xs-6">
-                <label>View Input</label>
-                <input type="text" class="monthpicker form-control"/>
+                <label>Select Month</label>
+                <input id="monthpicker" type="text" class="form-control"/>
             </div>
         </div>
     </div>
@@ -150,15 +174,40 @@
         <div class="panel-heading">Year Picker</div>
         <div class="panel-body">
             <div class="form-group col-xs-6">
-                <label>View Input</label>
-                <input type="text" class="yearpicker form-control"/>
+                <label>Select Year</label>
+                <input id="yearpicker" type="text" class="form-control"/>
             </div>
         </div>
     </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Year And Month Picker</div>
+        <div class="panel-body">
+            <div class="form-group col-xs-6">
+                <label>Select Year And Month</label>
+                <input id="yearAndMonthpicker" type="text" class=" form-control"/>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">inline Datepicker</div>
         <div class="panel-body">
-            <div class="col-xs-6 inline-datepicker"></div>
+            <div id="inlineDatepicker" class="col-xs-6"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">With Min and Max</div>
+        <div class="panel-body">
+            <div id="inlineDatepickerWithMinMax" class="col-xs-6"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Inline Time picker</div>
+        <div class="panel-body">
+            <div id="persianDigit" class="col-xs-6"></div>
         </div>
     </div>
 </div>

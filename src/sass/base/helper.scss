@@ -1,0 +1,65 @@
+.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.animation {
+  -webkit-transition: $animate-duration;
+  -moz-transition: $animate-duration;
+  -ms-transition: $animate-duration;
+  -o-transition: $animate-duration;
+  transition: $animate-duration;
+}
+.reset-curve{
+    -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.top-big-curve {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-border-top-left-radius: $layout-big-curve;
+  -webkit-border-top-right-radius: $layout-big-curve;
+  -moz-border-radius-topleft: $layout-big-curve;
+  -moz-border-radius-topright: $layout-big-curve;
+  border-top-left-radius: $layout-big-curve;
+  border-top-right-radius: $layout-big-curve;
+}
+
+.bottom-big-curve {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-border-bottom-right-radius: $layout-big-curve;
+  -webkit-border-bottom-left-radius: $layout-big-curve;
+  -moz-border-radius-bottomright: $layout-big-curve;
+  -moz-border-radius-bottomleft: $layout-big-curve;
+  border-bottom-right-radius: $layout-big-curve;
+  border-bottom-left-radius: $layout-big-curve;
+}
+
+.big-curve {
+  -webkit-border-radius: $layout-big-curve;
+  -moz-border-radius: $layout-big-curve;
+  border-radius: $layout-big-curve;
+}
+
+.small-curve {
+  -webkit-border-radius: $layout-small-curve;
+  -moz-border-radius: $layout-small-curve;
+  border-radius: $layout-small-curve;
+}
+
+.main-box-shadow {
+  -webkit-box-shadow: $main-box-shadow;
+  -moz-box-shadow: $main-box-shadow;
+  box-shadow: $main-box-shadow;
+}
+
+.interactive-item {
+  cursor: pointer;
+}

@@ -136,12 +136,47 @@ var ClassMonthPicker = {
                 if (startYear < y & y < endYear) {
                     return true;
                 }
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return true;
         }
+    },
+
+
+    /**
+     *
+     * @returns {ClassMonthPicker}
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.next();
+                } else {
+                    self.prev();
+                }
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
     },
 
     /**
@@ -163,7 +198,7 @@ var ClassMonthPicker = {
             if (self._checkMonthAccess(m)) {
                 monthItem.click(function () {
                     self.onSelect($(this).data().monthIndex);
-                    self.datepicker.selectMonth($(this).data().monthIndex);
+                    self.datepicker.selectMonth(parseInt($(this).data().monthIndex));
                     return false;
                 });
             } else {
@@ -183,6 +218,8 @@ var ClassMonthPicker = {
      */
     init: function () {
         this._render();
+        this._attachEvents();
+        return this;
     }
 };
 

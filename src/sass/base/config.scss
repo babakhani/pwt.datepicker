@@ -1,0 +1,82 @@
+// Color
+
+$white: #ffffff !default;
+$dark: #333333 !default;
+$gray: #cccccc !default;
+$light-gray: #eeeeee !default;
+$ultra-light-gray: #f1f1f1 !default;
+$super-light-gray: #f9f9f9 !default;
+$today-color: #006dcc !default;
+
+// Font Style & text
+$main-font: 12px tahoma !default;
+$big-font: 14px tahoma !default;
+$small-font: 10px tahoma !default;
+$strong-font: bold;
+$super-strong-font: bold;
+
+$global-text-color: $dark;
+
+
+$global-text-align: center !default;
+$layout-big-curve: 6px !default;
+$layout-small-curve: 3px !default;
+$main-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !default;
+$animate-duration: all 100ms ease !default;
+
+// Plot area
+
+$plot-area-bg: $white !default;
+$plot-area-border: 1px solid $gray !default;
+
+// Bottom
+$bottom-bg: $white !default;
+$bottom-bg-hover: $light-gray !default;
+$bottom-text-color: $dark;
+
+// Date Item
+
+$date-item-font: 14px !default;
+$date-item-bg: $white !default;
+$date-item-border: 0px !default;
+$date-item-color: $dark !default;
+$date-item-text-shadow: none !default;
+
+$date-item-hover-font: 14px !default;
+$date-item-hover-bg: $light-gray !default;
+$date-item-hover-border: 0px !default;
+$date-item-hover-color: "";
+$date-item-hover-text-shadow: none !default;
+
+$date-item-today-bg: $dark !default;
+$date-item-today-border: 0px !default;
+$date-item-today-color: $white !default;
+$date-item-today-text-shadow: none !default;
+
+$date-item-selected-bg: $today-color !important !default;
+$date-item-selected-border: none;
+$date-item-selected-color: $white !default;
+$date-item-selected-text-shadow: 1px 1px 1px #000000 !default;
+
+$date-item-numb-bg: "";
+$date-item-numb-border: none !default;
+$date-item-numb-color: $gray !default;
+$date-item-numb-text-shadow: none !default;
+
+$date-item-disable-bg: $ultra-light-gray !important !default;
+$date-item-disable-border: none !important !default;
+$date-item-disable-color: $gray !important !default;
+$date-item-disable-text-shadow: none !important !default;
+
+// Tiomepicker
+
+$timepicker-border: 1px solid $ultra-light-gray !default;
+$timepicker-bg: $super-light-gray !default;
+
+$timepicker-segment-divider-font: 12px bold !default;
+$timepicker-input-bg: $super-light-gray !default;
+$timepicker-input-border: none !default;
+
+
+
+

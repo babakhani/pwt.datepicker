@@ -1,0 +1,62 @@
+.datepicker-plot-area .datepicker-time-view {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 5px 1%;
+  margin: 0px;
+  margin: 3px 0px;
+  background: $timepicker-bg;
+  border-top: $timepicker-border;
+  & > div.time-segment {
+    display: block;
+    width: 22%;
+    height: 60px;
+    float: left;
+    overflow: hidden;
+    @extend .interactive-item;
+    @extend .big-curve;
+    &:hover .down-btn,
+    &:hover .up-btn {
+      font-weight: $strong-font;
+      background-color: $bottom-bg;
+
+    }
+  }
+  & .divider {
+    display: block;
+    width: 3%;
+    height: 60px;
+    line-height: 60px !important;
+    float: left;
+    overflow: hidden;
+    font: $timepicker-segment-divider-font;
+  }
+  .down-btn,
+  .up-btn {
+    display: block;
+    float: left;
+    width: 100%;
+    margin: 0px 0%;
+    height: 20px;
+    line-height: 18px;
+    @extend .top-big-curve;
+    &:hover {
+      background-color: $bottom-bg-hover;
+    }
+    @extend .interactive-item;
+    @extend .animation;
+  }
+  .down-btn {
+    @extend .bottom-big-curve;
+  }
+  input {
+    display: block;
+    width: 90%;
+    margin: 0px 5%;
+    height: 20px;
+    padding: 0px;
+    @extend .interactive-item;
+    border: $timepicker-input-border;
+    background: $timepicker-input-bg;
+  }
+}
