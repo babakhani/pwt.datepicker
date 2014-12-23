@@ -11,9 +11,6 @@ var ClassDaypicker = {
      */
     next: function () {
         var self = this;
-
-        log(self.datepicker.state.view)
-
         if (self.datepicker.state.view.month === 12) {
             self.datepicker.state.setView('month', 1);
             self.datepicker.state.setView('year', parseInt(self.datepicker.state.view.year) + 1);
