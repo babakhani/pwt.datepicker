@@ -88,7 +88,6 @@ var ClassConfig = {
      */
     inputDelay: 800,
 
-
     /**
      * @method
      * @param unixDate
@@ -236,6 +235,12 @@ var ClassConfig = {
         enabled: false,
         showSeconds: true,
         showMeridian: true,
+
+
+        scrollEnabled: true,
+        /**
+         * @deprecated 0.3.5
+         */
         changeOnScroll: true
     },
 
@@ -245,6 +250,7 @@ var ClassConfig = {
      */
     dayPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY MMMM',
         titleFormatter: function (year, month) {
             if (this.datepicker.persianDigit == false) {
@@ -266,6 +272,7 @@ var ClassConfig = {
      */
     monthPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (unix) {
             if (this.datepicker.persianDigit == false) {
@@ -273,7 +280,7 @@ var ClassConfig = {
             }
             var titleStr = new persianDate(unix).format(this.titleFormat);
             window.formatPersian = true;
-            return titleStr
+            return titleStr;
 
         },
         onSelect: function (monthIndex) {
@@ -288,6 +295,7 @@ var ClassConfig = {
      */
     yearPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (year) {
             var remaining = parseInt(year / 12) * 12;
@@ -849,6 +857,8 @@ var ClassCompat = {
         } else {
             this.state._filetredDate = false;
         }
+
+
         return this;
     }
 
@@ -2326,6 +2336,40 @@ var ClassDaypicker = {
         return this;
     },
 
+    /**
+     *
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.prev();
+                }else{
+                    self.next();
+                }
+
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
+    },
+
 
     /**
      *
@@ -2357,7 +2401,8 @@ var ClassDaypicker = {
      */
     init: function () {
         var self = this;
-        this._render();
+        this._render()
+        this._attachEvents();
         this._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         return this;
     }
@@ -2514,12 +2559,47 @@ var ClassMonthPicker = {
                 if (startYear < y & y < endYear) {
                     return true;
                 }
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return true;
         }
+    },
+
+
+    /**
+     *
+     * @returns {ClassMonthPicker}
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.prev();
+                } else {
+                    self.next();
+                }
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
     },
 
     /**
@@ -2561,6 +2641,8 @@ var ClassMonthPicker = {
      */
     init: function () {
         this._render();
+        this._attachEvents();
+        return this;
     }
 };
 
@@ -2707,6 +2789,42 @@ var ClassYearPicker = {
 
     },
 
+
+    /**
+     *
+     * @returns {ClassMonthPicker}
+     * @private
+     */
+    _attachEvents: function () {
+        var self = this;
+        if (this.scrollEnabled) {
+            $(this.container).mousewheel(function (event) {
+
+                if (event.deltaY > 0) {
+                    self.prev();
+                } else {
+                    self.next();
+                }
+
+            });
+            $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
+                var scrollTo = null;
+
+                if (e.type == 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if (e.type == 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                if (scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
+            });
+        }
+        return this;
+    },
+
     /**
      *
      * @returns {Class_YearPicker}
@@ -2751,6 +2869,8 @@ var ClassYearPicker = {
      */
     init: function () {
         this._render();
+        this._attachEvents();
+        return this;
     }
 };
 
@@ -3126,7 +3246,7 @@ var ClassTimepicker = {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
             return false;
         });
-        if (this.changeOnScroll) {
+        if (this.scrollEnabled & this.datepicker.scrollEnabled) {
             $('> div.time-segment', this.container).mousewheel(function (event) {
                 var moveMode = 'down';
                 if (event.deltaY > 0) {

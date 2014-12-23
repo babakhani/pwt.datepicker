@@ -27,6 +27,8 @@ var ClassCompat = {
         } else {
             this.state._filetredDate = false;
         }
+
+
         return this;
     }
 

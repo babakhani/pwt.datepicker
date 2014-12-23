@@ -276,7 +276,7 @@ var ClassTimepicker = {
             self['_move' + $(this).parent().attr('data-time-key')]('down');
             return false;
         });
-        if (this.changeOnScroll) {
+        if (this.scrollEnabled & this.datepicker.scrollEnabled) {
             $('> div.time-segment', this.container).mousewheel(function (event) {
                 var moveMode = 'down';
                 if (event.deltaY > 0) {

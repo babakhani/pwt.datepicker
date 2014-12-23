@@ -69,7 +69,6 @@ var ClassConfig = {
      */
     inputDelay: 800,
 
-
     /**
      * @method
      * @param unixDate
@@ -217,6 +216,12 @@ var ClassConfig = {
         enabled: false,
         showSeconds: true,
         showMeridian: true,
+
+
+        scrollEnabled: true,
+        /**
+         * @deprecated 0.3.5
+         */
         changeOnScroll: true
     },
 
@@ -226,6 +231,7 @@ var ClassConfig = {
      */
     dayPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY MMMM',
         titleFormatter: function (year, month) {
             if (this.datepicker.persianDigit == false) {
@@ -247,6 +253,7 @@ var ClassConfig = {
      */
     monthPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (unix) {
             if (this.datepicker.persianDigit == false) {
@@ -254,7 +261,7 @@ var ClassConfig = {
             }
             var titleStr = new persianDate(unix).format(this.titleFormat);
             window.formatPersian = true;
-            return titleStr
+            return titleStr;
 
         },
         onSelect: function (monthIndex) {
@@ -269,6 +276,7 @@ var ClassConfig = {
      */
     yearPicker: {
         enabled: true,
+        scrollEnabled: true,
         titleFormat: 'YYYY',
         titleFormatter: function (year) {
             var remaining = parseInt(year / 12) * 12;
