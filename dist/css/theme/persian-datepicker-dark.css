@@ -1,31 +1,8 @@
-/* Color
--------------------------------*/
-/* Font Style & text
--------------------------------*/
-/*
--------------------------------*/
-/* Plot area
--------------------------------*/
-/* Bottom
--------------------------------*/
-/* Date Item
--------------------------------*/
-/* Tiomepicker
--------------------------------*/
-/* Color
--------------------------------*/
-/* Font Style & text
--------------------------------*/
-/*
--------------------------------*/
-/* Plot area
--------------------------------*/
-/* Bottom
--------------------------------*/
-/* Date Item
--------------------------------*/
-/* Tiomepicker
--------------------------------*/
+/* persian-datepicker - v0.3.5 
+  Author: reza babakhani 
+ http://babakhani.github.io/PersianWebToolkit/datepicker 
+ */
+
 .unselectable, .datepicker-plot-area {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -171,7 +148,6 @@
   min-height: 200px !important;
   margin: 0px 1% 0px 1%; }
 
-/*-------------------------------------   Modules ---------------------*/
 .datepicker-plot-area .datepicker-time-view {
   display: block;
   float: left;
@@ -350,5 +326,3 @@
     display: block;
     width: 15%;
     float: left; }
-
-/*-------------------------------------   Theme Style ---------------------*/

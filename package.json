@@ -1,6 +1,6 @@
 {
     "name": "persian-datepicker",
-    "version": "0.3.0",
+    "version": "0.3.5",
     "devDependencies": {
         "grunt": "0.4.4",
         "grunt-cli": "0.1.13",

@@ -1,4 +1,8 @@
-/* persian-datepicker - v0.3.0 */( function () {(function ($) {
+/* persian-datepicker - v0.3.5 
+  Author: reza babakhani 
+ http://babakhani.github.io/PersianWebToolkit/datepicker 
+ */
+( function () {(function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments), output = this;
         if (!this) {

@@ -1,5 +1,5 @@
-/* Color
--------------------------------*/
+// Color
+
 $white: #ffffff !default;
 $dark: #333333 !default;
 $gray: #cccccc !default;
@@ -8,8 +8,7 @@ $ultra-light-gray: #f1f1f1 !default;
 $super-light-gray: #f9f9f9 !default;
 $today-color: #006dcc !default;
 
-/* Font Style & text
--------------------------------*/
+// Font Style & text
 $main-font: 12px tahoma !default;
 $big-font: 14px tahoma !default;
 $small-font: 10px tahoma !default;
@@ -18,27 +17,25 @@ $super-strong-font: bold;
 
 $global-text-color: $dark;
 
-/*
--------------------------------*/
+
 $global-text-align: center !default;
 $layout-big-curve: 6px !default;
 $layout-small-curve: 3px !default;
 $main-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !default;
 $animate-duration: all 100ms ease !default;
 
-/* Plot area
--------------------------------*/
+// Plot area
+
 $plot-area-bg: $white !default;
 $plot-area-border: 1px solid $gray !default;
 
-/* Bottom
--------------------------------*/
+// Bottom
 $bottom-bg: $white !default;
 $bottom-bg-hover: $light-gray !default;
 $bottom-text-color: $dark;
 
-/* Date Item
--------------------------------*/
+// Date Item
+
 $date-item-font: 14px !default;
 $date-item-bg: $white !default;
 $date-item-border: 0px !default;
@@ -71,8 +68,8 @@ $date-item-disable-border: none !important !default;
 $date-item-disable-color: $gray !important !default;
 $date-item-disable-text-shadow: none !important !default;
 
-/* Tiomepicker
--------------------------------*/
+// Tiomepicker
+
 $timepicker-border: 1px solid $ultra-light-gray !default;
 $timepicker-bg: $super-light-gray !default;
 

@@ -1,12 +1,15 @@
 module.exports = function (grunt) {
+    var fileBanner = '/* <%= pkg.name %> - v<%= pkg.version %> \n ' +//
+        ' Author: reza babakhani \n ' + //
+        'http://babakhani.github.io/PersianWebToolkit/datepicker \n */\n'
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
                 stripBanners: true,
-                banner: '/* <%= pkg.name %> - v<%= pkg.version %> */' +
-                    '( function () {',
+                banner: fileBanner + '( function () {',
                 footer: '}());'
             },
             dist: {
@@ -36,6 +39,9 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
+            options: {
+                banner: fileBanner
+            },
             build: {
                 src: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js',
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.min.js'
@@ -43,7 +49,7 @@ module.exports = function (grunt) {
         },
         sass: {
             options: {
-                compress: false,
+                banner: fileBanner,
                 sourcemap: 'none'
             },
             dist: {
@@ -75,6 +81,9 @@ module.exports = function (grunt) {
             }
         },
         cssmin: {
+            options: {
+                banner: fileBanner
+            },
             combine: {
                 files: {
                     'dist/css/<%= pkg.name %>-<%= pkg.version %>.min.css': ['src/css/<%= pkg.name %>.css']
@@ -85,9 +94,7 @@ module.exports = function (grunt) {
             dist: {
                 src: 'src/js',
                 options: {
-                    destination: 'doc/<%= pkg.version %>',
-//                    configure: 'doc/conf.json',
-//                    template: 'node_modules/ink-docstrap/template',
+                    destination: 'doc/<%= pkg.version %>'
                 }
             }
         },
