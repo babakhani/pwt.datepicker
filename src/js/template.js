@@ -1,9 +1,11 @@
 /**
+ * @global
+ * @class TEMPLATE
  * @type {{datepciker: string, navigator: string, timepicker: string}}
  */
 var TEMPLATE = {
     /**
-     * datepicker
+     * @desc datepicker
      */
     datepciker: "<div class='{{css.datePickerPlotArea}}' >" + //
         "<div class='{{css.navigator}}' ></div>" +//
@@ -16,7 +18,7 @@ var TEMPLATE = {
 
 
     /**
-     * navigator
+     * @desc navigator
      */
     navigator: "<div class='{{css.datpickerHeader}}' >" + //
         "<div class='{{css.btnNext}}' >{{btnNextText}}</div>" + //
@@ -26,7 +28,7 @@ var TEMPLATE = {
 
 
     /**
-     * timepicker
+     * @desc timepicker
      */
     timepicker: "<div class='hour time-segment' data-time-key='hour' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
@@ -54,7 +56,7 @@ var TEMPLATE = {
         "</div>",
 
     /**
-     * Month Grid
+     * @desc Month Grid
      */
     monthGrid: "<div class='{{css.main}}' >" + //
         "<div class='{{css.header}}' >" + //

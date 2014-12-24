@@ -1,5 +1,6 @@
 'use strict';
 /**
+ * @desc {@link ClassDatepicker}
  * @class ClassToolbox
  * @type {{cssClass: {btnToday: string}, _goToday: _goToday, _render: _render, init: init}}
  */
@@ -65,13 +66,6 @@ var ClassToolbox = {
 };
 
 
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassToolbox
- */
 var Toolbox = function (options, container) {
     return inherit(this, [ClassSprite, ClassToolbox, options, {
         $container: container

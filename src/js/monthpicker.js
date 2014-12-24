@@ -1,11 +1,12 @@
 'use strict';
 /**
+ * @desc used in {@link ClassDatepicker}
  * @class ClassMonthPicker
  * @type {{cssClass: {selectedMonth: string, monthItem: string}, monthRange: (ClassDateRange.monthRange|*), _updateNavigator: _updateNavigator, hide: hide, show: show, selectMonth: selectMonth, defineSelectedMonth: defineSelectedMonth, next: next, prev: prev, updateView: updateView, _render: _render, init: init}}
  */
 var ClassMonthPicker = {
     /**
-     * cssClass
+     * @desc cssClass
      */
     cssClass: {
         selectedMonth: "selected",
@@ -14,13 +15,13 @@ var ClassMonthPicker = {
     },
 
     /**
-     * monthRange
+     * @desc monthRange
      */
     monthRange: ClassDateRange.monthRange,
 
 
     /**
-     *
+     * @desc _updateNavigator
      * @private
      */
     _updateNavigator: function () {
@@ -31,7 +32,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc hide
      * @returns {Class_MonthPicker}
      */
     hide: function () {
@@ -41,7 +42,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc show
      * @returns {Class_MonthPicker}
      */
     show: function () {
@@ -53,7 +54,7 @@ var ClassMonthPicker = {
 
 
     /**
-     * selectMonth
+     * @desc selectMonth
      */
     selectMonth: function () {
         this.defineSelectedMonth();
@@ -62,7 +63,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc defineSelectedMonth
      * @returns {Class_MonthPicker}
      */
     defineSelectedMonth: function () {
@@ -76,7 +77,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc next
      * @returns {Class_MonthPicker}
      */
     next: function () {
@@ -90,7 +91,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc prev
      * @returns {Class_MonthPicker}
      */
     prev: function () {
@@ -103,7 +104,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc updateView
      * @returns {Class_MonthPicker}
      */
     updateView: function () {
@@ -114,7 +115,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc _checkMonthAccess
      * @param month
      * @returns {boolean}
      * @private
@@ -146,7 +147,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc _attachEvents
      * @returns {ClassMonthPicker}
      * @private
      */
@@ -180,7 +181,7 @@ var ClassMonthPicker = {
     },
 
     /**
-     *
+     * @desc _render
      * @returns {Class_MonthPicker}
      * @private
      */
@@ -214,7 +215,8 @@ var ClassMonthPicker = {
     },
 
     /**
-     * init
+     * @desc init
+     * @returns {ClassMonthPicker}
      */
     init: function () {
         this._render();
@@ -223,14 +225,6 @@ var ClassMonthPicker = {
     }
 };
 
-
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassMonthPicker
- */
 var MonthPicker = function (options, container) {
     return inherit(this, [ClassSprite, ClassMonthPicker, options, {
         container: container

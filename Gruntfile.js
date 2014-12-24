@@ -94,7 +94,9 @@ module.exports = function (grunt) {
             dist: {
                 src: 'src/js',
                 options: {
-                    destination: 'doc/<%= pkg.version %>'
+                    destination: 'doc/<%= pkg.version %>',
+//                    configure: 'doc/conf.json',
+//                    template: 'node_modules/ink-docstrap/template',
                 }
             }
         },
@@ -106,6 +108,10 @@ module.exports = function (grunt) {
             sass: {
                 files: ['src/sass/**/*.scss'],
                 tasks: ['sass', 'cssmin']
+            },
+            doc: {
+                files: ['src/js/*.js'],
+                tasks: ['jsdoc']
             }
         },
         yuidoc: {
@@ -130,7 +136,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     if (grunt.option("doc") === true) {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'jsdoc']);
+        grunt.registerTask('default', ['jsdoc', 'watch']);
     } else {
         grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'watch']);
     }

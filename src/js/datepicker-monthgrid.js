@@ -1,10 +1,18 @@
 /**
+ * @desc used in {@link ClassDatepicker}
  * @class ClassMonthGrid
+ * @memberOf ClassDayPicker
  * @type {{state: {year: null, month: null, date: null, firstWeekDayOfMonth: null, daysCount: null}, persianDigit: boolean, _formatDigit: _formatDigit, events: {init: init, render: render, reRender: reRender, selectDay: selectDay}, _markToday: _markToday, _updateState: _updateState, selectDate: selectDate, markSelectedDate: markSelectedDate, updateAs: updateAs, goToNextMonth: goToNextMonth, goToPrevMonth: goToPrevMonth, goToYear: goToYear, applyStory: applyStory}}
  */
 var ClassMonthGrid = {
     /**
-     * state
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc state
+     * @prop year
+     * @prop month
+     * @prop date
+     * @prop firstWeekDayOfMonth
+     * @prop daysCount
      */
     state: {
         year: null,
@@ -16,13 +24,15 @@ var ClassMonthGrid = {
 
 
     /**
-     * perisnaDigit
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc perisnaDigit
      */
     persianDigit: true,
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc _formatDigit
      * @param digit
      * @returns {*}
      * @private
@@ -38,7 +48,12 @@ var ClassMonthGrid = {
 
 
     /**
-     * evenets
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc evenets
+     * @prop init
+     * @prop render
+     * @prop reRender
+     * @prop selectDay
      */
     events: {
         init: function () {
@@ -56,7 +71,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc _markToday
      * @returns {Class_MonthGrid}
      * @private
      */
@@ -78,11 +94,12 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc _updateState
      * @returns {Class_MonthGrid}
      * @private
+     * @todo : must remove
      */
-    // TODO : must remove
     _updateState: function () {
         var self = this;
         var t = new persianDate();
@@ -93,7 +110,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc selectDate
      * @param unixDate
      * @returns {Class_MonthGrid}
      */
@@ -117,7 +135,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc markSelectedDate
      * @param unixDate
      */
     markSelectedDate: function (unixDate) {
@@ -134,7 +153,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc updateAs
      * @param year
      * @param month
      * @returns {Class_MonthGrid}
@@ -149,7 +169,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc goToNextMonth
      * @returns {boolean}
      */
     goToNextMonth: function () {
@@ -166,14 +187,16 @@ var ClassMonthGrid = {
 
 
     /**
-     * goTOPrevMonth
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc goTOPrevMonth
      */
     goToPrevMonth: function () {
     },
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc goToYear
      * @param year
      */
     goToYear: function (year) {
@@ -182,20 +205,13 @@ var ClassMonthGrid = {
 
 
     /**
-     * applyStory
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc applyStory
      */
     applyStory: function () {
         //this.view.applyStory(this);
     }
 };
-
-
-/**
- *
- * @param options
- * @returns {MonthGrid}
- * @constructs ClassMonthGrid
- */
 MonthGrid = function (options) {
     // Change !!
     //this.pcal = options.parent.pcal;

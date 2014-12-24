@@ -1,10 +1,12 @@
 /**
- *
+ * @desc used by {@link ClassDatepicker}
+ * @class ClassCompat
+ * @memberOf ClassDatepicker
  * @type {{}}
  */
 var ClassCompat = {
     /**
-     *
+     * @memberOf ClassDatepicker.ClassCompat
      * @returns {ClassDatepicker}
      */
     compatConfig: function () {
@@ -27,9 +29,6 @@ var ClassCompat = {
         } else {
             this.state._filetredDate = false;
         }
-
-
         return this;
     }
-
 };

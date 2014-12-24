@@ -1,11 +1,24 @@
 'use strict';
 /**
+ * @desc used in {@link ClassMonthGrid}
  * @class ViewsMonthGrid
+ * @memberOf ClassMonthGrid
  * @type {{cssClass: {main: string, header: string, headerTitle: string, headerRow: string, headerRowCell: string, daysTable: string, currentMonth: string, today: string, selected: string}, views: {default: {render: render, renderDays: renderDays}}}}
  */
 var ViewsMonthGrid = {
     /**
-     * cssClass
+     * @memberOf ClassMonthGrid.ViewsMonthGrid
+     * @desc cssClass       {string}
+     * @prop main           {string}
+     * @prop header         {string}
+     * @prop headerTitle    {string}
+     * @prop headerRow      {string}
+     * @prop headerRowCell  {string}
+     * @prop daysTable      {string}
+     * @prop currentMonth   {string}
+     * @prop today          {string}
+     * @prop selected       {string}
+     * @prop disbaled       {string}
      */
     cssClass: {
         main: "month-grid-box",
@@ -22,7 +35,8 @@ var ViewsMonthGrid = {
 
 
     /**
-     *  views
+     * @memberOf ClassMonthGrid.ViewsMonthGrid
+     * @desc views
      */
     views: {
         "default": {

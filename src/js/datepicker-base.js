@@ -1,12 +1,12 @@
 'use strict';
 /**
+ * @class ClassBase
  * @abstract
  * @type {{init: init, publishInDic: publishInDic, callOfDict: callOfDict, isSameDay: isSameDay, isValidGreguranDate: isValidGreguranDate, validatePersianDateString: validatePersianDateString, fullHeight: fullHeight, attachEvent: attachEvent, dettachEvent: dettachEvent, clearEvent: clearEvent, raiseEvent: raiseEvent, events: {init: null}}}
  */
 var ClassBase = {
     /**
-     *  Call init method
-     * init;
+     * @desc initilize {@link ClassBase}
      * @private
      */
     init: function () {
@@ -17,8 +17,8 @@ var ClassBase = {
 
     /**
      *
-     * @param objectList
-     * @param methodName
+     * @param {Array} objectList
+     * @param {string} methodName
      * @returns {*}
      */
     publishInDic: function (objectList, methodName) {
@@ -31,9 +31,9 @@ var ClassBase = {
 
     /**
      *
-     * @param objectList
-     * @param key
-     * @param methodName
+     * @param {Array} objectList
+     * @param {string} key
+     * @param {string} methodName
      */
     callOfDict: function (objectList, key, methodName) {
     },
@@ -41,8 +41,8 @@ var ClassBase = {
 
     /**
      *
-     * @param unix1
-     * @param unix2
+     * @param {Numer} unix1
+     * @param {Numer} unix2
      * @returns {pDate|boolean}
      */
     isSameDay: function (unix1, unix2) {
@@ -56,8 +56,7 @@ var ClassBase = {
 
 
     /**
-     *
-     * @param inputDate
+     * @param {string} inputDate
      * @returns {*|boolean}
      */
     isValidGreguranDate: function (inputDate) {
@@ -67,7 +66,7 @@ var ClassBase = {
 
     /**
      *
-     * @param pasted
+     * @param {string} pasted
      * @returns {*}
      */
     validatePersianDateString: function (pasted) {
@@ -91,7 +90,7 @@ var ClassBase = {
 
     /**
      *
-     * @param element
+     * @param {object} element
      * @returns {*}
      */
     fullHeight: function (element) {
@@ -101,8 +100,8 @@ var ClassBase = {
 
     /**
      *
-     * @param eventName
-     * @param func
+     * @param {string} eventName
+     * @param {Function} func
      * @returns {Class_Base}
      */
     attachEvent: function (eventName, func) {
@@ -122,8 +121,8 @@ var ClassBase = {
 
     /**
      *
-     * @param eventName
-     * @param func
+     * @param {string} eventName
+     * @param {Function} func
      * @returns {Class_Base}
      */
     dettachEvent: function (eventName, func) {
@@ -141,8 +140,7 @@ var ClassBase = {
 
 
     /**
-     *
-     * @param eventName
+     * @param {string} eventName
      * @returns {Class_Base}
      */
     clearEvent: function (eventName) {
@@ -152,7 +150,6 @@ var ClassBase = {
 
 
     /**
-     *
      * @param eventName
      * @param args
      * @returns {Class_Base}
@@ -177,38 +174,35 @@ var ClassBase = {
             }
         }
         return this;
-    },
-
-    /**
-     * evenets
-     */
-    events: {
-        init: null // e
     }
 };
 
 
 /**
+ * @class ClassSprite
  * @abstract
  * @type {{defaultView: string, events: {init: init, render: null}, views: {default: {render: render}}, element: {main: null}, createElementByClass: createElementByClass, render: render, tmpl: {}}}
  */
 var ClassSprite = {
+    /**
+     * @desc defaultView
+     */
     defaultView: "default",
+
+
+    /**
+     * @desc events
+     */
     events: {
         init: function () {
             this.render();
         },
-
-
-        /**
-         * render
-         */
         render: null
     },
 
 
     /**
-     * Views
+     * @desc views
      */
     views: {
         'default': {
@@ -219,7 +213,7 @@ var ClassSprite = {
 
 
     /**
-     * element
+     * @desc element
      */
     element: {
         main: null// Root Element Of Sprite
@@ -227,8 +221,8 @@ var ClassSprite = {
 
 
     /**
-     *
-     * @param className
+     * @desc createElementByClass
+     * @param {string} className string of class
      * @returns {*}
      */
     createElementByClass: function (className) {
@@ -237,8 +231,8 @@ var ClassSprite = {
 
 
     /**
-     *
-     * @param viewName
+     * @desc render
+     * @param {string} viewName
      * @returns {*}
      */
     render: function (viewName) {
@@ -248,7 +242,6 @@ var ClassSprite = {
         this.raiseEvent('render');
         this.view = this.views[viewName];
         return this.view.render(this);
-    },
-    tmpl: {}
+    }
 };
 

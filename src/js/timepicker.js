@@ -1,27 +1,28 @@
 'use strict';
 /**
- * @class ClassTimepicker
+ * @desc used in {@link ClassDatepicker}
+ * @class ClassTimePicker
  * @type {{showSeconds: boolean, showMeridian: boolean, minuteStep: number, cssClss: {timepicker: string}, show: show, hide: hide, _render: _render, _currentMeridian: null, convert24hTo12: convert24hTo12, convert12hTo24: convert12hTo24, _updateTime: _updateTime, _updateMeridian: _updateMeridian, _toggleMeridian: _toggleMeridian, _movehour: _movehour, _moveminute: _moveminute, _movesecond: _movesecond, _movemeridian: _movemeridian, _updateState: _updateState, _attachEvent: _attachEvent, _bootstrap: _bootstrap, init: init}}
  */
-var ClassTimepicker = {
+var ClassTimePicker = {
     /**
-     * secondStep
+     * @property secondStep
      */
     secondStep: 1,
 
 
     /**
-     * minuteStep
+     * @property minuteStep
      */
     minuteStep: 1,
 
     /**
-     * hourStep
+     * @property hourStep
      */
     hourStep: 1,
 
     /**
-     * cssClass
+     * @property cssClass
      */
     cssClss: {
         timepicker: "viewModel"
@@ -29,7 +30,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property show
      * @returns {Class_Timepicker}
      */
     show: function () {
@@ -40,7 +41,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property hide
      * @returns {Class_Timepicker}
      */
     hide: function () {
@@ -51,7 +52,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property _render
      * @returns {Class_Timepicker}
      * @private
      */
@@ -66,13 +67,13 @@ var ClassTimepicker = {
 
 
     /**
-     * _currentMeridian
+     *  @property _currentMeridian
      */
     _currentMeridian: null,
 
 
     /**
-     *
+     * @property convert24hTo12
      * @param hour
      */
     convert24hTo12: function (hour) {
@@ -89,7 +90,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property convert12hTo24
      * @param hour
      * @returns {*}
      */
@@ -106,7 +107,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property _updateTime
      * @param state
      * @returns {Class_Timepicker}
      * @private
@@ -125,7 +126,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property _updateMeridian
      * @param state
      * @returns {Class_Timepicker}
      * @private
@@ -349,17 +350,8 @@ var ClassTimepicker = {
         return this;
     }
 };
-
-
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassTimepicker
- */
 var TimePicker = function (options, container) {
-    return inherit(this, [ClassSprite, ClassTimepicker, options, {
+    return inherit(this, [ClassSprite, ClassTimePicker, options, {
         container: container
     }]);
 };

@@ -24,13 +24,18 @@
 'use strict';
 
 /**
- * @class
+ * Overwrite by option passed to plugin
+ * {@link http://http://babakhani.github.io/PersianWebToolkit/doc/datepicker/0.3.5/}
+ * @class ClassConfig
+ * @memberOf ClassDatepicker
  * @type {{cssClass: string, daysTitleFormat: string, persianDigit: boolean, viewMode: string, position: string, autoClose: boolean, toolbox: boolean, format: boolean, observer: boolean, altField: boolean, altFormat: string, inputDelay: number, viewFormat: string, formatter: formatter, altFieldFormatter: altFieldFormatter, show: show, hide: hide, onShow: onShow, onHide: onHide, onSelect: onSelect, timePicker: {enabled: boolean}, dayPicker: {enabled: boolean}, monthPicker: {enabled: boolean}, yearPicker: {enabled: boolean}}}
  */
 var ClassConfig = {
 
+
     /**
-     * @property persianDigit
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description if true all digit convert to persian digit.
      * @type {boolean}
      * @default true
      */
@@ -38,6 +43,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description Acceptable value : day,month,year
      * @property viewMode
      * @type {string}
      * @default day
@@ -46,6 +53,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description [x,y] , define a position of datepicker relative to input element.
      * @property position
      * @type {string|Array}
      * @default auto
@@ -54,6 +63,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description If true picker close When Select day
      * @property autoClose
      * @type {boolean}
      * @default false
@@ -62,7 +73,10 @@ var ClassConfig = {
 
 
     /**
-     * @format format
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description the date format, combination of d, dd, m, mm, yy, yyy.
+     * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
+     * @desc format
      * @type {boolean}
      * @default false
      */
@@ -70,7 +84,8 @@ var ClassConfig = {
 
 
     /**
-     * @format observer
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc observer
      * @type {boolean}
      * @default false
      */
@@ -78,22 +93,16 @@ var ClassConfig = {
 
 
     /**
-     * @format altField
-     * @type {boolean}
-     * @default false
-     */
-    altField: false,
-
-
-    /**
-     * @format inputDelay
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc inputDelay
      * @type {number}
      * @default 800
      */
     inputDelay: 800,
 
     /**
-     * @method
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc format value of input
      * @param unixDate
      * @returns {*}
      */
@@ -106,7 +115,20 @@ var ClassConfig = {
 
 
     /**
-     * @format altField
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class'
+     * @desc altField
+     * @type {boolean}
+     * @default false
+     */
+    altField: false,
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description the date format, combination of d, dd, m, mm, yy, yyy.
+     * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
+     * @desc altField
      * @type {string}
      * @default unix
      */
@@ -114,7 +136,8 @@ var ClassConfig = {
 
 
     /**
-     * @method
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc format value of 'altField' input
      * @param unixDate
      * @returns {*}
      */
@@ -134,6 +157,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc Open the date picker.
      * @method
      * @returns {ClassConfig}
      */
@@ -147,6 +172,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc Hide the date picker
      * @method
      * @returns {ClassConfig}
      */
@@ -160,15 +187,20 @@ var ClassConfig = {
     },
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc Removes the datepicker functionality completely.
      * @method
      * @param self
      */
     destroy: function () {
+        this.inputElem.removeClass(self.cssClass);
         this.elmenet.main.remove();
     },
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker instance. It is called just before the datepicker is displayed.
      * @event
      * @param self
      */
@@ -177,6 +209,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker instance. It is called just before the datepicker Hide.
      * @event
      * @param self
      */
@@ -185,6 +219,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker unixDate. It is called When Day Select.
      * @event
      * @param unixDate
      */
@@ -193,30 +229,73 @@ var ClassConfig = {
     },
 
     /**
+     * @see ClassNavigator
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc navigator config object
      * @property navigator
-     * @type {boolean}
+     * @type {object}
      * @default true
      */
     navigator: {
+        /**
+         * @desc Enable or Disable dayPicker
+         */
         enabled: true,
+
+
+        /**
+         * @desc navigator text config object
+         */
         text: {
+            /**
+             * @desc text of next btn
+             */
             btnNextText: "<",
+
+
+            /**
+             * @desc text of prev btn
+             */
             btnPrevText: ">"
         },
+
+
+        /**
+         * @desc Trigger When Next button clicked
+         * @event
+         * @param navigator
+         */
         onNext: function (navigator) {
             //log("navigator next ");
         },
+
+
+        /**
+         * @desc Trigger When Prev button clicked
+         * @event
+         * @param navigator
+         */
         onPrev: function (navigator) {
             //log("navigator prev ");
         },
+
+
+        /**
+         * @desc Trigger When Switch view button clicked
+         * @event
+         * @param navigator
+         */
         onSwitch: function (state) {
             // console.log("navigator switch ");
         }
     },
 
     /**
+     * @see ClassToolbox
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc toolbox config object
      * @property toolbox
-     * @type {boolean}
+     * @type {object}
      * @default true
      * @deprecated 0.2.3
      */
@@ -232,6 +311,9 @@ var ClassConfig = {
 
 
     /**
+     * @see ClassTimePicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc timepicker config object
      * @property timePicker
      * @type {object}
      */
@@ -252,6 +334,9 @@ var ClassConfig = {
     },
 
     /**
+     * @see ClassDayPicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc dayPicker config object
      * @property dayPicker
      * @type {object}
      */
@@ -274,6 +359,9 @@ var ClassConfig = {
     },
 
     /**
+     * @see ClassMonthPicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc monthPicker config object
      * @property monthPicker
      * @type {object}
      */
@@ -297,6 +385,9 @@ var ClassConfig = {
 
 
     /**
+     * @see ClassYearPicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc yearPicker config object
      * @property yearPicker
      * @type {object}
      */
@@ -315,29 +406,37 @@ var ClassConfig = {
 
 
     /**
-     * if true all pickers hide and just shpw timepicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc if true all pickers hide and just shpw timepicker
      * @property justSelectOnDate
+     * @type {boolean}
      */
     onlyTimePicker: false,
 
 
     /**
-     * if true date select just by click on day in month grid
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc if true date select just by click on day in month grid
      * @property justSelectOnDate
+     * @type {boolean}
      */
     justSelectOnDate: true,
 
 
     /**
-     * set min date on datepicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc set min date on datepicker
      * @property minDate
+     * @type {boolean}
      */
     minDate: false,
 
 
     /**
-     * set max date on datepicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc set max date on datepicker
      * @property maxDate
+     * @type {boolean}
      */
     maxDate: false
 
@@ -346,8 +445,6 @@ var ClassConfig = {
 
 }
 var ClassDateRange = {
-
-
     /**
      * @property monthRange
      */
@@ -523,7 +620,7 @@ var ClassDateRange = {
 
 var TEMPLATE = {
     /**
-     * datepicker
+     * @desc datepicker
      */
     datepciker: "<div class='{{css.datePickerPlotArea}}' >" + //
         "<div class='{{css.navigator}}' ></div>" +//
@@ -536,7 +633,7 @@ var TEMPLATE = {
 
 
     /**
-     * navigator
+     * @desc navigator
      */
     navigator: "<div class='{{css.datpickerHeader}}' >" + //
         "<div class='{{css.btnNext}}' >{{btnNextText}}</div>" + //
@@ -546,7 +643,7 @@ var TEMPLATE = {
 
 
     /**
-     * timepicker
+     * @desc timepicker
      */
     timepicker: "<div class='hour time-segment' data-time-key='hour' >" + //
         "<div class='up-btn' >&#9650;</div>" + //
@@ -574,7 +671,7 @@ var TEMPLATE = {
         "</div>",
 
     /**
-     * Month Grid
+     * @desc Month Grid
      */
     monthGrid: "<div class='{{css.main}}' >" + //
         "<div class='{{css.header}}' >" + //
@@ -586,13 +683,13 @@ var TEMPLATE = {
 }
 'use strict';
 /**
+ * @class ClassBase
  * @abstract
  * @type {{init: init, publishInDic: publishInDic, callOfDict: callOfDict, isSameDay: isSameDay, isValidGreguranDate: isValidGreguranDate, validatePersianDateString: validatePersianDateString, fullHeight: fullHeight, attachEvent: attachEvent, dettachEvent: dettachEvent, clearEvent: clearEvent, raiseEvent: raiseEvent, events: {init: null}}}
  */
 var ClassBase = {
     /**
-     *  Call init method
-     * init;
+     * @desc initilize {@link ClassBase}
      * @private
      */
     init: function () {
@@ -603,8 +700,8 @@ var ClassBase = {
 
     /**
      *
-     * @param objectList
-     * @param methodName
+     * @param {Array} objectList
+     * @param {string} methodName
      * @returns {*}
      */
     publishInDic: function (objectList, methodName) {
@@ -617,9 +714,9 @@ var ClassBase = {
 
     /**
      *
-     * @param objectList
-     * @param key
-     * @param methodName
+     * @param {Array} objectList
+     * @param {string} key
+     * @param {string} methodName
      */
     callOfDict: function (objectList, key, methodName) {
     },
@@ -627,8 +724,8 @@ var ClassBase = {
 
     /**
      *
-     * @param unix1
-     * @param unix2
+     * @param {Numer} unix1
+     * @param {Numer} unix2
      * @returns {pDate|boolean}
      */
     isSameDay: function (unix1, unix2) {
@@ -642,8 +739,7 @@ var ClassBase = {
 
 
     /**
-     *
-     * @param inputDate
+     * @param {string} inputDate
      * @returns {*|boolean}
      */
     isValidGreguranDate: function (inputDate) {
@@ -653,7 +749,7 @@ var ClassBase = {
 
     /**
      *
-     * @param pasted
+     * @param {string} pasted
      * @returns {*}
      */
     validatePersianDateString: function (pasted) {
@@ -677,7 +773,7 @@ var ClassBase = {
 
     /**
      *
-     * @param element
+     * @param {object} element
      * @returns {*}
      */
     fullHeight: function (element) {
@@ -687,8 +783,8 @@ var ClassBase = {
 
     /**
      *
-     * @param eventName
-     * @param func
+     * @param {string} eventName
+     * @param {Function} func
      * @returns {Class_Base}
      */
     attachEvent: function (eventName, func) {
@@ -708,8 +804,8 @@ var ClassBase = {
 
     /**
      *
-     * @param eventName
-     * @param func
+     * @param {string} eventName
+     * @param {Function} func
      * @returns {Class_Base}
      */
     dettachEvent: function (eventName, func) {
@@ -727,8 +823,7 @@ var ClassBase = {
 
 
     /**
-     *
-     * @param eventName
+     * @param {string} eventName
      * @returns {Class_Base}
      */
     clearEvent: function (eventName) {
@@ -738,7 +833,6 @@ var ClassBase = {
 
 
     /**
-     *
      * @param eventName
      * @param args
      * @returns {Class_Base}
@@ -763,38 +857,35 @@ var ClassBase = {
             }
         }
         return this;
-    },
-
-    /**
-     * evenets
-     */
-    events: {
-        init: null // e
     }
 };
 
 
 /**
+ * @class ClassSprite
  * @abstract
  * @type {{defaultView: string, events: {init: init, render: null}, views: {default: {render: render}}, element: {main: null}, createElementByClass: createElementByClass, render: render, tmpl: {}}}
  */
 var ClassSprite = {
+    /**
+     * @desc defaultView
+     */
     defaultView: "default",
+
+
+    /**
+     * @desc events
+     */
     events: {
         init: function () {
             this.render();
         },
-
-
-        /**
-         * render
-         */
         render: null
     },
 
 
     /**
-     * Views
+     * @desc views
      */
     views: {
         'default': {
@@ -805,7 +896,7 @@ var ClassSprite = {
 
 
     /**
-     * element
+     * @desc element
      */
     element: {
         main: null// Root Element Of Sprite
@@ -813,8 +904,8 @@ var ClassSprite = {
 
 
     /**
-     *
-     * @param className
+     * @desc createElementByClass
+     * @param {string} className string of class
      * @returns {*}
      */
     createElementByClass: function (className) {
@@ -823,8 +914,8 @@ var ClassSprite = {
 
 
     /**
-     *
-     * @param viewName
+     * @desc render
+     * @param {string} viewName
      * @returns {*}
      */
     render: function (viewName) {
@@ -834,14 +925,13 @@ var ClassSprite = {
         this.raiseEvent('render');
         this.view = this.views[viewName];
         return this.view.render(this);
-    },
-    tmpl: {}
+    }
 };
 
 
 var ClassCompat = {
     /**
-     *
+     * @memberOf ClassDatepicker.ClassCompat
      * @returns {ClassDatepicker}
      */
     compatConfig: function () {
@@ -864,11 +954,8 @@ var ClassCompat = {
         } else {
             this.state._filetredDate = false;
         }
-
-
         return this;
     }
-
 };
 'use strict';
 /**
@@ -1163,7 +1250,13 @@ if (!jQuery.browser) {
 }
 var ClassMonthGrid = {
     /**
-     * state
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc state
+     * @prop year
+     * @prop month
+     * @prop date
+     * @prop firstWeekDayOfMonth
+     * @prop daysCount
      */
     state: {
         year: null,
@@ -1175,13 +1268,15 @@ var ClassMonthGrid = {
 
 
     /**
-     * perisnaDigit
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc perisnaDigit
      */
     persianDigit: true,
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc _formatDigit
      * @param digit
      * @returns {*}
      * @private
@@ -1197,7 +1292,12 @@ var ClassMonthGrid = {
 
 
     /**
-     * evenets
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc evenets
+     * @prop init
+     * @prop render
+     * @prop reRender
+     * @prop selectDay
      */
     events: {
         init: function () {
@@ -1215,7 +1315,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc _markToday
      * @returns {Class_MonthGrid}
      * @private
      */
@@ -1237,11 +1338,12 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc _updateState
      * @returns {Class_MonthGrid}
      * @private
+     * @todo : must remove
      */
-    // TODO : must remove
     _updateState: function () {
         var self = this;
         var t = new persianDate();
@@ -1252,7 +1354,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc selectDate
      * @param unixDate
      * @returns {Class_MonthGrid}
      */
@@ -1276,7 +1379,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc markSelectedDate
      * @param unixDate
      */
     markSelectedDate: function (unixDate) {
@@ -1293,7 +1397,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc updateAs
      * @param year
      * @param month
      * @returns {Class_MonthGrid}
@@ -1308,7 +1413,8 @@ var ClassMonthGrid = {
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc goToNextMonth
      * @returns {boolean}
      */
     goToNextMonth: function () {
@@ -1325,14 +1431,16 @@ var ClassMonthGrid = {
 
 
     /**
-     * goTOPrevMonth
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc goTOPrevMonth
      */
     goToPrevMonth: function () {
     },
 
 
     /**
-     *
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc goToYear
      * @param year
      */
     goToYear: function (year) {
@@ -1341,20 +1449,13 @@ var ClassMonthGrid = {
 
 
     /**
-     * applyStory
+     * @memberOf ClassDayPicker.ClassMonthGrid
+     * @desc applyStory
      */
     applyStory: function () {
         //this.view.applyStory(this);
     }
 };
-
-
-/**
- *
- * @param options
- * @returns {MonthGrid}
- * @constructs ClassMonthGrid
- */
 MonthGrid = function (options) {
     // Change !!
     //this.pcal = options.parent.pcal;
@@ -1364,12 +1465,25 @@ MonthGrid = function (options) {
 
 'use strict';
 /**
+ * @desc used in {@link ClassMonthGrid}
  * @class ViewsMonthGrid
+ * @memberOf ClassMonthGrid
  * @type {{cssClass: {main: string, header: string, headerTitle: string, headerRow: string, headerRowCell: string, daysTable: string, currentMonth: string, today: string, selected: string}, views: {default: {render: render, renderDays: renderDays}}}}
  */
 var ViewsMonthGrid = {
     /**
-     * cssClass
+     * @memberOf ClassMonthGrid.ViewsMonthGrid
+     * @desc cssClass       {string}
+     * @prop main           {string}
+     * @prop header         {string}
+     * @prop headerTitle    {string}
+     * @prop headerRow      {string}
+     * @prop headerRowCell  {string}
+     * @prop daysTable      {string}
+     * @prop currentMonth   {string}
+     * @prop today          {string}
+     * @prop selected       {string}
+     * @prop disbaled       {string}
      */
     cssClass: {
         main: "month-grid-box",
@@ -1386,7 +1500,8 @@ var ViewsMonthGrid = {
 
 
     /**
-     *  views
+     * @memberOf ClassMonthGrid.ViewsMonthGrid
+     * @desc views
      */
     views: {
         "default": {
@@ -1493,14 +1608,22 @@ var ViewsMonthGrid = {
 };
 'use strict';
 /**
+ * @desc used in {@link ClassDatepicker}
  * @class ViewsDatePicker
+ * @memberOf ClassDatepicker
  * @type {{cssClass: {datePickerPlotArea: string, yearView: string, monthView: string, dayView: string, timeView: string, navigator: string, toolbox: string}, container: {}, views: {default: {render: render, fixPosition: fixPosition}}}}
  */
 var ViewsDatePicker = {
-
-
     /**
-     * cssClass
+     * @memberOf ClassDatepicker.ViewsDatePicker
+     * @desc cssClass           {string}
+     * @prop datePickerPlotArea {string}
+     * @prop yearView           {string}
+     * @prop monthView          {string}
+     * @prop dayView            {string}
+     * @prop timeView           {string}
+     * @prop navigator          {string}
+     * @prop toolbox            {string}
      */
     cssClass: {
         datePickerPlotArea: "datepicker-plot-area",
@@ -1514,15 +1637,25 @@ var ViewsDatePicker = {
 
 
     /**
-     * conatiner
+     * @memberOf ClassDatepicker.ViewsDatePicker
+     * @desc conatiner
      */
     container: {},
 
 
     /**
-     * views
+     * @memberOf ClassDatepicker.ViewsDatePicker
+     * @desc views
+     * @prop default {object}
      */
     views: {
+
+
+        /**
+         * @memberOf ClassDatepicker.ViewsDatePicker.views
+         * @prop render {function}
+         * @prop fixPosition {function}
+         */
         "default": {
             /**
              *
@@ -1533,7 +1666,11 @@ var ViewsDatePicker = {
                 var viewData = {
                     css: self.cssClass
                 };
+
                 self.element = {};
+                /**
+                 * @memberOf ViewsDatePicker
+                 */
                 self.element.main = $.tmplMustache(TEMPLATE.datepciker, viewData).appendTo(self.$container);
 
                 if (!self._inlineView) {
@@ -1636,32 +1773,29 @@ var ViewsDatePicker = {
 var ClassDatepicker = {
     /**
      *
+     * @desc list of picker obejcts like dayPicker,monthPicker,yearPicker
      * @private
      */
     _pickers: {},
 
 
     /**
-     * @private
-     */
-    events: {},
-
-
-    /**
+     * @desc save current visibility state of plugin
      * @private
      */
     _viewed: false,
 
 
     /**
+     * @desc if plugin selector detect as a div or any element exsept inpout set as true
      * @private
      */
     _inlineView: false,
 
 
     /**
-     *
-     * @param action
+     * @desc define next state of {@link ClassDatepicker._pickers}
+     * @param {string} action . Acceptable Value : 'day','month',year
      * @returns {*}
      * @private
      */
@@ -1701,12 +1835,11 @@ var ClassDatepicker = {
 
 
     /**
-     *
-     * @param state
+     * @desc check next state is available in {@link ClassDatepicker._pickers}
+     * @param {string} state Accepptable Value: 'day','month','year'
      * @returns {*}
      * @private
      */
-
     _checkNextStateAvalibility: function (state) {
         if (!this._pickers[state]) {
             this.element.main.hide();
@@ -1718,6 +1851,7 @@ var ClassDatepicker = {
 
 
     /**
+     * @desc update {@link ClassNavigator} object switch text
      * @param switchStr
      * @public
      * @returns {ClassDatepicker}
@@ -1731,6 +1865,7 @@ var ClassDatepicker = {
 
 
     /**
+     * @desc update {@link ClassNavigator} relaion state
      * @param switchStr
      * @public
      * @returns {ClassDatepicker}
@@ -1744,7 +1879,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc change {@link _pickers} visibility
      * @param state
      * @param action
      * @returns {ClassDatepicker}
@@ -1768,13 +1903,14 @@ var ClassDatepicker = {
 
 
     /**
+     * @desc used in {@link ClassDatepicker._attachEvents}
      * @private
      */
     _flagSelfManipulate: true,
 
 
     /**
-     *
+     * @desc only called by {@link ClassTimepicker}
      * @param key
      * @param val
      */
@@ -1786,7 +1922,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc only called by {@link ClassDaypicker}
      * @param key
      * @param unixDate
      * @returns {ClassDatepicker}
@@ -1816,7 +1952,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc only called by {@link ClassMonthPicker}
      * @param monthNum
      * @returns {ClassDatepicker}
      */
@@ -1836,7 +1972,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc only called by {@link ClassYearPicker}
      * @param yearNum
      * @returns {ClassDatepicker}
      */
@@ -1855,7 +1991,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc check {@link ClassDatepicker.persianDigit} and if set true all digit convert to persian
      * @param digit
      * @returns {*}
      * @private
@@ -1871,18 +2007,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
-     * @returns {ClassDatepicker}
-     */
-    destroy: function () {
-        this.inputElem.removeClass(self.cssClass);
-        this.element.main.remove();
-        return this;
-    },
-
-
-    /**
-     *
+     * @desc use in {@link ClassDatepicker._attachEvents}
      * @param pasted
      * @returns {ClassDatepicker}
      * @private
@@ -1909,7 +2034,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc  Attach all dom events to rendered element.
      * @returns {ClassDatepicker}
      * @private
      */
@@ -1985,7 +2110,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc update input and altField input elemet value
      * @returns {ClassDatepicker}
      * @private
      */
@@ -2002,7 +2127,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc bootstrap method of {@link ClassDatepicker}
      * @returns {ClassDatepicker}
      * @private
      */
@@ -2028,7 +2153,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc initilize {@link ClassDatepicker}
      * @returns {ClassDatepicker}
      */
     init: function () {
@@ -2039,8 +2164,6 @@ var ClassDatepicker = {
         this._updateInputElement();
         this.view = this.views['default'];
         this.view.render(this);
-
-
         this.inputElem.data("datepicker", this);
         this.inputElem.addClass(self.cssClass);
         this._attachEvents();
@@ -2048,13 +2171,6 @@ var ClassDatepicker = {
     }
 };
 
-/**
- *
- * @param mainElem
- * @param options
- * @returns {*}
- * @constructs ClassDatepicker
- */
 var Datepicker = function (mainElem, options) {
     return inherit(this, [ClassSprite, ClassCompat, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
         $container: mainElem,
@@ -2065,14 +2181,19 @@ var Datepicker = function (mainElem, options) {
 
 'use strict';
 /**
+ * @desc usen in {@link ClassDatepicker}
  * @class
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */
 var ClassNavigator = {
+    /**
+     * @desc enabled
+     * @type {Function}
+     */
     enabled: true,
 
     /**
-     * text
+     * @desc text
      */
     text: {
         btnNextText: "<",
@@ -2080,7 +2201,7 @@ var ClassNavigator = {
     },
 
     /**
-     * cssClass
+     * @desc cssClass
      */
     cssClass: {
         datpickerHeader: "datepicker-header",
@@ -2091,13 +2212,14 @@ var ClassNavigator = {
 
 
     /**
-     * relation
+     * @desc Defnine wich picker related to navigator
+     * @desc relation
      */
     relation: "day",
 
 
     /**
-     *
+     * @desc switchRelation
      * @param string
      * @returns {ClassNavigator}
      */
@@ -2109,7 +2231,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc updateSwitchBtn
      * @param val
      * @returns {ClassNavigator}
      */
@@ -2120,7 +2242,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _next
      * @returns {ClassNavigator}
      * @private
      */
@@ -2132,7 +2254,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _prev
      * @returns {ClassNavigator}
      * @private
      */
@@ -2143,7 +2265,7 @@ var ClassNavigator = {
     },
 
     /**
-     *
+     * @desc _switch
      * @returns {ClassNavigator}
      * @private
      */
@@ -2154,7 +2276,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _render
      * @private
      */
     _render: function () {
@@ -2169,7 +2291,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _attachEvents
      * @private
      */
     _attachEvents: function () {
@@ -2190,7 +2312,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc init
      * @returns {ClassNavigator}
      */
     init: function () {
@@ -2200,15 +2322,6 @@ var ClassNavigator = {
         return this;
     }
 };
-
-
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassNavigator
- */
 var Navigator = function (options, container) {
     return inherit(this, [ClassSprite, ClassNavigator, options, {
         $container: container
@@ -2217,12 +2330,14 @@ var Navigator = function (options, container) {
 
 'use strict';
 /**
- * @class ClassDaypicker
+ * @desc used in {@link ClassDatepicker}
+ * @class ClassDayPicker
  * @type {{next: next, prev: prev, updateView: updateView, _updateView: _updateView, selectDay: selectDay, _updateNavigator: _updateNavigator, hide: hide, show: show, _updateSelectedDay: _updateSelectedDay, _render: _render, init: init}}
  */
-var ClassDaypicker = {
+var ClassDayPicker = {
     /**
-     * Go to next Month-day view
+     * @desc next
+     * @desc Go to next Month-day view
      * @public
      * @returns {ClassDaypicker}
      */
@@ -2240,7 +2355,8 @@ var ClassDaypicker = {
 
 
     /**
-     * Go to previews Month-day view
+     * @desc prev
+     * @desc Go to previews Month-day view
      * @public
      * @returns {ClassDaypicker}
      */
@@ -2258,7 +2374,7 @@ var ClassDaypicker = {
 
 
     /**
-     * Update view
+     * @desc updateView
      * @public
      * @returns {ClassDaypicker}
      */
@@ -2269,7 +2385,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _updateView
      * @returns {ClassDaypicker}
      * @private
      */
@@ -2283,6 +2399,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc selectDay
      * @public
      * @returns {ClassDaypicker}
      */
@@ -2297,7 +2414,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _updateNavigator
      * @param year
      * @param month
      * @private
@@ -2312,6 +2429,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc hide
      * @public
      * @returns {ClassDaypicker}
      */
@@ -2322,6 +2440,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc show
      * @public
      * @returns {ClassDaypicker}
      */
@@ -2333,7 +2452,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _updateSelectedDay
      * @param unix
      * @returns {ClassDaypicker}
      * @private
@@ -2344,7 +2463,7 @@ var ClassDaypicker = {
     },
 
     /**
-     *
+     * @desc _attachEvents
      * @private
      */
     _attachEvents: function () {
@@ -2379,7 +2498,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _render
      * @private
      */
     _render: function () {
@@ -2403,6 +2522,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc init
      * @private
      * @returns {Class_Daypicker}
      */
@@ -2414,28 +2534,21 @@ var ClassDaypicker = {
         return this;
     }
 };
-
-
-/**
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassDaypicker
- */
 var Daypicker = function (options, container) {
-    return inherit(this, [ClassSprite, ClassDaypicker, options, {
+    return inherit(this, [ClassSprite, ClassDayPicker, options, {
         container: container
     }]);
 };
 
 'use strict';
 /**
+ * @desc used in {@link ClassDatepicker}
  * @class ClassMonthPicker
  * @type {{cssClass: {selectedMonth: string, monthItem: string}, monthRange: (ClassDateRange.monthRange|*), _updateNavigator: _updateNavigator, hide: hide, show: show, selectMonth: selectMonth, defineSelectedMonth: defineSelectedMonth, next: next, prev: prev, updateView: updateView, _render: _render, init: init}}
  */
 var ClassMonthPicker = {
     /**
-     * cssClass
+     * @desc cssClass
      */
     cssClass: {
         selectedMonth: "selected",
@@ -2444,13 +2557,13 @@ var ClassMonthPicker = {
     },
 
     /**
-     * monthRange
+     * @desc monthRange
      */
     monthRange: ClassDateRange.monthRange,
 
 
     /**
-     *
+     * @desc _updateNavigator
      * @private
      */
     _updateNavigator: function () {
@@ -2461,7 +2574,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc hide
      * @returns {Class_MonthPicker}
      */
     hide: function () {
@@ -2471,7 +2584,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc show
      * @returns {Class_MonthPicker}
      */
     show: function () {
@@ -2483,7 +2596,7 @@ var ClassMonthPicker = {
 
 
     /**
-     * selectMonth
+     * @desc selectMonth
      */
     selectMonth: function () {
         this.defineSelectedMonth();
@@ -2492,7 +2605,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc defineSelectedMonth
      * @returns {Class_MonthPicker}
      */
     defineSelectedMonth: function () {
@@ -2506,7 +2619,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc next
      * @returns {Class_MonthPicker}
      */
     next: function () {
@@ -2520,7 +2633,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc prev
      * @returns {Class_MonthPicker}
      */
     prev: function () {
@@ -2533,7 +2646,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc updateView
      * @returns {Class_MonthPicker}
      */
     updateView: function () {
@@ -2544,7 +2657,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc _checkMonthAccess
      * @param month
      * @returns {boolean}
      * @private
@@ -2576,7 +2689,7 @@ var ClassMonthPicker = {
 
 
     /**
-     *
+     * @desc _attachEvents
      * @returns {ClassMonthPicker}
      * @private
      */
@@ -2610,7 +2723,7 @@ var ClassMonthPicker = {
     },
 
     /**
-     *
+     * @desc _render
      * @returns {Class_MonthPicker}
      * @private
      */
@@ -2644,7 +2757,8 @@ var ClassMonthPicker = {
     },
 
     /**
-     * init
+     * @desc init
+     * @returns {ClassMonthPicker}
      */
     init: function () {
         this._render();
@@ -2653,14 +2767,6 @@ var ClassMonthPicker = {
     }
 };
 
-
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassMonthPicker
- */
 var MonthPicker = function (options, container) {
     return inherit(this, [ClassSprite, ClassMonthPicker, options, {
         container: container
@@ -2669,6 +2775,7 @@ var MonthPicker = function (options, container) {
 
 'use strict';
 /**
+ * @desc used in {@link ClassDatepicker}
  * @class ClassYearPicker
  * @type {{cssClass: {selectedYear: string, yearItem: string}, events: {select: select}, _updateNavigator: _updateNavigator, hide: hide, show: show, next: next, prev: prev, selectYear: selectYear, updateView: updateView, _render: _render, init: init}}
  */
@@ -2882,13 +2989,6 @@ var ClassYearPicker = {
 };
 
 
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassYearPicker
- */
 var YearPicker = function (options, container) {
     return inherit(this, [ClassSprite, ClassYearPicker, options, {
         container: container
@@ -2897,6 +2997,7 @@ var YearPicker = function (options, container) {
 
 'use strict';
 /**
+ * @desc {@link ClassDatepicker}
  * @class ClassToolbox
  * @type {{cssClass: {btnToday: string}, _goToday: _goToday, _render: _render, init: init}}
  */
@@ -2962,13 +3063,6 @@ var ClassToolbox = {
 };
 
 
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassToolbox
- */
 var Toolbox = function (options, container) {
     return inherit(this, [ClassSprite, ClassToolbox, options, {
         $container: container
@@ -2977,28 +3071,29 @@ var Toolbox = function (options, container) {
 
 'use strict';
 /**
- * @class ClassTimepicker
+ * @desc used in {@link ClassDatepicker}
+ * @class ClassTimePicker
  * @type {{showSeconds: boolean, showMeridian: boolean, minuteStep: number, cssClss: {timepicker: string}, show: show, hide: hide, _render: _render, _currentMeridian: null, convert24hTo12: convert24hTo12, convert12hTo24: convert12hTo24, _updateTime: _updateTime, _updateMeridian: _updateMeridian, _toggleMeridian: _toggleMeridian, _movehour: _movehour, _moveminute: _moveminute, _movesecond: _movesecond, _movemeridian: _movemeridian, _updateState: _updateState, _attachEvent: _attachEvent, _bootstrap: _bootstrap, init: init}}
  */
-var ClassTimepicker = {
+var ClassTimePicker = {
     /**
-     * secondStep
+     * @property secondStep
      */
     secondStep: 1,
 
 
     /**
-     * minuteStep
+     * @property minuteStep
      */
     minuteStep: 1,
 
     /**
-     * hourStep
+     * @property hourStep
      */
     hourStep: 1,
 
     /**
-     * cssClass
+     * @property cssClass
      */
     cssClss: {
         timepicker: "viewModel"
@@ -3006,7 +3101,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property show
      * @returns {Class_Timepicker}
      */
     show: function () {
@@ -3017,7 +3112,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property hide
      * @returns {Class_Timepicker}
      */
     hide: function () {
@@ -3028,7 +3123,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property _render
      * @returns {Class_Timepicker}
      * @private
      */
@@ -3043,13 +3138,13 @@ var ClassTimepicker = {
 
 
     /**
-     * _currentMeridian
+     *  @property _currentMeridian
      */
     _currentMeridian: null,
 
 
     /**
-     *
+     * @property convert24hTo12
      * @param hour
      */
     convert24hTo12: function (hour) {
@@ -3066,7 +3161,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property convert12hTo24
      * @param hour
      * @returns {*}
      */
@@ -3083,7 +3178,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property _updateTime
      * @param state
      * @returns {Class_Timepicker}
      * @private
@@ -3102,7 +3197,7 @@ var ClassTimepicker = {
 
 
     /**
-     *
+     * @property _updateMeridian
      * @param state
      * @returns {Class_Timepicker}
      * @private
@@ -3326,28 +3421,22 @@ var ClassTimepicker = {
         return this;
     }
 };
-
-
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassTimepicker
- */
 var TimePicker = function (options, container) {
-    return inherit(this, [ClassSprite, ClassTimepicker, options, {
+    return inherit(this, [ClassSprite, ClassTimePicker, options, {
         container: container
     }]);
 };
 
 'use strict';
 /**
- * @class
+ * @desc used in {@link ClassDatepicker}
+ * @class ClassDatepickerState
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
  */
 var ClassDatepickerState = {
-
+    /**
+     * @desc define start and end of available date
+     */
     filterDate: {
         start: {
             year: 0,
@@ -3370,7 +3459,7 @@ var ClassDatepickerState = {
     },
 
     /**
-     * view
+     * @desc view
      */
     view: {
         year: 0,
@@ -3384,7 +3473,7 @@ var ClassDatepickerState = {
 
 
     /**
-     * selected
+     * @desc selected
      */
     selected: {
         year: 0,
@@ -3396,9 +3485,16 @@ var ClassDatepickerState = {
         unixDate: 0
     },
 
+
+    /**
+     * @desc setFilterDate
+     * @param key
+     * @param startVal
+     * @param endVal
+     */
     setFilterDate: function (key, startVal, endVal) {
         var self = this;
-         if(!startVal){
+        if (!startVal) {
             startVal = -99999999999999;
         }
         var pd = new persianDate(startVal);
@@ -3410,7 +3506,7 @@ var ClassDatepickerState = {
         self.filterDate.start.date = pd.date();
         self.filterDate.start.year = pd.year();
 
-        if(!endVal){
+        if (!endVal) {
             endVal = 99999999999999
         }
         var pd = new persianDate(endVal);
@@ -3423,8 +3519,9 @@ var ClassDatepickerState = {
         self.filterDate.end.year = pd.year();
     },
 
+
     /**
-     *
+     * @desc _updateSelectedUnix
      * @returns {Class_DatepickerState}
      * @private
      */
@@ -3442,7 +3539,7 @@ var ClassDatepickerState = {
 
 
     /**
-     *
+     * @desc setTime
      * @param key
      * @param value
      * @returns {Class_DatepickerState}
@@ -3476,6 +3573,7 @@ var ClassDatepickerState = {
 
 
     /**
+     * @desc setSelected
      * @public
      * @param key
      * @param value
@@ -3510,6 +3608,7 @@ var ClassDatepickerState = {
 
 
     /**
+     * @desc syncViewWithelected
      * @public
      * @returns {Class_DatepickerState}
      */
@@ -3523,7 +3622,7 @@ var ClassDatepickerState = {
 
 
     /**
-     *
+     * @desc _updateViewUnix
      * @returns {Class_DatepickerState}
      * @private
      */
@@ -3541,6 +3640,7 @@ var ClassDatepickerState = {
     },
 
     /**
+     * @desc setView
      * @public
      * @param key
      * @param value
@@ -3574,11 +3674,6 @@ var ClassDatepickerState = {
 };
 
 
-/**
- * @param options
- * @returns {*}
- * @constructs ClassDatepickerState
- */
 var State = function (options) {
     return inherit(this, [ClassDatepickerState, options]);
 };

@@ -1,13 +1,21 @@
 'use strict';
 /**
+ * @desc used in {@link ClassDatepicker}
  * @class ViewsDatePicker
+ * @memberOf ClassDatepicker
  * @type {{cssClass: {datePickerPlotArea: string, yearView: string, monthView: string, dayView: string, timeView: string, navigator: string, toolbox: string}, container: {}, views: {default: {render: render, fixPosition: fixPosition}}}}
  */
 var ViewsDatePicker = {
-
-
     /**
-     * cssClass
+     * @memberOf ClassDatepicker.ViewsDatePicker
+     * @desc cssClass           {string}
+     * @prop datePickerPlotArea {string}
+     * @prop yearView           {string}
+     * @prop monthView          {string}
+     * @prop dayView            {string}
+     * @prop timeView           {string}
+     * @prop navigator          {string}
+     * @prop toolbox            {string}
      */
     cssClass: {
         datePickerPlotArea: "datepicker-plot-area",
@@ -21,15 +29,25 @@ var ViewsDatePicker = {
 
 
     /**
-     * conatiner
+     * @memberOf ClassDatepicker.ViewsDatePicker
+     * @desc conatiner
      */
     container: {},
 
 
     /**
-     * views
+     * @memberOf ClassDatepicker.ViewsDatePicker
+     * @desc views
+     * @prop default {object}
      */
     views: {
+
+
+        /**
+         * @memberOf ClassDatepicker.ViewsDatePicker.views
+         * @prop render {function}
+         * @prop fixPosition {function}
+         */
         "default": {
             /**
              *
@@ -40,7 +58,11 @@ var ViewsDatePicker = {
                 var viewData = {
                     css: self.cssClass
                 };
+
                 self.element = {};
+                /**
+                 * @memberOf ViewsDatePicker
+                 */
                 self.element.main = $.tmplMustache(TEMPLATE.datepciker, viewData).appendTo(self.$container);
 
                 if (!self._inlineView) {
