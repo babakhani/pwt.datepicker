@@ -405,7 +405,7 @@ var ClassDatepicker = {
 };
 
 var Datepicker = function (mainElem, options) {
-    return inherit(this, [ClassSprite, ClassCompat, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
+    return inherit(this, [ClassSprite, ClassCompat, ClassDatepicker, ViewsDatePicker,ClassConfig, options, {
         $container: mainElem,
         inputElem: $(mainElem)
     }]);

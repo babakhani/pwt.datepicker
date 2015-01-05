@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @desc usen in {@link ClassDatepicker}
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @desc used in {@link ClassDatepicker}
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class ClassDayPicker
  * @type {{next: next, prev: prev, updateView: updateView, _updateView: _updateView, selectDay: selectDay, _updateNavigator: _updateNavigator, hide: hide, show: show, _updateSelectedDay: _updateSelectedDay, _render: _render, init: init}}
  */

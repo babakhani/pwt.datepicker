@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @desc used in {@link ClassDatepicker}
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class ViewsDatePicker
  * @memberOf ClassDatepicker
  * @type {{cssClass: {datePickerPlotArea: string, yearView: string, monthView: string, dayView: string, timeView: string, navigator: string, toolbox: string}, container: {}, views: {default: {render: render, fixPosition: fixPosition}}}}
@@ -118,6 +118,7 @@ var ViewsDatePicker = {
                     self.container.yearView.hide();
                 }
                 if (self.timePicker.enabled | self.onlyTimePicker === true) {
+                    log('render timepicker')
                     self.timePicker = new TimePicker($.extend(true, self.timePicker, {datepicker: self}), self.container.timeView);
                 }
                 else {

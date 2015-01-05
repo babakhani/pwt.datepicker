@@ -1,7 +1,8 @@
 'use strict';
 /**
- * @desc used in {@link ClassDatepicker}
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class ClassYearPicker
+ * @instance
  * @type {{cssClass: {selectedYear: string, yearItem: string}, events: {select: select}, _updateNavigator: _updateNavigator, hide: hide, show: show, next: next, prev: prev, selectYear: selectYear, updateView: updateView, _render: _render, init: init}}
  */
 var ClassYearPicker = {

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @desc used in {@link ClassDatepicker}
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class ClassMonthPicker
  * @type {{cssClass: {selectedMonth: string, monthItem: string}, monthRange: (ClassDateRange.monthRange|*), _updateNavigator: _updateNavigator, hide: hide, show: show, selectMonth: selectMonth, defineSelectedMonth: defineSelectedMonth, next: next, prev: prev, updateView: updateView, _render: _render, init: init}}
  */
@@ -122,21 +122,13 @@ var ClassMonthPicker = {
      */
     _checkMonthAccess: function (month) {
         if (this.datepicker.state._filetredDate) {
-            var startYear = this.datepicker.state.filterDate.start.year;
-            var endYear = this.datepicker.state.filterDate.end.year;
             var y = this.datepicker.state.view.year;
-            var startMonth = this.datepicker.state.filterDate.start.month;
-            var endMonth = this.datepicker.state.filterDate.end.month;
-            if (startYear <= y & y <= endYear) {
-                if (y === startYear && month >= startMonth && month <= endMonth) {
-                    return true;
-                }
-                if (y === endYear && month <= endMonth && month >= startMonth) {
-                    return true;
-                }
-                if (startYear < y & y < endYear) {
-                    return true;
-                }
+            var monthUnix = new pDate([y, month]).unix() * 1000;
+
+            if (monthUnix >= this.datepicker.state.filterDate.start.unixDate &&
+                monthUnix <= this.datepicker.state.filterDate.end.unixDate
+                ) {
+                return true;
             } else {
                 return false;
             }

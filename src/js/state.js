@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @desc used in {@link ClassDatepicker}
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class ClassDatepickerState
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
  */
