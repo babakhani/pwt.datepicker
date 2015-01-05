@@ -1,5 +1,5 @@
 module.exports = function (grunt) {
-    var fileBanner = '/* <%= pkg.name %> - v<%= pkg.version %> \n ' +//
+    var fileBanner = '/*\n  <%= pkg.name %> - v<%= pkg.version %> \n ' +//
         ' Author: reza babakhani \n ' + //
         'http://babakhani.github.io/PersianWebToolkit/datepicker \n */\n'
 
@@ -18,12 +18,12 @@ module.exports = function (grunt) {
                     'src/js/config.js',
                     'src/js/constant.js',
                     'src/js/template.js',
-                    'src/js/datepicker-base.js',
-                    'src/js/datepicker-compat.js',
+                    'src/js/base-class.js',
+                    'src/js/compat-class.js',
                     'src/js/constant.js',
-                    'src/js/datepicker-helper.js',
-                    'src/js/datepicker-monthgrid.js',
-                    'src/js/datepicker-monthgrid-view.js',
+                    'src/js/helper.js',
+                    'src/js/monthgrid.js',
+                    'src/js/monthgrid-view.js',
                     'src/js/datepicker-view.js',
                     'src/js/datepicker.js',
                     'src/js/navigator.js',
@@ -94,7 +94,9 @@ module.exports = function (grunt) {
             dist: {
                 src: 'src/js',
                 options: {
-                    destination: 'doc/<%= pkg.version %>'
+                    destination: 'doc/<%= pkg.version %>',
+                    configure: 'doc/conf.json',
+                    template: 'doc/templates/default'
                 }
             }
         },
@@ -106,6 +108,10 @@ module.exports = function (grunt) {
             sass: {
                 files: ['src/sass/**/*.scss'],
                 tasks: ['sass', 'cssmin']
+            },
+            doc: {
+                files: ['src/js/*.js'],
+                tasks: ['jsdoc']
             }
         },
         yuidoc: {
@@ -130,7 +136,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     if (grunt.option("doc") === true) {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'jsdoc']);
+        grunt.registerTask('default', ['jsdoc', 'watch']);
     } else {
         grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'watch']);
     }

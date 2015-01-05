@@ -10,7 +10,7 @@
         "persian",
         "iran"
     ],
-    "version": "0.2.2",
+    "version": "0.3.6",
     "author": {
         "name": "Reza Babakhani",
         "url": "http://babakhani.github.io/PersianWebToolkit/"
@@ -33,6 +33,6 @@
     "download": "https://github.com/babakhani/pwt.datepicker/archive/master.zip",
     "dependencies": {
         "jquery": ">=1.5",
-        "pwt-date" : ">=0.1.6"
+        "pwt-date": ">=0.1.6"
     }
 }

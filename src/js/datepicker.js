@@ -6,32 +6,29 @@
 var ClassDatepicker = {
     /**
      *
+     * @desc list of picker obejcts like dayPicker,monthPicker,yearPicker
      * @private
      */
     _pickers: {},
 
 
     /**
-     * @private
-     */
-    events: {},
-
-
-    /**
+     * @desc save current visibility state of plugin
      * @private
      */
     _viewed: false,
 
 
     /**
+     * @desc if plugin selector detect as a div or any element exsept inpout set as true
      * @private
      */
     _inlineView: false,
 
 
     /**
-     *
-     * @param action
+     * @desc define next state of {@link ClassDatepicker._pickers}
+     * @param {string} action . Acceptable Value : 'day','month',year
      * @returns {*}
      * @private
      */
@@ -71,12 +68,11 @@ var ClassDatepicker = {
 
 
     /**
-     *
-     * @param state
+     * @desc check next state is available in {@link ClassDatepicker._pickers}
+     * @param {string} state Accepptable Value: 'day','month','year'
      * @returns {*}
      * @private
      */
-
     _checkNextStateAvalibility: function (state) {
         if (!this._pickers[state]) {
             this.element.main.hide();
@@ -88,6 +84,7 @@ var ClassDatepicker = {
 
 
     /**
+     * @desc update {@link ClassNavigator} object switch text
      * @param switchStr
      * @public
      * @returns {ClassDatepicker}
@@ -101,6 +98,7 @@ var ClassDatepicker = {
 
 
     /**
+     * @desc update {@link ClassNavigator} relaion state
      * @param switchStr
      * @public
      * @returns {ClassDatepicker}
@@ -114,7 +112,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc change {@link _pickers} visibility
      * @param state
      * @param action
      * @returns {ClassDatepicker}
@@ -138,13 +136,14 @@ var ClassDatepicker = {
 
 
     /**
+     * @desc used in {@link ClassDatepicker._attachEvents}
      * @private
      */
     _flagSelfManipulate: true,
 
 
     /**
-     *
+     * @desc only called by {@link ClassTimepicker}
      * @param key
      * @param val
      */
@@ -156,7 +155,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc only called by {@link ClassDaypicker}
      * @param key
      * @param unixDate
      * @returns {ClassDatepicker}
@@ -186,7 +185,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc only called by {@link ClassMonthPicker}
      * @param monthNum
      * @returns {ClassDatepicker}
      */
@@ -206,7 +205,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc only called by {@link ClassYearPicker}
      * @param yearNum
      * @returns {ClassDatepicker}
      */
@@ -225,7 +224,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc check {@link ClassDatepicker.persianDigit} and if set true all digit convert to persian
      * @param digit
      * @returns {*}
      * @private
@@ -241,18 +240,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
-     * @returns {ClassDatepicker}
-     */
-    destroy: function () {
-        this.inputElem.removeClass(self.cssClass);
-        this.element.main.remove();
-        return this;
-    },
-
-
-    /**
-     *
+     * @desc use in {@link ClassDatepicker._attachEvents}
      * @param pasted
      * @returns {ClassDatepicker}
      * @private
@@ -279,7 +267,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc  Attach all dom events to rendered element.
      * @returns {ClassDatepicker}
      * @private
      */
@@ -355,7 +343,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc update input and altField input elemet value
      * @returns {ClassDatepicker}
      * @private
      */
@@ -372,7 +360,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc bootstrap method of {@link ClassDatepicker}
      * @returns {ClassDatepicker}
      * @private
      */
@@ -398,7 +386,7 @@ var ClassDatepicker = {
 
 
     /**
-     *
+     * @desc initilize {@link ClassDatepicker}
      * @returns {ClassDatepicker}
      */
     init: function () {
@@ -409,8 +397,6 @@ var ClassDatepicker = {
         this._updateInputElement();
         this.view = this.views['default'];
         this.view.render(this);
-
-
         this.inputElem.data("datepicker", this);
         this.inputElem.addClass(self.cssClass);
         this._attachEvents();
@@ -418,15 +404,8 @@ var ClassDatepicker = {
     }
 };
 
-/**
- *
- * @param mainElem
- * @param options
- * @returns {*}
- * @constructs ClassDatepicker
- */
 var Datepicker = function (mainElem, options) {
-    return inherit(this, [ClassSprite, ClassCompat, ClassDatepicker, ClassConfig, ViewsDatePicker, options, {
+    return inherit(this, [ClassSprite, ClassCompat, ClassDatepicker, ViewsDatePicker,ClassConfig, options, {
         $container: mainElem,
         inputElem: $(mainElem)
     }]);

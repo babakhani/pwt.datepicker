@@ -1,13 +1,18 @@
 'use strict';
 /**
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class
  * @type {{cssClass: {datpickerHeader: string, btnNext: string, btnSwitch: string, btnPrev: string}, relation: string, switchRelation: switchRelation, updateSwitchBtn: updateSwitchBtn, _next: _next, _prev: _prev, _switch: _switch, _render: _render, _attachEvents: _attachEvents, init: init}}
  */
 var ClassNavigator = {
+    /**
+     * @desc enabled
+     * @type {Function}
+     */
     enabled: true,
 
     /**
-     * text
+     * @desc text
      */
     text: {
         btnNextText: "<",
@@ -15,7 +20,7 @@ var ClassNavigator = {
     },
 
     /**
-     * cssClass
+     * @desc cssClass
      */
     cssClass: {
         datpickerHeader: "datepicker-header",
@@ -26,13 +31,14 @@ var ClassNavigator = {
 
 
     /**
-     * relation
+     * @desc Defnine wich picker related to navigator
+     * @desc relation
      */
     relation: "day",
 
 
     /**
-     *
+     * @desc switchRelation
      * @param string
      * @returns {ClassNavigator}
      */
@@ -44,7 +50,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc updateSwitchBtn
      * @param val
      * @returns {ClassNavigator}
      */
@@ -55,7 +61,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _next
      * @returns {ClassNavigator}
      * @private
      */
@@ -67,7 +73,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _prev
      * @returns {ClassNavigator}
      * @private
      */
@@ -78,7 +84,7 @@ var ClassNavigator = {
     },
 
     /**
-     *
+     * @desc _switch
      * @returns {ClassNavigator}
      * @private
      */
@@ -89,7 +95,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _render
      * @private
      */
     _render: function () {
@@ -104,7 +110,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc _attachEvents
      * @private
      */
     _attachEvents: function () {
@@ -125,7 +131,7 @@ var ClassNavigator = {
 
 
     /**
-     *
+     * @desc init
      * @returns {ClassNavigator}
      */
     init: function () {
@@ -135,15 +141,6 @@ var ClassNavigator = {
         return this;
     }
 };
-
-
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassNavigator
- */
 var Navigator = function (options, container) {
     return inherit(this, [ClassSprite, ClassNavigator, options, {
         $container: container

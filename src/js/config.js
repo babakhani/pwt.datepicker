@@ -1,13 +1,18 @@
 'use strict';
 
 /**
- * @class
+ * Overwrite by option passed to plugin
+ * {@link http://http://babakhani.github.io/PersianWebToolkit/doc/datepicker/0.3.5/}
+ * @class ClassConfig
+ * @memberOf ClassDatepicker
  * @type {{cssClass: string, daysTitleFormat: string, persianDigit: boolean, viewMode: string, position: string, autoClose: boolean, toolbox: boolean, format: boolean, observer: boolean, altField: boolean, altFormat: string, inputDelay: number, viewFormat: string, formatter: formatter, altFieldFormatter: altFieldFormatter, show: show, hide: hide, onShow: onShow, onHide: onHide, onSelect: onSelect, timePicker: {enabled: boolean}, dayPicker: {enabled: boolean}, monthPicker: {enabled: boolean}, yearPicker: {enabled: boolean}}}
  */
 var ClassConfig = {
 
+
     /**
-     * @property persianDigit
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description if true all digit convert to persian digit.
      * @type {boolean}
      * @default true
      */
@@ -15,6 +20,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description Acceptable value : day,month,year
      * @property viewMode
      * @type {string}
      * @default day
@@ -23,6 +30,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description [x,y] , define a position of datepicker relative to input element.
      * @property position
      * @type {string|Array}
      * @default auto
@@ -31,6 +40,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description If true picker close When Select day
      * @property autoClose
      * @type {boolean}
      * @default false
@@ -39,7 +50,10 @@ var ClassConfig = {
 
 
     /**
-     * @format format
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description the date format, combination of d, dd, m, mm, yy, yyy.
+     * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
+     * @desc format
      * @type {boolean}
      * @default false
      */
@@ -47,7 +61,8 @@ var ClassConfig = {
 
 
     /**
-     * @format observer
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc observer
      * @type {boolean}
      * @default false
      */
@@ -55,22 +70,16 @@ var ClassConfig = {
 
 
     /**
-     * @format altField
-     * @type {boolean}
-     * @default false
-     */
-    altField: false,
-
-
-    /**
-     * @format inputDelay
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc inputDelay
      * @type {number}
      * @default 800
      */
     inputDelay: 800,
 
     /**
-     * @method
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc format value of input
      * @param unixDate
      * @returns {*}
      */
@@ -83,7 +92,20 @@ var ClassConfig = {
 
 
     /**
-     * @format altField
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class'
+     * @desc altField
+     * @type {boolean}
+     * @default false
+     */
+    altField: false,
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description the date format, combination of d, dd, m, mm, yy, yyy.
+     * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
+     * @desc altField
      * @type {string}
      * @default unix
      */
@@ -91,7 +113,8 @@ var ClassConfig = {
 
 
     /**
-     * @method
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc format value of 'altField' input
      * @param unixDate
      * @returns {*}
      */
@@ -111,6 +134,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc Open the date picker.
      * @method
      * @returns {ClassConfig}
      */
@@ -124,6 +149,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc Hide the date picker
      * @method
      * @returns {ClassConfig}
      */
@@ -137,15 +164,20 @@ var ClassConfig = {
     },
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc Removes the datepicker functionality completely.
      * @method
      * @param self
      */
     destroy: function () {
+        this.inputElem.removeClass(self.cssClass);
         this.elmenet.main.remove();
     },
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker instance. It is called just before the datepicker is displayed.
      * @event
      * @param self
      */
@@ -154,6 +186,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker instance. It is called just before the datepicker Hide.
      * @event
      * @param self
      */
@@ -162,6 +196,8 @@ var ClassConfig = {
 
 
     /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker unixDate. It is called When Day Select.
      * @event
      * @param unixDate
      */
@@ -170,30 +206,73 @@ var ClassConfig = {
     },
 
     /**
+     * @see ClassNavigator
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc navigator config object
      * @property navigator
-     * @type {boolean}
+     * @type {object}
      * @default true
      */
     navigator: {
+        /**
+         * @desc Enable or Disable dayPicker
+         */
         enabled: true,
+
+
+        /**
+         * @desc navigator text config object
+         */
         text: {
+            /**
+             * @desc text of next btn
+             */
             btnNextText: "<",
+
+
+            /**
+             * @desc text of prev btn
+             */
             btnPrevText: ">"
         },
+
+
+        /**
+         * @desc Trigger When Next button clicked
+         * @event
+         * @param navigator
+         */
         onNext: function (navigator) {
             //log("navigator next ");
         },
+
+
+        /**
+         * @desc Trigger When Prev button clicked
+         * @event
+         * @param navigator
+         */
         onPrev: function (navigator) {
             //log("navigator prev ");
         },
+
+
+        /**
+         * @desc Trigger When Switch view button clicked
+         * @event
+         * @param navigator
+         */
         onSwitch: function (state) {
             // console.log("navigator switch ");
         }
     },
 
     /**
+     * @see ClassToolbox
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc toolbox config object
      * @property toolbox
-     * @type {boolean}
+     * @type {object}
      * @default true
      * @deprecated 0.2.3
      */
@@ -209,6 +288,9 @@ var ClassConfig = {
 
 
     /**
+     * @see ClassTimePicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc timepicker config object
      * @property timePicker
      * @type {object}
      */
@@ -229,6 +311,9 @@ var ClassConfig = {
     },
 
     /**
+     * @see ClassDayPicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc dayPicker config object
      * @property dayPicker
      * @type {object}
      */
@@ -251,6 +336,9 @@ var ClassConfig = {
     },
 
     /**
+     * @see ClassMonthPicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc monthPicker config object
      * @property monthPicker
      * @type {object}
      */
@@ -274,6 +362,9 @@ var ClassConfig = {
 
 
     /**
+     * @see ClassYearPicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc yearPicker config object
      * @property yearPicker
      * @type {object}
      */
@@ -292,29 +383,37 @@ var ClassConfig = {
 
 
     /**
-     * if true all pickers hide and just shpw timepicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc if true all pickers hide and just shpw timepicker
      * @property justSelectOnDate
+     * @type {boolean}
      */
     onlyTimePicker: false,
 
 
     /**
-     * if true date select just by click on day in month grid
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc if true date select just by click on day in month grid
      * @property justSelectOnDate
+     * @type {boolean}
      */
     justSelectOnDate: true,
 
 
     /**
-     * set min date on datepicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc set min date on datepicker
      * @property minDate
+     * @type {boolean}
      */
     minDate: false,
 
 
     /**
-     * set max date on datepicker
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc set max date on datepicker
      * @property maxDate
+     * @type {boolean}
      */
     maxDate: false
 

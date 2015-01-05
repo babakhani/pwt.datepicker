@@ -1,11 +1,13 @@
 'use strict';
 /**
- * @class ClassDaypicker
+ * @desc Instantiate in {@link ClassDatepicker}
+ * @class ClassDayPicker
  * @type {{next: next, prev: prev, updateView: updateView, _updateView: _updateView, selectDay: selectDay, _updateNavigator: _updateNavigator, hide: hide, show: show, _updateSelectedDay: _updateSelectedDay, _render: _render, init: init}}
  */
-var ClassDaypicker = {
+var ClassDayPicker = {
     /**
-     * Go to next Month-day view
+     * @desc next
+     * @desc Go to next Month-day view
      * @public
      * @returns {ClassDaypicker}
      */
@@ -23,7 +25,8 @@ var ClassDaypicker = {
 
 
     /**
-     * Go to previews Month-day view
+     * @desc prev
+     * @desc Go to previews Month-day view
      * @public
      * @returns {ClassDaypicker}
      */
@@ -41,7 +44,7 @@ var ClassDaypicker = {
 
 
     /**
-     * Update view
+     * @desc updateView
      * @public
      * @returns {ClassDaypicker}
      */
@@ -52,7 +55,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _updateView
      * @returns {ClassDaypicker}
      * @private
      */
@@ -66,6 +69,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc selectDay
      * @public
      * @returns {ClassDaypicker}
      */
@@ -80,7 +84,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _updateNavigator
      * @param year
      * @param month
      * @private
@@ -95,6 +99,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc hide
      * @public
      * @returns {ClassDaypicker}
      */
@@ -105,6 +110,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc show
      * @public
      * @returns {ClassDaypicker}
      */
@@ -116,7 +122,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _updateSelectedDay
      * @param unix
      * @returns {ClassDaypicker}
      * @private
@@ -127,7 +133,7 @@ var ClassDaypicker = {
     },
 
     /**
-     *
+     * @desc _attachEvents
      * @private
      */
     _attachEvents: function () {
@@ -162,7 +168,7 @@ var ClassDaypicker = {
 
 
     /**
-     *
+     * @desc _render
      * @private
      */
     _render: function () {
@@ -186,6 +192,7 @@ var ClassDaypicker = {
 
 
     /**
+     * @desc init
      * @private
      * @returns {Class_Daypicker}
      */
@@ -197,16 +204,8 @@ var ClassDaypicker = {
         return this;
     }
 };
-
-
-/**
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassDaypicker
- */
 var Daypicker = function (options, container) {
-    return inherit(this, [ClassSprite, ClassDaypicker, options, {
+    return inherit(this, [ClassSprite, ClassDayPicker, options, {
         container: container
     }]);
 };

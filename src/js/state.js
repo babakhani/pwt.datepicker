@@ -1,10 +1,13 @@
 'use strict';
 /**
- * @class
+ * @desc Instantiate in {@link ClassDatepicker}
+ * @class ClassDatepickerState
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
  */
 var ClassDatepickerState = {
-
+    /**
+     * @desc define start and end of available date
+     */
     filterDate: {
         start: {
             year: 0,
@@ -27,7 +30,7 @@ var ClassDatepickerState = {
     },
 
     /**
-     * view
+     * @desc view
      */
     view: {
         year: 0,
@@ -41,7 +44,7 @@ var ClassDatepickerState = {
 
 
     /**
-     * selected
+     * @desc selected
      */
     selected: {
         year: 0,
@@ -53,9 +56,16 @@ var ClassDatepickerState = {
         unixDate: 0
     },
 
+
+    /**
+     * @desc setFilterDate
+     * @param key
+     * @param startVal
+     * @param endVal
+     */
     setFilterDate: function (key, startVal, endVal) {
         var self = this;
-         if(!startVal){
+        if (!startVal) {
             startVal = -99999999999999;
         }
         var pd = new persianDate(startVal);
@@ -67,7 +77,7 @@ var ClassDatepickerState = {
         self.filterDate.start.date = pd.date();
         self.filterDate.start.year = pd.year();
 
-        if(!endVal){
+        if (!endVal) {
             endVal = 99999999999999
         }
         var pd = new persianDate(endVal);
@@ -80,8 +90,9 @@ var ClassDatepickerState = {
         self.filterDate.end.year = pd.year();
     },
 
+
     /**
-     *
+     * @desc _updateSelectedUnix
      * @returns {Class_DatepickerState}
      * @private
      */
@@ -99,7 +110,7 @@ var ClassDatepickerState = {
 
 
     /**
-     *
+     * @desc setTime
      * @param key
      * @param value
      * @returns {Class_DatepickerState}
@@ -133,6 +144,7 @@ var ClassDatepickerState = {
 
 
     /**
+     * @desc setSelected
      * @public
      * @param key
      * @param value
@@ -167,6 +179,7 @@ var ClassDatepickerState = {
 
 
     /**
+     * @desc syncViewWithelected
      * @public
      * @returns {Class_DatepickerState}
      */
@@ -180,7 +193,7 @@ var ClassDatepickerState = {
 
 
     /**
-     *
+     * @desc _updateViewUnix
      * @returns {Class_DatepickerState}
      * @private
      */
@@ -198,6 +211,7 @@ var ClassDatepickerState = {
     },
 
     /**
+     * @desc setView
      * @public
      * @param key
      * @param value
@@ -231,11 +245,6 @@ var ClassDatepickerState = {
 };
 
 
-/**
- * @param options
- * @returns {*}
- * @constructs ClassDatepickerState
- */
 var State = function (options) {
     return inherit(this, [ClassDatepickerState, options]);
 };

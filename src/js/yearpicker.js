@@ -1,6 +1,8 @@
 'use strict';
 /**
+ * @desc Instantiate in {@link ClassDatepicker}
  * @class ClassYearPicker
+ * @instance
  * @type {{cssClass: {selectedYear: string, yearItem: string}, events: {select: select}, _updateNavigator: _updateNavigator, hide: hide, show: show, next: next, prev: prev, selectYear: selectYear, updateView: updateView, _render: _render, init: init}}
  */
 var ClassYearPicker = {
@@ -213,13 +215,6 @@ var ClassYearPicker = {
 };
 
 
-/**
- *
- * @param options
- * @param container
- * @returns {*}
- * @constructs ClassYearPicker
- */
 var YearPicker = function (options, container) {
     return inherit(this, [ClassSprite, ClassYearPicker, options, {
         container: container

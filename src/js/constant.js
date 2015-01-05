@@ -1,9 +1,11 @@
 /**
+ * @desc some date range list
  * @abstract
+ * @global
+ * @const
+ * @todo move this to persin-date lib and remove from this project code repo
  */
 var ClassDateRange = {
-
-
     /**
      * @property monthRange
      */
