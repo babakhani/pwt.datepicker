@@ -1,6 +1,6 @@
 {
     "name": "persian-datepicker",
-    "version": "0.3.6",
+    "version": "0.4.0",
     "devDependencies": {
         "grunt": "0.4.4",
         "grunt-cli": "0.1.13",
@@ -12,7 +12,7 @@
         "grunt-jsdoc": "^0.5.7",
         "jsdoc": "^3.2.0",
         "jsdoc-oblivion": "^0.2.0",
-        "grunt-contrib-sass":"",
-        "grunt-contrib-watch":""
+        "grunt-contrib-sass":"*",
+        "grunt-contrib-watch":"*"
     }
 }

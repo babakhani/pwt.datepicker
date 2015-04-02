@@ -65,6 +65,12 @@ module.exports = function (grunt) {
                     },
                     {
                         'dist/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-redblack.css': 'src/sass/persian-datepicker-redblack.scss'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-cheerup.css': 'src/sass/persian-datepicker-cheerup.scss'
                     }
                 ]
             }
@@ -100,6 +106,18 @@ module.exports = function (grunt) {
                 }
             }
         },
+        yuidoc: {
+            compile: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
+                options: {
+                    paths: ['src/js'],
+                    outdir: 'doc/yui/'
+                }
+            }
+        },
         watch: {
             scripts: {
                 files: ['src/js/*.js'],
@@ -113,18 +131,6 @@ module.exports = function (grunt) {
                 files: ['src/js/*.js'],
                 tasks: ['jsdoc']
             }
-        },
-        yuidoc: {
-            all: {
-                name: '<%= pkg.name %>',
-                description: '<%= pkg.description %>',
-                version: '<%= pkg.version %>',
-                url: '<%= pkg.homepage %>',
-                options: {
-                    paths: ['src/js'],
-                    outdir: 'doc/yui/'
-                }
-            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-sass');
@@ -133,6 +139,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     if (grunt.option("doc") === true) {
