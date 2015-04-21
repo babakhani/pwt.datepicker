@@ -8,6 +8,6 @@
     ],
     "dependencies": {
         "jquery": ">=1.10.2",
-        "persian-date": "~1.7.0"
+        "persian-date": "~0.1.8"
     }
 }
