@@ -1,5 +1,5 @@
 /*
-  persian-datepicker - v0.4.1 
+  persian-datepicker - v0.4.2 
   Author: reza babakhani 
  http://babakhani.github.io/PersianWebToolkit/datepicker 
  */

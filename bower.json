@@ -1,6 +1,6 @@
 {
     "name": "persian-datepicker",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "main": "dist/",
     "ignore": [
         ".jshintrc",
@@ -8,6 +8,6 @@
     ],
     "dependencies": {
         "jquery": ">=1.10.2",
-        "persian-date": "~1.7.0"
+        "persian-date": ">=1.8.0"
     }
 }

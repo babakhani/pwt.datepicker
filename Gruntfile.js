@@ -49,7 +49,7 @@ module.exports = function (grunt) {
         },
         sass: {
             options: {
-                banner: fileBanner,
+                //banner: fileBanner,
                 sourcemap: 'none'
             },
             dist: {
@@ -139,7 +139,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-jsdoc');
-    grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     if (grunt.option("doc") === true) {

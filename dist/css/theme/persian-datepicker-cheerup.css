@@ -1,9 +1,8 @@
 /*
-  persian-datepicker - v0.4.1 
-  Author: reza babakhani 
- http://babakhani.github.io/PersianWebToolkit/datepicker 
+  persian-datepicker - v0.4.2
+  Author: reza babakhani
+ http://babakhani.github.io/PersianWebToolkit/datepicker
  */
-
 .unselectable, .datepicker-plot-area {
   -moz-user-select: none;
   -khtml-user-select: none;
