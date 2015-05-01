@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "devDependencies": {
     "coffee-script": "^1.9.2",
     "grunt": "0.4.4",
