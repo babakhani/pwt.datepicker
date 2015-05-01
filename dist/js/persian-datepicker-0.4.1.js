@@ -1,5 +1,5 @@
 /*
-  persian-datepicker - v0.4.0
+  persian-datepicker - v0.4.1 
   Author: reza babakhani 
  http://babakhani.github.io/PersianWebToolkit/datepicker 
  */
@@ -2221,12 +2221,14 @@ var ClassDatepicker = {
         return this;
     },
 
+
     /**
      * @desc set time of timepicker
      */
     setTime: function () {
         this.timePicker.setTime(this.state.selected.unixDate);
     },
+
 
     /**
      * @desc set date of datepicker
