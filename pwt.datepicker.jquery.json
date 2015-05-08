@@ -1,16 +1,17 @@
 {
     "name": "pwt.datepicker",
     "title": "jQuery Persian Datepicker",
-    "description": "javascript date library for parsing, validating, manipulating, and formatting persian dates System.",
+    "description": "Javascript jalali calendar capable datepicker widget http://babakhani.github.io/PersianWebToolkit/datepicker.",
     "keywords": [
         "date",
         "datepicker",
+        "datetimepicker",
         "jalali",
         "khayam",
         "persian",
         "iran"
     ],
-    "version": "0.3.6",
+    "version": "0.4.5",
     "author": {
         "name": "Reza Babakhani",
         "url": "http://babakhani.github.io/PersianWebToolkit/"
@@ -33,6 +34,6 @@
     "download": "https://github.com/babakhani/pwt.datepicker/archive/master.zip",
     "dependencies": {
         "jquery": ">=1.5",
-        "pwt-date": ">=0.1.6"
+        "pwt-date": ">=0.1.8"
     }
 }

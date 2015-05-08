@@ -1,6 +1,11 @@
 pwt.datepicker
 ==============
 
-Date picker work with Persian date system
+Jalali calendar datepicker, which depends on https://github.com/babakhani/PersianDate
 
-http://babakhani.github.io/PersianWebToolkit/datepicker
+[Documents](http://babakhani.github.io/PersianWebToolkit/datepicker)
+
+
+persian, datepicker, date, khayam, jalali, jquery, plugin, javascript, js, persian web toolkit, pwt,
+bootstrap timepicker, bootstrap datetimepicker
+

@@ -33,7 +33,7 @@ var ClassToolbox = {
     _goToday: function () {
         var self = this;
         var todayUnix = new Date().valueOf();
-        self.datepicker.selectDate('unix', todayUnix);
+        self.datepicker.selectDate(todayUnix);
         this.onToday(this);
         return this;
     },

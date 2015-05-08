@@ -4,11 +4,24 @@
     <title>Persian DatePicker</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link href="css/persian-datepicker.css" rel="stylesheet" type="text/css"/>
+
+    <link href="css/persian-datepicker.css" rel="stylesheet" type="text/css"/>
+
+    <!--<link href="../dist/css/theme/persian-datepicker-blue.css" rel="stylesheet" type="text/css"/>-->
+    <link href="../dist/css/theme/persian-datepicker-dark.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../dist/css/theme/persian-datepicker-redblack.css" rel="stylesheet" type="text/css"/>
+
+    <link href="../dist/css/theme/persian-datepicker-cheerup.css" rel="stylesheet" type="text/css"/>
+
+
+
+
     <script type="text/javascript" src="../lib/jquery.js"></script>
     <script type="text/javascript" src="../lib/persian-date.js"></script>
 
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="js/mousewheel.js"></script>
     <script type="text/javascript" src="js/plugin.js"></script>
@@ -53,14 +66,61 @@
         /*
          Default
          */
-        $("#inlineDatepicker").persianDatepicker({
+        window.pd = $("#inlineDatepicker").persianDatepicker({
             timePicker: {
                 enabled: true
             },
             altField: '#inlineDatepickerAlt',
             altFormat: "YYYY MM DD HH:mm:ss",
-            minDate:1258675200000,
-            maxDate:1358675200000
+//            minDate:1258675200000,
+//            maxDate:1358675200000,
+            checkDate: function (unix) {
+                var output = true;
+                var d = new persianDate(unix);
+                if (d.date() == 20) {
+                    output = false;
+                }
+                return output;
+            },
+            checkMonth: function (month) {
+                var output = true;
+                if (month == 1) {
+                    output = false;
+                }
+                return output;
+
+            }, checkYear: function (year) {
+                var output = true;
+                if (year == 1396) {
+                    output = false;
+                }
+                return output;
+            }
+
+        }).data('datepicker');
+
+        $("#inlineDatepicker").pDatepicker("setDate", [1391, 12, 1, 11, 14]);
+
+        //pd.setDate([1333,12,28,11,20,30]);
+
+        /**
+         * Default
+         * */
+        $('#default').persianDatepicker({
+            altField: '#defaultAlt'
+
+        });
+
+
+        /*
+         observer
+         */
+        $("#observer").persianDatepicker({
+            altField: '#observerAlt',
+            altFormat: "YYYY MM DD HH:mm:ss",
+            observer: true,
+            format: 'YYYY/MM/DD'
+
         });
 
         /*
@@ -135,6 +195,39 @@
             maxDate: 1419983467029
         });
         /**
+         Custom Disable Date
+         */
+        $("#customDisabled").persianDatepicker({
+            timePicker: {
+                enabled: true
+            },
+            altField: '#customDisabledAlt',
+            checkDate: function (unix) {
+                var output = true;
+                var d = new persianDate(unix);
+                if (d.date() == 20 | d.date() == 21 | d.date() == 22) {
+                    output = false;
+                }
+                return output;
+            },
+            checkMonth: function (month) {
+                var output = true;
+                if (month == 1) {
+                    output = false;
+                }
+                return output;
+
+            }, checkYear: function (year) {
+                var output = true;
+                if (year == 1396) {
+                    output = false;
+                }
+                return output;
+            }
+
+        });
+
+        /**
          persianDate
          */
         $("#persianDigit").persianDatepicker({
@@ -149,33 +242,36 @@
         <h1>Persian Date Picker Demo</h1>
 
         <p>
-            <span class="label label-success">Version 0.3.5</span>
+            <span class="label label-success">Version 0.4.2</span>
         </p>
     </div>
     <div class="col-xs-3">
-        <label>Theme</label>
-        <select class="form-control theme-roller">
-            <option value="default">Default</option>
-            <option value="dark">Dark</option>
-            <option value="blue">Blue</option>
-        </select>
+        <!--<label>Theme</label>-->
+        <!--<select class="form-control theme-roller">-->
+            <!--<option value="default">Default</option>-->
+            <!--<option value="dark">Dark</option>-->
+            <!--<option value="blue">Blue</option>-->
+        <!--</select>-->
     </div>
 </div>
 <div class="col-xs-12">
-
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-heading">
             <h4>Inline Datepicker</h4>
-
-            <div id="inlineDatepicker" class="col-xs-6"></div>
+        </div>
+        <div class="panel-body">
+            <div id="inlineDatepicker" data-date="2016/12/13 12:20" class="col-xs-6"></div>
             <div class="col-xs-6">
                 <input id="inlineDatepickerAlt" type="text" class="form-control"/>
             </div>
         </div>
     </div>
+
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-heading">
             <h4>Default Functionlaity</h4>
+        </div>
+        <div class="panel-body">
 
             <div class="form-group col-xs-6">
                 <label>Select Date</label>
@@ -187,10 +283,29 @@
 
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <h4>Time Picker</h4>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Observer Functionlaity</h4>
+            <h6>sync with pasted data</h6>
+        </div>
+        <div class="panel-body">
+            <div class="form-group col-xs-6">
+                <label>Select Date</label>
+                <input id="observer" type="text" class="form-control"/>
+            </div>
+            <div class="form-group col-xs-6">
+                <input id="observerAlt" type="text" class="form-control"/>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Time Picker</h4>
+        </div>
+        <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Time</label>
                 <input id="timepicker" type="text" class="form-control"/>
@@ -201,9 +316,10 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-heading">
             <h4>Month Picker</h4>
-
+        </div>
+        <div class="panel-body">
             <div class="form-group col-xs-6">
                 <h4>Select Month</h4>
                 <input id="monthpicker" type="text" class="form-control"/>
@@ -214,9 +330,10 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-heading">
             <h4>Year Picker</h4>
-
+        </div>
+        <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Year</label>
                 <input id="yearpicker" type="text" class="form-control"/>
@@ -228,9 +345,10 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-heading">
             <h4>Year And Month Picker</h4>
-
+        </div>
+        <div class="panel-body">
             <div class="form-group col-xs-6">
                 <label>Select Year And Month</label>
                 <input id="yearAndMonthpicker" type="text" class=" form-control"/>
@@ -243,9 +361,10 @@
 
 
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-heading">
             <h4>With Min and Max</h4>
-
+        </div>
+        <div class="panel-body">
             <div id="inlineDatepickerWithMinMax" class="col-xs-6"></div>
             <div class="col-xs-6">
                 <input id="inlineDatepickerWithMinMaxAlt" type="text" class=" form-control"/>
@@ -254,8 +373,22 @@
     </div>
 
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Custom Date Disabled</h4>
+        </div>
         <div class="panel-body">
+            <div id="customDisabled" class="col-xs-6"></div>
+            <div class="col-xs-6">
+                <input id="customDisabledAlt" type="text" class=" form-control"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
             <h4>English Digit</h4>
+        </div>
+        <div class="panel-body">
 
             <div id="persianDigit" class="col-xs-6"></div>
             <div class="col-xs-6">

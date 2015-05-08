@@ -49,7 +49,7 @@ module.exports = function (grunt) {
         },
         sass: {
             options: {
-                banner: fileBanner,
+                //banner: fileBanner,
                 sourcemap: 'none'
             },
             dist: {
@@ -65,6 +65,12 @@ module.exports = function (grunt) {
                     },
                     {
                         'dist/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-redblack.css': 'src/sass/persian-datepicker-redblack.scss'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-cheerup.css': 'src/sass/persian-datepicker-cheerup.scss'
                     }
                 ]
             }
@@ -100,6 +106,18 @@ module.exports = function (grunt) {
                 }
             }
         },
+        yuidoc: {
+            compile: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
+                options: {
+                    paths: ['src/js'],
+                    outdir: 'doc/yui/'
+                }
+            }
+        },
         watch: {
             scripts: {
                 files: ['src/js/*.js'],
@@ -112,18 +130,6 @@ module.exports = function (grunt) {
             doc: {
                 files: ['src/js/*.js'],
                 tasks: ['jsdoc']
-            }
-        },
-        yuidoc: {
-            all: {
-                name: '<%= pkg.name %>',
-                description: '<%= pkg.description %>',
-                version: '<%= pkg.version %>',
-                url: '<%= pkg.homepage %>',
-                options: {
-                    paths: ['src/js'],
-                    outdir: 'doc/yui/'
-                }
             }
         }
     });
