@@ -190,7 +190,7 @@ declare interface PDatePickerOptions {
     /**
      * [x,y] , define a position of datepicker relative to input element.
      * default: auto*/
-    position?: Array<any>
+    position?: Array<any> | string
     /**
      * If true picker close When Select day
      * default: false*/
