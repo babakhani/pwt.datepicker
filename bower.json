@@ -8,6 +8,6 @@
     ],
     "dependencies": {
         "jquery": ">=1.10.2",
-        "persian-datepicker-ehdi": ">=0.1.9"
+        "persian-date-ehdi": ">=0.1.9"
     }
 }
