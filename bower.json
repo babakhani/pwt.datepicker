@@ -1,7 +1,7 @@
 {
-    "name": "persian-datepicker-ehdi",
+    "name": "persian-datepicker",
     "version": "0.4.5",
-    "main": "dist/js/persian-datepicker-0.4.5.js",
+    "main": "dist/",
     "ignore": [
         ".jshintrc",
         "**/*.txt"
