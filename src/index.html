@@ -5,16 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link href="css/persian-datepicker.css" rel="stylesheet" type="text/css"/>
 
-    <link href="css/persian-datepicker.css" rel="stylesheet" type="text/css"/>
-
     <!--<link href="../dist/css/theme/persian-datepicker-blue.css" rel="stylesheet" type="text/css"/>-->
     <link href="../dist/css/theme/persian-datepicker-dark.css" rel="stylesheet" type="text/css"/>
 
     <link href="../dist/css/theme/persian-datepicker-redblack.css" rel="stylesheet" type="text/css"/>
 
     <link href="../dist/css/theme/persian-datepicker-cheerup.css" rel="stylesheet" type="text/css"/>
-
-
 
 
     <script type="text/javascript" src="../lib/jquery.js"></script>
@@ -67,39 +63,26 @@
          Default
          */
         window.pd = $("#inlineDatepicker").persianDatepicker({
-            timePicker: {
-                enabled: true
-            },
             altField: '#inlineDatepickerAlt',
-            altFormat: "YYYY MM DD HH:mm:ss",
-//            minDate:1258675200000,
-//            maxDate:1358675200000,
-            checkDate: function (unix) {
-                var output = true;
-                var d = new persianDate(unix);
-                if (d.date() == 20) {
-                    output = false;
-                }
-                return output;
+            altFormat: 'unix',
+            altFieldFormatter: function (unixDate) {
+                var self = this;
+                var thisAltFormat = self.altFormat.toLowerCase();
+                return new persianDate(unixDate).format();
             },
-            checkMonth: function (month) {
-                var output = true;
-                if (month == 1) {
-                    output = false;
-                }
-                return output;
-
-            }, checkYear: function (year) {
-                var output = true;
-                if (year == 1396) {
-                    output = false;
-                }
-                return output;
+            timePicker: {
+                enabled: true,
+                showSeconds: true,
+                showMeridian: false,
+                scrollEnabled: true
             }
 
         }).data('datepicker');
 
-        $("#inlineDatepicker").pDatepicker("setDate", [1391, 12, 1, 11, 14]);
+        //$("#inlineDatepicker").pDatepicker('destroy');
+
+        console.log(window.pd.setDate);
+
 
         //pd.setDate([1333,12,28,11,20,30]);
 
@@ -248,9 +231,9 @@
     <div class="col-xs-3">
         <!--<label>Theme</label>-->
         <!--<select class="form-control theme-roller">-->
-            <!--<option value="default">Default</option>-->
-            <!--<option value="dark">Dark</option>-->
-            <!--<option value="blue">Blue</option>-->
+        <!--<option value="default">Default</option>-->
+        <!--<option value="dark">Dark</option>-->
+        <!--<option value="blue">Blue</option>-->
         <!--</select>-->
     </div>
 </div>

@@ -186,7 +186,7 @@ var ClassConfig = {
      */
     destroy: function () {
         this.inputElem.removeClass(self.cssClass);
-        this.elmenet.main.remove();
+        this.element.main.remove();
     },
 
 
@@ -2605,7 +2605,7 @@ var ClassDayPicker = {
             datepicker: self.datepicker
         });
         this.mGrid.attachEvent("selectDay", function (x) {
-            self.datepicker.selectDate( x);
+            self.datepicker.selectDate(x);
             self.onSelect(x);
             self.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         });
@@ -3318,15 +3318,23 @@ var ClassTimePicker = {
      */
     _movehour: function (mode) {
         var currentVal = parseInt(this.hourInput.val());
-        if (mode === 'up') {
-            if (currentVal >= 12) {
-                currentVal = this.hourStep;
+        if (this.showMeridian == true) {
+            if (mode === 'up') {
+                if (currentVal >= 12) {
+                    currentVal = this.hourStep;
+                } else {
+                    currentVal += this.hourStep;
+                }
             } else {
-                currentVal += this.hourStep;
+                if (currentVal <= 1) {
+                    currentVal = 12;
+                } else {
+                    currentVal -= this.hourStep;
+                }
             }
         } else {
-            if (currentVal <= 1) {
-                currentVal = 12;
+            if (mode === 'up') {
+                currentVal += this.hourStep;
             } else {
                 currentVal -= this.hourStep;
             }
@@ -3497,7 +3505,7 @@ var ClassTimePicker = {
      *
      * @param unix
      */
-    setTime:function(unix){
+    setTime: function (unix) {
         var pd = new persianDate(unix);
         this._updateState('hour', pd.hour());
         this._updateState('minute', pd.minute());
