@@ -27,6 +27,15 @@ var ClassConfig = {
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
+     * @description if false datepicker initiate with empty value in input.
+     * @type {boolean}
+     * @default true
+     */
+    initialValue: true,
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
      * @description if true all digit convert to persian digit.
      * @type {boolean}
      * @default true
@@ -1770,7 +1779,9 @@ var ViewsDatePicker = {
                 }
 
                 self.changeView(self.viewMode);
-                self._syncWithImportData(self.state.unixDate);
+                if (self.initialValue) {
+                    self._syncWithImportData(self.state.unixDate);
+                }
                 return this;
             },
 
@@ -2250,7 +2261,9 @@ var ClassDatepicker = {
         this.state = new State({datepicker: self});
         this.compatConfig();
         this._defineOnInitState();
-        this._updateInputElement();
+        if (self.initialValue) {
+            this._updateInputElement();
+        }
         this.view = this.views['default'];
         this.view.render(this);
         this.inputElem.data("datepicker", this);

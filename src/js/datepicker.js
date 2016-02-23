@@ -450,7 +450,9 @@ var ClassDatepicker = {
         this.state = new State({datepicker: self});
         this.compatConfig();
         this._defineOnInitState();
-        this._updateInputElement();
+        if (self.initialValue) {
+            this._updateInputElement();
+        }
         this.view = this.views['default'];
         this.view.render(this);
         this.inputElem.data("datepicker", this);
