@@ -125,7 +125,9 @@ var ViewsDatePicker = {
                 }
 
                 self.changeView(self.viewMode);
-                self._syncWithImportData(self.state.unixDate);
+                if (self.initialValue) {
+                    self._syncWithImportData(self.state.unixDate);
+                }
                 return this;
             },
 
