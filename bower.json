@@ -1,13 +1,13 @@
 {
-    "name": "persian-datepicker",
-    "version": "0.4.5",
-    "main": "dist/",
+    "name": "persian-datepicker-ehdi",
+    "version": "0.4.7",
+    "main": "dist/js/persian-datepicker-0.4.7.js",
     "ignore": [
         ".jshintrc",
         "**/*.txt"
     ],
     "dependencies": {
         "jquery": ">=1.10.2",
-        "persian-date": ">=0.1.8"
+        "persian-date-ehdi": ">=0.1.9"
     }
 }

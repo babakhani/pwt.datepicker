@@ -1,7 +1,7 @@
 /*
-  persian-datepicker - v0.4.5 
-  Author: reza babakhani 
- http://babakhani.github.io/PersianWebToolkit/datepicker 
+  persian-datepicker - v0.4.5
+  Author: reza babakhani
+ http://babakhani.github.io/PersianWebToolkit/datepicker
  */
 ( function () {(function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
@@ -125,6 +125,14 @@ var ClassConfig = {
      * @default unix
      */
     altFormat: 'unix',
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @description it will fill input on init
+     * @type {boolean}
+     * @default true
+     */
+    fillOnInit: true,
 
 
     /**
@@ -2083,7 +2091,8 @@ var ClassDatepicker = {
             if (jQuery.isNumeric(pasted)) {
                 var newPersainDate = new persianDate(pasted);
                 self.state.setSelected('unix', newPersainDate);
-                self._updateInputElement();
+                if(self.fillOnInit)
+                  self._updateInputElement(); //ehdi
             } else {
                 var persianDateArray = self.validatePersianDateString(pasted);
                 if (persianDateArray != null) {
@@ -2250,7 +2259,8 @@ var ClassDatepicker = {
         this.state = new State({datepicker: self});
         this.compatConfig();
         this._defineOnInitState();
-        this._updateInputElement();
+        if(self.fillOnInit)
+          this._updateInputElement(); //ehdi
         this.view = this.views['default'];
         this.view.render(this);
         this.inputElem.data("datepicker", this);
