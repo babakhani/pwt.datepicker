@@ -426,7 +426,10 @@ var ClassDatepicker = {
      * @desc set time of timepicker
      */
     setTime: function () {
-        this.timePicker.setTime(this.state.selected.unixDate);
+        if(this.timePicker.enabled){
+            this.timePicker.setTime(this.state.selected.unixDate);
+        }
+        return this;
     },
 
 
@@ -450,7 +453,9 @@ var ClassDatepicker = {
         this.state = new State({datepicker: self});
         this.compatConfig();
         this._defineOnInitState();
-        this._updateInputElement();
+        if (self.initialValue) {
+            this._updateInputElement();
+        }
         this.view = this.views['default'];
         this.view.render(this);
         this.inputElem.data("datepicker", this);

@@ -183,7 +183,7 @@ var ClassDayPicker = {
             datepicker: self.datepicker
         });
         this.mGrid.attachEvent("selectDay", function (x) {
-            self.datepicker.selectDate( x);
+            self.datepicker.selectDate(x);
             self.onSelect(x);
             self.mGrid.selectDate(self.datepicker.state.selected.unixDate);
         });

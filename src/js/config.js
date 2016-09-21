@@ -10,6 +10,15 @@ var ClassConfig = {
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
+     * @description if false datepicker initiate with empty value in input.
+     * @type {boolean}
+     * @default true
+     */
+    initialValue: true,
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
      * @description if true all digit convert to persian digit.
      * @type {boolean}
      * @default true
@@ -169,7 +178,7 @@ var ClassConfig = {
      */
     destroy: function () {
         this.inputElem.removeClass(self.cssClass);
-        this.elmenet.main.remove();
+        this.element.main.remove();
     },
 
 
