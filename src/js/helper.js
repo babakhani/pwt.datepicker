@@ -288,4 +288,4 @@ if (!jQuery.browser) {
     }
 
     jQuery.browser = browser;
-}
+};

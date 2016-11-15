@@ -180,6 +180,7 @@ var ClassDatepicker = {
         self.onSelect(unixDate, this);
         if (self.autoClose) {
             self.element.main.hide();
+            $('input').blur();
         }
         return this;
     },

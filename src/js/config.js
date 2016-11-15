@@ -456,6 +456,4 @@ var ClassConfig = {
     checkYear: function (year) {
         return true;
     }
-
-
-}
+};
