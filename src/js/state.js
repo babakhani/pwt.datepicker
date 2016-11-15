@@ -5,6 +5,14 @@
  * @type {{view: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, selected: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, _updateSelectedUnix: _updateSelectedUnix, setTime: setTime, setSelected: setSelected, syncViewWithelected: syncViewWithelected, setView: setView}}
  */
 var ClassDatepickerState = {
+
+
+    /**
+     * @desc data filter flag, if true minDate and maxDate applied to date cells
+     */
+    _filetredDate: false,
+
+
     /**
      * @desc define start and end of available date
      */
@@ -178,12 +186,12 @@ var ClassDatepickerState = {
     },
 
     /**
-     * 
+     *
      * @param key
      * @param value
      * @returns {ClassDatepickerState}
      */
-    setSelectedDateTime:function (key, value) {
+    setSelectedDateTime: function (key, value) {
         var self = this;
         switch (key) {
             case 'unix':

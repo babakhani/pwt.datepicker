@@ -115,15 +115,17 @@ var ClassYearPicker = {
      * @private
      */
     _checkYearAccess: function (y) {
+        var output = true;
         if (this.datepicker.state._filetredDate) {
             var startYear = this.datepicker.state.filterDate.start.year;
             var endYear = this.datepicker.state.filterDate.end.year;
             if (startYear <= y & y <= endYear) {
-                return true;
+                output = true;
             } else {
                 return false;
             }
-        } else {
+        }
+        if(output){
             return this.datepicker.checkYear(y);
         }
     },

@@ -205,20 +205,19 @@ var ClassMonthGrid = {
 
 
     _checkDayAccess: function (thisUnix) {
-        var self = this;
+        var self = this,
+            output = true;
         if (self.datepicker.state._filetredDate) {
             if (self.minDate && self.maxDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
                 self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
-                if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
-                    return true;
-                } else {
+                if (!(thisUnix >= self.minDate && thisUnix <= self.maxDate)) {
                     return false;
                 }
             } else if (self.minDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
-                if (thisUnix >= self.minDate) {
-                    return true;
+                if (thisUnix <= self.minDate) {
+                    return false;
                 }
             } else if (self.maxDate) {
                 self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
@@ -226,12 +225,9 @@ var ClassMonthGrid = {
                     return false;
                 }
             }
-        } else {
-            if (self.datepicker.checkDate(thisUnix)) {
-                return false;
-            } else {
-                return true;
-            }
+        }
+        if (output) {
+            return self.datepicker.checkDate(thisUnix);
         }
     },
 
