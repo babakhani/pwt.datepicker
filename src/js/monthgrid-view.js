@@ -59,6 +59,7 @@ var ViewsMonthGrid = {
                 self.daysBox = self.createElementByClass(self.cssClass.daysTable);
                 this.renderDays(self);
             },
+
             /**
              *
              * @param self
@@ -71,7 +72,7 @@ var ViewsMonthGrid = {
                     var span = $("<span/>")
                         .text(self._formatDigit(day))
                         .attr("unixDate", dayPartUnixTime)
-                        .data({ day: day, month: month, year: year, unixDate: dayPartUnixTime})
+                        .data({day: day, month: month, year: year, unixDate: dayPartUnixTime})
                         .addClass(cssClass)
                         .appendTo($(this))[0];
                     self.daysList.push(span);
@@ -81,6 +82,8 @@ var ViewsMonthGrid = {
                 self.firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(self.state.year, self.state.month);
                 var currentMonthIndex = 1;
                 var nextMonthIndex = 1;
+
+
                 $(self.daysBox).find("td").each(function (index) {
                     $(this).empty();
                     if (self.firstWeekDayOfMonth > 1 && index + 1 < self.firstWeekDayOfMonth) {
@@ -111,33 +114,15 @@ var ViewsMonthGrid = {
                         addSpan.apply(this, [day, nextMonth, nextYear, "other-month"]);
                         nextMonthIndex += 1;
                     }
+                    
+
+
                     var thisUnix = $(this).children("span").data("unixDate");
-
-
-                    if (self.datepicker.state._filetredDate) {
-                        if (self.minDate && self.maxDate) {
-                            if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
-                                $(this).addClass(self.cssClass.disbaled);
-                            } else {
-                                $(this).removeClass(self.cssClass.disbaled);
-                            }
-                        } else if (self.minDate) {
-                            if (thisUnix >= self.minDate) {
-                                $(this).addClass(self.cssClass.disbaled);
-                            }
-                        } else if (self.maxDate) {
-                            if (thisUnix <= self.maxDate) {
-                                $(this).removeClass(self.cssClass.disbaled);
-                            }
-                        }
+                    if (self._checkDayAccess(thisUnix)){
+                        $(this).removeClass(self.cssClass.disbaled);
                     } else {
-                        if (self.datepicker.checkDate(thisUnix)) {
-                            $(this).removeClass(self.cssClass.disbaled);
-                        } else {
-                            $(this).addClass(self.cssClass.disbaled);
-                        }
+                        $(this).addClass(self.cssClass.disbaled);
                     }
-
 
                 });
                 $(self.daysBox).find("td").not('.disabled').children("span").click(function () {

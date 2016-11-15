@@ -123,7 +123,7 @@ var ClassYearPicker = {
             } else {
                 return false;
             }
-        }else {
+        } else {
             return this.datepicker.checkYear(y);
         }
     },

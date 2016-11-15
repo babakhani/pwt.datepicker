@@ -122,13 +122,25 @@ var ClassMonthPicker = {
      */
     _checkMonthAccess: function (month) {
         if (this.datepicker.state._filetredDate) {
-            var y = this.datepicker.state.view.year;
-            var monthUnix = new pDate([y, month]).unix() * 1000;
-            if (monthUnix >= this.datepicker.state.filterDate.start.unixDate &&
-                monthUnix <= this.datepicker.state.filterDate.end.unixDate
-                ) {
+            var y = this.datepicker.state.view.year,
+                startMonth = this.datepicker.state.filterDate.start.month,
+                endMonth = this.datepicker.state.filterDate.end.month,
+                startYear = this.datepicker.state.filterDate.start.year,
+                endYear = this.datepicker.state.filterDate.end.year;
+
+            if (startYear == endYear && endYear == y && month >= startMonth && month <= endMonth) {
                 return true;
-            } else {
+            }
+            else if (y != endYear && y == startYear && month >= startMonth) {
+                return true;
+            }
+            else if (y != startYear && y == endYear && month <= endMonth) {
+                return true;
+            }
+            else if (y > startYear && y < endYear) {
+                return true;
+            }
+            else {
                 return false;
             }
         }

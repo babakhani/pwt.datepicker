@@ -132,6 +132,7 @@ var ClassDayPicker = {
         return this;
     },
 
+
     /**
      * @desc _attachEvents
      * @private

@@ -476,6 +476,7 @@ var ClassConfig = {
 
 
 }
+
 var ClassDateRange = {
     /**
      * @property monthRange
@@ -2194,42 +2195,12 @@ var ClassDatepicker = {
     _updateInputElement: function () {
         var self = this;
         self._flagSelfManipulate = true;
-        // Update Alt Field
-        self.altField.val(self.altFieldFormatter(self.state.selected.unixDate)).trigger('change');
-        ;
         // Update Display Field
         self.inputElem.val(self.formatter(self.state.selected.unixDate)).trigger('change');
-        ;
+        // Update Alt Field
+        self.altField.val(self.altFieldFormatter(self.state.selected.unixDate)).trigger('change');
         self._flagSelfManipulate = false;
         return self;
-    },
-
-
-    /**
-     * @desc bootstrap method of {@link ClassDatepicker}
-     * @returns {ClassDatepicker}
-     * @private
-     */
-    _defineOnInitState: function () {
-        if ($(this.$container)[0].nodeName == 'INPUT') {
-            var garegurianDate = new Date(this.inputElem.val()).valueOf();
-            this.$container = $('body');
-        }
-        else {
-            var garegurianDate = new Date($(this.$container).data('date')).valueOf();
-            this._inlineView = true;
-        }
-        if (garegurianDate && garegurianDate != 'undefined') {
-            this.state.unixDate = garegurianDate;
-        }
-        else {
-            this.state.unixDate = new Date().valueOf();
-        }
-        this.altField = $(this.altField);
-        this.state.setSelectedDateTime('unix', this.state.unixDate);
-        this.state.setTime('unix', this.state.unixDate);
-        this.state.setView('unix', this.state.unixDate);
-        return this;
     },
 
 
@@ -2237,7 +2208,7 @@ var ClassDatepicker = {
      * @desc set time of timepicker
      */
     setTime: function () {
-        if(this.timePicker.enabled){
+        if (this.timePicker.enabled) {
             this.timePicker.setTime(this.state.selected.unixDate);
         }
         return this;
@@ -2256,10 +2227,48 @@ var ClassDatepicker = {
 
 
     /**
-     * @desc initilize {@link ClassDatepicker}
+     * @desc bootstrap method of {@link ClassDatepicker}
      * @returns {ClassDatepicker}
+     * @private
      */
-    init: function () {
+    _defineOnInitState: function () {
+        if ($(this.$container)[0].nodeName == 'INPUT') {
+            var garegurianDate = new Date(this.inputElem.val()).valueOf();
+            this.$container = $('body');
+        }
+        else {
+            var garegurianDate = new Date($(this.$container).data('date')).valueOf();
+            this._inlineView = true;
+        }
+
+        if (garegurianDate && garegurianDate != 'undefined') {
+            this.state.unixDate = garegurianDate;
+        }
+        else {
+            this.state.unixDate = new Date().valueOf();
+        }
+        this.altField = $(this.altField);
+        this.state.setSelectedDateTime('unix', this.state.unixDate);
+        this.state.setTime('unix', this.state.unixDate);
+        this.state.setView('unix', this.state.unixDate);
+        return this;
+    },
+
+
+    /**
+     *
+     * @private
+     */
+    _attachInstanceToElement: function () {
+        this.inputElem.data("datepicker", this);
+    },
+
+
+    /**
+     *
+     * @private
+     */
+    _bootstrapState: function () {
         var self = this;
         this.state = new State({datepicker: self});
         this.compatConfig();
@@ -2267,10 +2276,27 @@ var ClassDatepicker = {
         if (self.initialValue) {
             this._updateInputElement();
         }
+    },
+
+
+    /**
+     *
+     * @private
+     */
+    _initView: function () {
         this.view = this.views['default'];
         this.view.render(this);
-        this.inputElem.data("datepicker", this);
-        this.inputElem.addClass(self.cssClass);
+    },
+
+
+    /**
+     * @desc initilize {@link ClassDatepicker}
+     * @returns {ClassDatepicker}
+     */
+    init: function () {
+        this._bootstrapState();
+        this._initView();
+        this._attachInstanceToElement();
         this._attachEvents();
         return this;
     }
@@ -3724,7 +3750,12 @@ var ClassDatepickerState = {
         return this;
     },
 
-
+    /**
+     * 
+     * @param key
+     * @param value
+     * @returns {ClassDatepickerState}
+     */
     setSelectedDateTime:function (key, value) {
         var self = this;
         switch (key) {

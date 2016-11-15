@@ -204,6 +204,38 @@ var ClassMonthGrid = {
     },
 
 
+    _checkDayAccess: function (thisUnix) {
+        var self = this;
+        if (self.datepicker.state._filetredDate) {
+            if (self.minDate && self.maxDate) {
+                self.minDate = new pDate(self.minDate).startOf('day').valueOf();
+                self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
+                if (thisUnix >= self.minDate && thisUnix <= self.maxDate) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if (self.minDate) {
+                self.minDate = new pDate(self.minDate).startOf('day').valueOf();
+                if (thisUnix >= self.minDate) {
+                    return true;
+                }
+            } else if (self.maxDate) {
+                self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
+                if (thisUnix <= self.maxDate) {
+                    return false;
+                }
+            }
+        } else {
+            if (self.datepicker.checkDate(thisUnix)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
+
+
     /**
      * @memberOf ClassDayPicker.ClassMonthGrid
      * @desc applyStory

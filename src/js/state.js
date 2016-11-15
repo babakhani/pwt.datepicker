@@ -25,7 +25,7 @@ var ClassDatepickerState = {
             hour: 0,
             minute: 0,
             second: 0,
-            unixDate: 100
+            unixDate: 0
         }
     },
 
@@ -177,7 +177,12 @@ var ClassDatepickerState = {
         return this;
     },
 
-
+    /**
+     * 
+     * @param key
+     * @param value
+     * @returns {ClassDatepickerState}
+     */
     setSelectedDateTime:function (key, value) {
         var self = this;
         switch (key) {
