@@ -27,6 +27,15 @@ var ClassConfig = {
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
+     * @description disable days.
+     * @type {number|Array}
+     * @default []
+     */
+    disableDays: [],
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
      * @description if false datepicker initiate with empty value in input.
      * @type {boolean}
      * @default true
@@ -1634,6 +1643,12 @@ var ViewsMonthGrid = {
                             $(this).removeClass(self.cssClass.disbaled);
                         } else {
                             $(this).addClass(self.cssClass.disbaled);
+                        }
+                        if (self.datepicker.disableDays.length) {
+                            var d = new persianDate(thisUnix);
+                            if ($.inArray(d.pDate.date, self.datepicker.disableDays) !== -1) {
+                                $(this).addClass(self.cssClass.disbaled);
+                            }
                         }
                     }
 

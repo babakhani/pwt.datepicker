@@ -10,6 +10,15 @@ var ClassConfig = {
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
+     * @description disable days.
+     * @type {number|Array}
+     * @default []
+     */
+    disableDays: [],
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
      * @description if false datepicker initiate with empty value in input.
      * @type {boolean}
      * @default true
