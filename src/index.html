@@ -44,40 +44,41 @@
     $(document).ready(function () {
         window.pd = $("#inlineDatepicker").persianDatepicker({
             initialValue: false,
-            viewMode: 'month',
+//            viewMode: 'month',
             altField: '#inlineDatepickerAlt',
             altFormat: 'unix',
             observer: true,
             minDate: 1479718200000,
             maxDate: 1493106600000,
-            altFieldFormatter: function (unixDate) {
-                return new pDate(unixDate).format();
-            },
-            checkDate: function (unix) {
-                if (
-                        new pDate(unix).days() == 0 |
-                        new pDate(unix).days() == 1 |
-                        new pDate(unix).days() == 3 |
-                        new pDate(unix).days() == 5) {
-                    return false;
-                } else {
-                    return true;
-                }
-            },
-            checkMonth: function (month, year) {
-                if (month > 8) {
-                    return false;
-                } else {
-                    return true;
-                }
-            },
-            checkYear: function (year) {
-                if (year > 1400) {
-                    return false;
-                }else{
-                    return true;
-                }
-            },
+//            onSelect: function(unix){
+//                log(new pDate(unix).format())
+//            },
+//            altFieldFormatter: function (unixDate) {
+//                return new pDate(unixDate).format();
+//            },
+//            checkDate: function (unix) {
+//                if (
+//                    new pDate(unix).days() == 0 |
+//                    new pDate(unix).days() == 1) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            },
+//            checkMonth: function (month, year) {
+//                if (month > 8) {
+//                    return false;
+//                } else {
+//                    return true;
+//                }
+//            },
+//            checkYear: function (year) {
+//                if (year > 1400) {
+//                    return false;
+//                }else{
+//                    return true;
+//                }
+//            },
             timePicker: {
                 enabled: true,
                 showMeridian: true,
@@ -91,7 +92,7 @@
     <div class="col-xs-9">
         <h1>Persian Date Picker Demo</h1>
         <p>
-            <span class="label label-success">Version 1.0.0</span>
+            <span class="label label-success">Version 0.5.0</span>
         </p>
     </div>
 </div>
