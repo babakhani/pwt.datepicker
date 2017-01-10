@@ -41,6 +41,7 @@
     "persian-date": ">=0.1.8"
   },
   "scripts": {
-    "test": "./node_modules/jshint/bin/jshint src/test.js"
+    "test": "./node_modules/jshint/bin/jshint src/js/*.js",
+    "test0": "./node_modules/jshint/bin/jshint dist/js/persian-datepicker-0.5.0.js"
   }
 }

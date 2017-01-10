@@ -10,7 +10,7 @@
         }
         $(this).each(function () {
             // encapsulation Args
-            var emptyArr = new Array, tempArg = args.concat(emptyArr), dp = $(this).data("datepicker");
+            var emptyArr = [], tempArg = args.concat(emptyArr), dp = $(this).data("datepicker");
             if (dp && typeof tempArg[0] == "string") {
                 var funcName = tempArg[0], funcArgs = tempArg.splice(0, 1);
                 output = dp[funcName](tempArg[0]);

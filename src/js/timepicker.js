@@ -1,3 +1,8 @@
+/*global ClassSprite */
+/*global inherit */
+/*global TEMPLATE */
+/*global persianDate */
+
 'use strict';
 /**
  * @desc Instantiate in {@link ClassDatepicker}
@@ -34,7 +39,6 @@ var ClassTimePicker = {
      * @returns {Class_Timepicker}
      */
     show: function () {
-        'use strict';
         this.container.show();
         return this;
     },
@@ -45,7 +49,6 @@ var ClassTimePicker = {
      * @returns {Class_Timepicker}
      */
     hide: function () {
-        'use strict';
         this.container.hide();
         return this;
     },
@@ -114,11 +117,11 @@ var ClassTimePicker = {
      */
     _updateTime: function (state) {
         var timeStateObject = state.selected;
-        var hourArray = this.convert24hTo12(timeStateObject['hour']);
-        this.hourInput.val(timeStateObject['hour']);
-        this.minuteInput.val(timeStateObject['minute']);
-        this.secondInput.val(timeStateObject['second']);
-        this.meridianInput.val(timeStateObject.dateObj.format('a'))
+        var hourArray = this.convert24hTo12(timeStateObject.hour);
+        this.hourInput.val(timeStateObject.hour);
+        this.minuteInput.val(timeStateObject.minute);
+        this.secondInput.val(timeStateObject.second);
+        this.meridianInput.val(timeStateObject.dateObj.format('a'));
         this._currentMeridian = hourArray[1];
         this.meridianInput.attr({'data-meridian-mode': this._currentMeridian});
         return this;
@@ -133,7 +136,7 @@ var ClassTimePicker = {
      */
     _updateMeridian: function (state) {
         var timeStateObject = state.selected;
-        this.meridianInput.val(timeStateObject.dateObj.format('a'))
+        this.meridianInput.val(timeStateObject.dateObj.format('a'));
         return this;
     },
 
@@ -163,7 +166,7 @@ var ClassTimePicker = {
      */
     _movehour: function (mode) {
         var currentVal = parseInt(this.hourInput.val());
-        if (this.showMeridian == true) {
+        if (this.showMeridian === true) {
             if (mode === 'up') {
                 if (currentVal >= 12) {
                     currentVal = this.hourStep;

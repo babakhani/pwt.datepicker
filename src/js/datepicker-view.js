@@ -82,7 +82,7 @@ var ViewsDatePicker = {
                 self.container.timeView = $(self.element.main).children('.' + self.cssClass.timeView);
                 self.container.toolbox = $(self.element.main).children('.' + self.cssClass.toolbox);
 
-                if (self.navigator.enabled && self.onlyTimePicker == false) {
+                if (self.navigator.enabled && self.onlyTimePicker === false) {
                     self.navigator = new Navigator($.extend(true, self.navigator, {datepicker: self}), self.container.navigator);
                 } else {
                     self.container.navigator.remove();

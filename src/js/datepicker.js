@@ -75,8 +75,8 @@ var ClassDatepicker = {
     _checkNextStateAvalibility: function (state) {
         if (!this._pickers[state]) {
             this.element.main.hide();
-            return false;
             $.error(state + "Picker Set as {enabled:false} and dos not exist!! Set viewMode to Enabled view Check Configuration");
+            return false;
         }
         return state;
     },
@@ -200,13 +200,13 @@ var ClassDatepicker = {
         switch (self.currentView) {
             case ('month'):
                 self.monthPicker.selectMonth();
-                break
+                break;
             case ('year'):
                 self.yearPicker.selectYear();
-                break
+                break;
             case ('day'):
                 self.dayPicker.selectDay();
-                break
+                break;
         }
         self._updateInputElement();
         self.onSelect(unixDate, this);
@@ -287,12 +287,12 @@ var ClassDatepicker = {
                 self._updateInputElement();
             } else {
                 var persianDateArray = self.validatePersianDateString(pasted);
-                if (persianDateArray != null) {
+                if (persianDateArray !== null) {
                     delay(function () {
 
                         var newPersainDate = new persianDate(persianDateArray);
                         self.selectDate(newPersainDate.valueOf());
-                    }, self.inputDelay)
+                    }, self.inputDelay);
                 }
             }
         }
@@ -409,7 +409,7 @@ var ClassDatepicker = {
      */
     setDate: function (p) {
         var date = new persianDate(p);
-        this.selectDateTime(date.valueOf())
+        this.selectDateTime(date.valueOf());
         this.setTime();
         return this;
     },
@@ -421,12 +421,13 @@ var ClassDatepicker = {
      * @private
      */
     _defineOnInitState: function () {
+        var garegurianDate = null;
         if ($(this.$container)[0].nodeName == 'INPUT') {
-            var garegurianDate = new Date(this.inputElem.val()).valueOf();
+            garegurianDate = new Date(this.inputElem.val()).valueOf();
             this.$container = $('body');
         }
         else {
-            var garegurianDate = new Date($(this.$container).data('date')).valueOf();
+            garegurianDate = new Date($(this.$container).data('date')).valueOf();
             this._inlineView = true;
         }
 

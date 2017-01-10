@@ -1,3 +1,6 @@
+/*global ClassSprite */
+/*global inherit */
+/*global range */
 'use strict';
 /**
  * @desc Instantiate in {@link ClassDatepicker}
@@ -173,9 +176,9 @@ var ClassYearPicker = {
      */
     _render: function () {
         var self = this;
-        var yearItem
-            , year = self.datepicker.state.view.year
-            , remaining = parseInt(year / 12) * 12;
+        var yearItem,
+            year = self.datepicker.state.view.year,
+            remaining = parseInt(year / 12) * 12;
         self.container.children("." + self.cssClass.yearItem).remove();
         var i;
         for (i in range(12)) {

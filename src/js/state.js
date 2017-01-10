@@ -1,3 +1,5 @@
+/*global persianDate */
+/*global inherit */
 'use strict';
 /**
  * @desc Instantiate in {@link ClassDatepicker}
@@ -86,16 +88,16 @@ var ClassDatepickerState = {
         self.filterDate.start.year = pd.year();
 
         if (!endVal) {
-            endVal = 99999999999999
+            endVal = 99999999999999;
         }
-        var pd = new persianDate(endVal);
+        var pdEnd = new persianDate(endVal);
         self.filterDate.end.unixDate = endVal;
-        self.filterDate.end.hour = pd.hour();
-        self.filterDate.end.minute = pd.minute();
-        self.filterDate.end.second = pd.second();
-        self.filterDate.end.month = pd.month();
-        self.filterDate.end.date = pd.date();
-        self.filterDate.end.year = pd.year();
+        self.filterDate.end.hour = pdEnd.hour();
+        self.filterDate.end.minute = pdEnd.minute();
+        self.filterDate.end.second = pdEnd.second();
+        self.filterDate.end.month = pdEnd.month();
+        self.filterDate.end.date = pdEnd.date();
+        self.filterDate.end.year = pdEnd.year();
     },
 
 
@@ -111,7 +113,7 @@ var ClassDatepickerState = {
             this.selected.hour,
             this.selected.minute,
             this.selected.second
-        ])
+        ]);
         this.selected.unixDate = this.selected.dateObj.valueOf();
         return this;
     },
@@ -174,11 +176,11 @@ var ClassDatepickerState = {
                 self._updateSelectedUnix();
                 break;
             case 'month':
-                this.selected.month = value
+                this.selected.month = value;
                 self._updateSelectedUnix();
                 break;
             case 'date':
-                this.selected.month = value
+                this.selected.month = value;
                 self._updateSelectedUnix();
                 break;
         }
@@ -210,11 +212,11 @@ var ClassDatepickerState = {
                 self._updateSelectedUnix();
                 break;
             case 'month':
-                this.selected.month = value
+                this.selected.month = value;
                 self._updateSelectedUnix();
                 break;
             case 'date':
-                this.selected.month = value
+                this.selected.month = value;
                 self._updateSelectedUnix();
                 break;
         }
@@ -249,7 +251,7 @@ var ClassDatepickerState = {
             this.view.hour,
             this.view.minute,
             this.view.second
-        ])
+        ]);
         this.view.unixDate = this.view.dateObj.valueOf();
         return this;
     },

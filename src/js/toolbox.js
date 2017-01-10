@@ -1,3 +1,5 @@
+/*global ClassSprite */
+/*global inherit */
 'use strict';
 /**
  * @desc {@link ClassDatepicker}

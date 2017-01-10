@@ -1,3 +1,6 @@
+/*global ClassSprite */
+/*global inherit */
+/*global TEMPLATE */
 'use strict';
 /**
  * @desc Instantiate in {@link ClassDatepicker}

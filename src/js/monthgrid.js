@@ -181,7 +181,7 @@ var ClassMonthGrid = {
         } else {
             self.state.month += 1;
         }
-        self.updateAs(self.state.year, self.state.month)
+        self.updateAs(self.state.year, self.state.month);
         return false;
     },
 
@@ -240,7 +240,7 @@ var ClassMonthGrid = {
         //this.view.applyStory(this);
     }
 };
-MonthGrid = function (options) {
+var MonthGrid = function (options) {
     // Change !!
     //this.pcal = options.parent.pcal;
     inherit(this, [ClassSprite, ViewsMonthGrid, ClassDateRange, ClassMonthGrid, options]);

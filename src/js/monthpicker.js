@@ -1,3 +1,7 @@
+/*global ClassSprite */
+/*global ClassDateRange */
+/*global inherit */
+
 'use strict';
 /**
  * @desc Instantiate in {@link ClassDatepicker}
@@ -122,10 +126,11 @@ var ClassMonthPicker = {
      */
     _checkMonthAccess: function (month) {
         var self = this,
-            output = true;
+            output = true,
+            y = null;
         if (this.datepicker.state._filetredDate) {
-            var y = this.datepicker.state.view.year,
-                startMonth = this.datepicker.state.filterDate.start.month,
+            y = this.datepicker.state.view.year;
+            var startMonth = this.datepicker.state.filterDate.start.month,
                 endMonth = this.datepicker.state.filterDate.end.month,
                 startYear = this.datepicker.state.filterDate.start.year,
                 endYear = this.datepicker.state.filterDate.end.year;
@@ -213,7 +218,6 @@ var ClassMonthPicker = {
                 });
             }
         }
-        ;
         this.defineSelectedMonth();
         return this;
     },

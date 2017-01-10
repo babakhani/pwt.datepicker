@@ -4,29 +4,29 @@
  * @type {Function}
  */
 Object.keys = Object.keys || (function () {
-    var hasOwnProperty = Object.prototype.hasOwnProperty, hasDontEnumBug = !{
-        toString: null
-    }.propertyIsEnumerable("toString"), DontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'], DontEnumsLength = DontEnums.length;
+        var hasOwnProperty = Object.prototype.hasOwnProperty, hasDontEnumBug = !{
+            toString: null
+        }.propertyIsEnumerable("toString"), DontEnums = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'constructor'], DontEnumsLength = DontEnums.length;
 
-    return function (o) {
-        if (typeof o !== "object" && typeof o !== "function" || o === null)
-            throw new TypeError("Object.keys called on a non-object");
+        return function (o) {
+            if (typeof o !== "object" && typeof o !== "function" || o === null)
+                throw new TypeError("Object.keys called on a non-object");
 
-        var result = [];
-        for (var name in o) {
-            if (hasOwnProperty.call(o, name))
-                result.push(name);
-        }
-
-        if (hasDontEnumBug) {
-            for (var i = 0; i < DontEnumsLength; i++) {
-                if (hasOwnProperty.call(o, DontEnums[i]))
-                    result.push(DontEnums[i]);
+            var result = [];
+            for (var name in o) {
+                if (hasOwnProperty.call(o, name))
+                    result.push(name);
             }
-        }
-        return result;
-    };
-})();
+
+            if (hasDontEnumBug) {
+                for (var i = 0; i < DontEnumsLength; i++) {
+                    if (hasOwnProperty.call(o, DontEnums[i]))
+                        result.push(DontEnums[i]);
+                }
+            }
+            return result;
+        };
+    })();
 
 
 /**
@@ -146,7 +146,7 @@ String.prototype.toPersianDigit = function (a) {
             enDigitArr.push(digit.charCodeAt(i));
         }
         for (var j = 0; j < enDigitArr.length; j++) {
-            peDigitArr.push(String.fromCharCode(enDigitArr[j] + ((!!a && a == true) ? 1584 : 1728)));
+            peDigitArr.push(String.fromCharCode(enDigitArr[j] + ((!!a && a === true) ? 1584 : 1728)));
         }
         return peDigitArr.join('');
     });
@@ -165,7 +165,7 @@ String.prototype.toEngilshDigit = function (a) {
             enDigitArr.push(digit.charCodeAt(i));
         }
         for (var j = 0; j < enDigitArr.length; j++) {
-            peDigitArr.push(String.fromCharCode(enDigitArr[j] - ((!!a && a == true) ? 1584 : 1728)));
+            peDigitArr.push(String.fromCharCode(enDigitArr[j] - ((!!a && a === true) ? 1584 : 1728)));
         }
         return enDigitArr.join('');
     });
@@ -217,7 +217,7 @@ var range = function (e) {
 var inherit = function (self, baseClasses) {
     var copyObject = function (o) {
         return $.extend(true, {}, o);
-    }
+    };
     var args = [true, self, copyObject(ClassBase)];
     var events = [];
     for (var index in baseClasses) {
@@ -225,18 +225,18 @@ var inherit = function (self, baseClasses) {
         if (!cls) {
             continue;
         }
-        if (cls['events'] && Object.keys(cls['events']).length > 0) {
-            events.push(cls['events']);
+        if (cls.events && Object.keys(cls.events).length > 0) {
+            events.push(cls.events);
         }
         cls.events = {};
         args.push(cls);
     }
     $.extend.apply(self, args);
-    for (var index in events) {
-        var eventsObject = events[index];
-        var eventKeys = Object.keys(eventsObject)
+    for (var eventIndex in events) {
+        var eventsObject = events[eventIndex];
+        var eventKeys = Object.keys(eventsObject);
         for (var keyIndex in eventKeys) {
-            var key = eventKeys[keyIndex]
+            var key = eventKeys[keyIndex];
             var val = eventsObject[key];
             if (key && val) {
                 self.attachEvent(key, val);
@@ -245,7 +245,7 @@ var inherit = function (self, baseClasses) {
     }
     self.init();
     return self;
-}
+};
 
 
 /**
@@ -264,8 +264,8 @@ jQuery.uaMatch = function (ua) {
         [];
 
     return {
-        browser: match[ 1 ] || "",
-        version: match[ 2 ] || "0"
+        browser: match[1] || "",
+        version: match[2] || "0"
     };
 };
 
@@ -276,7 +276,7 @@ if (!jQuery.browser) {
     var browser = {};
 
     if (matched.browser) {
-        browser[ matched.browser ] = true;
+        browser[matched.browser] = true;
         browser.version = matched.version;
     }
 
@@ -288,4 +288,4 @@ if (!jQuery.browser) {
     }
 
     jQuery.browser = browser;
-};
+}

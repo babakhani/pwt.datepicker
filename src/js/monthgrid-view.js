@@ -1,3 +1,5 @@
+/*global persianDate */
+/*global TEMPLATE */
 'use strict';
 /**
  * @desc Instantiate in {@link ClassMonthGrid}
@@ -55,7 +57,6 @@ var ViewsMonthGrid = {
                 for (weekDay in self.weekRange) {
                     $("<div/>").text(self.weekRange[weekDay].abbr.fa).addClass(self.cssClass.headerRowCell).appendTo(self.headerRow)[0];
                 }
-                ;
                 self.daysBox = self.createElementByClass(self.cssClass.daysTable);
                 this.renderDays(self);
             },
@@ -76,7 +77,7 @@ var ViewsMonthGrid = {
                         .addClass(cssClass)
                         .appendTo($(this))[0];
                     self.daysList.push(span);
-                }
+                };
                 var t = new persianDate();
                 self.daysCount = t.daysInMonth(self.state.year, self.state.month);
                 self.firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(self.state.year, self.state.month);
@@ -86,39 +87,44 @@ var ViewsMonthGrid = {
 
                 $(self.daysBox).find("td").each(function (index) {
                     $(this).empty();
+                    var prevMonth = null,
+                        prevYear = null,
+                        nextMonth = null,
+                        nextYear = null,
+                        day = null;
+
                     if (self.firstWeekDayOfMonth > 1 && index + 1 < self.firstWeekDayOfMonth) {
                         if (self.state.month === 1) {
-                            var prevMonth = 12;
-                            var prevYear = parseInt(self.state.year) - 1;
+                            prevMonth = 12;
+                            prevYear = parseInt(self.state.year) - 1;
                         } else {
-                            var prevMonth = parseInt(self.state.month) - 1;
-                            var prevYear = parseInt(self.state.year);
+                            prevMonth = parseInt(self.state.month) - 1;
+                            prevYear = parseInt(self.state.year);
                         }
                         var prevMonthDaysCount = t.daysInMonth(prevYear, prevMonth);
-                        var day = parseInt((prevMonthDaysCount - self.firstWeekDayOfMonth) + (index + 2));
-                        addSpan.apply(this, [day, prevMonth, prevYear, "other-month"])
+                        day = parseInt((prevMonthDaysCount - self.firstWeekDayOfMonth) + (index + 2));
+                        addSpan.apply(this, [day, prevMonth, prevYear, "other-month"]);
                     } else if (index + 2 === (currentMonthIndex + self.firstWeekDayOfMonth) && currentMonthIndex <= self.daysCount) {
-                        var day = currentMonthIndex;
-                        addSpan.apply(this, [day, parseInt(self.state.month), parseInt(self.state.year)])
+                        day = currentMonthIndex;
+                        addSpan.apply(this, [day, parseInt(self.state.month), parseInt(self.state.year)]);
                         currentMonthIndex++;
                     } else {
 
                         if (self.state.month === 12) {
-                            var nextMonth = 1;
-                            var nextYear = parseInt(self.state.year) + 1;
+                            nextMonth = 1;
+                            nextYear = parseInt(self.state.year) + 1;
                         } else {
-                            var nextMonth = parseInt(self.state.month) + 1;
-                            var nextYear = self.state.year;
+                            nextMonth = parseInt(self.state.month) + 1;
+                            nextYear = self.state.year;
                         }
-                        var day = nextMonthIndex;
+                        day = nextMonthIndex;
                         addSpan.apply(this, [day, nextMonth, nextYear, "other-month"]);
                         nextMonthIndex += 1;
                     }
-                    
 
 
                     var thisUnix = $(this).children("span").data("unixDate");
-                    if (self._checkDayAccess(thisUnix)){
+                    if (self._checkDayAccess(thisUnix)) {
                         $(this).removeClass(self.cssClass.disbaled);
                     } else {
                         $(this).addClass(self.cssClass.disbaled);

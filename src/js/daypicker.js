@@ -199,7 +199,7 @@ var ClassDayPicker = {
      */
     init: function () {
         var self = this;
-        this._render()
+        this._render();
         this._attachEvents();
         this._updateNavigator(self.datepicker.state.selected.year, self.datepicker.state.selected.month);
         return this;

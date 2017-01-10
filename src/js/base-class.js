@@ -46,8 +46,8 @@ var ClassBase = {
      * @returns {pDate|boolean}
      */
     isSameDay: function (unix1, unix2) {
-        var d1 = new pDate(unix1);
-        var d2 = new pDate(unix2);
+        var d1 = new persianDate(unix1);
+        var d2 = new persianDate(unix2);
         return d1 && d2 &&
             d1.year() === d2.year() &&
             d1.month() === d2.month() &&
@@ -61,8 +61,8 @@ var ClassBase = {
      */
     isValidGreguranDate: function (inputDate) {
         return inputDate &&
-                new Date(inputDate) != "Invalid Date" &&
-                new Date(inputDate) != "undefined";
+            new Date(inputDate) != "Invalid Date" &&
+            new Date(inputDate) != "undefined";
     },
 
 
@@ -72,12 +72,15 @@ var ClassBase = {
      * @returns {*}
      */
     validatePersianDateString: function (pasted) {
-        var newDate = new Date(pasted);
-        var inputArray = pasted.split("/");
+        var newDate = new Date(pasted),
+            trueYear = null,
+            trueMonth = null,
+            trueDay = null,
+            inputArray = pasted.split("/");
         if (inputArray.length === 3) {
-            var trueYear = inputArray[0].toString().length <= 4 && inputArray[0].toString().length >= 1;
-            var trueMonth = inputArray[1].toString().length <= 2 && inputArray[1].toString().length >= 1;
-            var trueDay = inputArray[2].toString().length <= 2 && inputArray[2].toString().length >= 1;
+            trueYear = inputArray[0].toString().length <= 4 && inputArray[0].toString().length >= 1;
+            trueMonth = inputArray[1].toString().length <= 2 && inputArray[1].toString().length >= 1;
+            trueDay = inputArray[2].toString().length <= 2 && inputArray[2].toString().length >= 1;
         }
         $.each(inputArray, function (index, key) {
             inputArray[index] = parseInt(key);
@@ -116,7 +119,7 @@ var ClassBase = {
                 $.error("The function {0} was already added to event's chain.".format(func.toString));
             }
         }
-        this.events[eventName].push(func)
+        this.events[eventName].push(func);
         return this;
     },
 
