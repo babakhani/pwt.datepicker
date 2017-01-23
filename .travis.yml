@@ -6,11 +6,8 @@ node_js:
 - '0.6'
 - iojs
 
-
-
 before_script:
   npm install grunt-release --save-dev
-
 
 deploy:
   provider: npm

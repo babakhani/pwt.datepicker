@@ -2,6 +2,8 @@
  * Persian-Datepicker
  * @author Reza Babakhani
  */
+
+import Datepicker from "init.js";
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments), output = this;

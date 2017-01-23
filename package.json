@@ -34,14 +34,20 @@
     "grunt-contrib-watch": "*",
     "grunt-jsdoc": "^0.5.7",
     "jsdoc": "^3.2.0",
-    "jshint": "^2.6.0"
+    "jshint": "^2.6.0",
+    "babel-cli": "^6.0.0"
   },
   "dependencies": {
+    "handlebars": "^4.0.6",
     "jquery": ">=1.10.2",
+    "jslint": "^0.10.3",
+    "mustache": "^2.3.0",
     "persian-date": ">=0.1.8"
   },
   "scripts": {
+    "babel": "babel new_source -d es5",
     "test": "./node_modules/jshint/bin/jshint src/js/*.js",
+    "jslint": "jslint dist/js/persian-datepicker-0.5.0.js",
     "test0": "./node_modules/jshint/bin/jshint dist/js/persian-datepicker-0.5.0.js"
   }
 }

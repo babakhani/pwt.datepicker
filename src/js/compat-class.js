@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @desc Instantiate by {@link ClassDatepicker}
  * @class ClassCompat

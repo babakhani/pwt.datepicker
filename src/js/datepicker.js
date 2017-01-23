@@ -422,7 +422,7 @@ var ClassDatepicker = {
      */
     _defineOnInitState: function () {
         var garegurianDate = null;
-        if ($(this.$container)[0].nodeName == 'INPUT') {
+        if ($(this.$container)[0].nodeName === 'INPUT') {
             garegurianDate = new Date(this.inputElem.val()).valueOf();
             this.$container = $('body');
         }

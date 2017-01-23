@@ -299,10 +299,10 @@ var ClassTimePicker = {
             $('> div.time-segment', this.container).bind('mousewheel DOMMouseScroll', function (e) {
                 var scrollTo = null;
 
-                if (e.type == 'mousewheel') {
+                if (e.type === 'mousewheel') {
                     scrollTo = (e.originalEvent.wheelDelta * -1);
                 }
-                else if (e.type == 'DOMMouseScroll') {
+                else if (e.type === 'DOMMouseScroll') {
                     scrollTo = 40 * e.originalEvent.detail;
                 }
                 if (scrollTo) {

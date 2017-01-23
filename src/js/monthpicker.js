@@ -174,10 +174,10 @@ var ClassMonthPicker = {
             $(this.container).bind('mousewheel DOMMouseScroll', function (e) {
                 var scrollTo = null;
 
-                if (e.type == 'mousewheel') {
+                if (e.type === 'mousewheel') {
                     scrollTo = (e.originalEvent.wheelDelta * -1);
                 }
-                else if (e.type == 'DOMMouseScroll') {
+                else if (e.type === 'DOMMouseScroll') {
                     scrollTo = 40 * e.originalEvent.detail;
                 }
                 if (scrollTo) {
@@ -204,7 +204,6 @@ var ClassMonthPicker = {
                 .addClass(self.cssClass.monthItem)
                 .text(self.monthRange[m].name.fa)
                 .appendTo(self.container);
-
             if (self._checkMonthAccess(m)) {
                 monthItem.click(function () {
                     self.onSelect($(this).data().monthIndex);
