@@ -95,15 +95,6 @@ class View {
             output = true;
         self.minDate = this.datepicker.options.minDate;
         self.maxDate = this.datepicker.options.maxDate;
-        log('-========');
-        log('min : ' + self.minDate);
-        log(thisUnix);
-        log('max : ' + self.maxDate);
-        log('-========');
-        log('-========');
-        log('-========');
-        log('-========');
-
         if (self.datepicker.state._filetredDate) {
             if (self.minDate && self.maxDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
@@ -149,7 +140,7 @@ class View {
             for (let [dayIndex, day] of daysRow.entries()) {
                 var dayObject = {
                     title: null,
-                    checkDayAccess: this.checkDayAccess(new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf())
+                    enabled: this.checkDayAccess(new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf())
                 };
                 if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
                     dayObject.title = '--';

@@ -31,7 +31,12 @@ const Template = `
                         {{#days.list}}
                             <tr>
                                 {{#.}}
-                                    <td class=""><span unixdate="">{{title}} -  {{checkDayAccess}}</span></td>
+                                    {{#enabled}}
+                                        <td class=""><span unixdate="">{{title}}</span></td>
+                                    {{/enabled}}
+                                    {{^enabled}}
+                                        <td class="disabled"><span unixdate="">{{title}}</span></td>
+                                    {{/enabled}}
                                 {{/.}}
                             </tr>
                         {{/days.list}}
@@ -46,7 +51,12 @@ const Template = `
         {{#month.viewMode}}
             <div class="datepicker-month-view">
                 {{#month.list}}
-                    <div class="month1 month-item ">{{title}} -- <small>{{year}}</small></div>            
+                    {{#enabled}}               
+                        <div class="month-item ">{{title}}</small></div>
+                    {{/enabled}}
+                    {{^enabled}}               
+                        <div class="month-item month-item-disable">{{title}}</small></div>
+                    {{/enabled}}
                 {{/month.list}}
             </div>
         {{/month.viewMode}}
