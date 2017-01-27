@@ -123,6 +123,9 @@ class View {
     };
 
     getDayViewModel() {
+        if (this.datepicker.options.viewMode != 'day') {
+            return false;
+        }
         const viewMonth = this.datepicker.state.view.month;
         const viewYear = this.datepicker.state.view.year;
         let pdateInstance = new persianDate();
@@ -146,7 +149,6 @@ class View {
                     var pdate = new pDate(this.datepicker.state.view.dateObj.startOf('month').valueOf());
                     var calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
                     var otherMonth = true;
-
                 }
                 else if ((rowIndex == 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
@@ -158,9 +160,7 @@ class View {
                     var pdate = new pDate(this.datepicker.state.view.dateObj.endOf('month').valueOf());
                     var calcedDate = pdate.add('days', nextMonthListIndex);
                     var otherMonth = true;
-
                 }
-                log(otherMonth)
                 outputList[rowIndex].push({
                     title: calcedDate.date(),
                     dataUnix: calcedDate.valueOf(),
@@ -171,7 +171,7 @@ class View {
             }
         }
         return {
-            enabled: this.datepicker.options.dayPicker.enabled,
+            enabled: this.datepicker.options.dayPicker.enabled && this.datepicker.state.viewMode == 'day',
             viewMode: this.datepicker.state.viewMode == 'day',
             list: outputList
         }
@@ -183,7 +183,7 @@ class View {
             output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
         }
         else if (this.datepicker.state.viewMode == 'month') {
-            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix)
+            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.dateObj.valueOf())
         }
         else if (this.datepicker.state.viewMode == 'year') {
             output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
