@@ -123,9 +123,11 @@ class View {
     };
 
     getDayViewModel() {
-        if (this.datepicker.options.viewMode != 'day') {
-            return false;
+        // log(this.datepicker.state.viewMode)
+        if (this.datepicker.state.viewMode != 'day') {
+            return [];
         }
+        // log('if you see this many time your code has performance issue')
         const viewMonth = this.datepicker.state.view.month;
         const viewYear = this.datepicker.state.view.year;
         let pdateInstance = new persianDate();
