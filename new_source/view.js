@@ -125,11 +125,12 @@ class View {
     getDayViewModel() {
         const viewMonth = this.datepicker.state.view.month;
         const viewYear = this.datepicker.state.view.year;
-        let t = new persianDate();
-        let daysCount = t.daysInMonth(viewYear, viewMonth);
-        let firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
+        let pdateInstance = new persianDate();
+        let daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
+        var firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
         let outputList = [];
         let daysListindex = 0;
+        let nextMonthListIndex = 0;
         let daysMatrix = [
             ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
             ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
@@ -141,30 +142,32 @@ class View {
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
             for (let [dayIndex, day] of daysRow.entries()) {
-                var dayObject = {
-                    title: null,
-                    dataUnix: null,
-                    enabled: null
-                };
                 if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
-                    dayObject.title = '--';
-                    outputList[rowIndex].push(dayObject);
+                    var pdate = new pDate(this.datepicker.state.view.dateObj.startOf('month').valueOf());
+                    var calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
+                    var otherMonth = true;
+
                 }
                 else if ((rowIndex == 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
-                    var unixDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf();
-                    var dayObject = {
-                        title: daysListindex,
-                        dataUnix: unixDate,
-                        enabled: this.checkDayAccess(unixDate)
-                    };
-                    dayObject.title = daysListindex;
-                    outputList[rowIndex].push(dayObject);
+                    var calcedDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]);
+                    var otherMonth = false;
                 }
                 else {
-                    dayObject.title = '--';
-                    outputList[rowIndex].push(dayObject);
+                    nextMonthListIndex += 1;
+                    var pdate = new pDate(this.datepicker.state.view.dateObj.endOf('month').valueOf());
+                    var calcedDate = pdate.add('days', nextMonthListIndex);
+                    var otherMonth = true;
+
                 }
+                log(otherMonth)
+                outputList[rowIndex].push({
+                    title: calcedDate.date(),
+                    dataUnix: calcedDate.valueOf(),
+                    otherMonth: otherMonth,
+                    // TODO: make configurable
+                    enabled: this.checkDayAccess(calcedDate.valueOf())
+                });
             }
         }
         return {
@@ -172,6 +175,20 @@ class View {
             viewMode: this.datepicker.state.viewMode == 'day',
             list: outputList
         }
+    };
+
+    getNavSwitchText(data) {
+        let output;
+        if (this.datepicker.state.viewMode == 'day') {
+            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
+        }
+        else if (this.datepicker.state.viewMode == 'month') {
+            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix)
+        }
+        else if (this.datepicker.state.viewMode == 'year') {
+            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
+        }
+        return output;
     };
 
     getViewModel(data) {
@@ -189,20 +206,6 @@ class View {
             year: this.getYearViewModel(data),
         }
     };
-
-    getNavSwitchText(data) {
-        let output;
-        if (this.datepicker.state.viewMode == 'day') {
-            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
-        }
-        else if (this.datepicker.state.viewMode == 'month') {
-            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix)
-        }
-        else if (this.datepicker.state.viewMode == 'year') {
-            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
-        }
-        return output;
-    }
 
     render(data) {
         Mustache.parse(Template);

@@ -29,14 +29,26 @@ const Template = `
                 <table cellspacing="0" class="table-days">
                     <tbody>
                         {{#days.list}}
+                           
                             <tr>
                                 {{#.}}
+                                    {{^otherMonth}}
                                     {{#enabled}}
                                         <td data-unix="{{dataUnix}}" class=""><span >{{title}}</span></td>
                                     {{/enabled}}
                                     {{^enabled}}
                                         <td data-unix="{{dataUnix}}" class="disabled"><span>{{title}}</span></td>
                                     {{/enabled}}
+                                    {{/otherMonth}}
+                                    
+                                    {{#otherMonth}}
+                                    {{#enabled}}
+                                        <td data-unix="{{dataUnix}}" ><span class="other-month">{{title}}</span></td>
+                                    {{/enabled}}
+                                    {{^enabled}}
+                                        <td data-unix="{{dataUnix}}" class="disabled"><span class="other-month">{{title}}</span></td>
+                                    {{/enabled}}
+                                    {{/otherMonth}}
                                 {{/.}}
                             </tr>
                         {{/days.list}}

@@ -991,7 +991,7 @@ var State = function () {
 }();
 "use strict";
 
-var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area datepicker-plot-area-inline-view\">\n    {{#navigator.enabled}}\n        <div class=\"navigator\">\n            <div class=\"datepicker-header\">\n                <div class=\"btn btn-next\">&lt;</div>\n                <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n                <div class=\"btn btn-prev\">&gt;</div>\n            </div>\n        </div>\n    {{/navigator.enabled}}\n    \n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        <div class=\"header-row-cell\">\u0634</div>\n                        <div class=\"header-row-cell\">\u06CC</div>\n                        <div class=\"header-row-cell\">\u062F</div>\n                        <div class=\"header-row-cell\">\u0633</div>\n                        <div class=\"header-row-cell\">\u0686</div>\n                        <div class=\"header-row-cell\">\u067E</div>\n                        <div class=\"header-row-cell\">\u062C</div>\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"\"><span >{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span>{{title}}</span></td>\n                                    {{/enabled}}\n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item \">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item \">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable\">{{title}}</div>\n                    {{/enabled}}\n                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    <div class=\"datepicker-time-view\"></div>\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">\u0627\u0645\u0631\u0648\u0632</div>\n    </div>\n</div>\n";
+var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area datepicker-plot-area-inline-view\">\n    {{#navigator.enabled}}\n        <div class=\"navigator\">\n            <div class=\"datepicker-header\">\n                <div class=\"btn btn-next\">&lt;</div>\n                <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n                <div class=\"btn btn-prev\">&gt;</div>\n            </div>\n        </div>\n    {{/navigator.enabled}}\n    \n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        <div class=\"header-row-cell\">\u0634</div>\n                        <div class=\"header-row-cell\">\u06CC</div>\n                        <div class=\"header-row-cell\">\u062F</div>\n                        <div class=\"header-row-cell\">\u0633</div>\n                        <div class=\"header-row-cell\">\u0686</div>\n                        <div class=\"header-row-cell\">\u067E</div>\n                        <div class=\"header-row-cell\">\u062C</div>\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{^otherMonth}}\n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"\"><span >{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span>{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{/otherMonth}}\n                                    \n                                    {{#otherMonth}}\n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" ><span class=\"other-month\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span class=\"other-month\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{/otherMonth}}\n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item \">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item \">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable\">{{title}}</div>\n                    {{/enabled}}\n                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    <div class=\"datepicker-time-view\"></div>\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">\u0627\u0645\u0631\u0648\u0632</div>\n    </div>\n</div>\n";
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -1177,11 +1177,12 @@ var View = function () {
         value: function getDayViewModel() {
             var viewMonth = this.datepicker.state.view.month;
             var viewYear = this.datepicker.state.view.year;
-            var t = new persianDate();
-            var daysCount = t.daysInMonth(viewYear, viewMonth);
-            var firstWeekDayOfMonth = t.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
+            var pdateInstance = new persianDate();
+            var daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
+            var firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
             var outputList = [];
             var daysListindex = 0;
+            var nextMonthListIndex = 0;
             var daysMatrix = [['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null']];
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
@@ -1204,28 +1205,28 @@ var View = function () {
                                 dayIndex = _step4$value[0],
                                 day = _step4$value[1];
 
-                            var dayObject = {
-                                title: null,
-                                dataUnix: null,
-                                enabled: null
-                            };
                             if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
-                                dayObject.title = '--';
-                                outputList[rowIndex].push(dayObject);
+                                var pdate = new pDate(this.datepicker.state.view.dateObj.startOf('month').valueOf());
+                                var calcedDate = pdate.subtract('days', firstWeekDayOfMonth - dayIndex);
+                                var otherMonth = true;
                             } else if (rowIndex == 0 && dayIndex >= firstWeekDayOfMonth || rowIndex <= 5 && daysListindex < daysCount) {
                                 daysListindex += 1;
-                                var unixDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf();
-                                var dayObject = {
-                                    title: daysListindex,
-                                    dataUnix: unixDate,
-                                    enabled: this.checkDayAccess(unixDate)
-                                };
-                                dayObject.title = daysListindex;
-                                outputList[rowIndex].push(dayObject);
+                                var calcedDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]);
+                                var otherMonth = false;
                             } else {
-                                dayObject.title = '--';
-                                outputList[rowIndex].push(dayObject);
+                                nextMonthListIndex += 1;
+                                var pdate = new pDate(this.datepicker.state.view.dateObj.endOf('month').valueOf());
+                                var calcedDate = pdate.add('days', nextMonthListIndex);
+                                var otherMonth = true;
                             }
+                            log(otherMonth);
+                            outputList[rowIndex].push({
+                                title: calcedDate.date(),
+                                dataUnix: calcedDate.valueOf(),
+                                otherMonth: otherMonth,
+                                // TODO: make configurable
+                                enabled: this.checkDayAccess(calcedDate.valueOf())
+                            });
                         }
                     } catch (err) {
                         _didIteratorError4 = true;
@@ -1264,6 +1265,19 @@ var View = function () {
             };
         }
     }, {
+        key: 'getNavSwitchText',
+        value: function getNavSwitchText(data) {
+            var output = void 0;
+            if (this.datepicker.state.viewMode == 'day') {
+                output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month);
+            } else if (this.datepicker.state.viewMode == 'month') {
+                output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix);
+            } else if (this.datepicker.state.viewMode == 'year') {
+                output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year);
+            }
+            return output;
+        }
+    }, {
         key: 'getViewModel',
         value: function getViewModel(data) {
             return {
@@ -1279,19 +1293,6 @@ var View = function () {
                 month: this.getMonthViewModel(data),
                 year: this.getYearViewModel(data)
             };
-        }
-    }, {
-        key: 'getNavSwitchText',
-        value: function getNavSwitchText(data) {
-            var output = void 0;
-            if (this.datepicker.state.viewMode == 'day') {
-                output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month);
-            } else if (this.datepicker.state.viewMode == 'month') {
-                output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix);
-            } else if (this.datepicker.state.viewMode == 'year') {
-                output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year);
-            }
-            return output;
         }
     }, {
         key: 'render',
