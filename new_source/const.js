@@ -1,3 +1,6 @@
+const log = function (input) {
+    console.log(input);
+};
 const ClassDateRange = {
         /**
          * @property monthRange

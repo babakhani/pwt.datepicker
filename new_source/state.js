@@ -75,6 +75,49 @@ class State {
         self.filterDate.end.year = pdEnd.year();
     };
 
+    setSelectedDateTime(key, value) {
+        var self = this;
+        switch (key) {
+            case 'unix':
+                self.selected.unixDate = value;
+                var pd = new persianDate(value);
+                self.selected.year = pd.year();
+                self.selected.month = pd.month();
+                self.selected.date = pd.date();
+                self.selected.hour = pd.hour();
+                self.selected.minute = pd.minute();
+                self.selected.second = pd.second();
+                self._updateSelectedUnix();
+                break;
+            case 'year':
+                this.selected.year = value;
+                self._updateSelectedUnix();
+                break;
+            case 'month':
+                this.selected.month = value;
+                self._updateSelectedUnix();
+                break;
+            case 'date':
+                this.selected.month = value;
+                self._updateSelectedUnix();
+                break;
+        }
+        return this;
+    }
+
+    _updateSelectedUnix() {
+        this.selected.dateObj = new persianDate([this.selected.year,
+            this.selected.month,
+            this.selected.date,
+            this.selected.hour,
+            this.selected.minute,
+            this.selected.second
+        ]);
+        this.selected.unixDate = this.selected.dateObj.valueOf();
+        this.datepicker.selectDate(this.selected.unixDate);
+        return this;
+    }
+
     _syncViewModes(pd) {
         this.view.year = pd.year();
         this.view.month = pd.month();
@@ -105,7 +148,7 @@ class State {
                 this.updateView('year', this.view.year + 1);
             }
             if (this.viewMode == 'day') {
-                if ((this.view.month + 1) > 11) {
+                if ((this.view.month + 1) == 13) {
                     this.updateView('year', this.view.year + 1);
                     this.updateView('month', 1);
                 } else {

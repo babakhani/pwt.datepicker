@@ -249,7 +249,7 @@ var DefaultConfig = {
         /**
          *
          */
-        switchFormat : 'YYYY MMMM',
+        switchFormat: 'YYYY MMMM',
 
 
         /**
@@ -337,10 +337,10 @@ var DefaultConfig = {
         'scrollEnabled': true,
         'titleFormat': 'YYYY MMMM',
         'titleFormatter': function (year, month) {
-            if (this.datepicker.persianDigit === false) {
+            if (this.datepicker.options.persianDigit === false) {
                 window.formatPersian = false;
             }
-            var titleStr = new persianDate([year, month]).format(this.titleFormat);
+            var titleStr = new persianDate([year, month]).format(this.datepicker.options.dayPicker.titleFormat);
             window.formatPersian = true;
             return titleStr;
         },
@@ -362,10 +362,10 @@ var DefaultConfig = {
         'scrollEnabled': true,
         'titleFormat': 'YYYY',
         'titleFormatter': function (unix) {
-            if (this.datepicker.persianDigit === false) {
+            if (this.datepicker.options.persianDigit === false) {
                 window.formatPersian = false;
             }
-            var titleStr = new persianDate(unix).format(this.titleFormat);
+            var titleStr = new persianDate(unix).format(this.datepicker.options.monthPicker.titleFormat);
             window.formatPersian = true;
             return titleStr;
 

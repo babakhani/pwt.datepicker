@@ -181,7 +181,7 @@ class View {
                 enabled: this.datepicker.options.navigator.enabled,
                 switch: {
                     enabled: true,
-                    text: data.dateObj.format(this.datepicker.options.navigator.switchFormat)
+                    text: this.getNavSwitchText(data)
                 },
             },
             days: this.getDayViewModel(data),
@@ -189,6 +189,20 @@ class View {
             year: this.getYearViewModel(data),
         }
     };
+
+    getNavSwitchText(data) {
+        let output;
+        if (this.datepicker.state.viewMode == 'day') {
+            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
+        }
+        else if (this.datepicker.state.viewMode == 'month') {
+            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix)
+        }
+        else if (this.datepicker.state.viewMode == 'year') {
+            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
+        }
+        return output;
+    }
 
     render(data) {
         Mustache.parse(Template);

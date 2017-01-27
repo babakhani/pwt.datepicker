@@ -3,7 +3,7 @@ const Datepicker = function (inputElement, options) {
     this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
     this.inputElement = inputElement;
     this.initialUnix = null;
-    this.options = new Options( options);
+    this.options = new Options(options);
     this.state = new State(this);
     this.view = new View(this);
 
@@ -24,6 +24,11 @@ const Datepicker = function (inputElement, options) {
         }
         return this;
     };
+
+    this.selectDate = function (unix) {
+        $(inputElement).val(new pDate(unix).format());
+    }
+
     this._updateStateOnInit = function () {
         this.state.updateView('unix', this.initialUnix);
     };

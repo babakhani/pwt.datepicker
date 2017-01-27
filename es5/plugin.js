@@ -3,8 +3,6 @@
 var log = function log(input) {
     console.log(input);
 };
-"use strict";
-
 var ClassDateRange = {
     /**
      * @property monthRange
@@ -218,6 +216,11 @@ var Datepicker = function Datepicker(inputElement, options) {
         }
         return this;
     };
+
+    this.selectDate = function (unix) {
+        $(inputElement).val(new pDate(unix).format());
+    };
+
     this._updateStateOnInit = function () {
         this.state.updateView('unix', this.initialUnix);
     };
@@ -545,10 +548,10 @@ var DefaultConfig = {
     'scrollEnabled': true,
     'titleFormat': 'YYYY MMMM',
     'titleFormatter': function titleFormatter(year, month) {
-      if (this.datepicker.persianDigit === false) {
+      if (this.datepicker.options.persianDigit === false) {
         window.formatPersian = false;
       }
-      var titleStr = new persianDate([year, month]).format(this.titleFormat);
+      var titleStr = new persianDate([year, month]).format(this.datepicker.options.dayPicker.titleFormat);
       window.formatPersian = true;
       return titleStr;
     },
@@ -570,10 +573,10 @@ var DefaultConfig = {
     'scrollEnabled': true,
     'titleFormat': 'YYYY',
     'titleFormatter': function titleFormatter(unix) {
-      if (this.datepicker.persianDigit === false) {
+      if (this.datepicker.options.persianDigit === false) {
         window.formatPersian = false;
       }
-      var titleStr = new persianDate(unix).format(this.titleFormat);
+      var titleStr = new persianDate(unix).format(this.datepicker.options.monthPicker.titleFormat);
       window.formatPersian = true;
       return titleStr;
     },
@@ -664,40 +667,6 @@ var DefaultConfig = {
     return true;
   }
 };
-"use strict";
-'use strict';
-
-var checkMonthAccess = function checkMonthAccess(month) {
-    log('checkYearAccess');
-
-    // var self = this,
-    //     output = true,
-    //     y = null;
-    // if (this.datepicker.state._filetredDate) {
-    //     y = this.datepicker.state.view.year;
-    //     var startMonth = this.datepicker.state.filterDate.start.month,
-    //         endMonth = this.datepicker.state.filterDate.end.month,
-    //         startYear = this.datepicker.state.filterDate.start.year,
-    //         endYear = this.datepicker.state.filterDate.end.year;
-    //     if (
-    //         (startYear == endYear && endYear == y && month >= startMonth && month <= endMonth)
-    //         |
-    //         (y != endYear && y == startYear && month >= startMonth)
-    //         |
-    //         (y != startYear && y == endYear && month <= endMonth)
-    //         |
-    //         (y > startYear && y < endYear)
-    //     ) {
-    //         output = true;
-    //     }
-    //     else {
-    //         return false;
-    //     }
-    // }
-    // if (output) {
-    //     return self.datepicker.checkMonth(month, y);
-    // }
-};
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -731,20 +700,25 @@ var Navigator = function () {
                 }
             });
             $(document).on('click', '#' + that.datepicker.id + ' .datepicker-day-view td', function () {
-                log('day select');
-                log($(this).data('unix'));
-
-                that.datepicker.state.updateView('unix', $(this).data('unix'));
+                var thisUnix = $(this).data('unix');
+                that.datepicker.state.updateView('unix', thisUnix);
+                that.datepicker.state.setSelectedDateTime('unix', thisUnix);
             });
             $(document).on('click', '#' + that.datepicker.id + ' .datepicker-month-view .month-item', function () {
-                log('month select');
                 that.datepicker.state.switchViewModeTo('day');
                 that.datepicker.state.updateView('month', $(this).data('month'));
+
+                if (!that.datepicker.options.justSelectOnDate) {
+                    that.datepicker.state.setSelectedDateTime('month', $(this).data('month'));
+                }
             });
             $(document).on('click', '#' + that.datepicker.id + ' .datepicker-year-view .year-item', function () {
-                log('year select');
                 that.datepicker.state.switchViewModeTo('month');
                 that.datepicker.state.updateView('year', $(this).data('year'));
+
+                if (!that.datepicker.options.justSelectOnDate) {
+                    that.datepicker.state.setSelectedDateTime('year', $(this).data('year'));
+                }
             });
         }
     }]);
@@ -883,6 +857,45 @@ var State = function () {
             self.filterDate.end.year = pdEnd.year();
         }
     }, {
+        key: 'setSelectedDateTime',
+        value: function setSelectedDateTime(key, value) {
+            var self = this;
+            switch (key) {
+                case 'unix':
+                    self.selected.unixDate = value;
+                    var pd = new persianDate(value);
+                    self.selected.year = pd.year();
+                    self.selected.month = pd.month();
+                    self.selected.date = pd.date();
+                    self.selected.hour = pd.hour();
+                    self.selected.minute = pd.minute();
+                    self.selected.second = pd.second();
+                    self._updateSelectedUnix();
+                    break;
+                case 'year':
+                    this.selected.year = value;
+                    self._updateSelectedUnix();
+                    break;
+                case 'month':
+                    this.selected.month = value;
+                    self._updateSelectedUnix();
+                    break;
+                case 'date':
+                    this.selected.month = value;
+                    self._updateSelectedUnix();
+                    break;
+            }
+            return this;
+        }
+    }, {
+        key: '_updateSelectedUnix',
+        value: function _updateSelectedUnix() {
+            this.selected.dateObj = new persianDate([this.selected.year, this.selected.month, this.selected.date, this.selected.hour, this.selected.minute, this.selected.second]);
+            this.selected.unixDate = this.selected.dateObj.valueOf();
+            this.datepicker.selectDate(this.selected.unixDate);
+            return this;
+        }
+    }, {
         key: '_syncViewModes',
         value: function _syncViewModes(pd) {
             this.view.year = pd.year();
@@ -909,7 +922,7 @@ var State = function () {
                     this.updateView('year', this.view.year + 1);
                 }
                 if (this.viewMode == 'day') {
-                    if (this.view.month + 1 > 11) {
+                    if (this.view.month + 1 == 13) {
                         this.updateView('year', this.view.year + 1);
                         this.updateView('month', 1);
                     } else {
@@ -1258,13 +1271,26 @@ var View = function () {
                     enabled: this.datepicker.options.navigator.enabled,
                     switch: {
                         enabled: true,
-                        text: data.dateObj.format(this.datepicker.options.navigator.switchFormat)
+                        text: this.getNavSwitchText(data)
                     }
                 },
                 days: this.getDayViewModel(data),
                 month: this.getMonthViewModel(data),
                 year: this.getYearViewModel(data)
             };
+        }
+    }, {
+        key: 'getNavSwitchText',
+        value: function getNavSwitchText(data) {
+            var output = void 0;
+            if (this.datepicker.state.viewMode == 'day') {
+                output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month);
+            } else if (this.datepicker.state.viewMode == 'month') {
+                output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.unix);
+            } else if (this.datepicker.state.viewMode == 'year') {
+                output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year);
+            }
+            return output;
         }
     }, {
         key: 'render',
@@ -1277,4 +1303,3 @@ var View = function () {
 
     return View;
 }();
-"use strict";

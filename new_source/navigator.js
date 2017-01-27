@@ -4,7 +4,7 @@ class Navigator {
         this._attachEvents();
     }
 
-    getSwitchText(pdate){
+    getSwitchText(pdate) {
         return
     }
 
@@ -22,21 +22,26 @@ class Navigator {
             }
         });
         $(document).on('click', '#' + that.datepicker.id + ' .datepicker-day-view td', function () {
-            log('day select');
-            log($(this).data('unix'))
+            let thisUnix = $(this).data('unix');
+            that.datepicker.state.updateView('unix', thisUnix);
+            that.datepicker.state.setSelectedDateTime('unix', thisUnix);
 
-            that.datepicker.state.updateView('unix', $(this).data('unix'));
         });
         $(document).on('click', '#' + that.datepicker.id + ' .datepicker-month-view .month-item', function () {
-            log('month select');
             that.datepicker.state.switchViewModeTo('day');
             that.datepicker.state.updateView('month', $(this).data('month'));
 
+            if (!that.datepicker.options.justSelectOnDate) {
+                that.datepicker.state.setSelectedDateTime('month', $(this).data('month'));
+            }
         });
         $(document).on('click', '#' + that.datepicker.id + ' .datepicker-year-view .year-item', function () {
-            log('year select');
             that.datepicker.state.switchViewModeTo('month');
             that.datepicker.state.updateView('year', $(this).data('year'));
+
+            if (!that.datepicker.options.justSelectOnDate) {
+                that.datepicker.state.setSelectedDateTime('year', $(this).data('year'));
+            }
         });
     }
 }
