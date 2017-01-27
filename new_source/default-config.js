@@ -33,6 +33,8 @@ var DefaultConfig = {
      * @type {string}
      * @default day
      */
+
+    // TODO: revert this to day
     'viewMode': 'day',
 
 
@@ -413,7 +415,7 @@ var DefaultConfig = {
      * @property minDate
      * @type {boolean}
      */
-    'minDate': false,
+    'minDate': -999999999999,
 
 
     /**
@@ -422,7 +424,7 @@ var DefaultConfig = {
      * @property maxDate
      * @type {boolean}
      */
-    'maxDate': false,
+    'maxDate': 999999999999,
 
 
     /**

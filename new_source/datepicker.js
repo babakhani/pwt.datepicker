@@ -1,11 +1,11 @@
-const Datepicker = function (inputElement, options = DefaultConfig) {
-    this.$container = inputElement;
+const Datepicker = function (inputElement, options) {
+    this.id = 321312312;
+    this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
     this.inputElement = inputElement;
     this.initialUnix = null;
-    // TODO: extend with memeber config dosent handles
-    this.options = new Options(DefaultConfig, this);
-    this.state = new State(options, this);
-    this.view = new View(options, this);
+    this.options = new Options( options);
+    this.state = new State(this);
+    this.view = new View(this);
 
     this._defineOnInitState = function () {
         let garegurianDate = null;

@@ -6,15 +6,15 @@ class Navigator {
 
     _attachEvents() {
         var that = this;
-        $(this.datepicker.view.rendered).find('.btn').click(function () {
+        $(document).on('click', '#' + that.datepicker.id + ' .btn', function () {
             if ($(this).is('.btn-next')) {
-                that.datepicker.state.next();
+                that.datepicker.state.navigate('next');
             }
             else if ($(this).is('.btn-switch')) {
                 that.datepicker.state.switchViewMode();
             }
             else if ($(this).is('.btn-prev')) {
-                that.datepicker.state.prev();
+                that.datepicker.state.navigate('prev');
             }
         })
     }

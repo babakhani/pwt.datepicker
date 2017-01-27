@@ -1,5 +1,5 @@
 class Options {
-    constructor(DefaultConfig) {
-        return DefaultConfig;
+    constructor(options) {
+        return $.extend(true, this, DefaultConfig, options);
     }
 }
