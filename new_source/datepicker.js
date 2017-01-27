@@ -1,5 +1,6 @@
 const Datepicker = function (inputElement, options) {
-    this.id = 321312312;
+    let randomId = parseInt(Math.random(100) * 1000);
+    this.id = `persianDateInstance-${randomId}`;
     this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
     this.inputElement = inputElement;
     this.initialUnix = null;
