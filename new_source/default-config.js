@@ -247,6 +247,12 @@ var DefaultConfig = {
 
 
         /**
+         *
+         */
+        switchFormat : 'YYYY MMMM',
+
+
+        /**
          * @desc Trigger When Next button clicked
          * @event
          * @param navigator
@@ -415,7 +421,7 @@ var DefaultConfig = {
      * @property minDate
      * @type {boolean}
      */
-    'minDate': -999999999999,
+    'minDate': null,
 
 
     /**
@@ -424,7 +430,7 @@ var DefaultConfig = {
      * @property maxDate
      * @type {boolean}
      */
-    'maxDate': 999999999999,
+    'maxDate': null,
 
 
     /**

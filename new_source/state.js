@@ -1,12 +1,10 @@
 class State {
     constructor(datepicker) {
         this.datepicker = datepicker;
-        this._filetredDate = true;
+        this.filetredDate = (this.datepicker.options.minDate || this.datepicker.options.maxDate);
         this.viewModeList = ['day', 'month', 'year'];
         this.viewMode = datepicker.options.viewMode; // defaul 'day'
         this.viewModeIndex = this.viewModeList.indexOf(datepicker.options.viewMode); // defaul 'day'
-
-
         this.filterDate = {
             start: {
                 year: 0,
@@ -53,6 +51,12 @@ class State {
 
     setFilterDate(minDate, maxDate) {
         var self = this;
+        if (!minDate) {
+            minDate = -999999999999999999;
+        }
+        if (!maxDate) {
+            maxDate = 999999999999999999;
+        }
         var pd = new persianDate(minDate);
         self.filterDate.start.unixDate = minDate;
         self.filterDate.start.hour = pd.hour();
@@ -130,9 +134,13 @@ class State {
     switchViewMode() {
         this.viewModeIndex = ((this.viewModeIndex + 1) >= this.viewModeList.length) ? 0 : (this.viewModeIndex + 1);
         this.viewMode = (this.viewModeList[this.viewModeIndex]) ? (this.viewModeList[this.viewModeIndex]) : (this.viewModeList[0]);
-        log(this.viewMode);
         this._updateViewUnix();
         return this;
+    }
+
+    switchViewModeTo(viewMode) {
+        this.viewMode = viewMode;
+        this.viewModeIndex = this.viewModeList.indexOf(viewMode);
     }
 
     updateView(key, value) {

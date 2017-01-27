@@ -8,7 +8,7 @@ class View {
 
     checkYearAccess(y) {
         var output = true;
-        if (this.datepicker.state._filetredDate) {
+        if (this.datepicker.state.filetredDate) {
             var startYear = this.datepicker.state.filterDate.start.year;
             var endYear = this.datepicker.state.filterDate.end.year;
             if (startYear <= y & y <= endYear) {
@@ -35,7 +35,8 @@ class View {
         for (let i of list) {
             yearsModel.push({
                 title: i,
-                enabled: this.checkYearAccess(i)
+                enabled: this.checkYearAccess(i),
+                dataYear: i
             });
         }
         return {
@@ -48,7 +49,7 @@ class View {
     checkMonthAccess(month) {
         var output = true,
             y = null;
-        if (this.datepicker.state._filetredDate) {
+        if (this.datepicker.state.filetredDate) {
             y = this.datepicker.state.view.year;
             var startMonth = this.datepicker.state.filterDate.start.month,
                 endMonth = this.datepicker.state.filterDate.end.month,
@@ -80,7 +81,8 @@ class View {
             monthModel.push({
                 title: month.name.fa,
                 enabled: this.checkMonthAccess(month.index),
-                year: this.datepicker.state.view.year
+                year: this.datepicker.state.view.year,
+                dataMonth: month.index
             });
         }
         return {
@@ -95,7 +97,8 @@ class View {
             output = true;
         self.minDate = this.datepicker.options.minDate;
         self.maxDate = this.datepicker.options.maxDate;
-        if (self.datepicker.state._filetredDate) {
+
+        if (self.datepicker.state.filetredDate) {
             if (self.minDate && self.maxDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
                 self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
@@ -140,19 +143,21 @@ class View {
             for (let [dayIndex, day] of daysRow.entries()) {
                 var dayObject = {
                     title: null,
-                    enabled: this.checkDayAccess(new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf())
+                    dataUnix: null,
+                    enabled: null
                 };
                 if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
                     dayObject.title = '--';
                     outputList[rowIndex].push(dayObject);
                 }
-                else if (rowIndex == 0 && dayIndex >= firstWeekDayOfMonth) {
+                else if ((rowIndex == 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
-                    dayObject.title = daysListindex;
-                    outputList[rowIndex].push(dayObject);
-                }
-                else if (rowIndex <= 5 && daysListindex < daysCount) {
-                    daysListindex += 1;
+                    var unixDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf();
+                    var dayObject = {
+                        title: daysListindex,
+                        dataUnix: unixDate,
+                        enabled: this.checkDayAccess(unixDate)
+                    };
                     dayObject.title = daysListindex;
                     outputList[rowIndex].push(dayObject);
                 }
@@ -162,8 +167,6 @@ class View {
                 }
             }
         }
-        log(outputList)
-
         return {
             enabled: this.datepicker.options.dayPicker.enabled,
             viewMode: this.datepicker.state.viewMode == 'day',
@@ -174,12 +177,12 @@ class View {
     getViewModel(data) {
         return {
             plotId: '',
-            switch: {
-                enabled: true,
-                date: data.dateObj.format()
-            },
             navigator: {
                 enabled: this.datepicker.options.navigator.enabled,
+                switch: {
+                    enabled: true,
+                    text: data.dateObj.format(this.datepicker.options.navigator.switchFormat)
+                },
             },
             days: this.getDayViewModel(data),
             month: this.getMonthViewModel(data),

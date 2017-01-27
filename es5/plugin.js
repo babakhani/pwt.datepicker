@@ -459,6 +459,11 @@ var DefaultConfig = {
     },
 
     /**
+     *
+     */
+    switchFormat: 'YYYY MMMM',
+
+    /**
      * @desc Trigger When Next button clicked
      * @event
      * @param navigator
@@ -619,7 +624,7 @@ var DefaultConfig = {
    * @property minDate
    * @type {boolean}
    */
-  'minDate': -999999999999,
+  'minDate': null,
 
   /**
    * @memberOf ClassDatepicker.ClassConfig
@@ -627,7 +632,7 @@ var DefaultConfig = {
    * @property maxDate
    * @type {boolean}
    */
-  'maxDate': 999999999999,
+  'maxDate': null,
 
   /**
    * @memberOf ClassDatepicker.ClassConfig
@@ -708,6 +713,11 @@ var Navigator = function () {
     }
 
     _createClass(Navigator, [{
+        key: 'getSwitchText',
+        value: function getSwitchText(pdate) {
+            return;
+        }
+    }, {
         key: '_attachEvents',
         value: function _attachEvents() {
             var that = this;
@@ -719,6 +729,22 @@ var Navigator = function () {
                 } else if ($(this).is('.btn-prev')) {
                     that.datepicker.state.navigate('prev');
                 }
+            });
+            $(document).on('click', '#' + that.datepicker.id + ' .datepicker-day-view td', function () {
+                log('day select');
+                log($(this).data('unix'));
+
+                that.datepicker.state.updateView('unix', $(this).data('unix'));
+            });
+            $(document).on('click', '#' + that.datepicker.id + ' .datepicker-month-view .month-item', function () {
+                log('month select');
+                that.datepicker.state.switchViewModeTo('day');
+                that.datepicker.state.updateView('month', $(this).data('month'));
+            });
+            $(document).on('click', '#' + that.datepicker.id + ' .datepicker-year-view .year-item', function () {
+                log('year select');
+                that.datepicker.state.switchViewModeTo('month');
+                that.datepicker.state.updateView('year', $(this).data('year'));
             });
         }
     }]);
@@ -781,12 +807,10 @@ var State = function () {
         _classCallCheck(this, State);
 
         this.datepicker = datepicker;
-        this._filetredDate = true;
+        this.filetredDate = this.datepicker.options.minDate || this.datepicker.options.maxDate;
         this.viewModeList = ['day', 'month', 'year'];
         this.viewMode = datepicker.options.viewMode; // defaul 'day'
         this.viewModeIndex = this.viewModeList.indexOf(datepicker.options.viewMode); // defaul 'day'
-
-
         this.filterDate = {
             start: {
                 year: 0,
@@ -835,6 +859,12 @@ var State = function () {
         key: 'setFilterDate',
         value: function setFilterDate(minDate, maxDate) {
             var self = this;
+            if (!minDate) {
+                minDate = -999999999999999999;
+            }
+            if (!maxDate) {
+                maxDate = 999999999999999999;
+            }
             var pd = new persianDate(minDate);
             self.filterDate.start.unixDate = minDate;
             self.filterDate.start.hour = pd.hour();
@@ -908,9 +938,14 @@ var State = function () {
         value: function switchViewMode() {
             this.viewModeIndex = this.viewModeIndex + 1 >= this.viewModeList.length ? 0 : this.viewModeIndex + 1;
             this.viewMode = this.viewModeList[this.viewModeIndex] ? this.viewModeList[this.viewModeIndex] : this.viewModeList[0];
-            log(this.viewMode);
             this._updateViewUnix();
             return this;
+        }
+    }, {
+        key: 'switchViewModeTo',
+        value: function switchViewModeTo(viewMode) {
+            this.viewMode = viewMode;
+            this.viewModeIndex = this.viewModeList.indexOf(viewMode);
         }
     }, {
         key: 'updateView',
@@ -942,7 +977,7 @@ var State = function () {
 }();
 "use strict";
 
-var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area datepicker-plot-area-inline-view\">\n    {{#navigator.enabled}}\n        <div class=\"navigator\">\n            <div class=\"datepicker-header\">\n                <div class=\"btn btn-next\">&lt;</div>\n                <div class=\"btn btn-switch\">{{ switch.date }}</div>\n                <div class=\"btn btn-prev\">&gt;</div>\n            </div>\n        </div>\n    {{/navigator.enabled}}\n    \n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        <div class=\"header-row-cell\">\u0634</div>\n                        <div class=\"header-row-cell\">\u06CC</div>\n                        <div class=\"header-row-cell\">\u062F</div>\n                        <div class=\"header-row-cell\">\u0633</div>\n                        <div class=\"header-row-cell\">\u0686</div>\n                        <div class=\"header-row-cell\">\u067E</div>\n                        <div class=\"header-row-cell\">\u062C</div>\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td class=\"\"><span unixdate=\"\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td class=\"disabled\"><span unixdate=\"\">{{title}}</span></td>\n                                    {{/enabled}}\n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div class=\"month-item \">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div class=\"month-item month-item-disable\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div class=\"year-item \">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div class=\"year-item year-item-disable\">{{title}}</div>\n                    {{/enabled}}\n                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    <div class=\"datepicker-time-view\"></div>\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">\u0627\u0645\u0631\u0648\u0632</div>\n    </div>\n</div>\n";
+var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area datepicker-plot-area-inline-view\">\n    {{#navigator.enabled}}\n        <div class=\"navigator\">\n            <div class=\"datepicker-header\">\n                <div class=\"btn btn-next\">&lt;</div>\n                <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n                <div class=\"btn btn-prev\">&gt;</div>\n            </div>\n        </div>\n    {{/navigator.enabled}}\n    \n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        <div class=\"header-row-cell\">\u0634</div>\n                        <div class=\"header-row-cell\">\u06CC</div>\n                        <div class=\"header-row-cell\">\u062F</div>\n                        <div class=\"header-row-cell\">\u0633</div>\n                        <div class=\"header-row-cell\">\u0686</div>\n                        <div class=\"header-row-cell\">\u067E</div>\n                        <div class=\"header-row-cell\">\u062C</div>\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"\"><span >{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span>{{title}}</span></td>\n                                    {{/enabled}}\n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item \">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item \">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable\">{{title}}</div>\n                    {{/enabled}}\n                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    <div class=\"datepicker-time-view\"></div>\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">\u0627\u0645\u0631\u0648\u0632</div>\n    </div>\n</div>\n";
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -967,7 +1002,7 @@ var View = function () {
         key: 'checkYearAccess',
         value: function checkYearAccess(y) {
             var output = true;
-            if (this.datepicker.state._filetredDate) {
+            if (this.datepicker.state.filetredDate) {
                 var startYear = this.datepicker.state.filterDate.start.year;
                 var endYear = this.datepicker.state.filterDate.end.year;
                 if (startYear <= y & y <= endYear) {
@@ -1006,7 +1041,8 @@ var View = function () {
 
                     yearsModel.push({
                         title: i,
-                        enabled: this.checkYearAccess(i)
+                        enabled: this.checkYearAccess(i),
+                        dataYear: i
                     });
                 }
             } catch (err) {
@@ -1035,7 +1071,7 @@ var View = function () {
         value: function checkMonthAccess(month) {
             var output = true,
                 y = null;
-            if (this.datepicker.state._filetredDate) {
+            if (this.datepicker.state.filetredDate) {
                 y = this.datepicker.state.view.year;
                 var startMonth = this.datepicker.state.filterDate.start.month,
                     endMonth = this.datepicker.state.filterDate.end.month,
@@ -1066,7 +1102,8 @@ var View = function () {
                     monthModel.push({
                         title: month.name.fa,
                         enabled: this.checkMonthAccess(month.index),
-                        year: this.datepicker.state.view.year
+                        year: this.datepicker.state.view.year,
+                        dataMonth: month.index
                     });
                 }
             } catch (err) {
@@ -1097,7 +1134,8 @@ var View = function () {
                 output = true;
             self.minDate = this.datepicker.options.minDate;
             self.maxDate = this.datepicker.options.maxDate;
-            if (self.datepicker.state._filetredDate) {
+
+            if (self.datepicker.state.filetredDate) {
                 if (self.minDate && self.maxDate) {
                     self.minDate = new pDate(self.minDate).startOf('day').valueOf();
                     self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
@@ -1154,17 +1192,20 @@ var View = function () {
 
                             var dayObject = {
                                 title: null,
-                                enabled: this.checkDayAccess(new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf())
+                                dataUnix: null,
+                                enabled: null
                             };
                             if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
                                 dayObject.title = '--';
                                 outputList[rowIndex].push(dayObject);
-                            } else if (rowIndex == 0 && dayIndex >= firstWeekDayOfMonth) {
+                            } else if (rowIndex == 0 && dayIndex >= firstWeekDayOfMonth || rowIndex <= 5 && daysListindex < daysCount) {
                                 daysListindex += 1;
-                                dayObject.title = daysListindex;
-                                outputList[rowIndex].push(dayObject);
-                            } else if (rowIndex <= 5 && daysListindex < daysCount) {
-                                daysListindex += 1;
+                                var unixDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]).valueOf();
+                                var dayObject = {
+                                    title: daysListindex,
+                                    dataUnix: unixDate,
+                                    enabled: this.checkDayAccess(unixDate)
+                                };
                                 dayObject.title = daysListindex;
                                 outputList[rowIndex].push(dayObject);
                             } else {
@@ -1202,8 +1243,6 @@ var View = function () {
                 }
             }
 
-            log(outputList);
-
             return {
                 enabled: this.datepicker.options.dayPicker.enabled,
                 viewMode: this.datepicker.state.viewMode == 'day',
@@ -1215,12 +1254,12 @@ var View = function () {
         value: function getViewModel(data) {
             return {
                 plotId: '',
-                switch: {
-                    enabled: true,
-                    date: data.dateObj.format()
-                },
                 navigator: {
-                    enabled: this.datepicker.options.navigator.enabled
+                    enabled: this.datepicker.options.navigator.enabled,
+                    switch: {
+                        enabled: true,
+                        text: data.dateObj.format(this.datepicker.options.navigator.switchFormat)
+                    }
                 },
                 days: this.getDayViewModel(data),
                 month: this.getMonthViewModel(data),

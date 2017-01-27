@@ -4,7 +4,7 @@ const Template = `
         <div class="navigator">
             <div class="datepicker-header">
                 <div class="btn btn-next">&lt;</div>
-                <div class="btn btn-switch">{{ switch.date }}</div>
+                <div class="btn btn-switch">{{ navigator.switch.text }}</div>
                 <div class="btn btn-prev">&gt;</div>
             </div>
         </div>
@@ -32,10 +32,10 @@ const Template = `
                             <tr>
                                 {{#.}}
                                     {{#enabled}}
-                                        <td class=""><span unixdate="">{{title}}</span></td>
+                                        <td data-unix="{{dataUnix}}" class=""><span >{{title}}</span></td>
                                     {{/enabled}}
                                     {{^enabled}}
-                                        <td class="disabled"><span unixdate="">{{title}}</span></td>
+                                        <td data-unix="{{dataUnix}}" class="disabled"><span>{{title}}</span></td>
                                     {{/enabled}}
                                 {{/.}}
                             </tr>
@@ -52,10 +52,10 @@ const Template = `
             <div class="datepicker-month-view">
                 {{#month.list}}
                     {{#enabled}}               
-                        <div class="month-item ">{{title}}</small></div>
+                        <div data-month="{{dataMonth}}" class="month-item ">{{title}}</small></div>
                     {{/enabled}}
                     {{^enabled}}               
-                        <div class="month-item month-item-disable">{{title}}</small></div>
+                        <div data-month="{{dataMonth}}" class="month-item month-item-disable">{{title}}</small></div>
                     {{/enabled}}
                 {{/month.list}}
             </div>
@@ -67,10 +67,10 @@ const Template = `
             <div class="datepicker-year-view" >
                 {{#year.list}}
                     {{#enabled}}
-                        <div class="year-item ">{{title}}</div>
+                        <div data-year="{{dataYear}}" class="year-item ">{{title}}</div>
                     {{/enabled}}
                     {{^enabled}}
-                        <div class="year-item year-item-disable">{{title}}</div>
+                        <div data-year="{{dataYear}}" class="year-item year-item-disable">{{title}}</div>
                     {{/enabled}}
                     
                 {{/year.list}}
