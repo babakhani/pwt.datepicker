@@ -5,140 +5,50 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+
+    <link href="../src/css/persian-datepicker.css" rel="stylesheet"/>
     <title>Document</title>
 </head>
 <body>
 
-<script src="plugin.js"></script>
-<script>
+<!--<div class="col-xs-12">-->
+    <!--<div class="col-xs-9">-->
+        <!--&lt;!&ndash;<h1>Persian Date Picker Demo</h1>&ndash;&gt;-->
+        <!--&lt;!&ndash;<p>&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="label label-success">Version 0.5.0</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</p>&ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
+<div class="col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <!--<h4>Inline Datepicker</h4>-->
+        </div>
+        <div class="panel-body">
+            <input id="inlineDatepicker" value="2016/12/11 12:20" class="col-xs-6"/>
+        </div>
+    </div>
+</div>
 
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/mustache.js/mustache.js"></script>
+<script src="../bower_components/persian-date/dist/0.1.8/persian-date-0.1.8.js"></script>
 
+<script src="../es5/plugin.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.pd = $("#inlineDatepicker").persianDatepicker({
+            initialValue: false,
+            altField: '#inlineDatepickerAlt',
+            altFormat: 'unix',
+            observer: true,
+//            minDate: 1479718200000,
+//            maxDate: 1493106600000,
+            dayPicker: {},
+        }).data('datepicker');
+    });
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-<!--<div class="datepicker-plot-area datepicker-plot-area-inline-view">-->
-    <!--<div class="navigator">-->
-        <!--<div class="datepicker-header">-->
-            <!--<div class="btn-next">&lt;</div>-->
-            <!--<div class="btn-switch">۱۳۹۵ مرداد</div>-->
-            <!--<div class="btn-prev">&gt;</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="datepicker-day-view" style="display: block;">-->
-        <!--<div class="month-grid-box">-->
-            <!--<div class="header">-->
-                <!--<div class="title"></div>-->
-                <!--<div class="header-row">-->
-                    <!--<div class="header-row-cell">ش</div>-->
-                    <!--<div class="header-row-cell">ی</div>-->
-                    <!--<div class="header-row-cell">د</div>-->
-                    <!--<div class="header-row-cell">س</div>-->
-                    <!--<div class="header-row-cell">چ</div>-->
-                    <!--<div class="header-row-cell">پ</div>-->
-                    <!--<div class="header-row-cell">ج</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<table cellspacing="0" class="table-days">-->
-                <!--<tbody>-->
-                <!--<tr>-->
-                    <!--<td class="disabled"><span unixdate="1468611000000" class="other-month">۲۶</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1468697400000" class="other-month">۲۷</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1468783800000" class="other-month">۲۸</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1468870200000" class="other-month">۲۹</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1468956600000" class="other-month">۳۰</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469043000000" class="other-month">۳۱</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469129400000">۱</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="disabled"><span unixdate="1469215800000">۲</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469302200000">۳</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469388600000">۴</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469475000000">۵</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469561400000">۶</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469647800000">۷</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469734200000">۸</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="disabled"><span unixdate="1469820600000">۹</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469907000000">۱۰</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1469993400000">۱۱</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470079800000">۱۲</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470166200000">۱۳</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470252600000">۱۴</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470339000000">۱۵</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="disabled"><span unixdate="1470425400000">۱۶</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470511800000">۱۷</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470598200000">۱۸</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470684600000">۱۹</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470771000000">۲۰</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470857400000">۲۱</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1470943800000">۲۲</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="disabled"><span unixdate="1471030200000">۲۳</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471116600000">۲۴</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471203000000">۲۵</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471289400000">۲۶</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471375800000">۲۷</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471462200000">۲۸</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471548600000">۲۹</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="disabled"><span unixdate="1471635000000">۳۰</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471721400000">۳۱</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471807800000" class="other-month">۱</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471894200000" class="other-month">۲</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1471980600000" class="other-month">۳</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1472067000000" class="other-month">۴</span></td>-->
-                    <!--<td class="disabled"><span unixdate="1472153400000" class="other-month">۵</span></td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="datepicker-month-view" style="display: none;">-->
-        <!--<div class="month1 month-item month-item-disable">فروردین</div>-->
-        <!--<div class="month2 month-item month-item-disable">اردیبهشت</div>-->
-        <!--<div class="month3 month-item month-item-disable">خرداد</div>-->
-        <!--<div class="month4 month-item month-item-disable">تیر</div>-->
-        <!--<div class="month5 month-item month-item-disable">مرداد</div>-->
-        <!--<div class="month6 month-item month-item-disable">شهریور</div>-->
-        <!--<div class="month7 month-item month-item-disable">مهر</div>-->
-        <!--<div class="month8 month-item month-item-disable">آبان</div>-->
-        <!--<div class="month9 month-item selected">آذر</div>-->
-        <!--<div class="month10 month-item">دی</div>-->
-        <!--<div class="month11 month-item">بهمن</div>-->
-        <!--<div class="month12 month-item">اسفند</div>-->
-    <!--</div>-->
-    <!--<div class="datepicker-year-view" style="display: none;">-->
-        <!--<div class="year-item year-item-disable">۱۳۹۲</div>-->
-        <!--<div class="year-item year-item-disable">۱۳۹۳</div>-->
-        <!--<div class="year-item year-item-disable">۱۳۹۴</div>-->
-        <!--<div class="year-item selected">۱۳۹۵</div>-->
-        <!--<div class="year-item">۱۳۹۶</div>-->
-        <!--<div class="year-item year-item-disable">۱۳۹۷</div>-->
-        <!--<div class="year-item year-item-disable">۱۳۹۸</div>-->
-        <!--<div class="year-item year-item-disable">۱۳۹۹</div>-->
-        <!--<div class="year-item year-item-disable">۱۴۰۰</div>-->
-        <!--<div class="year-item year-item-disable">۱۴۰۱</div>-->
-        <!--<div class="year-item year-item-disable">۱۴۰۲</div>-->
-        <!--<div class="year-item year-item-disable">۱۴۰۳</div>-->
-    <!--</div>-->
-    <!--<div class="datepicker-time-view" style="display: none;"></div>-->
-    <!--<div class="toolbox ">-->
-        <!--<div class="btn-today">امروز</div>-->
-    <!--</div>-->
-<!--</div>-->
