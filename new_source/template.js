@@ -32,23 +32,14 @@ const Template = `
                            
                             <tr>
                                 {{#.}}
-                                    {{^otherMonth}}
-                                    {{#enabled}}
-                                        <td data-unix="{{dataUnix}}" class=""><span >{{title}}</span></td>
-                                    {{/enabled}}
-                                    {{^enabled}}
-                                        <td data-unix="{{dataUnix}}" class="disabled"><span>{{title}}</span></td>
-                                    {{/enabled}}
-                                    {{/otherMonth}}
                                     
-                                    {{#otherMonth}}
                                     {{#enabled}}
-                                        <td data-unix="{{dataUnix}}" ><span class="other-month">{{title}}</span></td>
+                                        <td data-unix="{{dataUnix}}" ><span  class="{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}}">{{title}}</span></td>
                                     {{/enabled}}
                                     {{^enabled}}
-                                        <td data-unix="{{dataUnix}}" class="disabled"><span class="other-month">{{title}}</span></td>
+                                        <td data-unix="{{dataUnix}}" class="disabled"><span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
                                     {{/enabled}}
-                                    {{/otherMonth}}
+                                    
                                 {{/.}}
                             </tr>
                         {{/days.list}}
@@ -64,10 +55,10 @@ const Template = `
             <div class="datepicker-month-view">
                 {{#month.list}}
                     {{#enabled}}               
-                        <div data-month="{{dataMonth}}" class="month-item ">{{title}}</small></div>
+                        <div data-month="{{dataMonth}}" class="month-item {{#selected}}selected{{/selected}}">{{title}}</small></div>
                     {{/enabled}}
                     {{^enabled}}               
-                        <div data-month="{{dataMonth}}" class="month-item month-item-disable">{{title}}</small></div>
+                        <div data-month="{{dataMonth}}" class="month-item month-item-disable {{#selected}}selected{{/selected}}">{{title}}</small></div>
                     {{/enabled}}
                 {{/month.list}}
             </div>
@@ -79,12 +70,11 @@ const Template = `
             <div class="datepicker-year-view" >
                 {{#year.list}}
                     {{#enabled}}
-                        <div data-year="{{dataYear}}" class="year-item ">{{title}}</div>
+                        <div data-year="{{dataYear}}" class="year-item {{#selected}}selected{{/selected}}">{{title}}</div>
                     {{/enabled}}
                     {{^enabled}}
-                        <div data-year="{{dataYear}}" class="year-item year-item-disable">{{title}}</div>
-                    {{/enabled}}
-                    
+                        <div data-year="{{dataYear}}" class="year-item year-item-disable {{#selected}}selected{{/selected}}">{{title}}</div>
+                    {{/enabled}}                    
                 {{/year.list}}
             </div>
         {{/year.viewMode }}

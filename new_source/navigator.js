@@ -23,25 +23,25 @@ class Navigator {
         });
         $(document).on('click', '#' + that.datepicker.id + ' .datepicker-day-view td', function () {
             let thisUnix = $(this).data('unix');
-            that.datepicker.state.updateView('unix', thisUnix);
             that.datepicker.state.setSelectedDateTime('unix', thisUnix);
+            that.datepicker.state.updateView('unix', thisUnix);
 
         });
         $(document).on('click', '#' + that.datepicker.id + ' .datepicker-month-view .month-item', function () {
             that.datepicker.state.switchViewModeTo('day');
-            that.datepicker.state.updateView('month', $(this).data('month'));
 
             if (!that.datepicker.options.justSelectOnDate) {
                 that.datepicker.state.setSelectedDateTime('month', $(this).data('month'));
             }
+            that.datepicker.state.updateView('month', $(this).data('month'));
         });
         $(document).on('click', '#' + that.datepicker.id + ' .datepicker-year-view .year-item', function () {
             that.datepicker.state.switchViewModeTo('month');
-            that.datepicker.state.updateView('year', $(this).data('year'));
 
             if (!that.datepicker.options.justSelectOnDate) {
                 that.datepicker.state.setSelectedDateTime('year', $(this).data('year'));
             }
+            that.datepicker.state.updateView('year', $(this).data('year'));
         });
     }
 }

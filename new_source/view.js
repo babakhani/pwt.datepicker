@@ -36,7 +36,8 @@ class View {
             yearsModel.push({
                 title: i,
                 enabled: this.checkYearAccess(i),
-                dataYear: i
+                dataYear: i,
+                selected: this.datepicker.state.selected.year == i
             });
         }
         return {
@@ -82,7 +83,8 @@ class View {
                 title: month.name.fa,
                 enabled: this.checkMonthAccess(month.index),
                 year: this.datepicker.state.view.year,
-                dataMonth: month.index
+                dataMonth: month.index,
+                selected: DateUtil.isSameMonth(this.datepicker.state.selected.dateObj, new pDate([this.datepicker.state.view.year,month.index]))
             });
         }
         return {
@@ -123,7 +125,6 @@ class View {
     };
 
     getDayViewModel() {
-        // log(this.datepicker.state.viewMode)
         if (this.datepicker.state.viewMode != 'day') {
             return [];
         }
@@ -166,6 +167,7 @@ class View {
                 outputList[rowIndex].push({
                     title: calcedDate.date(),
                     dataUnix: calcedDate.valueOf(),
+                    selected: DateUtil.isSameDay(calcedDate, this.datepicker.state.selected.dateObj),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -203,6 +205,7 @@ class View {
                     text: this.getNavSwitchText(data)
                 },
             },
+            selected: this.datepicker.state.selected,
             days: this.getDayViewModel(data),
             month: this.getMonthViewModel(data),
             year: this.getYearViewModel(data),
