@@ -80,8 +80,10 @@ const Template = `
         {{/year.viewMode }}
     {{/year.enabled }}
     <div class="datepicker-time-view"></div>
+    {{#toolbox}}
     <div class="toolbox ">
-        <div class="btn-today">امروز</div>
+        <div class="btn-today">{{text.btnToday}}</div>
     </div>
+    {{/toolbox}}
 </div>
 `;

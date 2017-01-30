@@ -209,6 +209,7 @@ class View {
             days: this.getDayViewModel(data),
             month: this.getMonthViewModel(data),
             year: this.getYearViewModel(data),
+            toolbox: this.datepicker.options.toolbox
         }
     };
 

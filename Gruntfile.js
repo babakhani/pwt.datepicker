@@ -14,26 +14,8 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: [
-                    'src/js/plugin.js',
-                    'src/js/config.js',
-                    'src/js/constant.js',
-                    'src/js/template.js',
-                    'src/js/base-class.js',
-                    'src/js/compat-class.js',
-                    'src/js/constant.js',
-                    'src/js/helper.js',
-                    'src/js/monthgrid.js',
-                    'src/js/monthgrid-view.js',
-                    'src/js/datepicker-view.js',
-                    'src/js/datepicker.js',
-                    'src/js/navigator.js',
-                    'src/js/daypicker.js',
-                    'src/js/monthpicker.js',
-                    'src/js/yearpicker.js',
-                    'src/js/toolbox.js',
-                    'src/js/timepicker.js',
-                    'src/js/state.js',
-                    'src/js/mousewheel.js'
+                    'es5/plugin.js',
+                    'bower_components/mustache.js/mustache.js',
                 ],
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
             }
@@ -81,7 +63,8 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         src: ['src/css/<%= pkg.name %>.css'],
-                        dest: 'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css' }
+                        dest: 'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css'
+                    }
                 ]
 
             }
@@ -144,7 +127,7 @@ module.exports = function (grunt) {
     if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc', 'watch']);
     } else {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin' , 'uglify', 'watch']);
+        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'watch']);
     }
 
 };

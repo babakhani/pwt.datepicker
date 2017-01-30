@@ -7,6 +7,7 @@ const Datepicker = function (inputElement, options) {
     this.options = new Options(options);
     this.state = new State(this);
     this.view = new View(this);
+    this.toolbox = new Toolbox(this);
 
     this._defineOnInitState = function () {
         let garegurianDate = null;
