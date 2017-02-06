@@ -12,6 +12,7 @@
   "dependencies": {
     "jquery": ">=1.10.2",
     "persian-date": ">=0.1.8",
-    "mustache.js": "mustache#^2.3.0"
+    "mustache.js": "mustache#^2.3.0",
+    "hamsterjs": "*"
   }
 }

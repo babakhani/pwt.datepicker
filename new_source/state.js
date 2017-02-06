@@ -2,9 +2,9 @@ class State {
     constructor(datepicker) {
         this.datepicker = datepicker;
         this.filetredDate = (this.datepicker.options.minDate || this.datepicker.options.maxDate);
-        this.viewModeList = ['day', 'month', 'year'];
-        this.viewMode = datepicker.options.viewMode; // defaul 'day'
-        this.viewModeIndex = this.viewModeList.indexOf(datepicker.options.viewMode); // defaul 'day'
+        this.viewModeList = this.datepicker.options._viewModeList;
+        this.viewMode = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? datepicker.options.viewMode : this.viewModeList[0]; // defaul 'day'
+        this.viewModeIndex = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? this.viewModeList.indexOf(datepicker.options.viewMode) : 0; // defaul 'day'
         this.filterDate = {
             start: {
                 year: 0,
@@ -33,7 +33,8 @@ class State {
             minute: 0,
             second: 0,
             unixDate: 0,
-            dateObject: null
+            dateObject: null,
+            meridian: 'AM'
         };
         this.selected = {
             year: 0,
@@ -76,45 +77,57 @@ class State {
     };
 
     setSelectedDateTime(key, value) {
-        var self = this;
+        var that = this;
         switch (key) {
             case 'unix':
-                self.selected.unixDate = value;
+                that.selected.unixDate = value;
                 var pd = new persianDate(value);
-                self.selected.year = pd.year();
-                self.selected.month = pd.month();
-                self.selected.date = pd.date();
-                self.selected.hour = pd.hour();
-                self.selected.minute = pd.minute();
-                self.selected.second = pd.second();
-                self._updateSelectedUnix();
+                that.selected.year = pd.year();
+                that.selected.month = pd.month();
+                that.selected.date = pd.date();
+                that.selected.hour = that.view.hour;
+                that.selected.minute = that.view.minute;
+                that.selected.second = that.view.second;
+                that._updateSelectedUnix();
                 break;
             case 'year':
                 this.selected.year = value;
-                self._updateSelectedUnix();
+                that._updateSelectedUnix();
                 break;
             case 'month':
                 this.selected.month = value;
-                self._updateSelectedUnix();
+                that._updateSelectedUnix();
                 break;
             case 'date':
                 this.selected.month = value;
-                self._updateSelectedUnix();
+                that._updateSelectedUnix();
+            case 'hour':
+                this.selected.hour = value;
+                that._updateSelectedUnix();
+                break;
+            case 'minute':
+                this.selected.minute = value;
+                that._updateSelectedUnix();
+                break;
+            case 'second':
+                this.selected.second = value;
+                that._updateSelectedUnix();
                 break;
         }
         return this;
     }
 
     _updateSelectedUnix() {
-        this.selected.dateObj = new persianDate([this.selected.year,
+        this.selected.dateObject = new persianDate([
+            this.selected.year,
             this.selected.month,
             this.selected.date,
-            this.selected.hour,
-            this.selected.minute,
-            this.selected.second
+            this.view.hour,
+            this.view.minute,
+            this.view.second
         ]);
-        this.selected.unixDate = this.selected.dateObj.valueOf();
-        this.datepicker.selectDate(this.selected.unixDate);
+        this.selected.unixDate = this.selected.dateObject.valueOf();
+        this.datepicker.updateInput(this.selected.unixDate);
         return this;
     }
 
@@ -124,51 +137,36 @@ class State {
         this.view.date = pd.date();
     }
 
-    _updateViewUnix() {
-        this.view.dateObj = new persianDate([
-            this.view.year,
-            this.view.month,
-            this.view.date,
-            this.view.hour,
-            this.view.minute,
-            this.view.second
-        ]);
-        this._syncViewModes(this.view.dateObj)
-        this.view.unixDate = this.view.dateObj.valueOf();
-        this.datepicker.view.render(this.view);
-        return this;
-    }
-
-    navigate(nav,) {
+    navigate(nav) {
         if (nav == 'next') {
             if (this.viewMode == 'year') {
-                this.updateView('year', this.view.year + 12);
+                this.setViewDateTime('year', this.view.year + 12);
             }
             if (this.viewMode == 'month') {
-                this.updateView('year', this.view.year + 1);
+                this.setViewDateTime('year', this.view.year + 1);
             }
             if (this.viewMode == 'day') {
                 if ((this.view.month + 1) == 13) {
-                    this.updateView('year', this.view.year + 1);
-                    this.updateView('month', 1);
+                    this.setViewDateTime('year', this.view.year + 1);
+                    this.setViewDateTime('month', 1);
                 } else {
-                    this.updateView('month', this.view.month + 1);
+                    this.setViewDateTime('month', this.view.month + 1);
                 }
             }
         }
         else {
             if (this.viewMode == 'year') {
-                this.updateView('year', this.view.year - 12);
+                this.setViewDateTime('year', this.view.year - 12);
             }
             if (this.viewMode == 'month') {
-                this.updateView('year', this.view.year - 1);
+                this.setViewDateTime('year', this.view.year - 1);
             }
             if (this.viewMode == 'day') {
                 if ((this.view.month - 1) <= 0) {
-                    this.updateView('year', this.view.year - 1);
-                    this.updateView('month', 12);
+                    this.setViewDateTime('year', this.view.year - 1);
+                    this.setViewDateTime('month', 12);
                 } else {
-                    this.updateView('month', this.view.month - 1);
+                    this.setViewDateTime('month', this.view.month - 1);
                 }
             }
         }
@@ -177,16 +175,34 @@ class State {
     switchViewMode() {
         this.viewModeIndex = ((this.viewModeIndex + 1) >= this.viewModeList.length) ? 0 : (this.viewModeIndex + 1);
         this.viewMode = (this.viewModeList[this.viewModeIndex]) ? (this.viewModeList[this.viewModeIndex]) : (this.viewModeList[0]);
-        this._updateViewUnix();
+        this._setViewDateTimeUnix();
         return this;
     }
 
     switchViewModeTo(viewMode) {
-        this.viewMode = viewMode;
-        this.viewModeIndex = this.viewModeList.indexOf(viewMode);
+        if (this.viewModeList.indexOf(viewMode) >= 0) {
+            this.viewMode = viewMode;
+            this.viewModeIndex = this.viewModeList.indexOf(viewMode);
+        }
     }
 
-    updateView(key, value) {
+
+    _setViewDateTimeUnix() {
+        this.view.dateObject = new persianDate([
+            this.view.year,
+            this.view.month,
+            this.view.date,
+            this.view.hour,
+            this.view.minute,
+            this.view.second
+        ]);
+        this._syncViewModes(this.view.dateObject)
+        this.view.unixDate = this.view.dateObject.valueOf();
+        this.datepicker.view.render(this.view);
+        return this;
+    }
+
+    setViewDateTime(key, value) {
         var self = this;
         switch (key) {
             case 'unix':
@@ -194,6 +210,9 @@ class State {
                 self.view.year = pd.year();
                 self.view.month = pd.month();
                 self.view.date = pd.date();
+                self.view.hour = pd.hour();
+                self.view.minute = pd.minute();
+                self.view.second = pd.second();
                 break;
             case 'year':
                 this.view.year = value;
@@ -203,9 +222,17 @@ class State {
                 break;
             case 'date':
                 this.view.month = value;
+            case 'hour':
+                this.view.hour = value;
+                break;
+            case 'minute':
+                this.view.minute = value;
+                break;
+            case 'second':
+                this.view.second = value;
                 break;
         }
-        this._updateViewUnix();
+        this._setViewDateTimeUnix();
         return this;
     }
 }

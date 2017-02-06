@@ -3,13 +3,14 @@ const Template = `
     {{#navigator.enabled}}
         <div class="navigator">
             <div class="datepicker-header">
-                <div class="btn btn-next">&lt;</div>
+                <div class="btn btn-next">{{navigator.text.btnNextText}}</div>
                 <div class="btn btn-switch">{{ navigator.switch.text }}</div>
-                <div class="btn btn-prev">&gt;</div>
+                <div class="btn btn-prev">{{navigator.text.btnPrevText}}</div>
             </div>
         </div>
     {{/navigator.enabled}}
-   
+    
+    <div class="datepicker-grid-view" >
     {{#days.enabled}}
         {{#days.viewMode}}
         <div class="datepicker-day-view" >    
@@ -79,11 +80,53 @@ const Template = `
             </div>
         {{/year.viewMode }}
     {{/year.enabled }}
-    <div class="datepicker-time-view"></div>
+    
+    </div>
+    {{#time}}
+    {{#enabled}}
+    <div class="datepicker-time-view">
+        {{#hour.enabled}}
+            <div class="hour time-segment" data-time-key="hour">
+                <div class="up-btn" data-time-key="hour">▲</div>
+                <input value="{{hour.title}}" type="text" placeholder="hour" class="hour-input">
+                <div class="down-btn" data-time-key="hour">▼</div>                    
+            </div>       
+            <div class="divider">:</div>
+        {{/hour.enabled}}
+        {{#minute.enabled}}
+            <div class="minute time-segment" data-time-key="minute" >
+                <div class="up-btn" data-time-key="minute">▲</div>
+                <input value="{{minute.title}}" type="text" placeholder="minute" class="minute-input">
+                <div class="down-btn" data-time-key="minute">▼</div>
+            </div>        
+            <div class="divider second-divider">:</div>
+        {{/minute.enabled}}
+        {{#second.enabled}}
+            <div class="second time-segment" data-time-key="second"  >
+                <div class="up-btn" data-time-key="second" >▲</div>
+                <input value="{{second.title}}"  type="text" placeholder="second" class="second-input">
+                <div class="down-btn" data-time-key="second" >▼</div>
+            </div>
+            <div class="divider meridian-divider"></div>
+            <div class="divider meridian-divider"></div>
+        {{/second.enabled}}
+        {{#meridian.enabled}}
+            <div class="meridian time-segment" data-time-key="meridian" >
+                <div class="up-btn" data-time-key="meridian">▲</div>
+                <input value="{{meridian.title}}" type="text" class="meridian-input">
+                <div class="down-btn" data-time-key="meridian">▼</div>
+            </div>
+        {{/meridian.enabled}}
+    </div>
+    {{/enabled}}
+    {{/time}}
+    
     {{#toolbox}}
+    {{#enabled}}
     <div class="toolbox ">
         <div class="btn-today">{{text.btnToday}}</div>
     </div>
+    {{/enabled}}
     {{/toolbox}}
 </div>
 `;

@@ -1,6 +1,17 @@
 const log = function (input) {
     console.log(input);
 };
+const debug = function (elem, input) {
+    if(window.persianDatepickerDebug){
+        console.log('Debug: ' + elem.constructor.name + ' : ' + input);
+    }
+};
+
+var delay = function (callback, ms) {
+    clearTimeout(window.datepickerTimer);
+    window.datepickerTimer = setTimeout(callback, ms);
+};
+
 const ClassDateRange = {
         /**
          * @property monthRange

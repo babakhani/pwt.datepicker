@@ -6,6 +6,20 @@ class View {
         return this;
     }
 
+    getNavSwitchText(data) {
+        let output;
+        if (this.datepicker.state.viewMode == 'day') {
+            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
+        }
+        else if (this.datepicker.state.viewMode == 'month') {
+            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.dateObject.valueOf())
+        }
+        else if (this.datepicker.state.viewMode == 'year') {
+            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
+        }
+        return output;
+    };
+
     checkYearAccess(y) {
         var output = true;
         if (this.datepicker.state.filetredDate) {
@@ -33,8 +47,10 @@ class View {
          */
         let yearsModel = [];
         for (let i of list) {
+            let yearStr = new pDate([i]);
+            yearStr.formatPersian = this.datepicker.options.persianDigit;
             yearsModel.push({
-                title: i,
+                title: yearStr.format('YYYY'),
                 enabled: this.checkYearAccess(i),
                 dataYear: i,
                 selected: this.datepicker.state.selected.year == i
@@ -49,9 +65,8 @@ class View {
 
     checkMonthAccess(month) {
         var output = true,
-            y = null;
-        if (this.datepicker.state.filetredDate) {
             y = this.datepicker.state.view.year;
+        if (this.datepicker.state.filetredDate) {
             var startMonth = this.datepicker.state.filterDate.start.month,
                 endMonth = this.datepicker.state.filterDate.end.month,
                 startYear = this.datepicker.state.filterDate.start.year,
@@ -84,7 +99,7 @@ class View {
                 enabled: this.checkMonthAccess(month.index),
                 year: this.datepicker.state.view.year,
                 dataMonth: month.index,
-                selected: DateUtil.isSameMonth(this.datepicker.state.selected.dateObj, new pDate([this.datepicker.state.view.year,month.index]))
+                selected: DateUtil.isSameMonth(this.datepicker.state.selected.dateObject, new pDate([this.datepicker.state.view.year, month.index]))
             });
         }
         return {
@@ -149,7 +164,7 @@ class View {
             outputList[rowIndex] = [];
             for (let [dayIndex, day] of daysRow.entries()) {
                 if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
-                    var pdate = new pDate(this.datepicker.state.view.dateObj.startOf('month').valueOf());
+                    var pdate = new pDate(this.datepicker.state.view.dateObject.startOf('month').valueOf());
                     var calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
                     var otherMonth = true;
                 }
@@ -160,14 +175,15 @@ class View {
                 }
                 else {
                     nextMonthListIndex += 1;
-                    var pdate = new pDate(this.datepicker.state.view.dateObj.endOf('month').valueOf());
+                    var pdate = new pDate(this.datepicker.state.view.dateObject.endOf('month').valueOf());
                     var calcedDate = pdate.add('days', nextMonthListIndex);
                     var otherMonth = true;
                 }
+                calcedDate.formatPersian = this.datepicker.options.persianDigit;
                 outputList[rowIndex].push({
-                    title: calcedDate.date(),
+                    title: calcedDate.format('DD'),
                     dataUnix: calcedDate.valueOf(),
-                    selected: DateUtil.isSameDay(calcedDate, this.datepicker.state.selected.dateObj),
+                    selected: DateUtil.isSameDay(calcedDate, this.datepicker.state.selected.dateObject),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -181,18 +197,28 @@ class View {
         }
     };
 
-    getNavSwitchText(data) {
-        let output;
-        if (this.datepicker.state.viewMode == 'day') {
-            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
+    getTimeViewModel() {
+        this.datepicker.state.view.dateObject.formatPersian = this.datepicker.options.persianDigit;
+        return {
+            enabled: this.datepicker.options.timePicker.enabled,
+            hour: {
+                title: this.datepicker.state.view.dateObject.format('HH'),
+                enabled: this.datepicker.options.timePicker.hour.enabled
+
+            },
+            minute: {
+                title: this.datepicker.state.view.dateObject.format('mm'),
+                enabled: this.datepicker.options.timePicker.minute.enabled
+            },
+            second: {
+                title: this.datepicker.state.view.dateObject.format('ss'),
+                enabled: this.datepicker.options.timePicker.second.enabled
+            },
+            meridian: {
+                title: this.datepicker.state.view.dateObject.meridian,
+                enabled: this.datepicker.options.timePicker.meridian.enabled
+            }
         }
-        else if (this.datepicker.state.viewMode == 'month') {
-            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.dateObj.valueOf())
-        }
-        else if (this.datepicker.state.viewMode == 'year') {
-            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
-        }
-        return output;
     };
 
     getViewModel(data) {
@@ -204,8 +230,10 @@ class View {
                     enabled: true,
                     text: this.getNavSwitchText(data)
                 },
+                text: this.datepicker.options.navigator.text
             },
             selected: this.datepicker.state.selected,
+            time: this.getTimeViewModel(data),
             days: this.getDayViewModel(data),
             month: this.getMonthViewModel(data),
             year: this.getYearViewModel(data),
@@ -214,8 +242,16 @@ class View {
     };
 
     render(data) {
+        debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(Template, this.getViewModel(data)));
         this.datepicker.$container.empty().append(this.rendered);
+        this.afterRnder();
     };
+
+    afterRnder() {
+        if (this.datepicker.navigator) {
+            this.datepicker.navigator.liveAttach();
+        }
+    }
 }

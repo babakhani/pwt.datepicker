@@ -289,7 +289,6 @@ var ClassDatepicker = {
                 var persianDateArray = self.validatePersianDateString(pasted);
                 if (persianDateArray !== null) {
                     delay(function () {
-
                         var newPersainDate = new persianDate(persianDateArray);
                         self.selectDate(newPersainDate.valueOf());
                     }, self.inputDelay);

@@ -16,6 +16,7 @@ module.exports = function (grunt) {
                 src: [
                     'es5/plugin.js',
                     'bower_components/mustache.js/mustache.js',
+                    'bower_components/hamsterjs/hamster.js',
                 ],
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
             }

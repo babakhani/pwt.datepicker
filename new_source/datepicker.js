@@ -8,38 +8,24 @@ const Datepicker = function (inputElement, options) {
     this.state = new State(this);
     this.view = new View(this);
     this.toolbox = new Toolbox(this);
-
-    this._defineOnInitState = function () {
-        let garegurianDate = null;
-        this.initialUnix = null;
-        if ($(this.$container)[0].nodeName === 'INPUT') {
-            garegurianDate = new Date(this.inputElement.getAttribute('value')).valueOf();
-        }
-        else {
-            garegurianDate = new Date($(this.$container).data('date')).valueOf();
-        }
-        if (garegurianDate && garegurianDate != 'undefined') {
-            this.initialUnix = garegurianDate;
-        }
-        else {
-            this.initialUnix = new Date().valueOf();
-        }
-        return this;
+    this.input = new Input(this, inputElement);
+    this.updateInput = function (unix) {
+        this.input.update(unix);
     };
-
     this.selectDate = function (unix) {
         $(inputElement).val(new pDate(unix).format());
-    }
-
-    this._updateStateOnInit = function () {
-        this.state.updateView('unix', this.initialUnix);
+        return this;
     };
-    this._defineOnInitState();
-    this._updateStateOnInit();
-
+    this.state.setViewDateTime('unix', this.input.getOnInitState());
+    if (this.options.initialValue) {
+        this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+        this.state.setViewDateTime('unix', this.input.getOnInitState());
+    }
     this.navigator = new Navigator(options, this);
     return {
         'datepicker': this,
-        'state': this.state
+        'state': this.state,
+        selectDate: this.selectDate,
+        updateView: this.updateView
     };
 };
