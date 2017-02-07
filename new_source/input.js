@@ -6,6 +6,30 @@ class Input {
         return this;
     }
 
+    attachInputElementEvents() {
+        let that = this;
+        $(this.elem).focus(function () {
+            that.datepicker.view.show();
+        });
+        $(this.elem).blur(function (e) {
+            // TODO: must fix
+            // if ($(e.target).parents('#' + that.datepicker.view.id).length < 0) {
+           // that.datepicker.view.hide();
+            //}
+        });
+    }
+
+    getInputPosition() {
+        return $(this.elem).position();
+    }
+
+    getInputSize() {
+        return {
+            width: $(this.elem).outerWidth(),
+            height: $(this.elem).outerHeight()
+        }
+    }
+
     updateAltField(unix) {
         let value = this.datepicker.options.altFieldFormatter(unix);
         $(this.datepicker.options.altField).val(value);
@@ -14,7 +38,6 @@ class Input {
     updateInputField(unix) {
         let value = this.datepicker.options.formatter(unix);
         $(this.elem).val(value);
-
     }
 
     update(unix) {

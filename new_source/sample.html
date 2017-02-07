@@ -32,6 +32,16 @@
     </div>
 </div>
 
+<div class="col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <!--<h4>Inline Datepicker</h4>-->
+        </div>
+        <div id="inline" class="panel-body">
+        </div>
+    </div>
+</div>
+
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/mustache.js/mustache.js"></script>
 <script src="../bower_components/hamsterjs/hamster.js"></script>
@@ -42,7 +52,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        window.persianDatepickerDebug = true;
+        window.persianDatepickerDebug = false;
+
+        window.inline = $('#inline').persianDatepicker();
 
         window.pd = $("#inlineDatepicker").persianDatepicker({
             altField: '#inlineDatepickerAlt',
@@ -81,7 +93,7 @@
 //                    log("toolbox today btn");
 //                }
 //            },
-            viewMode : 'year'
+            viewMode: 'year'
 
 
         }).data('datepicker');

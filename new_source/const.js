@@ -3,7 +3,12 @@ const log = function (input) {
 };
 const debug = function (elem, input) {
     if(window.persianDatepickerDebug){
-        console.log('Debug: ' + elem.constructor.name + ' : ' + input);
+        if(elem.constructor.name){
+            console.log('Debug: ' + elem.constructor.name + ' : ' + input);
+        }else{
+            console.log('Debug: ' + input);
+        }
+
     }
 };
 

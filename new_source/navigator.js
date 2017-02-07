@@ -6,7 +6,7 @@ class Navigator {
 
     liveAttach() {
         var that = this;
-        let gridPlot = $('#' + that.datepicker.id + ' .datepicker-grid-view')[0];
+        let gridPlot = $('#' + that.datepicker.view.id + ' .datepicker-grid-view')[0];
         Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
             if (delta > 0) {
                 that.datepicker.state.navigate('next');
@@ -17,7 +17,7 @@ class Navigator {
         });
 
         if (this.datepicker.options.timePicker.enabled) {
-            let timePlot = $('#' + that.datepicker.id + ' .datepicker-time-view')[0];
+            let timePlot = $('#' + that.datepicker.view.id + ' .datepicker-time-view')[0];
             Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
                 let $target = $(event.target);
                 let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
@@ -54,7 +54,7 @@ class Navigator {
             /**
              * @description navigator click event
              */
-            $(document).on('click', '#' + that.datepicker.id + ' .btn', function () {
+            $(document).on('click', '#' + that.datepicker.view.id + ' .btn', function () {
                 if ($(this).is('.btn-next')) {
                     that.datepicker.state.navigate('next');
                     that.datepicker.options.navigator.onNext(that);
@@ -78,7 +78,7 @@ class Navigator {
             /**
              * @description time up btn click event
              */
-            $(document).on('click', '#' + that.datepicker.id + ' .up-btn', function () {
+            $(document).on('click', '#' + that.datepicker.view.id + ' .up-btn', function () {
                 let timekey = $(this).data('time-key');
                 that.timeUp(timekey);
             });
@@ -86,7 +86,7 @@ class Navigator {
             /**
              * @description time down btn click event
              */
-            $(document).on('click', '#' + that.datepicker.id + ' .down-btn', function () {
+            $(document).on('click', '#' + that.datepicker.view.id + ' .down-btn', function () {
                 var timekey = $(this).data('time-key');
                 that.timeDown(timekey);
             });
@@ -100,11 +100,15 @@ class Navigator {
             /**
              * @description days click event
              */
-            $(document).on('click', '#' + that.datepicker.id + ' .datepicker-day-view td', function () {
+            $(document).on('click', '#' + that.datepicker.view.id + ' .datepicker-day-view td', function () {
                 let thisUnix = $(this).data('unix');
                 that.datepicker.state.setSelectedDateTime('unix', thisUnix);
                 that.datepicker.state.setViewDateTime('unix', that.datepicker.state.selected.unixDate);
                 that.datepicker.options.dayPicker.onSelect(thisUnix);
+                if (that.datepicker.options.autoClose) {
+                    that.datepicker.view.hide();
+                    that.datepicker.options.onHide(that);
+                }
             });
         }
 
@@ -116,14 +120,19 @@ class Navigator {
             /**
              * @description month click event
              */
-            $(document).on('click', '#' + that.datepicker.id + ' .datepicker-month-view .month-item', function () {
+            $(document).on('click', '#' + that.datepicker.view.id + ' .datepicker-month-view .month-item', function () {
                 let month = $(this).data('month');
                 that.datepicker.state.switchViewModeTo('day');
                 if (!that.datepicker.options.onlySelectOnDate) {
                     that.datepicker.state.setSelectedDateTime('month', month);
+                    if (that.datepicker.options.autoClose) {
+                        that.datepicker.view.hide();
+                        that.datepicker.options.onHide(that);
+                    }
                 }
                 that.datepicker.state.setViewDateTime('month', month);
                 that.datepicker.options.monthPicker.onSelect(month);
+
             });
         }
 
@@ -131,15 +140,19 @@ class Navigator {
         /**
          * @description check if yearPicker enabled attach Events
          */
-        if (this.datepicker.options.monthPicker.enabled) {
+        if (this.datepicker.options.yearPicker.enabled) {
             /**
              * @description year click event
              */
-            $(document).on('click', '#' + that.datepicker.id + ' .datepicker-year-view .year-item', function () {
+            $(document).on('click', '#' + that.datepicker.view.id + ' .datepicker-year-view .year-item', function () {
                 let year = $(this).data('year');
                 that.datepicker.state.switchViewModeTo('month');
                 if (!that.datepicker.options.onlySelectOnDate) {
                     that.datepicker.state.setSelectedDateTime('year', year);
+                    if (that.datepicker.options.autoClose) {
+                        that.datepicker.view.hide();
+                        that.datepicker.options.onHide(that);
+                    }
                 }
                 that.datepicker.state.setViewDateTime('year', year);
                 that.datepicker.options.yearPicker.onSelect(year);

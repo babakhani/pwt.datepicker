@@ -107,6 +107,10 @@
   border: 0px;
   text-shadow: none; }
 
+.datepicker-container {
+  position: absolute;
+  top: 100px; }
+
 .datepicker-plot-area {
   box-sizing: border-box;
   overflow: hidden;

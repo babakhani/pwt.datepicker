@@ -3,8 +3,53 @@ class View {
         this.yearsViewCount = 12;
         this.datepicker = datepicker;
         this.rendered = null;
+        let randomId = parseInt(Math.random(100) * 1000);
+        this.id = `persianDateInstance-${randomId}`;
+        let that = this;
+        if (this.datepicker.inputElement.nodeName === 'INPUT') {
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
+            this.$container.hide();
+            this.datepicker.input.attachInputElementEvents();
+            this.setPickerBoxPosition();
+        }
+        else {
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.datepicker.inputElement);
+        }
         return this;
     }
+
+    destroy() {
+        this.$container.remove();
+    }
+
+    setPickerBoxPosition() {
+        let inputPosition = this.datepicker.input.getInputPosition();
+        let inputSize = this.datepicker.input.getInputSize();
+        if (this.datepicker.options.position === "auto") {
+            this.$container.css({
+                left: (inputPosition.left) + 'px',
+                top: (inputSize.height + inputPosition.top) + 'px'
+            })
+        } else {
+            this.$container.css({
+                top: (this.datepicker.options.position[0] + inputPosition.left) + 'px',
+                left: (this.datepicker.options.position[1] + inputPosition.top) + 'px'
+            });
+        }
+    }
+
+    show() {
+        this.$container.show();
+    }
+
+    hide() {
+        this.$container.hide();
+    }
+
+    toggle() {
+        this.$container.toggle();
+    }
+
 
     getNavSwitchText(data) {
         let output;
@@ -245,7 +290,7 @@ class View {
         debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(Template, this.getViewModel(data)));
-        this.datepicker.$container.empty().append(this.rendered);
+        this.$container.empty().append(this.rendered);
         this.afterRnder();
     };
 

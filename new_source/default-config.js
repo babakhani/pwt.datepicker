@@ -355,9 +355,6 @@ var DefaultConfig = {
         }
     },
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////// Under Implement ///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
@@ -366,12 +363,8 @@ var DefaultConfig = {
      * @param unixDate
      */
     'onSelect': function (unixDate) {
-        return this;
+        debug(this, 'datepicker Event: onSelect : ' + unixDate);
     },
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////// Un  implemented ///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     /**
@@ -386,6 +379,36 @@ var DefaultConfig = {
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker instance. It is called just before the datepicker is displayed.
+     * @event
+     * @param self
+     */
+    'onShow': function () {
+        debug(this, 'dayPicker Event: onShow ');
+    },
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
+     * @desc A function that takes current datepicker instance. It is called just before the datepicker Hide.
+     * @event
+     * @param self
+     */
+    'onHide': function () {
+        debug(this, 'dayPicker Event: onHide ');
+    },
+
+    'onToggle': function () {
+        debug(this, 'dayPicker Event: onToggle ');
+    },
+
+    'onDestroy': function () {
+        debug(this, 'dayPicker Event: onDestroy ');
+    },
+
+
+    /**
+     * @memberOf ClassDatepicker.ClassConfig
      * @description If true picker close When Select day
      * @property autoClose
      * @type {boolean}
@@ -393,6 +416,15 @@ var DefaultConfig = {
      */
     'autoClose': false,
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// Under Implement ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// Un  implemented ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @memberOf ClassDatepicker.ClassConfig
@@ -411,71 +443,5 @@ var DefaultConfig = {
      * @default 800
      */
     'inputDelay': 800,
-
-
-    /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @desc Open the date picker.
-     * @method
-     * @returns {ClassConfig}
-     */
-    'show': function () {
-        this.view.fixPosition(this);
-        this.element.main.show();
-        this.onShow(this);
-        this._viewed = true;
-        return this;
-    },
-
-
-    /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @desc Hide the date picker
-     * @method
-     * @returns {ClassConfig}
-     */
-    'hide': function () {
-        if (this._viewed) {
-            this.element.main.hide();
-            this.onHide(this);
-            this._viewed = false;
-        }
-        return this;
-    },
-
-    /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @desc Removes the datepicker functionality completely.
-     * @method
-     * @param self
-     */
-    'destroy': function () {
-        this.inputElem.removeClass(self.cssClass);
-        this.element.main.remove();
-    },
-
-
-    /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @desc A function that takes current datepicker instance. It is called just before the datepicker is displayed.
-     * @event
-     * @param self
-     */
-    'onShow': function (self) {
-    },
-
-
-    /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @desc A function that takes current datepicker instance. It is called just before the datepicker Hide.
-     * @event
-     * @param self
-     */
-    'onHide': function (self) {
-    },
-
-
-
-
 
 };

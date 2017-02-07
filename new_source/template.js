@@ -8,8 +8,7 @@ const Template = `
                 <div class="btn btn-prev">{{navigator.text.btnPrevText}}</div>
             </div>
         </div>
-    {{/navigator.enabled}}
-    
+    {{/navigator.enabled}}    
     <div class="datepicker-grid-view" >
     {{#days.enabled}}
         {{#days.viewMode}}

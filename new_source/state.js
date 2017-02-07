@@ -128,6 +128,7 @@ class State {
         ]);
         this.selected.unixDate = this.selected.dateObject.valueOf();
         this.datepicker.updateInput(this.selected.unixDate);
+        this.datepicker.options.onSelect(this.selected.unixDate);
         return this;
     }
 

@@ -18,7 +18,7 @@ class Options {
             options.timePicker.minute.step = options.timePicker.step;
         }
         if (options.timePicker.second.step == null) {
-            options.timePicker.minute.step = options.timePicker.step;
+            options.timePicker.second.step = options.timePicker.step;
         }
 
         if(options.dayPicker.enabled == false){
