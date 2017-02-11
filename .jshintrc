@@ -1,6 +1,7 @@
 {
   "strict": false,
   "node": true,
+  "esversion": 6,
   "globals": {
     "$": false,
     "window": true,

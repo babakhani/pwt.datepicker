@@ -1,28 +1,19 @@
 /**
- * Overwrite by option passed to plugin
- * {@link http://http://babakhani.github.io/PersianWebToolkit/doc/datepicker/0.3.5/}
- * @class ClassConfig
- * @memberOf ClassDatepicker
- * @type {{cssClass: string, daysTitleFormat: string, persianDigit: boolean, viewMode: string, position: string, autoClose: boolean, toolbox: boolean, format: boolean, observer: boolean, altField: boolean, altFormat: string, inputDelay: number, viewFormat: string, formatter: formatter, altFieldFormatter: altFieldFormatter, show: show, hide: hide, onShow: onShow, onHide: onHide, onSelect: onSelect, timePicker: {enabled: boolean}, dayPicker: {enabled: boolean}, monthPicker: {enabled: boolean}, yearPicker: {enabled: boolean}}}
+ *
+ * @type {{initialValue: boolean, persianDigit: boolean, viewMode: string, format: boolean, formatter: ClassDatepicker.ClassConfig.formatter, altField: boolean, altFormat: string, altFieldFormatter: ClassDatepicker.ClassConfig.altFieldFormatter, minDate: null, maxDate: null, navigator: {enabled: boolean, text: {btnNextText: string, btnPrevText: string}, onNext: ClassDatepicker.ClassConfig.navigator.onNext, onPrev: ClassDatepicker.ClassConfig.navigator.onPrev, onSwitch: ClassDatepicker.ClassConfig.navigator.onSwitch}, toolbox: {enabled: boolean, text: {btnToday: string}, onToday: ClassDatepicker.ClassConfig.toolbox.onToday}, onlyTimePicker: boolean, onlySelectOnDate: boolean, checkDate: ClassDatepicker.ClassConfig.checkDate, checkMonth: ClassDatepicker.ClassConfig.checkMonth, checkYear: ClassDatepicker.ClassConfig.checkYear, timePicker: {enabled: boolean, step: number, hour: {enabled: boolean, step: null}, minute: {enabled: boolean, step: null}, second: {enabled: boolean, step: null}, meridian: {enabled: boolean}}, dayPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.dayPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.dayPicker.onSelect}, monthPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.monthPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.monthPicker.onSelect}, yearPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.yearPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.yearPicker.onSelect}, onSelect: ClassDatepicker.ClassConfig.onSelect, position: string, onShow: ClassDatepicker.ClassConfig.onShow, onHide: ClassDatepicker.ClassConfig.onHide, onToggle: Config.onToggle, onDestroy: Config.onDestroy, autoClose: boolean, observer: boolean, inputDelay: number}}
+ * @member initialValue
+ * @todo doc must fix
  */
-var DefaultConfig = {
-
+const Config = {
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @description if false datepicker initiate with empty value in input.
-     * @type {boolean}
-     * @default true
-     * @version 0.6.0
+     * @type Boolean
      */
     'initialValue': true,
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @description if true all digit convert to persian digit.
-     * @type {boolean}
-     * @default true
+     * @type Boolean
      */
     'persianDigit': true,
 
@@ -398,10 +389,16 @@ var DefaultConfig = {
         debug(this, 'dayPicker Event: onHide ');
     },
 
+    /**
+     *
+     */
     'onToggle': function () {
         debug(this, 'dayPicker Event: onToggle ');
     },
 
+    /**
+     *
+     */
     'onDestroy': function () {
         debug(this, 'dayPicker Event: onDestroy ');
     },
@@ -443,5 +440,4 @@ var DefaultConfig = {
      * @default 800
      */
     'inputDelay': 800,
-
 };

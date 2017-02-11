@@ -1,9 +1,30 @@
+/**
+ * This navigator class do every thing about navigate and select date
+ * @public
+ */
 class Navigator {
-    constructor(options, datepicker) {
+
+    /**
+     * @param {object} datepicker
+     * @return {Navigator}
+     */
+    constructor(datepicker) {
+
+        /**
+         * @type {Datepicker}
+         */
         this.datepicker = datepicker;
+        this.liveAttach();
         this._attachEvents();
+        return this;
     }
 
+
+    /**
+     * @desc attach events that needed attach after every render
+     * @public
+     * @todo attach as a live way
+     */
     liveAttach() {
         var that = this;
         let gridPlot = $('#' + that.datepicker.view.id + ' .datepicker-grid-view')[0];
@@ -31,6 +52,11 @@ class Navigator {
         }
     }
 
+    /**
+     * @desc set time up depend to timekey
+     * @param {String} timekey - accept hour, minute,second
+     * @public
+     */
     timeUp(timekey) {
         let step = this.datepicker.options.timePicker[timekey].step;
         let currentState = DateUtil.normalizeTime(timekey, parseInt(this.datepicker.state.view[timekey]) + step);
@@ -38,6 +64,12 @@ class Navigator {
         this.datepicker.state.setSelectedDateTime('unix', this.datepicker.state.selected.unixDate);
     }
 
+
+    /**
+     * @desc set time down depend to timekey
+     * @param {String} timekey - accept hour, minute,second
+     * @public
+     */
     timeDown(timekey) {
         let step = this.datepicker.options.timePicker[timekey].step;
         let currentState = DateUtil.normalizeTime(timekey, parseInt(this.datepicker.state.view[timekey]) - step);
@@ -45,10 +77,14 @@ class Navigator {
         this.datepicker.state.setSelectedDateTime('unix', this.datepicker.state.selected.unixDate);
     }
 
+
+    /**
+     * @desc attach dom events
+     * @todo remove jquery
+     * @private
+     */
     _attachEvents() {
         var that = this;
-
-        this.liveAttach();
 
         if (this.datepicker.options.navigator.enabled) {
             /**
@@ -75,6 +111,7 @@ class Navigator {
          * @description check if timePicker enabled attach Events
          */
         if (this.datepicker.options.timePicker.enabled) {
+
             /**
              * @description time up btn click event
              */
@@ -97,6 +134,7 @@ class Navigator {
          * @description check if dayPicker enabled attach Events
          */
         if (this.datepicker.options.dayPicker.enabled) {
+
             /**
              * @description days click event
              */
@@ -117,6 +155,7 @@ class Navigator {
          * @description check if monthPicker enabled attach Events
          */
         if (this.datepicker.options.monthPicker.enabled) {
+
             /**
              * @description month click event
              */
@@ -141,6 +180,7 @@ class Navigator {
          * @description check if yearPicker enabled attach Events
          */
         if (this.datepicker.options.yearPicker.enabled) {
+
             /**
              * @description year click event
              */

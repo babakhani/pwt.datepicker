@@ -1,0 +1,21 @@
+{
+  "source": "./new_source",
+  "destination": "./doc",
+  "coverage": true,
+  "access": [
+    "public",
+    "protected"
+  ],
+  "unexportIdentifier": true,
+  "undocumentIdentifier": true,
+  "experimentalProposal": {
+    "classProperties": false,
+    "objectRestSpread": false,
+    "decorators": false,
+    "doExpressions": false,
+    "functionBind": false,
+    "asyncGenerators": false,
+    "exportExtensions": false,
+    "dynamicImport": false
+  }
+}

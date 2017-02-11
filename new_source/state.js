@@ -1,10 +1,50 @@
+/**
+ * All state set in his object and get from this
+ * also this object notify other object to update self or update view or etc.
+ */
 class State {
+
+    /**
+     * @param {Datepicker} datepicker
+     * @return {State}
+     */
     constructor(datepicker) {
+
+        /**
+         * @type {object}
+         */
         this.datepicker = datepicker;
+
+        /**
+         * @type {Boolean}
+         */
         this.filetredDate = (this.datepicker.options.minDate || this.datepicker.options.maxDate);
+
+        /**
+         * @desc get generated view mode list from options object
+         * @type {Array}
+         */
         this.viewModeList = this.datepicker.options._viewModeList;
-        this.viewMode = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? datepicker.options.viewMode : this.viewModeList[0]; // defaul 'day'
+
+        /**
+         * @desc view mode string day, month, year
+         * @type {String}
+         * @default day
+         * @todo add time to view modes
+         */
+        this.viewMode = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? datepicker.options.viewMode : this.viewModeList[0];
+
+        /**
+         * @desc view mode string index in view mode list
+         * @type {number}
+         */
         this.viewModeIndex = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? this.viewModeList.indexOf(datepicker.options.viewMode) : 0; // defaul 'day'
+
+
+        /**
+         * @desc contain filtered date objects
+         * @type {{start: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}, end: {year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number}}}
+         */
         this.filterDate = {
             start: {
                 year: 0,
@@ -25,6 +65,11 @@ class State {
                 unixDate: 0
             }
         };
+
+        /**
+         * @desc contain view date object
+         * @type {{year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number, dateObject: null, meridian: string}}
+         */
         this.view = {
             year: 0,
             month: 0,
@@ -36,6 +81,11 @@ class State {
             dateObject: null,
             meridian: 'AM'
         };
+
+        /**
+         * @desc contain selected date object
+         * @type {{year: number, month: number, date: number, hour: number, minute: number, second: number, unixDate: number, dateObject: null}}
+         */
         this.selected = {
             year: 0,
             month: 0,
@@ -46,11 +96,17 @@ class State {
             unixDate: 0,
             dateObject: null
         };
-        this.setFilterDate(this.datepicker.options.minDate, this.datepicker.options.maxDate);
+
+        this._setFilterDate(this.datepicker.options.minDate, this.datepicker.options.maxDate);
         return this;
     }
 
-    setFilterDate(minDate, maxDate) {
+    /**
+     * @private
+     * @param minDate
+     * @param maxDate
+     */
+    _setFilterDate(minDate, maxDate) {
         var self = this;
         if (!minDate) {
             minDate = -999999999999999999;
@@ -74,8 +130,16 @@ class State {
         self.filterDate.end.month = pdEnd.month();
         self.filterDate.end.date = pdEnd.date();
         self.filterDate.end.year = pdEnd.year();
-    };
+    }
 
+
+    /**
+     * @desc called on date select
+     * @param {String} key - accept date, month, year, hour, minute, second
+     * @param {Number} value
+     * @public
+     * @return {State}
+     */
     setSelectedDateTime(key, value) {
         var that = this;
         switch (key) {
@@ -99,8 +163,9 @@ class State {
                 that._updateSelectedUnix();
                 break;
             case 'date':
-                this.selected.month = value;
+                this.selected.date = value;
                 that._updateSelectedUnix();
+                break;
             case 'hour':
                 this.selected.hour = value;
                 that._updateSelectedUnix();
@@ -117,6 +182,11 @@ class State {
         return this;
     }
 
+
+    /**
+     * @return {State}
+     * @private
+     */
     _updateSelectedUnix() {
         this.selected.dateObject = new persianDate([
             this.selected.year,
@@ -132,12 +202,20 @@ class State {
         return this;
     }
 
+    /**
+     * @param pd
+     * @private
+     */
     _syncViewModes(pd) {
         this.view.year = pd.year();
         this.view.month = pd.month();
         this.view.date = pd.date();
     }
 
+    /**
+     * @desc change view state
+     * @param {String} nav - accept next, prev
+     */
     navigate(nav) {
         if (nav == 'next') {
             if (this.viewMode == 'year') {
@@ -173,6 +251,11 @@ class State {
         }
     }
 
+    /**
+     * @public
+     * @desc every time called view state changed to next in queue
+     * @return {State}
+     */
     switchViewMode() {
         this.viewModeIndex = ((this.viewModeIndex + 1) >= this.viewModeList.length) ? 0 : (this.viewModeIndex + 1);
         this.viewMode = (this.viewModeList[this.viewModeIndex]) ? (this.viewModeList[this.viewModeIndex]) : (this.viewModeList[0]);
@@ -180,6 +263,10 @@ class State {
         return this;
     }
 
+    /**
+     * @desc switch to specified view mode
+     * @param {String} viewMode - accept date, month, year
+     */
     switchViewModeTo(viewMode) {
         if (this.viewModeList.indexOf(viewMode) >= 0) {
             this.viewMode = viewMode;
@@ -187,7 +274,11 @@ class State {
         }
     }
 
-
+    /**
+     *
+     * @return {State}
+     * @private
+     */
     _setViewDateTimeUnix() {
         this.view.dateObject = new persianDate([
             this.view.year,
@@ -197,12 +288,18 @@ class State {
             this.view.minute,
             this.view.second
         ]);
-        this._syncViewModes(this.view.dateObject)
+        this._syncViewModes(this.view.dateObject);
         this.view.unixDate = this.view.dateObject.valueOf();
         this.datepicker.view.render(this.view);
         return this;
     }
 
+    /**
+     *
+     * @param {String} key -  accept date, month, year, hour, minute, second
+     * @param {Number} value
+     * @return {State}
+     */
     setViewDateTime(key, value) {
         var self = this;
         switch (key) {
@@ -222,7 +319,8 @@ class State {
                 this.view.month = value;
                 break;
             case 'date':
-                this.view.month = value;
+                this.view.date = value;
+                break;
             case 'hour':
                 this.view.hour = value;
                 break;

@@ -1,51 +1,112 @@
-const Datepicker = function (inputElement, options) {
-    this.initialUnix = null;
-    this.inputElement = inputElement;
-    this.options = new Options(options);
-    this.input = new Input(this, inputElement);
-    this.state = new State(this);
-    this.view = new View(this);
-    this.toolbox = new Toolbox(this);
+/**
+ * Datepicker
+ */
+class Datepicker {
+
+    /**
+     * @param {Object} inputElement - Datepicker element
+     * @param {Object} options - Options passed by init method
+     * @return {{datepicker: Datepicker, state: State, selectDate: *, updateView: (*|updateView), show: show, hide: hide, toggle: toggle, destroy: destroy}}
+     */
+    constructor(inputElement, options) {
 
 
-    this.updateInput = function (unix) {
-        this.input.update(unix);
-    };
+        /**
+         * @type {DateUtil} DateUtil - date helper class
+         */
 
-    this.state.setViewDateTime('unix', this.input.getOnInitState());
 
-    if (this.options.initialValue) {
-        this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+
+        /**
+         * @type {unix} [initialUnix=null]
+         */
+        this.initialUnix = null;
+
+
+        /**
+         * @type {Object} [inputElement=inputElement]
+         */
+        this.inputElement = inputElement;
+
+
+        /**
+         * @type {Options} handle works about config
+         */
+        this.options = new Options(options);
+
+
+        /**
+         * @type {Input} handle works about input and alt field input element
+         */
+        this.input = new Input(this, inputElement);
+
+
+        /**
+         *
+         * @type {State} set and get selected and view and other state
+         */
+        this.state = new State(this);
+
+
+        /**
+         *
+         * @type {View} render datepicker view base on State
+         */
+        this.view = new View(this);
+
+        /**
+         *
+         * @type {Toolbox} handle works about toolbox
+         */
+        this.toolbox = new Toolbox(this);
+
+        /**
+         *
+         * @param unix
+         */
+        this.updateInput = function (unix) {
+            this.input.update(unix);
+        };
+
         this.state.setViewDateTime('unix', this.input.getOnInitState());
-    }
-
-    this.navigator = new Navigator(options, this);
-
-    let that = this;
-    return {
-        'datepicker': this,
-        'state': this.state,
-        selectDate: this.selectDate,
-        updateView: this.updateView,
-        show: function () {
-            that.view.show();
-            that.options.onShow(that);
-            return that;
-        },
-        hide: function () {
-            that.view.hide();
-            that.options.onHide(that);
-            return that;
-        },
-        toggle: function () {
-            that.view.toggle();
-            that.options.onToggle(that);
-            return that;
-        },
-        destroy: function () {
-            that.view.destroy();
-            that.options.onDestroy(that);
-            return that;
+        if (this.options.initialValue) {
+            this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+            this.state.setViewDateTime('unix', this.input.getOnInitState());
         }
-    };
-};
+
+
+        /**
+         *
+         * @type {Navigator} handle navigation and dateoicker element events
+         */
+        this.navigator = new Navigator(this);
+
+        let that = this;
+        return {
+            'datepicker': this,
+            'state': this.state,
+            selectDate: this.selectDate,
+            updateView: this.updateView,
+            show: function () {
+                that.view.show();
+                that.options.onShow(that);
+                return that;
+            },
+            hide: function () {
+                that.view.hide();
+                that.options.onHide(that);
+                return that;
+            },
+            toggle: function () {
+                that.view.toggle();
+                that.options.onToggle(that);
+                return that;
+            },
+            destroy: function () {
+                that.view.destroy();
+                that.options.onDestroy(that);
+                return that;
+            }
+        };
+    }
+}

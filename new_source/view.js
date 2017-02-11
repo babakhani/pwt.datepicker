@@ -1,15 +1,49 @@
+/**
+ * As its name suggests, all rendering works do in this object
+ */
 class View {
+
+    /**
+     *
+     * @param {Datepicker} datepicker
+     * @return {View}
+     */
     constructor(datepicker) {
+
+        /**
+         * @type {number}
+         */
         this.yearsViewCount = 12;
+
+        /**
+         *
+         * @type {Datepicker}
+         */
         this.datepicker = datepicker;
+
+        /**
+         *
+         * @type {null}
+         */
         this.rendered = null;
-        let randomId = parseInt(Math.random(100) * 1000);
-        this.id = `persianDateInstance-${randomId}`;
+
+
+        /**
+         *
+         * @type {null}
+         */
+        this.$container = null;
+
+
+        /**
+         *
+         * @type {string}
+         */
+        this.id = `persianDateInstance-${parseInt(Math.random(100) * 1000)}`;
         let that = this;
         if (this.datepicker.inputElement.nodeName === 'INPUT') {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.$container.hide();
-            this.datepicker.input.attachInputElementEvents();
             this.setPickerBoxPosition();
         }
         else {
@@ -18,10 +52,16 @@ class View {
         return this;
     }
 
+    /**
+     * @desc remove datepicker container element from dom
+     */
     destroy() {
         this.$container.remove();
     }
 
+    /**
+     * @desc set datepicker container element based on <input/> element position
+     */
     setPickerBoxPosition() {
         let inputPosition = this.datepicker.input.getInputPosition();
         let inputSize = this.datepicker.input.getInputSize();
@@ -29,7 +69,7 @@ class View {
             this.$container.css({
                 left: (inputPosition.left) + 'px',
                 top: (inputSize.height + inputPosition.top) + 'px'
-            })
+            });
         } else {
             this.$container.css({
                 top: (this.datepicker.options.position[0] + inputPosition.left) + 'px',
@@ -38,50 +78,75 @@ class View {
         }
     }
 
+    /**
+     * @desc show datepicker container element
+     */
     show() {
         this.$container.show();
     }
 
+    /**
+     * @desc hide datepicker container element
+     */
     hide() {
         this.$container.hide();
     }
 
+    /**
+     * @desc toggle datepicker container element
+     */
     toggle() {
         this.$container.toggle();
     }
 
-
-    getNavSwitchText(data) {
+    /**
+     * @desc return navigator switch text
+     * @param {String} data -  accept day, month, year
+     * @private
+     * @return {String}
+     */
+    _getNavSwitchText(data) {
         let output;
         if (this.datepicker.state.viewMode == 'day') {
-            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month)
+            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month);
         }
         else if (this.datepicker.state.viewMode == 'month') {
-            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.dateObject.valueOf())
+            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.dateObject.valueOf());
         }
         else if (this.datepicker.state.viewMode == 'year') {
-            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year)
+            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year);
         }
         return output;
-    };
+    }
 
-    checkYearAccess(y) {
+    /**
+     * @desc check year is accessible
+     * @param {Number} year - year number
+     * @return {Boolean}
+     */
+    checkYearAccess(year) {
         var output = true;
         if (this.datepicker.state.filetredDate) {
             var startYear = this.datepicker.state.filterDate.start.year;
             var endYear = this.datepicker.state.filterDate.end.year;
-            if (startYear <= y & y <= endYear) {
+            if (startYear <= year & year <= endYear) {
                 output = true;
             } else {
                 return false;
             }
         }
         if (output) {
-            return this.datepicker.options.checkYear(y);
+            return this.datepicker.options.checkYear(year);
         }
-    };
+    }
 
-    getYearViewModel(viewState) {
+
+    /**
+     * @private
+     * @param viewState
+     * @return {{enabled: boolean, viewMode: boolean, list: Array}}
+     */
+    _getYearViewModel(viewState) {
         /**
          * @description Generate years list based on viewState year
          * @return ['1380',n+12,'1392']
@@ -105,9 +170,14 @@ class View {
             enabled: this.datepicker.options.yearPicker.enabled,
             viewMode: this.datepicker.state.viewMode == 'year',
             list: yearsModel
-        }
-    };
+        };
+    }
 
+    /**
+     * @desc check month is accessible
+     * @param {Number} month - month number
+     * @return {Boolean}
+     */
     checkMonthAccess(month) {
         var output = true,
             y = this.datepicker.state.view.year;
@@ -134,9 +204,13 @@ class View {
         if (output) {
             return this.datepicker.options.checkMonth(month, y);
         }
-    };
+    }
 
-    getMonthViewModel() {
+    /**
+     * @private
+     * @return {{enabled: boolean, viewMode: boolean, list: Array}}
+     */
+    _getMonthViewModel() {
         let monthModel = [];
         for (let month of ClassDateRange.monthRange) {
             monthModel.push({
@@ -151,10 +225,15 @@ class View {
             enabled: this.datepicker.options.monthPicker.enabled,
             viewMode: this.datepicker.state.viewMode == 'month',
             list: monthModel
-        }
-    };
+        };
+    }
 
-    checkDayAccess(thisUnix) {
+    /**
+     * @desc check day is accessible
+     * @param {Number} thisUnix - month number
+     * @return {Boolean}
+     */
+    checkDayAccess(unixtimespan) {
         var self = this,
             output = true;
         self.minDate = this.datepicker.options.minDate;
@@ -164,27 +243,31 @@ class View {
             if (self.minDate && self.maxDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
                 self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
-                if (!(thisUnix >= self.minDate && thisUnix <= self.maxDate)) {
+                if (!(unixtimespan >= self.minDate && unixtimespan <= self.maxDate)) {
                     return false;
                 }
             } else if (self.minDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
-                if (thisUnix <= self.minDate) {
+                if (unixtimespan <= self.minDate) {
                     return false;
                 }
             } else if (self.maxDate) {
                 self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
-                if (thisUnix <= self.maxDate) {
+                if (unixtimespan <= self.maxDate) {
                     return false;
                 }
             }
         }
         if (output) {
-            return self.datepicker.options.checkDate(thisUnix);
+            return self.datepicker.options.checkDate(unixtimespan);
         }
-    };
+    }
 
-    getDayViewModel() {
+    /**
+     * @private
+     * @return {object}
+     */
+    _getDayViewModel() {
         if (this.datepicker.state.viewMode != 'day') {
             return [];
         }
@@ -208,21 +291,22 @@ class View {
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
             for (let [dayIndex, day] of daysRow.entries()) {
-                if (rowIndex == 0 && dayIndex < firstWeekDayOfMonth) {
-                    var pdate = new pDate(this.datepicker.state.view.dateObject.startOf('month').valueOf());
-                    var calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
-                    var otherMonth = true;
+                let calcedDate, otherMonth, pdate;
+                if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
+                    pdate = new pDate(this.datepicker.state.view.dateObject.startOf('month').valueOf());
+                    calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
+                    otherMonth = true;
                 }
-                else if ((rowIndex == 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
+                else if ((rowIndex === 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
-                    var calcedDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]);
-                    var otherMonth = false;
+                    calcedDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]);
+                    otherMonth = false;
                 }
                 else {
                     nextMonthListIndex += 1;
-                    var pdate = new pDate(this.datepicker.state.view.dateObject.endOf('month').valueOf());
-                    var calcedDate = pdate.add('days', nextMonthListIndex);
-                    var otherMonth = true;
+                    pdate = new pDate(this.datepicker.state.view.dateObject.endOf('month').valueOf());
+                    calcedDate = pdate.add('days', nextMonthListIndex);
+                    otherMonth = true;
                 }
                 calcedDate.formatPersian = this.datepicker.options.persianDigit;
                 outputList[rowIndex].push({
@@ -239,10 +323,14 @@ class View {
             enabled: this.datepicker.options.dayPicker.enabled && this.datepicker.state.viewMode == 'day',
             viewMode: this.datepicker.state.viewMode == 'day',
             list: outputList
-        }
-    };
+        };
+    }
 
-    getTimeViewModel() {
+    /**
+     * @private
+     * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridian: {title: (meridian|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridian|{enabled}|string|string), enabled: boolean}}}
+     */
+    _getTimeViewModel() {
         this.datepicker.state.view.dateObject.formatPersian = this.datepicker.options.persianDigit;
         return {
             enabled: this.datepicker.options.timePicker.enabled,
@@ -263,9 +351,13 @@ class View {
                 title: this.datepicker.state.view.dateObject.meridian,
                 enabled: this.datepicker.options.timePicker.meridian.enabled
             }
-        }
-    };
+        };
+    }
 
+    /**
+     * @param data
+     * @return {*}
+     */
     getViewModel(data) {
         return {
             plotId: '',
@@ -273,30 +365,38 @@ class View {
                 enabled: this.datepicker.options.navigator.enabled,
                 switch: {
                     enabled: true,
-                    text: this.getNavSwitchText(data)
+                    text: this._getNavSwitchText(data)
                 },
                 text: this.datepicker.options.navigator.text
             },
             selected: this.datepicker.state.selected,
-            time: this.getTimeViewModel(data),
-            days: this.getDayViewModel(data),
-            month: this.getMonthViewModel(data),
-            year: this.getYearViewModel(data),
+            time: this._getTimeViewModel(data),
+            days: this._getDayViewModel(data),
+            month: this._getMonthViewModel(data),
+            year: this._getYearViewModel(data),
             toolbox: this.datepicker.options.toolbox
-        }
-    };
+        };
+    }
 
+    /**
+     * @render datepicker view element
+     * @param data
+     */
     render(data) {
         debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(Template, this.getViewModel(data)));
         this.$container.empty().append(this.rendered);
-        this.afterRnder();
-    };
+        this.afterRender();
+    }
 
-    afterRnder() {
+    /**
+     * @desc do after render work like attache events
+     */
+    afterRender() {
         if (this.datepicker.navigator) {
             this.datepicker.navigator.liveAttach();
         }
     }
 }
+

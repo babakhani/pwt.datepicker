@@ -1,3 +1,6 @@
+/**
+ * @type {string}
+ */
 const Template = `
 <div id="plotId" class="datepicker-plot-area datepicker-plot-area-inline-view">
     {{#navigator.enabled}}

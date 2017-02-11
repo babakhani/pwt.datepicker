@@ -1,9 +1,23 @@
+/**
+ * Extend default config from user interred and do compatibility works
+ * @public
+ */
 class Options {
+
+    /**
+     * @param {object} options config passed when initialize
+     * @return {object}
+     * @todo remove jquery
+     */
     constructor(options) {
-        return this.compatibility($.extend(true, this, DefaultConfig, options));
+        return this._compatibility($.extend(true, this, Config, options));
     }
 
-    compatibility(options) {
+    /**
+     * @private
+     * @param options
+     */
+    _compatibility(options) {
         if (options.onlyTimePicker) {
             options.dayPicker.enabled = false;
             options.monthPicker.enabled = false;
@@ -11,17 +25,17 @@ class Options {
             options.timePicker.enabled = true;
         }
 
-        if (options.timePicker.hour.step == null) {
+        if (options.timePicker.hour.step === null) {
             options.timePicker.hour.step = options.timePicker.step;
         }
-        if (options.timePicker.minute.step == null) {
+        if (options.timePicker.minute.step === null) {
             options.timePicker.minute.step = options.timePicker.step;
         }
-        if (options.timePicker.second.step == null) {
+        if (options.timePicker.second.step === null) {
             options.timePicker.second.step = options.timePicker.step;
         }
 
-        if(options.dayPicker.enabled == false){
+        if (options.dayPicker.enabled === false) {
             options.onlySelectOnDate = false;
         }
 

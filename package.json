@@ -38,9 +38,9 @@
     "grunt-contrib-uglify ": "^0.1.0",
     "grunt-contrib-watch": "*",
     "grunt-jsdoc": "^0.5.7",
-    "jsdoc": "^3.2.0",
+    "esdoc": "*",
     "jshint": "^2.6.0",
-    "webpack": "^1.14.0"
+    "mocha": "*"
   },
   "dependencies": {
     "babel-polyfill": "^6.22.0",
@@ -53,8 +53,7 @@
   },
   "scripts": {
     "babel": "babel --watch new_source --out-file es5/plugin.js",
-    "test": "./node_modules/jshint/bin/jshint new_source/*.js",
-    "jslint": "jslint dist/js/persian-datepicker-0.5.0.js",
-    "test0": "./node_modules/jshint/bin/jshint dist/js/persian-datepicker-0.5.0.js"
+    "jshint": "./node_modules/jshint/bin/jshint new_source/*.js",
+    "doc": "esdoc --wtach"
   }
 }
