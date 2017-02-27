@@ -5,26 +5,26 @@
 class State {
 
     /**
-     * @param {Datepicker} datepicker
+     * @param {model} model
      * @return {State}
      */
-    constructor(datepicker) {
+    constructor(model) {
 
         /**
          * @type {object}
          */
-        this.datepicker = datepicker;
+        this.model = model;
 
         /**
          * @type {Boolean}
          */
-        this.filetredDate = (this.datepicker.options.minDate || this.datepicker.options.maxDate);
+        this.filetredDate = (this.model.options.minDate || this.model.options.maxDate);
 
         /**
          * @desc get generated view mode list from options object
          * @type {Array}
          */
-        this.viewModeList = this.datepicker.options._viewModeList;
+        this.viewModeList = this.model.options._viewModeList;
 
         /**
          * @desc view mode string day, month, year
@@ -32,13 +32,13 @@ class State {
          * @default day
          * @todo add time to view modes
          */
-        this.viewMode = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? datepicker.options.viewMode : this.viewModeList[0];
+        this.viewMode = (this.viewModeList.indexOf(model.options.viewMode) > 0) ? model.options.viewMode : this.viewModeList[0];
 
         /**
          * @desc view mode string index in view mode list
          * @type {number}
          */
-        this.viewModeIndex = (this.viewModeList.indexOf(datepicker.options.viewMode) > 0) ? this.viewModeList.indexOf(datepicker.options.viewMode) : 0; // defaul 'day'
+        this.viewModeIndex = (this.viewModeList.indexOf(model.options.viewMode) > 0) ? this.viewModeList.indexOf(model.options.viewMode) : 0; // defaul 'day'
 
 
         /**
@@ -97,7 +97,7 @@ class State {
             dateObject: null
         };
 
-        this._setFilterDate(this.datepicker.options.minDate, this.datepicker.options.maxDate);
+        this._setFilterDate(this.model.options.minDate, this.model.options.maxDate);
         return this;
     }
 
@@ -197,8 +197,8 @@ class State {
             this.view.second
         ]);
         this.selected.unixDate = this.selected.dateObject.valueOf();
-        this.datepicker.updateInput(this.selected.unixDate);
-        this.datepicker.options.onSelect(this.selected.unixDate);
+        this.model.updateInput(this.selected.unixDate);
+        this.model.options.onSelect(this.selected.unixDate);
         return this;
     }
 
@@ -290,7 +290,7 @@ class State {
         ]);
         this._syncViewModes(this.view.dateObject);
         this.view.unixDate = this.view.dateObject.valueOf();
-        this.datepicker.view.render(this.view);
+        this.model.view.render(this.view);
         return this;
     }
 

@@ -1,8 +1,7 @@
 /**
  *
- * @type {{initialValue: boolean, persianDigit: boolean, viewMode: string, format: boolean, formatter: ClassDatepicker.ClassConfig.formatter, altField: boolean, altFormat: string, altFieldFormatter: ClassDatepicker.ClassConfig.altFieldFormatter, minDate: null, maxDate: null, navigator: {enabled: boolean, text: {btnNextText: string, btnPrevText: string}, onNext: ClassDatepicker.ClassConfig.navigator.onNext, onPrev: ClassDatepicker.ClassConfig.navigator.onPrev, onSwitch: ClassDatepicker.ClassConfig.navigator.onSwitch}, toolbox: {enabled: boolean, text: {btnToday: string}, onToday: ClassDatepicker.ClassConfig.toolbox.onToday}, onlyTimePicker: boolean, onlySelectOnDate: boolean, checkDate: ClassDatepicker.ClassConfig.checkDate, checkMonth: ClassDatepicker.ClassConfig.checkMonth, checkYear: ClassDatepicker.ClassConfig.checkYear, timePicker: {enabled: boolean, step: number, hour: {enabled: boolean, step: null}, minute: {enabled: boolean, step: null}, second: {enabled: boolean, step: null}, meridian: {enabled: boolean}}, dayPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.dayPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.dayPicker.onSelect}, monthPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.monthPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.monthPicker.onSelect}, yearPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.yearPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.yearPicker.onSelect}, onSelect: ClassDatepicker.ClassConfig.onSelect, position: string, onShow: ClassDatepicker.ClassConfig.onShow, onHide: ClassDatepicker.ClassConfig.onHide, onToggle: Config.onToggle, onDestroy: Config.onDestroy, autoClose: boolean, observer: boolean, inputDelay: number}}
  * @member initialValue
- * @todo doc must fix
+
  */
 const Config = {
 
@@ -19,30 +18,23 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @description Acceptable value : day,month,year
-     * @property viewMode
      * @type {string}
      * @default day
-     * @version 0.6.0
      */
     'viewMode': 'day',
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @description the date format, combination of d, dd, m, mm, yy, yyy.
      * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
-     * @desc format
      * @type {boolean}
      * @default false
-     * @version 0.6.0
      */
-    'format': false,
+    'format': 'LLLL',
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc format value of input
      * @param unixDate
      * @returns {*}
@@ -56,9 +48,7 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @description An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class'
-     * @desc altField
      * @type {boolean}
      * @default false
      */
@@ -66,10 +56,8 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @description the date format, combination of d, dd, m, mm, yy, yyy.
      * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
-     * @desc altField
      * @type {string}
      * @default unix
      */
@@ -77,11 +65,9 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc format value of 'altField' input
      * @param unixDate
      * @returns {*}
-     * @version 0.6.0
      */
     'altFieldFormatter': function (unixDate) {
         var self = this;
@@ -101,7 +87,6 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc set min date on datepicker
      * @property minDate
      * @type {boolean}
@@ -110,7 +95,6 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc set max date on datepicker
      * @property maxDate
      * @type {boolean}
@@ -119,10 +103,7 @@ const Config = {
 
 
     /**
-     * @see ClassNavigator
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc navigator config object
-     * @property navigator
      * @type {object}
      * @default true
      */
@@ -182,13 +163,9 @@ const Config = {
 
 
     /**
-     * @see ClassToolbox
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc toolbox config object
-     * @property toolbox
      * @type {object}
      * @default true
-     * @deprecated 0.2.3
      */
     'toolbox': {
         'enabled': true,
@@ -202,16 +179,14 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc if true all pickers hide and just shpw timepicker
-     * @property justSelectOnDate
+     * @default false
      * @type {boolean}
      */
     'onlyTimePicker': false,
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc if true date select just by click on day in month grid
      * @property justSelectOnDate
      * @type {boolean}
@@ -220,9 +195,7 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc check date avalibility
-     * @property unix
      * @type {function}
      */
     'checkDate': function (unix) {
@@ -231,9 +204,7 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc check month avalibility
-     * @property month index
      * @type {function}
      */
     'checkMonth': function (month) {
@@ -242,9 +213,7 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc check year avalibility
-     * @property year
      * @type {function}
      */
     'checkYear': function (year) {
@@ -253,10 +222,7 @@ const Config = {
 
 
     /**
-     * @see ClassTimePicker
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc timepicker config object
-     * @property timePicker
      * @type {object}
      */
     'timePicker': {
@@ -281,10 +247,7 @@ const Config = {
 
 
     /**
-     * @see ClassDayPicker
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc dayPicker config object
-     * @property dayPicker
      * @type {object}
      */
     'dayPicker': {
@@ -292,8 +255,8 @@ const Config = {
         'titleFormat': 'YYYY MMMM',
         'titleFormatter': function (year, month) {
             var titleDate = new persianDate([year, month]);
-            titleDate.formatPersian = this.datepicker.options.persianDigit;
-            return titleDate.format(this.datepicker.options.dayPicker.titleFormat);
+            titleDate.formatPersian = this.model.options.persianDigit;
+            return titleDate.format(this.model.options.dayPicker.titleFormat);
         },
         'onSelect': function (selectedDayUnix) {
             debug('dayPicker Event: onSelect : ' + selectedDayUnix);
@@ -303,10 +266,7 @@ const Config = {
 
 
     /**
-     * @see ClassMonthPicker
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc monthPicker config object
-     * @property monthPicker
      * @type {object}
      */
     'monthPicker': {
@@ -314,8 +274,8 @@ const Config = {
         'titleFormat': 'YYYY',
         'titleFormatter': function (unix) {
             var titleDate = new persianDate(unix);
-            titleDate.formatPersian = this.datepicker.options.persianDigit;
-            return titleDate.format(this.datepicker.options.monthPicker.titleFormat);
+            titleDate.formatPersian = this.model.options.persianDigit;
+            return titleDate.format(this.model.options.monthPicker.titleFormat);
         },
         'onSelect': function (monthIndex) {
             debug('monthPicker Event: onSelect : ' + monthIndex);
@@ -324,10 +284,7 @@ const Config = {
 
 
     /**
-     * @see ClassYearPicker
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc yearPicker config object
-     * @property yearPicker
      * @type {object}
      */
     'yearPicker': {
@@ -337,9 +294,9 @@ const Config = {
             let remaining = parseInt(year / 12, 10) * 12;
             let startYear = new pDate([remaining]);
             let endYear = new pDate([remaining + 11]);
-            startYear.formatPersian = this.datepicker.options.persianDigit;
-            endYear.formatPersian = this.datepicker.options.persianDigit;
-            return startYear.format(this.datepicker.options.yearPicker.titleFormat) + "-" + endYear.format(this.datepicker.options.yearPicker.titleFormat);
+            startYear.formatPersian = this.model.options.persianDigit;
+            endYear.formatPersian = this.model.options.persianDigit;
+            return startYear.format(this.model.options.yearPicker.titleFormat) + "-" + endYear.format(this.model.options.yearPicker.titleFormat);
         },
         'onSelect': function (year) {
             debug('yearPicker Event: onSelect : ' + year);
@@ -348,7 +305,6 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc A function that takes current datepicker unixDate. It is called When Day Select.
      * @event
      * @param unixDate
@@ -357,22 +313,15 @@ const Config = {
         debug(this, 'datepicker Event: onSelect : ' + unixDate);
     },
 
-
     /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @description [x,y] , define a position of datepicker relative to input element.
-     * @property position
-     * @type {string|Array}
-     * @default auto
+     *
      */
     'position': 'auto',
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc A function that takes current datepicker instance. It is called just before the datepicker is displayed.
      * @event
-     * @param self
      */
     'onShow': function () {
         debug(this, 'dayPicker Event: onShow ');
@@ -380,7 +329,6 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc A function that takes current datepicker instance. It is called just before the datepicker Hide.
      * @event
      * @param self
@@ -405,14 +353,21 @@ const Config = {
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @description If true picker close When Select day
-     * @property autoClose
      * @type {boolean}
      * @default false
      */
     'autoClose': false,
 
+
+
+    /**
+     * @desc observer
+     * @type {boolean}
+     * @default false
+     * @deprecated
+     */
+    'observer': false,
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////// Under Implement ///////////////////////////////////////////////////////////////////////////////////////
@@ -423,18 +378,9 @@ const Config = {
 /////////// Un  implemented ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * @memberOf ClassDatepicker.ClassConfig
-     * @desc observer
-     * @type {boolean}
-     * @default false
-     * @deprecated
-     */
-    'observer': false,
 
 
     /**
-     * @memberOf ClassDatepicker.ClassConfig
      * @desc inputDelay
      * @type {number}
      * @default 800

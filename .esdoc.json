@@ -1,4 +1,5 @@
 {
+  "title": "Persian datepicker",
   "source": "./new_source",
   "destination": "./doc",
   "coverage": true,
@@ -6,16 +7,23 @@
     "public",
     "protected"
   ],
+  "manual": {
+    "globalIndex": true,
+    "index": "./README.md",
+    "configuration": ["./manual/configuration.md"],
+    "faq": ["./manual/faq.md"],
+    "changelog": ["./CHANGES.md"]
+  },
   "unexportIdentifier": true,
   "undocumentIdentifier": true,
   "experimentalProposal": {
-    "classProperties": false,
-    "objectRestSpread": false,
-    "decorators": false,
-    "doExpressions": false,
-    "functionBind": false,
-    "asyncGenerators": false,
-    "exportExtensions": false,
-    "dynamicImport": false
+    "classProperties": true,
+    "objectRestSpread": true,
+    "decorators": true,
+    "doExpressions": true,
+    "functionBind": true,
+    "asyncGenerators": true,
+    "exportExtensions": true,
+    "dynamicImport": true
   }
 }

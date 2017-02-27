@@ -9,7 +9,7 @@
     "bootstrap-datetimepicker",
     "persian-date"
   ],
-  "license": "MIT",
+  "license": "WTFPL",
   "author": "Reza Babakhani <babakhani.reza@gmail.com>",
   "contributors": [
     {
@@ -27,8 +27,11 @@
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
+    "babel-runtime": "^6.22.0",
     "coffee-script": "^1.9.2",
+    "esdoc": "*",
     "grunt": "0.4.4",
     "grunt-cli": "0.1.13",
     "grunt-contrib-concat": "^0.5.0",
@@ -38,22 +41,20 @@
     "grunt-contrib-uglify ": "^0.1.0",
     "grunt-contrib-watch": "*",
     "grunt-jsdoc": "^0.5.7",
-    "esdoc": "*",
+    "grunt-jsdoc-to-markdown": "^2.0.0",
+    "handlebars": "^4.0.6",
     "jshint": "^2.6.0",
     "mocha": "*"
   },
   "dependencies": {
-    "babel-polyfill": "^6.22.0",
-    "babel-runtime": "^6.22.0",
-    "handlebars": "^4.0.6",
     "jquery": ">=1.10.2",
-    "jslint": "^0.10.3",
     "mustache": "^2.3.0",
-    "persian-date": ">=0.1.8"
+    "persian-date": ">=0.1.8",
+    "simple-server": "^1.0.1"
   },
   "scripts": {
-    "babel": "babel --watch new_source --out-file es5/plugin.js",
-    "jshint": "./node_modules/jshint/bin/jshint new_source/*.js",
+    "babel": "babel --watch src/es6 --out-file src/js/persian-darepicker.js",
+    "jshint": "./node_modules/jshint/bin/jshint src/es6/*.js",
     "doc": "esdoc --wtach"
   }
 }

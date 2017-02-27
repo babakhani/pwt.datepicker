@@ -1,17 +1,36 @@
-'use strict';
 /**
- * @desc some date range list
- * @abstract
- * @global
- * @const
- * @todo move this to persin-date lib and remove from this project code repo
+ * @desc normal log
+ * @param input
  */
-var ClassDateRange = {
+const log = function (input) {
+    console.log(input);
+};
+
+/**
+ * @desc show debug messages if window.persianDatepickerDebug set as true
+ * @param elem
+ * @param input
+ */
+const debug = function (elem, input) {
+    if (window.persianDatepickerDebug) {
+        if (elem.constructor.name) {
+            console.log('Debug: ' + elem.constructor.name + ' : ' + input);
+        } else {
+            console.log('Debug: ' + input);
+        }
+
+    }
+};
+
+/**
+ */
+const ClassDateRange = {
     /**
      * @property monthRange
      */
-    monthRange: {
-        1: {
+    monthRange: [
+        {
+            index: 1,
             name: {
                 fa: "فروردین"
             },
@@ -19,7 +38,8 @@ var ClassDateRange = {
                 fa: "فرو"
             }
         },
-        2: {
+        {
+            index: 2,
             name: {
                 fa: "اردیبهشت"
             },
@@ -27,7 +47,8 @@ var ClassDateRange = {
                 fa: "ارد"
             }
         },
-        3: {
+        {
+            index: 3,
             name: {
                 fa: "خرداد"
             },
@@ -35,7 +56,8 @@ var ClassDateRange = {
                 fa: "خرد"
             }
         },
-        4: {
+        {
+            index: 4,
             name: {
                 fa: "تیر"
             },
@@ -43,7 +65,8 @@ var ClassDateRange = {
                 fa: "تیر"
             }
         },
-        5: {
+        {
+            index: 5,
             name: {
                 fa: "مرداد"
             },
@@ -51,7 +74,8 @@ var ClassDateRange = {
                 fa: "مرد"
             }
         },
-        6: {
+        {
+            index: 6,
             name: {
                 fa: "شهریور"
             },
@@ -59,7 +83,8 @@ var ClassDateRange = {
                 fa: "شهر"
             }
         },
-        7: {
+        {
+            index: 7,
             name: {
                 fa: "مهر"
             },
@@ -67,7 +92,8 @@ var ClassDateRange = {
                 fa: "مهر"
             }
         },
-        8: {
+        {
+            index: 8,
             name: {
                 fa: "آبان"
             },
@@ -76,7 +102,8 @@ var ClassDateRange = {
             }
 
         },
-        9: {
+        {
+            index: 9,
             name: {
                 fa: "آذر"
             },
@@ -84,7 +111,8 @@ var ClassDateRange = {
                 fa: "آذر"
             }
         },
-        10: {
+        {
+            index: 10,
             name: {
                 fa: "دی"
             },
@@ -92,7 +120,8 @@ var ClassDateRange = {
                 fa: "دی"
             }
         },
-        11: {
+        {
+            index: 11,
             name: {
                 fa: "بهمن"
             },
@@ -100,7 +129,8 @@ var ClassDateRange = {
                 fa: "بهم"
             }
         },
-        12: {
+        {
+            index: 12,
             name: {
                 fa: "اسفند"
             },
@@ -108,7 +138,7 @@ var ClassDateRange = {
                 fa: "اسف"
             }
         }
-    },
+    ],
 
 
     /**
@@ -154,8 +184,7 @@ var ClassDateRange = {
             abbr: {
                 fa: "چ"
             }
-        },
-        5: {
+        }, 5: {
             name: {
                 fa: "پنج شنبه"
             },

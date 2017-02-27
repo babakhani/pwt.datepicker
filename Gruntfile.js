@@ -58,18 +58,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        copy: {
-            main: {
-                files: [
-                    {
-                        expand: true,
-                        src: ['src/css/<%= pkg.name %>.css'],
-                        dest: 'dist/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.css'
-                    }
-                ]
-
-            }
-        },
         cssmin: {
             options: {
                 banner: fileBanner
@@ -77,28 +65,6 @@ module.exports = function (grunt) {
             combine: {
                 files: {
                     'dist/css/<%= pkg.name %>-<%= pkg.version %>.min.css': ['src/css/<%= pkg.name %>.css']
-                }
-            }
-        },
-        jsdoc: {
-            dist: {
-                src: 'src/js',
-                options: {
-                    destination: 'doc/<%= pkg.version %>',
-                    configure: 'doc/conf.json',
-                    template: 'doc/templates/default'
-                }
-            }
-        },
-        yuidoc: {
-            compile: {
-                name: '<%= pkg.name %>',
-                description: '<%= pkg.description %>',
-                version: '<%= pkg.version %>',
-                url: '<%= pkg.homepage %>',
-                options: {
-                    paths: ['src/js'],
-                    outdir: 'doc/yui/'
                 }
             }
         },
@@ -115,6 +81,12 @@ module.exports = function (grunt) {
                 files: ['src/js/*.js'],
                 tasks: ['jsdoc']
             }
+        },
+        jsdoc2md: {
+            oneOutputFile: {
+                src: 'src/es6/*.js',
+                dest: 'doc/documentation.md'
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-sass');
@@ -122,12 +94,19 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-jsdoc-to-markdown')
 
-    if (grunt.option("doc") === true) {
-        grunt.registerTask('default', ['jsdoc', 'watch']);
-    } else {
+    if (grunt.option("dev") === true) {
+        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'watch']);
+    }
+    else if (grunt.option("build") === true) {
+        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify']);
+    }
+    else if (grunt.option("doc") === true) {
+        grunt.registerTask('default', ['jsdoc2md']);
+    }
+    else {
         grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'watch']);
     }
 

@@ -1,12 +1,12 @@
 /**
  * Datepicker
  */
-class Datepicker {
+class Model {
 
     /**
-     * @param {Object} inputElement - Datepicker element
-     * @param {Object} options - Options passed by init method
-     * @return {{datepicker: Datepicker, state: State, selectDate: *, updateView: (*|updateView), show: show, hide: hide, toggle: toggle, destroy: destroy}}
+     *
+     * @param inputElement
+     * @param options
      */
     constructor(inputElement, options) {
 
@@ -14,7 +14,6 @@ class Datepicker {
         /**
          * @type {DateUtil} DateUtil - date helper class
          */
-
 
 
         /**
@@ -71,7 +70,6 @@ class Datepicker {
         this.state.setViewDateTime('unix', this.input.getOnInitState());
         if (this.options.initialValue) {
             this.state.setSelectedDateTime('unix', this.input.getOnInitState());
-            this.state.setViewDateTime('unix', this.input.getOnInitState());
         }
 
 
@@ -85,8 +83,15 @@ class Datepicker {
         return {
             'datepicker': this,
             'state': this.state,
+            get options() {
+                return that.options;
+            },
+            set options(inputOptions) {
+                that.options = new Options(inputOptions);
+                that.view.reRender();
+            },
             selectDate: this.selectDate,
-            updateView: this.updateView,
+            updateView: this.view.updateView,
             show: function () {
                 that.view.show();
                 that.options.onShow(that);

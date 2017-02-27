@@ -4,21 +4,25 @@
 class Input {
 
     /**
-     * @param {Datepicker} datepicker
+     * @param {Model} model
      * @param {Element} inputElement
      * @return {Input}
      */
-    constructor(datepicker, inputElement) {
+    constructor(model, inputElement) {
 
         /**
-         * @type {Datepicker} datepicker
+         * @type {Object} datepicker
          */
-        this.datepicker = datepicker;
+        this.model = model;
 
         /**
          * @type {Element} input element
          */
         this.elem = inputElement;
+
+        // if (this.model.options.observer) {
+        this.observe();
+        // }
 
         /**
          * @type {Number} initialUnix
@@ -28,6 +32,29 @@ class Input {
         return this;
     }
 
+
+    observe() {
+        let that = this;
+        let watch = function () {
+            var elem = $(this);
+            // Save current value of element
+            elem.data('oldVal', elem.val());
+            // Look for changes in the value
+            elem.bind("propertychange change click keyup input paste", function (event) {
+                // If value has changed...
+                if (elem.data('oldVal') != elem.val()) {
+                    // Updated stored value
+                    elem.data('oldVal', elem.val());
+                    log('value change: ' + elem.val());
+                    that.model.state.setViewDateTime('unix', elem.val());
+                    that.model.state.setSelectedDateTime('unix', elem.val());
+                }
+            });
+        };
+        $(this.elem).each(watch);
+        $(this.model.options.altField).each(watch);
+    }
+
     /**
      * @private
      * @desc attach events to input field
@@ -35,12 +62,12 @@ class Input {
     _attachInputElementEvents() {
         let that = this;
         $(this.elem).focus(function () {
-            that.datepicker.view.show();
+            that.model.view.show();
         });
         $(this.elem).blur(function (e) {
             // TODO: must fix
             // if ($(e.target).parents('#' + that.datepicker.view.id).length < 0) {
-            // that.datepicker.view.hide();
+            // that.model.view.hide();
             //}
         });
     }
@@ -52,7 +79,7 @@ class Input {
      * @todo remove jquery
      */
     getInputPosition() {
-        return $(this.elem).position();
+        return $(this.elem).offset();
     }
 
 
@@ -76,8 +103,8 @@ class Input {
      * @private
      */
     _updateAltField(unix) {
-        let value = this.datepicker.options.altFieldFormatter(unix);
-        $(this.datepicker.options.altField).val(value);
+        let value = this.model.options.altFieldFormatter(unix);
+        $(this.model.options.altField).val(value);
     }
 
 
@@ -88,7 +115,7 @@ class Input {
      * @private
      */
     _updateInputField(unix) {
-        let value = this.datepicker.options.formatter(unix);
+        let value = this.model.options.formatter(unix);
         $(this.elem).val(value);
     }
 

@@ -22,6 +22,8 @@ class Options {
             options.dayPicker.enabled = false;
             options.monthPicker.enabled = false;
             options.yearPicker.enabled = false;
+            options.navigator.enabled = false;
+            options.toolbox.enabled = false;
             options.timePicker.enabled = true;
         }
 

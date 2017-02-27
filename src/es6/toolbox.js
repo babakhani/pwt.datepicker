@@ -7,12 +7,12 @@ class Toolbox {
      * @param {Datepicker} datepicker
      * @return {Toolbox}
      */
-    constructor(datepicker) {
+    constructor(model) {
 
         /**
          * @type {Datepicker}
          */
-        this.datepicker = datepicker;
+        this.model = model;
         this._attachEvents();
         return this;
     }
@@ -23,9 +23,9 @@ class Toolbox {
     _attachEvents() {
         let that = this;
         $(document).on('click', '.btn-today', function () {
-            that.datepicker.state.setSelectedDateTime('unix', new Date().valueOf());
-            that.datepicker.state.setViewDateTime('unix', new Date().valueOf());
-            that.datepicker.options.toolbox.onToday();
+            that.model.state.setSelectedDateTime('unix', new Date().valueOf());
+            that.model.state.setViewDateTime('unix', new Date().valueOf());
+            that.model.options.toolbox.onToday();
         });
     }
 

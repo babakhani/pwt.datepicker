@@ -5,10 +5,10 @@ class View {
 
     /**
      *
-     * @param {Datepicker} datepicker
+     * @param {Datepicker} model
      * @return {View}
      */
-    constructor(datepicker) {
+    constructor(model) {
 
         /**
          * @type {number}
@@ -19,7 +19,7 @@ class View {
          *
          * @type {Datepicker}
          */
-        this.datepicker = datepicker;
+        this.model = model;
 
         /**
          *
@@ -41,13 +41,13 @@ class View {
          */
         this.id = `persianDateInstance-${parseInt(Math.random(100) * 1000)}`;
         let that = this;
-        if (this.datepicker.inputElement.nodeName === 'INPUT') {
+        if (this.model.inputElement.nodeName === 'INPUT') {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.$container.hide();
             this.setPickerBoxPosition();
         }
         else {
-            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.datepicker.inputElement);
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.model.inputElement);
         }
         return this;
     }
@@ -63,17 +63,17 @@ class View {
      * @desc set datepicker container element based on <input/> element position
      */
     setPickerBoxPosition() {
-        let inputPosition = this.datepicker.input.getInputPosition();
-        let inputSize = this.datepicker.input.getInputSize();
-        if (this.datepicker.options.position === "auto") {
+        let inputPosition = this.model.input.getInputPosition();
+        let inputSize = this.model.input.getInputSize();
+        if (this.model.options.position === "auto") {
             this.$container.css({
                 left: (inputPosition.left) + 'px',
                 top: (inputSize.height + inputPosition.top) + 'px'
             });
         } else {
             this.$container.css({
-                top: (this.datepicker.options.position[0] + inputPosition.left) + 'px',
-                left: (this.datepicker.options.position[1] + inputPosition.top) + 'px'
+                top: (this.model.options.position[0] + inputPosition.left) + 'px',
+                left: (this.model.options.position[1] + inputPosition.top) + 'px'
             });
         }
     }
@@ -83,6 +83,7 @@ class View {
      */
     show() {
         this.$container.show();
+        this.setPickerBoxPosition();
     }
 
     /**
@@ -107,14 +108,14 @@ class View {
      */
     _getNavSwitchText(data) {
         let output;
-        if (this.datepicker.state.viewMode == 'day') {
-            output = this.datepicker.options.dayPicker.titleFormatter.call(this, data.year, data.month);
+        if (this.model.state.viewMode == 'day') {
+            output = this.model.options.dayPicker.titleFormatter.call(this, data.year, data.month);
         }
-        else if (this.datepicker.state.viewMode == 'month') {
-            output = this.datepicker.options.monthPicker.titleFormatter.call(this, data.dateObject.valueOf());
+        else if (this.model.state.viewMode == 'month') {
+            output = this.model.options.monthPicker.titleFormatter.call(this, data.dateObject.valueOf());
         }
-        else if (this.datepicker.state.viewMode == 'year') {
-            output = this.datepicker.options.yearPicker.titleFormatter.call(this, data.year);
+        else if (this.model.state.viewMode == 'year') {
+            output = this.model.options.yearPicker.titleFormatter.call(this, data.year);
         }
         return output;
     }
@@ -126,9 +127,9 @@ class View {
      */
     checkYearAccess(year) {
         var output = true;
-        if (this.datepicker.state.filetredDate) {
-            var startYear = this.datepicker.state.filterDate.start.year;
-            var endYear = this.datepicker.state.filterDate.end.year;
+        if (this.model.state.filetredDate) {
+            var startYear = this.model.state.filterDate.start.year;
+            var endYear = this.model.state.filterDate.end.year;
             if (startYear <= year & year <= endYear) {
                 output = true;
             } else {
@@ -136,7 +137,7 @@ class View {
             }
         }
         if (output) {
-            return this.datepicker.options.checkYear(year);
+            return this.model.options.checkYear(year);
         }
     }
 
@@ -158,17 +159,17 @@ class View {
         let yearsModel = [];
         for (let i of list) {
             let yearStr = new pDate([i]);
-            yearStr.formatPersian = this.datepicker.options.persianDigit;
+            yearStr.formatPersian = this.model.options.persianDigit;
             yearsModel.push({
                 title: yearStr.format('YYYY'),
                 enabled: this.checkYearAccess(i),
                 dataYear: i,
-                selected: this.datepicker.state.selected.year == i
+                selected: this.model.state.selected.year == i
             });
         }
         return {
-            enabled: this.datepicker.options.yearPicker.enabled,
-            viewMode: this.datepicker.state.viewMode == 'year',
+            enabled: this.model.options.yearPicker.enabled,
+            viewMode: this.model.state.viewMode == 'year',
             list: yearsModel
         };
     }
@@ -180,12 +181,12 @@ class View {
      */
     checkMonthAccess(month) {
         var output = true,
-            y = this.datepicker.state.view.year;
-        if (this.datepicker.state.filetredDate) {
-            var startMonth = this.datepicker.state.filterDate.start.month,
-                endMonth = this.datepicker.state.filterDate.end.month,
-                startYear = this.datepicker.state.filterDate.start.year,
-                endYear = this.datepicker.state.filterDate.end.year;
+            y = this.model.state.view.year;
+        if (this.model.state.filetredDate) {
+            var startMonth = this.model.state.filterDate.start.month,
+                endMonth = this.model.state.filterDate.end.month,
+                startYear = this.model.state.filterDate.start.year,
+                endYear = this.model.state.filterDate.end.year;
             if (
                 (startYear == endYear && endYear == y && month >= startMonth && month <= endMonth)
                 |
@@ -202,7 +203,7 @@ class View {
             }
         }
         if (output) {
-            return this.datepicker.options.checkMonth(month, y);
+            return this.model.options.checkMonth(month, y);
         }
     }
 
@@ -216,14 +217,14 @@ class View {
             monthModel.push({
                 title: month.name.fa,
                 enabled: this.checkMonthAccess(month.index),
-                year: this.datepicker.state.view.year,
+                year: this.model.state.view.year,
                 dataMonth: month.index,
-                selected: DateUtil.isSameMonth(this.datepicker.state.selected.dateObject, new pDate([this.datepicker.state.view.year, month.index]))
+                selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new pDate([this.model.state.view.year, month.index]))
             });
         }
         return {
-            enabled: this.datepicker.options.monthPicker.enabled,
-            viewMode: this.datepicker.state.viewMode == 'month',
+            enabled: this.model.options.monthPicker.enabled,
+            viewMode: this.model.state.viewMode == 'month',
             list: monthModel
         };
     }
@@ -236,10 +237,10 @@ class View {
     checkDayAccess(unixtimespan) {
         var self = this,
             output = true;
-        self.minDate = this.datepicker.options.minDate;
-        self.maxDate = this.datepicker.options.maxDate;
+        self.minDate = this.model.options.minDate;
+        self.maxDate = this.model.options.maxDate;
 
-        if (self.datepicker.state.filetredDate) {
+        if (self.model.state.filetredDate) {
             if (self.minDate && self.maxDate) {
                 self.minDate = new pDate(self.minDate).startOf('day').valueOf();
                 self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
@@ -259,7 +260,7 @@ class View {
             }
         }
         if (output) {
-            return self.datepicker.options.checkDate(unixtimespan);
+            return self.model.options.checkDate(unixtimespan);
         }
     }
 
@@ -268,12 +269,12 @@ class View {
      * @return {object}
      */
     _getDayViewModel() {
-        if (this.datepicker.state.viewMode != 'day') {
+        if (this.model.state.viewMode != 'day') {
             return [];
         }
         // log('if you see this many time your code has performance issue')
-        const viewMonth = this.datepicker.state.view.month;
-        const viewYear = this.datepicker.state.view.year;
+        const viewMonth = this.model.state.view.month;
+        const viewYear = this.model.state.view.year;
         let pdateInstance = new persianDate();
         let daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
         var firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
@@ -293,26 +294,26 @@ class View {
             for (let [dayIndex, day] of daysRow.entries()) {
                 let calcedDate, otherMonth, pdate;
                 if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                    pdate = new pDate(this.datepicker.state.view.dateObject.startOf('month').valueOf());
+                    pdate = new pDate(this.model.state.view.dateObject.startOf('month').valueOf());
                     calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
                     otherMonth = true;
                 }
                 else if ((rowIndex === 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
-                    calcedDate = new pDate([this.datepicker.state.view.year, this.datepicker.state.view.month, daysListindex]);
+                    calcedDate = new pDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
                     otherMonth = false;
                 }
                 else {
                     nextMonthListIndex += 1;
-                    pdate = new pDate(this.datepicker.state.view.dateObject.endOf('month').valueOf());
+                    pdate = new pDate(this.model.state.view.dateObject.endOf('month').valueOf());
                     calcedDate = pdate.add('days', nextMonthListIndex);
                     otherMonth = true;
                 }
-                calcedDate.formatPersian = this.datepicker.options.persianDigit;
+                calcedDate.formatPersian = this.model.options.persianDigit;
                 outputList[rowIndex].push({
                     title: calcedDate.format('DD'),
                     dataUnix: calcedDate.valueOf(),
-                    selected: DateUtil.isSameDay(calcedDate, this.datepicker.state.selected.dateObject),
+                    selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -320,8 +321,8 @@ class View {
             }
         }
         return {
-            enabled: this.datepicker.options.dayPicker.enabled && this.datepicker.state.viewMode == 'day',
-            viewMode: this.datepicker.state.viewMode == 'day',
+            enabled: this.model.options.dayPicker.enabled && this.model.state.viewMode == 'day',
+            viewMode: this.model.state.viewMode == 'day',
             list: outputList
         };
     }
@@ -331,25 +332,25 @@ class View {
      * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridian: {title: (meridian|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridian|{enabled}|string|string), enabled: boolean}}}
      */
     _getTimeViewModel() {
-        this.datepicker.state.view.dateObject.formatPersian = this.datepicker.options.persianDigit;
+        this.model.state.view.dateObject.formatPersian = this.model.options.persianDigit;
         return {
-            enabled: this.datepicker.options.timePicker.enabled,
+            enabled: this.model.options.timePicker.enabled,
             hour: {
-                title: this.datepicker.state.view.dateObject.format('HH'),
-                enabled: this.datepicker.options.timePicker.hour.enabled
+                title: this.model.state.view.dateObject.format('HH'),
+                enabled: this.model.options.timePicker.hour.enabled
 
             },
             minute: {
-                title: this.datepicker.state.view.dateObject.format('mm'),
-                enabled: this.datepicker.options.timePicker.minute.enabled
+                title: this.model.state.view.dateObject.format('mm'),
+                enabled: this.model.options.timePicker.minute.enabled
             },
             second: {
-                title: this.datepicker.state.view.dateObject.format('ss'),
-                enabled: this.datepicker.options.timePicker.second.enabled
+                title: this.model.state.view.dateObject.format('ss'),
+                enabled: this.model.options.timePicker.second.enabled
             },
             meridian: {
-                title: this.datepicker.state.view.dateObject.meridian,
-                enabled: this.datepicker.options.timePicker.meridian.enabled
+                title: this.model.state.view.dateObject.meridian,
+                enabled: this.model.options.timePicker.meridian.enabled
             }
         };
     }
@@ -359,22 +360,27 @@ class View {
      * @return {*}
      */
     getViewModel(data) {
+
+        log('getViewModel')
+        log(this.model.options.navigator.enabled)
+
+
         return {
             plotId: '',
             navigator: {
-                enabled: this.datepicker.options.navigator.enabled,
+                enabled: this.model.options.navigator.enabled,
                 switch: {
                     enabled: true,
                     text: this._getNavSwitchText(data)
                 },
-                text: this.datepicker.options.navigator.text
+                text: this.model.options.navigator.text
             },
-            selected: this.datepicker.state.selected,
+            selected: this.model.state.selected,
             time: this._getTimeViewModel(data),
             days: this._getDayViewModel(data),
             month: this._getMonthViewModel(data),
             year: this._getYearViewModel(data),
-            toolbox: this.datepicker.options.toolbox
+            toolbox: this.model.options.toolbox
         };
     }
 
@@ -383,6 +389,7 @@ class View {
      * @param data
      */
     render(data) {
+        // log('Render')
         debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(Template, this.getViewModel(data)));
@@ -390,12 +397,18 @@ class View {
         this.afterRender();
     }
 
+
+    reRender() {
+        let data = this.model.state.view;
+        this.render(data);
+    }
+
     /**
      * @desc do after render work like attache events
      */
     afterRender() {
-        if (this.datepicker.navigator) {
-            this.datepicker.navigator.liveAttach();
+        if (this.model.navigator) {
+            this.model.navigator.liveAttach();
         }
     }
 }

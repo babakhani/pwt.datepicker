@@ -2,9 +2,17 @@
  * Persian-Datepicker
  * @author Reza Babakhani
  */
+
+/**
+ * @author babakhani.reza@gmail.com
+ * @description jquery plugin initializer
+ */
+
+var DateUtil = new DateUtil();
+
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
-        var args = Array.prototype.slice.call(arguments), output = this;
+        var args = Array.prototype.slice.call(arguments), output = null, self = this;
         if (!this) {
             $.error("Invalid selector");
         }
@@ -18,9 +26,10 @@
                 funcName = tempArg[0];
                 output = dp[funcName](tempArg[0]);
             } else {
-                this.pDatePicker = new Datepicker(this, options);
+                self.pDatePicker = new Model(this, options);
             }
         });
-        return output;
+        $(this).data('datepicker', self.pDatePicker);
+        return this;
     };
 })(jQuery);
