@@ -12,8 +12,9 @@
   -o-transition: $animate-duration;
   transition: $animate-duration;
 }
-.reset-curve{
-    -webkit-border-radius: 0px;
+
+.reset-curve {
+  -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
 }

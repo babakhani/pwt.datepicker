@@ -1,10 +1,9 @@
 /**
- * Datepicker
+ * Main datepicker object, manage every things
  */
 class Model {
 
     /**
-     *
      * @param inputElement
      * @param options
      */
@@ -12,50 +11,55 @@ class Model {
 
 
         /**
-         * @type {DateUtil} DateUtil - date helper class
+         * @desc DateUtil - date helper class
+         * @type {DateUtil}
          */
 
 
         /**
-         * @type {unix} [initialUnix=null]
+         * @desc [initialUnix=null]
+         * @type {unix}
          */
         this.initialUnix = null;
 
 
         /**
-         * @type {Object} [inputElement=inputElement]
+         * @desc inputElement=inputElement
+         * @type {Object}
          */
         this.inputElement = inputElement;
 
 
         /**
-         * @type {Options} handle works about config
+         * @desc handle works about config
+         * @type {Options}
          */
         this.options = new Options(options);
 
 
         /**
-         * @type {Input} handle works about input and alt field input element
+         * @desc handle works about input and alt field input element
+         * @type {Input}
          */
         this.input = new Input(this, inputElement);
 
 
         /**
-         *
-         * @type {State} set and get selected and view and other state
+         * @desc set and get selected and view and other state
+         * @type {State}
          */
         this.state = new State(this);
 
 
         /**
-         *
-         * @type {View} render datepicker view base on State
+         * @desc render datepicker view base on State
+         * @type {View}
          */
         this.view = new View(this);
 
         /**
-         *
-         * @type {Toolbox} handle works about toolbox
+         * @desc handle works about toolbox
+         * @type {Toolbox}
          */
         this.toolbox = new Toolbox(this);
 
@@ -74,8 +78,8 @@ class Model {
 
 
         /**
-         *
-         * @type {Navigator} handle navigation and dateoicker element events
+         * @desc handle navigation and dateoicker element events
+         * @type {Navigator}
          */
         this.navigator = new Navigator(this);
 

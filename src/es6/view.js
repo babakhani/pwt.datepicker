@@ -361,8 +361,8 @@ class View {
      */
     getViewModel(data) {
 
-        log('getViewModel')
-        log(this.model.options.navigator.enabled)
+        log('getViewModel');
+        log(this.model.options.navigator.enabled);
 
 
         return {

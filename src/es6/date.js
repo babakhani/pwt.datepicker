@@ -1,5 +1,6 @@
 /**
- * Date helper
+ * Date helper, some useful date method stored here
+ * @class
  */
 class DateUtil {
 
@@ -7,7 +8,8 @@ class DateUtil {
      * check if a date is same as b
      * @param dateA
      * @param dateB
-     * @return {*|boolean}
+     * @return {boolean}
+     * @static
      */
     isSameDay(dateA, dateB) {
         return dateA && dateB && dateA.date() == dateB.date() && dateA.year() == dateB.year() && dateA.month() == dateB.month();
@@ -18,7 +20,8 @@ class DateUtil {
      * @desc check if a month is same as b
      * @param {Date} dateA
      * @param {Date} dateB
-     * @return {*|boolean}
+     * @return {boolean}
+     * @static
      */
     isSameMonth(dateA, dateB) {
         return dateA && dateB && dateA.year() == dateB.year() && dateA.month() == dateB.month();
@@ -27,9 +30,10 @@ class DateUtil {
 
     /**
      * @desc normalize time, like check second if bigger than 60
-     * @param {String} key
-     * @param {Number} value
-     * @return {Number}
+     * @param {string} key
+     * @param {number} value
+     * @return {number}
+     * @static
      */
     normalizeTime(key, value) {
         let output = value;

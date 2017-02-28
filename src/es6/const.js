@@ -1,6 +1,7 @@
 /**
  * @desc normal log
  * @param input
+ * @example log('whoooooha')
  */
 const log = function (input) {
     console.log(input);
@@ -10,6 +11,8 @@ const log = function (input) {
  * @desc show debug messages if window.persianDatepickerDebug set as true
  * @param elem
  * @param input
+ * @example window.persianDatepickerDebug = true;
+ * debug('element','message');
  */
 const debug = function (elem, input) {
     if (window.persianDatepickerDebug) {

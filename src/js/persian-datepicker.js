@@ -1,10 +1,7 @@
 'use strict';
 
 /**
- *
- * @type {{initialValue: boolean, persianDigit: boolean, viewMode: string, format: boolean, formatter: ClassDatepicker.ClassConfig.formatter, altField: boolean, altFormat: string, altFieldFormatter: ClassDatepicker.ClassConfig.altFieldFormatter, minDate: null, maxDate: null, navigator: {enabled: boolean, text: {btnNextText: string, btnPrevText: string}, onNext: ClassDatepicker.ClassConfig.navigator.onNext, onPrev: ClassDatepicker.ClassConfig.navigator.onPrev, onSwitch: ClassDatepicker.ClassConfig.navigator.onSwitch}, toolbox: {enabled: boolean, text: {btnToday: string}, onToday: ClassDatepicker.ClassConfig.toolbox.onToday}, onlyTimePicker: boolean, onlySelectOnDate: boolean, checkDate: ClassDatepicker.ClassConfig.checkDate, checkMonth: ClassDatepicker.ClassConfig.checkMonth, checkYear: ClassDatepicker.ClassConfig.checkYear, timePicker: {enabled: boolean, step: number, hour: {enabled: boolean, step: null}, minute: {enabled: boolean, step: null}, second: {enabled: boolean, step: null}, meridian: {enabled: boolean}}, dayPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.dayPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.dayPicker.onSelect}, monthPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.monthPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.monthPicker.onSelect}, yearPicker: {enabled: boolean, titleFormat: string, titleFormatter: ClassDatepicker.ClassConfig.yearPicker.titleFormatter, onSelect: ClassDatepicker.ClassConfig.yearPicker.onSelect}, onSelect: ClassDatepicker.ClassConfig.onSelect, position: string, onShow: ClassDatepicker.ClassConfig.onShow, onHide: ClassDatepicker.ClassConfig.onHide, onToggle: Config.onToggle, onDestroy: Config.onDestroy, autoClose: boolean, observer: boolean, inputDelay: number}}
- * @member initialValue
-
+ * This is default config class
  */
 var Config = {
 
@@ -362,6 +359,7 @@ var Config = {
 /**
  * @desc normal log
  * @param input
+ * @example log('whoooooha')
  */
 var log = function log(input) {
     console.log(input);
@@ -371,6 +369,8 @@ var log = function log(input) {
  * @desc show debug messages if window.persianDatepickerDebug set as true
  * @param elem
  * @param input
+ * @example window.persianDatepickerDebug = true;
+ * debug('element','message');
  */
 var debug = function debug(elem, input) {
     if (window.persianDatepickerDebug) {
@@ -383,7 +383,6 @@ var debug = function debug(elem, input) {
 };
 
 /**
- * @type {{monthRange: [*], weekRange: {0: {name: {fa: string}, abbr: {fa: string}}, 1: {name: {fa: string}, abbr: {fa: string}}, 2: {name: {fa: string}, abbr: {fa: string}}, 3: {name: {fa: string}, abbr: {fa: string}}, 4: {name: {fa: string}, abbr: {fa: string}}, 5: {name: {fa: string}, abbr: {fa: string}}, 6: {name: {fa: string}, abbr: {fa: string}}}, persianDaysName: [*]}}
  */
 var ClassDateRange = {
     /**
@@ -561,7 +560,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Date helper
+ * Date helper, some useful date method stored here
+ * @class
  */
 var DateUtil = function () {
     function DateUtil() {
@@ -576,7 +576,8 @@ var DateUtil = function () {
          * check if a date is same as b
          * @param dateA
          * @param dateB
-         * @return {*|boolean}
+         * @return {boolean}
+         * @static
          */
         value: function isSameDay(dateA, dateB) {
             return dateA && dateB && dateA.date() == dateB.date() && dateA.year() == dateB.year() && dateA.month() == dateB.month();
@@ -586,7 +587,8 @@ var DateUtil = function () {
          * @desc check if a month is same as b
          * @param {Date} dateA
          * @param {Date} dateB
-         * @return {*|boolean}
+         * @return {boolean}
+         * @static
          */
 
     }, {
@@ -597,9 +599,10 @@ var DateUtil = function () {
 
         /**
          * @desc normalize time, like check second if bigger than 60
-         * @param {String} key
-         * @param {Number} value
-         * @return {Number}
+         * @param {string} key
+         * @param {number} value
+         * @return {number}
+         * @static
          */
 
     }, {
@@ -632,25 +635,25 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Do every thing about <input/> element like get default value, set new value, set alt field input and etc.
+ * Do every thing about input element like get default value, set new value, set alt field input and etc.
  */
 var Input = function () {
 
     /**
      * @param {Model} model
-     * @param {Element} inputElement
+     * @param {Element}
      * @return {Input}
      */
     function Input(model, inputElement) {
         _classCallCheck(this, Input);
 
         /**
-         * @type {Datepicker} datepicker
+         * @type {Object}
          */
         this.model = model;
 
         /**
-         * @type {Element} input element
+         * @type {Element}
          */
         this.elem = inputElement;
 
@@ -659,7 +662,7 @@ var Input = function () {
         // }
 
         /**
-         * @type {Number} initialUnix
+         * @type {Number}
          */
         this.initialUnix = null;
         this._attachInputElementEvents();
@@ -680,9 +683,11 @@ var Input = function () {
                     if (elem.data('oldVal') != elem.val()) {
                         // Updated stored value
                         elem.data('oldVal', elem.val());
+
                         log('value change: ' + elem.val());
-                        that.model.state.setViewDateTime('unix', elem.val());
-                        that.model.state.setSelectedDateTime('unix', elem.val());
+
+                        // that.model.state.setViewDateTime('unix', elem.val());
+                        // that.model.state.setSelectedDateTime('unix', elem.val());
                     }
                 });
             };
@@ -766,7 +771,6 @@ var Input = function () {
         }
 
         /**
-         * @desc
          * @param unix
          */
 
@@ -808,58 +812,61 @@ var Input = function () {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Datepicker
+ * Main datepicker object, manage every things
  */
 var Model =
 
 /**
- *
  * @param inputElement
  * @param options
- * @return {{datepicker: Model, state: State, selectDate: *, updateView: *, show: show, hide: hide, toggle: toggle, destroy: destroy}}
  */
 function Model(inputElement, options) {
   _classCallCheck(this, Model);
 
   /**
-   * @type {DateUtil} DateUtil - date helper class
+   * @desc DateUtil - date helper class
+   * @type {DateUtil}
    */
 
   /**
-   * @type {unix} [initialUnix=null]
+   * @desc [initialUnix=null]
+   * @type {unix}
    */
   this.initialUnix = null;
 
   /**
-   * @type {Object} [inputElement=inputElement]
+   * @desc inputElement=inputElement
+   * @type {Object}
    */
   this.inputElement = inputElement;
 
   /**
-   * @type {Options} handle works about config
+   * @desc handle works about config
+   * @type {Options}
    */
   this.options = new Options(options);
 
   /**
-   * @type {Input} handle works about input and alt field input element
+   * @desc handle works about input and alt field input element
+   * @type {Input}
    */
   this.input = new Input(this, inputElement);
 
   /**
-   *
-   * @type {State} set and get selected and view and other state
+   * @desc set and get selected and view and other state
+   * @type {State}
    */
   this.state = new State(this);
 
   /**
-   *
-   * @type {View} render datepicker view base on State
+   * @desc render datepicker view base on State
+   * @type {View}
    */
   this.view = new View(this);
 
   /**
-   *
-   * @type {Toolbox} handle works about toolbox
+   * @desc handle works about toolbox
+   * @type {Toolbox}
    */
   this.toolbox = new Toolbox(this);
 
@@ -877,8 +884,8 @@ function Model(inputElement, options) {
   }
 
   /**
-   *
-   * @type {Navigator} handle navigation and dateoicker element events
+   * @desc handle navigation and dateoicker element events
+   * @type {Navigator}
    */
   this.navigator = new Navigator(this);
 
@@ -1204,18 +1211,16 @@ var Options = function () {
 }();
 "use strict";
 
-/**
+/*
  * Persian-Datepicker
  * @author Reza Babakhani
  */
 
+var DateUtil = new DateUtil();
 /**
  * @author babakhani.reza@gmail.com
  * @description jquery plugin initializer
  */
-
-var DateUtil = new DateUtil();
-
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments),
@@ -1632,7 +1637,7 @@ var Toolbox = function () {
   }
 
   /**
-   * @private
+   * attach all events about toolbox
    */
 
 

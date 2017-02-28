@@ -14,7 +14,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 
 
 - [Documents](http://babakhani.github.io/PersianWebToolkit/datepicker)
-- [Demo](http://babakhani.github.io/PersianWebToolkit/demo)
+- [Demo](http://babakhani.github.io/PersianWebToolkit/datepcker/example)
 
 
 ## Table of content:

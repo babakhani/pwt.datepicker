@@ -18,7 +18,7 @@ class Toolbox {
     }
 
     /**
-     * @private
+     * attach all events about toolbox
      */
     _attachEvents() {
         let that = this;

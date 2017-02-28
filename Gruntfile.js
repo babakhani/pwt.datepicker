@@ -14,9 +14,9 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: [
-                    'es5/plugin.js',
-                    'bower_components/mustache.js/mustache.js',
-                    'bower_components/hamsterjs/hamster.js',
+                    'bower_components/mustache.js/mustache.min.js',
+                    'bower_components/hamsterjs/hamster.min.js',
+                    'src/js/persian-datepicker.js',
                 ],
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
             }
@@ -84,7 +84,12 @@ module.exports = function (grunt) {
         },
         jsdoc2md: {
             oneOutputFile: {
-                src: 'src/es6/*.js',
+                options: {
+                    'no-gfm': true,
+                    'heading-depth': 2,
+                    'example-lang': 'js'
+                },
+                src: 'src/es6/**.js',
                 dest: 'doc/documentation.md'
             }
         }
@@ -95,10 +100,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-jsdoc-to-markdown')
+    grunt.loadNpmTasks('grunt-jsdoc-to-markdown');
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'watch']);
+        grunt.registerTask('default', ['concat', 'sass', 'watch']);
     }
     else if (grunt.option("build") === true) {
         grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify']);

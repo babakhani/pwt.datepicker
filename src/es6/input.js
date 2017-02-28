@@ -1,22 +1,22 @@
 /**
- * Do every thing about <input/> element like get default value, set new value, set alt field input and etc.
+ * Do every thing about input element like get default value, set new value, set alt field input and etc.
  */
 class Input {
 
     /**
      * @param {Model} model
-     * @param {Element} inputElement
+     * @param {Element}
      * @return {Input}
      */
     constructor(model, inputElement) {
 
         /**
-         * @type {Object} datepicker
+         * @type {Object}
          */
         this.model = model;
 
         /**
-         * @type {Element} input element
+         * @type {Element}
          */
         this.elem = inputElement;
 
@@ -25,7 +25,7 @@ class Input {
         // }
 
         /**
-         * @type {Number} initialUnix
+         * @type {Number}
          */
         this.initialUnix = null;
         this._attachInputElementEvents();
@@ -45,9 +45,11 @@ class Input {
                 if (elem.data('oldVal') != elem.val()) {
                     // Updated stored value
                     elem.data('oldVal', elem.val());
+
                     log('value change: ' + elem.val());
-                    that.model.state.setViewDateTime('unix', elem.val());
-                    that.model.state.setSelectedDateTime('unix', elem.val());
+
+                    // that.model.state.setViewDateTime('unix', elem.val());
+                    // that.model.state.setSelectedDateTime('unix', elem.val());
                 }
             });
         };
@@ -121,7 +123,6 @@ class Input {
 
 
     /**
-     * @desc
      * @param unix
      */
     update(unix) {

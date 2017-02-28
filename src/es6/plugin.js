@@ -1,15 +1,15 @@
-/**
+/*
  * Persian-Datepicker
  * @author Reza Babakhani
  */
 
+
+
+var DateUtil = new DateUtil();
 /**
  * @author babakhani.reza@gmail.com
  * @description jquery plugin initializer
  */
-
-var DateUtil = new DateUtil();
-
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments), output = null, self = this;
