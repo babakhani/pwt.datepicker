@@ -15,7 +15,7 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     'bower_components/mustache.js/mustache.min.js',
-                    'bower_components/hamsterjs/hamster.min.js',
+                    'bower_components/hamsterjs/hamster.js',
                     'src/js/persian-datepicker.js',
                 ],
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
                     'heading-depth': 2,
                     'example-lang': 'js'
                 },
-                src: 'src/es6/**.js',
+                src: 'src/es6/config.js',
                 dest: 'doc/documentation.md'
             }
         }

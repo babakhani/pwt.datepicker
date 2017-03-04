@@ -127,6 +127,7 @@ class Navigator {
                 var timekey = $(this).data('time-key');
                 that.timeDown(timekey);
             });
+
         }
 
 

@@ -112,13 +112,13 @@ const Template = `
             <div class="divider meridian-divider"></div>
             <div class="divider meridian-divider"></div>
         {{/second.enabled}}
-        {{#meridian.enabled}}
-            <div class="meridian time-segment" data-time-key="meridian" >
-                <div class="up-btn" data-time-key="meridian">▲</div>
-                <input value="{{meridian.title}}" type="text" class="meridian-input">
-                <div class="down-btn" data-time-key="meridian">▼</div>
+        {{#meridiem.enabled}}
+            <div class="meridiem time-segment" data-time-key="meridian" >
+                <div class="up-btn" data-time-key="meridiem">▲</div>
+                <input value="{{meridiem.title}}" type="text" class="meridiem-input">
+                <div class="down-btn" data-time-key="meridiem">▼</div>
             </div>
-        {{/meridian.enabled}}
+        {{/meridiem.enabled}}
     </div>
     {{/enabled}}
     {{/time}}

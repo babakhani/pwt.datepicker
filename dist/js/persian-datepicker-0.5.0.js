@@ -5,6 +5,328 @@
  */
 ( function () {(function defineMustache(global,factory){if(typeof exports==="object"&&exports&&typeof exports.nodeName!=="string"){factory(exports)}else if(typeof define==="function"&&define.amd){define(["exports"],factory)}else{global.Mustache={};factory(global.Mustache)}})(this,function mustacheFactory(mustache){var objectToString=Object.prototype.toString;var isArray=Array.isArray||function isArrayPolyfill(object){return objectToString.call(object)==="[object Array]"};function isFunction(object){return typeof object==="function"}function typeStr(obj){return isArray(obj)?"array":typeof obj}function escapeRegExp(string){return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g,"\\$&")}function hasProperty(obj,propName){return obj!=null&&typeof obj==="object"&&propName in obj}var regExpTest=RegExp.prototype.test;function testRegExp(re,string){return regExpTest.call(re,string)}var nonSpaceRe=/\S/;function isWhitespace(string){return!testRegExp(nonSpaceRe,string)}var entityMap={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","/":"&#x2F;","`":"&#x60;","=":"&#x3D;"};function escapeHtml(string){return String(string).replace(/[&<>"'`=\/]/g,function fromEntityMap(s){return entityMap[s]})}var whiteRe=/\s*/;var spaceRe=/\s+/;var equalsRe=/\s*=/;var curlyRe=/\s*\}/;var tagRe=/#|\^|\/|>|\{|&|=|!/;function parseTemplate(template,tags){if(!template)return[];var sections=[];var tokens=[];var spaces=[];var hasTag=false;var nonSpace=false;function stripSpace(){if(hasTag&&!nonSpace){while(spaces.length)delete tokens[spaces.pop()]}else{spaces=[]}hasTag=false;nonSpace=false}var openingTagRe,closingTagRe,closingCurlyRe;function compileTags(tagsToCompile){if(typeof tagsToCompile==="string")tagsToCompile=tagsToCompile.split(spaceRe,2);if(!isArray(tagsToCompile)||tagsToCompile.length!==2)throw new Error("Invalid tags: "+tagsToCompile);openingTagRe=new RegExp(escapeRegExp(tagsToCompile[0])+"\\s*");closingTagRe=new RegExp("\\s*"+escapeRegExp(tagsToCompile[1]));closingCurlyRe=new RegExp("\\s*"+escapeRegExp("}"+tagsToCompile[1]))}compileTags(tags||mustache.tags);var scanner=new Scanner(template);var start,type,value,chr,token,openSection;while(!scanner.eos()){start=scanner.pos;value=scanner.scanUntil(openingTagRe);if(value){for(var i=0,valueLength=value.length;i<valueLength;++i){chr=value.charAt(i);if(isWhitespace(chr)){spaces.push(tokens.length)}else{nonSpace=true}tokens.push(["text",chr,start,start+1]);start+=1;if(chr==="\n")stripSpace()}}if(!scanner.scan(openingTagRe))break;hasTag=true;type=scanner.scan(tagRe)||"name";scanner.scan(whiteRe);if(type==="="){value=scanner.scanUntil(equalsRe);scanner.scan(equalsRe);scanner.scanUntil(closingTagRe)}else if(type==="{"){value=scanner.scanUntil(closingCurlyRe);scanner.scan(curlyRe);scanner.scanUntil(closingTagRe);type="&"}else{value=scanner.scanUntil(closingTagRe)}if(!scanner.scan(closingTagRe))throw new Error("Unclosed tag at "+scanner.pos);token=[type,value,start,scanner.pos];tokens.push(token);if(type==="#"||type==="^"){sections.push(token)}else if(type==="/"){openSection=sections.pop();if(!openSection)throw new Error('Unopened section "'+value+'" at '+start);if(openSection[1]!==value)throw new Error('Unclosed section "'+openSection[1]+'" at '+start)}else if(type==="name"||type==="{"||type==="&"){nonSpace=true}else if(type==="="){compileTags(value)}}openSection=sections.pop();if(openSection)throw new Error('Unclosed section "'+openSection[1]+'" at '+scanner.pos);return nestTokens(squashTokens(tokens))}function squashTokens(tokens){var squashedTokens=[];var token,lastToken;for(var i=0,numTokens=tokens.length;i<numTokens;++i){token=tokens[i];if(token){if(token[0]==="text"&&lastToken&&lastToken[0]==="text"){lastToken[1]+=token[1];lastToken[3]=token[3]}else{squashedTokens.push(token);lastToken=token}}}return squashedTokens}function nestTokens(tokens){var nestedTokens=[];var collector=nestedTokens;var sections=[];var token,section;for(var i=0,numTokens=tokens.length;i<numTokens;++i){token=tokens[i];switch(token[0]){case"#":case"^":collector.push(token);sections.push(token);collector=token[4]=[];break;case"/":section=sections.pop();section[5]=token[2];collector=sections.length>0?sections[sections.length-1][4]:nestedTokens;break;default:collector.push(token)}}return nestedTokens}function Scanner(string){this.string=string;this.tail=string;this.pos=0}Scanner.prototype.eos=function eos(){return this.tail===""};Scanner.prototype.scan=function scan(re){var match=this.tail.match(re);if(!match||match.index!==0)return"";var string=match[0];this.tail=this.tail.substring(string.length);this.pos+=string.length;return string};Scanner.prototype.scanUntil=function scanUntil(re){var index=this.tail.search(re),match;switch(index){case-1:match=this.tail;this.tail="";break;case 0:match="";break;default:match=this.tail.substring(0,index);this.tail=this.tail.substring(index)}this.pos+=match.length;return match};function Context(view,parentContext){this.view=view;this.cache={".":this.view};this.parent=parentContext}Context.prototype.push=function push(view){return new Context(view,this)};Context.prototype.lookup=function lookup(name){var cache=this.cache;var value;if(cache.hasOwnProperty(name)){value=cache[name]}else{var context=this,names,index,lookupHit=false;while(context){if(name.indexOf(".")>0){value=context.view;names=name.split(".");index=0;while(value!=null&&index<names.length){if(index===names.length-1)lookupHit=hasProperty(value,names[index]);value=value[names[index++]]}}else{value=context.view[name];lookupHit=hasProperty(context.view,name)}if(lookupHit)break;context=context.parent}cache[name]=value}if(isFunction(value))value=value.call(this.view);return value};function Writer(){this.cache={}}Writer.prototype.clearCache=function clearCache(){this.cache={}};Writer.prototype.parse=function parse(template,tags){var cache=this.cache;var tokens=cache[template];if(tokens==null)tokens=cache[template]=parseTemplate(template,tags);return tokens};Writer.prototype.render=function render(template,view,partials){var tokens=this.parse(template);var context=view instanceof Context?view:new Context(view);return this.renderTokens(tokens,context,partials,template)};Writer.prototype.renderTokens=function renderTokens(tokens,context,partials,originalTemplate){var buffer="";var token,symbol,value;for(var i=0,numTokens=tokens.length;i<numTokens;++i){value=undefined;token=tokens[i];symbol=token[0];if(symbol==="#")value=this.renderSection(token,context,partials,originalTemplate);else if(symbol==="^")value=this.renderInverted(token,context,partials,originalTemplate);else if(symbol===">")value=this.renderPartial(token,context,partials,originalTemplate);else if(symbol==="&")value=this.unescapedValue(token,context);else if(symbol==="name")value=this.escapedValue(token,context);else if(symbol==="text")value=this.rawValue(token);if(value!==undefined)buffer+=value}return buffer};Writer.prototype.renderSection=function renderSection(token,context,partials,originalTemplate){var self=this;var buffer="";var value=context.lookup(token[1]);function subRender(template){return self.render(template,context,partials)}if(!value)return;if(isArray(value)){for(var j=0,valueLength=value.length;j<valueLength;++j){buffer+=this.renderTokens(token[4],context.push(value[j]),partials,originalTemplate)}}else if(typeof value==="object"||typeof value==="string"||typeof value==="number"){buffer+=this.renderTokens(token[4],context.push(value),partials,originalTemplate)}else if(isFunction(value)){if(typeof originalTemplate!=="string")throw new Error("Cannot use higher-order sections without the original template");value=value.call(context.view,originalTemplate.slice(token[3],token[5]),subRender);if(value!=null)buffer+=value}else{buffer+=this.renderTokens(token[4],context,partials,originalTemplate)}return buffer};Writer.prototype.renderInverted=function renderInverted(token,context,partials,originalTemplate){var value=context.lookup(token[1]);if(!value||isArray(value)&&value.length===0)return this.renderTokens(token[4],context,partials,originalTemplate)};Writer.prototype.renderPartial=function renderPartial(token,context,partials){if(!partials)return;var value=isFunction(partials)?partials(token[1]):partials[token[1]];if(value!=null)return this.renderTokens(this.parse(value),context,partials,value)};Writer.prototype.unescapedValue=function unescapedValue(token,context){var value=context.lookup(token[1]);if(value!=null)return value};Writer.prototype.escapedValue=function escapedValue(token,context){var value=context.lookup(token[1]);if(value!=null)return mustache.escape(value)};Writer.prototype.rawValue=function rawValue(token){return token[1]};mustache.name="mustache.js";mustache.version="2.3.0";mustache.tags=["{{","}}"];var defaultWriter=new Writer;mustache.clearCache=function clearCache(){return defaultWriter.clearCache()};mustache.parse=function parse(template,tags){return defaultWriter.parse(template,tags)};mustache.render=function render(template,view,partials){if(typeof template!=="string"){throw new TypeError('Invalid template! Template should be a "string" '+'but "'+typeStr(template)+'" was given as the first '+"argument for mustache#render(template, view, partials)")}return defaultWriter.render(template,view,partials)};mustache.to_html=function to_html(template,view,partials,send){var result=mustache.render(template,view,partials);if(isFunction(send)){send(result)}else{return result}};mustache.escape=escapeHtml;mustache.Scanner=Scanner;mustache.Context=Context;mustache.Writer=Writer;return mustache});
 
+(function(window, document){
+'use strict';
+
+/**
+ * Hamster
+ * use this to create instances
+ * @returns {Hamster.Instance}
+ * @constructor
+ */
+var Hamster = function(element) {
+  return new Hamster.Instance(element);
+};
+
+// default event name
+Hamster.SUPPORT = 'wheel';
+
+// default DOM methods
+Hamster.ADD_EVENT = 'addEventListener';
+Hamster.REMOVE_EVENT = 'removeEventListener';
+Hamster.PREFIX = '';
+
+// until browser inconsistencies have been fixed...
+Hamster.READY = false;
+
+Hamster.Instance = function(element){
+  if (!Hamster.READY) {
+    // fix browser inconsistencies
+    Hamster.normalise.browser();
+
+    // Hamster is ready...!
+    Hamster.READY = true;
+  }
+
+  this.element = element;
+
+  // store attached event handlers
+  this.handlers = [];
+
+  // return instance
+  return this;
+};
+
+/**
+ * create new hamster instance
+ * all methods should return the instance itself, so it is chainable.
+ * @param   {HTMLElement}       element
+ * @returns {Hamster.Instance}
+ * @constructor
+ */
+Hamster.Instance.prototype = {
+  /**
+   * bind events to the instance
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
+   * @returns {Hamster.Instance}
+   */
+  wheel: function onEvent(handler, useCapture){
+    Hamster.event.add(this, Hamster.SUPPORT, handler, useCapture);
+
+    // handle MozMousePixelScroll in older Firefox
+    if (Hamster.SUPPORT === 'DOMMouseScroll') {
+      Hamster.event.add(this, 'MozMousePixelScroll', handler, useCapture);
+    }
+
+    return this;
+  },
+
+  /**
+   * unbind events to the instance
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
+   * @returns {Hamster.Instance}
+   */
+  unwheel: function offEvent(handler, useCapture){
+    // if no handler argument,
+    // unbind the last bound handler (if exists)
+    if (handler === undefined && (handler = this.handlers.slice(-1)[0])) {
+      handler = handler.original;
+    }
+
+    Hamster.event.remove(this, Hamster.SUPPORT, handler, useCapture);
+
+    // handle MozMousePixelScroll in older Firefox
+    if (Hamster.SUPPORT === 'DOMMouseScroll') {
+      Hamster.event.remove(this, 'MozMousePixelScroll', handler, useCapture);
+    }
+
+    return this;
+  }
+};
+
+Hamster.event = {
+  /**
+   * cross-browser 'addWheelListener'
+   * @param   {Instance}    hamster
+   * @param   {String}      eventName
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
+   */
+  add: function add(hamster, eventName, handler, useCapture){
+    // store the original handler
+    var originalHandler = handler;
+
+    // redefine the handler
+    handler = function(originalEvent){
+
+      if (!originalEvent) {
+        originalEvent = window.event;
+      }
+
+      // create a normalised event object,
+      // and normalise "deltas" of the mouse wheel
+      var event = Hamster.normalise.event(originalEvent),
+          delta = Hamster.normalise.delta(originalEvent);
+
+      // fire the original handler with normalised arguments
+      return originalHandler(event, delta[0], delta[1], delta[2]);
+
+    };
+
+    // cross-browser addEventListener
+    hamster.element[Hamster.ADD_EVENT](Hamster.PREFIX + eventName, handler, useCapture || false);
+
+    // store original and normalised handlers on the instance
+    hamster.handlers.push({
+      original: originalHandler,
+      normalised: handler
+    });
+  },
+
+  /**
+   * removeWheelListener
+   * @param   {Instance}    hamster
+   * @param   {String}      eventName
+   * @param   {Function}    handler
+   * @param   {Boolean}     useCapture
+   */
+  remove: function remove(hamster, eventName, handler, useCapture){
+    // find the normalised handler on the instance
+    var originalHandler = handler,
+        lookup = {},
+        handlers;
+    for (var i = 0, len = hamster.handlers.length; i < len; ++i) {
+      lookup[hamster.handlers[i].original] = hamster.handlers[i];
+    }
+    handlers = lookup[originalHandler];
+    handler = handlers.normalised;
+
+    // cross-browser removeEventListener
+    hamster.element[Hamster.REMOVE_EVENT](Hamster.PREFIX + eventName, handler, useCapture || false);
+
+    // remove original and normalised handlers from the instance
+    for (var h in hamster.handlers) {
+      if (hamster.handlers[h] == handlers) {
+        hamster.handlers.splice(h, 1);
+        break;
+      }
+    }
+  }
+};
+
+/**
+ * these hold the lowest deltas,
+ * used to normalise the delta values
+ * @type {Number}
+ */
+var lowestDelta,
+    lowestDeltaXY;
+
+Hamster.normalise = {
+  /**
+   * fix browser inconsistencies
+   */
+  browser: function normaliseBrowser(){
+    // detect deprecated wheel events
+    if (!('onwheel' in document || document.documentMode >= 9)) {
+      Hamster.SUPPORT = document.onmousewheel !== undefined ?
+                        'mousewheel' : // webkit and IE < 9 support at least "mousewheel"
+                        'DOMMouseScroll'; // assume remaining browsers are older Firefox
+    }
+
+    // detect deprecated event model
+    if (!window.addEventListener) {
+      // assume IE < 9
+      Hamster.ADD_EVENT = 'attachEvent';
+      Hamster.REMOVE_EVENT = 'detachEvent';
+      Hamster.PREFIX = 'on';
+    }
+
+  },
+
+  /**
+   * create a normalised event object
+   * @param   {Function}    originalEvent
+   * @returns {Object}      event
+   */
+   event: function normaliseEvent(originalEvent){
+    var event = {
+          // keep a reference to the original event object
+          originalEvent: originalEvent,
+          target: originalEvent.target || originalEvent.srcElement,
+          type: 'wheel',
+          deltaMode: originalEvent.type === 'MozMousePixelScroll' ? 0 : 1,
+          deltaX: 0,
+          delatZ: 0,
+          preventDefault: function(){
+            if (originalEvent.preventDefault) {
+              originalEvent.preventDefault();
+            } else {
+              originalEvent.returnValue = false;
+            }
+          },
+          stopPropagation: function(){
+            if (originalEvent.stopPropagation) {
+              originalEvent.stopPropagation();
+            } else {
+              originalEvent.cancelBubble = false;
+            }
+          }
+        };
+
+    // calculate deltaY (and deltaX) according to the event
+
+    // 'mousewheel'
+    if (originalEvent.wheelDelta) {
+      event.deltaY = - 1/40 * originalEvent.wheelDelta;
+    }
+    // webkit
+    if (originalEvent.wheelDeltaX) {
+      event.deltaX = - 1/40 * originalEvent.wheelDeltaX;
+    }
+
+    // 'DomMouseScroll'
+    if (originalEvent.detail) {
+      event.deltaY = originalEvent.detail;
+    }
+
+    return event;
+  },
+
+  /**
+   * normalise 'deltas' of the mouse wheel
+   * @param   {Function}    originalEvent
+   * @returns {Array}       deltas
+   */
+  delta: function normaliseDelta(originalEvent){
+    var delta = 0,
+      deltaX = 0,
+      deltaY = 0,
+      absDelta = 0,
+      absDeltaXY = 0,
+      fn;
+
+    // normalise deltas according to the event
+
+    // 'wheel' event
+    if (originalEvent.deltaY) {
+      deltaY = originalEvent.deltaY * -1;
+      delta  = deltaY;
+    }
+    if (originalEvent.deltaX) {
+      deltaX = originalEvent.deltaX;
+      delta  = deltaX * -1;
+    }
+
+    // 'mousewheel' event
+    if (originalEvent.wheelDelta) {
+      delta = originalEvent.wheelDelta;
+    }
+    // webkit
+    if (originalEvent.wheelDeltaY) {
+      deltaY = originalEvent.wheelDeltaY;
+    }
+    if (originalEvent.wheelDeltaX) {
+      deltaX = originalEvent.wheelDeltaX * -1;
+    }
+
+    // 'DomMouseScroll' event
+    if (originalEvent.detail) {
+      delta = originalEvent.detail * -1;
+    }
+
+    // Don't return NaN
+    if (delta === 0) {
+      return [0, 0, 0];
+    }
+
+    // look for lowest delta to normalize the delta values
+    absDelta = Math.abs(delta);
+    if (!lowestDelta || absDelta < lowestDelta) {
+      lowestDelta = absDelta;
+    }
+    absDeltaXY = Math.max(Math.abs(deltaY), Math.abs(deltaX));
+    if (!lowestDeltaXY || absDeltaXY < lowestDeltaXY) {
+      lowestDeltaXY = absDeltaXY;
+    }
+
+    // convert deltas to whole numbers
+    fn = delta > 0 ? 'floor' : 'ceil';
+    delta  = Math[fn](delta / lowestDelta);
+    deltaX = Math[fn](deltaX / lowestDeltaXY);
+    deltaY = Math[fn](deltaY / lowestDeltaXY);
+
+    return [delta, deltaX, deltaY];
+  }
+};
+
+if (typeof window.define === 'function' && window.define.amd) {
+  // AMD
+  window.define('hamster', [], function(){
+    return Hamster;
+  });
+} else if (typeof exports === 'object') {
+  // CommonJS
+  module.exports = Hamster;
+} else {
+  // Browser global
+  window.Hamster = Hamster;
+}
+
+})(window, window.document);
+
 'use strict';
 
 /**
@@ -690,9 +1012,11 @@ var Input = function () {
                     if (elem.data('oldVal') != elem.val()) {
                         // Updated stored value
                         elem.data('oldVal', elem.val());
+
                         log('value change: ' + elem.val());
-                        that.model.state.setViewDateTime('unix', elem.val());
-                        that.model.state.setSelectedDateTime('unix', elem.val());
+
+                        // that.model.state.setViewDateTime('unix', elem.val());
+                        // that.model.state.setSelectedDateTime('unix', elem.val());
                     }
                 });
             };

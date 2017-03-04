@@ -177,7 +177,7 @@ const Config = {
 
 
     /**
-     * @desc if true all pickers hide and just shpw timepicker
+     * @desc if true all pickers hide and just show timepicker
      * @default false
      * @type {boolean}
      */
@@ -224,22 +224,78 @@ const Config = {
      * @type {object}
      */
     'timePicker': {
-        'enabled': true,
+
+        /**
+         * @type boolean
+         */
+        'enabled': false,
+
+        /**
+         * @type number
+         */
         'step': 1,
+
+        /**
+         * @type object
+         */
         'hour': {
+
+            /**
+             * @type boolean
+             */
             'enabled': true,
-            'step': null // overwrite by parent step
+
+            /**
+             * @description overwrite by parent step
+             * @type boolean
+             */
+            'step': null
         },
+
+        /**
+         * @type object
+         */
         'minute': {
+
+            /**
+             * @type boolean
+             */
             'enabled': true,
-            'step': null // overwrite by parent step
+
+            /**
+             * @description overwrite by parent step
+             * @type boolean
+             */
+            'step': null
         },
+
+        /**
+         * @type object
+         */
         'second': {
+
+            /**
+             * @type boolean
+             */
             'enabled': true,
-            'step': null // overwrite by parent step
+
+            /**
+             * @description overwrite by parent step
+             * @type boolean
+             */
+            'step': null
         },
-        'meridian': {
-            'enabled': true
+
+        /**
+         * @type object
+         */
+        'meridiem': {
+
+            /**
+             * @type boolean
+             * @description if you set this as false, datepicker clock system moved to 24-hour system
+             */
+            'enabled': false
         }
     },
 

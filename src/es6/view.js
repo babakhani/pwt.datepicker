@@ -272,7 +272,7 @@ class View {
         if (this.model.state.viewMode != 'day') {
             return [];
         }
-        // log('if you see this many time your code has performance issue')
+        //log('if you see this many time your code has performance issue');
         const viewMonth = this.model.state.view.month;
         const viewYear = this.model.state.view.year;
         let pdateInstance = new persianDate();
@@ -329,16 +329,24 @@ class View {
 
     /**
      * @private
-     * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridian: {title: (meridian|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridian|{enabled}|string|string), enabled: boolean}}}
+     * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridiem: {title: (meridiem|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridiem|{enabled}|string|string), enabled: boolean}}}
      */
     _getTimeViewModel() {
+        let hourTitle;
         this.model.state.view.dateObject.formatPersian = this.model.options.persianDigit;
+
+
+        if (this.model.options.timePicker.meridiem.enabled) {
+            hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour) + '').toPersianDigit();
+        } else {
+            hourTitle = (this.model.state.view.hour + '').toPersianDigit();
+        }
+
         return {
             enabled: this.model.options.timePicker.enabled,
             hour: {
-                title: this.model.state.view.dateObject.format('HH'),
+                title: hourTitle,
                 enabled: this.model.options.timePicker.hour.enabled
-
             },
             minute: {
                 title: this.model.state.view.dateObject.format('mm'),
@@ -348,9 +356,9 @@ class View {
                 title: this.model.state.view.dateObject.format('ss'),
                 enabled: this.model.options.timePicker.second.enabled
             },
-            meridian: {
-                title: this.model.state.view.dateObject.meridian,
-                enabled: this.model.options.timePicker.meridian.enabled
+            meridiem: {
+                title: this.model.state.view.dateObject.format('a'),
+                enabled: this.model.options.timePicker.meridiem.enabled
             }
         };
     }
@@ -360,11 +368,6 @@ class View {
      * @return {*}
      */
     getViewModel(data) {
-
-        log('getViewModel');
-        log(this.model.options.navigator.enabled);
-
-
         return {
             plotId: '',
             navigator: {

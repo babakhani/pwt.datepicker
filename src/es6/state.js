@@ -79,7 +79,7 @@ class State {
             second: 0,
             unixDate: 0,
             dateObject: null,
-            meridian: 'AM'
+            meridiem: 'AM'
         };
 
         /**
@@ -322,7 +322,11 @@ class State {
                 this.view.date = value;
                 break;
             case 'hour':
-                this.view.hour = value;
+                if (self.model.options.timePicker.meridiem.enabled) {
+                    this.view.hour = DateUtil.convert12hTo24(value, self.view.meridiem);
+                } else {
+                    this.view.hour = value;
+                }
                 break;
             case 'minute':
                 this.view.minute = value;
@@ -330,8 +334,25 @@ class State {
             case 'second':
                 this.view.second = value;
                 break;
+            case 'meridiem':
+                self.meridiemToggle();
+                self.setViewDateTime('hour', DateUtil.convertAMtoPM(self.view.hour, self.view.meridiem));
+                return false;
+                break;
         }
         this._setViewDateTimeUnix();
         return this;
     }
+
+
+    meridiemToggle() {
+        var self = this;
+        if (self.view.meridiem === 'AM') {
+            self.view.meridiem = 'PM';
+        } else if (self.view.meridiem === 'PM') {
+            self.view.meridiem = 'AM';
+        }
+
+    }
+
 }

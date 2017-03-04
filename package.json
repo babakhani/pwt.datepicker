@@ -54,6 +54,7 @@
     "jshint": "./node_modules/jshint/bin/jshint src/es6/*.js",
     "doc": "grunt --doc",
     "build": "grunt --build",
+    "serve": "babel --watch src/es6 --out-file src/js/persian-datepicker.js & simple-server 3000",
     "dev": "grunt --dev"
   }
 }
