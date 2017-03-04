@@ -4,14 +4,14 @@
 const Config = {
 
     /**
-     * @type Boolean
+     * @type boolean
      * @default true
      */
     'initialValue': true,
 
 
     /**
-     * @type Boolean
+     * @type boolean
      * @default true
      */
     'persianDigit': true,
@@ -137,6 +137,20 @@ const Config = {
          * @default true
          */
         'enabled': true,
+
+        /**
+         *
+         * @type object
+         * @description scroll navigation options
+         */
+        'scroll': {
+
+            /**
+             * @type boolean
+             * @default true
+             */
+            'enabled': true
+        },
 
 
         /**

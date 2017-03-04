@@ -26,29 +26,33 @@ class Navigator {
      * @todo attach as a live way
      */
     liveAttach() {
-        var that = this;
-        let gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
-        Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
-            if (delta > 0) {
-                that.model.state.navigate('next');
-            } else {
-                that.model.state.navigate('prev');
-            }
-            event.preventDefault();
-        });
 
-        if (this.model.options.timePicker.enabled) {
-            let timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
-            Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
-                let $target = $(event.target);
-                let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
+        // Check options
+        if (this.model.options.navigator.scroll.enabled) {
+            var that = this;
+            let gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
+            Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
                 if (delta > 0) {
-                    that.timeUp(key);
+                    that.model.state.navigate('next');
                 } else {
-                    that.timeDown(key);
+                    that.model.state.navigate('prev');
                 }
                 event.preventDefault();
             });
+
+            if (this.model.options.timePicker.enabled) {
+                let timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
+                Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
+                    let $target = $(event.target);
+                    let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
+                    if (delta > 0) {
+                        that.timeUp(key);
+                    } else {
+                        that.timeDown(key);
+                    }
+                    event.preventDefault();
+                });
+            }
         }
     }
 

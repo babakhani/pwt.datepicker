@@ -6,13 +6,13 @@
 var Config = {
 
   /**
-   * @type Boolean
+   * @type boolean
    * @default true
    */
   'initialValue': true,
 
   /**
-   * @type Boolean
+   * @type boolean
    * @default true
    */
   'persianDigit': true,
@@ -128,6 +128,20 @@ var Config = {
      * @default true
      */
     'enabled': true,
+
+    /**
+     *
+     * @type object
+     * @description scroll navigation options
+     */
+    'scroll': {
+
+      /**
+       * @type boolean
+       * @default true
+       */
+      'enabled': true
+    },
 
     /**
      * @description navigator text config object
@@ -952,6 +966,7 @@ var Input = function () {
                     if (elem.data('oldVal') != elem.val()) {
                         // Updated stored value
                         elem.data('oldVal', elem.val());
+
                         // that.model.state.setViewDateTime('unix', elem.val());
                         // that.model.state.setSelectedDateTime('unix', elem.val());
                     }
@@ -1228,29 +1243,33 @@ var Navigator = function () {
     _createClass(Navigator, [{
         key: 'liveAttach',
         value: function liveAttach() {
-            var that = this;
-            var gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
-            Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
-                if (delta > 0) {
-                    that.model.state.navigate('next');
-                } else {
-                    that.model.state.navigate('prev');
-                }
-                event.preventDefault();
-            });
 
-            if (this.model.options.timePicker.enabled) {
-                var timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
-                Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
-                    var $target = $(event.target);
-                    var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
+            // Check options
+            if (this.model.options.navigator.scroll.enabled) {
+                var that = this;
+                var gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
+                Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
                     if (delta > 0) {
-                        that.timeUp(key);
+                        that.model.state.navigate('next');
                     } else {
-                        that.timeDown(key);
+                        that.model.state.navigate('prev');
                     }
                     event.preventDefault();
                 });
+
+                if (this.model.options.timePicker.enabled) {
+                    var timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
+                    Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
+                        var $target = $(event.target);
+                        var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
+                        if (delta > 0) {
+                            that.timeUp(key);
+                        } else {
+                            that.timeDown(key);
+                        }
+                        event.preventDefault();
+                    });
+                }
             }
         }
 

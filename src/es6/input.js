@@ -45,6 +45,7 @@ class Input {
                 if (elem.data('oldVal') != elem.val()) {
                     // Updated stored value
                     elem.data('oldVal', elem.val());
+
                     // that.model.state.setViewDateTime('unix', elem.val());
                     // that.model.state.setSelectedDateTime('unix', elem.val());
                 }
