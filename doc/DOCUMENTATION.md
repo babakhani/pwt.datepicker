@@ -6,8 +6,8 @@ This is default config class
 **Kind**: global constant  
 
 * [Config](#Config)
-    * [.initialValue](#Config.initialValue) : <code>Boolean</code>
-    * [.persianDigit](#Config.persianDigit) : <code>Boolean</code>
+    * [.initialValue](#Config.initialValue) : <code>boolean</code>
+    * [.persianDigit](#Config.persianDigit) : <code>boolean</code>
     * [.viewMode](#Config.viewMode) : <code>string</code>
     * [.format](#Config.format) : <code>boolean</code>
     * [.altField](#Config.altField) : <code>boolean</code>
@@ -16,6 +16,8 @@ This is default config class
     * [.maxDate](#Config.maxDate) : <code>Date</code>
     * [.navigator](#Config.navigator) : <code>object</code>
         * [.enabled](#Config.navigator.enabled) : <code>boolean</code>
+        * [.scroll](#Config.navigator.scroll) : <code>object</code>
+            * [.enabled](#Config.navigator.scroll.enabled) : <code>boolean</code>
         * [.text](#Config.navigator.text)
             * [.btnNextText](#Config.navigator.text.btnNextText)
             * [.btnPrevText](#Config.navigator.text.btnPrevText)
@@ -75,12 +77,12 @@ This is default config class
 
 <a name="Config.initialValue"></a>
 
-### Config.initialValue : <code>Boolean</code>
+### Config.initialValue : <code>boolean</code>
 **Kind**: static property of <code>[Config](#Config)</code>  
 **Default**: <code>true</code>  
 <a name="Config.persianDigit"></a>
 
-### Config.persianDigit : <code>Boolean</code>
+### Config.persianDigit : <code>boolean</code>
 **Kind**: static property of <code>[Config](#Config)</code>  
 **Default**: <code>true</code>  
 <a name="Config.viewMode"></a>
@@ -165,6 +167,8 @@ navigator config object
 
 * [.navigator](#Config.navigator) : <code>object</code>
     * [.enabled](#Config.navigator.enabled) : <code>boolean</code>
+    * [.scroll](#Config.navigator.scroll) : <code>object</code>
+        * [.enabled](#Config.navigator.scroll.enabled) : <code>boolean</code>
     * [.text](#Config.navigator.text)
         * [.btnNextText](#Config.navigator.text.btnNextText)
         * [.btnPrevText](#Config.navigator.text.btnPrevText)
@@ -178,6 +182,17 @@ navigator config object
 Enable or Disable dayPicker
 
 **Kind**: static property of <code>[navigator](#Config.navigator)</code>  
+**Default**: <code>true</code>  
+<a name="Config.navigator.scroll"></a>
+
+#### navigator.scroll : <code>object</code>
+scroll navigation options
+
+**Kind**: static property of <code>[navigator](#Config.navigator)</code>  
+<a name="Config.navigator.scroll.enabled"></a>
+
+##### scroll.enabled : <code>boolean</code>
+**Kind**: static property of <code>[scroll](#Config.navigator.scroll)</code>  
 **Default**: <code>true</code>  
 <a name="Config.navigator.text"></a>
 

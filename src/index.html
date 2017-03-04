@@ -19,6 +19,21 @@
     </div>
 </div>
 <div class="col-xs-12">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+            <input id="normalAlt" value="2016/12/10 12:20" class="col-xs-6"/>
+            <br/>
+            <br/>
+            <input id="normal">
+            </input>
+        </div>
+    </div>
+
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Panel title</h3>
@@ -31,6 +46,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/mustache.js/mustache.js"></script>
@@ -40,6 +57,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         window.persianDatepickerDebug = false;
+
+        $('#normal').persianDatepicker();
+
         window.pd = $("#inline").persianDatepicker({
 //            observer: true,
 //            // Done and tested

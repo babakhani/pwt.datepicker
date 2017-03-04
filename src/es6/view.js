@@ -395,7 +395,7 @@ class View {
         // log('Render')
         debug(this, 'render');
         Mustache.parse(Template);
-        this.rendered = $(Mustache.render(Template, this.getViewModel(data)));
+        this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
         this.$container.empty().append(this.rendered);
         this.afterRender();
     }

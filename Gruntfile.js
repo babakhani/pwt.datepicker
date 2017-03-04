@@ -90,7 +90,7 @@ module.exports = function (grunt) {
                     'example-lang': 'js'
                 },
                 src: 'src/es6/config.js',
-                dest: 'doc/documentation.md'
+                dest: 'doc/OPTIONS.md'
             }
         }
     });

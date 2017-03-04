@@ -18,6 +18,10 @@ class Options {
      * @param options
      */
     _compatibility(options) {
+        if (!options.template) {
+            options.template = Template;
+        }
+
         if (options.onlyTimePicker) {
             options.dayPicker.enabled = false;
             options.monthPicker.enabled = false;
