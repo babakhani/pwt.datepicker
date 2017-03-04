@@ -5,12 +5,14 @@ const Config = {
 
     /**
      * @type Boolean
+     * @default true
      */
     'initialValue': true,
 
 
     /**
      * @type Boolean
+     * @default true
      */
     'persianDigit': true,
 
@@ -18,7 +20,7 @@ const Config = {
     /**
      * @description Acceptable value : day,month,year
      * @type {string}
-     * @default day
+     * @default 'day'
      */
     'viewMode': 'day',
 
@@ -27,15 +29,21 @@ const Config = {
      * @description the date format, combination of d, dd, m, mm, yy, yyy.
      * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
      * @type {boolean}
-     * @default false
+     * @default 'LLLL'
      */
     'format': 'LLLL',
 
 
     /**
-     * @desc format value of input
+     * @description format value of input
      * @param unixDate
-     * @returns {*}
+     * @default function
+     * @example function (unixDate) {
+     *      var self = this;
+     *      var pdate = new persianDate(unixDate);
+     *      pdate.formatPersian = this.persianDigit;
+     *      return pdate.format(self.format);
+     *  }
      */
     'formatter': function (unixDate) {
         var self = this;
@@ -57,23 +65,38 @@ const Config = {
      * @description the date format, combination of d, dd, m, mm, yy, yyy.
      * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
      * @type {string}
-     * @default unix
+     * @default 'unix'
      */
     'altFormat': 'unix',
 
 
     /**
-     * @desc format value of 'altField' input
+     * @description format value of 'altField' input
      * @param unixDate
-     * @returns {*}
+     * @default function
+     * @example function (unixDate) {
+     *      var self = this;
+     *      var thisAltFormat = self.altFormat.toLowerCase();
+     *      if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
+     *          return new Date(unixDate);
+     *      }
+     *      if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
+     *          return unixDate;
+     *      }
+     *      else {
+     *          var pd = new persianDate(unixDate);
+     *          pd.formatPersian = this.persianDigit;
+     *          return pd.format(self.altFormat);
+     *      }
+     *  }
      */
     'altFieldFormatter': function (unixDate) {
         var self = this;
         var thisAltFormat = self.altFormat.toLowerCase();
-        if (thisAltFormat === "gregorian" || thisAltFormat === "g") {
+        if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
             return new Date(unixDate);
         }
-        if (thisAltFormat === "unix" || thisAltFormat === "u") {
+        if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
             return unixDate;
         }
         else {
@@ -85,116 +108,154 @@ const Config = {
 
 
     /**
-     * @desc set min date on datepicker
+     * @description set min date on datepicker
      * @property minDate
-     * @type {boolean}
+     * @type Date
+     * @default null
      */
     'minDate': null,
 
 
     /**
-     * @desc set max date on datepicker
+     * @description set max date on datepicker
      * @property maxDate
-     * @type {boolean}
+     * @type Date
+     * @default null
      */
     'maxDate': null,
 
 
     /**
-     * @desc navigator config object
+     * @description navigator config object
      * @type {object}
      * @default true
      */
     'navigator': {
         /**
-         * @desc Enable or Disable dayPicker
+         * @description Enable or Disable dayPicker
+         * @type boolean
+         * @default true
          */
         'enabled': true,
 
 
         /**
-         * @desc navigator text config object
+         * @description navigator text config object
          */
         'text': {
             /**
-             * @desc text of next btn
+             * @description text of next btn
+             * @default '<'
              */
-            'btnNextText': "<",
+            'btnNextText': '<',
 
 
             /**
-             * @desc text of prev btn
+             * @description text of prev btn
+             * @default: '>'
              */
-            'btnPrevText': ">"
+            'btnPrevText': '>'
         },
 
 
         /**
-         * @desc Trigger When Next button clicked
+         * @description Trigger When Next button clicked
          * @event
          * @param navigator
+         * @example function (navigator) {
+         *      //log('navigator next ');
+         *  }
          */
         'onNext': function (navigator) {
-            //log("navigator next ");
+            //log('navigator next ');
         },
 
 
         /**
-         * @desc Trigger When Prev button clicked
+         * @description Trigger When Prev button clicked
          * @event
          * @param navigator
+         * @example function (navigator) {
+         *      //log('navigator prev ');
+         *  }
          */
         'onPrev': function (navigator) {
-            //log("navigator prev ");
+            //log('navigator prev ');
         },
 
 
         /**
-         * @desc Trigger When Switch view button clicked
+         * @description Trigger When Switch view button clicked
          * @event
          * @param navigator
+         * @example function (state) {
+                // console.log('navigator switch ');
+         *  }
          */
         'onSwitch': function (state) {
-            // console.log("navigator switch ");
+            // console.log('navigator switch ');
         }
     },
 
 
     /**
-     * @desc toolbox config object
+     * @description toolbox config object
      * @type {object}
      * @default true
      */
     'toolbox': {
+
+        /**
+         * @type boolean
+         * @default true
+         */
         'enabled': true,
+
+        /**
+         * @type object
+         */
         'text': {
-            btnToday: "امروز"
+
+            /**
+             * @type string
+             * @default 'امروز'
+             */
+            btnToday: 'امروز'
         },
+
+        /**
+         * @event
+         * @param toolbox
+         * @example function (toolbox) {
+         *      //log('toolbox today btn');
+         *  }
+         */
         onToday: function (toolbox) {
-            //log("toolbox today btn");
+            //log('toolbox today btn');
         }
     },
 
 
     /**
-     * @desc if true all pickers hide and just show timepicker
+     * @description if true all pickers hide and just show timepicker
      * @default false
-     * @type {boolean}
+     * @type boolean
      */
     'onlyTimePicker': false,
 
 
     /**
-     * @desc if true date select just by click on day in month grid
+     * @description if true date select just by click on day in month grid
      * @property justSelectOnDate
-     * @type {boolean}
+     * @type boolean
+     * @default: true
      */
     'onlySelectOnDate': true,
 
 
     /**
-     * @desc check date avalibility
-     * @type {function}
+     * @description check date avalibility
+     * @type function
      */
     'checkDate': function (unix) {
         return true;
@@ -202,7 +263,7 @@ const Config = {
 
 
     /**
-     * @desc check month avalibility
+     * @description check month avalibility
      * @type {function}
      */
     'checkMonth': function (month) {
@@ -211,7 +272,7 @@ const Config = {
 
 
     /**
-     * @desc check year avalibility
+     * @description check year avalibility
      * @type {function}
      */
     'checkYear': function (year) {
@@ -220,7 +281,7 @@ const Config = {
 
 
     /**
-     * @desc timepicker config object
+     * @description timepicker config object
      * @type {object}
      */
     'timePicker': {
@@ -301,17 +362,38 @@ const Config = {
 
 
     /**
-     * @desc dayPicker config object
+     * @description dayPicker config object
      * @type {object}
      */
     'dayPicker': {
+
+        /**
+         * @type boolean
+         * @default true
+         */
         'enabled': true,
+
+        /**
+         * @type string
+         * @default 'YYYY MMMM'
+         */
         'titleFormat': 'YYYY MMMM',
+
+        /**
+         * @param year
+         * @param month
+         * @return {*}
+         */
         'titleFormatter': function (year, month) {
             var titleDate = new persianDate([year, month]);
             titleDate.formatPersian = this.model.options.persianDigit;
             return titleDate.format(this.model.options.dayPicker.titleFormat);
         },
+
+        /**
+         * @event
+         * @param selectedDayUnix
+         */
         'onSelect': function (selectedDayUnix) {
             debug('dayPicker Event: onSelect : ' + selectedDayUnix);
         }
@@ -320,17 +402,37 @@ const Config = {
 
 
     /**
-     * @desc monthPicker config object
+     * @description monthPicker config object
      * @type {object}
      */
     'monthPicker': {
+
+        /**
+         * @type boolean
+         * @default true
+         */
         'enabled': true,
+
+        /**
+         * @type string
+         * @default 'YYYY'
+         */
         'titleFormat': 'YYYY',
+
+        /**
+         * @param unix
+         * @return {*}
+         */
         'titleFormatter': function (unix) {
             var titleDate = new persianDate(unix);
             titleDate.formatPersian = this.model.options.persianDigit;
             return titleDate.format(this.model.options.monthPicker.titleFormat);
         },
+
+        /**
+         * @event
+         * @param monthIndex
+         */
         'onSelect': function (monthIndex) {
             debug('monthPicker Event: onSelect : ' + monthIndex);
         }
@@ -338,20 +440,41 @@ const Config = {
 
 
     /**
-     * @desc yearPicker config object
+     * @description yearPicker config object
      * @type {object}
      */
     'yearPicker': {
+
+        /**
+         * @type boolean
+         * @default true
+         */
         'enabled': true,
+
+        /**
+         * @type string
+         * @default 'YYYY'
+         */
         'titleFormat': 'YYYY',
+
+        /**
+         *
+         * @param year
+         * @return {string}
+         */
         'titleFormatter': function (year) {
             let remaining = parseInt(year / 12, 10) * 12;
             let startYear = new pDate([remaining]);
             let endYear = new pDate([remaining + 11]);
             startYear.formatPersian = this.model.options.persianDigit;
             endYear.formatPersian = this.model.options.persianDigit;
-            return startYear.format(this.model.options.yearPicker.titleFormat) + "-" + endYear.format(this.model.options.yearPicker.titleFormat);
+            return startYear.format(this.model.options.yearPicker.titleFormat) + '-' + endYear.format(this.model.options.yearPicker.titleFormat);
         },
+
+        /**
+         * @event
+         * @param year
+         */
         'onSelect': function (year) {
             debug('yearPicker Event: onSelect : ' + year);
         }
@@ -359,7 +482,7 @@ const Config = {
 
 
     /**
-     * @desc A function that takes current datepicker unixDate. It is called When Day Select.
+     * @description A function that takes current datepicker unixDate. It is called When Day Select.
      * @event
      * @param unixDate
      */
@@ -368,13 +491,18 @@ const Config = {
     },
 
     /**
-     *
+     * @description position of datepicker relative to input element
+     * @type mix
+     * @default 'auto'
+     * @example
+     *  'position': 'auto'
+     *'position': [10,10]
      */
     'position': 'auto',
 
 
     /**
-     * @desc A function that takes current datepicker instance. It is called just before the datepicker is displayed.
+     * @description A function that takes current datepicker instance. It is called just before the datepicker is displayed.
      * @event
      */
     'onShow': function () {
@@ -383,7 +511,7 @@ const Config = {
 
 
     /**
-     * @desc A function that takes current datepicker instance. It is called just before the datepicker Hide.
+     * @description A function that takes current datepicker instance. It is called just before the datepicker Hide.
      * @event
      * @param self
      */
@@ -414,8 +542,12 @@ const Config = {
     'autoClose': false,
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////// Under Implement ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
-     * @desc observer
+     * @description observer
      * @type {boolean}
      * @default false
      * @deprecated
@@ -423,17 +555,12 @@ const Config = {
     'observer': false,
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////// Under Implement ///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////// Un  implemented ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     /**
-     * @desc inputDelay
+     * @description inputDelay
      * @type {number}
      * @default 800
      */
