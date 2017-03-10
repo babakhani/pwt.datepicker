@@ -1261,7 +1261,7 @@ var DateUtil = function () {
             if (hour - 12 < 0) {
                 output = hour + 12;
             }
-            if (hour - 12 == 0) {
+            if (hour - 12 === 0) {
                 output = 0;
             }
             return output;
@@ -1301,10 +1301,10 @@ var DateUtil = function () {
             if (meridiem === "AM" && hour < 12 && hour > 0) {
                 output = hour + 12;
             }
-            if (meridiem === "AM" && hour == 0) {
+            if (meridiem === "AM" && hour === 0) {
                 output = 12;
             }
-            if (meridiem === "PM" && hour == 0) {
+            if (meridiem === "PM" && hour === 0) {
                 output = 0;
             }
             return output;
@@ -2110,7 +2110,7 @@ var State = function () {
 
         this.ui = {
             isOpen: false,
-            isInline: !(this.model.inputElement.nodeName === 'INPUT'),
+            isInline: this.model.inputElement.nodeName !== 'INPUT',
             isInput: this.model.inputElement.nodeName === 'INPUT'
         };
 
@@ -2365,7 +2365,6 @@ var State = function () {
                 case 'meridiem':
                     self.meridiemToggle();
                     self.setViewDateTime('hour', DateUtil.convertAMtoPM(self.view.hour, self.view.meridiem));
-                    return false;
                     break;
             }
             this._setViewDateTimeUnix();

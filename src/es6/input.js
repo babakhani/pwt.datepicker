@@ -37,9 +37,7 @@ class Input {
 
 
     addInitialClass() {
-        $(this.elem).addClass('pwt-datepicker-input-element')
-
-
+        $(this.elem).addClass('pwt-datepicker-input-element');
     }
 
 

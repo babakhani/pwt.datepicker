@@ -17,7 +17,7 @@ class DateUtil {
         if ((hour - 12) < 0) {
             output = hour + 12;
         }
-        if ((hour - 12) == 0) {
+        if ((hour - 12) === 0) {
             output = 0;
         }
         return output;
@@ -53,10 +53,10 @@ class DateUtil {
         if (meridiem === "AM" && hour < 12 && hour > 0) {
             output = hour + 12;
         }
-        if (meridiem === "AM" && hour == 0) {
+        if (meridiem === "AM" && hour === 0) {
             output = 12;
         }
-        if (meridiem === "PM" && hour == 0) {
+        if (meridiem === "PM" && hour === 0) {
             output = 0;
         }
         return output;

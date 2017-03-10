@@ -100,8 +100,8 @@ class State {
 
         this.ui = {
             isOpen: false,
-            isInline: !(this.model.inputElement.nodeName === 'INPUT'),
-            isInput: this.model.inputElement.nodeName === 'INPUT',
+            isInline: this.model.inputElement.nodeName !== 'INPUT',
+            isInput: this.model.inputElement.nodeName === 'INPUT'
         };
 
         this._setFilterDate(this.model.options.minDate, this.model.options.maxDate);
@@ -344,7 +344,6 @@ class State {
             case 'meridiem':
                 self.meridiemToggle();
                 self.setViewDateTime('hour', DateUtil.convertAMtoPM(self.view.hour, self.view.meridiem));
-                return false;
                 break;
         }
         this._setViewDateTimeUnix();
