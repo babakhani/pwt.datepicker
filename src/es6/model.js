@@ -6,6 +6,7 @@ class Model {
     /**
      * @param inputElement
      * @param options
+     * @private
      */
     constructor(inputElement, options) {
 
@@ -73,10 +74,6 @@ class Model {
             this.state.setSelectedDateTime('unix', this.input.getOnInitState());
         }
 
-        this.selectDate = function (input) {
-            this.state.setSelectedDateTime('unix', input);
-        };
-
         /**
          * @desc handle navigation and dateoicker element events
          * @type {Navigator}
@@ -85,8 +82,12 @@ class Model {
 
         let that = this;
         return {
-            'datepicker': this,
+            /**
+             *
+             */
             'state': this.state,
+
+
             get options() {
                 return that.options;
             },
@@ -94,8 +95,6 @@ class Model {
                 that.options = new Options(inputOptions);
                 that.view.reRender();
             },
-            setDate: this.selectDate,
-            updateView: this.view.updateView,
             show: function () {
                 that.view.show();
                 that.options.onShow(that);
@@ -115,7 +114,15 @@ class Model {
                 that.view.destroy();
                 that.options.onDestroy(that);
                 return that;
+            },
+            setDate: function (input) {
+                that.state.setSelectedDateTime('unix', input);
+                that.state.setViewDateTime('unix', input);
+                that.state.setSelectedDateTime('unix', input);
+                that.options.dayPicker.onSelect(input);
+                return that;
             }
+
         };
     }
 }

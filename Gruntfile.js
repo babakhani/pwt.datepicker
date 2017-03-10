@@ -91,6 +91,15 @@ module.exports = function (grunt) {
                 },
                 src: 'src/es6/config.js',
                 dest: 'doc/OPTIONS.md'
+            },
+            oneOutputFile: {
+                options: {
+                    'no-gfm': true,
+                    'heading-depth': 2,
+                    'example-lang': 'js'
+                },
+                src: 'src/es6/model.js',
+                dest: 'doc/METHOD.md'
             }
         }
     });

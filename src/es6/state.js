@@ -121,7 +121,7 @@ class State {
         if (!maxDate) {
             maxDate = 999999999999999999;
         }
-        var pd = new persianDate(minDate);
+        let pd = new persianDate(minDate);
         self.filterDate.start.unixDate = minDate;
         self.filterDate.start.hour = pd.hour();
         self.filterDate.start.minute = pd.minute();
@@ -129,7 +129,8 @@ class State {
         self.filterDate.start.month = pd.month();
         self.filterDate.start.date = pd.date();
         self.filterDate.start.year = pd.year();
-        var pdEnd = new persianDate(maxDate);
+
+        let pdEnd = new persianDate(maxDate);
         self.filterDate.end.unixDate = maxDate;
         self.filterDate.end.hour = pdEnd.hour();
         self.filterDate.end.minute = pdEnd.minute();
@@ -139,85 +140,6 @@ class State {
         self.filterDate.end.year = pdEnd.year();
     }
 
-
-    /**
-     * @desc called on date select
-     * @param {String} key - accept date, month, year, hour, minute, second
-     * @param {Number} value
-     * @public
-     * @return {State}
-     */
-    setSelectedDateTime(key, value) {
-        var that = this;
-        switch (key) {
-            case 'unix':
-                that.selected.unixDate = value;
-                var pd = new persianDate(value);
-                that.selected.year = pd.year();
-                that.selected.month = pd.month();
-                that.selected.date = pd.date();
-                that.selected.hour = that.view.hour;
-                that.selected.minute = that.view.minute;
-                that.selected.second = that.view.second;
-                that._updateSelectedUnix();
-                break;
-            case 'year':
-                this.selected.year = value;
-                that._updateSelectedUnix();
-                break;
-            case 'month':
-                this.selected.month = value;
-                that._updateSelectedUnix();
-                break;
-            case 'date':
-                this.selected.date = value;
-                that._updateSelectedUnix();
-                break;
-            case 'hour':
-                this.selected.hour = value;
-                that._updateSelectedUnix();
-                break;
-            case 'minute':
-                this.selected.minute = value;
-                that._updateSelectedUnix();
-                break;
-            case 'second':
-                this.selected.second = value;
-                that._updateSelectedUnix();
-                break;
-        }
-        return this;
-    }
-
-
-    /**
-     * @return {State}
-     * @private
-     */
-    _updateSelectedUnix() {
-        this.selected.dateObject = new persianDate([
-            this.selected.year,
-            this.selected.month,
-            this.selected.date,
-            this.view.hour,
-            this.view.minute,
-            this.view.second
-        ]);
-        this.selected.unixDate = this.selected.dateObject.valueOf();
-        this.model.updateInput(this.selected.unixDate);
-        this.model.options.onSelect(this.selected.unixDate);
-        return this;
-    }
-
-    /**
-     * @param pd
-     * @private
-     */
-    _syncViewModes(pd) {
-        this.view.year = pd.year();
-        this.view.month = pd.month();
-        this.view.date = pd.date();
-    }
 
     /**
      * @desc change view state
@@ -281,6 +203,71 @@ class State {
         }
     }
 
+
+    /**
+     * @desc called on date select
+     * @param {String} key - accept date, month, year, hour, minute, second
+     * @param {Number} value
+     * @public
+     * @return {State}
+     */
+    setSelectedDateTime(key, value) {
+        var that = this;
+        switch (key) {
+            case 'unix':
+                that.selected.unixDate = value;
+                let pd = new persianDate(value);
+                that.selected.year = pd.year();
+                that.selected.month = pd.month();
+                that.selected.date = pd.date();
+                that.selected.hour = pd.hour();
+                that.selected.minute = pd.minute();
+                that.selected.second = pd.second();
+                break;
+            case 'year':
+                this.selected.year = value;
+                break;
+            case 'month':
+                this.selected.month = value;
+                break;
+            case 'date':
+                this.selected.date = value;
+                break;
+            case 'hour':
+                this.selected.hour = value;
+                break;
+            case 'minute':
+                this.selected.minute = value;
+                break;
+            case 'second':
+                this.selected.second = value;
+                break;
+        }
+        that._updateSelectedUnix();
+        return this;
+    }
+
+
+    /**
+     * @return {State}
+     * @private
+     */
+    _updateSelectedUnix() {
+        this.selected.dateObject = new persianDate([
+            this.selected.year,
+            this.selected.month,
+            this.selected.date,
+            this.view.hour,
+            this.view.minute,
+            this.view.second
+        ]);
+        this.selected.unixDate = this.selected.dateObject.valueOf();
+        this.model.updateInput(this.selected.unixDate);
+        this.model.options.onSelect(this.selected.unixDate);
+        return this;
+    }
+
+
     /**
      *
      * @return {State}
@@ -295,7 +282,13 @@ class State {
             this.view.minute,
             this.view.second
         ]);
-        this._syncViewModes(this.view.dateObject);
+
+        this.view.year = this.view.dateObject.year();
+        this.view.month = this.view.dateObject.month();
+        this.view.date = this.view.dateObject.date();
+        this.view.hour = this.view.dateObject.hour();
+        this.view.minute = this.view.dateObject.minute();
+        this.view.second = this.view.dateObject.second();
         this.view.unixDate = this.view.dateObject.valueOf();
         this.model.view.render(this.view);
         return this;
@@ -311,7 +304,7 @@ class State {
         var self = this;
         switch (key) {
             case 'unix':
-                var pd = new persianDate(value);
+                let pd = new persianDate(value);
                 self.view.year = pd.year();
                 self.view.month = pd.month();
                 self.view.date = pd.date();
@@ -351,6 +344,9 @@ class State {
     }
 
 
+    /**
+     * desc change meridiem state
+     */
     meridiemToggle() {
         var self = this;
         if (self.view.meridiem === 'AM') {

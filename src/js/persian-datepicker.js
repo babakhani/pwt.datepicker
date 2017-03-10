@@ -1238,6 +1238,7 @@ var Model =
 /**
  * @param inputElement
  * @param options
+ * @private
  */
 function Model(inputElement, options) {
   _classCallCheck(this, Model);
@@ -1302,10 +1303,6 @@ function Model(inputElement, options) {
     this.state.setSelectedDateTime('unix', this.input.getOnInitState());
   }
 
-  this.selectDate = function (input) {
-    this.state.setSelectedDateTime('unix', input);
-  };
-
   /**
    * @desc handle navigation and dateoicker element events
    * @type {Navigator}
@@ -1314,8 +1311,11 @@ function Model(inputElement, options) {
 
   var that = this;
   return {
-    'datepicker': this,
+    /**
+     *
+     */
     'state': this.state,
+
     get options() {
       return that.options;
     },
@@ -1323,8 +1323,6 @@ function Model(inputElement, options) {
       that.options = new Options(inputOptions);
       that.view.reRender();
     },
-    setDate: this.selectDate,
-    updateView: this.view.updateView,
     show: function show() {
       that.view.show();
       that.options.onShow(that);
@@ -1344,7 +1342,15 @@ function Model(inputElement, options) {
       that.view.destroy();
       that.options.onDestroy(that);
       return that;
+    },
+    setDate: function setDate(input) {
+      that.state.setSelectedDateTime('unix', input);
+      that.state.setViewDateTime('unix', input);
+      that.state.setSelectedDateTime('unix', input);
+      that.options.dayPicker.onSelect(input);
+      return that;
     }
+
   };
 };
 'use strict';
@@ -1818,6 +1824,7 @@ var State = function () {
             self.filterDate.start.month = pd.month();
             self.filterDate.start.date = pd.date();
             self.filterDate.start.year = pd.year();
+
             var pdEnd = new persianDate(maxDate);
             self.filterDate.end.unixDate = maxDate;
             self.filterDate.end.hour = pdEnd.hour();
@@ -1826,86 +1833,6 @@ var State = function () {
             self.filterDate.end.month = pdEnd.month();
             self.filterDate.end.date = pdEnd.date();
             self.filterDate.end.year = pdEnd.year();
-        }
-
-        /**
-         * @desc called on date select
-         * @param {String} key - accept date, month, year, hour, minute, second
-         * @param {Number} value
-         * @public
-         * @return {State}
-         */
-
-    }, {
-        key: 'setSelectedDateTime',
-        value: function setSelectedDateTime(key, value) {
-            var that = this;
-            switch (key) {
-                case 'unix':
-                    that.selected.unixDate = value;
-                    var pd = new persianDate(value);
-                    that.selected.year = pd.year();
-                    that.selected.month = pd.month();
-                    that.selected.date = pd.date();
-                    that.selected.hour = that.view.hour;
-                    that.selected.minute = that.view.minute;
-                    that.selected.second = that.view.second;
-                    that._updateSelectedUnix();
-                    break;
-                case 'year':
-                    this.selected.year = value;
-                    that._updateSelectedUnix();
-                    break;
-                case 'month':
-                    this.selected.month = value;
-                    that._updateSelectedUnix();
-                    break;
-                case 'date':
-                    this.selected.date = value;
-                    that._updateSelectedUnix();
-                    break;
-                case 'hour':
-                    this.selected.hour = value;
-                    that._updateSelectedUnix();
-                    break;
-                case 'minute':
-                    this.selected.minute = value;
-                    that._updateSelectedUnix();
-                    break;
-                case 'second':
-                    this.selected.second = value;
-                    that._updateSelectedUnix();
-                    break;
-            }
-            return this;
-        }
-
-        /**
-         * @return {State}
-         * @private
-         */
-
-    }, {
-        key: '_updateSelectedUnix',
-        value: function _updateSelectedUnix() {
-            this.selected.dateObject = new persianDate([this.selected.year, this.selected.month, this.selected.date, this.view.hour, this.view.minute, this.view.second]);
-            this.selected.unixDate = this.selected.dateObject.valueOf();
-            this.model.updateInput(this.selected.unixDate);
-            this.model.options.onSelect(this.selected.unixDate);
-            return this;
-        }
-
-        /**
-         * @param pd
-         * @private
-         */
-
-    }, {
-        key: '_syncViewModes',
-        value: function _syncViewModes(pd) {
-            this.view.year = pd.year();
-            this.view.month = pd.month();
-            this.view.date = pd.date();
         }
 
         /**
@@ -1979,6 +1906,67 @@ var State = function () {
         }
 
         /**
+         * @desc called on date select
+         * @param {String} key - accept date, month, year, hour, minute, second
+         * @param {Number} value
+         * @public
+         * @return {State}
+         */
+
+    }, {
+        key: 'setSelectedDateTime',
+        value: function setSelectedDateTime(key, value) {
+            var that = this;
+            switch (key) {
+                case 'unix':
+                    that.selected.unixDate = value;
+                    var pd = new persianDate(value);
+                    that.selected.year = pd.year();
+                    that.selected.month = pd.month();
+                    that.selected.date = pd.date();
+                    that.selected.hour = pd.hour();
+                    that.selected.minute = pd.minute();
+                    that.selected.second = pd.second();
+                    break;
+                case 'year':
+                    this.selected.year = value;
+                    break;
+                case 'month':
+                    this.selected.month = value;
+                    break;
+                case 'date':
+                    this.selected.date = value;
+                    break;
+                case 'hour':
+                    this.selected.hour = value;
+                    break;
+                case 'minute':
+                    this.selected.minute = value;
+                    break;
+                case 'second':
+                    this.selected.second = value;
+                    break;
+            }
+            that._updateSelectedUnix();
+            return this;
+        }
+
+        /**
+         * @return {State}
+         * @private
+         */
+
+    }, {
+        key: '_updateSelectedUnix',
+        value: function _updateSelectedUnix() {
+            this.selected.dateObject = new persianDate([this.selected.year, this.selected.month, this.selected.date, this.view.hour, this.view.minute, this.view.second]);
+            this.selected.unixDate = this.selected.dateObject.valueOf();
+            this.model.updateInput(this.selected.unixDate);
+            this.model.options.onSelect(this.selected.unixDate);
+            return this;
+        }
+
+        /**
          *
          * @return {State}
          * @private
@@ -1988,7 +1976,13 @@ var State = function () {
         key: '_setViewDateTimeUnix',
         value: function _setViewDateTimeUnix() {
             this.view.dateObject = new persianDate([this.view.year, this.view.month, this.view.date, this.view.hour, this.view.minute, this.view.second]);
-            this._syncViewModes(this.view.dateObject);
+
+            this.view.year = this.view.dateObject.year();
+            this.view.month = this.view.dateObject.month();
+            this.view.date = this.view.dateObject.date();
+            this.view.hour = this.view.dateObject.hour();
+            this.view.minute = this.view.dateObject.minute();
+            this.view.second = this.view.dateObject.second();
             this.view.unixDate = this.view.dateObject.valueOf();
             this.model.view.render(this.view);
             return this;
@@ -2045,6 +2039,11 @@ var State = function () {
             this._setViewDateTimeUnix();
             return this;
         }
+
+        /**
+         * desc change meridiem state
+         */
+
     }, {
         key: 'meridiemToggle',
         value: function meridiemToggle() {
