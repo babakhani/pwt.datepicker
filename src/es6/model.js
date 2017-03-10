@@ -73,6 +73,9 @@ class Model {
             this.state.setSelectedDateTime('unix', this.input.getOnInitState());
         }
 
+        this.selectDate = function (input) {
+            this.state.setSelectedDateTime('unix', input);
+        };
 
         /**
          * @desc handle navigation and dateoicker element events
@@ -91,7 +94,7 @@ class Model {
                 that.options = new Options(inputOptions);
                 that.view.reRender();
             },
-            selectDate: this.selectDate,
+            setDate: this.selectDate,
             updateView: this.view.updateView,
             show: function () {
                 that.view.show();

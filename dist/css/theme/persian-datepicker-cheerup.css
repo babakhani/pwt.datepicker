@@ -76,7 +76,7 @@
   border: none;
   text-shadow: 1px 1px 1px #000; }
 
-.datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-year-view .year-item:hover,
+.datepicker-plot-area .datepicker-day-view .table-days td span.selected:hover, .datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-year-view .year-item:hover,
 .datepicker-plot-area .datepicker-month-view .month-item:hover {
   background-color: #393939;
   color: "";

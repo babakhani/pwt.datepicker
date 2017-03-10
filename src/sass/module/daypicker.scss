@@ -30,10 +30,6 @@
           margin: 0;
           @extend %date-item;
 
-          &:hover {
-            @extend %date-item-hover;
-          }
-
           &.other-month {
             @extend %date-item-numb;
           }
@@ -44,6 +40,11 @@
 
           &.selected {
             @extend %date-item-selected;
+          }
+
+          &.selected:hover,
+          &:hover {
+            @extend %date-item-hover;
           }
 
         }
