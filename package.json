@@ -39,15 +39,14 @@
     "grunt-contrib-uglify ": "^0.1.0",
     "grunt-contrib-watch": "*",
     "grunt-jsdoc-to-markdown": "^2.0.0",
-    "handlebars": "^4.0.6",
     "jshint": "^2.6.0",
-    "mocha": "*",
     "sass-lint": "^1.10.2",
-    "simple-server": "^1.0.1"
+    "simple-server": "^1.0.1",
+    "mustache": "=2.3.0",
+    "hamsterjs": "=1.1.2"
   },
   "dependencies": {
     "jquery": "2.2.0",
-    "mustache": "^2.3.0",
     "persian-date": ">=0.1.8"
   },
   "scripts": {

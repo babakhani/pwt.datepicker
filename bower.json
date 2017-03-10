@@ -1,18 +1,19 @@
 {
   "name": "persian-datepicker",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "main": [
-    "dist/js/persian-datepicker-0.4.5.min.js",
-    "dist/css/persian-datepicker-0.4.5.min.css"
+    "dist/js/persian-datepicker-0.5.0.min.js",
+    "dist/css/persian-datepicker-0.5.0.min.css"
   ],
   "ignore": [
-    ".jshintrc",
-    "**/*.txt"
+    "src",
+    ".*",
+    "jslint.conf",
+    "Gruntfile.js",
+    "pwt.datepicker.jquery.json"
   ],
   "dependencies": {
     "jquery": ">=1.10.2",
-    "persian-date": ">=0.1.8",
-    "mustache.js": "mustache#^2.3.0",
-    "hamsterjs": "*"
+    "persian-date": ">=0.1.8"
   }
 }

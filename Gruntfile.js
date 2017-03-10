@@ -14,8 +14,8 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: [
-                    'bower_components/mustache.js/mustache.min.js',
-                    'bower_components/hamsterjs/hamster.js',
+                    'node_modules/mustache/mustache.js',
+                    'node_modules/hamsterjs/hamster.js',
                     'src/js/persian-datepicker.js',
                 ],
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
         grunt.registerTask('default', ['sass', 'watch']);
     }
     else if (grunt.option("build") === true) {
-        grunt.registerTask('default', ['sass', 'cssmin', 'uglify']);
+        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify']);
     }
     else if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc2md']);
