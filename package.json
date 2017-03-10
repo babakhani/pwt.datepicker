@@ -45,7 +45,7 @@
     "simple-server": "^1.0.1"
   },
   "dependencies": {
-    "jquery": ">=1.10.2",
+    "jquery": "2.2.0",
     "mustache": "^2.3.0",
     "persian-date": ">=0.1.8"
   },

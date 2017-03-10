@@ -22,13 +22,11 @@ class Model {
          */
         this.initialUnix = null;
 
-
         /**
          * @desc inputElement=inputElement
          * @type {Object}
          */
         this.inputElement = inputElement;
-
 
         /**
          * @desc handle works about config
@@ -36,19 +34,18 @@ class Model {
          */
         this.options = new Options(options);
 
+        /**
+         * @desc set and get selected and view and other state
+         * @type {State}
+         */
+        this.state = new State(this);
+
 
         /**
          * @desc handle works about input and alt field input element
          * @type {Input}
          */
         this.input = new Input(this, inputElement);
-
-
-        /**
-         * @desc set and get selected and view and other state
-         * @type {State}
-         */
-        this.state = new State(this);
 
 
         /**

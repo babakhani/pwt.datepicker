@@ -1073,6 +1073,9 @@ var Input = function () {
         this.observe();
         // }
 
+
+        this.addInitialClass();
+
         /**
          * @type {Number}
          */
@@ -1082,6 +1085,11 @@ var Input = function () {
     }
 
     _createClass(Input, [{
+        key: 'addInitialClass',
+        value: function addInitialClass() {
+            $(this.elem).addClass('pwt-datepicker-input-element');
+        }
+    }, {
         key: 'observe',
         value: function observe() {
             var that = this;
@@ -1117,12 +1125,13 @@ var Input = function () {
             $(this.elem).focus(function () {
                 that.model.view.show();
             });
-            $(this.elem).blur(function (e) {
-                // TODO: must fix
-                // if ($(e.target).parents('#' + that.datepicker.view.id).length < 0) {
-                // that.model.view.hide();
-                //}
-            });
+            if (this.model.state.ui.isInput) {
+                $(document).on('click', function (e) {
+                    if (!$(e.target).closest(".datepicker-plot-area, .datepicker-plot-area > *, .pwt-datepicker-input-element").length) {
+                        that.model.view.hide();
+                    }
+                });
+            }
         }
 
         /**
@@ -1257,16 +1266,16 @@ function Model(inputElement, options) {
   this.options = new Options(options);
 
   /**
-   * @desc handle works about input and alt field input element
-   * @type {Input}
-   */
-  this.input = new Input(this, inputElement);
-
-  /**
    * @desc set and get selected and view and other state
    * @type {State}
    */
   this.state = new State(this);
+
+  /**
+   * @desc handle works about input and alt field input element
+   * @type {Input}
+   */
+  this.input = new Input(this, inputElement);
 
   /**
    * @desc render datepicker view base on State
@@ -1768,6 +1777,12 @@ var State = function () {
             second: 0,
             unixDate: 0,
             dateObject: null
+        };
+
+        this.ui = {
+            isOpen: false,
+            isInline: !(this.model.inputElement.nodeName === 'INPUT'),
+            isInput: this.model.inputElement.nodeName === 'INPUT'
         };
 
         this._setFilterDate(this.model.options.minDate, this.model.options.maxDate);

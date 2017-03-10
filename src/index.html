@@ -49,7 +49,7 @@
 
 
 </div>
-<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../bower_components/mustache.js/mustache.js"></script>
 <script src="../bower_components/hamsterjs/hamster.js"></script>
 <script src="../bower_components/persian-date/dist/0.1.8/persian-date-0.1.8.js"></script>
@@ -61,6 +61,7 @@
         $('#normal').persianDatepicker();
 
         window.pd = $("#inline").persianDatepicker({
+            autoClose: true,
 //            observer: true,
 //            // Done and tested
 //            persianDigit: false,

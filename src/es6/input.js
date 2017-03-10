@@ -24,12 +24,22 @@ class Input {
         this.observe();
         // }
 
+
+        this.addInitialClass();
+
         /**
          * @type {Number}
          */
         this.initialUnix = null;
         this._attachInputElementEvents();
         return this;
+    }
+
+
+    addInitialClass() {
+        $(this.elem).addClass('pwt-datepicker-input-element')
+
+
     }
 
 
@@ -64,12 +74,13 @@ class Input {
         $(this.elem).focus(function () {
             that.model.view.show();
         });
-        $(this.elem).blur(function (e) {
-            // TODO: must fix
-            // if ($(e.target).parents('#' + that.datepicker.view.id).length < 0) {
-            // that.model.view.hide();
-            //}
-        });
+        if (this.model.state.ui.isInput) {
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest(".datepicker-plot-area, .datepicker-plot-area > *, .pwt-datepicker-input-element").length) {
+                    that.model.view.hide();
+                }
+            });
+        }
     }
 
 
