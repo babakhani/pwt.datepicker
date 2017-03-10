@@ -329,6 +329,119 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * This is default API class
+ */
+var API = function () {
+    function API(model) {
+        _classCallCheck(this, API);
+
+        this.model = model;
+    }
+
+    _createClass(API, [{
+        key: 'show',
+
+
+        /**
+         * @description make datepicker visible
+         * @example var pd = $('.selector').persianDatepicker();
+         * pd.show();
+         */
+        value: function show() {
+            this.model.view.show();
+            this.model.options.onShow(this);
+            return this.model;
+        }
+
+        /**
+         * @description make datepicker invisible
+         * @example var pd = $('.selector').persianDatepicker();
+         * pd.show();
+         */
+
+    }, {
+        key: 'hide',
+        value: function hide() {
+            this.model.view.hide();
+            this.model.options.onHide(this);
+            return this.model;
+        }
+
+        /**
+         * @description toggle datepicker visibility state
+         * @example var pd = $('.selector').persianDatepicker();
+         * pd.toggle();
+         */
+
+    }, {
+        key: 'toggle',
+        value: function toggle() {
+            this.model.view.toggle();
+            this.model.options.onToggle(this.model);
+            return this.model;
+        }
+
+        /**
+         * @description destroy every thing clean dom and
+         * @example var pd = $('.selector').persianDatepicker();
+         * pd.destroy();
+         */
+
+    }, {
+        key: 'destroy',
+        value: function destroy() {
+            // TODO: destroy every thing
+            this.model.view.destroy();
+            this.model.options.onDestroy(this.model);
+            return this.model;
+        }
+
+        /**
+         * @description set selected date of datepicker accept unix timestamp
+         * @param unix
+         * @example var pd = $('.selector').persianDatepicker();
+         * pd.setDate(1382276091100)
+         */
+
+    }, {
+        key: 'setDate',
+        value: function setDate(unix) {
+            this.model.state.setSelectedDateTime('unix', unix);
+            this.model.state.setViewDateTime('unix', unix);
+            this.model.state.setSelectedDateTime('unix', unix);
+            this.model.options.dayPicker.onSelect(unix);
+            return this.model;
+        }
+    }, {
+        key: 'options',
+        get: function get() {
+            return this.model.options;
+        }
+
+        /**
+         * @description set options live
+         * @example var pd = $('.selector').persianDatepicker();
+         * pd.options;
+         * //return current options
+         * pd.options = {};
+         * // set options and render datepicker with new options
+         */
+        ,
+        set: function set(inputOptions) {
+            this.model.options = new Options(inputOptions);
+            this.model.view.reRender();
+        }
+    }]);
+
+    return API;
+}();
+'use strict';
+
 /**
  * This is default config class
  */
@@ -1639,48 +1752,7 @@ function Model(inputElement, options) {
   this.navigator = new Navigator(this);
 
   var that = this;
-  return {
-    /**
-     *
-     */
-    'state': this.state,
-
-    get options() {
-      return that.options;
-    },
-    set options(inputOptions) {
-      that.options = new Options(inputOptions);
-      that.view.reRender();
-    },
-    show: function show() {
-      that.view.show();
-      that.options.onShow(that);
-      return that;
-    },
-    hide: function hide() {
-      that.view.hide();
-      that.options.onHide(that);
-      return that;
-    },
-    toggle: function toggle() {
-      that.view.toggle();
-      that.options.onToggle(that);
-      return that;
-    },
-    destroy: function destroy() {
-      that.view.destroy();
-      that.options.onDestroy(that);
-      return that;
-    },
-    setDate: function setDate(input) {
-      that.state.setSelectedDateTime('unix', input);
-      that.state.setViewDateTime('unix', input);
-      that.state.setSelectedDateTime('unix', input);
-      that.options.dayPicker.onSelect(input);
-      return that;
-    }
-
-  };
+  return new API(this);
 };
 'use strict';
 

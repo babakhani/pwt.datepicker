@@ -83,7 +83,7 @@ module.exports = function (grunt) {
             }
         },
         jsdoc2md: {
-            oneOutputFile: {
+            config: {
                 options: {
                     'no-gfm': true,
                     'heading-depth': 2,
@@ -92,14 +92,14 @@ module.exports = function (grunt) {
                 src: 'src/es6/config.js',
                 dest: 'doc/OPTIONS.md'
             },
-            oneOutputFile: {
+            api: {
                 options: {
                     'no-gfm': true,
                     'heading-depth': 2,
                     'example-lang': 'js'
                 },
-                src: 'src/es6/model.js',
-                dest: 'doc/METHOD.md'
+                src: 'src/es6/api.js',
+                dest: 'doc/API.md'
             }
         }
     });

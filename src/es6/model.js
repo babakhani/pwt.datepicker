@@ -81,48 +81,6 @@ class Model {
         this.navigator = new Navigator(this);
 
         let that = this;
-        return {
-            /**
-             *
-             */
-            'state': this.state,
-
-
-            get options() {
-                return that.options;
-            },
-            set options(inputOptions) {
-                that.options = new Options(inputOptions);
-                that.view.reRender();
-            },
-            show: function () {
-                that.view.show();
-                that.options.onShow(that);
-                return that;
-            },
-            hide: function () {
-                that.view.hide();
-                that.options.onHide(that);
-                return that;
-            },
-            toggle: function () {
-                that.view.toggle();
-                that.options.onToggle(that);
-                return that;
-            },
-            destroy: function () {
-                that.view.destroy();
-                that.options.onDestroy(that);
-                return that;
-            },
-            setDate: function (input) {
-                that.state.setSelectedDateTime('unix', input);
-                that.state.setViewDateTime('unix', input);
-                that.state.setSelectedDateTime('unix', input);
-                that.options.dayPicker.onSelect(input);
-                return that;
-            }
-
-        };
+        return new API(this);
     }
 }
