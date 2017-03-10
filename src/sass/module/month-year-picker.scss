@@ -1,26 +1,28 @@
+.datepicker-plot-area {
+  // sass-lint:disable force-element-nesting
+  .datepicker-year-view .year-item,
+  .datepicker-month-view .month-item {
+    display: block;
+    width: 31%;
+    margin: 2px 1% 0;
+    float: right;
+    height: 36px;
+    line-height: 34px;
+    @extend %date-item;
 
-.datepicker-plot-area .datepicker-year-view .year-item,
-.datepicker-plot-area .datepicker-month-view .month-item {
-  display: block;
-  width: 31%;
-  margin: 2px 1% 0px 1%;
-  float: right;
-  height: 36px;
-  line-height: 34px;
-  @extend .date-item;
-}
+    &:hover {
+      @extend %date-item-hover;
+    }
 
-.datepicker-plot-area .datepicker-year-view .year-item-disable,
-.datepicker-plot-area .datepicker-month-view .month-item-disable {
-  @extend .date-item-disable;
-}
+    &.selected {
+      @extend %date-item-selected;
+    }
+  }
 
-.datepicker-plot-area .datepicker-year-view .year-item:hover,
-.datepicker-plot-area .datepicker-month-view .month-item:hover {
-  @extend .date-item-hover;
-}
+  .datepicker-year-view .year-item-disable,
+  .datepicker-month-view .month-item-disable {
+    @extend %date-item-disable;
+  }
+  // sass-lint:enable force-element-nesting
 
-.datepicker-plot-area .datepicker-year-view .year-item.selected,
-.datepicker-plot-area .datepicker-month-view .month-item.selected {
-  @extend .date-item-selected;
 }

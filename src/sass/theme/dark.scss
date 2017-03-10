@@ -1,11 +1,11 @@
 // Color
-$white: #2D2D2D;
-$dark: #ffffff;
-$gray: #cccccc;
+$white: #2d2d2d;
+$dark: #fff;
+$gray: #ccc;
 $light-gray: #393939;
 $ultra-light-gray: #393939;
 $super-light-gray: #393939;
-$today-color: #D68E3A;
+$today-color: #d68e3a;
 
 // Font Style & text
 $main-font: 12px tahoma;
@@ -19,7 +19,7 @@ $global-text-color: $dark;
 $global-text-align: center;
 $layout-big-curve: 6px;
 $layout-small-curve: 3px;
-$main-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+$main-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 $animate-duration: all 100ms ease;
 
 // Plot area
@@ -34,35 +34,35 @@ $bottom-text-color: $dark;
 // Date Item
 $date-item-font: 14px;
 $date-item-bg: $white;
-$date-item-border: 0px;
+$date-item-border: 0;
 $date-item-color: $dark;
 $date-item-text-shadow: none;
 
 $date-item-hover-font: 14px;
 $date-item-hover-bg: $light-gray;
-$date-item-hover-border: 0px;
-$date-item-hover-color: "";
+$date-item-hover-border: 0;
+$date-item-hover-color: '';
 $date-item-hover-text-shadow: none;
 
 $date-item-today-bg: $dark;
-$date-item-today-border: 0px;
+$date-item-today-border: 0;
 $date-item-today-color: $white;
 $date-item-today-text-shadow: none;
 
-$date-item-selected-bg: $today-color !important;
+$date-item-selected-bg: $today-color;
 $date-item-selected-border: none;
 $date-item-selected-color: $white !default;
-$date-item-selected-text-shadow: 1px 1px 1px #000000;
+$date-item-selected-text-shadow: 1px 1px 1px #000;
 
-$date-item-numb-bg: "";
+$date-item-numb-bg: '';
 $date-item-numb-border: none;
 $date-item-numb-color: $gray;
 $date-item-numb-text-shadow: none;
 
-$date-item-disable-bg: $ultra-light-gray !important;
-$date-item-disable-border: none !important;
-$date-item-disable-color: $gray !important;
-$date-item-disable-text-shadow: none !important;
+$date-item-disable-bg: $ultra-light-gray;
+$date-item-disable-border: none;
+$date-item-disable-color: $gray;
+$date-item-disable-text-shadow: none;
 
 // Tiomepicker
 $timepicker-border: 1px solid $ultra-light-gray;

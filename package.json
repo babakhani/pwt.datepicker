@@ -42,6 +42,7 @@
     "handlebars": "^4.0.6",
     "jshint": "^2.6.0",
     "mocha": "*",
+    "sass-lint": "^1.10.2",
     "simple-server": "^1.0.1"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
   "scripts": {
     "babel": "babel --watch src/es6 --out-file src/js/persian-datepicker.js",
     "jshint": "./node_modules/jshint/bin/jshint src/es6/*.js",
+    "lint": "sass-lint -c .sass-lint.yml --verbose",
     "doc": "grunt --doc",
     "build": "grunt --build",
     "serve": "babel --watch src/es6 --out-file src/js/persian-datepicker.js & simple-server 3000",

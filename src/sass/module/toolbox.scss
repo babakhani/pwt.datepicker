@@ -1,20 +1,24 @@
-.datepicker-plot-area .toolbox {
-  display: block;
-  width: 100%;
-  float: left;
-  padding: 3px 0px;
-  .btn-today {
+.datepicker-plot-area {
+  .toolbox {
     display: block;
-    width: 60px;
-    height: 20px;
-    line-height: 16px;
-    margin: 0px auto;
+    float: left;
+    padding: 3px 0;
+    width: 100%;
 
-    font-weight: $strong-font;
-    background-color: $bottom-bg;
-    &:hover {
-      background-color: $bottom-bg-hover;
+    .btn-today {
+      @extend %interactive-item;
+      background-color: $bottom-bg;
+
+      display: block;
+      font-weight: $strong-font;
+      height: 20px;
+      line-height: 16px;
+      margin: 0 auto;
+      width: 60px;
+
+      &:hover {
+        background-color: $bottom-bg-hover;
+      }
     }
-    @extend .interactive-item;
   }
 }

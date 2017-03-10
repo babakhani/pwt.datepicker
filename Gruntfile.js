@@ -103,10 +103,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jsdoc-to-markdown');
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['concat', 'sass', 'watch']);
+        grunt.registerTask('default', ['sass', 'watch']);
     }
     else if (grunt.option("build") === true) {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify']);
+        grunt.registerTask('default', ['sass', 'cssmin', 'uglify']);
     }
     else if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc2md']);

@@ -1,39 +1,45 @@
-.datepicker-plot-area .datepicker-header {
-  display: block;
-  width: 98%;
-  height: 30px;
-  float: left;
-  padding: 3px 1% 0px 1%;
-  .btn-next,
-  .btn-switch,
-  .btn-prev {
+.datepicker-plot-area {
+  .datepicker-header {
     display: block;
+    width: 98%;
+    height: 30px;
     float: left;
-    height: 28px;
-    line-height: 28px;
-    font-weight: $strong-font;
-    background-color: $bottom-bg;
-    color: $bottom-text-color;
-    &:hover {
-      background-color: $bottom-bg-hover;
-    }
-    @extend .interactive-item;
+    padding: 3px 1% 0;
 
-  }
-  .btn-next {
-    display: block;
-    width: 15%;
-    float: left;
-  }
-  .btn-switch {
-    display: block;
-    width: 66%;
-    margin: 0px 2% 0px 2%;
-    float: left;
-  }
-  .btn-prev {
-    display: block;
-    width: 15%;
-    float: left;
+    .btn-next,
+    .btn-switch,
+    .btn-prev {
+      display: block;
+      float: left;
+      height: 28px;
+      line-height: 28px;
+      font-weight: $strong-font;
+      background-color: $bottom-bg;
+      color: $bottom-text-color;
+      @extend %interactive-item;
+
+      &:hover {
+        background-color: $bottom-bg-hover;
+      }
+    }
+
+    .btn-next {
+      display: block;
+      width: 15%;
+      float: left;
+    }
+
+    .btn-switch {
+      display: block;
+      width: 66%;
+      margin: 0 2%;
+      float: left;
+    }
+
+    .btn-prev {
+      display: block;
+      width: 15%;
+      float: left;
+    }
   }
 }
