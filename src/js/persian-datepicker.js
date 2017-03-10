@@ -2097,7 +2097,7 @@ var Toolbox = function () {
     key: '_attachEvents',
     value: function _attachEvents() {
       var that = this;
-      $(document).on('click', '.btn-today', function () {
+      $(document).on('click', '#' + that.model.view.id + ' .btn-today', function () {
         that.model.state.setSelectedDateTime('unix', new Date().valueOf());
         that.model.state.setViewDateTime('unix', new Date().valueOf());
         that.model.options.toolbox.onToday();
