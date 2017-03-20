@@ -41,19 +41,19 @@ module.exports = function (grunt) {
                         'src/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
+                        'src/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'dist/css/theme/<%= pkg.name %>-blue.css': 'src/sass/persian-datepicker-blue.scss'
+                        'src/css/theme/<%= pkg.name %>-blue.css': 'src/sass/persian-datepicker-blue.scss'
                     },
                     {
-                        'dist/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
+                        'src/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
                     },
                     {
-                        'dist/css/theme/<%= pkg.name %>-redblack.css': 'src/sass/persian-datepicker-redblack.scss'
+                        'src/css/theme/<%= pkg.name %>-redblack.css': 'src/sass/persian-datepicker-redblack.scss'
                     },
                     {
-                        'dist/css/theme/<%= pkg.name %>-cheerup.css': 'src/sass/persian-datepicker-cheerup.scss'
+                        'src/css/theme/<%= pkg.name %>-cheerup.css': 'src/sass/persian-datepicker-cheerup.scss'
                     }
                 ]
             }
