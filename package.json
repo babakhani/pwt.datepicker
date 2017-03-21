@@ -45,18 +45,20 @@
     "mustache": "=2.3.0",
     "persian-date": "^0.1.8",
     "sass-lint": "^1.10.2",
-    "simple-server": "^1.0.1"
+    "simple-server": "^1.0.1",
+    "sync-pkg": "^0.7.2"
   },
   "dependencies": {
     "jquery": "2.2.0",
     "persian-date": "0.1.8"
   },
   "scripts": {
+    "pre-dev" : "sudo npm install -g sync-pkg babel grunt simple-server",
     "dev": "babel --watch src/es6 --out-file src/.tmp/persian-datepicker.js & simple-server 3000 & grunt --force --dev &",
     "jshint": "./node_modules/jshint/bin/jshint src/es6/*.js",
     "lint": "sass-lint -c .sass-lint.yml --verbose",
     "doc": "grunt --doc",
     "build": "grunt --force --build",
-    "serve": "babel --watch src/es6 --out-file src/js/persian-datepicker.js & simple-server 3000"
+    "sync-pkg": "sync-pkg"
   }
 }
