@@ -64,5 +64,6 @@
   ],
   "files": [
     "dist"
-  ]
+  ],
+  "description": "jQuery datepicker plugin work with Iranian calendar."
 }
