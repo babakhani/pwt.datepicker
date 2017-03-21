@@ -5,40 +5,86 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <link href="css/persian-datepicker-0.5.0.css" rel="stylesheet"/>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link id="datepickerTheme" href="./css/persian-datepicker-0.5.0.css" rel="stylesheet"/>
     <title>Persian Datepicker</title>
+    <script type="text/javascript">
+        function swapStyleSheet(sheet) {
+            document.getElementById('datepickerTheme').setAttribute('href', sheet);
+        }
+    </script>
 </head>
 <body>
 <div class="col-xs-12">
-    <div class="col-xs-9">
-        <h1>Persian Date Picker Demo</h1>
-        <p>
-            <span class="label label-success">Version 0.5.0</span>
-        </p>
-    </div>
+    <p>
+    <h1>Persian Date Picker Demo</h1>
+    <span class="label label-success">Version 0.5.0</span>
+    </p>
 </div>
 <div class="col-xs-12">
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <input id="inlineAlt" value="2016/12/10 12:20" class="col-xs-6"/>
-            <br/>
-            <br/>
-            <div id="inline">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Theme Roller</h3>
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-primary" onclick="swapStyleSheet('css/theme/persian-datepicker-blue-0.5.0.css')">
+                        Blue
+                    </button>
+                    <button class="btn btn-primary"
+                            onclick="swapStyleSheet('css/theme/persian-datepicker-cheerup-0.5.0.css')">
+                        Cheerup
+                    </button>
+                    <button class="btn btn-primary" onclick="swapStyleSheet('css/theme/persian-datepicker-dark-0.5.0.css')">
+                        Dark
+                    </button>
+                    <button class="btn btn-primary"
+                            onclick="swapStyleSheet('css/theme/persian-datepicker-redblack-0.5.0.css')">
+                        Redblack
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Inline Sample</h3>
+                </div>
+                <div class="panel-body">
+                    <input id="inlineAlt" value="2016/12/10 12:20" class="col-xs-6"/>
+                    <br/>
+                    <br/>
+                    <div id="inline">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Input Sample</h3>
+                </div>
+                <div class="panel-body">
+                    <input id="normalAlt" value="2016/12/10 12:20" class="col-xs-6"/>
+                    <br/>
+                    <br/>
+                    <input id="normal"/>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 <script src="../node_modules/jquery/dist/jquery.js"></script>
-<script src="../bower_components/persian-date/dist/0.1.8/persian-date-0.1.8.js"></script>
-<script src="js/persian-datepicker-0.5.0.js"></script>
+<script src="../node_modules/persian-date/dist/persian-date.js"></script>
+<script src="./js/persian-datepicker-0.5.0.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        window.persianDatepickerDebug = false;
+        $('#normal').persianDatepicker();
         window.pd = $("#inline").persianDatepicker({
             altField: '#inlineAlt',
-            altFormat: 'unix',
+            altFormat: 'LLLL',
             timePicker: {
                 enabled: true,
                 meridiem: {

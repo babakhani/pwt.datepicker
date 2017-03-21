@@ -17,3 +17,5 @@ bower_components
 node_modules
 .sass-cache
 old-js
+
+src/.tmp/*

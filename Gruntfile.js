@@ -1,7 +1,9 @@
 module.exports = function (grunt) {
     var fileBanner = '/*\n  <%= pkg.name %> - v<%= pkg.version %> \n ' +//
         ' Author: reza babakhani \n ' + //
-        'http://babakhani.github.io/PersianWebToolkit/datepicker \n */\n'
+        'http://babakhani.github.io/PersianWebToolkit/datepicker \n */\n';
+
+    require('load-grunt-tasks')(grunt);
 
     // Project configuration.
     grunt.initConfig({
@@ -16,7 +18,7 @@ module.exports = function (grunt) {
                 src: [
                     'node_modules/mustache/mustache.js',
                     'node_modules/hamsterjs/hamster.js',
-                    'src/js/persian-datepicker.js',
+                    'src/.tmp/persian-datepicker.js'
                 ],
                 dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
             }
@@ -32,54 +34,73 @@ module.exports = function (grunt) {
         },
         sass: {
             options: {
-                //banner: fileBanner,
                 sourcemap: 'none'
             },
             dist: {
                 files: [
                     {
-                        'src/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
+                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'src/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
+                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'src/css/theme/<%= pkg.name %>-blue.css': 'src/sass/persian-datepicker-blue.scss'
+                        'dist/css/theme/<%= pkg.name %>-blue-<%= pkg.version %>.css': 'src/sass/persian-datepicker-blue.scss'
                     },
                     {
-                        'src/css/theme/<%= pkg.name %>-dark.css': 'src/sass/persian-datepicker-dark.scss'
+                        'dist/css/theme/<%= pkg.name %>-dark-<%= pkg.version %>.css': 'src/sass/persian-datepicker-dark.scss'
                     },
                     {
-                        'src/css/theme/<%= pkg.name %>-redblack.css': 'src/sass/persian-datepicker-redblack.scss'
+                        'dist/css/theme/<%= pkg.name %>-redblack-<%= pkg.version %>.css': 'src/sass/persian-datepicker-redblack.scss'
                     },
                     {
-                        'src/css/theme/<%= pkg.name %>-cheerup.css': 'src/sass/persian-datepicker-cheerup.scss'
+                        'dist/css/theme/<%= pkg.name %>-cheerup-<%= pkg.version %>.css': 'src/sass/persian-datepicker-cheerup.scss'
                     }
                 ]
             }
         },
         cssmin: {
             options: {
-                banner: fileBanner
+                banner: fileBanner,
+                sourceMap: true,
+                report: true
             },
-            combine: {
-                files: {
-                    'dist/css/<%= pkg.name %>-<%= pkg.version %>.min.css': ['src/css/<%= pkg.name %>.css']
-                }
+            main: {
+                files: [
+                    {
+                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.min.css': 'dist/css/<%= pkg.name %>-<%= pkg.version %>.css'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-blue-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-blue-<%= pkg.version %>.css'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-dark-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-dark-<%= pkg.version %>.css'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-redblack-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-redblack-<%= pkg.version %>.css'
+                    },
+                    {
+                        'dist/css/theme/<%= pkg.name %>-cheerup-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-cheerup-<%= pkg.version %>.css'
+                    }
+                ]
             }
         },
         watch: {
             scripts: {
-                files: ['src/js/*.js'],
+                files: ['src/.tmp/*.js'],
                 tasks: ['concat']
             },
             sass: {
                 files: ['src/sass/**/*.scss'],
-                tasks: ['sass', 'cssmin']
+                tasks: ['sass']
             },
             doc: {
-                files: ['src/js/*.js'],
-                tasks: ['jsdoc']
+                files: ['src/es6/*.js'],
+                tasks: ['jsdoc2md']
+            },
+            livereload: {
+                options: {livereload: true},
+                files: ['dist/**/*'],
             }
         },
         jsdoc2md: {
@@ -90,7 +111,7 @@ module.exports = function (grunt) {
                     'example-lang': 'js'
                 },
                 src: 'src/es6/config.js',
-                dest: 'doc/OPTIONS.md'
+                dest: 'dist/doc/OPTIONS.md'
             },
             api: {
                 options: {
@@ -99,29 +120,21 @@ module.exports = function (grunt) {
                     'example-lang': 'js'
                 },
                 src: 'src/es6/api.js',
-                dest: 'doc/API.md'
+                dest: 'dist/doc/API.md'
             }
         }
     });
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-jsdoc-to-markdown');
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['sass', 'watch']);
+        grunt.registerTask('default', ['sass', 'concat', 'watch:scripts', 'watch:sass', 'watch:livereload']);
     }
     else if (grunt.option("build") === true) {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify']);
+        grunt.registerTask('default', ['sass', 'jsdoc2md', 'concat', 'cssmin', 'uglify']);
     }
     else if (grunt.option("doc") === true) {
-        grunt.registerTask('default', ['jsdoc2md']);
+        grunt.registerTask('default', ['jsdoc2md', 'watch:doc']);
     }
     else {
         grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'watch']);
     }
-
 };
