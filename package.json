@@ -53,7 +53,7 @@
     "persian-date": "0.1.8"
   },
   "scripts": {
-    "pre-dev" : "sudo npm install -g sync-pkg babel grunt simple-server",
+    "pre-dev" : "sudo npm install -g sync-pkg babel grunt simple-server versionn",
     "dev": "babel --watch src/es6 --out-file src/.tmp/persian-datepicker.js & simple-server 3000 & grunt --force --dev &",
     "jshint": "./node_modules/jshint/bin/jshint src/es6/*.js",
     "lint": "sass-lint -c .sass-lint.yml --verbose",
