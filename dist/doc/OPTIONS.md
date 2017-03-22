@@ -6,6 +6,7 @@ This is default config class
 **Kind**: global constant  
 
 * [Config](#Config)
+    * [.inline](#Config.inline) : <code>boolean</code>
     * [.initialValue](#Config.initialValue) : <code>boolean</code>
     * [.persianDigit](#Config.persianDigit) : <code>boolean</code>
     * [.viewMode](#Config.viewMode) : <code>string</code>
@@ -76,6 +77,13 @@ This is default config class
     * ["onShow"](#Config.event_onShow)
     * ["onHide" (self)](#Config.event_onHide)
 
+<a name="Config.inline"></a>
+
+### Config.inline : <code>boolean</code>
+if true datepicker render inline
+
+**Kind**: static property of <code>[Config](#Config)</code>  
+**Default**: <code>false</code>  
 <a name="Config.initialValue"></a>
 
 ### Config.initialValue : <code>boolean</code>

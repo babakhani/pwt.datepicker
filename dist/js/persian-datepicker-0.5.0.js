@@ -1077,6 +1077,13 @@ var API = function () {
 var Config = {
 
   /**
+   * @description if true datepicker render inline
+   * @type boolean
+   * @default false
+   */
+  'inline': false,
+
+  /**
    * @type boolean
    * @default true
    */
@@ -2193,10 +2200,10 @@ var Input = function () {
         key: '_attachInputElementEvents',
         value: function _attachInputElementEvents() {
             var that = this;
-            $(this.elem).focus(function () {
+            $(this.elem).on('focus click', function () {
                 that.model.view.show();
             });
-            if (this.model.state.ui.isInput) {
+            if (this.model.state.ui.isInline == false) {
                 $(document).on('click', function (e) {
                     if (!$(e.target).closest(".datepicker-plot-area, .datepicker-plot-area > *, .pwt-datepicker-input-element").length) {
                         that.model.view.hide();
@@ -2821,8 +2828,7 @@ var State = function () {
 
         this.ui = {
             isOpen: false,
-            isInline: this.model.inputElement.nodeName !== 'INPUT',
-            isInput: this.model.inputElement.nodeName === 'INPUT'
+            isInline: this.model.options.inline
         };
 
         this._setFilterDate(this.model.options.minDate, this.model.options.maxDate);
@@ -3191,12 +3197,13 @@ var View = function () {
          */
         this.id = 'persianDateInstance-' + parseInt(Math.random(100) * 1000);
         var that = this;
-        if (this.model.state.ui.isInput) {
+
+        if (this.model.state.ui.isInline) {
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.model.inputElement);
+        } else {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.$container.hide();
             this.setPickerBoxPosition();
-        } else {
-            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.model.inputElement);
         }
         return this;
     }

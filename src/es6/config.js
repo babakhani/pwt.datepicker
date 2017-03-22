@@ -4,6 +4,13 @@
 const Config = {
 
     /**
+     * @description if true datepicker render inline
+     * @type boolean
+     * @default false
+     */
+    'inline': false,
+
+    /**
      * @type boolean
      * @default true
      */

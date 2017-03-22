@@ -97,11 +97,9 @@ class State {
             dateObject: null
         };
 
-
         this.ui = {
             isOpen: false,
-            isInline: this.model.inputElement.nodeName !== 'INPUT',
-            isInput: this.model.inputElement.nodeName === 'INPUT'
+            isInline: this.model.options.inline
         };
 
         this._setFilterDate(this.model.options.minDate, this.model.options.maxDate);

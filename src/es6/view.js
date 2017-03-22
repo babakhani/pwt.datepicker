@@ -41,13 +41,14 @@ class View {
          */
         this.id = `persianDateInstance-${parseInt(Math.random(100) * 1000)}`;
         let that = this;
-        if (this.model.state.ui.isInput) {
+
+        if (this.model.state.ui.isInline) {
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.model.inputElement);
+        }
+        else {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.$container.hide();
             this.setPickerBoxPosition();
-        }
-        else {
-            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.model.inputElement);
         }
         return this;
     }
