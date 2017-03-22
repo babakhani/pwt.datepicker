@@ -41,7 +41,7 @@ class View {
          */
         this.id = `persianDateInstance-${parseInt(Math.random(100) * 1000)}`;
         let that = this;
-        if (this.model.inputElement.nodeName === 'INPUT') {
+        if (this.model.state.ui.isInput) {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.$container.hide();
             this.setPickerBoxPosition();
@@ -383,7 +383,8 @@ class View {
             days: this._getDayViewModel(data),
             month: this._getMonthViewModel(data),
             year: this._getYearViewModel(data),
-            toolbox: this.model.options.toolbox
+            toolbox: this.model.options.toolbox,
+            cssClass: this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : ''
         };
     }
 

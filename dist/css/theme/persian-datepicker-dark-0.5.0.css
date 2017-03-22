@@ -93,9 +93,9 @@
   min-height: 70px;
   display: block;
   width: 200px;
+  min-width: 200px;
   padding: 0 5px;
   position: absolute;
-  top: 100px;
   font: 12px tahoma;
   border: 1px solid #ccc;
   background-color: #2d2d2d; }

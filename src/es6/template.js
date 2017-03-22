@@ -2,7 +2,7 @@
  * @type {string}
  */
 const Template = `
-<div id="plotId" class="datepicker-plot-area datepicker-plot-area-inline-view">
+<div id="plotId" class="datepicker-plot-area {{cssClass}}">
     {{#navigator.enabled}}
         <div class="navigator">
             <div class="datepicker-header">

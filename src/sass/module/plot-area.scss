@@ -9,9 +9,9 @@
   min-height: 70px;
   display: block;
   width: 200px;
+  min-width: 200px;
   padding: 0 5px;
   position: absolute;
-  top: 100px;
   font: $main-font;
   border: $plot-area-border;
   background-color: $plot-area-bg;
