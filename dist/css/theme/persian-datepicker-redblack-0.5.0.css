@@ -214,8 +214,8 @@
 .datepicker-plot-area .datepicker-year-view .year-item,
 .datepicker-plot-area .datepicker-month-view .month-item {
   display: block;
-  width: 31%;
-  margin: 2px 1% 0;
+  width: 33.333333%;
+  margin: 2px 0 0;
   float: right;
   height: 36px;
   line-height: 34px; }
@@ -225,7 +225,8 @@
   width: 100%;
   height: 30px;
   float: left;
-  padding: 3px 0 0; }
+  padding: 3px 0 0;
+  margin-bottom: 8px; }
   .datepicker-plot-area .datepicker-header .btn-next,
   .datepicker-plot-area .datepicker-header .btn-switch,
   .datepicker-plot-area .datepicker-header .btn-prev {
@@ -276,7 +277,8 @@
   width: 100%;
   height: 30px;
   float: left;
-  padding: 3px 0 0; }
+  padding: 3px 0 0;
+  margin-bottom: 8px; }
   .datepicker-plot-area .datepicker-header .btn-next,
   .datepicker-plot-area .datepicker-header .btn-switch,
   .datepicker-plot-area .datepicker-header .btn-prev {
