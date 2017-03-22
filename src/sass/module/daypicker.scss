@@ -40,9 +40,12 @@
 
           &.selected {
             @extend %date-item-selected;
+
+            &:hover {
+              @extend %date-item-hover;
+            }
           }
 
-          &.selected:hover,
           &:hover {
             @extend %date-item-hover;
           }
