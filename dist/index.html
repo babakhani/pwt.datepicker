@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../assets/css/fontiran.css" rel="stylesheet"/>
+
     <link id="datepickerTheme" href="./css/persian-datepicker-0.5.0.css" rel="stylesheet"/>
     <title>Persian Datepicker</title>
     <script type="text/javascript">
@@ -13,6 +15,14 @@
             document.getElementById('datepickerTheme').setAttribute('href', sheet);
         }
     </script>
+
+    <style type="text/css">
+        *,
+        body{
+            font-family: IRANSans, tahoma ;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -44,14 +54,14 @@
 
 <div class="col-xs-12">
     <div class="row">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Inline Sample</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <input id="inlineAlt" class="form-control" value="2016/12/10 12:20" class="col-xs-6"/>
+                        <input id="inlineAlt" class="form-control" value="2016/12/10 12:20" disabled/>
                         <br/>
                         <div id="inline">
                         </div>
@@ -59,17 +69,36 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Input Sample</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <input id="normalAlt" class="form-control" value="2016/12/10 12:20" class="col-xs-6"/>
+                        <input id="normalAlt" class="form-control" value="2016/12/10 12:20" disabled/>
                     </div>
                     <div class="form-group">
                         <input class="form-control" id="normal"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Input Sample</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input id="inputGroupAlt" type="text" class="form-control" placeholder="Alt Field" disabled>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@</span>
+                            <input id="inputGroup" type="text" class="form-control" placeholder="Username"
+                                   aria-describedby="basic-addon1">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,7 +111,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         window.persianDatepickerDebug = false;
-        $('#normal').persianDatepicker();
+        $('#normal').persianDatepicker({
+            altField: '#normalAlt',
+            altFormat: 'LLLL'
+        });
+        $('#inputGroup').persianDatepicker({
+            altField: '#inputGroupAlt',
+            altFormat: 'LLLL'
+        });
         window.pd = $("#inline").persianDatepicker({
             altField: '#inlineAlt',
             altFormat: 'LLLL',

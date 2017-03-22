@@ -1,10 +1,10 @@
 .datepicker-plot-area {
   .datepicker-header {
     display: block;
-    width: 98%;
+    width: 100%;
     height: 30px;
     float: left;
-    padding: 3px 1% 0;
+    padding: 3px 0 0;
 
     .btn-next,
     .btn-switch,
@@ -17,6 +17,7 @@
       background-color: $bottom-bg;
       color: $bottom-text-color;
       @extend %interactive-item;
+      padding: 0;
 
       &:hover {
         background-color: $bottom-bg-hover;
