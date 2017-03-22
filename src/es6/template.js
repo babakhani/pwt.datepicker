@@ -98,7 +98,7 @@ const Template = `
         {{#minute.enabled}}
             <div class="minute time-segment" data-time-key="minute" >
                 <div class="up-btn" data-time-key="minute">▲</div>
-                <input value="{{minute.title}}" type="text" placeholder="minute" class="minute-input">
+                <input disabled value="{{minute.title}}" type="text" placeholder="minute" class="minute-input">
                 <div class="down-btn" data-time-key="minute">▼</div>
             </div>        
             <div class="divider second-divider">
@@ -108,7 +108,7 @@ const Template = `
         {{#second.enabled}}
             <div class="second time-segment" data-time-key="second"  >
                 <div class="up-btn" data-time-key="second" >▲</div>
-                <input value="{{second.title}}"  type="text" placeholder="second" class="second-input">
+                <input disabled value="{{second.title}}"  type="text" placeholder="second" class="second-input">
                 <div class="down-btn" data-time-key="second" >▼</div>
             </div>
             <div class="divider meridian-divider"></div>
@@ -117,7 +117,7 @@ const Template = `
         {{#meridiem.enabled}}
             <div class="meridiem time-segment" data-time-key="meridian" >
                 <div class="up-btn" data-time-key="meridiem">▲</div>
-                <input value="{{meridiem.title}}" type="text" class="meridiem-input">
+                <input disabled value="{{meridiem.title}}" type="text" class="meridiem-input">
                 <div class="down-btn" data-time-key="meridiem">▼</div>
             </div>
         {{/meridiem.enabled}}

@@ -51,12 +51,14 @@
       margin: 0;
       height: 20px;
       line-height: 18px;
+      color: $timepicker-btn-color;
       @extend %top-big-curve;
       @extend %interactive-item;
       @extend %animation;
 
       &:hover {
         background-color: $bottom-bg-hover;
+        color: $timepicker-btn-hover-color;
       }
 
     }
@@ -71,6 +73,7 @@
       margin: 0 5%;
       height: 20px;
       padding: 0;
+      outline: none;
       @extend %interactive-item;
       border: $timepicker-input-border;
       background: $timepicker-input-bg;
