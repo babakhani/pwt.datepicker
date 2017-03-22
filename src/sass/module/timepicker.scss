@@ -36,6 +36,11 @@
       float: left;
       overflow: hidden;
       font: $timepicker-segment-divider-font;
+
+      span {
+        height: 60px;
+        line-height: 60px;
+      }
     }
 
     .down-btn,

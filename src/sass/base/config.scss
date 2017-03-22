@@ -42,9 +42,9 @@ $date-item-color: $dark !default;
 $date-item-text-shadow: none !default;
 
 $date-item-hover-font: 14px !default;
-$date-item-hover-bg: $light-gray !default;
+$date-item-hover-bg: $today-color !default;
 $date-item-hover-border: 0 !default;
-$date-item-hover-color: '';
+$date-item-hover-color: $white !default;
 $date-item-hover-text-shadow: none !default;
 
 $date-item-today-bg: $dark !default;
@@ -67,7 +67,7 @@ $date-item-disable-border: none !default;
 $date-item-disable-color: $gray !default;
 $date-item-disable-text-shadow: none !default;
 
-// Tiomepicker
+// Timepicker
 
 $timepicker-border: 1px solid $ultra-light-gray !default;
 $timepicker-bg: $super-light-gray !default;

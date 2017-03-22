@@ -91,7 +91,7 @@ module.exports = function (grunt) {
                 tasks: ['concat']
             },
             sass: {
-                files: ['src/sass/**/*.scss'],
+                files: ['src/sass/**/*.scss','src/sass/*.scss'],
                 tasks: ['sass']
             },
             doc: {
@@ -126,7 +126,7 @@ module.exports = function (grunt) {
     });
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['sass', 'concat', 'watch:scripts', 'watch:sass', 'watch:livereload']);
+        grunt.registerTask('default', ['sass', 'concat', 'watch']);
     }
     else if (grunt.option("build") === true) {
         grunt.registerTask('default', ['sass', 'jsdoc2md', 'concat', 'cssmin', 'uglify']);

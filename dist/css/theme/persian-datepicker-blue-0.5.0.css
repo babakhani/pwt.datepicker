@@ -148,6 +148,9 @@
     float: left;
     overflow: hidden;
     font: 12px bold; }
+    .datepicker-plot-area .datepicker-time-view .divider span {
+      height: 60px;
+      line-height: 60px; }
   .datepicker-plot-area .datepicker-time-view .down-btn,
   .datepicker-plot-area .datepicker-time-view .up-btn {
     display: block;

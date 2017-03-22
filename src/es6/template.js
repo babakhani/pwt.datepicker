@@ -93,7 +93,9 @@ const Template = `
                 <input value="{{hour.title}}" type="text" placeholder="hour" class="hour-input">
                 <div class="down-btn" data-time-key="hour">▼</div>                    
             </div>       
-            <div class="divider">:</div>
+            <div class="divider">
+                <span>:</span>
+            </div>
         {{/hour.enabled}}
         {{#minute.enabled}}
             <div class="minute time-segment" data-time-key="minute" >
@@ -101,7 +103,9 @@ const Template = `
                 <input value="{{minute.title}}" type="text" placeholder="minute" class="minute-input">
                 <div class="down-btn" data-time-key="minute">▼</div>
             </div>        
-            <div class="divider second-divider">:</div>
+            <div class="divider second-divider">
+                <span>:</span>
+            </div>
         {{/minute.enabled}}
         {{#second.enabled}}
             <div class="second time-segment" data-time-key="second"  >
