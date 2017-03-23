@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "jquery": "2.2.0",
-    "persian-date": "0.1.8"
+    "persian-date": "=0.1.8-b"
   },
   "scripts": {
     "pre-dev": "sudo npm install -g sync-pkg babel grunt simple-server versionn",
