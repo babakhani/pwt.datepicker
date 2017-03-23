@@ -72,7 +72,7 @@ class Input {
         $(this.elem).on('focus click',function () {
             that.model.view.show();
         });
-        if (this.model.state.ui.isInline == false) {
+        if (this.model.state.ui.isInline === false) {
             $(document).on('click', function (e) {
                 if (!$(e.target).closest(".datepicker-plot-area, .datepicker-plot-area > *, .pwt-datepicker-input-element").length) {
                     that.model.view.hide();
