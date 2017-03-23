@@ -9,4 +9,4 @@ bower_components
 .idea
 node_modules
 .sass-cache
-src/.tmp/*
+src/.tmp/persian-datepicker.js
