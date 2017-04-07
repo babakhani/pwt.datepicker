@@ -1,15 +1,5 @@
 module.exports = function (grunt) {
-
-    let banner =
-        '/*\n' +
-        '** <%= pkg.name %> - v<%= pkg.version %>\n' +
-        '** <%= pkg.author %>\n' +
-        '** <%= pkg.homepage %>\n' +
-        '** Under <%= pkg.license %> license \n' +
-        '*/ \n';
-
     require('load-grunt-tasks')(grunt);
-
     // Project configuration.
     grunt.initConfig({
         banner: '/*\n' +
@@ -40,7 +30,19 @@ module.exports = function (grunt) {
                 src: [
                     'node_modules/mustache/mustache.js',
                     'node_modules/hamsterjs/hamster.js',
-                    'src/.tmp/tmp.js'
+                    'src/.tmp/api.js',
+                    'src/.tmp/const.js',
+                    'src/.tmp/config.js',
+                    'src/.tmp/date.js',
+                    'src/.tmp/input.js',
+                    'src/.tmp/model.js',
+                    'src/.tmp/navigator.js',
+                    'src/.tmp/options.js',
+                    'src/.tmp/plugin.js',
+                    'src/.tmp/state.js',
+                    'src/.tmp/template.js',
+                    'src/.tmp/toolbox.js',
+                    'src/.tmp/view.js',
                 ],
                 dest: 'dist/js/<%= pkg.name %>.js'
             }
@@ -90,17 +92,13 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            scripts: {
-                files: ['src/.tmp/*.js'],
-                tasks: ['concat']
-            },
             sass: {
                 files: ['src/sass/**/*.scss', 'src/sass/*.scss'],
                 tasks: ['sass']
             },
-            doc: {
+            js: {
                 files: ['src/es6/*.js'],
-                tasks: ['jsdoc2md']
+                tasks: ['babel', 'concat']
             },
             livereload: {
                 options: {livereload: true},
@@ -126,16 +124,30 @@ module.exports = function (grunt) {
                 src: 'src/es6/api.js',
                 dest: 'dist/doc/API.md'
             }
+        },
+        babel: {
+            options: {
+                presets: ['es2015']
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/es6/',
+                    src: ['*.js'],
+                    dest: 'src/.tmp/',
+                    ext: '.js'
+                }]
+            }
         }
     });
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['sass:dev', 'concat', 'usebanner', 'watch']);
+        grunt.registerTask('default', ['babel', 'sass:dev', 'concat', 'uglify', 'usebanner', 'watch']);
     }
     else if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc2md', 'watch:doc']);
     }
     else {
-        grunt.registerTask('default', ['sass', 'jsdoc2md', 'concat', 'uglify', 'usebanner']);
+        grunt.registerTask('default', ['babel', 'sass', 'jsdoc2md', 'concat', 'uglify', 'usebanner']);
     }
 };

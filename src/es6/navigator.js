@@ -62,10 +62,21 @@ class Navigator {
      * @public
      */
     timeUp(timekey) {
-        let step = this.model.options.timePicker[timekey].step;
-        let currentState = DateUtil.normalizeTime(timekey, parseInt(this.model.state.view[timekey]) + step);
-        this.model.state.setViewDateTime(timekey, currentState);
-        this.model.state.setSelectedDateTime('unix', this.model.state.selected.unixDate);
+        let step, t;
+        if (timekey == 'meridiem') {
+            step = 12;
+            if (this.model.state.view.meridiem == 'AM') {
+                t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+            } else {
+                t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+            }
+            this.model.state.meridiemToggle()
+        } else {
+            step = this.model.options.timePicker[timekey].step;
+            t = new pDate(this.model.state.selected.unixDate).add(timekey, step).valueOf();
+        }
+        this.model.state.setViewDateTime('unix', t);
+        this.model.state.setSelectedDateTime('unix', t);
     }
 
 
@@ -75,10 +86,21 @@ class Navigator {
      * @public
      */
     timeDown(timekey) {
-        let step = this.model.options.timePicker[timekey].step;
-        let currentState = DateUtil.normalizeTime(timekey, parseInt(this.model.state.view[timekey]) - step);
-        this.model.state.setViewDateTime(timekey, currentState);
-        this.model.state.setSelectedDateTime('unix', this.model.state.selected.unixDate);
+        let step, t;
+        if (timekey == 'meridiem') {
+            step = 12;
+            if (this.model.state.view.meridiem == 'AM') {
+                t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+            } else {
+                t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+            }
+            this.model.state.meridiemToggle()
+        } else {
+            step = this.model.options.timePicker[timekey].step;
+            t = new pDate(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
+        }
+        this.model.state.setViewDateTime('unix', t);
+        this.model.state.setSelectedDateTime('unix', t);
     }
 
 
