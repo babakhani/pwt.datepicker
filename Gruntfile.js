@@ -1,86 +1,90 @@
 module.exports = function (grunt) {
-    var fileBanner = '/*\n  <%= pkg.name %> - v<%= pkg.version %> \n ' +//
-        ' Author: reza babakhani \n ' + //
-        'http://babakhani.github.io/PersianWebToolkit/datepicker \n */\n';
+
+    let banner =
+        '/*\n' +
+        '** <%= pkg.name %> - v<%= pkg.version %>\n' +
+        '** <%= pkg.author %>\n' +
+        '** <%= pkg.homepage %>\n' +
+        '** Under <%= pkg.license %> license \n' +
+        '*/ \n';
 
     require('load-grunt-tasks')(grunt);
 
     // Project configuration.
     grunt.initConfig({
+        banner: '/*\n' +
+        '** <%= pkg.name %> - v<%= pkg.version %>\n' +
+        '** <%= pkg.author %>\n' +
+        '** <%= pkg.homepage %>\n' +
+        '** Under <%= pkg.license %> license \n' +
+        '*/ \n',
+        usebanner: {
+            dist: {
+                options: {
+                    position: 'top',
+                    banner: '<%= banner %>'
+                },
+                files: {
+                    src: ['dist/**/*.js', 'dist/**/*css']
+                }
+            }
+        },
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
                 stripBanners: true,
-                banner: fileBanner + '( function () {',
+                banner: '( function () {',
                 footer: '}());'
             },
             dist: {
                 src: [
                     'node_modules/mustache/mustache.js',
                     'node_modules/hamsterjs/hamster.js',
-                    'src/.tmp/persian-datepicker.js'
+                    'src/.tmp/tmp.js'
                 ],
-                dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js'
+                dest: 'dist/js/<%= pkg.name %>.js'
             }
         },
         uglify: {
-            options: {
-                banner: fileBanner
-            },
             build: {
-                src: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.js',
-                dest: 'dist/js/<%= pkg.name %>-<%= pkg.version %>.min.js'
+                src: 'dist/js/<%= pkg.name %>.js',
+                dest: 'dist/js/<%= pkg.name %>.min.js'
             }
         },
         sass: {
-            options: {
-                sourcemap: 'none'
-            },
-            dist: {
+            dev: {
+                options: {
+                    style: 'expanded',
+                    sourcemap: 'none'
+                },
                 files: [
                     {
-                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
+                        'dist/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/persian-datepicker.scss'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-blue-<%= pkg.version %>.css': 'src/sass/persian-datepicker-blue.scss'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-dark-<%= pkg.version %>.css': 'src/sass/persian-datepicker-dark.scss'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-redblack-<%= pkg.version %>.css': 'src/sass/persian-datepicker-redblack.scss'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-cheerup-<%= pkg.version %>.css': 'src/sass/persian-datepicker-cheerup.scss'
+                        expand: true,
+                        cwd: 'src/sass/theme',
+                        src: ['*.scss'],
+                        dest: 'dist/css/theme',
+                        ext: '.css'
                     }
                 ]
-            }
-        },
-        cssmin: {
-            options: {
-                banner: fileBanner,
-                sourceMap: true,
-                report: true
             },
-            main: {
+            dist: {
+                options: {
+                    style: 'compressed',
+                    sourcemap: 'none'
+                },
                 files: [
                     {
-                        'dist/css/<%= pkg.name %>-<%= pkg.version %>.min.css': 'dist/css/<%= pkg.name %>-<%= pkg.version %>.css'
+                        'dist/css/<%= pkg.name %>.min.css': 'src/sass/persian-datepicker.scss'
                     },
                     {
-                        'dist/css/theme/<%= pkg.name %>-blue-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-blue-<%= pkg.version %>.css'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-dark-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-dark-<%= pkg.version %>.css'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-redblack-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-redblack-<%= pkg.version %>.css'
-                    },
-                    {
-                        'dist/css/theme/<%= pkg.name %>-cheerup-<%= pkg.version %>.min.css': 'dist/css/theme/<%= pkg.name %>-cheerup-<%= pkg.version %>.css'
+                        expand: true,
+                        cwd: 'src/sass/theme',
+                        src: ['*.scss'],
+                        dest: 'dist/css/theme',
+                        ext: '.min.css'
                     }
                 ]
             }
@@ -91,7 +95,7 @@ module.exports = function (grunt) {
                 tasks: ['concat']
             },
             sass: {
-                files: ['src/sass/**/*.scss','src/sass/*.scss'],
+                files: ['src/sass/**/*.scss', 'src/sass/*.scss'],
                 tasks: ['sass']
             },
             doc: {
@@ -126,15 +130,12 @@ module.exports = function (grunt) {
     });
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['sass', 'concat', 'watch']);
-    }
-    else if (grunt.option("build") === true) {
-        grunt.registerTask('default', ['sass', 'jsdoc2md', 'concat', 'cssmin', 'uglify']);
+        grunt.registerTask('default', ['sass:dev', 'concat', 'usebanner', 'watch']);
     }
     else if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc2md', 'watch:doc']);
     }
     else {
-        grunt.registerTask('default', ['concat', 'sass', 'cssmin', 'uglify', 'watch']);
+        grunt.registerTask('default', ['sass', 'jsdoc2md', 'concat', 'uglify', 'usebanner']);
     }
 };
