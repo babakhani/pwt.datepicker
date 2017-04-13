@@ -1,3 +1,12 @@
+let State = require('./state');
+let Toolbox = require('./toolbox');
+let View = require('./view');
+let Input = require('./input');
+let API = require('./api');
+let Navigator = require('./navigator');
+let Options = require('./options');
+
+
 /**
  * Main datepicker object, manage every things
  */
@@ -84,3 +93,5 @@ class Model {
         return new API(this);
     }
 }
+
+module.exports = Model;

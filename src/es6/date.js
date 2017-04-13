@@ -2,7 +2,7 @@
  * Date helper, some useful date method stored here
  * @class
  */
-class DateUtil {
+const DateUtil = {
 
     /**
      * @param hour
@@ -21,7 +21,7 @@ class DateUtil {
             output = 0;
         }
         return output;
-    }
+    },
 
 
     /**
@@ -37,7 +37,7 @@ class DateUtil {
             output = 0;
         }
         return output;
-    }
+    },
 
 
     /**
@@ -60,7 +60,7 @@ class DateUtil {
             output = 0;
         }
         return output;
-    }
+    },
 
 
     /**
@@ -72,7 +72,7 @@ class DateUtil {
      */
     isSameDay(dateA, dateB) {
         return dateA && dateB && dateA.date() == dateB.date() && dateA.year() == dateB.year() && dateA.month() == dateB.month();
-    }
+    },
 
 
     /**
@@ -84,7 +84,7 @@ class DateUtil {
      */
     isSameMonth(dateA, dateB) {
         return dateA && dateB && dateA.year() == dateB.year() && dateA.month() == dateB.month();
-    }
+    },
 
 
     /**
@@ -113,3 +113,5 @@ class DateUtil {
         return output;
     }
 }
+
+module.exports = DateUtil;

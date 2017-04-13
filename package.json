@@ -36,31 +36,31 @@
     "grunt-babel": "^6.0.0",
     "grunt-banner": "^0.6.0",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "*",
     "grunt-jsdoc-to-markdown": "^3.0.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-webpack": "^2.0.1",
     "jshint": "^2.6.0",
     "load-grunt-tasks": "^3.5.2",
     "mustache": "=2.3.0",
+    "node-sass": "^4.5.2",
     "persian-date": "^0.1.8",
     "sass-lint": "^1.10.2",
     "simple-server": "^1.0.1",
     "sync-pkg": "^0.7.2",
-    "webpack": "^2.3.3"
+    "webpack": "^2.3.3",
+    "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
     "jquery": "2.2.0",
     "persian-date": "=0.1.8-b"
   },
   "scripts": {
-    "pre-dev": "sudo npm install -g sync-pkg babel grunt simple-server versionn sass-lint jshint",
-    "dev": "grunt --dev",
-    "lint": "sass-lint -c .sass-lint.yml --verbose & ./node_modules/jshint/bin/jshint src/es6/*.js",
+    "dev": "node_modules/.bin/webpack-dev-server & grunt --dev",
+    "build": "rm -fR ./dist/js & rm -fR ./dist/css & rm -fR ./dist/doc & grunt",
     "doc": "grunt --doc",
-    "build": "grunt --force --build",
-    "sync-pkg": "sync-pkg"
+    "lint": "sass-lint -c .sass-lint.yml --verbose & ./node_modules/jshint/bin/jshint src/es6/*.js",
+    "sync-pkg": "sync-pkg",
+    "pre-dev": "sudo npm install -g sync-pkg babel grunt simple-server versionn sass-lint jshint"
   }
 }

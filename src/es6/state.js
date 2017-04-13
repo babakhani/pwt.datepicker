@@ -1,3 +1,6 @@
+let DateUtil = require('./date');
+
+
 /**
  * All state set in his object and get from this
  * also this object notify other object to update self or update view or etc.
@@ -280,7 +283,6 @@ class State {
             this.view.minute,
             this.view.second
         ]);
-
         this.view.year = this.view.dateObject.year();
         this.view.month = this.view.dateObject.month();
         this.view.date = this.view.dateObject.date();
@@ -356,3 +358,5 @@ class State {
     }
 
 }
+
+module.exports = State;

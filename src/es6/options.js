@@ -1,3 +1,5 @@
+let Config = require('./config');
+let Template = require('./template');
 /**
  * Extend default config from user interred and do compatibility works
  * @public
@@ -10,7 +12,10 @@ class Options {
      * @todo remove jquery
      */
     constructor(options) {
-        return this._compatibility($.extend(true, this, Config, options));
+        console.log(Config);
+        return this._compatibility(
+            $.extend(true, this, Config, options)
+        );
     }
 
     /**
@@ -58,3 +63,5 @@ class Options {
 
     }
 }
+
+module.exports = Options;

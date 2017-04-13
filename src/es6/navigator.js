@@ -1,3 +1,5 @@
+let Hamster = require('hamsterjs');
+
 /**
  * This navigator class do every thing about navigate and select date
  * @public
@@ -227,3 +229,5 @@ class Navigator {
         }
     }
 }
+
+module.exports = Navigator;

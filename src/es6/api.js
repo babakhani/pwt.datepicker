@@ -1,3 +1,5 @@
+let options = require('./options');
+
 /**
  * This is default API class
  */
@@ -87,3 +89,5 @@ class API {
     }
 
 }
+
+module.exports = API;

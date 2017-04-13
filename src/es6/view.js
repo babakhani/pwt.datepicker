@@ -1,3 +1,9 @@
+let ClassDateRange = require('./date-range');
+let Template = require('./template');
+let Helper = require('./helper');
+let DateUtil = require('./date');
+let Mustache = require('mustache');
+
 /**
  * As its name suggests, all rendering works do in this object
  */
@@ -395,8 +401,7 @@ class View {
      * @param data
      */
     render(data) {
-        // log('Render')
-        debug(this, 'render');
+        Helper.debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
         this.$container.empty().append(this.rendered);
@@ -419,3 +424,4 @@ class View {
     }
 }
 
+module.exports = View;

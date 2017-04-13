@@ -1,3 +1,5 @@
+let Helper = require('./helper');
+
 /**
  * This is default config class
  */
@@ -416,7 +418,7 @@ const Config = {
          * @param selectedDayUnix
          */
         'onSelect': function (selectedDayUnix) {
-            debug('dayPicker Event: onSelect : ' + selectedDayUnix);
+            Helper.debug('dayPicker Event: onSelect : ' + selectedDayUnix);
         }
 
     },
@@ -455,7 +457,7 @@ const Config = {
          * @param monthIndex
          */
         'onSelect': function (monthIndex) {
-            debug('monthPicker Event: onSelect : ' + monthIndex);
+            Helper.debug('monthPicker Event: onSelect : ' + monthIndex);
         }
     },
 
@@ -497,7 +499,7 @@ const Config = {
          * @param year
          */
         'onSelect': function (year) {
-            debug('yearPicker Event: onSelect : ' + year);
+            Helper.debug('yearPicker Event: onSelect : ' + year);
         }
     },
 
@@ -508,7 +510,7 @@ const Config = {
      * @param unixDate
      */
     'onSelect': function (unixDate) {
-        debug(this, 'datepicker Event: onSelect : ' + unixDate);
+        Helper.debug(this, 'datepicker Event: onSelect : ' + unixDate);
     },
 
     /**
@@ -527,7 +529,7 @@ const Config = {
      * @event
      */
     'onShow': function () {
-        debug(this, 'dayPicker Event: onShow ');
+        Helper.debug(this, 'dayPicker Event: onShow ');
     },
 
 
@@ -537,21 +539,21 @@ const Config = {
      * @param self
      */
     'onHide': function () {
-        debug(this, 'dayPicker Event: onHide ');
+        Helper.debug(this, 'dayPicker Event: onHide ');
     },
 
     /**
      *
      */
     'onToggle': function () {
-        debug(this, 'dayPicker Event: onToggle ');
+        Helper.debug(this, 'dayPicker Event: onToggle ');
     },
 
     /**
      *
      */
     'onDestroy': function () {
-        debug(this, 'dayPicker Event: onDestroy ');
+        Helper.debug(this, 'dayPicker Event: onDestroy ');
     },
 
 
@@ -722,5 +724,7 @@ const Config = {
      * @type {number}
      * @default 800
      */
-    'inputDelay': 800,
+    'inputDelay': 800
 };
+
+module.exports = Config;

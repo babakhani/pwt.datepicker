@@ -29,3 +29,5 @@ class Toolbox {
         });
     }
 }
+
+module.exports = Toolbox;

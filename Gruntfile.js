@@ -1,3 +1,6 @@
+const webpackConfig = require('./webpack.config.js');
+const webpackDevConfig = require('./webpack.config.dev.js');
+
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     // Project configuration.
@@ -20,75 +23,20 @@ module.exports = function (grunt) {
             }
         },
         pkg: grunt.file.readJSON('package.json'),
-        concat: {
-            options: {
-                stripBanners: true,
-                banner: '( function () {',
-                footer: '}());'
-            },
-            dist: {
-                src: [
-                    'node_modules/mustache/mustache.js',
-                    'node_modules/hamsterjs/hamster.js',
-                    'src/.tmp/api.js',
-                    'src/.tmp/const.js',
-                    'src/.tmp/config.js',
-                    'src/.tmp/date.js',
-                    'src/.tmp/input.js',
-                    'src/.tmp/model.js',
-                    'src/.tmp/navigator.js',
-                    'src/.tmp/options.js',
-                    'src/.tmp/plugin.js',
-                    'src/.tmp/state.js',
-                    'src/.tmp/template.js',
-                    'src/.tmp/toolbox.js',
-                    'src/.tmp/view.js',
-                ],
-                dest: 'dist/js/<%= pkg.name %>.js'
-            }
-        },
-        uglify: {
-            build: {
-                src: 'dist/js/<%= pkg.name %>.js',
-                dest: 'dist/js/<%= pkg.name %>.min.js'
-            }
-        },
         sass: {
             dev: {
-                options: {
-                    style: 'expanded',
-                    sourcemap: 'none'
-                },
-                files: [
-                    {
-                        'dist/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'src/sass/theme',
-                        src: ['*.scss'],
-                        dest: 'dist/css/theme',
-                        ext: '.css'
-                    }
-                ]
+                files: {
+                    'dist/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss',
+                }
             },
-            dist: {
+            prod: {
                 options: {
-                    style: 'compressed',
-                    sourcemap: 'none'
+                    outputStyle: 'compressed',
+                    sourceMap: true
                 },
-                files: [
-                    {
-                        'dist/css/<%= pkg.name %>.min.css': 'src/sass/persian-datepicker.scss'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'src/sass/theme',
-                        src: ['*.scss'],
-                        dest: 'dist/css/theme',
-                        ext: '.min.css'
-                    }
-                ]
+                files: {
+                    'dist/css/<%= pkg.name %>.min.css': 'src/sass/persian-datepicker.scss',
+                }
             }
         },
         watch: {
@@ -98,11 +46,7 @@ module.exports = function (grunt) {
             },
             js: {
                 files: ['src/es6/*.js'],
-                tasks: ['babel', 'concat']
-            },
-            livereload: {
-                options: {livereload: true},
-                files: ['dist/**/*'],
+                tasks: ['webpack:dev']
             }
         },
         jsdoc2md: {
@@ -125,29 +69,19 @@ module.exports = function (grunt) {
                 dest: 'dist/doc/API.md'
             }
         },
-        babel: {
-            options: {
-                presets: ['es2015']
-            },
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/es6/',
-                    src: ['*.js'],
-                    dest: 'src/.tmp/',
-                    ext: '.js'
-                }]
-            }
+        webpack: {
+            prod: webpackConfig,
+            dev: webpackDevConfig
         }
     });
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['babel', 'sass:dev', 'concat', 'uglify', 'usebanner', 'watch']);
+        grunt.registerTask('default', ['sass:dev', 'webpack:dev', 'watch']);
     }
     else if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc2md', 'watch:doc']);
     }
     else {
-        grunt.registerTask('default', ['babel', 'sass', 'jsdoc2md', 'concat', 'uglify', 'usebanner']);
+        grunt.registerTask('default', ['sass', 'webpack', 'jsdoc2md', 'usebanner']);
     }
 };

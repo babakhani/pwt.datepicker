@@ -72,11 +72,11 @@ $('.alt-field-example').persianDatepicker({
 ```html
 <input class="alt-field-example" />
 ```
-<label>Datepicker</label>
-<input class="datepicker-demo alt-field-example" />
-
 <label>Alt field</label>
 <input class="datepicker-demo-alt alt-field-example-alt-field" />
+
+<label>Datepicker</label>
+<input class="datepicker-demo alt-field-example" />
 
 
 ## persianDigit

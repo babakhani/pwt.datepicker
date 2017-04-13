@@ -134,3 +134,5 @@ const Template = `
     {{/toolbox}}
 </div>
 `;
+
+module.exports = Template;

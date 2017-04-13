@@ -1,9 +1,5 @@
-/*
- * Persian-Datepicker
- * @author Reza Babakhani
- */
+let Model = require('./model');
 
-var DateUtil = new DateUtil();
 /**
  * @author babakhani.reza@gmail.com
  * @description jquery plugin initializer
@@ -15,7 +11,6 @@ var DateUtil = new DateUtil();
             $.error("Invalid selector");
         }
         $(this).each(function () {
-
             // encapsulation Args
             var emptyArr = [],
                 tempArg = args.concat(emptyArr),
