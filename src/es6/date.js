@@ -9,9 +9,18 @@ const DateUtil = {
      * @param meridiem
      * @return {*}
      */
-    convertAMtoPM(hour) {
+    convertAMtoPM(hour, meridiem) {
+
+        console.log('convertAMtoPM')
+        console.log(hour)
+        console.log(meridiem)
+        console.log("-----------")
+
         var output = hour;
-        if ((hour + 12) > 24) {
+        if ((hour + 12) > 24 && meridiem === "AM") {
+            output = hour - 12;
+        }
+        if ((hour + 12) > 24 && meridiem === "PM") {
             output = hour - 12;
         }
         if ((hour - 12) < 0) {
@@ -28,7 +37,7 @@ const DateUtil = {
      * @property convert24hTo12
      * @param hour
      */
-    convert24hTo12(hour, meridiem) {
+    convert24hTo12(hour) {
         var output = hour;
         if (hour > 12) {
             output = hour - 12;
@@ -46,8 +55,10 @@ const DateUtil = {
      * @returns {*}
      */
     convert12hTo24(hour, meridiem) {
+        console.log('convert12hTo24');
+
         var output = hour;
-        if (meridiem === "PM" && hour > 12) {
+        if (meridiem && hour > 12) {
             output = hour - 12;
         }
         if (meridiem === "AM" && hour < 12 && hour > 0) {

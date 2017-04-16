@@ -322,21 +322,13 @@ class State {
                 this.view.date = value;
                 break;
             case 'hour':
-                if (self.model.options.timePicker.meridiem.enabled) {
-                    this.view.hour = DateUtil.convert12hTo24(value, self.view.meridiem);
-                } else {
-                    this.view.hour = value;
-                }
+                this.view.hour = value;
                 break;
             case 'minute':
                 this.view.minute = value;
                 break;
             case 'second':
                 this.view.second = value;
-                break;
-            case 'meridiem':
-                self.meridiemToggle();
-                self.setViewDateTime('hour', DateUtil.convertAMtoPM(self.view.hour, self.view.meridiem));
                 break;
         }
         this._setViewDateTimeUnix();

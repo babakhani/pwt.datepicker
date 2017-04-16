@@ -320,7 +320,8 @@ class View {
                 outputList[rowIndex].push({
                     title: calcedDate.format('DD'),
                     dataUnix: calcedDate.valueOf(),
-                    selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
+                    // TODO: check it
+                    selected: DateUtil.isSameDay(calcedDate, this.model.state.view.dateObject),
                     today: DateUtil.isSameDay(calcedDate, new pDate()),
                     otherMonth: otherMonth,
                     // TODO: make configurable
@@ -343,9 +344,8 @@ class View {
         let hourTitle;
         this.model.state.view.dateObject.formatPersian = this.model.options.persianDigit;
 
-
         if (this.model.options.timePicker.meridiem.enabled) {
-            hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour) + '').toPersianDigit();
+            hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour, this.model.state.view.meridiem) + '').toPersianDigit();
         } else {
             hourTitle = (this.model.state.view.hour + '').toPersianDigit();
         }

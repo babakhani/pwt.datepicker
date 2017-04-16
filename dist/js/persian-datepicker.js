@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.0
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -101,9 +94,18 @@ var DateUtil = {
      * @param meridiem
      * @return {*}
      */
-    convertAMtoPM: function convertAMtoPM(hour) {
+    convertAMtoPM: function convertAMtoPM(hour, meridiem) {
+
+        console.log('convertAMtoPM');
+        console.log(hour);
+        console.log(meridiem);
+        console.log("-----------");
+
         var output = hour;
-        if (hour + 12 > 24) {
+        if (hour + 12 > 24 && meridiem === "AM") {
+            output = hour - 12;
+        }
+        if (hour + 12 > 24 && meridiem === "PM") {
             output = hour - 12;
         }
         if (hour - 12 < 0) {
@@ -120,7 +122,7 @@ var DateUtil = {
      * @property convert24hTo12
      * @param hour
      */
-    convert24hTo12: function convert24hTo12(hour, meridiem) {
+    convert24hTo12: function convert24hTo12(hour) {
         var output = hour;
         if (hour > 12) {
             output = hour - 12;
@@ -138,8 +140,10 @@ var DateUtil = {
      * @returns {*}
      */
     convert12hTo24: function convert12hTo24(hour, meridiem) {
+        console.log('convert12hTo24');
+
         var output = hour;
-        if (meridiem === "PM" && hour > 12) {
+        if (meridiem && hour > 12) {
             output = hour - 12;
         }
         if (meridiem === "AM" && hour < 12 && hour > 0) {
@@ -1774,7 +1778,7 @@ var Navigator = function () {
                 t = void 0;
             if (timekey == 'meridiem') {
                 step = 12;
-                if (this.model.state.view.meridiem == 'AM') {
+                if (this.model.state.view.meridiem == 'PM') {
                     t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
                 } else {
                     t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
@@ -2281,21 +2285,13 @@ var State = function () {
                     this.view.date = value;
                     break;
                 case 'hour':
-                    if (self.model.options.timePicker.meridiem.enabled) {
-                        this.view.hour = DateUtil.convert12hTo24(value, self.view.meridiem);
-                    } else {
-                        this.view.hour = value;
-                    }
+                    this.view.hour = value;
                     break;
                 case 'minute':
                     this.view.minute = value;
                     break;
                 case 'second':
                     this.view.second = value;
-                    break;
-                case 'meridiem':
-                    self.meridiemToggle();
-                    self.setViewDateTime('hour', DateUtil.convertAMtoPM(self.view.hour, self.view.meridiem));
                     break;
             }
             this._setViewDateTimeUnix();
@@ -2796,7 +2792,8 @@ var View = function () {
                             outputList[rowIndex].push({
                                 title: calcedDate.format('DD'),
                                 dataUnix: calcedDate.valueOf(),
-                                selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
+                                // TODO: check it
+                                selected: DateUtil.isSameDay(calcedDate, this.model.state.view.dateObject),
                                 today: DateUtil.isSameDay(calcedDate, new pDate()),
                                 otherMonth: otherMonth,
                                 // TODO: make configurable
@@ -2852,7 +2849,7 @@ var View = function () {
             this.model.state.view.dateObject.formatPersian = this.model.options.persianDigit;
 
             if (this.model.options.timePicker.meridiem.enabled) {
-                hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour) + '').toPersianDigit();
+                hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour, this.model.state.view.meridiem) + '').toPersianDigit();
             } else {
                 hourTitle = (this.model.state.view.hour + '').toPersianDigit();
             }
