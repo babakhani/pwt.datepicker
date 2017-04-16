@@ -265,6 +265,7 @@ class State {
         this.selected.unixDate = this.selected.dateObject.valueOf();
         this.model.updateInput(this.selected.unixDate);
         this.model.options.onSelect(this.selected.unixDate);
+        this.model.view.render(this.view);
         return this;
     }
 
@@ -302,6 +303,8 @@ class State {
      */
     setViewDateTime(key, value) {
         var self = this;
+
+
         switch (key) {
             case 'unix':
                 let pd = new persianDate(value);

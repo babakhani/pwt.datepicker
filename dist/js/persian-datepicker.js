@@ -126,32 +126,6 @@ var DateUtil = {
      */
     isSameMonth: function isSameMonth(dateA, dateB) {
         return dateA && dateB && dateA.year() == dateB.year() && dateA.month() == dateB.month();
-    },
-
-
-    /**
-     * @desc normalize time, like check second if bigger than 60
-     * @param {string} key
-     * @param {number} value
-     * @return {number}
-     * @static
-     */
-    normalizeTime: function normalizeTime(key, value) {
-        var output = value;
-        if (key == 'hour') {
-            if (value < 0) {
-                output = 23;
-            } else if (value > 23) {
-                output = 0;
-            }
-        } else if (key == 'minute' || key == 'second') {
-            if (value < 0) {
-                output = 59;
-            } else if (value > 59) {
-                output = 0;
-            }
-        }
-        return output;
     }
 };
 
@@ -1725,9 +1699,9 @@ var Navigator = function () {
             if (timekey == 'meridiem') {
                 step = 12;
                 if (this.model.state.view.meridiem == 'PM') {
-                    t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
-                } else {
                     t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+                } else {
+                    t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
                 }
                 this.model.state.meridiemToggle();
             } else {
@@ -2176,6 +2150,7 @@ var State = function () {
             this.selected.unixDate = this.selected.dateObject.valueOf();
             this.model.updateInput(this.selected.unixDate);
             this.model.options.onSelect(this.selected.unixDate);
+            this.model.view.render(this.view);
             return this;
         }
 
@@ -2211,6 +2186,7 @@ var State = function () {
         key: 'setViewDateTime',
         value: function setViewDateTime(key, value) {
             var self = this;
+
             switch (key) {
                 case 'unix':
                     var pd = new persianDate(value);
@@ -2738,8 +2714,7 @@ var View = function () {
                             outputList[rowIndex].push({
                                 title: calcedDate.format('DD'),
                                 dataUnix: calcedDate.valueOf(),
-                                // TODO: check it
-                                selected: DateUtil.isSameDay(calcedDate, this.model.state.view.dateObject),
+                                selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
                                 today: DateUtil.isSameDay(calcedDate, new pDate()),
                                 otherMonth: otherMonth,
                                 // TODO: make configurable

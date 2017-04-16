@@ -320,8 +320,7 @@ class View {
                 outputList[rowIndex].push({
                     title: calcedDate.format('DD'),
                     dataUnix: calcedDate.valueOf(),
-                    // TODO: check it
-                    selected: DateUtil.isSameDay(calcedDate, this.model.state.view.dateObject),
+                    selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
                     today: DateUtil.isSameDay(calcedDate, new pDate()),
                     otherMonth: otherMonth,
                     // TODO: make configurable
