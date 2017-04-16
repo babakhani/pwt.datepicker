@@ -1699,9 +1699,9 @@ var Navigator = function () {
             if (timekey == 'meridiem') {
                 step = 12;
                 if (this.model.state.view.meridiem == 'PM') {
-                    t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
-                } else {
                     t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+                } else {
+                    t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
                 }
                 this.model.state.meridiemToggle();
             } else {

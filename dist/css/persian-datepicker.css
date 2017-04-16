@@ -84,7 +84,8 @@
   text-shadow: none; }
 
 .datepicker-container {
-  position: fixed;
+  position: absolute;
+  z-index: 100000;
   top: 0; }
 
 .datepicker-plot-area {
