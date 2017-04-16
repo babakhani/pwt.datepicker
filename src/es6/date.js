@@ -5,35 +5,6 @@
 const DateUtil = {
 
     /**
-     * @param hour
-     * @param meridiem
-     * @return {*}
-     */
-    convertAMtoPM(hour, meridiem) {
-
-        console.log('convertAMtoPM')
-        console.log(hour)
-        console.log(meridiem)
-        console.log("-----------")
-
-        var output = hour;
-        if ((hour + 12) > 24 && meridiem === "AM") {
-            output = hour - 12;
-        }
-        if ((hour + 12) > 24 && meridiem === "PM") {
-            output = hour - 12;
-        }
-        if ((hour - 12) < 0) {
-            output = hour + 12;
-        }
-        if ((hour - 12) === 0) {
-            output = 0;
-        }
-        return output;
-    },
-
-
-    /**
      * @property convert24hTo12
      * @param hour
      */
@@ -47,32 +18,6 @@ const DateUtil = {
         }
         return output;
     },
-
-
-    /**
-     * @property convert12hTo24
-     * @param hour
-     * @returns {*}
-     */
-    convert12hTo24(hour, meridiem) {
-        console.log('convert12hTo24');
-
-        var output = hour;
-        if (meridiem && hour > 12) {
-            output = hour - 12;
-        }
-        if (meridiem === "AM" && hour < 12 && hour > 0) {
-            output = hour + 12;
-        }
-        if (meridiem === "AM" && hour === 0) {
-            output = 12;
-        }
-        if (meridiem === "PM" && hour === 0) {
-            output = 0;
-        }
-        return output;
-    },
-
 
     /**
      * check if a date is same as b

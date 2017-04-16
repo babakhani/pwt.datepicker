@@ -59,7 +59,7 @@
     "start": "node_modules/.bin/webpack-dev-server & grunt --dev",
     "build": "rm -fR ./dist/js & rm -fR ./dist/css & rm -fR ./dist/doc & grunt",
     "doc": "grunt --doc",
-    "lint": "sass-lint -c .sass-lint.yml --verbose & ./node_modules/jshint/bin/jshint src/es6/*.js",
+    "test": "sass-lint -c .sass-lint.yml --verbose & ./node_modules/jshint/bin/jshint src/es6/*.js",
     "sync-pkg": "sync-pkg",
     "pre-dev": "sudo npm install -g sync-pkg babel grunt simple-server versionn sass-lint jshint"
   }
