@@ -13,6 +13,14 @@ Jalali calendar datepicker, which depends on https://github.com/babakhani/Persia
 More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 
 
+<a class="github-button" href="https://github.com/babakhani/pwt.datepicker/archive/master.zip" data-icon="octicon-cloud-download" data-style="mega" aria-label="Download babakhani/pwt.datepicker on GitHub">Download</a>
+<a class="github-button" href="https://github.com/babakhani/pwt.datepicker" data-icon="octicon-star" data-style="mega" data-count-href="/babakhani/pwt.datepicker/stargazers" data-count-api="/repos/babakhani/pwt.datepicker#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star babakhani/pwt.datepicker on GitHub">Star</a>
+<a class="github-button" href="https://github.com/babakhani/pwt.datepicker/issues" data-icon="octicon-issue-opened" data-style="mega" data-count-api="/repos/babakhani/pwt.datepicker#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue babakhani/pwt.datepicker on GitHub">Issue</a>
+<a class="github-button" href="https://github.com/babakhani/pwt.datepicker/subscription" data-icon="octicon-eye" data-style="mega" data-count-href="/babakhani/pwt.datepicker/watchers" data-count-api="/repos/babakhani/pwt.datepicker#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch babakhani/pwt.datepicker on GitHub">Watch</a>
+<a class="github-button" href="https://github.com/babakhani/pwt.datepicker/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/babakhani/pwt.datepicker/network" data-count-api="/repos/babakhani/pwt.datepicker#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork babakhani/pwt.datepicker on GitHub">Fork</a>
+
+
+
 - [Documents](http://babakhani.github.io/PersianWebToolkit/datepicker)
 - [Demo](http://babakhani.github.io/PersianWebToolkit/datepcker/example)
 
