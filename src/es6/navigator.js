@@ -167,7 +167,7 @@ class Navigator {
             /**
              * @description days click event
              */
-            $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.year-item-disable)', function () {
+            $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
                 let thisUnix = $(this).data('unix');
                 that.model.state.setSelectedDateTime('unix', thisUnix);
                 that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
@@ -188,7 +188,7 @@ class Navigator {
             /**
              * @description month click event
              */
-            $(document).on('click', '#' + that.model.view.id + ' .datepicker-month-view .month-item:not(.year-item-disable)', function () {
+            $(document).on('click', '#' + that.model.view.id + ' .datepicker-month-view .month-item:not(.month-item-disable)', function () {
                 let month = $(this).data('month');
                 that.model.state.switchViewModeTo('day');
                 if (!that.model.options.onlySelectOnDate) {
