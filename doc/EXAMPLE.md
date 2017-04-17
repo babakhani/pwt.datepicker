@@ -58,8 +58,9 @@ $('.observer-example').persianDatepicker({
 ```html
 <input class="observer-example" />
 ```
-<label>Datepicker</label>
+<label>Alt field</label>
 <input class="datepicker-demo observer-example-alt" />
+<label>Datepicker</label>
 <input class="datepicker-demo observer-example" />
 
 
