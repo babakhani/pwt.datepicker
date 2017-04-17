@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.0
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1523,8 +1516,6 @@ var Input = function () {
                     trueKey = true;
                 }
                 if (trueKey) {
-
-                    console.log('true key');
                     clearTimeout(typingTimer);
                     typingTimer = setTimeout(function () {
                         doneTyping($self);

@@ -79,8 +79,6 @@ class Input {
                 trueKey = true;
             }
             if (trueKey) {
-
-                console.log('true key')
                 clearTimeout(typingTimer);
                 typingTimer = setTimeout(function () {
                     doneTyping($self);

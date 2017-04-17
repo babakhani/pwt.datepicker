@@ -72,7 +72,7 @@ class Navigator {
             } else {
                 t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
             }
-            this.model.state.meridiemToggle()
+            this.model.state.meridiemToggle();
         } else {
             step = this.model.options.timePicker[timekey].step;
             t = new pDate(this.model.state.selected.unixDate).add(timekey, step).valueOf();
@@ -96,7 +96,7 @@ class Navigator {
             } else {
                 t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
             }
-            this.model.state.meridiemToggle()
+            this.model.state.meridiemToggle();
         } else {
             step = this.model.options.timePicker[timekey].step;
             t = new pDate(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
