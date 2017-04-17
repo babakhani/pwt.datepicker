@@ -1,5 +1,80 @@
 @import '../base/config';
-@import 'blue';
+
+
+// Color
+$white: #1a3347;
+$dark: #fff;
+$gray: #00aae2;
+$light-gray: #0095c6;
+$ultra-light-gray: #204b6e;
+$super-light-gray: #204b6e;
+$today-color: #0085b2;
+
+// Font Style & text
+$main-font: 12px tahoma;
+$big-font: 14px tahoma;
+$small-font: 10px tahoma;
+$strong-font: bold;
+$super-strong-font: bold;
+
+$global-text-color: $dark;
+
+$global-text-align: center;
+$layout-big-curve: 6px;
+$layout-small-curve: 3px;
+$main-box-shadow: none;
+$animate-duration: all 100ms ease;
+
+// Plot area
+$plot-area-bg: $white;
+$plot-area-border: none;
+
+// Bottom
+$bottom-bg: $white;
+$bottom-bg-hover: $light-gray;
+$bottom-text-color: $dark;
+
+// Date Item
+$date-item-font: 14px;
+$date-item-bg: $white;
+$date-item-border: 0;
+$date-item-color: $dark;
+$date-item-text-shadow: none;
+
+$date-item-hover-font: 14px;
+$date-item-hover-bg: $light-gray;
+$date-item-hover-border: 0;
+$date-item-hover-color: $dark;
+$date-item-hover-text-shadow: none;
+
+$date-item-today-bg: $dark;
+$date-item-today-border: 0;
+$date-item-today-color: $white;
+$date-item-today-text-shadow: none;
+
+$date-item-selected-bg: $today-color;
+$date-item-selected-border: none;
+$date-item-selected-color: $white !default;
+$date-item-selected-text-shadow: 1px 1px 1px #000;
+
+$date-item-numb-bg: '';
+$date-item-numb-border: none;
+$date-item-numb-color: $gray;
+$date-item-numb-text-shadow: none;
+
+$date-item-disable-bg: $ultra-light-gray;
+$date-item-disable-border: none;
+$date-item-disable-color: $gray;
+$date-item-disable-text-shadow: none;
+
+// Tiomepicker
+$timepicker-border: 1px solid $ultra-light-gray;
+$timepicker-bg: $super-light-gray;
+
+$timepicker-segment-divider-font: 12px bold;
+$timepicker-input-bg: $super-light-gray;
+$timepicker-input-border: none;
+
 
 @import '../base/helper';
 @import '../layout/default';

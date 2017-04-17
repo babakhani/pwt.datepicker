@@ -37,6 +37,18 @@ module.exports = function (grunt) {
                 files: {
                     'dist/css/<%= pkg.name %>.min.css': 'src/sass/persian-datepicker.scss',
                 }
+            },
+            theme: {
+                options: {
+                    outputStyle: 'compressed',
+                    sourceMap: true
+                },
+                files: {
+                    'dist/css/theme/<%= pkg.name %>-blue.min.css': 'src/sass/theme/<%= pkg.name %>-blue.scss',
+                    'dist/css/theme/<%= pkg.name %>-cheerup.min.css': 'src/sass/theme/<%= pkg.name %>-cheerup.scss',
+                    'dist/css/theme/<%= pkg.name %>-dark.min.css': 'src/sass/theme/<%= pkg.name %>-dark.scss',
+                    'dist/css/theme/<%= pkg.name %>-redblack.min.css': 'src/sass/theme/<%= pkg.name %>-redblack.scss'
+                }
             }
         },
         watch: {
