@@ -3,21 +3,21 @@
  * @author Reza Babakhani
  */
 
-var DateUtil = new DateUtil();
+let DateUtil = new DateUtil();
 /**
  * @author babakhani.reza@gmail.com
  * @description jquery plugin initializer
  */
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
-        var args = Array.prototype.slice.call(arguments), output = null, self = this;
+        let args = Array.prototype.slice.call(arguments), output = null, self = this;
         if (!this) {
             $.error("Invalid selector");
         }
         $(this).each(function () {
 
             // encapsulation Args
-            var emptyArr = [],
+            let emptyArr = [],
                 tempArg = args.concat(emptyArr),
                 dp = $(this).data("datepicker"),
                 funcName = null;

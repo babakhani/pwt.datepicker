@@ -115,7 +115,7 @@ class State {
      * @param maxDate
      */
     _setFilterDate(minDate, maxDate) {
-        var self = this;
+        let self = this;
         if (!minDate) {
             minDate = -999999999999999999;
         }
@@ -213,7 +213,7 @@ class State {
      * @return {State}
      */
     setSelectedDateTime(key, value) {
-        var that = this;
+        let that = this;
         switch (key) {
             case 'unix':
                 that.selected.unixDate = value;
@@ -302,7 +302,7 @@ class State {
      * @return {State}
      */
     setViewDateTime(key, value) {
-        var self = this;
+        let self = this;
 
 
         switch (key) {
@@ -343,7 +343,7 @@ class State {
      * desc change meridiem state
      */
     meridiemToggle() {
-        var self = this;
+        let self = this;
         if (self.view.meridiem === 'AM') {
             self.view.meridiem = 'PM';
         } else if (self.view.meridiem === 'PM') {

@@ -6,13 +6,13 @@ let Model = require('./model');
  */
 (function ($) {
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
-        var args = Array.prototype.slice.call(arguments), output = null, self = this;
+        let args = Array.prototype.slice.call(arguments), output = null, self = this;
         if (!this) {
             $.error("Invalid selector");
         }
         $(this).each(function () {
             // encapsulation Args
-            var emptyArr = [],
+            let emptyArr = [],
                 tempArg = args.concat(emptyArr),
                 dp = $(this).data("datepicker"),
                 funcName = null;

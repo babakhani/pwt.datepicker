@@ -5,7 +5,7 @@
  */
 String.prototype.toPersianDigit = function (latinDigit) {
     return this.replace(/\d+/g, function (digit) {
-        var enDigitArr = [], peDigitArr = [], i, j;
+        let enDigitArr = [], peDigitArr = [], i, j;
         for (i = 0; i < digit.length; i += 1) {
             enDigitArr.push(digit.charCodeAt(i));
         }

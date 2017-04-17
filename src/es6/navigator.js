@@ -31,7 +31,7 @@ class Navigator {
 
         // Check options
         if (this.model.options.navigator.scroll.enabled) {
-            var that = this;
+            let that = this;
             let gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
             Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
                 if (delta > 0) {
@@ -112,7 +112,7 @@ class Navigator {
      * @private
      */
     _attachEvents() {
-        var that = this;
+        let that = this;
 
         if (this.model.options.navigator.enabled) {
             /**
@@ -152,7 +152,7 @@ class Navigator {
              * @description time down btn click event
              */
             $(document).on('click', '#' + that.model.view.id + ' .down-btn', function () {
-                var timekey = $(this).data('time-key');
+                let timekey = $(this).data('time-key');
                 that.timeDown(timekey);
             });
 

@@ -11,7 +11,7 @@ class PersianDateParser {
             jalaliPat = new RegExp(that.pattern.jalali);
 
         String.prototype.toEnglishDigits = function () {
-            var charCodeZero = '۰'.charCodeAt(0);
+            let charCodeZero = '۰'.charCodeAt(0);
             return this.replace(/[۰-۹]/g, function (w) {
                 return w.charCodeAt(0) - charCodeZero;
             });

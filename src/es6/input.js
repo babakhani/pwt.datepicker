@@ -73,8 +73,8 @@ class Input {
         });
 
         $(that.elem).bind("keyup", function (e) {
-            var $self = $(this);
-            var trueKey = false;
+            let $self = $(this);
+            let trueKey = false;
             if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {
                 trueKey = true;
             }
@@ -97,9 +97,9 @@ class Input {
         // TODO
         // self.model.options.altField.bind("change", function () {
         //     //if (!self._flagSelfManipulate) {
-        //         var newDate = new Date($(this).val());
+        //         let newDate = new Date($(this).val());
         //         if (newDate !== "Invalid Date") {
-        //             var newPersainDate = new persianDate(newDate);
+        //             let newPersainDate = new persianDate(newDate);
         //             self.selectDate(newPersainDate.valueOf());
         //         }
         //   //  }

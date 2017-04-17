@@ -55,8 +55,8 @@ const Config = {
      *  }
      */
     'formatter': function (unixDate) {
-        var self = this;
-        var pdate = new persianDate(unixDate);
+        let self = this;
+        let pdate = new persianDate(unixDate);
         pdate.formatPersian = this.persianDigit;
         return pdate.format(self.format);
     },
@@ -100,8 +100,8 @@ const Config = {
      *  }
      */
     'altFieldFormatter': function (unixDate) {
-        var self = this;
-        var thisAltFormat = self.altFormat.toLowerCase();
+        let self = this;
+        let thisAltFormat = self.altFormat.toLowerCase();
         if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
             return new Date(unixDate);
         }
@@ -109,7 +109,7 @@ const Config = {
             return unixDate;
         }
         else {
-            var pd = new persianDate(unixDate);
+            let pd = new persianDate(unixDate);
             pd.formatPersian = this.persianDigit;
             return pd.format(self.altFormat);
         }
@@ -408,7 +408,7 @@ const Config = {
          * @return {*}
          */
         'titleFormatter': function (year, month) {
-            var titleDate = new persianDate([year, month]);
+            let titleDate = new persianDate([year, month]);
             titleDate.formatPersian = this.model.options.persianDigit;
             return titleDate.format(this.model.options.dayPicker.titleFormat);
         },
@@ -447,7 +447,7 @@ const Config = {
          * @return {*}
          */
         'titleFormatter': function (unix) {
-            var titleDate = new persianDate(unix);
+            let titleDate = new persianDate(unix);
             titleDate.formatPersian = this.model.options.persianDigit;
             return titleDate.format(this.model.options.monthPicker.titleFormat);
         },

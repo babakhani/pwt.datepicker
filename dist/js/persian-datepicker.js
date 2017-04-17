@@ -1534,9 +1534,9 @@ var Input = function () {
             // TODO
             // self.model.options.altField.bind("change", function () {
             //     //if (!self._flagSelfManipulate) {
-            //         var newDate = new Date($(this).val());
+            //         let newDate = new Date($(this).val());
             //         if (newDate !== "Invalid Date") {
-            //             var newPersainDate = new persianDate(newDate);
+            //             let newPersainDate = new persianDate(newDate);
             //             self.selectDate(newPersainDate.valueOf());
             //         }
             //   //  }

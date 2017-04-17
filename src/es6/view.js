@@ -133,10 +133,10 @@ class View {
      * @return {Boolean}
      */
     checkYearAccess(year) {
-        var output = true;
+        let output = true;
         if (this.model.state.filetredDate) {
-            var startYear = this.model.state.filterDate.start.year;
-            var endYear = this.model.state.filterDate.end.year;
+            let startYear = this.model.state.filterDate.start.year;
+            let endYear = this.model.state.filterDate.end.year;
             if (startYear <= year & year <= endYear) {
                 output = true;
             } else {
@@ -187,10 +187,10 @@ class View {
      * @return {Boolean}
      */
     checkMonthAccess(month) {
-        var output = true,
+        let output = true,
             y = this.model.state.view.year;
         if (this.model.state.filetredDate) {
-            var startMonth = this.model.state.filterDate.start.month,
+            let startMonth = this.model.state.filterDate.start.month,
                 endMonth = this.model.state.filterDate.end.month,
                 startYear = this.model.state.filterDate.start.year,
                 endYear = this.model.state.filterDate.end.year;
@@ -242,7 +242,7 @@ class View {
      * @return {Boolean}
      */
     checkDayAccess(unixtimespan) {
-        var self = this,
+        let self = this,
             output = true;
         self.minDate = this.model.options.minDate;
         self.maxDate = this.model.options.maxDate;
@@ -284,7 +284,7 @@ class View {
         const viewYear = this.model.state.view.year;
         let pdateInstance = new persianDate();
         let daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
-        var firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
+        let firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
         let outputList = [];
         let daysListindex = 0;
         let nextMonthListIndex = 0;

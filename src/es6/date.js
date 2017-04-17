@@ -9,7 +9,7 @@ const DateUtil = {
      * @param hour
      */
     convert24hTo12(hour) {
-        var output = hour;
+        let output = hour;
         if (hour > 12) {
             output = hour - 12;
         }
