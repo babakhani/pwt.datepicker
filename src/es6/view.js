@@ -261,7 +261,7 @@ class View {
                 }
             } else if (self.maxDate) {
                 self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
-                if (unixtimespan <= self.maxDate) {
+                if (unixtimespan >= self.maxDate) {
                     return false;
                 }
             }

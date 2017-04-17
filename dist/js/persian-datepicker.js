@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.0
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -2750,7 +2743,7 @@ var View = function () {
                     }
                 } else if (self.maxDate) {
                     self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
-                    if (unixtimespan <= self.maxDate) {
+                    if (unixtimespan >= self.maxDate) {
                         return false;
                     }
                 }
