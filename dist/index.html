@@ -165,20 +165,20 @@
 
         // Normal Sample
         // --------------------------------------------
-//        $('#normal').persianDatepicker({
-//            altField: '#normalAlt',
-//            altFormat: 'LLLL',
-//            initialValue: false,
-//            observer: true,
-//            format: 'YYYY/MM/DD'
-//        });
-//
-//        // Input Group Sample
-//        // --------------------------------------------
-//        $('#inputGroup').persianDatepicker({
-//            altField: '#inputGroupAlt,#inputGroupAlt2',
-//            altFormat: 'LLLL'
-//        });
+        $('#normal').persianDatepicker({
+            altField: '#normalAlt',
+            altFormat: 'LLLL',
+            initialValue: false,
+            observer: true,
+            format: 'YYYY/MM/DD'
+        });
+
+        // Input Group Sample
+        // --------------------------------------------
+        $('#inputGroup').persianDatepicker({
+            altField: '#inputGroupAlt,#inputGroupAlt2',
+            altFormat: 'LLLL'
+        });
 
         // Inline Sample
         // --------------------------------------------
@@ -186,7 +186,9 @@
             inline: true,
             altField: '#inlineAlt',
             altFormat: 'LLLL',
-            maxDate: new persianDate().valueOf(),
+            viewMode: 'year',
+            maxDate: new persianDate().add('month', 3).valueOf(),
+            minDate: new persianDate().subtract('month', 3).valueOf(),
             timePicker: {
                 enabled: true,
                 meridiem: {

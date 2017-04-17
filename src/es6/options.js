@@ -12,7 +12,6 @@ class Options {
      * @todo remove jquery
      */
     constructor(options) {
-        console.log(Config);
         return this._compatibility(
             $.extend(true, this, Config, options)
         );

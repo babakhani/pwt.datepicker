@@ -137,9 +137,10 @@ class View {
         if (this.model.state.filetredDate) {
             let startYear = this.model.state.filterDate.start.year;
             let endYear = this.model.state.filterDate.end.year;
-            if (startYear <= year & year <= endYear) {
-                output = true;
-            } else {
+            if (startYear && year < startYear) {
+                return false;
+            }
+            else if (endYear && year > endYear) {
                 return false;
             }
         }
@@ -194,18 +195,13 @@ class View {
                 endMonth = this.model.state.filterDate.end.month,
                 startYear = this.model.state.filterDate.start.year,
                 endYear = this.model.state.filterDate.end.year;
-            if (
-                (startYear == endYear && endYear == y && month >= startMonth && month <= endMonth)
-                |
-                (y != endYear && y == startYear && month >= startMonth)
-                |
-                (y != startYear && y == endYear && month <= endMonth)
-                |
-                (y > startYear && y < endYear)
-            ) {
-                output = true;
+            if (startMonth && endMonth && ((y == endYear && month > endMonth) || y > endYear) || ((y == startYear && month < startMonth) || y < startYear)) {
+                return false;
             }
-            else {
+            else if (endMonth && ((y == endYear && month > endMonth) || y > endYear)) {
+                return false;
+            }
+            else if (startMonth && ((y == startYear && month < startMonth) || y < startYear)) {
                 return false;
             }
         }

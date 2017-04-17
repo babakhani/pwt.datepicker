@@ -201,7 +201,6 @@ var Options = function () {
     function Options(options) {
         _classCallCheck(this, Options);
 
-        console.log(Config);
         return this._compatibility($.extend(true, this, Config, options));
     }
 
@@ -1850,7 +1849,7 @@ var Navigator = function () {
                 /**
                  * @description days click event
                  */
-                $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td', function () {
+                $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.year-item-disable)', function () {
                     var thisUnix = $(this).data('unix');
                     that.model.state.setSelectedDateTime('unix', thisUnix);
                     that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
@@ -1870,7 +1869,7 @@ var Navigator = function () {
                 /**
                  * @description month click event
                  */
-                $(document).on('click', '#' + that.model.view.id + ' .datepicker-month-view .month-item', function () {
+                $(document).on('click', '#' + that.model.view.id + ' .datepicker-month-view .month-item:not(.year-item-disable)', function () {
                     var month = $(this).data('month');
                     that.model.state.switchViewModeTo('day');
                     if (!that.model.options.onlySelectOnDate) {
@@ -1893,7 +1892,7 @@ var Navigator = function () {
                 /**
                  * @description year click event
                  */
-                $(document).on('click', '#' + that.model.view.id + ' .datepicker-year-view .year-item', function () {
+                $(document).on('click', '#' + that.model.view.id + ' .datepicker-year-view .year-item:not(.year-item-disable)', function () {
                     var year = $(this).data('year');
                     that.model.state.switchViewModeTo('month');
                     if (!that.model.options.onlySelectOnDate) {
@@ -2569,9 +2568,9 @@ var View = function () {
             if (this.model.state.filetredDate) {
                 var startYear = this.model.state.filterDate.start.year;
                 var endYear = this.model.state.filterDate.end.year;
-                if (startYear <= year & year <= endYear) {
-                    output = true;
-                } else {
+                if (startYear && year < startYear) {
+                    return false;
+                } else if (endYear && year > endYear) {
                     return false;
                 }
             }
@@ -2657,9 +2656,11 @@ var View = function () {
                     endMonth = this.model.state.filterDate.end.month,
                     startYear = this.model.state.filterDate.start.year,
                     endYear = this.model.state.filterDate.end.year;
-                if ((startYear == endYear && endYear == y && month >= startMonth && month <= endMonth) | (y != endYear && y == startYear && month >= startMonth) | (y != startYear && y == endYear && month <= endMonth) | (y > startYear && y < endYear)) {
-                    output = true;
-                } else {
+                if (startMonth && endMonth && (y == endYear && month > endMonth || y > endYear) || y == startYear && month < startMonth || y < startYear) {
+                    return false;
+                } else if (endMonth && (y == endYear && month > endMonth || y > endYear)) {
+                    return false;
+                } else if (startMonth && (y == startYear && month < startMonth || y < startYear)) {
                     return false;
                 }
             }
