@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v0.5.0
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -970,8 +977,8 @@ var Config = {
      */
     'titleFormatter': function titleFormatter(year) {
       var remaining = parseInt(year / 12, 10) * 12;
-      var startYear = new pDate([remaining]);
-      var endYear = new pDate([remaining + 11]);
+      var startYear = new persianDate([remaining]);
+      var endYear = new persianDate([remaining + 11]);
       startYear.formatPersian = this.model.options.persianDigit;
       endYear.formatPersian = this.model.options.persianDigit;
       return startYear.format(this.model.options.yearPicker.titleFormat) + '-' + endYear.format(this.model.options.yearPicker.titleFormat);
@@ -1481,7 +1488,7 @@ var Input = function () {
             var parse = new PersianDateParser(),
                 that = this;
             if (parse.parse(inputString) !== undefined) {
-                var pd = new pDate(parse.parse(inputString)).valueOf();
+                var pd = new persianDate(parse.parse(inputString)).valueOf();
                 that.model.state.setSelectedDateTime('unix', pd);
                 that.model.state.setViewDateTime('unix', pd);
             }
@@ -1751,14 +1758,14 @@ var Navigator = function () {
             if (timekey == 'meridiem') {
                 step = 12;
                 if (this.model.state.view.meridiem == 'PM') {
-                    t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+                    t = new persianDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
                 } else {
-                    t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+                    t = new persianDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
                 }
                 this.model.state.meridiemToggle();
             } else {
                 step = this.model.options.timePicker[timekey].step;
-                t = new pDate(this.model.state.selected.unixDate).add(timekey, step).valueOf();
+                t = new persianDate(this.model.state.selected.unixDate).add(timekey, step).valueOf();
             }
             this.model.state.setViewDateTime('unix', t);
             this.model.state.setSelectedDateTime('unix', t);
@@ -1778,14 +1785,14 @@ var Navigator = function () {
             if (timekey == 'meridiem') {
                 step = 12;
                 if (this.model.state.view.meridiem == 'AM') {
-                    t = new pDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+                    t = new persianDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
                 } else {
-                    t = new pDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+                    t = new persianDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
                 }
                 this.model.state.meridiemToggle();
             } else {
                 step = this.model.options.timePicker[timekey].step;
-                t = new pDate(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
+                t = new persianDate(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
             }
             this.model.state.setViewDateTime('unix', t);
             this.model.state.setSelectedDateTime('unix', t);
@@ -2610,7 +2617,7 @@ var View = function () {
                 for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var i = _step.value;
 
-                    var yearStr = new pDate([i]);
+                    var yearStr = new persianDate([i]);
                     yearStr.formatPersian = this.model.options.persianDigit;
                     yearsModel.push({
                         title: yearStr.format('YYYY'),
@@ -2690,7 +2697,7 @@ var View = function () {
                         enabled: this.checkMonthAccess(month.index),
                         year: this.model.state.view.year,
                         dataMonth: month.index,
-                        selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new pDate([this.model.state.view.year, month.index]))
+                        selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, month.index]))
                     });
                 }
             } catch (err) {
@@ -2731,18 +2738,18 @@ var View = function () {
 
             if (self.model.state.filetredDate) {
                 if (self.minDate && self.maxDate) {
-                    self.minDate = new pDate(self.minDate).startOf('day').valueOf();
-                    self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
+                    self.minDate = new persianDate(self.minDate).startOf('day').valueOf();
+                    self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
                     if (!(unixtimespan >= self.minDate && unixtimespan <= self.maxDate)) {
                         return false;
                     }
                 } else if (self.minDate) {
-                    self.minDate = new pDate(self.minDate).startOf('day').valueOf();
+                    self.minDate = new persianDate(self.minDate).startOf('day').valueOf();
                     if (unixtimespan <= self.minDate) {
                         return false;
                     }
                 } else if (self.maxDate) {
-                    self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
+                    self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
                     if (unixtimespan <= self.maxDate) {
                         return false;
                     }
@@ -2799,16 +2806,16 @@ var View = function () {
                                 otherMonth = void 0,
                                 pdate = void 0;
                             if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                                pdate = new pDate(this.model.state.view.dateObject.startOf('month').valueOf());
+                                pdate = new persianDate(this.model.state.view.dateObject.startOf('month').valueOf());
                                 calcedDate = pdate.subtract('days', firstWeekDayOfMonth - dayIndex);
                                 otherMonth = true;
                             } else if (rowIndex === 0 && dayIndex >= firstWeekDayOfMonth || rowIndex <= 5 && daysListindex < daysCount) {
                                 daysListindex += 1;
-                                calcedDate = new pDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
+                                calcedDate = new persianDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
                                 otherMonth = false;
                             } else {
                                 nextMonthListIndex += 1;
-                                pdate = new pDate(this.model.state.view.dateObject.endOf('month').valueOf());
+                                pdate = new persianDate(this.model.state.view.dateObject.endOf('month').valueOf());
                                 calcedDate = pdate.add('days', nextMonthListIndex);
                                 otherMonth = true;
                             }
@@ -2817,7 +2824,7 @@ var View = function () {
                                 title: calcedDate.format('DD'),
                                 dataUnix: calcedDate.valueOf(),
                                 selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
-                                today: DateUtil.isSameDay(calcedDate, new pDate()),
+                                today: DateUtil.isSameDay(calcedDate, new persianDate()),
                                 otherMonth: otherMonth,
                                 // TODO: make configurable
                                 enabled: this.checkDayAccess(calcedDate.valueOf())

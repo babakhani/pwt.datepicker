@@ -487,8 +487,8 @@ const Config = {
          */
         'titleFormatter': function (year) {
             let remaining = parseInt(year / 12, 10) * 12;
-            let startYear = new pDate([remaining]);
-            let endYear = new pDate([remaining + 11]);
+            let startYear = new persianDate([remaining]);
+            let endYear = new persianDate([remaining + 11]);
             startYear.formatPersian = this.model.options.persianDigit;
             endYear.formatPersian = this.model.options.persianDigit;
             return startYear.format(this.model.options.yearPicker.titleFormat) + '-' + endYear.format(this.model.options.yearPicker.titleFormat);

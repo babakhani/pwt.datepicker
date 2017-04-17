@@ -165,7 +165,7 @@ class View {
          */
         let yearsModel = [];
         for (let i of list) {
-            let yearStr = new pDate([i]);
+            let yearStr = new persianDate([i]);
             yearStr.formatPersian = this.model.options.persianDigit;
             yearsModel.push({
                 title: yearStr.format('YYYY'),
@@ -226,7 +226,7 @@ class View {
                 enabled: this.checkMonthAccess(month.index),
                 year: this.model.state.view.year,
                 dataMonth: month.index,
-                selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new pDate([this.model.state.view.year, month.index]))
+                selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, month.index]))
             });
         }
         return {
@@ -249,18 +249,18 @@ class View {
 
         if (self.model.state.filetredDate) {
             if (self.minDate && self.maxDate) {
-                self.minDate = new pDate(self.minDate).startOf('day').valueOf();
-                self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
+                self.minDate = new persianDate(self.minDate).startOf('day').valueOf();
+                self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
                 if (!(unixtimespan >= self.minDate && unixtimespan <= self.maxDate)) {
                     return false;
                 }
             } else if (self.minDate) {
-                self.minDate = new pDate(self.minDate).startOf('day').valueOf();
+                self.minDate = new persianDate(self.minDate).startOf('day').valueOf();
                 if (unixtimespan <= self.minDate) {
                     return false;
                 }
             } else if (self.maxDate) {
-                self.maxDate = new pDate(self.maxDate).endOf('day').valueOf();
+                self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
                 if (unixtimespan <= self.maxDate) {
                     return false;
                 }
@@ -301,18 +301,18 @@ class View {
             for (let [dayIndex, day] of daysRow.entries()) {
                 let calcedDate, otherMonth, pdate;
                 if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                    pdate = new pDate(this.model.state.view.dateObject.startOf('month').valueOf());
+                    pdate = new persianDate(this.model.state.view.dateObject.startOf('month').valueOf());
                     calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
                     otherMonth = true;
                 }
                 else if ((rowIndex === 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
-                    calcedDate = new pDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
+                    calcedDate = new persianDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
                     otherMonth = false;
                 }
                 else {
                     nextMonthListIndex += 1;
-                    pdate = new pDate(this.model.state.view.dateObject.endOf('month').valueOf());
+                    pdate = new persianDate(this.model.state.view.dateObject.endOf('month').valueOf());
                     calcedDate = pdate.add('days', nextMonthListIndex);
                     otherMonth = true;
                 }
@@ -321,7 +321,7 @@ class View {
                     title: calcedDate.format('DD'),
                     dataUnix: calcedDate.valueOf(),
                     selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
-                    today: DateUtil.isSameDay(calcedDate, new pDate()),
+                    today: DateUtil.isSameDay(calcedDate, new persianDate()),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())

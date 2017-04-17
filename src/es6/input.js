@@ -45,7 +45,7 @@ class Input {
         let parse = new PersianDateParser(),
             that = this;
         if (parse.parse(inputString) !== undefined) {
-            let pd = new pDate(parse.parse(inputString)).valueOf();
+            let pd = new persianDate(parse.parse(inputString)).valueOf();
             that.model.state.setSelectedDateTime('unix', pd);
             that.model.state.setViewDateTime('unix', pd);
         }
