@@ -16,10 +16,6 @@ $('.normal-example').persianDatepicker();
 
 ## inline example
 
-inline example with 
-
-
-
 ```javascript
 $('.inline-example').persianDatepicker({
     inline: true,
@@ -46,6 +42,8 @@ $('.inline-example').persianDatepicker({
 <div class="inline-example" ></div>
 
 ## Observer
+
+true, make user able to edit date by keyboard
 
 ```javascript
 $('.observer-example').persianDatepicker({
