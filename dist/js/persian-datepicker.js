@@ -83,6 +83,48 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 
+var Helper = {
+    /**
+     * @desc normal log
+     * @param input
+     * @example log('whoooooha')
+     */
+    log: function log(input) {
+        console.log(input);
+    },
+
+
+    /**
+     * @desc show debug messages if window.persianDatepickerDebug set as true
+     * @param elem
+     * @param input
+     * @example window.persianDatepickerDebug = true;
+     * debug('element','message');
+     */
+    debug: function debug(elem, input) {
+        if (window.persianDatepickerDebug) {
+            if (elem.constructor.name) {
+                console.log('Debug: ' + elem.constructor.name + ' : ' + input);
+            } else {
+                console.log('Debug: ' + input);
+            }
+        }
+    },
+    delay: function delay(callback, ms) {
+        clearTimeout(window.datepickerTimer);
+        window.datepickerTimer = setTimeout(callback, ms);
+    }
+};
+
+module.exports = Helper;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * Date helper, some useful date method stored here
  * @class
@@ -130,44 +172,6 @@ var DateUtil = {
 };
 
 module.exports = DateUtil;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Helper = {
-    /**
-     * @desc normal log
-     * @param input
-     * @example log('whoooooha')
-     */
-    log: function log(input) {
-        console.log(input);
-    },
-
-
-    /**
-     * @desc show debug messages if window.persianDatepickerDebug set as true
-     * @param elem
-     * @param input
-     * @example window.persianDatepickerDebug = true;
-     * debug('element','message');
-     */
-    debug: function debug(elem, input) {
-        if (window.persianDatepickerDebug) {
-            if (elem.constructor.name) {
-                console.log('Debug: ' + elem.constructor.name + ' : ' + input);
-            } else {
-                console.log('Debug: ' + input);
-            }
-        }
-    }
-};
-
-module.exports = Helper;
 
 /***/ }),
 /* 2 */
@@ -278,9 +282,9 @@ module.exports = Template;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var State = __webpack_require__(11);
-var Toolbox = __webpack_require__(12);
-var View = __webpack_require__(13);
+var State = __webpack_require__(12);
+var Toolbox = __webpack_require__(13);
+var View = __webpack_require__(14);
 var Input = __webpack_require__(9);
 var API = __webpack_require__(5);
 var Navigator = __webpack_require__(10);
@@ -503,7 +507,7 @@ module.exports = API;
 "use strict";
 
 
-var Helper = __webpack_require__(1);
+var Helper = __webpack_require__(0);
 
 /**
  * This is default config class
@@ -1426,9 +1430,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var Helper = __webpack_require__(0);
+var PersianDateParser = __webpack_require__(11);
 /**
  * Do every thing about input element like get default value, set new value, set alt field input and etc.
  */
+
 var Input = function () {
 
     /**
@@ -1449,10 +1456,9 @@ var Input = function () {
          */
         this.elem = inputElement;
 
-        // if (this.model.options.observer) {
-        this.observe();
-        // }
-
+        if (this.model.options.observer) {
+            this.observe();
+        }
 
         this.addInitialClass();
 
@@ -1470,27 +1476,73 @@ var Input = function () {
             $(this.elem).addClass('pwt-datepicker-input-element');
         }
     }, {
+        key: 'parseInput',
+        value: function parseInput(inputString) {
+            var parse = new PersianDateParser(),
+                that = this;
+            if (parse.parse(inputString) !== undefined) {
+                var pd = new pDate(parse.parse(inputString)).valueOf();
+                that.model.state.setSelectedDateTime('unix', pd);
+                that.model.state.setViewDateTime('unix', pd);
+            }
+        }
+    }, {
         key: 'observe',
         value: function observe() {
             var that = this;
-            var watch = function watch() {
-                var elem = $(this);
-                // Save current value of element
-                elem.data('oldVal', elem.val());
-                // Look for changes in the value
-                elem.bind("propertychange change click keyup input paste", function (event) {
-                    // If value has changed...
-                    if (elem.data('oldVal') != elem.val()) {
-                        // Updated stored value
-                        elem.data('oldVal', elem.val());
+            /////////////////   Manipulate by Copy And paste
+            $(that.elem).bind('paste', function (e) {
+                Helper.delay(function () {
+                    that.parseInput(e.target.value);
+                }, 60);
+            });
+            var typingTimer = void 0,
+                doneTypingInterval = that.model.options.inputDelay,
+                ctrlDown = false,
+                ctrlKey = [17, 91],
+                vKey = 86,
+                cKey = 67;
 
-                        // that.model.state.setViewDateTime('unix', elem.val());
-                        // that.model.state.setSelectedDateTime('unix', elem.val());
-                    }
-                });
-            };
-            $(this.elem).each(watch);
-            $(this.model.options.altField).each(watch);
+            $(document).keydown(function (e) {
+                if ($.inArray(e.keyCode, ctrlKey) > 0) ctrlDown = true;
+            }).keyup(function (e) {
+                if ($.inArray(e.keyCode, ctrlKey) > 0) ctrlDown = false;
+            });
+
+            $(that.elem).bind("keyup", function (e) {
+                var $self = $(this);
+                var trueKey = false;
+                if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0)) {
+                    trueKey = true;
+                }
+                if (trueKey) {
+
+                    console.log('true key');
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(function () {
+                        doneTyping($self);
+                    }, doneTypingInterval);
+                }
+            });
+
+            $(that.elem).on('keydown', function () {
+                clearTimeout(typingTimer);
+            });
+            function doneTyping($self) {
+                that.parseInput($self.val());
+            }
+
+            /////////////////   Manipulate by alt changes
+            // TODO
+            // self.model.options.altField.bind("change", function () {
+            //     //if (!self._flagSelfManipulate) {
+            //         var newDate = new Date($(this).val());
+            //         if (newDate !== "Invalid Date") {
+            //             var newPersainDate = new persianDate(newDate);
+            //             self.selectDate(newPersainDate.valueOf());
+            //         }
+            //   //  }
+            // });
         }
 
         /**
@@ -1566,7 +1618,9 @@ var Input = function () {
         key: '_updateInputField',
         value: function _updateInputField(unix) {
             var value = this.model.options.formatter(unix);
-            $(this.elem).val(value);
+            if ($(this.elem).val() != value) {
+                $(this.elem).val(value);
+            }
         }
 
         /**
@@ -1620,7 +1674,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Hamster = __webpack_require__(14);
+var Hamster = __webpack_require__(15);
 
 /**
  * This navigator class do every thing about navigate and select date
@@ -1874,7 +1928,57 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DateUtil = __webpack_require__(0);
+var PersianDateParser = function () {
+    function PersianDateParser() {
+        _classCallCheck(this, PersianDateParser);
+
+        this.pattern = {
+            jalali: /^[1-4]\d{3}(\/|-|\.)((0?[1-6](\/|-|\.)((3[0-1])|([1-2][0-9])|(0?[1-9])))|((1[0-2]|(0?[7-9]))(\/|-|\.)(30|([1-2][0-9])|(0?[1-9]))))$/g
+        };
+    }
+
+    _createClass(PersianDateParser, [{
+        key: 'parse',
+        value: function parse(inputString) {
+            var that = this,
+                persianDateArray = void 0,
+                jalaliPat = new RegExp(that.pattern.jalali);
+
+            String.prototype.toEnglishDigits = function () {
+                var charCodeZero = '۰'.charCodeAt(0);
+                return this.replace(/[۰-۹]/g, function (w) {
+                    return w.charCodeAt(0) - charCodeZero;
+                });
+            };
+
+            inputString = inputString.toEnglishDigits();
+
+            if (jalaliPat.test(inputString)) {
+                persianDateArray = inputString.split(/\/|-|\,|\./).map(Number);
+                return persianDateArray;
+            } else {
+                return undefined;
+            }
+        }
+    }]);
+
+    return PersianDateParser;
+}();
+
+module.exports = PersianDateParser;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var DateUtil = __webpack_require__(1);
 
 /**
  * All state set in his object and get from this
@@ -2242,7 +2346,7 @@ var State = function () {
 module.exports = State;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2295,7 +2399,7 @@ var Toolbox = function () {
 module.exports = Toolbox;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2311,9 +2415,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var ClassDateRange = __webpack_require__(7);
 var Template = __webpack_require__(3);
-var Helper = __webpack_require__(1);
-var DateUtil = __webpack_require__(0);
-var Mustache = __webpack_require__(15);
+var Helper = __webpack_require__(0);
+var DateUtil = __webpack_require__(1);
+var Mustache = __webpack_require__(16);
 
 /**
  * As its name suggests, all rendering works do in this object
@@ -2864,7 +2968,7 @@ var View = function () {
 module.exports = View;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3197,7 +3301,7 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!

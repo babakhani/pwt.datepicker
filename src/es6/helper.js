@@ -24,6 +24,11 @@ const Helper = {
             }
 
         }
+    },
+
+    delay(callback, ms) {
+        clearTimeout(window.datepickerTimer);
+        window.datepickerTimer = setTimeout(callback, ms);
     }
 };
 
