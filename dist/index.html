@@ -188,6 +188,9 @@
             altFormat: 'LLLL',
             maxDate: new persianDate().add('month', 3).valueOf(),
             minDate: new persianDate().subtract('month', 3).valueOf(),
+            checkDate: function (unix) {
+                return new persianDate(unix).day() != 4;
+            },
             timePicker: {
                 enabled: true,
                 meridiem: {

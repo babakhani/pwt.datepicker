@@ -182,7 +182,7 @@ $('.max-date-example').persianDatepicker({
 ```javascript
 $('.check-date-example').persianDatepicker({
     checkDate: function(unix){
-        return new persianDate(unix).weekDayNumber != 4;
+        return new persianDate(unix).day() != 4;
     }
 });
 ```
@@ -264,7 +264,7 @@ $('.auto-close-example').persianDatepicker({
 ```javascript
 $('.on-select-example').persianDatepicker({
     onSelect: function(unix){
-        alert('datepicker select : ' + unix);
+        console.log('datepicker select : ' + unix);
     }
 });
 ```
