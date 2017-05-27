@@ -1,8 +1,6 @@
 Persian Date Picker
 ==============
 
-[![npm version](https://badge.fury.io/js/persian-datepicker.svg)](https://github.com/babakhani/PersianDate)
-[![Bower version](https://badge.fury.io/bo/persian-datepicker.svg)](https://github.com/babakhani/PersianDate)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/persianwebtoolkit/datepicker)
 
 Persian Date Picker
@@ -41,8 +39,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 ## Install
 
 ```bash
-npm install persian-datepicker
-bower install persian-datepicker
+npm install persian-datepicker@0.5.3
 ```
 
 ## Usage
