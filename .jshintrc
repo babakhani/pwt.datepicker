@@ -2,6 +2,7 @@
   "strict": false,
   "node": true,
   "esversion": 6,
+  "latedef": "nofunc",
   "globals": {
     "$": false,
     "window": true,

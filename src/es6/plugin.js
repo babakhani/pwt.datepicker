@@ -3,7 +3,11 @@
  * @author Reza Babakhani
  */
 
+/* jshint ignore:start */
 let DateUtil = new DateUtil();
+/* jshint ignore:end */
+
+
 /**
  * @author babakhani.reza@gmail.com
  * @description jquery plugin initializer
