@@ -39,7 +39,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 ## Install
 
 ```bash
-npm install persian-datepicker@0.5.4
+npm install persian-datepicker@beta
 ```
 
 ## Usage
