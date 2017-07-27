@@ -3264,11 +3264,21 @@ var ClassTimePicker = {
      */
     convert12hTo24: function (hour) {
         var output = hour;
-        if (this._currentMeridian === "PM" && hour < 12) {
-            output = hour + 12;
+        if(this.showMeridian){
+            if (this._currentMeridian === "PM" && hour < 12) {
+                output = hour + 12;
+            }
+            if (this._currentMeridian === "AM" && hour === 12) {
+                output = hour - 12;
+            }
         }
-        if (this._currentMeridian === "AM" && hour === 12) {
-            output = hour - 12;
+        else{
+            if(hour >= 24)
+                output = hour - 24;
+            else if(hour < 0)
+                output = 0;
+            else
+                output = hour;
         }
         return output;
     },
@@ -3348,8 +3358,14 @@ var ClassTimePicker = {
         } else {
             if (mode === 'up') {
                 currentVal += this.hourStep;
+
+                if(currentVal > 23)
+                    currentVal = 0;
             } else {
                 currentVal -= this.hourStep;
+                
+                if(currentVal < 0)
+                    currentVal = 23;
             }
         }
         this.hourInput.val(currentVal);
