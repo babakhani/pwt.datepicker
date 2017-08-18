@@ -3,7 +3,7 @@ Persian Date Picker
 
 [![npm version](https://badge.fury.io/js/persian-datepicker.svg)](https://badge.fury.io/js/persian-datepicker)
 [![Bower version](https://badge.fury.io/bo/persian-datepicker.svg)](https://badge.fury.io/bo/persian-datepicker)
-[![Travis-ci](https://travis-ci.org/babakhani/pwt.datepicker.svg?branch=refactor)](https://badge.fury.io/bo/persian-datepicker)
+[![Travis-ci](https://travis-ci.org/babakhani/pwt.datepicker.svg?branch=master)](https://badge.fury.io/bo/persian-datepicker)
 
 Persian Date Picker
 This Date picker work with Iranian calendar.
@@ -18,9 +18,8 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 <a class="github-button" href="https://github.com/babakhani/pwt.datepicker/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/babakhani/pwt.datepicker/network" data-count-api="/repos/babakhani/pwt.datepicker#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork babakhani/pwt.datepicker on GitHub">Fork</a>
 
 
-
-- [Documents](http://babakhani.github.io/PersianWebToolkit/beta/datepicker)
-- [Demo](http://babakhani.github.io/PersianWebToolkit/beta/datepicker/example)
+- [Documents](http://babakhani.github.io/PersianWebToolkit/doc/datepicker)
+- [Demo](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/example)
 
 
 ## Table of content:

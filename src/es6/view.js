@@ -14,7 +14,7 @@ class View {
      * @param {Datepicker} model
      * @return {View}
      */
-    constructor(model) {
+    constructor (model) {
 
         /**
          * @type {number}
@@ -62,14 +62,14 @@ class View {
     /**
      * @desc remove datepicker container element from dom
      */
-    destroy() {
+    destroy () {
         this.$container.remove();
     }
 
     /**
      * @desc set datepicker container element based on <input/> element position
      */
-    setPickerBoxPosition() {
+    setPickerBoxPosition () {
         let inputPosition = this.model.input.getInputPosition();
         let inputSize = this.model.input.getInputSize();
         if (this.model.options.position === "auto") {
@@ -88,7 +88,7 @@ class View {
     /**
      * @desc show datepicker container element
      */
-    show() {
+    show () {
         this.$container.show();
         this.setPickerBoxPosition();
     }
@@ -96,14 +96,14 @@ class View {
     /**
      * @desc hide datepicker container element
      */
-    hide() {
+    hide () {
         this.$container.hide();
     }
 
     /**
      * @desc toggle datepicker container element
      */
-    toggle() {
+    toggle () {
         this.$container.toggle();
     }
 
@@ -113,7 +113,7 @@ class View {
      * @private
      * @return {String}
      */
-    _getNavSwitchText(data) {
+    _getNavSwitchText (data) {
         let output;
         if (this.model.state.viewMode == 'day') {
             output = this.model.options.dayPicker.titleFormatter.call(this, data.year, data.month);
@@ -132,7 +132,7 @@ class View {
      * @param {Number} year - year number
      * @return {Boolean}
      */
-    checkYearAccess(year) {
+    checkYearAccess (year) {
         let output = true;
         if (this.model.state.filetredDate) {
             let startYear = this.model.state.filterDate.start.year;
@@ -155,7 +155,7 @@ class View {
      * @param viewState
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
-    _getYearViewModel(viewState) {
+    _getYearViewModel (viewState) {
         /**
          * @description Generate years list based on viewState year
          * @return ['1380',n+12,'1392']
@@ -187,14 +187,14 @@ class View {
      * @param {Number} month - month number
      * @return {Boolean}
      */
-    checkMonthAccess(month) {
+    checkMonthAccess (month) {
         let output = true,
-            y = this.model.state.view.year;
+          y = this.model.state.view.year;
         if (this.model.state.filetredDate) {
             let startMonth = this.model.state.filterDate.start.month,
-                endMonth = this.model.state.filterDate.end.month,
-                startYear = this.model.state.filterDate.start.year,
-                endYear = this.model.state.filterDate.end.year;
+              endMonth = this.model.state.filterDate.end.month,
+              startYear = this.model.state.filterDate.start.year,
+              endYear = this.model.state.filterDate.end.year;
             if (startMonth && endMonth && ((y == endYear && month > endMonth) || y > endYear) || ((y == startYear && month < startMonth) || y < startYear)) {
                 return false;
             }
@@ -214,7 +214,7 @@ class View {
      * @private
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
-    _getMonthViewModel() {
+    _getMonthViewModel () {
         let monthModel = [];
         for (let month of ClassDateRange.monthRange) {
             monthModel.push({
@@ -237,9 +237,9 @@ class View {
      * @param {Number} thisUnix - month number
      * @return {Boolean}
      */
-    checkDayAccess(unixtimespan) {
+    checkDayAccess (unixtimespan) {
         let self = this,
-            output = true;
+          output = true;
         self.minDate = this.model.options.minDate;
         self.maxDate = this.model.options.maxDate;
 
@@ -271,7 +271,7 @@ class View {
      * @private
      * @return {object}
      */
-    _getDayViewModel() {
+    _getDayViewModel () {
         if (this.model.state.viewMode != 'day') {
             return [];
         }
@@ -298,7 +298,7 @@ class View {
                 let calcedDate, otherMonth, pdate;
                 if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
                     pdate = new persianDate(this.model.state.view.dateObject.startOf('month').valueOf());
-                    calcedDate = pdate.subtract('days', (firstWeekDayOfMonth - dayIndex));
+                    calcedDate = pdate.subtract('days', ((firstWeekDayOfMonth) - dayIndex ));
                     otherMonth = true;
                 }
                 else if ((rowIndex === 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
@@ -335,7 +335,7 @@ class View {
      * @private
      * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridiem: {title: (meridiem|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridiem|{enabled}|string|string), enabled: boolean}}}
      */
-    _getTimeViewModel() {
+    _getTimeViewModel () {
         let hourTitle;
         this.model.state.view.dateObject.formatPersian = this.model.options.persianDigit;
 
@@ -370,7 +370,7 @@ class View {
      * @param data
      * @return {*}
      */
-    getViewModel(data) {
+    getViewModel (data) {
         return {
             plotId: '',
             navigator: {
@@ -395,7 +395,7 @@ class View {
      * @render datepicker view element
      * @param data
      */
-    render(data) {
+    render (data) {
         Helper.debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
@@ -404,7 +404,7 @@ class View {
     }
 
 
-    reRender() {
+    reRender () {
         let data = this.model.state.view;
         this.render(data);
     }
@@ -412,7 +412,7 @@ class View {
     /**
      * @desc do after render work like attache events
      */
-    afterRender() {
+    afterRender () {
         if (this.model.navigator) {
             this.model.navigator.liveAttach();
         }

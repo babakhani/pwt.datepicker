@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "jQuery datepicker plugin work with Iranian calendar.",
   "keywords": [
     "jquery-plugin",
@@ -24,6 +24,9 @@
     "url": "https://github.com/babakhani/pwt.datepicker/issues"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
     "grunt": "^1.0.1",
     "grunt-banner": "^0.6.0",
     "grunt-cli": "^1.2.0",
@@ -31,6 +34,7 @@
     "grunt-jsdoc-to-markdown": "^3.0.0",
     "grunt-sass": "^2.0.0",
     "grunt-webpack": "^2.0.1",
+    "hamsterjs": "^1.1.2",
     "jshint": "^2.6.0",
     "load-grunt-tasks": "^3.5.2",
     "mustache": "=2.3.0",
@@ -44,7 +48,7 @@
   },
   "dependencies": {
     "jquery": "2.2.0",
-    "persian-date": "=0.1.8-b"
+    "persian-date": "0.2.3"
   },
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server & grunt --dev",
