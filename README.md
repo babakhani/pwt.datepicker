@@ -76,6 +76,8 @@ npm install persian-datepicker@beta
 | maxDate                        | unixDate         | null                                            | Format value of input |
 | navigator                      | object           |                                                 | Navigator object options |
 | navigator.enabled              | boolean          | true                                            | Make enable/disable navigator |
+| navigator.scroll               | object           |                                                 | navigate by mousewheel options |
+| navigator.scroll.enabled       | boolean          | true                                            | if you want prevent to navigate on dates with mousewheel event make this options false |
 | navigator.text                 | object           | true                                            | |
 | navigator.text.btnNextText     | string           | '<'                                             | |
 | navigator.text.btnPrevText     | string           | '>'                                             | |
