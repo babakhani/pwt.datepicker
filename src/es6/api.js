@@ -1,4 +1,4 @@
-let options = require('./options');
+let Options = require('./options');
 
 /**
  * This is default API class

@@ -17,7 +17,7 @@ class Model {
      * @param options
      * @private
      */
-    constructor(inputElement, options) {
+    constructor (inputElement, options) {
 
 
         /**
@@ -79,9 +79,7 @@ class Model {
         };
 
         this.state.setViewDateTime('unix', this.input.getOnInitState());
-        if (this.options.initialValue) {
-            this.state.setSelectedDateTime('unix', this.input.getOnInitState());
-        }
+        this.state.setSelectedDateTime('unix', this.input.getOnInitState());
 
         /**
          * @desc handle navigation and dateoicker element events
@@ -89,7 +87,6 @@ class Model {
          */
         this.navigator = new Navigator(this);
 
-        let that = this;
         return new API(this);
     }
 }

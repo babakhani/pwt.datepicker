@@ -22,7 +22,7 @@
     <!-- Theme Switcher -->
     <!-- ------------------------------------------------------------------------------------ -->
     <script type="text/javascript">
-        function swapStyleSheet(sheet) {
+        function swapStyleSheet (sheet) {
             document.getElementById('datepickerTheme').setAttribute('href', sheet);
         }
     </script>
@@ -94,7 +94,7 @@
                             <div class="form-group">
                                 <input id="inlineAlt" class="form-control" disabled/>
                                 <br/>
-                                <div id="inline">
+                                <div id="inline" data-date="2016/2/2 11:30:59">
                                 </div>
                             </div>
                         </div>
@@ -111,6 +111,19 @@
                             </div>
                             <div class="form-group">
                                 <input class="form-control" id="normal"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Only Timepicker with initial value</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input class="form-control" id="timePicker" value="11:23:23"/>
                             </div>
                         </div>
                     </div>
@@ -175,6 +188,13 @@
             format: 'YYYY/MM/DD'
         });
 
+        // Timepicker With initial Value
+        // --------------------------------------------
+        $('#timePicker').persianDatepicker({
+            onlyTimePicker: true,
+            format: 'HH:mm:ss'
+        });
+
         // Input Group Sample
         // --------------------------------------------
         $('#inputGroup').persianDatepicker({
@@ -199,7 +219,7 @@
                     enabled: true
                 }
             },
-        }).data('datepicker');
+        });
     });
 </script>
 </body>

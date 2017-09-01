@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.5
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -23,9 +16,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -366,9 +359,7 @@ function Model(inputElement, options) {
   };
 
   this.state.setViewDateTime('unix', this.input.getOnInitState());
-  if (this.options.initialValue) {
-    this.state.setSelectedDateTime('unix', this.input.getOnInitState());
-  }
+  this.state.setSelectedDateTime('unix', this.input.getOnInitState());
 
   /**
    * @desc handle navigation and dateoicker element events
@@ -376,7 +367,6 @@ function Model(inputElement, options) {
    */
   this.navigator = new Navigator(this);
 
-  var that = this;
   return new API(this);
 };
 
@@ -393,7 +383,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var options = __webpack_require__(2);
+var Options = __webpack_require__(2);
 
 /**
  * This is default API class
@@ -1421,7 +1411,7 @@ var Model = __webpack_require__(4);
             }
         });
         $(this).data('datepicker', self.pDatePicker);
-        return this;
+        return self.pDatePicker;
     };
 })(jQuery);
 
@@ -1456,6 +1446,12 @@ var Input = function () {
          * @type {Object}
          */
         this.model = model;
+
+        /**
+         * @type {boolean}
+         * @private
+         */
+        this._firstUpdate = true;
 
         /**
          * @type {Element}
@@ -1558,16 +1554,21 @@ var Input = function () {
         key: '_attachInputElementEvents',
         value: function _attachInputElementEvents() {
             var that = this;
+            var closePickerHandler = function closePickerHandler(e) {
+                console.log("closePickerHandler");
+                if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) && $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
+                    that.model.view.hide();
+                    console.log("do close picker");
+                    $('body').unbind('click', closePickerHandler);
+                }
+            };
+
             $(this.elem).on('focus click', function () {
                 that.model.view.show();
+                if (that.model.state.ui.isInline === false) {
+                    $('body').bind('click', closePickerHandler);
+                }
             });
-            if (this.model.state.ui.isInline === false) {
-                $(document).on('click', function (e) {
-                    if (!$(e.target).closest(".datepicker-plot-area, .datepicker-plot-area > *, .pwt-datepicker-input-element").length) {
-                        that.model.view.hide();
-                    }
-                });
-            }
         }
 
         /**
@@ -1634,8 +1635,12 @@ var Input = function () {
     }, {
         key: 'update',
         value: function update(unix) {
-            this._updateInputField(unix);
-            this._updateAltField(unix);
+            if (this.model.options.initialValue == false && this._firstUpdate) {
+                this._firstUpdate = false;
+            } else {
+                this._updateInputField(unix);
+                this._updateAltField(unix);
+            }
         }
 
         /**
@@ -1646,17 +1651,37 @@ var Input = function () {
     }, {
         key: 'getOnInitState',
         value: function getOnInitState() {
-            var garegurianDate = null;
-            var $inputElem = $(this.elem);
+            var persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$';
+            var garegurianDate = null,
+                $inputElem = $(this.elem),
+                inputValue = void 0;
+
+            // Define input value by check inline mode and input mode
             if ($inputElem[0].nodeName === 'INPUT') {
-                garegurianDate = new Date($inputElem[0].getAttribute('value')).valueOf();
+                inputValue = $inputElem[0].getAttribute('value');
             } else {
-                garegurianDate = new Date($inputElem.data('date')).valueOf();
+                inputValue = $inputElem.data('date');
             }
-            if (garegurianDate && garegurianDate != 'undefined') {
-                this.initialUnix = garegurianDate;
+
+            // Check time string by regex
+            if (inputValue && inputValue.match(persianDatePickerTimeRegex)) {
+                var timeArray = inputValue.split(':'),
+                    tempDate = new Date();
+                tempDate.setHours(timeArray[0]);
+                tempDate.setMinutes(timeArray[1]);
+                if (timeArray[2]) {
+                    tempDate.setSeconds(timeArray[2]);
+                } else {
+                    tempDate.setSeconds(0);
+                }
+                this.initialUnix = tempDate.valueOf();
             } else {
-                this.initialUnix = new Date().valueOf();
+                garegurianDate = new Date(inputValue).valueOf();
+                if (garegurianDate && garegurianDate != 'undefined') {
+                    this.initialUnix = garegurianDate;
+                } else {
+                    this.initialUnix = new Date().valueOf();
+                }
             }
             return this.initialUnix;
         }
@@ -2504,8 +2529,8 @@ var View = function () {
                 });
             } else {
                 this.$container.css({
-                    top: this.model.options.position[0] + inputPosition.left + 'px',
-                    left: this.model.options.position[1] + inputPosition.top + 'px'
+                    left: this.model.options.position[1] + inputPosition.left + 'px',
+                    top: this.model.options.position[0] + inputPosition.top + 'px'
                 });
             }
         }
