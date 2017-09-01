@@ -10,7 +10,7 @@ class Navigator {
      * @param {object} datepicker
      * @return {Navigator}
      */
-    constructor(model) {
+    constructor (model) {
 
         /**
          * @type {Datepicker}
@@ -27,7 +27,7 @@ class Navigator {
      * @public
      * @todo attach as a live way
      */
-    liveAttach() {
+    liveAttach () {
 
         // Check options
         if (this.model.options.navigator.scroll.enabled) {
@@ -47,10 +47,12 @@ class Navigator {
                 Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
                     let $target = $(event.target);
                     let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
-                    if (delta > 0) {
-                        that.timeUp(key);
-                    } else {
-                        that.timeDown(key);
+                    if (key) {
+                        if (delta > 0) {
+                            that.timeUp(key);
+                        } else {
+                            that.timeDown(key);
+                        }
                     }
                     event.preventDefault();
                 });
@@ -63,7 +65,7 @@ class Navigator {
      * @param {String} timekey - accept hour, minute,second
      * @public
      */
-    timeUp(timekey) {
+    timeUp (timekey) {
         let step, t;
         if (timekey == 'meridiem') {
             step = 12;
@@ -87,7 +89,7 @@ class Navigator {
      * @param {String} timekey - accept hour, minute,second
      * @public
      */
-    timeDown(timekey) {
+    timeDown (timekey) {
         let step, t;
         if (timekey == 'meridiem') {
             step = 12;
@@ -111,7 +113,7 @@ class Navigator {
      * @todo remove jquery
      * @private
      */
-    _attachEvents() {
+    _attachEvents () {
         let that = this;
 
         if (this.model.options.navigator.enabled) {
