@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v0.5.9
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1555,10 +1562,8 @@ var Input = function () {
         value: function _attachInputElementEvents() {
             var that = this;
             var closePickerHandler = function closePickerHandler(e) {
-                console.log("closePickerHandler");
                 if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) && $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
                     that.model.view.hide();
-                    console.log("do close picker");
                     $('body').unbind('click', closePickerHandler);
                 }
             };

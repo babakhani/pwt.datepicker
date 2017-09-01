@@ -82,24 +82,24 @@ This is default config class
 ### Config.inline : <code>boolean</code>
 if true datepicker render inline
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.initialValue"></a>
 
 ### Config.initialValue : <code>boolean</code>
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
 <a name="Config.persianDigit"></a>
 
 ### Config.persianDigit : <code>boolean</code>
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
 <a name="Config.viewMode"></a>
 
 ### Config.viewMode : <code>string</code>
 Acceptable value : day,month,year
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&quot;&#x27;day&#x27;&quot;</code>  
 <a name="Config.format"></a>
 
@@ -107,14 +107,14 @@ Acceptable value : day,month,year
 the date format, combination of d, dd, m, mm, yy, yyy.
 [http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/](http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/)
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&#x27;LLLL&#x27;</code>  
 <a name="Config.altField"></a>
 
 ### Config.altField : <code>boolean</code>
 An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class'
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.altFormat"></a>
 
@@ -122,14 +122,14 @@ An input element that is to be updated with the selected date from the datepicke
 the date format, combination of d, dd, m, mm, yy, yyy.
 [http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/](http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/)
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&quot;&#x27;unix&#x27;&quot;</code>  
 <a name="Config.minDate"></a>
 
 ### Config.minDate : <code>Date</code>
 set min date on datepicker
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>null</code>  
 **Properties**
 
@@ -150,7 +150,7 @@ set min date on datepicker
 ### Config.maxDate : <code>Date</code>
 set max date on datepicker
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>null</code>  
 **Properties**
 
@@ -171,7 +171,7 @@ set max date on datepicker
 ### Config.navigator : <code>object</code>
 navigator config object
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
 
 * [.navigator](#Config.navigator) : <code>object</code>
@@ -190,25 +190,25 @@ navigator config object
 #### navigator.enabled : <code>boolean</code>
 Enable or Disable dayPicker
 
-**Kind**: static property of <code>[navigator](#Config.navigator)</code>  
+**Kind**: static property of [<code>navigator</code>](#Config.navigator)  
 **Default**: <code>true</code>  
 <a name="Config.navigator.scroll"></a>
 
 #### navigator.scroll : <code>object</code>
 scroll navigation options
 
-**Kind**: static property of <code>[navigator](#Config.navigator)</code>  
+**Kind**: static property of [<code>navigator</code>](#Config.navigator)  
 <a name="Config.navigator.scroll.enabled"></a>
 
 ##### scroll.enabled : <code>boolean</code>
-**Kind**: static property of <code>[scroll](#Config.navigator.scroll)</code>  
+**Kind**: static property of [<code>scroll</code>](#Config.navigator.scroll)  
 **Default**: <code>true</code>  
 <a name="Config.navigator.text"></a>
 
 #### navigator.text
 navigator text config object
 
-**Kind**: static property of <code>[navigator](#Config.navigator)</code>  
+**Kind**: static property of [<code>navigator</code>](#Config.navigator)  
 
 * [.text](#Config.navigator.text)
     * [.btnNextText](#Config.navigator.text.btnNextText)
@@ -219,21 +219,21 @@ navigator text config object
 ##### text.btnNextText
 text of next btn
 
-**Kind**: static property of <code>[text](#Config.navigator.text)</code>  
+**Kind**: static property of [<code>text</code>](#Config.navigator.text)  
 **Default**: <code>&#x27;&lt;&#x27;</code>  
 <a name="Config.navigator.text.btnPrevText"></a>
 
 ##### text.btnPrevText
 text of prev btn
 
-**Kind**: static property of <code>[text](#Config.navigator.text)</code>  
+**Kind**: static property of [<code>text</code>](#Config.navigator.text)  
 **Default:**: '>'  
 <a name="Config.navigator.event_onNext"></a>
 
 #### "onNext" (navigator)
 Trigger When Next button clicked
 
-**Kind**: event emitted by <code>[navigator](#Config.navigator)</code>  
+**Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 <table>
   <thead>
     <tr>
@@ -257,7 +257,7 @@ function (navigator) {
 #### "onPrev" (navigator)
 Trigger When Prev button clicked
 
-**Kind**: event emitted by <code>[navigator](#Config.navigator)</code>  
+**Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 <table>
   <thead>
     <tr>
@@ -281,7 +281,7 @@ function (navigator) {
 #### "onSwitch" (navigator)
 Trigger When Switch view button clicked
 
-**Kind**: event emitted by <code>[navigator](#Config.navigator)</code>  
+**Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 <table>
   <thead>
     <tr>
@@ -305,7 +305,7 @@ function (state) {
 ### Config.toolbox : <code>object</code>
 toolbox config object
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
 
 * [.toolbox](#Config.toolbox) : <code>object</code>
@@ -317,21 +317,21 @@ toolbox config object
 <a name="Config.toolbox.enabled"></a>
 
 #### toolbox.enabled : <code>boolean</code>
-**Kind**: static property of <code>[toolbox](#Config.toolbox)</code>  
+**Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 **Default**: <code>true</code>  
 <a name="Config.toolbox.text"></a>
 
 #### toolbox.text : <code>object</code>
-**Kind**: static property of <code>[toolbox](#Config.toolbox)</code>  
+**Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 <a name="Config.toolbox.text.btnToday"></a>
 
 ##### text.btnToday : <code>string</code>
-**Kind**: static property of <code>[text](#Config.toolbox.text)</code>  
+**Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;امروز&#x27;&quot;</code>  
 <a name="Config.toolbox.event_onToday"></a>
 
 #### "onToday" (toolbox)
-**Kind**: event emitted by <code>[toolbox](#Config.toolbox)</code>  
+**Kind**: event emitted by [<code>toolbox</code>](#Config.toolbox)  
 <table>
   <thead>
     <tr>
@@ -355,14 +355,14 @@ function (toolbox) {
 ### Config.onlyTimePicker : <code>boolean</code>
 if true all pickers hide and just show timepicker
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.onlySelectOnDate"></a>
 
 ### Config.onlySelectOnDate : <code>boolean</code>
 if true date select just by click on day in month grid
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default:**: true  
 **Properties**
 
@@ -383,7 +383,7 @@ if true date select just by click on day in month grid
 ### Config.timePicker : <code>object</code>
 timepicker config object
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 
 * [.timePicker](#Config.timePicker) : <code>object</code>
     * [.enabled](#Config.timePicker.enabled) : <code>boolean</code>
@@ -403,15 +403,15 @@ timepicker config object
 <a name="Config.timePicker.enabled"></a>
 
 #### timePicker.enabled : <code>boolean</code>
-**Kind**: static property of <code>[timePicker](#Config.timePicker)</code>  
+**Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.step"></a>
 
 #### timePicker.step : <code>number</code>
-**Kind**: static property of <code>[timePicker](#Config.timePicker)</code>  
+**Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.hour"></a>
 
 #### timePicker.hour : <code>object</code>
-**Kind**: static property of <code>[timePicker](#Config.timePicker)</code>  
+**Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 
 * [.hour](#Config.timePicker.hour) : <code>object</code>
     * [.enabled](#Config.timePicker.hour.enabled) : <code>boolean</code>
@@ -420,17 +420,17 @@ timepicker config object
 <a name="Config.timePicker.hour.enabled"></a>
 
 ##### hour.enabled : <code>boolean</code>
-**Kind**: static property of <code>[hour](#Config.timePicker.hour)</code>  
+**Kind**: static property of [<code>hour</code>](#Config.timePicker.hour)  
 <a name="Config.timePicker.hour.step"></a>
 
 ##### hour.step : <code>boolean</code>
 overwrite by parent step
 
-**Kind**: static property of <code>[hour](#Config.timePicker.hour)</code>  
+**Kind**: static property of [<code>hour</code>](#Config.timePicker.hour)  
 <a name="Config.timePicker.minute"></a>
 
 #### timePicker.minute : <code>object</code>
-**Kind**: static property of <code>[timePicker](#Config.timePicker)</code>  
+**Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 
 * [.minute](#Config.timePicker.minute) : <code>object</code>
     * [.enabled](#Config.timePicker.minute.enabled) : <code>boolean</code>
@@ -439,17 +439,17 @@ overwrite by parent step
 <a name="Config.timePicker.minute.enabled"></a>
 
 ##### minute.enabled : <code>boolean</code>
-**Kind**: static property of <code>[minute](#Config.timePicker.minute)</code>  
+**Kind**: static property of [<code>minute</code>](#Config.timePicker.minute)  
 <a name="Config.timePicker.minute.step"></a>
 
 ##### minute.step : <code>boolean</code>
 overwrite by parent step
 
-**Kind**: static property of <code>[minute](#Config.timePicker.minute)</code>  
+**Kind**: static property of [<code>minute</code>](#Config.timePicker.minute)  
 <a name="Config.timePicker.second"></a>
 
 #### timePicker.second : <code>object</code>
-**Kind**: static property of <code>[timePicker](#Config.timePicker)</code>  
+**Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 
 * [.second](#Config.timePicker.second) : <code>object</code>
     * [.enabled](#Config.timePicker.second.enabled) : <code>boolean</code>
@@ -458,29 +458,29 @@ overwrite by parent step
 <a name="Config.timePicker.second.enabled"></a>
 
 ##### second.enabled : <code>boolean</code>
-**Kind**: static property of <code>[second](#Config.timePicker.second)</code>  
+**Kind**: static property of [<code>second</code>](#Config.timePicker.second)  
 <a name="Config.timePicker.second.step"></a>
 
 ##### second.step : <code>boolean</code>
 overwrite by parent step
 
-**Kind**: static property of <code>[second](#Config.timePicker.second)</code>  
+**Kind**: static property of [<code>second</code>](#Config.timePicker.second)  
 <a name="Config.timePicker.meridiem"></a>
 
 #### timePicker.meridiem : <code>object</code>
-**Kind**: static property of <code>[timePicker](#Config.timePicker)</code>  
+**Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.meridiem.enabled"></a>
 
 ##### meridiem.enabled : <code>boolean</code>
 if you set this as false, datepicker clock system moved to 24-hour system
 
-**Kind**: static property of <code>[meridiem](#Config.timePicker.meridiem)</code>  
+**Kind**: static property of [<code>meridiem</code>](#Config.timePicker.meridiem)  
 <a name="Config.dayPicker"></a>
 
 ### Config.dayPicker : <code>object</code>
 dayPicker config object
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 
 * [.dayPicker](#Config.dayPicker) : <code>object</code>
     * [.enabled](#Config.dayPicker.enabled) : <code>boolean</code>
@@ -491,17 +491,17 @@ dayPicker config object
 <a name="Config.dayPicker.enabled"></a>
 
 #### dayPicker.enabled : <code>boolean</code>
-**Kind**: static property of <code>[dayPicker](#Config.dayPicker)</code>  
+**Kind**: static property of [<code>dayPicker</code>](#Config.dayPicker)  
 **Default**: <code>true</code>  
 <a name="Config.dayPicker.titleFormat"></a>
 
 #### dayPicker.titleFormat : <code>string</code>
-**Kind**: static property of <code>[dayPicker](#Config.dayPicker)</code>  
+**Kind**: static property of [<code>dayPicker</code>](#Config.dayPicker)  
 **Default**: <code>&quot;&#x27;YYYY MMMM&#x27;&quot;</code>  
 <a name="Config.dayPicker.titleFormatter"></a>
 
 #### dayPicker.titleFormatter(year, month) ⇒ <code>\*</code>
-**Kind**: static method of <code>[dayPicker](#Config.dayPicker)</code>  
+**Kind**: static method of [<code>dayPicker</code>](#Config.dayPicker)  
 <table>
   <thead>
     <tr>
@@ -519,7 +519,7 @@ dayPicker config object
 <a name="Config.dayPicker.event_onSelect"></a>
 
 #### "onSelect" (selectedDayUnix)
-**Kind**: event emitted by <code>[dayPicker](#Config.dayPicker)</code>  
+**Kind**: event emitted by [<code>dayPicker</code>](#Config.dayPicker)  
 <table>
   <thead>
     <tr>
@@ -537,7 +537,7 @@ dayPicker config object
 ### Config.monthPicker : <code>object</code>
 monthPicker config object
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 
 * [.monthPicker](#Config.monthPicker) : <code>object</code>
     * [.enabled](#Config.monthPicker.enabled) : <code>boolean</code>
@@ -548,17 +548,17 @@ monthPicker config object
 <a name="Config.monthPicker.enabled"></a>
 
 #### monthPicker.enabled : <code>boolean</code>
-**Kind**: static property of <code>[monthPicker](#Config.monthPicker)</code>  
+**Kind**: static property of [<code>monthPicker</code>](#Config.monthPicker)  
 **Default**: <code>true</code>  
 <a name="Config.monthPicker.titleFormat"></a>
 
 #### monthPicker.titleFormat : <code>string</code>
-**Kind**: static property of <code>[monthPicker](#Config.monthPicker)</code>  
+**Kind**: static property of [<code>monthPicker</code>](#Config.monthPicker)  
 **Default**: <code>&quot;&#x27;YYYY&#x27;&quot;</code>  
 <a name="Config.monthPicker.titleFormatter"></a>
 
 #### monthPicker.titleFormatter(unix) ⇒ <code>\*</code>
-**Kind**: static method of <code>[monthPicker](#Config.monthPicker)</code>  
+**Kind**: static method of [<code>monthPicker</code>](#Config.monthPicker)  
 <table>
   <thead>
     <tr>
@@ -574,7 +574,7 @@ monthPicker config object
 <a name="Config.monthPicker.event_onSelect"></a>
 
 #### "onSelect" (monthIndex)
-**Kind**: event emitted by <code>[monthPicker](#Config.monthPicker)</code>  
+**Kind**: event emitted by [<code>monthPicker</code>](#Config.monthPicker)  
 <table>
   <thead>
     <tr>
@@ -592,7 +592,7 @@ monthPicker config object
 ### Config.yearPicker : <code>object</code>
 yearPicker config object
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 
 * [.yearPicker](#Config.yearPicker) : <code>object</code>
     * [.enabled](#Config.yearPicker.enabled) : <code>boolean</code>
@@ -603,17 +603,17 @@ yearPicker config object
 <a name="Config.yearPicker.enabled"></a>
 
 #### yearPicker.enabled : <code>boolean</code>
-**Kind**: static property of <code>[yearPicker](#Config.yearPicker)</code>  
+**Kind**: static property of [<code>yearPicker</code>](#Config.yearPicker)  
 **Default**: <code>true</code>  
 <a name="Config.yearPicker.titleFormat"></a>
 
 #### yearPicker.titleFormat : <code>string</code>
-**Kind**: static property of <code>[yearPicker](#Config.yearPicker)</code>  
+**Kind**: static property of [<code>yearPicker</code>](#Config.yearPicker)  
 **Default**: <code>&quot;&#x27;YYYY&#x27;&quot;</code>  
 <a name="Config.yearPicker.titleFormatter"></a>
 
 #### yearPicker.titleFormatter(year) ⇒ <code>string</code>
-**Kind**: static method of <code>[yearPicker](#Config.yearPicker)</code>  
+**Kind**: static method of [<code>yearPicker</code>](#Config.yearPicker)  
 <table>
   <thead>
     <tr>
@@ -629,7 +629,7 @@ yearPicker config object
 <a name="Config.yearPicker.event_onSelect"></a>
 
 #### "onSelect" (year)
-**Kind**: event emitted by <code>[yearPicker](#Config.yearPicker)</code>  
+**Kind**: event emitted by [<code>yearPicker</code>](#Config.yearPicker)  
 <table>
   <thead>
     <tr>
@@ -647,7 +647,7 @@ yearPicker config object
 ### Config.position : <code>mix</code>
 position of datepicker relative to input element
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&#x27;auto&#x27;</code>  
 **Example**  
 ```js
@@ -659,14 +659,14 @@ position of datepicker relative to input element
 ### Config.autoClose : <code>boolean</code>
 If true picker close When Select day
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.template"></a>
 
 ### Config.template : <code>string</code>
 by default datepicker have a template string, and you can overwrite it simply by replace string in config.
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Example**  
 ```js
 <div id="plotId" class="datepicker-plot-area datepicker-plot-area-inline-view">
@@ -806,21 +806,21 @@ by default datepicker have a template string, and you can overwrite it simply by
 
 observer
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.inputDelay"></a>
 
 ### Config.inputDelay : <code>number</code>
 inputDelay
 
-**Kind**: static property of <code>[Config](#Config)</code>  
+**Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>800</code>  
 <a name="Config.formatter"></a>
 
 ### Config.formatter(unixDate)
 format value of input
 
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 **Default**: <code>function</code>  
 <table>
   <thead>
@@ -848,7 +848,7 @@ function (unixDate) {
 ### Config.altFieldFormatter(unixDate)
 format value of 'altField' input
 
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 **Default**: <code>function</code>  
 <table>
   <thead>
@@ -885,33 +885,33 @@ function (unixDate) {
 ### Config.checkDate() : <code>function</code>
 check date avalibility
 
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.checkMonth"></a>
 
 ### Config.checkMonth() : <code>function</code>
 check month avalibility
 
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.checkYear"></a>
 
 ### Config.checkYear() : <code>function</code>
 check year avalibility
 
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.onToggle"></a>
 
 ### Config.onToggle()
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.onDestroy"></a>
 
 ### Config.onDestroy()
-**Kind**: static method of <code>[Config](#Config)</code>  
+**Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.event_onSelect"></a>
 
 ### "onSelect" (unixDate)
 A function that takes current datepicker unixDate. It is called When Day Select.
 
-**Kind**: event emitted by <code>[Config](#Config)</code>  
+**Kind**: event emitted by [<code>Config</code>](#Config)  
 <table>
   <thead>
     <tr>
@@ -929,13 +929,13 @@ A function that takes current datepicker unixDate. It is called When Day Select.
 ### "onShow"
 A function that takes current datepicker instance. It is called just before the datepicker is displayed.
 
-**Kind**: event emitted by <code>[Config](#Config)</code>  
+**Kind**: event emitted by [<code>Config</code>](#Config)  
 <a name="Config.event_onHide"></a>
 
 ### "onHide" (self)
 A function that takes current datepicker instance. It is called just before the datepicker Hide.
 
-**Kind**: event emitted by <code>[Config](#Config)</code>  
+**Kind**: event emitted by [<code>Config</code>](#Config)  
 <table>
   <thead>
     <tr>

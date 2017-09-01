@@ -18,7 +18,7 @@ This is default API class
 ### apI.options
 set options live
 
-**Kind**: instance property of <code>[API](#API)</code>  
+**Kind**: instance property of [<code>API</code>](#API)  
 **Example**  
 ```js
 var pd = $('.selector').persianDatepicker();
@@ -32,7 +32,7 @@ pd.options = {};
 ### apI.show()
 make datepicker visible
 
-**Kind**: instance method of <code>[API](#API)</code>  
+**Kind**: instance method of [<code>API</code>](#API)  
 **Example**  
 ```js
 var pd = $('.selector').persianDatepicker();
@@ -43,7 +43,7 @@ pd.show();
 ### apI.hide()
 make datepicker invisible
 
-**Kind**: instance method of <code>[API](#API)</code>  
+**Kind**: instance method of [<code>API</code>](#API)  
 **Example**  
 ```js
 var pd = $('.selector').persianDatepicker();
@@ -54,7 +54,7 @@ pd.show();
 ### apI.toggle()
 toggle datepicker visibility state
 
-**Kind**: instance method of <code>[API](#API)</code>  
+**Kind**: instance method of [<code>API</code>](#API)  
 **Example**  
 ```js
 var pd = $('.selector').persianDatepicker();
@@ -65,7 +65,7 @@ pd.toggle();
 ### apI.destroy()
 destroy every thing clean dom and
 
-**Kind**: instance method of <code>[API](#API)</code>  
+**Kind**: instance method of [<code>API</code>](#API)  
 **Example**  
 ```js
 var pd = $('.selector').persianDatepicker();
@@ -76,7 +76,7 @@ pd.destroy();
 ### apI.setDate(unix)
 set selected date of datepicker accept unix timestamp
 
-**Kind**: instance method of <code>[API](#API)</code>  
+**Kind**: instance method of [<code>API</code>](#API)  
 <table>
   <thead>
     <tr>
