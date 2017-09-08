@@ -66,6 +66,7 @@ npm install persian-datepicker@beta
 | name                           | type             | default                                         | description  |
 | -------------                  |:-------------:   | :----------------------------------------------:| :----------: |
 | initialValue                   | boolean          | true                                            | If set true datepicker init with input value date |
+| calendarType                   | string           | 'gregorian'                                     | Accept gregorian, persian                |
 | persianDigit                   | boolean          | true                                            | If true all digit shows as persian digit |
 | viewMode                       | string           | 'day'                                           | Accept day, motnh, year |
 | format                         | string           | 'LLLL'                                          | Default input value formatt string.|

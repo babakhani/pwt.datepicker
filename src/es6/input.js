@@ -205,20 +205,17 @@ class Input {
      * @desc return initial value
      * @return {Number} - unix
      */
-    getOnInitState () {
+    getOnInitState() {
         const persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$'
-        let garegurianDate = null,
-          $inputElem = $(this.elem),
-          inputValue;
-
-        // Define input value by check inline mode and input mode
+        let garegurianDate = null;
+        let $inputElem = $(this.elem);
+        let inputValue = null;
         if ($inputElem[0].nodeName === 'INPUT') {
-            inputValue = $inputElem[0].getAttribute('value');
+            inputValue = $inputElem[0].getAttribute('value')
         }
         else {
-            inputValue = $inputElem.data('date');
+            inputValue = $inputElem.data('date')
         }
-
 
         // Check time string by regex
         if (inputValue && inputValue.match(persianDatePickerTimeRegex)) {
@@ -234,7 +231,14 @@ class Input {
             this.initialUnix = tempDate.valueOf();
         }
         else {
-            garegurianDate = new Date(inputValue).valueOf();
+            if (this.model.options.calendarType === 'persian' && inputValue) {
+                let parse = new PersianDateParser()
+                let pd = new persianDate(parse.parse(inputValue)).valueOf();
+                garegurianDate = new Date(pd).valueOf();
+            } else {
+                garegurianDate = new Date(inputValue).valueOf();
+            }
+
             if (garegurianDate && garegurianDate != 'undefined') {
                 this.initialUnix = garegurianDate;
             }

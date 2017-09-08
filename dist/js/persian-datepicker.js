@@ -531,6 +531,12 @@ var Config = {
   'initialValue': true,
 
   /**
+   * @type string
+   * @default gregorian
+   */
+  'calendarType': 'gregorian',
+
+  /**
    * @type boolean
    * @default true
    */
@@ -1657,11 +1663,9 @@ var Input = function () {
         key: 'getOnInitState',
         value: function getOnInitState() {
             var persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$';
-            var garegurianDate = null,
-                $inputElem = $(this.elem),
-                inputValue = void 0;
-
-            // Define input value by check inline mode and input mode
+            var garegurianDate = null;
+            var $inputElem = $(this.elem);
+            var inputValue = null;
             if ($inputElem[0].nodeName === 'INPUT') {
                 inputValue = $inputElem[0].getAttribute('value');
             } else {
@@ -1681,7 +1685,14 @@ var Input = function () {
                 }
                 this.initialUnix = tempDate.valueOf();
             } else {
-                garegurianDate = new Date(inputValue).valueOf();
+                if (this.model.options.calendarType === 'persian' && inputValue) {
+                    var parse = new PersianDateParser();
+                    var pd = new persianDate(parse.parse(inputValue)).valueOf();
+                    garegurianDate = new Date(pd).valueOf();
+                } else {
+                    garegurianDate = new Date(inputValue).valueOf();
+                }
+
                 if (garegurianDate && garegurianDate != 'undefined') {
                     this.initialUnix = garegurianDate;
                 } else {

@@ -8,6 +8,7 @@ This is default config class
 * [Config](#Config)
     * [.inline](#Config.inline) : <code>boolean</code>
     * [.initialValue](#Config.initialValue) : <code>boolean</code>
+    * [.calendarType](#Config.calendarType) : <code>string</code>
     * [.persianDigit](#Config.persianDigit) : <code>boolean</code>
     * [.viewMode](#Config.viewMode) : <code>string</code>
     * [.format](#Config.format) : <code>boolean</code>
@@ -89,6 +90,11 @@ if true datepicker render inline
 ### Config.initialValue : <code>boolean</code>
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
+<a name="Config.calendarType"></a>
+
+### Config.calendarType : <code>string</code>
+**Kind**: static property of [<code>Config</code>](#Config)  
+**Default**: <code>&quot;gregorian&quot;</code>  
 <a name="Config.persianDigit"></a>
 
 ### Config.persianDigit : <code>boolean</code>

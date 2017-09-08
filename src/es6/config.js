@@ -20,6 +20,13 @@ const Config = {
 
 
     /**
+     * @type string
+     * @default gregorian
+     */
+    'calendarType': 'gregorian',
+
+
+    /**
      * @type boolean
      * @default true
      */
