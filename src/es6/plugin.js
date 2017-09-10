@@ -22,9 +22,9 @@ let DateUtil = new DateUtil();
 
             // encapsulation Args
             let emptyArr = [],
-                tempArg = args.concat(emptyArr),
-                dp = $(this).data("datepicker"),
-                funcName = null;
+              tempArg = args.concat(emptyArr),
+              dp = $(this).data("datepicker"),
+              funcName = null;
             if (dp && typeof tempArg[0] === "string") {
                 funcName = tempArg[0];
                 output = dp[funcName](tempArg[0]);

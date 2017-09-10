@@ -94,7 +94,7 @@
                             <div class="form-group">
                                 <input id="inlineAlt" class="form-control" disabled/>
                                 <br/>
-                                <div id="inline" data-date="2016/2/2 11:30:59">
+                                <div id="inline">
                                 </div>
                             </div>
                         </div>
@@ -173,7 +173,8 @@
 <!-- ------------------------------------------------------------------------------------ -->
 <script type="text/javascript">
     $(document).ready(function () {
-
+        persianDate.toCalendar('persianAstro');
+        persianDate.toLocale('fa');
         // Debug mode
         // --------------------------------------------
         window.persianDatepickerDebug = false;

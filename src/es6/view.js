@@ -1,4 +1,3 @@
-let ClassDateRange = require('./date-range');
 let Template = require('./template');
 let Helper = require('./helper');
 let DateUtil = require('./date');
@@ -216,13 +215,13 @@ class View {
      */
     _getMonthViewModel () {
         let monthModel = [];
-        for (let month of ClassDateRange.monthRange) {
+        for (let [index, month] of persianDate.rangeName().months.entries()) {
             monthModel.push({
-                title: month.name.fa,
-                enabled: this.checkMonthAccess(month.index),
+                title: month,
+                enabled: this.checkMonthAccess(index),
                 year: this.model.state.view.year,
-                dataMonth: month.index,
-                selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, month.index]))
+                dataMonth: index + 1,
+                selected: persianDate.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, index]))
             });
         }
         return {
@@ -316,8 +315,8 @@ class View {
                 outputList[rowIndex].push({
                     title: calcedDate.format('DD'),
                     dataUnix: calcedDate.valueOf(),
-                    selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
-                    today: DateUtil.isSameDay(calcedDate, new persianDate()),
+                    selected: persianDate.isSameDay(calcedDate, this.model.state.selected.dateObject),
+                    today: persianDate.isSameDay(calcedDate, new persianDate()),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -366,6 +365,15 @@ class View {
         };
     }
 
+    _getWeekViewModel (data) {
+        console.log('_getWeekViewModel');
+        console.log(data);
+        return {
+            enabled: true,
+            list: persianDate.rangeName().weekdaysMin
+        };
+    }
+
     /**
      * @param data
      * @return {*}
@@ -384,6 +392,7 @@ class View {
             selected: this.model.state.selected,
             time: this._getTimeViewModel(data),
             days: this._getDayViewModel(data),
+            weekdays: this._getWeekViewModel(data),
             month: this._getMonthViewModel(data),
             year: this._getYearViewModel(data),
             toolbox: this.model.options.toolbox,

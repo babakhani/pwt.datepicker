@@ -18,13 +18,9 @@ const Template = `
                 <div class="header">
                     <div class="title"></div>
                     <div class="header-row">
-                        <div class="header-row-cell">ش</div>
-                        <div class="header-row-cell">ی</div>
-                        <div class="header-row-cell">د</div>
-                        <div class="header-row-cell">س</div>
-                        <div class="header-row-cell">چ</div>
-                        <div class="header-row-cell">پ</div>
-                        <div class="header-row-cell">ج</div>
+                        {{#weekdays.list}}
+                            <div class="header-row-cell">{{.}}</div>
+                        {{/weekdays.list}}
                     </div>
                 </div>    
                 <table cellspacing="0" class="table-days">

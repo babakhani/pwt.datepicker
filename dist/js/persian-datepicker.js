@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.10
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -80,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -151,30 +144,6 @@ var DateUtil = {
             output = 0;
         }
         return output;
-    },
-
-
-    /**
-     * check if a date is same as b
-     * @param dateA
-     * @param dateB
-     * @return {boolean}
-     * @static
-     */
-    isSameDay: function isSameDay(dateA, dateB) {
-        return dateA && dateB && dateA.date() == dateB.date() && dateA.year() == dateB.year() && dateA.month() == dateB.month();
-    },
-
-
-    /**
-     * @desc check if a month is same as b
-     * @param {Date} dateA
-     * @param {Date} dateB
-     * @return {boolean}
-     * @static
-     */
-    isSameMonth: function isSameMonth(dateA, dateB) {
-        return dateA && dateB && dateA.year() == dateB.year() && dateA.month() == dateB.month();
     }
 };
 
@@ -275,7 +244,7 @@ module.exports = Options;
 /**
  * @type {string}
  */
-var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div class=\"datepicker-header\">\n            <div class=\"btn btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n            <div class=\"btn btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}    \n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        <div class=\"header-row-cell\">\u0634</div>\n                        <div class=\"header-row-cell\">\u06CC</div>\n                        <div class=\"header-row-cell\">\u062F</div>\n                        <div class=\"header-row-cell\">\u0633</div>\n                        <div class=\"header-row-cell\">\u0686</div>\n                        <div class=\"header-row-cell\">\u067E</div>\n                        <div class=\"header-row-cell\">\u062C</div>\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    \n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" ><span  class=\"{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}} {{#today}}today{{/today}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridiem.enabled}}\n            <div class=\"meridiem time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridiem\">\u25B2</div>\n                <input disabled value=\"{{meridiem.title}}\" type=\"text\" class=\"meridiem-input\">\n                <div class=\"down-btn\" data-time-key=\"meridiem\">\u25BC</div>\n            </div>\n        {{/meridiem.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">{{text.btnToday}}</div>\n    </div>\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
+var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div class=\"datepicker-header\">\n            <div class=\"btn btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n            <div class=\"btn btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}    \n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    \n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" ><span  class=\"{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}} {{#today}}today{{/today}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridiem.enabled}}\n            <div class=\"meridiem time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridiem\">\u25B2</div>\n                <input disabled value=\"{{meridiem.title}}\" type=\"text\" class=\"meridiem-input\">\n                <div class=\"down-btn\" data-time-key=\"meridiem\">\u25BC</div>\n            </div>\n        {{/meridiem.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">{{text.btnToday}}</div>\n    </div>\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
 
 module.exports = Template;
 
@@ -288,12 +257,12 @@ module.exports = Template;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var State = __webpack_require__(12);
-var Toolbox = __webpack_require__(13);
-var View = __webpack_require__(14);
-var Input = __webpack_require__(9);
+var State = __webpack_require__(11);
+var Toolbox = __webpack_require__(12);
+var View = __webpack_require__(13);
+var Input = __webpack_require__(8);
 var API = __webpack_require__(5);
-var Navigator = __webpack_require__(10);
+var Navigator = __webpack_require__(9);
 var Options = __webpack_require__(2);
 
 /**
@@ -1209,187 +1178,6 @@ module.exports = Config;
 "use strict";
 
 
-/**
- */
-var ClassDateRange = {
-    /**
-     * @property monthRange
-     */
-    monthRange: [{
-        index: 1,
-        name: {
-            fa: "فروردین"
-        },
-        abbr: {
-            fa: "فرو"
-        }
-    }, {
-        index: 2,
-        name: {
-            fa: "اردیبهشت"
-        },
-        abbr: {
-            fa: "ارد"
-        }
-    }, {
-        index: 3,
-        name: {
-            fa: "خرداد"
-        },
-        abbr: {
-            fa: "خرد"
-        }
-    }, {
-        index: 4,
-        name: {
-            fa: "تیر"
-        },
-        abbr: {
-            fa: "تیر"
-        }
-    }, {
-        index: 5,
-        name: {
-            fa: "مرداد"
-        },
-        abbr: {
-            fa: "مرد"
-        }
-    }, {
-        index: 6,
-        name: {
-            fa: "شهریور"
-        },
-        abbr: {
-            fa: "شهر"
-        }
-    }, {
-        index: 7,
-        name: {
-            fa: "مهر"
-        },
-        abbr: {
-            fa: "مهر"
-        }
-    }, {
-        index: 8,
-        name: {
-            fa: "آبان"
-        },
-        abbr: {
-            fa: "آبا"
-        }
-
-    }, {
-        index: 9,
-        name: {
-            fa: "آذر"
-        },
-        abbr: {
-            fa: "آذر"
-        }
-    }, {
-        index: 10,
-        name: {
-            fa: "دی"
-        },
-        abbr: {
-            fa: "دی"
-        }
-    }, {
-        index: 11,
-        name: {
-            fa: "بهمن"
-        },
-        abbr: {
-            fa: "بهم"
-        }
-    }, {
-        index: 12,
-        name: {
-            fa: "اسفند"
-        },
-        abbr: {
-            fa: "اسف"
-        }
-    }],
-
-    /**
-     * @property weekRange
-     */
-    weekRange: {
-        0: {
-            name: {
-                fa: "شنبه"
-            },
-            abbr: {
-                fa: "ش"
-            }
-        },
-        1: {
-            name: {
-                fa: "یکشنبه"
-            },
-            abbr: {
-                fa: "ی"
-            }
-        },
-        2: {
-            name: {
-                fa: "دوشنبه"
-            },
-            abbr: {
-                fa: "د"
-            }
-        },
-        3: {
-            name: {
-                fa: "سه شنبه"
-            },
-            abbr: {
-                fa: "س"
-            }
-        },
-        4: {
-            name: {
-                fa: "چهار شنبه"
-            },
-            abbr: {
-                fa: "چ"
-            }
-        }, 5: {
-            name: {
-                fa: "پنج شنبه"
-            },
-            abbr: {
-                fa: "پ"
-            }
-        },
-        6: {
-            name: {
-                fa: "جمعه"
-            },
-            abbr: {
-                fa: "ج"
-            }
-        }
-    },
-
-    /**
-     * @property persianDaysName
-     */
-    persianDaysName: ["اورمزد", "بهمن", "اوردیبهشت", "شهریور", "سپندارمذ", "خورداد", "امرداد", "دی به آذز", "آذز", "آبان", "خورشید", "ماه", "تیر", "گوش", "دی به مهر", "مهر", "سروش", "رشن", "فروردین", "بهرام", "رام", "باد", "دی به دین", "دین", "ارد", "اشتاد", "آسمان", "زامیاد", "مانتره سپند", "انارام", "زیادی"]
-};
-
-module.exports = ClassDateRange;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var Model = __webpack_require__(4);
 
 /**
@@ -1423,7 +1211,7 @@ var Model = __webpack_require__(4);
 })(jQuery);
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1434,7 +1222,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Helper = __webpack_require__(0);
-var PersianDateParser = __webpack_require__(11);
+var PersianDateParser = __webpack_require__(10);
 /**
  * Do every thing about input element like get default value, set new value, set alt field input and etc.
  */
@@ -1698,7 +1486,7 @@ var Input = function () {
 module.exports = Input;
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1708,7 +1496,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Hamster = __webpack_require__(15);
+var Hamster = __webpack_require__(14);
 
 /**
  * This navigator class do every thing about navigate and select date
@@ -1954,7 +1742,7 @@ var Navigator = function () {
 module.exports = Navigator;
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2004,7 +1792,7 @@ var PersianDateParser = function () {
 module.exports = PersianDateParser;
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2382,7 +2170,7 @@ var State = function () {
 module.exports = State;
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2435,7 +2223,7 @@ var Toolbox = function () {
 module.exports = Toolbox;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2449,11 +2237,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ClassDateRange = __webpack_require__(7);
 var Template = __webpack_require__(3);
 var Helper = __webpack_require__(0);
 var DateUtil = __webpack_require__(1);
-var Mustache = __webpack_require__(16);
+var Mustache = __webpack_require__(15);
 
 /**
  * As its name suggests, all rendering works do in this object
@@ -2722,15 +2509,17 @@ var View = function () {
             var _iteratorError2 = undefined;
 
             try {
-                for (var _iterator2 = ClassDateRange.monthRange[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var month = _step2.value;
+                for (var _iterator2 = persianDate.rangeName().months.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var _step2$value = _slicedToArray(_step2.value, 2),
+                        index = _step2$value[0],
+                        month = _step2$value[1];
 
                     monthModel.push({
-                        title: month.name.fa,
-                        enabled: this.checkMonthAccess(month.index),
+                        title: month,
+                        enabled: this.checkMonthAccess(index),
                         year: this.model.state.view.year,
-                        dataMonth: month.index,
-                        selected: DateUtil.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, month.index]))
+                        dataMonth: index + 1,
+                        selected: persianDate.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, index]))
                     });
                 }
             } catch (err) {
@@ -2856,8 +2645,8 @@ var View = function () {
                             outputList[rowIndex].push({
                                 title: calcedDate.format('DD'),
                                 dataUnix: calcedDate.valueOf(),
-                                selected: DateUtil.isSameDay(calcedDate, this.model.state.selected.dateObject),
-                                today: DateUtil.isSameDay(calcedDate, new persianDate()),
+                                selected: persianDate.isSameDay(calcedDate, this.model.state.selected.dateObject),
+                                today: persianDate.isSameDay(calcedDate, new persianDate()),
                                 otherMonth: otherMonth,
                                 // TODO: make configurable
                                 enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -2937,6 +2726,16 @@ var View = function () {
                 }
             };
         }
+    }, {
+        key: '_getWeekViewModel',
+        value: function _getWeekViewModel(data) {
+            console.log('_getWeekViewModel');
+            console.log(data);
+            return {
+                enabled: true,
+                list: persianDate.rangeName().weekdaysMin
+            };
+        }
 
         /**
          * @param data
@@ -2959,6 +2758,7 @@ var View = function () {
                 selected: this.model.state.selected,
                 time: this._getTimeViewModel(data),
                 days: this._getDayViewModel(data),
+                weekdays: this._getWeekViewModel(data),
                 month: this._getMonthViewModel(data),
                 year: this._getYearViewModel(data),
                 toolbox: this.model.options.toolbox,
@@ -3006,7 +2806,7 @@ var View = function () {
 module.exports = View;
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3339,7 +3139,7 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
