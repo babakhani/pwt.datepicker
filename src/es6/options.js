@@ -26,6 +26,9 @@ class Options {
             options.template = Template;
         }
 
+        persianDate.toCalendar(options.calendar);
+        persianDate.toLocale(options.locale);
+
         if (options.onlyTimePicker) {
             options.dayPicker.enabled = false;
             options.monthPicker.enabled = false;

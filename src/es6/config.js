@@ -5,6 +5,10 @@ let Helper = require('./helper');
  */
 const Config = {
 
+    calendar: 'persianAstro',
+
+    locale: 'fa',
+
     /**
      * @description if true datepicker render inline
      * @type boolean
@@ -57,7 +61,6 @@ const Config = {
     'formatter': function (unixDate) {
         let self = this;
         let pdate = new persianDate(unixDate);
-        pdate.formatPersian = this.persianDigit;
         return pdate.format(self.format);
     },
 
@@ -110,7 +113,6 @@ const Config = {
         }
         else {
             let pd = new persianDate(unixDate);
-            pd.formatPersian = this.persianDigit;
             return pd.format(self.altFormat);
         }
     },
@@ -409,7 +411,6 @@ const Config = {
          */
         'titleFormatter': function (year, month) {
             let titleDate = new persianDate([year, month]);
-            titleDate.formatPersian = this.model.options.persianDigit;
             return titleDate.format(this.model.options.dayPicker.titleFormat);
         },
 
@@ -448,7 +449,6 @@ const Config = {
          */
         'titleFormatter': function (unix) {
             let titleDate = new persianDate(unix);
-            titleDate.formatPersian = this.model.options.persianDigit;
             return titleDate.format(this.model.options.monthPicker.titleFormat);
         },
 
@@ -489,8 +489,6 @@ const Config = {
             let remaining = parseInt(year / 12, 10) * 12;
             let startYear = new persianDate([remaining]);
             let endYear = new persianDate([remaining + 11]);
-            startYear.formatPersian = this.model.options.persianDigit;
-            endYear.formatPersian = this.model.options.persianDigit;
             return startYear.format(this.model.options.yearPicker.titleFormat) + '-' + endYear.format(this.model.options.yearPicker.titleFormat);
         },
 

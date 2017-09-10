@@ -166,7 +166,6 @@ class View {
         let yearsModel = [];
         for (let i of list) {
             let yearStr = new persianDate([i]);
-            yearStr.formatPersian = this.model.options.persianDigit;
             yearsModel.push({
                 title: yearStr.format('YYYY'),
                 enabled: this.checkYearAccess(i),
@@ -221,7 +220,7 @@ class View {
                 enabled: this.checkMonthAccess(index),
                 year: this.model.state.view.year,
                 dataMonth: index + 1,
-                selected: persianDate.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, index]))
+                selected: persianDate.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, index + 1]))
             });
         }
         return {
@@ -311,9 +310,8 @@ class View {
                     calcedDate = pdate.add('days', nextMonthListIndex);
                     otherMonth = true;
                 }
-                calcedDate.formatPersian = this.model.options.persianDigit;
                 outputList[rowIndex].push({
-                    title: calcedDate.format('DD'),
+                    title: calcedDate.format('D'),
                     dataUnix: calcedDate.valueOf(),
                     selected: persianDate.isSameDay(calcedDate, this.model.state.selected.dateObject),
                     today: persianDate.isSameDay(calcedDate, new persianDate()),
@@ -336,14 +334,12 @@ class View {
      */
     _getTimeViewModel () {
         let hourTitle;
-        this.model.state.view.dateObject.formatPersian = this.model.options.persianDigit;
 
         if (this.model.options.timePicker.meridiem.enabled) {
             hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour, this.model.state.view.meridiem) + '').toPersianDigit();
         } else {
             hourTitle = (this.model.state.view.hour + '').toPersianDigit();
         }
-
         return {
             enabled: this.model.options.timePicker.enabled,
             hour: {
@@ -365,9 +361,7 @@ class View {
         };
     }
 
-    _getWeekViewModel (data) {
-        console.log('_getWeekViewModel');
-        console.log(data);
+    _getWeekViewModel () {
         return {
             enabled: true,
             list: persianDate.rangeName().weekdaysMin

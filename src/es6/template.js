@@ -125,6 +125,7 @@ const Template = `
     {{#enabled}}
     <div class="toolbox ">
         <div class="btn-today">{{text.btnToday}}</div>
+        <div class="btn-calendar">Cal</div>
     </div>
     {{/enabled}}
     {{/toolbox}}

@@ -100,6 +100,7 @@
                         </div>
                     </div>
                 </div>
+                -->
                 <div class="col-xs-12 col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -173,8 +174,6 @@
 <!-- ------------------------------------------------------------------------------------ -->
 <script type="text/javascript">
     $(document).ready(function () {
-        persianDate.toCalendar('persianAstro');
-        persianDate.toLocale('fa');
         // Debug mode
         // --------------------------------------------
         window.persianDatepickerDebug = false;
@@ -203,12 +202,36 @@
             altFormat: 'LLLL'
         });
 
+
+        // Inline Sample
+        // --------------------------------------------
+        $("#inlineGregorian").persianDatepicker({
+            inline: true,
+            locale: 'en',
+            calendar: 'gregorian',
+            altField: '#inlineAltGregorian',
+            altFormat: 'LLLL',
+            format: "lll",
+//            maxDate: new persianDate().add('month', 3).valueOf(),
+//            minDate: new persianDate().subtract('month', 3).valueOf(),
+            checkDate: function (unix) {
+                return new persianDate(unix).day() != 4;
+            },
+            timePicker: {
+                enabled: true,
+                meridiem: {
+                    enabled: true
+                }
+            },
+        });
+
         // Inline Sample
         // --------------------------------------------
         window.pd = $("#inline").persianDatepicker({
             inline: true,
             altField: '#inlineAlt',
             altFormat: 'LLLL',
+            format: "lll",
 //            maxDate: new persianDate().add('month', 3).valueOf(),
 //            minDate: new persianDate().subtract('month', 3).valueOf(),
             checkDate: function (unix) {

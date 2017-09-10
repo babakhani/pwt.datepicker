@@ -5,10 +5,12 @@
     padding: 3px 0;
     width: 100%;
 
+    .btn-calendar,
     .btn-today {
       @extend %interactive-item;
       background-color: $bottom-bg;
 
+      float: right;
       display: block;
       font-weight: $strong-font;
       height: 20px;
