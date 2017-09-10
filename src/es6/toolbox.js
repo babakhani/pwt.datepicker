@@ -26,8 +26,8 @@ class Toolbox {
             that.model.state.setSelectedDateTime('unix', new Date().valueOf());
             that.model.state.setViewDateTime('unix', new Date().valueOf());
             that.model.options.toolbox.onToday();
+            that.model.view.reRender();
         });
-
         $(document).on('click', '#' + that.model.view.id + ' .btn-calendar', function () {
             if (that.model.options.calendar.indexOf('persian') == 0) {
                 that.model.options.calendar = 'gregorian';
@@ -42,7 +42,6 @@ class Toolbox {
             let unix = that.model.state.view.unixDate;
             that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
-            that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.view.reRender();
             return this.model;
         });

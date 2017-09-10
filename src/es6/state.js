@@ -291,7 +291,7 @@ class State {
         this.view.minute = this.view.dateObject.minute();
         this.view.second = this.view.dateObject.second();
         this.view.unixDate = this.view.dateObject.valueOf();
-        this.model.view.render(this.view);
+//        this.model.view.render(this.view);
         return this;
     }
 
@@ -303,8 +303,6 @@ class State {
      */
     setViewDateTime(key, value) {
         let self = this;
-
-        console.log('setViewDateTime')
         switch (key) {
             case 'unix':
                 let pd = new persianDate(value);

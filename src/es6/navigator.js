@@ -28,7 +28,7 @@ class Navigator {
      * @todo attach as a live way
      */
     liveAttach () {
-
+        const that = this;
         // Check options
         if (this.model.options.navigator.scroll.enabled) {
             let that = this;
@@ -39,6 +39,7 @@ class Navigator {
                 } else {
                     that.model.state.navigate('prev');
                 }
+                that.model.view.render();
                 event.preventDefault();
             });
 
@@ -54,6 +55,7 @@ class Navigator {
                             that.timeDown(key);
                         }
                     }
+                    that.model.view.render();
                     event.preventDefault();
                 });
             }
@@ -124,14 +126,17 @@ class Navigator {
                 if ($(this).is('.btn-next')) {
                     that.model.state.navigate('next');
                     that.model.options.navigator.onNext(that);
+                    that.model.view.render();
                 }
                 else if ($(this).is('.btn-switch')) {
                     that.model.state.switchViewMode();
                     that.model.options.navigator.onSwitch(that);
+                    that.model.view.render();
                 }
                 else if ($(this).is('.btn-prev')) {
                     that.model.state.navigate('prev');
                     that.model.options.navigator.onPrev(that);
+                    that.model.view.render();
                 }
             });
         }
@@ -178,6 +183,7 @@ class Navigator {
                     that.model.view.hide();
                     that.model.options.onHide(that);
                 }
+                that.model.view.render();
             });
         }
 
@@ -201,8 +207,8 @@ class Navigator {
                     }
                 }
                 that.model.state.setViewDateTime('month', month);
+                that.model.view.render();
                 that.model.options.monthPicker.onSelect(month);
-
             });
         }
 
@@ -226,6 +232,7 @@ class Navigator {
                     }
                 }
                 that.model.state.setViewDateTime('year', year);
+                that.model.view.render();
                 that.model.options.yearPicker.onSelect(year);
             });
         }

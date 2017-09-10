@@ -447,6 +447,7 @@ var API = function () {
             this.model.state.setViewDateTime('unix', unix);
             this.model.state.setSelectedDateTime('unix', unix);
             this.model.options.dayPicker.onSelect(unix);
+            this.model.view.render(this.view);
             return this.model;
         }
     }, {
@@ -1532,32 +1533,34 @@ var Navigator = function () {
     _createClass(Navigator, [{
         key: 'liveAttach',
         value: function liveAttach() {
-
+            var that = this;
             // Check options
             if (this.model.options.navigator.scroll.enabled) {
-                var that = this;
-                var gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
+                var _that = this;
+                var gridPlot = $('#' + _that.model.view.id + ' .datepicker-grid-view')[0];
                 Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
                     if (delta > 0) {
-                        that.model.state.navigate('next');
+                        _that.model.state.navigate('next');
                     } else {
-                        that.model.state.navigate('prev');
+                        _that.model.state.navigate('prev');
                     }
+                    _that.model.view.render();
                     event.preventDefault();
                 });
 
                 if (this.model.options.timePicker.enabled) {
-                    var timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
+                    var timePlot = $('#' + _that.model.view.id + ' .datepicker-time-view')[0];
                     Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
                         var $target = $(event.target);
                         var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
                         if (key) {
                             if (delta > 0) {
-                                that.timeUp(key);
+                                _that.timeUp(key);
                             } else {
-                                that.timeDown(key);
+                                _that.timeDown(key);
                             }
                         }
+                        _that.model.view.render();
                         event.preventDefault();
                     });
                 }
@@ -1637,12 +1640,15 @@ var Navigator = function () {
                     if ($(this).is('.btn-next')) {
                         that.model.state.navigate('next');
                         that.model.options.navigator.onNext(that);
+                        that.model.view.render();
                     } else if ($(this).is('.btn-switch')) {
                         that.model.state.switchViewMode();
                         that.model.options.navigator.onSwitch(that);
+                        that.model.view.render();
                     } else if ($(this).is('.btn-prev')) {
                         that.model.state.navigate('prev');
                         that.model.options.navigator.onPrev(that);
+                        that.model.view.render();
                     }
                 });
             }
@@ -1686,6 +1692,7 @@ var Navigator = function () {
                         that.model.view.hide();
                         that.model.options.onHide(that);
                     }
+                    that.model.view.render();
                 });
             }
 
@@ -1708,6 +1715,7 @@ var Navigator = function () {
                         }
                     }
                     that.model.state.setViewDateTime('month', month);
+                    that.model.view.render();
                     that.model.options.monthPicker.onSelect(month);
                 });
             }
@@ -1731,6 +1739,7 @@ var Navigator = function () {
                         }
                     }
                     that.model.state.setViewDateTime('year', year);
+                    that.model.view.render();
                     that.model.options.yearPicker.onSelect(year);
                 });
             }
@@ -2100,7 +2109,7 @@ var State = function () {
             this.view.minute = this.view.dateObject.minute();
             this.view.second = this.view.dateObject.second();
             this.view.unixDate = this.view.dateObject.valueOf();
-            this.model.view.render(this.view);
+            //        this.model.view.render(this.view);
             return this;
         }
 
@@ -2115,8 +2124,6 @@ var State = function () {
         key: 'setViewDateTime',
         value: function setViewDateTime(key, value) {
             var self = this;
-
-            console.log('setViewDateTime');
             switch (key) {
                 case 'unix':
                     var pd = new persianDate(value);
@@ -2215,8 +2222,8 @@ var Toolbox = function () {
                 that.model.state.setSelectedDateTime('unix', new Date().valueOf());
                 that.model.state.setViewDateTime('unix', new Date().valueOf());
                 that.model.options.toolbox.onToday();
+                that.model.view.reRender();
             });
-
             $(document).on('click', '#' + that.model.view.id + ' .btn-calendar', function () {
                 if (that.model.options.calendar.indexOf('persian') == 0) {
                     that.model.options.calendar = 'gregorian';
@@ -2230,7 +2237,6 @@ var Toolbox = function () {
                 var unix = that.model.state.view.unixDate;
                 that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
                 that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
-                that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
                 that.model.view.reRender();
                 return this.model;
             });
@@ -2791,6 +2797,9 @@ var View = function () {
     }, {
         key: 'render',
         value: function render(data) {
+            if (!data) {
+                data = this.model.state.view;
+            }
             Helper.debug(this, 'render');
             Mustache.parse(Template);
             this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));

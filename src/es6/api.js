@@ -85,6 +85,7 @@ class API {
         this.model.state.setViewDateTime('unix', unix);
         this.model.state.setSelectedDateTime('unix', unix);
         this.model.options.dayPicker.onSelect(unix);
+        this.model.view.render(this.view);
         return this.model;
     }
 

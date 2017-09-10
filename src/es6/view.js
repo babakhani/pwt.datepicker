@@ -403,6 +403,9 @@ class View {
      * @param data
      */
     render (data) {
+        if (!data) {
+            data = this.model.state.view;
+        }
         Helper.debug(this, 'render');
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
