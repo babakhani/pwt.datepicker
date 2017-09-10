@@ -163,9 +163,10 @@ class View {
         /*
          * @description Generate years object based on list
          */
-        let yearsModel = [];
+        let yearsModel = [],
+          yearStr = new persianDate();
         for (let i of list) {
-            let yearStr = new persianDate([i]);
+            yearStr.year([i])
             yearsModel.push({
                 title: yearStr.format('YYYY'),
                 enabled: this.checkYearAccess(i),
@@ -213,14 +214,15 @@ class View {
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
     _getMonthViewModel () {
-        let monthModel = [];
+        let monthModel = [],
+          comparisonMonth = new persianDate();
         for (let [index, month] of persianDate.rangeName().months.entries()) {
             monthModel.push({
                 title: month,
                 enabled: this.checkMonthAccess(index),
                 year: this.model.state.view.year,
                 dataMonth: index + 1,
-                selected: persianDate.isSameMonth(this.model.state.selected.dateObject, new persianDate([this.model.state.view.year, index + 1]))
+                selected: persianDate.isSameMonth(this.model.state.selected.dateObject, comparisonMonth.year(this.model.state.view.year).month(index + 1))
             });
         }
         return {
@@ -290,31 +292,33 @@ class View {
             ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
             ['null', 'null', 'null', 'null', 'null', 'null', 'null']
         ];
+
+        let now = new persianDate(),
+          pdate = new persianDate();
+
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
             for (let [dayIndex, day] of daysRow.entries()) {
-                let calcedDate, otherMonth, pdate;
+                let calcedDate, otherMonth;
                 if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                    pdate = new persianDate(this.model.state.view.dateObject.startOf('month').valueOf());
-                    calcedDate = pdate.subtract('days', ((firstWeekDayOfMonth) - dayIndex ));
+                    calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').valueOf() / 1000).subtract('days', ((firstWeekDayOfMonth) - dayIndex ));
                     otherMonth = true;
                 }
                 else if ((rowIndex === 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
                     daysListindex += 1;
-                    calcedDate = new persianDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
+                    calcedDate = pdate.year(this.model.state.view.year).month(this.model.state.view.month).date(daysListindex);
                     otherMonth = false;
                 }
                 else {
                     nextMonthListIndex += 1;
-                    pdate = new persianDate(this.model.state.view.dateObject.endOf('month').valueOf());
-                    calcedDate = pdate.add('days', nextMonthListIndex);
+                    calcedDate = pdate.unix(this.model.state.view.dateObject.endOf('month').valueOf() / 1000).add('days', nextMonthListIndex);
                     otherMonth = true;
                 }
                 outputList[rowIndex].push({
                     title: calcedDate.format('D'),
                     dataUnix: calcedDate.valueOf(),
-                    selected: persianDate.isSameDay(calcedDate, this.model.state.selected.dateObject),
-                    today: persianDate.isSameDay(calcedDate, new persianDate()),
+                    selected: calcedDate.isSameDay(this.model.state.selected.dateObject),
+                    today: calcedDate.isSameDay(now),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())

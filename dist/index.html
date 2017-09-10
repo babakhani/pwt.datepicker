@@ -9,7 +9,7 @@
 
     <!-- Demo Bootstrap Style -->
     <!-- ------------------------------------------------------------------------------------ -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
 
     <!-- Demo Font Embed -->
     <!-- ------------------------------------------------------------------------------------ -->
@@ -179,64 +179,64 @@
         window.persianDatepickerDebug = false;
 
         // Normal Sample
-        // --------------------------------------------
-        $('#normal').persianDatepicker({
-            altField: '#normalAlt',
-            altFormat: 'LLLL',
-            initialValue: false,
-            observer: true,
-            format: 'YYYY/MM/DD'
-        });
-
-        // Timepicker With initial Value
-        // --------------------------------------------
-        $('#timePicker').persianDatepicker({
-            onlyTimePicker: true,
-            format: 'HH:mm:ss'
-        });
-
-        // Input Group Sample
-        // --------------------------------------------
-        $('#inputGroup').persianDatepicker({
-            altField: '#inputGroupAlt,#inputGroupAlt2',
-            altFormat: 'LLLL'
-        });
+//        // --------------------------------------------
+//        $('#normal').persianDatepicker({
+//            altField: '#normalAlt',
+//            altFormat: 'LLLL',
+//            initialValue: false,
+//            observer: true,
+//            format: 'YYYY/MM/DD'
+//        });
+//
+//        // Timepicker With initial Value
+//        // --------------------------------------------
+//        $('#timePicker').persianDatepicker({
+//            onlyTimePicker: true,
+//            format: 'HH:mm:ss'
+//        });
+//
+//        // Input Group Sample
+//        // --------------------------------------------
+//        $('#inputGroup').persianDatepicker({
+//            altField: '#inputGroupAlt,#inputGroupAlt2',
+//            altFormat: 'LLLL'
+//        });
 
 
         // Inline Sample
         // --------------------------------------------
-        $("#inlineGregorian").persianDatepicker({
-            inline: true,
-            locale: 'en',
-            calendar: 'gregorian',
-            altField: '#inlineAltGregorian',
-            altFormat: 'LLLL',
-            format: "lll",
-//            maxDate: new persianDate().add('month', 3).valueOf(),
-//            minDate: new persianDate().subtract('month', 3).valueOf(),
-            checkDate: function (unix) {
-                return new persianDate(unix).day() != 4;
-            },
-            timePicker: {
-                enabled: true,
-                meridiem: {
-                    enabled: true
-                }
-            },
-        });
+//        $("#inlineGregorian").persianDatepicker({
+//            inline: true,
+//            locale: 'en',
+//            calendar: 'gregorian',
+//            altField: '#inlineAltGregorian',
+//            altFormat: 'LLLL',
+//            format: "lll",
+////            maxDate: new persianDate().add('month', 3).valueOf(),
+////            minDate: new persianDate().subtract('month', 3).valueOf(),
+//            checkDate: function (unix) {
+//                return new persianDate(unix).day() != 4;
+//            },
+//            timePicker: {
+//                enabled: true,
+//                meridiem: {
+//                    enabled: true
+//                }
+//            },
+//        });
 
         // Inline Sample
         // --------------------------------------------
         window.pd = $("#inline").persianDatepicker({
             inline: true,
-            altField: '#inlineAlt',
-            altFormat: 'LLLL',
+//            altField: '#inlineAlt',
+//            altFormat: 'LLLL',
             format: "lll",
 //            maxDate: new persianDate().add('month', 3).valueOf(),
 //            minDate: new persianDate().subtract('month', 3).valueOf(),
-            checkDate: function (unix) {
-                return new persianDate(unix).day() != 4;
-            },
+//            checkDate: function (unix) {
+//                return new persianDate(unix).day() != 4;
+//            },
             timePicker: {
                 enabled: true,
                 meridiem: {

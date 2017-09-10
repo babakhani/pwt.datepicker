@@ -304,7 +304,7 @@ class State {
     setViewDateTime(key, value) {
         let self = this;
 
-
+        console.log('setViewDateTime')
         switch (key) {
             case 'unix':
                 let pd = new persianDate(value);
