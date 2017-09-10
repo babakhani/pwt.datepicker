@@ -11,7 +11,7 @@ class State {
      * @param {model} model
      * @return {State}
      */
-    constructor(model) {
+    constructor (model) {
 
         /**
          * @type {object}
@@ -94,6 +94,7 @@ class State {
             month: 0,
             date: 0,
             hour: 0,
+            hour12: 0,
             minute: 0,
             second: 0,
             unixDate: 0,
@@ -114,7 +115,7 @@ class State {
      * @param minDate
      * @param maxDate
      */
-    _setFilterDate(minDate, maxDate) {
+    _setFilterDate (minDate, maxDate) {
         let self = this;
         if (!minDate) {
             minDate = -999999999999999999;
@@ -122,7 +123,7 @@ class State {
         if (!maxDate) {
             maxDate = 999999999999999999;
         }
-        let pd = new persianDate(minDate);
+        let pd = self.model.PersianDate.date(minDate);
         self.filterDate.start.unixDate = minDate;
         self.filterDate.start.hour = pd.hour();
         self.filterDate.start.minute = pd.minute();
@@ -131,7 +132,7 @@ class State {
         self.filterDate.start.date = pd.date();
         self.filterDate.start.year = pd.year();
 
-        let pdEnd = new persianDate(maxDate);
+        let pdEnd = self.model.PersianDate.date(maxDate);
         self.filterDate.end.unixDate = maxDate;
         self.filterDate.end.hour = pdEnd.hour();
         self.filterDate.end.minute = pdEnd.minute();
@@ -146,7 +147,7 @@ class State {
      * @desc change view state
      * @param {String} nav - accept next, prev
      */
-    navigate(nav) {
+    navigate (nav) {
         if (nav == 'next') {
             if (this.viewMode == 'year') {
                 this.setViewDateTime('year', this.view.year + 12);
@@ -186,7 +187,7 @@ class State {
      * @desc every time called view state changed to next in queue
      * @return {State}
      */
-    switchViewMode() {
+    switchViewMode () {
         this.viewModeIndex = ((this.viewModeIndex + 1) >= this.viewModeList.length) ? 0 : (this.viewModeIndex + 1);
         this.viewMode = (this.viewModeList[this.viewModeIndex]) ? (this.viewModeList[this.viewModeIndex]) : (this.viewModeList[0]);
         this._setViewDateTimeUnix();
@@ -197,7 +198,7 @@ class State {
      * @desc switch to specified view mode
      * @param {String} viewMode - accept date, month, year
      */
-    switchViewModeTo(viewMode) {
+    switchViewModeTo (viewMode) {
         if (this.viewModeList.indexOf(viewMode) >= 0) {
             this.viewMode = viewMode;
             this.viewModeIndex = this.viewModeList.indexOf(viewMode);
@@ -212,16 +213,17 @@ class State {
      * @public
      * @return {State}
      */
-    setSelectedDateTime(key, value) {
+    setSelectedDateTime (key, value) {
         let that = this;
         switch (key) {
             case 'unix':
                 that.selected.unixDate = value;
-                let pd = new persianDate(value);
+                let pd = this.model.PersianDate.date(value);
                 that.selected.year = pd.year();
                 that.selected.month = pd.month();
                 that.selected.date = pd.date();
                 that.selected.hour = pd.hour();
+                that.selected.hour12 = pd.format('hh');
                 that.selected.minute = pd.minute();
                 that.selected.second = pd.second();
                 break;
@@ -253,8 +255,8 @@ class State {
      * @return {State}
      * @private
      */
-    _updateSelectedUnix() {
-        this.selected.dateObject = new persianDate([
+    _updateSelectedUnix () {
+        this.selected.dateObject = this.model.PersianDate.date([
             this.selected.year,
             this.selected.month,
             this.selected.date,
@@ -275,8 +277,8 @@ class State {
      * @return {State}
      * @private
      */
-    _setViewDateTimeUnix() {
-        this.view.dateObject = new persianDate([
+    _setViewDateTimeUnix () {
+        this.view.dateObject = this.model.PersianDate.date([
             this.view.year,
             this.view.month,
             this.view.date,
@@ -288,6 +290,7 @@ class State {
         this.view.month = this.view.dateObject.month();
         this.view.date = this.view.dateObject.date();
         this.view.hour = this.view.dateObject.hour();
+        this.view.hour12 = this.view.dateObject.format('hh');
         this.view.minute = this.view.dateObject.minute();
         this.view.second = this.view.dateObject.second();
         this.view.unixDate = this.view.dateObject.valueOf();
@@ -301,11 +304,11 @@ class State {
      * @param {Number} value
      * @return {State}
      */
-    setViewDateTime(key, value) {
+    setViewDateTime (key, value) {
         let self = this;
         switch (key) {
             case 'unix':
-                let pd = new persianDate(value);
+                let pd = this.model.PersianDate.date(value);
                 self.view.year = pd.year();
                 self.view.month = pd.month();
                 self.view.date = pd.date();
@@ -340,7 +343,7 @@ class State {
     /**
      * desc change meridiem state
      */
-    meridiemToggle() {
+    meridiemToggle () {
         let self = this;
         if (self.view.meridiem === 'AM') {
             self.view.meridiem = 'PM';

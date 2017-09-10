@@ -9,7 +9,7 @@
 
     <!-- Demo Bootstrap Style -->
     <!-- ------------------------------------------------------------------------------------ -->
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Demo Font Embed -->
     <!-- ------------------------------------------------------------------------------------ -->
@@ -100,7 +100,23 @@
                         </div>
                     </div>
                 </div>
-                -->
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Gregorian Inline Sample</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input id="inlineAltGregorian" class="form-control" disabled/>
+                                <br/>
+                                <div id="inlineGregorian">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-xs-12 col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -203,8 +219,8 @@
 //        });
 
 
-        // Inline Sample
-        // --------------------------------------------
+//         Inline Sample
+//         --------------------------------------------
 //        $("#inlineGregorian").persianDatepicker({
 //            inline: true,
 //            locale: 'en',
@@ -212,15 +228,15 @@
 //            altField: '#inlineAltGregorian',
 //            altFormat: 'LLLL',
 //            format: "lll",
-////            maxDate: new persianDate().add('month', 3).valueOf(),
-////            minDate: new persianDate().subtract('month', 3).valueOf(),
-//            checkDate: function (unix) {
-//                return new persianDate(unix).day() != 4;
-//            },
+////            maxDate: new persianDate().add('days', 30).valueOf(),
+////            minDate: new persianDate().subtract('days', 30).valueOf(),
+////            checkDate: function (unix) {
+////                return new persianDate(unix).day() != 4;
+////            },
 //            timePicker: {
 //                enabled: true,
 //                meridiem: {
-//                    enabled: true
+//                    enabled: false
 //                }
 //            },
 //        });

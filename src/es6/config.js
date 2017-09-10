@@ -60,7 +60,7 @@ const Config = {
      */
     'formatter': function (unixDate) {
         let self = this;
-        let pdate = new persianDate(unixDate);
+        let pdate = this.model.PersianDate.date(unixDate);
         return pdate.format(self.format);
     },
 
@@ -112,7 +112,7 @@ const Config = {
             return unixDate;
         }
         else {
-            let pd = new persianDate(unixDate);
+            let pd = this.model.PersianDate.date(unixDate);
             return pd.format(self.altFormat);
         }
     },
@@ -410,7 +410,7 @@ const Config = {
          * @return {*}
          */
         'titleFormatter': function (year, month) {
-            let titleDate = new persianDate([year, month]);
+            let titleDate = this.model.PersianDate.date([year, month]);
             return titleDate.format(this.model.options.dayPicker.titleFormat);
         },
 
@@ -448,7 +448,7 @@ const Config = {
          * @return {*}
          */
         'titleFormatter': function (unix) {
-            let titleDate = new persianDate(unix);
+            let titleDate = this.model.PersianDate.date(unix);
             return titleDate.format(this.model.options.monthPicker.titleFormat);
         },
 
@@ -487,8 +487,8 @@ const Config = {
          */
         'titleFormatter': function (year) {
             let remaining = parseInt(year / 12, 10) * 12;
-            let startYear = new persianDate([remaining]);
-            let endYear = new persianDate([remaining + 11]);
+            let startYear = this.model.PersianDate.date([remaining]);
+            let endYear = this.model.PersianDate.date([remaining + 11]);
             return startYear.format(this.model.options.yearPicker.titleFormat) + '-' + endYear.format(this.model.options.yearPicker.titleFormat);
         },
 

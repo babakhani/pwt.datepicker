@@ -5,6 +5,7 @@ let Input = require('./input');
 let API = require('./api');
 let Navigator = require('./navigator');
 let Options = require('./options');
+let PersianDateWrapper = require('./persian-date-wrapper');
 
 
 /**
@@ -21,12 +22,6 @@ class Model {
 
 
         /**
-         * @desc DateUtil - date helper class
-         * @type {DateUtil}
-         */
-
-
-        /**
          * @desc [initialUnix=null]
          * @type {unix}
          */
@@ -38,11 +33,19 @@ class Model {
          */
         this.inputElement = inputElement;
 
+
         /**
          * @desc handle works about config
          * @type {Options}
          */
-        this.options = new Options(options);
+        this.options = new Options(options, this);
+
+
+        /**
+         *
+         * @type {PersianDateWrapper}
+         */
+        this.PersianDate = new PersianDateWrapper(this);
 
         /**
          * @desc set and get selected and view and other state

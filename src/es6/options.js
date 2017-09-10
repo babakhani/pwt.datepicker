@@ -11,7 +11,8 @@ class Options {
      * @return {object}
      * @todo remove jquery
      */
-    constructor(options) {
+    constructor(options, model) {
+        this.model = model;
         return this._compatibility(
             $.extend(true, this, Config, options)
         );

@@ -51,7 +51,7 @@ class Input {
         let parse = new PersianDateParser(),
           that = this;
         if (parse.parse(inputString) !== undefined) {
-            let pd = new persianDate(parse.parse(inputString)).valueOf();
+            let pd = this.model.PersianDate.date(parse.parse(inputString)).valueOf();
             that.model.state.setSelectedDateTime('unix', pd);
             that.model.state.setViewDateTime('unix', pd);
         }
@@ -105,7 +105,7 @@ class Input {
         //     //if (!self._flagSelfManipulate) {
         //         let newDate = new Date($(this).val());
         //         if (newDate !== "Invalid Date") {
-        //             let newPersainDate = new persianDate(newDate);
+        //             let newPersainDate = this.model.PersianDate.date(newDate);
         //             self.selectDate(newPersainDate.valueOf());
         //         }
         //   //  }

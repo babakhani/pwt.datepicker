@@ -164,7 +164,7 @@ class View {
          * @description Generate years object based on list
          */
         let yearsModel = [],
-          yearStr = new persianDate();
+          yearStr = this.model.PersianDate.date();
         for (let i of list) {
             yearStr.year([i])
             yearsModel.push({
@@ -214,9 +214,9 @@ class View {
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
     _getMonthViewModel () {
-        let monthModel = [],
-          comparisonMonth = new persianDate();
-        for (let [index, month] of persianDate.rangeName().months.entries()) {
+        let monthModel = [], that = this,
+          comparisonMonth = this.model.PersianDate.date();
+        for (let [index, month] of that.model.PersianDate.date().rangeName().months.entries()) {
             monthModel.push({
                 title: month,
                 enabled: this.checkMonthAccess(index),
@@ -245,18 +245,18 @@ class View {
 
         if (self.model.state.filetredDate) {
             if (self.minDate && self.maxDate) {
-                self.minDate = new persianDate(self.minDate).startOf('day').valueOf();
-                self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
+                self.minDate = self.model.PersianDate.date(self.minDate).startOf('day').valueOf();
+                self.maxDate = self.model.PersianDate.date(self.maxDate).endOf('day').valueOf();
                 if (!(unixtimespan >= self.minDate && unixtimespan <= self.maxDate)) {
                     return false;
                 }
             } else if (self.minDate) {
-                self.minDate = new persianDate(self.minDate).startOf('day').valueOf();
+                self.minDate = self.model.PersianDate.date(self.minDate).startOf('day').valueOf();
                 if (unixtimespan <= self.minDate) {
                     return false;
                 }
             } else if (self.maxDate) {
-                self.maxDate = new persianDate(self.maxDate).endOf('day').valueOf();
+                self.maxDate = self.model.PersianDate.date(self.maxDate).endOf('day').valueOf();
                 if (unixtimespan >= self.maxDate) {
                     return false;
                 }
@@ -278,7 +278,7 @@ class View {
         //log('if you see this many time your code has performance issue');
         const viewMonth = this.model.state.view.month;
         const viewYear = this.model.state.view.year;
-        let pdateInstance = new persianDate();
+        let pdateInstance = this.model.PersianDate.date();
         let daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
         let firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
         let outputList = [];
@@ -293,8 +293,8 @@ class View {
             ['null', 'null', 'null', 'null', 'null', 'null', 'null']
         ];
 
-        let now = new persianDate(),
-          pdate = new persianDate();
+        let now = this.model.PersianDate.date(),
+          pdate = this.model.PersianDate.date();
 
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
@@ -338,11 +338,11 @@ class View {
      */
     _getTimeViewModel () {
         let hourTitle;
-
         if (this.model.options.timePicker.meridiem.enabled) {
-            hourTitle = (DateUtil.convert24hTo12(this.model.state.view.hour, this.model.state.view.meridiem) + '').toPersianDigit();
+            hourTitle = this.model.state.view.hour12;
+
         } else {
-            hourTitle = (this.model.state.view.hour + '').toPersianDigit();
+            hourTitle = this.model.state.view.hour;
         }
         return {
             enabled: this.model.options.timePicker.enabled,
@@ -368,7 +368,7 @@ class View {
     _getWeekViewModel () {
         return {
             enabled: true,
-            list: persianDate.rangeName().weekdaysMin
+            list: this.model.PersianDate.date().rangeName().weekdaysMin
         };
     }
 

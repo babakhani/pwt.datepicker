@@ -72,14 +72,14 @@ class Navigator {
         if (timekey == 'meridiem') {
             step = 12;
             if (this.model.state.view.meridiem == 'PM') {
-                t = new persianDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+                t = this.model.PersianDate.date(this.model.state.selected.unixDate).add('hour', step).valueOf();
             } else {
-                t = new persianDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+                t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
             }
             this.model.state.meridiemToggle();
         } else {
             step = this.model.options.timePicker[timekey].step;
-            t = new persianDate(this.model.state.selected.unixDate).add(timekey, step).valueOf();
+            t = this.model.PersianDate.date(this.model.state.selected.unixDate).add(timekey, step).valueOf();
         }
         this.model.state.setViewDateTime('unix', t);
         this.model.state.setSelectedDateTime('unix', t);
@@ -96,14 +96,14 @@ class Navigator {
         if (timekey == 'meridiem') {
             step = 12;
             if (this.model.state.view.meridiem == 'AM') {
-                t = new persianDate(this.model.state.selected.unixDate).add('hour', step).valueOf();
+                t = this.model.PersianDate.date(this.model.state.selected.unixDate).add('hour', step).valueOf();
             } else {
-                t = new persianDate(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
+                t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
             }
             this.model.state.meridiemToggle();
         } else {
             step = this.model.options.timePicker[timekey].step;
-            t = new persianDate(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
+            t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
         }
         this.model.state.setViewDateTime('unix', t);
         this.model.state.setSelectedDateTime('unix', t);
