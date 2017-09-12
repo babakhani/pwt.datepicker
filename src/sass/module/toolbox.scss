@@ -15,9 +15,10 @@
       font-weight: $strong-font;
       font-size: 11px;
       height: 20px;
+      white-space: nowrap;
       line-height: 18px;
       margin: 0 auto;
-      width: 60px;
+      min-width: 60px;
       &:hover {
         background-color: $bottom-bg-hover;
       }

@@ -236,7 +236,7 @@ class View {
                 enabled: this.checkMonthAccess(index),
                 year: this.model.state.view.year,
                 dataMonth: index + 1,
-                selected: (this.model.state.selected.year == this.model.state.view.year && this.model.state.selected.month == (index+1))
+                selected: (this.model.state.selected.year == this.model.state.view.year && this.model.state.selected.month == (index + 1))
             });
         }
         return {
@@ -318,6 +318,7 @@ class View {
             ['null', 'null', 'null', 'null', 'null', 'null', 'null']
         ];
 
+        const anotherCalendar = this._getAnotherCalendar();
         let pdate = this.model.PersianDate.date();
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
@@ -339,7 +340,7 @@ class View {
                 }
                 outputList[rowIndex].push({
                     title: calcedDate.format('D'),
-                    alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar('gregorian').format('D'),
+                    alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('D'),
                     dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                     dataUnix: calcedDate.valueOf(),
                     otherMonth: otherMonth,
@@ -433,6 +434,7 @@ class View {
      * @return {*}
      */
     getViewModel (data) {
+        const anotherCalendar = this._getAnotherCalendar();
         return {
             plotId: '',
             navigator: {
@@ -451,9 +453,26 @@ class View {
             year: this._getYearViewModel(data),
             toolbox: this.model.options.toolbox,
             cssClass: this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
-            altCalendarTitle: this.model.state.view.dateObject.toCalendar('gregorian').toLocale('en').format('MMM')
-
+            altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('MMMM')
         };
+    }
+
+
+    _getAnotherCalendar () {
+        let that = this, cal, loc;
+        if (that.model.options.calendar_ == that.model.options.calendar) {
+            cal = that.model.options.altCalendar;
+        }
+        else {
+            cal = that.model.options.calendar;
+        }
+        if (that.model.options.locale_ == that.model.options.locale) {
+            loc = that.model.options.altLocale;
+        }
+        else {
+            loc = that.model.options.locale;
+        }
+        return [cal, loc];
     }
 
     /**

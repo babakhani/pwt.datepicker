@@ -197,59 +197,62 @@
         window.persianDatepickerDebug = false;
 
         // Normal Sample
-//        // --------------------------------------------
-//        $('#normal').persianDatepicker({
-//            altField: '#normalAlt',
-//            altFormat: 'LLLL',
-//            initialValue: false,
-//            observer: true,
-//            format: 'YYYY/MM/DD'
-//        });
-//
-//        // Timepicker With initial Value
-//        // --------------------------------------------
-//        $('#timePicker').persianDatepicker({
-//            onlyTimePicker: true,
-//            format: 'HH:mm:ss'
-//        });
-//
-//        // Input Group Sample
-//        // --------------------------------------------
-//        $('#inputGroup').persianDatepicker({
-//            altField: '#inputGroupAlt,#inputGroupAlt2',
-//            altFormat: 'LLLL'
-//        });
+        // --------------------------------------------
+        $('#normal').persianDatepicker({
+            altField: '#normalAlt',
+            altFormat: 'LLLL',
+            initialValue: false,
+            observer: true,
+            format: 'YYYY/MM/DD'
+        });
+
+        // Timepicker With initial Value
+        // --------------------------------------------
+        $('#timePicker').persianDatepicker({
+            onlyTimePicker: true,
+            format: 'HH:mm:ss'
+        });
+
+        // Input Group Sample
+        // --------------------------------------------
+        $('#inputGroup').persianDatepicker({
+            altField: '#inputGroupAlt,#inputGroupAlt2',
+            altFormat: 'LLLL'
+        });
 
 
 //         Inline Sample
 //         --------------------------------------------
-//        $("#inlineGregorian").persianDatepicker({
-//            inline: true,
-//            locale: 'en',
-//            calendar: 'gregorian',
-//            altField: '#inlineAltGregorian',
-//            altFormat: 'LLLL',
-//            format: "lll",
-////            maxDate: new persianDate().add('days', 30).valueOf(),
-////            minDate: new persianDate().subtract('days', 30).valueOf(),
-////            checkDate: function (unix) {
-////                return new persianDate(unix).day() != 4;
-////            },
-//            timePicker: {
-//                enabled: true,
-//                meridiem: {
-//                    enabled: false
-//                }
-//            },
-//        });
+        $("#inlineGregorian").persianDatepicker({
+            inline: true,
+            locale: 'en',
+            calendar: 'gregorian',
+            altField: '#inlineAltGregorian',
+            altFormat: 'LLLL',
+            format: "lll",
+            maxDate: new persianDate().add('days', 90).valueOf(),
+            minDate: new persianDate().subtract('days', 90).valueOf(),
+            checkDate: function (unix) {
+                return new persianDate(unix).day() != 3;
+            },
+            timePicker: {
+                enabled: true,
+                meridiem: {
+                    enabled: false
+                }
+            },
+        });
 
         // Inline Sample
         // --------------------------------------------
         window.pd = $("#inline").persianDatepicker({
-            calendar: 'gregorian',
-//            locale: 'fa',
+//            calendar: 'persianAstro',
+//            alCalendar: 'persianAlgo',
+//            locale: 'en',
+//            altLocale: 'fa',
+
             inline: true,
-            viewMode: 'month',
+            viewMode: 'day',
 //            altField: '#inlineAlt',
 //            altFormat: 'LLLL',
             format: "lll",

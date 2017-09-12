@@ -28,13 +28,17 @@ class Toolbox {
 
     _toggleCalendartype () {
         let that = this;
-        if (that.model.options.calendar.indexOf('persian') == 0) {
-            that.model.options.calendar = 'gregorian';
-            that.model.options.locale = 'en';
+        if (that.model.options.calendar_ == that.model.options.calendar) {
+            that.model.options.calendar_ = that.model.options.altCalendar;
         }
         else {
-            that.model.options.calendar = 'persianAstro';
-            that.model.options.locale = 'fa';
+            that.model.options.calendar_ = that.model.options.calendar;
+        }
+        if (that.model.options.locale_ == that.model.options.locale) {
+            that.model.options.locale_ = that.model.options.altLocale;
+        }
+        else {
+            that.model.options.locale_ = that.model.options.locale;
         }
         this._updateSelfCalendarType();
     }

@@ -463,9 +463,11 @@ var Helper = __webpack_require__(0);
  */
 var Config = {
 
-  calendar: 'persianAstro',
+  calendar: 'persianAlgo',
+  altCalendar: 'gregorian',
 
   locale: 'fa',
+  altLocale: 'en',
 
   /**
    * @description if true datepicker render inline
@@ -1838,30 +1840,25 @@ var PersianDateWrapper = function () {
         _classCallCheck(this, PersianDateWrapper);
 
         this.model = model;
+        this.model.options.calendar_ = this.model.options.calendar;
+        this.model.options.locale_ = this.model.options.locale;
         return this;
     }
 
     _createClass(PersianDateWrapper, [{
-        key: 'date',
+        key: "date",
         value: function date(input) {
             if (window.inspdCount || window.inspdCount === 0) {
                 window.inspdCount++;
             } else {
                 window.inspdCount = 0;
             }
-
-            //        console.log('creatre persianDate istance --------- performance hit  :' +  window.inspdCount);
-
             var that = this;
-            var output = void 0;
-            if (that.model.options.calendar.indexOf('persian') == 0) {
-                var p = persianDate.toCalendar('persianAlgo');
-                output = new p(input);
-            } else {
-                var g = persianDate.toCalendar('gregorian');
-                output = new g(input);
-            }
-            return output.toLocale(that.model.options.locale);
+            var output = void 0,
+                cp = void 0;
+            cp = persianDate.toCalendar(that.model.options.calendar_);
+            output = new cp(input);
+            return output.toLocale(that.model.options.locale_);
         }
     }]);
 
@@ -2293,12 +2290,15 @@ var Toolbox = function () {
         key: '_toggleCalendartype',
         value: function _toggleCalendartype() {
             var that = this;
-            if (that.model.options.calendar.indexOf('persian') == 0) {
-                that.model.options.calendar = 'gregorian';
-                that.model.options.locale = 'en';
+            if (that.model.options.calendar_ == that.model.options.calendar) {
+                that.model.options.calendar_ = that.model.options.altCalendar;
             } else {
-                that.model.options.calendar = 'persianAstro';
-                that.model.options.locale = 'fa';
+                that.model.options.calendar_ = that.model.options.calendar;
+            }
+            if (that.model.options.locale_ == that.model.options.locale) {
+                that.model.options.locale_ = that.model.options.altLocale;
+            } else {
+                that.model.options.locale_ = that.model.options.locale;
             }
             this._updateSelfCalendarType();
         }
@@ -2741,6 +2741,7 @@ var View = function () {
             var nextMonthListIndex = 0;
             var daysMatrix = [['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null']];
 
+            var anotherCalendar = this._getAnotherCalendar();
             var pdate = this.model.PersianDate.date();
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
@@ -2779,7 +2780,7 @@ var View = function () {
                             }
                             outputList[rowIndex].push({
                                 title: calcedDate.format('D'),
-                                alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar('gregorian').format('D'),
+                                alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('D'),
                                 dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                                 dataUnix: calcedDate.valueOf(),
                                 otherMonth: otherMonth,
@@ -2909,6 +2910,7 @@ var View = function () {
     }, {
         key: 'getViewModel',
         value: function getViewModel(data) {
+            var anotherCalendar = this._getAnotherCalendar();
             return {
                 plotId: '',
                 navigator: {
@@ -2927,9 +2929,26 @@ var View = function () {
                 year: this._getYearViewModel(data),
                 toolbox: this.model.options.toolbox,
                 cssClass: this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
-                altCalendarTitle: this.model.state.view.dateObject.toCalendar('gregorian').toLocale('en').format('MMM')
-
+                altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('MMMM')
             };
+        }
+    }, {
+        key: '_getAnotherCalendar',
+        value: function _getAnotherCalendar() {
+            var that = this,
+                cal = void 0,
+                loc = void 0;
+            if (that.model.options.calendar_ == that.model.options.calendar) {
+                cal = that.model.options.altCalendar;
+            } else {
+                cal = that.model.options.calendar;
+            }
+            if (that.model.options.locale_ == that.model.options.locale) {
+                loc = that.model.options.altLocale;
+            } else {
+                loc = that.model.options.locale;
+            }
+            return [cal, loc];
         }
 
         /**

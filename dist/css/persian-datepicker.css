@@ -283,9 +283,10 @@
     font-weight: bold;
     font-size: 11px;
     height: 20px;
+    white-space: nowrap;
     line-height: 18px;
     margin: 0 auto;
-    width: 60px; }
+    min-width: 60px; }
     .datepicker-plot-area .toolbox .btn-calendar:hover,
     .datepicker-plot-area .toolbox .btn-today:hover {
       background-color: #eee; }
