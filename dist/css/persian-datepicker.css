@@ -58,7 +58,7 @@
   text-shadow: none;
   cursor: default; }
 
-.datepicker-plot-area .datepicker-day-view .table-days td span.today {
+.datepicker-plot-area .datepicker-day-view .table-days td.today span {
   background-color: #333;
   color: #fff;
   border: 0;
@@ -70,14 +70,14 @@
   border: none;
   text-shadow: none; }
 
-.datepicker-plot-area .datepicker-day-view .table-days td span.selected, .datepicker-plot-area .datepicker-year-view .year-item.selected,
+.datepicker-plot-area .datepicker-day-view .table-days td.selected span, .datepicker-plot-area .datepicker-year-view .year-item.selected,
 .datepicker-plot-area .datepicker-month-view .month-item.selected {
   background-color: #006dcc;
   color: #fff;
   border: none;
   text-shadow: 1px 1px 1px #000; }
 
-.datepicker-plot-area .datepicker-day-view .table-days td span.selected:hover, .datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-year-view .year-item:hover,
+.datepicker-plot-area .datepicker-day-view .table-days td.selected span:hover, .datepicker-plot-area .datepicker-day-view .table-days td span:hover, .datepicker-plot-area .datepicker-year-view .year-item:hover,
 .datepicker-plot-area .datepicker-month-view .month-item:hover {
   background-color: #006dcc;
   color: #fff;

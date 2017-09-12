@@ -21,6 +21,18 @@
           }
         }
 
+        &.selected span {
+          @extend %date-item-selected;
+
+          &:hover {
+            @extend %date-item-hover;
+          }
+        }
+
+        &.today span {
+          @extend %date-item-today;
+        }
+
         span {
           display: block;
           width: 100%;
@@ -32,18 +44,6 @@
 
           &.other-month {
             @extend %date-item-numb;
-          }
-
-          &.today {
-            @extend %date-item-today;
-          }
-
-          &.selected {
-            @extend %date-item-selected;
-
-            &:hover {
-              @extend %date-item-hover;
-            }
           }
 
           &:hover {

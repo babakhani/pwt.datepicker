@@ -83,6 +83,7 @@ class Model {
 
         this.state.setViewDateTime('unix', this.input.getOnInitState());
         this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+        this.view.render();
 
         /**
          * @desc handle navigation and dateoicker element events

@@ -31,10 +31,10 @@ const Template = `
                                 {{#.}}
                                     
                                     {{#enabled}}
-                                        <td data-unix="{{dataUnix}}" ><span  class="{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}} {{#today}}today{{/today}}">{{title}}</span></td>
+                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" ><span  class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
                                     {{/enabled}}
                                     {{^enabled}}
-                                        <td data-unix="{{dataUnix}}" class="disabled"><span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
+                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" class="disabled"><span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
                                     {{/enabled}}
                                     
                                 {{/.}}

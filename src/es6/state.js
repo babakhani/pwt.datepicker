@@ -267,7 +267,6 @@ class State {
         this.selected.unixDate = this.selected.dateObject.valueOf();
         this.model.updateInput(this.selected.unixDate);
         this.model.options.onSelect(this.selected.unixDate);
-        this.model.view.render(this.view);
         return this;
     }
 
@@ -294,7 +293,6 @@ class State {
         this.view.minute = this.view.dateObject.minute();
         this.view.second = this.view.dateObject.second();
         this.view.unixDate = this.view.dateObject.valueOf();
-//        this.model.view.render(this.view);
         return this;
     }
 

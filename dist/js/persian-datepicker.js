@@ -125,43 +125,12 @@ module.exports = Helper;
 "use strict";
 
 
-/**
- * Date helper, some useful date method stored here
- * @class
- */
-var DateUtil = {
-
-    /**
-     * @property convert24hTo12
-     * @param hour
-     */
-    convert24hTo12: function convert24hTo12(hour) {
-        var output = hour;
-        if (hour > 12) {
-            output = hour - 12;
-        }
-        if (hour === 0) {
-            output = 0;
-        }
-        return output;
-    }
-};
-
-module.exports = DateUtil;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Config = __webpack_require__(6);
-var Template = __webpack_require__(3);
+var Config = __webpack_require__(5);
+var Template = __webpack_require__(2);
 /**
  * Extend default config from user interred and do compatibility works
  * @public
@@ -239,7 +208,7 @@ var Options = function () {
 module.exports = Options;
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -248,12 +217,12 @@ module.exports = Options;
 /**
  * @type {string}
  */
-var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div class=\"datepicker-header\">\n            <div class=\"btn btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n            <div class=\"btn btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}    \n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    \n                                    {{#enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" ><span  class=\"{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}} {{#today}}today{{/today}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-unix=\"{{dataUnix}}\" class=\"disabled\"><span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridiem.enabled}}\n            <div class=\"meridiem time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridiem\">\u25B2</div>\n                <input disabled value=\"{{meridiem.title}}\" type=\"text\" class=\"meridiem-input\">\n                <div class=\"down-btn\" data-time-key=\"meridiem\">\u25BC</div>\n            </div>\n        {{/meridiem.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">{{text.btnToday}}</div>\n        {{^toolbox.gregorian}}\n        <div class=\"btn-calendar\">\u0645\u06CC\u0644\u0627\u062F\u06CC</div>\n        {{/toolbox.gregorian}}\n    </div>\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
+var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div class=\"datepicker-header\">\n            <div class=\"btn btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"btn btn-switch\">{{ navigator.switch.text }}</div>\n            <div class=\"btn btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}    \n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    \n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" ><span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\"><span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span></td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridiem.enabled}}\n            <div class=\"meridiem time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridiem\">\u25B2</div>\n                <input disabled value=\"{{meridiem.title}}\" type=\"text\" class=\"meridiem-input\">\n                <div class=\"down-btn\" data-time-key=\"meridiem\">\u25BC</div>\n            </div>\n        {{/meridiem.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox \">\n        <div class=\"btn-today\">{{text.btnToday}}</div>\n        {{^toolbox.gregorian}}\n        <div class=\"btn-calendar\">\u0645\u06CC\u0644\u0627\u062F\u06CC</div>\n        {{/toolbox.gregorian}}\n    </div>\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
 
 module.exports = Template;
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -265,9 +234,9 @@ var State = __webpack_require__(12);
 var Toolbox = __webpack_require__(13);
 var View = __webpack_require__(14);
 var Input = __webpack_require__(8);
-var API = __webpack_require__(5);
+var API = __webpack_require__(4);
 var Navigator = __webpack_require__(9);
-var Options = __webpack_require__(2);
+var Options = __webpack_require__(1);
 var PersianDateWrapper = __webpack_require__(11);
 
 /**
@@ -342,6 +311,7 @@ function Model(inputElement, options) {
 
   this.state.setViewDateTime('unix', this.input.getOnInitState());
   this.state.setSelectedDateTime('unix', this.input.getOnInitState());
+  this.view.render();
 
   /**
    * @desc handle navigation and dateoicker element events
@@ -355,7 +325,7 @@ function Model(inputElement, options) {
 module.exports = Model;
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -365,7 +335,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Options = __webpack_require__(2);
+var Options = __webpack_require__(1);
 
 /**
  * This is default API class
@@ -480,7 +450,7 @@ var API = function () {
 module.exports = API;
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1177,13 +1147,44 @@ var Config = {
 module.exports = Config;
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Date helper, some useful date method stored here
+ * @class
+ */
+var DateUtil = {
+
+    /**
+     * @property convert24hTo12
+     * @param hour
+     */
+    convert24hTo12: function convert24hTo12(hour) {
+        var output = hour;
+        if (hour > 12) {
+            output = hour - 12;
+        }
+        if (hour === 0) {
+            output = 0;
+        }
+        return output;
+    }
+};
+
+module.exports = DateUtil;
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Model = __webpack_require__(4);
+var Model = __webpack_require__(3);
 
 /**
  * @author babakhani.reza@gmail.com
@@ -1536,34 +1537,33 @@ var Navigator = function () {
     _createClass(Navigator, [{
         key: 'liveAttach',
         value: function liveAttach() {
-            var that = this;
             // Check options
             if (this.model.options.navigator.scroll.enabled) {
-                var _that = this;
-                var gridPlot = $('#' + _that.model.view.id + ' .datepicker-grid-view')[0];
+                var that = this;
+                var gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
                 Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
                     if (delta > 0) {
-                        _that.model.state.navigate('next');
+                        that.model.state.navigate('next');
                     } else {
-                        _that.model.state.navigate('prev');
+                        that.model.state.navigate('prev');
                     }
-                    _that.model.view.render();
+                    that.model.view.render();
                     event.preventDefault();
                 });
 
                 if (this.model.options.timePicker.enabled) {
-                    var timePlot = $('#' + _that.model.view.id + ' .datepicker-time-view')[0];
+                    var timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
                     Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
                         var $target = $(event.target);
                         var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
                         if (key) {
                             if (delta > 0) {
-                                _that.timeUp(key);
+                                that.timeUp(key);
                             } else {
-                                _that.timeDown(key);
+                                that.timeDown(key);
                             }
                         }
-                        _that.model.view.render();
+                        that.model.view.render();
                         event.preventDefault();
                     });
                 }
@@ -1580,7 +1580,8 @@ var Navigator = function () {
         key: 'timeUp',
         value: function timeUp(timekey) {
             var step = void 0,
-                t = void 0;
+                t = void 0,
+                that = this;
             if (timekey == 'meridiem') {
                 step = 12;
                 if (this.model.state.view.meridiem == 'PM') {
@@ -1595,6 +1596,11 @@ var Navigator = function () {
             }
             this.model.state.setViewDateTime('unix', t);
             this.model.state.setSelectedDateTime('unix', t);
+            this.model.view.renderTimePartial();
+            clearTimeout(this.scrollDelayTimeDown);
+            this.scrollDelayTimeUp = setTimeout(function () {
+                that.model.view.markSelectedDay();
+            }, 300);
         }
 
         /**
@@ -1607,7 +1613,8 @@ var Navigator = function () {
         key: 'timeDown',
         value: function timeDown(timekey) {
             var step = void 0,
-                t = void 0;
+                t = void 0,
+                that = this;
             if (timekey == 'meridiem') {
                 step = 12;
                 if (this.model.state.view.meridiem == 'AM') {
@@ -1622,6 +1629,11 @@ var Navigator = function () {
             }
             this.model.state.setViewDateTime('unix', t);
             this.model.state.setSelectedDateTime('unix', t);
+            this.model.view.renderTimePartial();
+            clearTimeout(this.scrollDelayTimeDown);
+            this.scrollDelayTimeDown = setTimeout(function () {
+                that.model.view.markSelectedDay();
+            }, 300);
         }
 
         /**
@@ -1695,7 +1707,7 @@ var Navigator = function () {
                         that.model.view.hide();
                         that.model.options.onHide(that);
                     }
-                    that.model.view.render();
+                    that.model.view.markSelectedDay();
                 });
             }
 
@@ -1832,18 +1844,18 @@ var PersianDateWrapper = function () {
                 window.inspdCount = 0;
             }
 
-            console.log('creatre persianDate istance --------- performance hit  :' + window.inspdCount);
+            //        console.log('creatre persianDate istance --------- performance hit  :' +  window.inspdCount);
 
             var that = this;
             var output = void 0;
             if (that.model.options.calendar.indexOf('persian') == 0) {
-                var p = persianDate.toCalendar('persianAstro');
-                output = new p(input).toLocale('fa');
+                var p = persianDate.toCalendar('persianAlgo');
+                output = new p(input);
             } else {
                 var g = persianDate.toCalendar('gregorian');
-                output = new g(input).toLocale('en');
+                output = new g(input);
             }
-            return output;
+            return output.toLocale(that.model.options.locale);
         }
     }]);
 
@@ -1863,7 +1875,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DateUtil = __webpack_require__(1);
+var DateUtil = __webpack_require__(6);
 
 /**
  * All state set in his object and get from this
@@ -2141,7 +2153,6 @@ var State = function () {
             this.selected.unixDate = this.selected.dateObject.valueOf();
             this.model.updateInput(this.selected.unixDate);
             this.model.options.onSelect(this.selected.unixDate);
-            this.model.view.render(this.view);
             return this;
         }
 
@@ -2163,7 +2174,6 @@ var State = function () {
             this.view.minute = this.view.dateObject.minute();
             this.view.second = this.view.dateObject.second();
             this.view.unixDate = this.view.dateObject.valueOf();
-            //        this.model.view.render(this.view);
             return this;
         }
 
@@ -2333,9 +2343,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Template = __webpack_require__(3);
+var Template = __webpack_require__(2);
 var Helper = __webpack_require__(0);
-var DateUtil = __webpack_require__(1);
 var Mustache = __webpack_require__(16);
 
 /**
@@ -2512,6 +2521,13 @@ var View = function () {
         value: function _getYearViewModel(viewState) {
             var _this = this;
 
+            var isEnabled = this.model.options.yearPicker.enabled;
+            // Make performance better
+            if (!isEnabled) {
+                return {
+                    enabled: false
+                };
+            }
             /**
              * @description Generate years list based on viewState year
              * @return ['1380',n+12,'1392']
@@ -2556,7 +2572,7 @@ var View = function () {
             }
 
             return {
-                enabled: this.model.options.yearPicker.enabled,
+                enabled: isEnabled,
                 viewMode: this.model.state.viewMode == 'year',
                 list: yearsModel
             };
@@ -2599,6 +2615,14 @@ var View = function () {
     }, {
         key: '_getMonthViewModel',
         value: function _getMonthViewModel() {
+            var isEnaled = this.model.options.monthPicker.enabled;
+            // Make performance better
+            if (!isEnaled) {
+                return {
+                    enabled: false
+                };
+            }
+
             var monthModel = [],
                 that = this,
                 comparisonMonth = this.model.PersianDate.date();
@@ -2636,7 +2660,7 @@ var View = function () {
             }
 
             return {
-                enabled: this.model.options.monthPicker.enabled,
+                enabled: isEnaled,
                 viewMode: this.model.state.viewMode == 'month',
                 list: monthModel
             };
@@ -2691,6 +2715,15 @@ var View = function () {
             if (this.model.state.viewMode != 'day') {
                 return [];
             }
+
+            var isEnabled = this.model.options.dayPicker.enabled;
+            // Make performance better
+            if (!isEnabled) {
+                return {
+                    enabled: false
+                };
+            }
+
             //log('if you see this many time your code has performance issue');
             var viewMonth = this.model.state.view.month;
             var viewYear = this.model.state.view.year;
@@ -2702,9 +2735,7 @@ var View = function () {
             var nextMonthListIndex = 0;
             var daysMatrix = [['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null']];
 
-            var now = this.model.PersianDate.date(),
-                pdate = this.model.PersianDate.date();
-
+            var pdate = this.model.PersianDate.date();
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
             var _iteratorError3 = undefined;
@@ -2742,9 +2773,8 @@ var View = function () {
                             }
                             outputList[rowIndex].push({
                                 title: calcedDate.format('D'),
+                                dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                                 dataUnix: calcedDate.valueOf(),
-                                selected: calcedDate.isSameDay(this.model.state.selected.dateObject),
-                                today: calcedDate.isSameDay(now),
                                 otherMonth: otherMonth,
                                 // TODO: make configurable
                                 enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -2781,10 +2811,34 @@ var View = function () {
             }
 
             return {
-                enabled: this.model.options.dayPicker.enabled && this.model.state.viewMode == 'day',
+                enabled: isEnabled,
                 viewMode: this.model.state.viewMode == 'day',
                 list: outputList
             };
+        }
+    }, {
+        key: 'markSelectedDay',
+        value: function markSelectedDay() {
+            var selected = this.model.state.selected;
+            this.$container.find('.table-days td').each(function () {
+                if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
+                    $(this).addClass('selected');
+                } else {
+                    $(this).removeClass('selected');
+                }
+            });
+        }
+    }, {
+        key: 'markToday',
+        value: function markToday() {
+            var today = new persianDate();
+            this.$container.find('.table-days td').each(function () {
+                if ($(this).data('date') == [today.year(), today.month(), today.date()].join(',')) {
+                    $(this).addClass('today');
+                } else {
+                    $(this).removeClass('today');
+                }
+            });
         }
 
         /**
@@ -2795,14 +2849,24 @@ var View = function () {
     }, {
         key: '_getTimeViewModel',
         value: function _getTimeViewModel() {
+
+            var isEnabled = this.model.options.timePicker.enabled;
+            // Make performance better
+            if (!isEnabled) {
+                return {
+                    enabled: false
+                };
+            }
+
             var hourTitle = void 0;
             if (this.model.options.timePicker.meridiem.enabled) {
                 hourTitle = this.model.state.view.hour12;
             } else {
                 hourTitle = this.model.state.view.hour;
             }
+
             return {
-                enabled: this.model.options.timePicker.enabled,
+                enabled: isEnabled,
                 hour: {
                     title: hourTitle,
                     enabled: this.model.options.timePicker.hour.enabled
@@ -2860,6 +2924,20 @@ var View = function () {
         }
 
         /**
+         * @desc render times area, prevent performance issue with scroll and time section
+         */
+
+    }, {
+        key: 'renderTimePartial',
+        value: function renderTimePartial() {
+            var timeViewModel = this._getTimeViewModel(this.model.state.view);
+            this.$container.find('[data-time-key="hour"] input').val(timeViewModel.hour.title);
+            this.$container.find('[data-time-key="minute"] input').val(timeViewModel.minute.title);
+            this.$container.find('[data-time-key="second"] input').val(timeViewModel.second.title);
+            this.$container.find('[data-time-key="meridian"] input').val(timeViewModel.meridiem.title);
+        }
+
+        /**
          * @render datepicker view element
          * @param data
          */
@@ -2874,6 +2952,8 @@ var View = function () {
             Mustache.parse(Template);
             this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
             this.$container.empty().append(this.rendered);
+            this.markSelectedDay();
+            this.markToday();
             this.afterRender();
         }
     }, {

@@ -9,7 +9,8 @@
 
     <!-- Demo Bootstrap Style -->
     <!-- ------------------------------------------------------------------------------------ -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link  rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 
     <!-- Demo Font Embed -->
     <!-- ------------------------------------------------------------------------------------ -->
@@ -173,10 +174,11 @@
 
 <!-- Jquery (required dependency) -->
 <!-- ------------------------------------------------------------------------------------ -->
-<script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
+<!--<script-->
+<!--src="https://code.jquery.com/jquery-3.2.1.min.js"-->
+<!--integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="-->
+<!--crossorigin="anonymous"></script>-->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
 
 <!-- ------------------------------------------------------------------------------------ -->
 <script src="../assets/persian-date.min.js"></script>
@@ -244,6 +246,8 @@
         // Inline Sample
         // --------------------------------------------
         window.pd = $("#inline").persianDatepicker({
+            calendar : 'gregorian',
+            locale : 'fa',
             inline: true,
 //            altField: '#inlineAlt',
 //            altFormat: 'LLLL',
@@ -253,6 +257,17 @@
 //            checkDate: function (unix) {
 //                return new persianDate(unix).day() != 4;
 //            },
+            navigator: {
+                scroll: {
+                    enabled: true
+                }
+            },
+            dayPicker: {
+                enabled: true
+            },
+            yearPicker: {
+                enabled: true
+            },
             timePicker: {
                 enabled: true,
                 meridiem: {

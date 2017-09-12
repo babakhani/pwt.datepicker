@@ -5,24 +5,24 @@ class PersianDateWrapper {
     }
 
     date (input) {
-        if(window.inspdCount || window.inspdCount === 0){
+        if (window.inspdCount || window.inspdCount === 0) {
             window.inspdCount++;
-        }else{
+        } else {
             window.inspdCount = 0;
         }
 
-        console.log('creatre persianDate istance --------- performance hit  :' +  window.inspdCount);
+//        console.log('creatre persianDate istance --------- performance hit  :' +  window.inspdCount);
 
         const that = this;
         let output;
         if (that.model.options.calendar.indexOf('persian') == 0) {
-            var p = persianDate.toCalendar('persianAstro');
-            output = new p(input).toLocale('fa');
+            var p = persianDate.toCalendar('persianAlgo');
+            output = new p(input);
         } else {
             var g = persianDate.toCalendar('gregorian');
-            output = new g(input).toLocale('en');
+            output = new g(input);
         }
-        return output;
+        return output.toLocale(that.model.options.locale);
     }
 }
 

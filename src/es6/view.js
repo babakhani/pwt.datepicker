@@ -1,6 +1,5 @@
 let Template = require('./template');
 let Helper = require('./helper');
-let DateUtil = require('./date');
 let Mustache = require('mustache');
 
 /**
@@ -155,6 +154,13 @@ class View {
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
     _getYearViewModel (viewState) {
+        var isEnabled = this.model.options.yearPicker.enabled;
+        // Make performance better
+        if (!isEnabled) {
+            return {
+                enabled: false
+            };
+        }
         /**
          * @description Generate years list based on viewState year
          * @return ['1380',n+12,'1392']
@@ -175,7 +181,7 @@ class View {
             });
         }
         return {
-            enabled: this.model.options.yearPicker.enabled,
+            enabled: isEnabled,
             viewMode: this.model.state.viewMode == 'year',
             list: yearsModel
         };
@@ -214,6 +220,14 @@ class View {
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
     _getMonthViewModel () {
+        var isEnaled = this.model.options.monthPicker.enabled;
+        // Make performance better
+        if (!isEnaled) {
+            return {
+                enabled: false
+            };
+        }
+
         let monthModel = [], that = this,
           comparisonMonth = this.model.PersianDate.date();
         for (let [index, month] of that.model.PersianDate.date().rangeName().months.entries()) {
@@ -226,7 +240,7 @@ class View {
             });
         }
         return {
-            enabled: this.model.options.monthPicker.enabled,
+            enabled: isEnaled,
             viewMode: this.model.state.viewMode == 'month',
             list: monthModel
         };
@@ -267,6 +281,7 @@ class View {
         }
     }
 
+
     /**
      * @private
      * @return {object}
@@ -275,6 +290,16 @@ class View {
         if (this.model.state.viewMode != 'day') {
             return [];
         }
+
+
+        var isEnabled = this.model.options.dayPicker.enabled;
+        // Make performance better
+        if (!isEnabled) {
+            return {
+                enabled: false
+            };
+        }
+
         //log('if you see this many time your code has performance issue');
         const viewMonth = this.model.state.view.month;
         const viewYear = this.model.state.view.year;
@@ -293,9 +318,7 @@ class View {
             ['null', 'null', 'null', 'null', 'null', 'null', 'null']
         ];
 
-        let now = this.model.PersianDate.date(),
-          pdate = this.model.PersianDate.date();
-
+        let pdate = this.model.PersianDate.date();
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
             for (let [dayIndex, day] of daysRow.entries()) {
@@ -316,9 +339,8 @@ class View {
                 }
                 outputList[rowIndex].push({
                     title: calcedDate.format('D'),
+                    dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                     dataUnix: calcedDate.valueOf(),
-                    selected: calcedDate.isSameDay(this.model.state.selected.dateObject),
-                    today: calcedDate.isSameDay(now),
                     otherMonth: otherMonth,
                     // TODO: make configurable
                     enabled: this.checkDayAccess(calcedDate.valueOf())
@@ -326,10 +348,32 @@ class View {
             }
         }
         return {
-            enabled: this.model.options.dayPicker.enabled && this.model.state.viewMode == 'day',
+            enabled: isEnabled,
             viewMode: this.model.state.viewMode == 'day',
             list: outputList
         };
+    }
+
+    markSelectedDay () {
+        const selected = this.model.state.selected;
+        this.$container.find('.table-days td').each(function () {
+            if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
+                $(this).addClass('selected');
+            } else {
+                $(this).removeClass('selected');
+            }
+        });
+    }
+
+    markToday () {
+        const today = new persianDate();
+        this.$container.find('.table-days td').each(function () {
+            if ($(this).data('date') == [today.year(), today.month(), today.date()].join(',')) {
+                $(this).addClass('today');
+            } else {
+                $(this).removeClass('today');
+            }
+        });
     }
 
     /**
@@ -337,6 +381,15 @@ class View {
      * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridiem: {title: (meridiem|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridiem|{enabled}|string|string), enabled: boolean}}}
      */
     _getTimeViewModel () {
+
+        var isEnabled = this.model.options.timePicker.enabled;
+        // Make performance better
+        if (!isEnabled) {
+            return {
+                enabled: false
+            };
+        }
+
         let hourTitle;
         if (this.model.options.timePicker.meridiem.enabled) {
             hourTitle = this.model.state.view.hour12;
@@ -344,8 +397,9 @@ class View {
         } else {
             hourTitle = this.model.state.view.hour;
         }
+
         return {
-            enabled: this.model.options.timePicker.enabled,
+            enabled: isEnabled,
             hour: {
                 title: hourTitle,
                 enabled: this.model.options.timePicker.hour.enabled
@@ -364,6 +418,7 @@ class View {
             }
         };
     }
+
 
     _getWeekViewModel () {
         return {
@@ -399,6 +454,18 @@ class View {
     }
 
     /**
+     * @desc render times area, prevent performance issue with scroll and time section
+     */
+    renderTimePartial () {
+        const timeViewModel = this._getTimeViewModel(this.model.state.view);
+        this.$container.find('[data-time-key="hour"] input').val(timeViewModel.hour.title);
+        this.$container.find('[data-time-key="minute"] input').val(timeViewModel.minute.title);
+        this.$container.find('[data-time-key="second"] input').val(timeViewModel.second.title);
+        this.$container.find('[data-time-key="meridian"] input').val(timeViewModel.meridiem.title);
+    }
+
+
+    /**
      * @render datepicker view element
      * @param data
      */
@@ -410,6 +477,8 @@ class View {
         Mustache.parse(Template);
         this.rendered = $(Mustache.render(this.model.options.template, this.getViewModel(data)));
         this.$container.empty().append(this.rendered);
+        this.markSelectedDay();
+        this.markToday();
         this.afterRender();
     }
 

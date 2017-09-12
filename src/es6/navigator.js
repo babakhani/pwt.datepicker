@@ -28,7 +28,6 @@ class Navigator {
      * @todo attach as a live way
      */
     liveAttach () {
-        const that = this;
         // Check options
         if (this.model.options.navigator.scroll.enabled) {
             let that = this;
@@ -68,7 +67,7 @@ class Navigator {
      * @public
      */
     timeUp (timekey) {
-        let step, t;
+        let step, t, that = this;
         if (timekey == 'meridiem') {
             step = 12;
             if (this.model.state.view.meridiem == 'PM') {
@@ -83,6 +82,12 @@ class Navigator {
         }
         this.model.state.setViewDateTime('unix', t);
         this.model.state.setSelectedDateTime('unix', t);
+        this.model.view.renderTimePartial();
+        clearTimeout(this.scrollDelayTimeDown);
+        this.scrollDelayTimeUp = setTimeout(function () {
+            that.model.view.markSelectedDay();
+        }, 300);
+
     }
 
 
@@ -92,7 +97,7 @@ class Navigator {
      * @public
      */
     timeDown (timekey) {
-        let step, t;
+        let step, t, that = this;
         if (timekey == 'meridiem') {
             step = 12;
             if (this.model.state.view.meridiem == 'AM') {
@@ -107,6 +112,11 @@ class Navigator {
         }
         this.model.state.setViewDateTime('unix', t);
         this.model.state.setSelectedDateTime('unix', t);
+        this.model.view.renderTimePartial();
+        clearTimeout(this.scrollDelayTimeDown);
+        this.scrollDelayTimeDown = setTimeout(function () {
+            that.model.view.markSelectedDay();
+        }, 300);
     }
 
 
@@ -183,7 +193,7 @@ class Navigator {
                     that.model.view.hide();
                     that.model.options.onHide(that);
                 }
-                that.model.view.render();
+                that.model.view.markSelectedDay();
             });
         }
 
