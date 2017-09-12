@@ -1579,6 +1579,9 @@ var Navigator = function () {
     }, {
         key: 'timeUp',
         value: function timeUp(timekey) {
+            if (this.model.options.timePicker[timekey] == undefined) {
+                return;
+            }
             var step = void 0,
                 t = void 0,
                 that = this;
@@ -1612,6 +1615,9 @@ var Navigator = function () {
     }, {
         key: 'timeDown',
         value: function timeDown(timekey) {
+            if (this.model.options.timePicker[timekey] == undefined) {
+                return;
+            }
             var step = void 0,
                 t = void 0,
                 that = this;

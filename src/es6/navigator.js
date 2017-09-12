@@ -67,6 +67,9 @@ class Navigator {
      * @public
      */
     timeUp (timekey) {
+        if(this.model.options.timePicker[timekey] == undefined ){
+            return;
+        }
         let step, t, that = this;
         if (timekey == 'meridiem') {
             step = 12;
@@ -97,6 +100,9 @@ class Navigator {
      * @public
      */
     timeDown (timekey) {
+        if(this.model.options.timePicker[timekey] == undefined ){
+            return;
+        }
         let step, t, that = this;
         if (timekey == 'meridiem') {
             step = 12;
