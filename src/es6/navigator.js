@@ -67,7 +67,7 @@ class Navigator {
      * @public
      */
     timeUp (timekey) {
-        if(this.model.options.timePicker[timekey] == undefined ){
+        if (this.model.options.timePicker[timekey] == undefined) {
             return;
         }
         let step, t, that = this;
@@ -90,9 +90,7 @@ class Navigator {
         this.scrollDelayTimeUp = setTimeout(function () {
             that.model.view.markSelectedDay();
         }, 300);
-
     }
-
 
     /**
      * @desc set time down depend to timekey
@@ -100,7 +98,7 @@ class Navigator {
      * @public
      */
     timeDown (timekey) {
-        if(this.model.options.timePicker[timekey] == undefined ){
+        if (this.model.options.timePicker[timekey] == undefined) {
             return;
         }
         let step, t, that = this;
