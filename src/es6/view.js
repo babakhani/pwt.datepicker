@@ -236,7 +236,7 @@ class View {
                 enabled: this.checkMonthAccess(index),
                 year: this.model.state.view.year,
                 dataMonth: index + 1,
-                selected: persianDate.isSameMonth(this.model.state.selected.dateObject, comparisonMonth.year(this.model.state.view.year).month(index + 1))
+                selected: (this.model.state.selected.year == this.model.state.view.year && this.model.state.selected.month == (index+1))
             });
         }
         return {
@@ -339,6 +339,7 @@ class View {
                 }
                 outputList[rowIndex].push({
                     title: calcedDate.format('D'),
+                    alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar('gregorian').format('D'),
                     dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
                     dataUnix: calcedDate.valueOf(),
                     otherMonth: otherMonth,
@@ -449,7 +450,9 @@ class View {
             month: this._getMonthViewModel(data),
             year: this._getYearViewModel(data),
             toolbox: this.model.options.toolbox,
-            cssClass: this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : ''
+            cssClass: this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
+            altCalendarTitle: this.model.state.view.dateObject.toCalendar('gregorian').toLocale('en').format('MMM')
+
         };
     }
 

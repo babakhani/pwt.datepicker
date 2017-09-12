@@ -31,10 +31,16 @@ const Template = `
                                 {{#.}}
                                     
                                     {{#enabled}}
-                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" ><span  class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
+                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" >
+                                            <span  class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span>
+                                            <i  class="alter-calendar-day">{{alterCalTitle}}</i>
+                                        </td>
                                     {{/enabled}}
                                     {{^enabled}}
-                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" class="disabled"><span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
+                                        <td data-date="{{dataDate}}" data-unix="{{dataUnix}}" class="disabled">
+                                            <span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span>
+                                            <i  class="alter-calendar-day">{{alterCalTitle}}</i>
+                                        </td>
                                     {{/enabled}}
                                     
                                 {{/.}}
@@ -126,7 +132,7 @@ const Template = `
     <div class="toolbox ">
         <div class="btn-today">{{text.btnToday}}</div>
         {{^toolbox.gregorian}}
-        <div class="btn-calendar">میلادی</div>
+        <div class="btn-calendar">{{altCalendarTitle}}</div>
         {{/toolbox.gregorian}}
     </div>
     {{/enabled}}
