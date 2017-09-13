@@ -249,6 +249,14 @@
 //         --------------------------------------------
         $("#inlineGregorian").persianDatepicker({
             inline: true,
+            calendar: {
+                persian: {
+                    showHint: true
+                },
+                gregorian: {
+                    showHint: true
+                }
+            },
             initialCalendar: 'gregorian',
             altField: '#inlineAltGregorian',
             altFormat: 'LLLL',
@@ -258,6 +266,11 @@
 //            checkDate: function (unix) {
 //                return new persianDate(unix).day() != 3;
 //            },
+            toolbox:{
+                calendarSwitch:{
+                    enabled:true
+                }
+            },
             timePicker: {
                 enabled: true,
                 meridiem: {
@@ -286,6 +299,11 @@
             altField: '#inlineAlt',
             altFormat: 'LLLL',
             format: "lll",
+            toolbox:{
+                calendarSwitch:{
+                    enabled:true
+                }
+            },
             navigator: {
                 scroll: {
                     enabled: true
@@ -312,10 +330,12 @@
                 persian: {
                     enabled: true,
                     locale: 'fa',
+                    showHint: true,
                     leapYearMode: "astronomical" // "astronomical"
                 },
                 gregorian: {
                     enabled: false,
+                    showHint: true,
                     locale: 'en'
                 }
             },

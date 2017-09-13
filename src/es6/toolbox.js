@@ -20,16 +20,11 @@ class Toolbox {
         let that = this;
         if (that.model.options.calendar_ == 'persian') {
             that.model.options.calendar_ = 'gregorian';
+            that.model.options.locale_ = this.model.options.calendar.gregorian.locale;
         }
         else {
             that.model.options.calendar_ = 'persian';
-        }
-
-        if (that.model.options.locale_ == 'fa') {
-            that.model.options.locale_ = 'en';
-        }
-        else if(that.model.options.locale_ == 'en'){
-            that.model.options.locale_ = 'fa';
+            that.model.options.locale_ = this.model.options.calendar.persian.locale;
         }
     }
 

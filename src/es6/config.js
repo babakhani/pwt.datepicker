@@ -17,11 +17,13 @@ const Config = {
         persian: {
             enabled: true,
             locale: 'fa',
+            showHint: false,
             leapYearMode: "algorithmic" // "astronomical"
         },
 
         gregorian: {
             enabled: false,
+            showHint: false,
             enableHint: 'true',
             locale: 'en'
         }
@@ -267,6 +269,11 @@ const Config = {
              * @default 'امروز'
              */
             btnToday: 'امروز'
+        },
+
+
+        calendarSwitch : {
+            enabled: false
         },
 
         /**
