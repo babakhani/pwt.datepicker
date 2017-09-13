@@ -36,6 +36,10 @@
             font-family: IRANSans, tahoma;
         }
 
+        body {
+            padding-bottom: 300px;
+        }
+
         .input-group-addon {
             cursor: pointer;
         }
@@ -89,13 +93,30 @@
                 <div class="col-xs-12 col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Inline Sample</h3>
+                            <h3 class="panel-title">Persian Inline Sample </h3>
+                            <span>algorithmic Leap Year</span>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <input id="inlineAlt" class="form-control" disabled/>
                                 <br/>
-                                <div id="inline">
+                                <div id="inline" data-date="2025/3/12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Persian Inline Sample</h3>
+                            <span>astronomical Leap Year</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input id="inlineAlt2" class="form-control" disabled/>
+                                <br/>
+                                <div id="inline2" data-date="2025/3/12">
                                 </div>
                             </div>
                         </div>
@@ -106,13 +127,27 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Gregorian Inline Sample</h3>
+                            <span>Gregorian Date</span>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <input id="inlineAltGregorian" class="form-control" disabled/>
                                 <br/>
-                                <div id="inlineGregorian">
+                                <div id="inlineGregorian" data-date="2025/3/12">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Only Timepicker with initial value</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input class="form-control" id="timePicker" value="11:23:23"/>
                             </div>
                         </div>
                     </div>
@@ -134,18 +169,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Only Timepicker with initial value</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input class="form-control" id="timePicker" value="11:23:23"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-xs-12 col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -225,16 +249,15 @@
 //         --------------------------------------------
         $("#inlineGregorian").persianDatepicker({
             inline: true,
-            locale: 'en',
-            calendar: 'gregorian',
+            initialCalendar: 'gregorian',
             altField: '#inlineAltGregorian',
             altFormat: 'LLLL',
             format: "lll",
-            maxDate: new persianDate().add('days', 90).valueOf(),
-            minDate: new persianDate().subtract('days', 90).valueOf(),
-            checkDate: function (unix) {
-                return new persianDate(unix).day() != 3;
-            },
+//            maxDate: new persianDate().add('days', 90).valueOf(),
+//            minDate: new persianDate().subtract('days', 90).valueOf(),
+//            checkDate: function (unix) {
+//                return new persianDate(unix).day() != 3;
+//            },
             timePicker: {
                 enabled: true,
                 meridiem: {
@@ -246,21 +269,61 @@
         // Inline Sample
         // --------------------------------------------
         window.pd = $("#inline").persianDatepicker({
-//            calendar: 'persianAstro',
-//            alCalendar: 'persianAlgo',
-//            locale: 'en',
-//            altLocale: 'fa',
+            calendar: {
+                persian: {
+                    enabled: true,
+                    locale: 'fa',
+                    leapYearMode: "algorithmic" // "astronomical"
+                },
 
+                gregorian: {
+                    enabled: false,
+                    locale: 'en'
+                }
+            },
             inline: true,
             viewMode: 'day',
-//            altField: '#inlineAlt',
-//            altFormat: 'LLLL',
+            altField: '#inlineAlt',
+            altFormat: 'LLLL',
             format: "lll",
-//            maxDate: new persianDate().add('month', 3).valueOf(),
-//            minDate: new persianDate().subtract('month', 3).valueOf(),
-//            checkDate: function (unix) {
-//                return new persianDate(unix).day() != 4;
-//            },
+            navigator: {
+                scroll: {
+                    enabled: true
+                }
+            },
+            dayPicker: {
+                enabled: true
+            },
+            yearPicker: {
+                enabled: true
+            },
+            timePicker: {
+                enabled: true,
+                meridiem: {
+                    enabled: true
+                }
+            },
+        });
+
+        // Inline Sample
+        // --------------------------------------------
+        $("#inline2").persianDatepicker({
+            calendar: {
+                persian: {
+                    enabled: true,
+                    locale: 'fa',
+                    leapYearMode: "astronomical" // "astronomical"
+                },
+                gregorian: {
+                    enabled: false,
+                    locale: 'en'
+                }
+            },
+            altField: '#inlineAlt2',
+            altFormat: 'LLLL',
+            inline: true,
+            viewMode: 'day',
+            format: "lll",
             navigator: {
                 scroll: {
                     enabled: true

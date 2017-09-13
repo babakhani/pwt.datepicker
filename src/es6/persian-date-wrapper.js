@@ -1,8 +1,8 @@
 class PersianDateWrapper {
     constructor (model) {
         this.model = model;
-        this.model.options.calendar_ = this.model.options.calendar;
-        this.model.options.locale_ = this.model.options.locale;
+        this.model.options.calendar_ = this.model.options.initialCalendar;
+        this.model.options.locale_ = this.model.options.calendar[this.model.options.initialCalendar].locale;
         return this;
     }
 
@@ -15,6 +15,9 @@ class PersianDateWrapper {
         const that = this;
         let output, cp;
         cp = persianDate.toCalendar(that.model.options.calendar_);
+        if (this.model.options.calendar[this.model.options.initialCalendar].leapYearMode) {
+            cp.toLeapYearMode(this.model.options.calendar[this.model.options.initialCalendar].leapYearMode);
+        }
         output = new cp(input);
         return output.toLocale(that.model.options.locale_);
     }

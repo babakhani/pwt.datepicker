@@ -162,10 +162,8 @@ var Options = function () {
             if (!options.template) {
                 options.template = Template;
             }
-
-            persianDate.toCalendar(options.calendar);
-            persianDate.toLocale(options.locale);
-
+            persianDate.toCalendar(options.initialCalendar);
+            persianDate.toLocale(options.calendar[options.initialCalendar].locale);
             if (options.onlyTimePicker) {
                 options.dayPicker.enabled = false;
                 options.monthPicker.enabled = false;
@@ -463,11 +461,29 @@ var Helper = __webpack_require__(0);
  */
 var Config = {
 
-  calendar: 'persianAlgo',
-  altCalendar: 'gregorian',
+  /**
+   *
+   */
+  inputCalendar: 'gregorian',
 
-  locale: 'fa',
-  altLocale: 'en',
+  /**
+   *
+   */
+  calendar: {
+    persian: {
+      enabled: true,
+      locale: 'fa',
+      leapYearMode: "algorithmic" // "astronomical"
+    },
+
+    gregorian: {
+      enabled: false,
+      enableHint: 'true',
+      locale: 'en'
+    }
+  },
+
+  initialCalendar: 'persian',
 
   /**
    * @description if true datepicker render inline
@@ -1840,8 +1856,8 @@ var PersianDateWrapper = function () {
         _classCallCheck(this, PersianDateWrapper);
 
         this.model = model;
-        this.model.options.calendar_ = this.model.options.calendar;
-        this.model.options.locale_ = this.model.options.locale;
+        this.model.options.calendar_ = this.model.options.initialCalendar;
+        this.model.options.locale_ = this.model.options.calendar[this.model.options.initialCalendar].locale;
         return this;
     }
 
@@ -1857,6 +1873,9 @@ var PersianDateWrapper = function () {
             var output = void 0,
                 cp = void 0;
             cp = persianDate.toCalendar(that.model.options.calendar_);
+            if (this.model.options.calendar[this.model.options.initialCalendar].leapYearMode) {
+                cp.toLeapYearMode(this.model.options.calendar[this.model.options.initialCalendar].leapYearMode);
+            }
             output = new cp(input);
             return output.toLocale(that.model.options.locale_);
         }
@@ -2273,34 +2292,24 @@ var Toolbox = function () {
          */
         this.model = model;
         this._attachEvents();
-        this._updateSelfCalendarType();
         return this;
     }
 
     _createClass(Toolbox, [{
-        key: '_updateSelfCalendarType',
-        value: function _updateSelfCalendarType() {
-            if (this.model.options.calendar.indexOf('persian') == 0) {
-                $('#' + this.model.view.id + ' .btn-calendar').text('میلادی');
-            } else {
-                $('#' + this.model.view.id + ' .btn-calendar').text('Persian');
-            }
-        }
-    }, {
         key: '_toggleCalendartype',
         value: function _toggleCalendartype() {
             var that = this;
-            if (that.model.options.calendar_ == that.model.options.calendar) {
-                that.model.options.calendar_ = that.model.options.altCalendar;
+            if (that.model.options.calendar_ == 'persian') {
+                that.model.options.calendar_ = 'gregorian';
             } else {
-                that.model.options.calendar_ = that.model.options.calendar;
+                that.model.options.calendar_ = 'persian';
             }
-            if (that.model.options.locale_ == that.model.options.locale) {
-                that.model.options.locale_ = that.model.options.altLocale;
-            } else {
-                that.model.options.locale_ = that.model.options.locale;
+
+            if (that.model.options.locale_ == 'fa') {
+                that.model.options.locale_ = 'en';
+            } else if (that.model.options.locale_ == 'en') {
+                that.model.options.locale_ = 'fa';
             }
-            this._updateSelfCalendarType();
         }
 
         /**
@@ -2868,9 +2877,9 @@ var View = function () {
 
             var hourTitle = void 0;
             if (this.model.options.timePicker.meridiem.enabled) {
-                hourTitle = this.model.state.view.hour12;
+                hourTitle = this.model.state.view.dateObject.format('hh');
             } else {
-                hourTitle = this.model.state.view.hour;
+                hourTitle = this.model.state.view.dateObject.format('HH');
             }
 
             return {
@@ -2938,15 +2947,15 @@ var View = function () {
             var that = this,
                 cal = void 0,
                 loc = void 0;
-            if (that.model.options.calendar_ == that.model.options.calendar) {
-                cal = that.model.options.altCalendar;
+            if (that.model.options.calendar_ == 'persian') {
+                cal = 'gregorian';
             } else {
-                cal = that.model.options.calendar;
+                cal = 'persian';
             }
-            if (that.model.options.locale_ == that.model.options.locale) {
-                loc = that.model.options.altLocale;
+            if (that.model.options.locale_ == 'fa') {
+                loc = that.model.options.calendar.gregorian.locale;
             } else {
-                loc = that.model.options.locale;
+                loc = that.model.options.calendar.persian.locale;
             }
             return [cal, loc];
         }

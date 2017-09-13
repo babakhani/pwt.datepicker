@@ -13,34 +13,24 @@ class Toolbox {
          */
         this.model = model;
         this._attachEvents();
-        this._updateSelfCalendarType();
         return this;
-    }
-
-    _updateSelfCalendarType () {
-        if (this.model.options.calendar.indexOf('persian') == 0) {
-            $('#' + this.model.view.id + ' .btn-calendar').text('میلادی');
-        }
-        else {
-            $('#' + this.model.view.id + ' .btn-calendar').text('Persian');
-        }
     }
 
     _toggleCalendartype () {
         let that = this;
-        if (that.model.options.calendar_ == that.model.options.calendar) {
-            that.model.options.calendar_ = that.model.options.altCalendar;
+        if (that.model.options.calendar_ == 'persian') {
+            that.model.options.calendar_ = 'gregorian';
         }
         else {
-            that.model.options.calendar_ = that.model.options.calendar;
+            that.model.options.calendar_ = 'persian';
         }
-        if (that.model.options.locale_ == that.model.options.locale) {
-            that.model.options.locale_ = that.model.options.altLocale;
+
+        if (that.model.options.locale_ == 'fa') {
+            that.model.options.locale_ = 'en';
         }
-        else {
-            that.model.options.locale_ = that.model.options.locale;
+        else if(that.model.options.locale_ == 'en'){
+            that.model.options.locale_ = 'fa';
         }
-        this._updateSelfCalendarType();
     }
 
     /**

@@ -394,10 +394,10 @@ class View {
 
         let hourTitle;
         if (this.model.options.timePicker.meridiem.enabled) {
-            hourTitle = this.model.state.view.hour12;
+            hourTitle = this.model.state.view.dateObject.format('hh');
 
         } else {
-            hourTitle = this.model.state.view.hour;
+            hourTitle = this.model.state.view.dateObject.format('HH');
         }
 
         return {
@@ -460,17 +460,17 @@ class View {
 
     _getAnotherCalendar () {
         let that = this, cal, loc;
-        if (that.model.options.calendar_ == that.model.options.calendar) {
-            cal = that.model.options.altCalendar;
+        if (that.model.options.calendar_ == 'persian') {
+            cal = 'gregorian';
         }
         else {
-            cal = that.model.options.calendar;
+            cal = 'persian';
         }
-        if (that.model.options.locale_ == that.model.options.locale) {
-            loc = that.model.options.altLocale;
+        if (that.model.options.locale_ == 'fa') {
+            loc = that.model.options.calendar.gregorian.locale;
         }
         else {
-            loc = that.model.options.locale;
+            loc = that.model.options.calendar.persian.locale;
         }
         return [cal, loc];
     }

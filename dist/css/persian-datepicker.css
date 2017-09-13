@@ -189,10 +189,11 @@
     margin: 0;
     position: relative; }
     .datepicker-plot-area .datepicker-day-view .table-days td .alter-calendar-day {
+      font-style: normal;
       position: absolute;
       font-size: 8px;
       bottom: 0;
-      right: 5px;
+      right: 2px;
       color: #f1f1f1; }
     .datepicker-plot-area .datepicker-day-view .table-days td span {
       display: block;

@@ -5,11 +5,30 @@ let Helper = require('./helper');
  */
 const Config = {
 
-    calendar: 'persianAlgo',
-    altCalendar: 'gregorian',
+    /**
+     *
+     */
+    inputCalendar: 'gregorian',
 
-    locale: 'fa',
-    altLocale: 'en',
+    /**
+     *
+     */
+    calendar: {
+        persian: {
+            enabled: true,
+            locale: 'fa',
+            leapYearMode: "algorithmic" // "astronomical"
+        },
+
+        gregorian: {
+            enabled: false,
+            enableHint: 'true',
+            locale: 'en'
+        }
+    },
+
+
+    initialCalendar: 'persian',
 
     /**
      * @description if true datepicker render inline

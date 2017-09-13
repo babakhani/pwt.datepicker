@@ -11,10 +11,10 @@ class Options {
      * @return {object}
      * @todo remove jquery
      */
-    constructor(options, model) {
+    constructor (options, model) {
         this.model = model;
         return this._compatibility(
-            $.extend(true, this, Config, options)
+          $.extend(true, this, Config, options)
         );
     }
 
@@ -22,14 +22,12 @@ class Options {
      * @private
      * @param options
      */
-    _compatibility(options) {
+    _compatibility (options) {
         if (!options.template) {
             options.template = Template;
         }
-
-        persianDate.toCalendar(options.calendar);
-        persianDate.toLocale(options.locale);
-
+        persianDate.toCalendar(options.initialCalendar);
+        persianDate.toLocale(options.calendar[options.initialCalendar].locale);
         if (options.onlyTimePicker) {
             options.dayPicker.enabled = false;
             options.monthPicker.enabled = false;
