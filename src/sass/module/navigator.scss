@@ -1,5 +1,5 @@
 .datepicker-plot-area {
-  .datepicker-header {
+  .datepicker-navigator {
     display: block;
     width: 100%;
     height: 30px;
@@ -7,38 +7,39 @@
     padding: 3px 0 0;
     margin-bottom: 8px;
 
-    .btn-next,
-    .btn-switch,
-    .btn-prev {
+    .pwt-btn-next,
+    .pwt-btn-switch,
+    .pwt-btn-prev {
       display: block;
       float: left;
       height: 28px;
       line-height: 28px;
       font-weight: $strong-font;
-      background-color: $bottom-bg;
-      color: $bottom-text-color;
+      background-color: $button-bg;
+      color: $button-text-color;
       @extend %interactive-item;
       padding: 0;
+      @extend %small-curve;
 
       &:hover {
-        background-color: $bottom-bg-hover;
+        background-color: $button-bg-hover;
       }
     }
 
-    .btn-next {
+    .pwt-btn-next {
       display: block;
       width: 15%;
       float: left;
     }
 
-    .btn-switch {
+    .pwt-btn-switch {
       display: block;
       width: 66%;
       margin: 0 2%;
       float: left;
     }
 
-    .btn-prev {
+    .pwt-btn-prev {
       display: block;
       width: 15%;
       float: left;

@@ -4,12 +4,12 @@
 const Template = `
 <div id="plotId" class="datepicker-plot-area {{cssClass}}">
     {{#navigator.enabled}}
-        <div class="datepicker-header">
-            <div class="btn btn-next">{{navigator.text.btnNextText}}</div>
-            <div class="btn btn-switch">{{ navigator.switch.text }}</div>
-            <div class="btn btn-prev">{{navigator.text.btnPrevText}}</div>
+        <div data-navigator class="datepicker-navigator">
+            <div class="pwt-btn pwt-btn-next">{{navigator.text.btnNextText}}</div>
+            <div class="pwt-btn pwt-btn-switch">{{navigator.switch.text}}</div>
+            <div class="pwt-btn pwt-btn-prev">{{navigator.text.btnPrevText}}</div>
         </div>
-    {{/navigator.enabled}}    
+    {{/navigator.enabled}}
     <div class="datepicker-grid-view" >
     {{#days.enabled}}
         {{#days.viewMode}}

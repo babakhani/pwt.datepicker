@@ -21,7 +21,7 @@
         .down-btn,
         .up-btn {
           font-weight: $strong-font;
-          background-color: $bottom-bg;
+          background-color: $button-bg;
 
         }
       }
@@ -57,7 +57,7 @@
       @extend %animation;
 
       &:hover {
-        background-color: $bottom-bg-hover;
+        background-color: $button-bg-hover;
         color: $timepicker-btn-hover-color;
       }
 

@@ -15,17 +15,14 @@ const Config = {
      */
     calendar: {
         persian: {
-            enabled: true,
             locale: 'fa',
             showHint: false,
             leapYearMode: "algorithmic" // "astronomical"
         },
 
         gregorian: {
-            enabled: false,
-            showHint: false,
-            enableHint: 'true',
-            locale: 'en'
+            locale: 'en',
+            showHint: false
         }
     },
 

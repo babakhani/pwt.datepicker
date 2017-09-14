@@ -136,18 +136,18 @@ class Navigator {
             /**
              * @description navigator click event
              */
-            $(document).on('click', '#' + that.model.view.id + ' .btn', function () {
-                if ($(this).is('.btn-next')) {
+            $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
+                if ($(this).is('.pwt-btn-next')) {
                     that.model.state.navigate('next');
                     that.model.options.navigator.onNext(that);
                     that.model.view.render();
                 }
-                else if ($(this).is('.btn-switch')) {
+                else if ($(this).is('.pwt-btn-switch')) {
                     that.model.state.switchViewMode();
                     that.model.options.navigator.onSwitch(that);
                     that.model.view.render();
                 }
-                else if ($(this).is('.btn-prev')) {
+                else if ($(this).is('.pwt-btn-prev')) {
                     that.model.state.navigate('prev');
                     that.model.options.navigator.onPrev(that);
                     that.model.view.render();

@@ -6,11 +6,8 @@
       float: left;
       direction: rtl;
 
-      tr {
-        width: 300px;
-      }
-
       td {
+        width: 45px;
         height: 26px;
         padding: 0;
         margin: 0;
@@ -37,7 +34,7 @@
         .alter-calendar-day {
           font-style: normal;
           position: absolute;
-          font-size: 8px;
+          font-size: 8.5px;
           bottom: 0;
           right: 2px;
           color: #f1f1f1;

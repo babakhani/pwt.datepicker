@@ -422,6 +422,11 @@ class View {
     }
 
 
+    /**
+     *
+     * @return {{enabled: boolean, list: (*|Array)}}
+     * @private
+     */
     _getWeekViewModel () {
         return {
             enabled: true,
@@ -430,6 +435,10 @@ class View {
     }
 
 
+    /**
+     *
+     * @return {string}
+     */
     getCssClass () {
         return [
             this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',

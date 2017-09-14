@@ -8,7 +8,7 @@
     .btn-calendar,
     .btn-today {
       @extend %interactive-item;
-      background-color: $bottom-bg;
+      background-color: $button-bg;
 
       float: right;
       display: block;
@@ -20,7 +20,7 @@
       margin: 0 auto;
       min-width: 60px;
       &:hover {
-        background-color: $bottom-bg-hover;
+        background-color: $button-bg-hover;
       }
     }
   }

@@ -1,4 +1,8 @@
 .datepicker-plot-area {
+  .datepicker-year-view,
+  .datepicker-month-view {
+    padding-top: 10px;
+  }
   // sass-lint:disable force-element-nesting
   .datepicker-year-view .year-item,
   .datepicker-month-view .month-item {
@@ -6,8 +10,8 @@
     width: 33.333333%;
     margin: 2px 0 0;
     float: right;
-    height: 36px;
-    line-height: 34px;
+    height: 42px;
+    line-height: 42px;
     @extend %date-item;
 
     &:hover {
