@@ -429,6 +429,14 @@ class View {
         };
     }
 
+
+    getCssClass () {
+        return [
+            this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
+            !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : ''
+        ].join(' ')
+    }
+
     /**
      * @param data
      * @return {*}
@@ -452,7 +460,7 @@ class View {
             month: this._getMonthViewModel(data),
             year: this._getYearViewModel(data),
             toolbox: this.model.options.toolbox,
-            cssClass: this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
+            cssClass: this.getCssClass(),
             altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('MMMM'),
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint
         };

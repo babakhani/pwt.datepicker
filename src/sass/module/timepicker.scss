@@ -79,4 +79,17 @@
       background: $timepicker-input-bg;
     }
   }
+
+  &.datepicker-state-no-meridiem {
+    .datepicker-time-view {
+      & > .time-segment {
+        width: 31%;
+      }
+
+      & > .meridian-divider{
+        display: none;
+      }
+
+    }
+  }
 }
