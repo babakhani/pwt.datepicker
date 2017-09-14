@@ -1726,15 +1726,25 @@ var Navigator = function () {
                  * @description days click event
                  */
                 $(document).on('click', '#' + that.model.view.id + ' .datepicker-day-view td:not(.disabled)', function () {
-                    var thisUnix = $(this).data('unix');
+                    var thisUnix = $(this).data('unix'),
+                        mustRender = void 0;
                     that.model.state.setSelectedDateTime('unix', thisUnix);
+                    if (that.model.state.selected.month !== that.model.state.view.month) {
+                        mustRender = true;
+                    } else {
+                        mustRender = false;
+                    }
                     that.model.state.setViewDateTime('unix', that.model.state.selected.unixDate);
-                    that.model.options.dayPicker.onSelect(thisUnix);
                     if (that.model.options.autoClose) {
                         that.model.view.hide();
                         that.model.options.onHide(that);
                     }
-                    that.model.view.markSelectedDay();
+                    if (mustRender) {
+                        that.model.view.render();
+                    } else {
+                        that.model.view.markSelectedDay();
+                    }
+                    that.model.options.dayPicker.onSelect(thisUnix);
                 });
             }
 

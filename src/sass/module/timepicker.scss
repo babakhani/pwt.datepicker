@@ -2,9 +2,8 @@
   .datepicker-time-view {
     display: block;
     float: left;
-    width: 100%;
-    padding: 5px 1%;
-    margin: 3px 0;
+    padding: 5px;
+    margin: 3px -5px;
     background: $timepicker-bg;
     border-top: $timepicker-border;
 
@@ -21,8 +20,7 @@
         .down-btn,
         .up-btn {
           font-weight: $strong-font;
-          background-color: $button-bg;
-
+          //background-color: $button-bg;
         }
       }
 
@@ -50,7 +48,7 @@
       width: 100%;
       margin: 0;
       height: 20px;
-      line-height: 18px;
+      line-height: 22px;
       color: $timepicker-btn-color;
       @extend %top-big-curve;
       @extend %interactive-item;
@@ -76,7 +74,7 @@
       outline: none;
       @extend %interactive-item;
       border: $timepicker-input-border;
-      background: $timepicker-input-bg;
+      background: transparent;
     }
   }
 
@@ -86,7 +84,7 @@
         width: 31%;
       }
 
-      & > .meridian-divider{
+      & > .meridian-divider {
         display: none;
       }
 

@@ -99,7 +99,7 @@
   display: block;
   width: 200px;
   min-width: 200px;
-  padding: 0 5px;
+  padding: 3px;
   position: absolute;
   font: 12px tahoma;
   border: 1px solid #ccc;
@@ -130,9 +130,8 @@
 .datepicker-plot-area .datepicker-time-view {
   display: block;
   float: left;
-  width: 100%;
-  padding: 5px 1%;
-  margin: 3px 0;
+  padding: 5px;
+  margin: 3px -5px;
   background: #f9f9f9;
   border-top: 1px solid #f1f1f1; }
   .datepicker-plot-area .datepicker-time-view > .time-segment {
@@ -143,8 +142,7 @@
     overflow: hidden; }
     .datepicker-plot-area .datepicker-time-view > .time-segment:hover .down-btn,
     .datepicker-plot-area .datepicker-time-view > .time-segment:hover .up-btn {
-      font-weight: bold;
-      background-color: #fcfcfc; }
+      font-weight: bold; }
   .datepicker-plot-area .datepicker-time-view .divider {
     display: block;
     width: 3%;
@@ -163,7 +161,7 @@
     width: 100%;
     margin: 0;
     height: 20px;
-    line-height: 18px;
+    line-height: 22px;
     color: #ccc; }
     .datepicker-plot-area .datepicker-time-view .down-btn:hover,
     .datepicker-plot-area .datepicker-time-view .up-btn:hover {
@@ -177,7 +175,7 @@
     padding: 0;
     outline: none;
     border: none;
-    background: #f9f9f9; }
+    background: transparent; }
 
 .datepicker-plot-area.datepicker-state-no-meridiem .datepicker-time-view > .time-segment {
   width: 31%; }
@@ -190,7 +188,7 @@
   float: left;
   direction: rtl; }
   .datepicker-plot-area .datepicker-day-view .table-days td {
-    width: 45px;
+    width: 14.2%;
     height: 26px;
     padding: 0;
     margin: 0;
@@ -214,24 +212,27 @@
   display: block;
   width: 100%;
   float: right;
-  min-width: 150px;
   height: 180px;
-  margin: 10px 0; }
-  .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row {
+  margin: 8px 0; }
+  .datepicker-plot-area .datepicker-day-view .month-grid-box .header {
     display: block;
     width: 100%;
-    height: 25px;
-    float: left; }
-  .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell {
-    display: block;
-    width: 14%;
-    height: 25px;
-    float: right;
-    line-height: 25px;
-    text-indent: 6px;
-    font: 14px tahoma;
-    font-weight: bold;
-    color: #333; }
+    float: left;
+    padding-bottom: 8px; }
+    .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row {
+      display: block;
+      width: 100%;
+      height: 25px;
+      float: left; }
+    .datepicker-plot-area .datepicker-day-view .month-grid-box .header .header-row-cell {
+      display: block;
+      width: 14.2%;
+      height: 25px;
+      float: right;
+      line-height: 25px;
+      font: 11px;
+      font-weight: bold;
+      color: #333; }
 
 .datepicker-plot-area .datepicker-year-view,
 .datepicker-plot-area .datepicker-month-view {
@@ -251,8 +252,7 @@
   width: 100%;
   height: 30px;
   float: left;
-  padding: 3px 0 0;
-  margin-bottom: 8px; }
+  padding: 0; }
   .datepicker-plot-area .datepicker-navigator .pwt-btn-next,
   .datepicker-plot-area .datepicker-navigator .pwt-btn-switch,
   .datepicker-plot-area .datepicker-navigator .pwt-btn-prev {
@@ -308,8 +308,7 @@
   width: 100%;
   height: 30px;
   float: left;
-  padding: 3px 0 0;
-  margin-bottom: 8px; }
+  padding: 0; }
   .datepicker-plot-area .datepicker-navigator .pwt-btn-next,
   .datepicker-plot-area .datepicker-navigator .pwt-btn-switch,
   .datepicker-plot-area .datepicker-navigator .pwt-btn-prev {

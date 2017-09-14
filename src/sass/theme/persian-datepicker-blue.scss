@@ -1,6 +1,5 @@
 @import '../base/config';
 
-
 // Color
 $white: #1a3347;
 $dark: #fff;
@@ -72,9 +71,8 @@ $timepicker-border: 1px solid $ultra-light-gray;
 $timepicker-bg: $super-light-gray;
 
 $timepicker-segment-divider-font: 12px bold;
-$timepicker-input-bg: $super-light-gray;
+$timepicker-input-bg: rgba(0, 0, 0, 0);
 $timepicker-input-border: none;
-
 
 @import '../base/helper';
 @import '../layout/default';

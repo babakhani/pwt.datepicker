@@ -7,7 +7,7 @@
       direction: rtl;
 
       td {
-        width: 45px;
+        width: 14.2%;
         height: 26px;
         padding: 0;
         margin: 0;
@@ -65,11 +65,14 @@
       display: block;
       width: 100%;
       float: right;
-      min-width: 150px;
       height: 180px;
-      margin: 10px 0;
+      margin: 8px 0;
 
       .header {
+        display: block;
+        width: 100%;
+        float: left;
+        padding-bottom: 8px;
 
         .header-row {
           display: block;
@@ -80,12 +83,11 @@
 
         .header-row-cell {
           display: block;
-          width: 14%;
+          width: 14.2%;
           height: 25px;
           float: right;
           line-height: 25px;
-          text-indent: 6px;
-          font: $big-font;
+          font: 11px;
           font-weight: $strong-font;
           color: $dark;
         }
