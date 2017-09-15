@@ -6,6 +6,9 @@ This is default config class
 **Kind**: global constant  
 
 * [Config](#Config)
+    * [.inputCalendar](#Config.inputCalendar)
+    * [.responsive](#Config.responsive)
+    * [.calendar](#Config.calendar)
     * [.inline](#Config.inline) : <code>boolean</code>
     * [.initialValue](#Config.initialValue) : <code>boolean</code>
     * [.persianDigit](#Config.persianDigit) : <code>boolean</code>
@@ -29,6 +32,7 @@ This is default config class
         * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
         * [.text](#Config.toolbox.text) : <code>object</code>
             * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
+            * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
         * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
     * [.onlyTimePicker](#Config.onlyTimePicker) : <code>boolean</code>
     * [.onlySelectOnDate](#Config.onlySelectOnDate) : <code>boolean</code>
@@ -77,6 +81,20 @@ This is default config class
     * ["onShow"](#Config.event_onShow)
     * ["onHide" (self)](#Config.event_onHide)
 
+<a name="Config.inputCalendar"></a>
+
+### Config.inputCalendar
+**Kind**: static property of [<code>Config</code>](#Config)  
+<a name="Config.responsive"></a>
+
+### Config.responsive
+responsive
+
+**Kind**: static property of [<code>Config</code>](#Config)  
+<a name="Config.calendar"></a>
+
+### Config.calendar
+**Kind**: static property of [<code>Config</code>](#Config)  
 <a name="Config.inline"></a>
 
 ### Config.inline : <code>boolean</code>
@@ -312,6 +330,7 @@ toolbox config object
     * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
     * [.text](#Config.toolbox.text) : <code>object</code>
         * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
+        * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
     * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
 
 <a name="Config.toolbox.enabled"></a>
@@ -323,11 +342,21 @@ toolbox config object
 
 #### toolbox.text : <code>object</code>
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
+
+* [.text](#Config.toolbox.text) : <code>object</code>
+    * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
+    * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+
 <a name="Config.toolbox.text.btnToday"></a>
 
 ##### text.btnToday : <code>string</code>
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;امروز&#x27;&quot;</code>  
+<a name="Config.toolbox.text.btnExit"></a>
+
+##### text.btnExit : <code>string</code>
+**Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
+**Default**: <code>&quot;&#x27;تایید&#x27;&quot;</code>  
 <a name="Config.toolbox.event_onToday"></a>
 
 #### "onToday" (toolbox)

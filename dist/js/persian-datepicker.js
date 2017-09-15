@@ -477,7 +477,7 @@ var Config = {
   /**
    * responsive
    */
-  responsive: false,
+  responsive: true,
 
   /**
    *

@@ -13,7 +13,8 @@ const Config = {
     /**
      * responsive
      */
-    responsive: false,
+    responsive: true,
+
 
     /**
      *
