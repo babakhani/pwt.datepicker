@@ -53,8 +53,15 @@ class View {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.hide();
             this.setPickerBoxPosition();
+            this.addCompatibilityClass();
         }
         return this;
+    }
+
+    addCompatibilityClass () {
+        if (Helper.isMobile && this.model.options.responsive) {
+            this.$container.addClass('pwt-mobile-view');
+        }
     }
 
     /**
@@ -301,8 +308,7 @@ class View {
         }
 
         //log('if you see this many time your code has performance issue');
-        const viewMonth = this.model.state.view.month;
-        const viewYear = this.model.state.view.year;
+        const viewMonth = this.model.state.view.month, viewYear = this.model.state.view.year;
         let pdateInstance = this.model.PersianDate.date();
         let daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
         let firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
@@ -444,7 +450,7 @@ class View {
             this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
             !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : '',
             this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '',
-            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridiem' : '',
+            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridiem' : ''
         ].join(' ')
     }
 

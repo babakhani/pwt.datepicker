@@ -11,6 +11,11 @@ const Config = {
     inputCalendar: 'gregorian',
 
     /**
+     * responsive
+     */
+    responsive: false,
+
+    /**
      *
      */
     calendar: {
@@ -275,7 +280,7 @@ const Config = {
         },
 
 
-        calendarSwitch : {
+        calendarSwitch: {
             enabled: false
         },
 

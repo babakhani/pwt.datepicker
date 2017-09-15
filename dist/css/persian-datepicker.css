@@ -317,6 +317,8 @@
     .datepicker-plot-area .toolbox .pwt-btn-calendar:hover,
     .datepicker-plot-area .toolbox .pwt-btn-today:hover {
       background-color: #eee; }
+  .datepicker-plot-area .toolbox .pwt-btn-exit {
+    display: none; }
 
 .datepicker-plot-area .datepicker-navigator {
   display: block;
@@ -351,7 +353,7 @@
     float: left; }
 
 @media only screen and (max-device-width: 480px) {
-  .datepicker-container {
+  .datepicker-container.pwt-mobile-view {
     position: fixed !important;
     width: 100vw !important;
     height: 100vh !important;
@@ -360,10 +362,12 @@
     bottom: 0 !important;
     overflow: hidden !important;
     transition: all 1s !important; }
-    .datepicker-container.pwt-hide {
+    .datepicker-container.pwt-mobile-view.pwt-hide {
       top: 100vh;
       height: 0; }
-    .datepicker-container .datepicker-plot-area {
+    .datepicker-container.pwt-mobile-view .pwt-btn-exit {
+      display: block; }
+    .datepicker-container.pwt-mobile-view .datepicker-plot-area {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -371,50 +375,50 @@
       left: 0 !important;
       right: 0 !important;
       bottom: 0 !important; }
-      .datepicker-container .datepicker-plot-area .table-days td,
-      .datepicker-container .datepicker-plot-area .table-days td span {
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area .table-days td,
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area .table-days td span {
         height: 44px;
         line-height: 44px;
         font-size: 14px; }
-      .datepicker-container .datepicker-plot-area .datepicker-year-view .year-item,
-      .datepicker-container .datepicker-plot-area .datepicker-month-view .month-item {
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area .datepicker-year-view .year-item,
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area .datepicker-month-view .month-item {
         height: 70px;
         line-height: 70px; }
-      .datepicker-container .datepicker-plot-area [class*="pwt-btn"] {
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area [class*="pwt-btn"] {
         height: 48px !important;
         line-height: 48px !important; }
-      .datepicker-container .datepicker-plot-area .pwt-btn-today {
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area .pwt-btn-today {
         float: left; }
-      .datepicker-container .datepicker-plot-area.datepicker-state-only-time {
+      .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time {
         background: rgba(0, 0, 0, 0.7);
         border: none;
         padding-top: 60%; }
-        .datepicker-container .datepicker-plot-area.datepicker-state-only-time .pwt-btn-exit {
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .pwt-btn-exit {
           margin-right: 5px; }
-        .datepicker-container .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view input {
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view input {
           height: 40px;
           line-height: 40px;
           font-size: 24px;
           margin: 5px 0; }
-        .datepicker-container .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .divider,
-        .datepicker-container .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .divider span {
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .divider,
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .divider span {
           font-size: 16px;
           display: block;
           height: 144px !important;
           line-height: 144px !important; }
-        .datepicker-container .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .down-btn,
-        .datepicker-container .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .up-btn {
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .down-btn,
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view .up-btn {
           height: 48px !important;
           line-height: 48px !important; }
-    .datepicker-container .datepicker-time-view input {
+    .datepicker-container.pwt-mobile-view .datepicker-time-view input {
       height: 32px;
       line-height: 34px;
       font-size: 18px; }
-    .datepicker-container .datepicker-time-view .divider,
-    .datepicker-container .datepicker-time-view .divider span {
+    .datepicker-container.pwt-mobile-view .datepicker-time-view .divider,
+    .datepicker-container.pwt-mobile-view .datepicker-time-view .divider span {
       height: 120px !important;
       line-height: 120px !important; }
-    .datepicker-container .datepicker-time-view .down-btn,
-    .datepicker-container .datepicker-time-view .up-btn {
+    .datepicker-container.pwt-mobile-view .datepicker-time-view .down-btn,
+    .datepicker-container.pwt-mobile-view .datepicker-time-view .up-btn {
       height: 40px !important;
       line-height: 40px !important; } }

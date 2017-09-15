@@ -475,6 +475,11 @@ var Config = {
   inputCalendar: 'gregorian',
 
   /**
+   * responsive
+   */
+  responsive: false,
+
+  /**
    *
    */
   calendar: {
@@ -2444,35 +2449,24 @@ var View = function () {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
             this.hide();
             this.setPickerBoxPosition();
+            this.addCompatibilityClass();
         }
-
-        (function ($) {
-            var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
-            $.fn.nodoubletapzoom = function () {
-                if (IS_IOS) $(this).bind('touchstart', function preventZoom(e) {
-                    var t2 = e.timeStamp,
-                        t1 = $(this).data('lastTouch') || t2,
-                        dt = t2 - t1,
-                        fingers = e.originalEvent.touches.length;
-                    $(this).data('lastTouch', t2);
-                    if (!dt || dt > 500 || fingers > 1) return; // not double-tap
-
-                    e.preventDefault(); // double tap - prevent the zoom
-                    // also synthesize click events we just swallowed up
-                    $(this).trigger('click').trigger('click');
-                });
-            };
-        })(jQuery);
-
         return this;
     }
 
-    /**
-     * @desc remove datepicker container element from dom
-     */
-
-
     _createClass(View, [{
+        key: 'addCompatibilityClass',
+        value: function addCompatibilityClass() {
+            if (Helper.isMobile && this.model.options.responsive) {
+                this.$container.addClass('pwt-mobile-view');
+            }
+        }
+
+        /**
+         * @desc remove datepicker container element from dom
+         */
+
+    }, {
         key: 'destroy',
         value: function destroy() {
             this.$container.remove();
@@ -2791,8 +2785,8 @@ var View = function () {
             }
 
             //log('if you see this many time your code has performance issue');
-            var viewMonth = this.model.state.view.month;
-            var viewYear = this.model.state.view.year;
+            var viewMonth = this.model.state.view.month,
+                viewYear = this.model.state.view.year;
             var pdateInstance = this.model.PersianDate.date();
             var daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
             var firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
