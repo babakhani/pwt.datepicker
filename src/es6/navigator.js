@@ -32,7 +32,7 @@ class Navigator {
         if (this.model.options.navigator.scroll.enabled) {
             let that = this;
             let gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
-            Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
+            Hamster(gridPlot).wheel(function (event, delta) {
                 if (delta > 0) {
                     that.model.state.navigate('next');
                 } else {
@@ -44,7 +44,7 @@ class Navigator {
 
             if (this.model.options.timePicker.enabled) {
                 let timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
-                Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
+                Hamster(timePlot).wheel(function (event, delta) {
                     let $target = $(event.target);
                     let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
                     if (key) {

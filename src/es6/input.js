@@ -68,7 +68,7 @@ class Input {
         let typingTimer,
           doneTypingInterval = that.model.options.inputDelay,
           ctrlDown = false,
-          ctrlKey = [17, 91], vKey = 86, cKey = 67;
+          ctrlKey = [17, 91], vKey = 86;
 
         $(document).keydown(function (e) {
             if ($.inArray(e.keyCode, ctrlKey) > 0)
@@ -78,7 +78,7 @@ class Input {
                 ctrlDown = false;
         });
 
-        $(that.elem).bind("keyup", function (e) {
+        $(that.elem).bind('keyup', function (e) {
             let $self = $(this);
             let trueKey = false;
             if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {

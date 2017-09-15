@@ -20,7 +20,9 @@ class PersianDateParser {
         inputString = inputString.toEnglishDigits();
 
         if (jalaliPat.test(inputString)) {
+            /* eslint-disable no-useless-escape */
             persianDateArray = inputString.split(/\/|-|\,|\./).map(Number);
+            /* eslint-enable no-useless-escape */
             return persianDateArray;
         } else {
             return undefined;

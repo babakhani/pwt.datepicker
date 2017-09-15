@@ -6,34 +6,77 @@ let Helper = require('./helper');
 const Config = {
 
     /**
-     *
+     * @description if set true make enable responsive view on mobile devices
+     * @type boolean
+     * @version 0.3.0
+     * @default true
      */
-    inputCalendar: 'gregorian',
-
-    /**
-     * responsive
-     */
-    responsive: true,
+    'responsive': true,
 
 
     /**
-     *
+     * @description calendar type and localization configuration
+     * @version 0.3.0
+     * @type object
      */
-    calendar: {
-        persian: {
-            locale: 'fa',
-            showHint: false,
-            leapYearMode: "algorithmic" // "astronomical"
+    'calendar': {
+
+        /**
+         * @description persian calendar configuration
+         * @type object
+         * @version 0.3.0
+         */
+        'persian': {
+
+            /**
+             * @description set locale of calendar available options: 'fa', 'en'
+             * @default 'fa'
+             * @type string
+             */
+            'locale': 'fa',
+
+            /**
+             * @description if set true, small date hint of this calendars will be shown on another calendar
+             * @type boolean
+             * @default false
+             */
+            'showHint': false,
+
+            /**
+             * @description config leap year calculation mode, available options: 'algorithmic', 'astronomical'
+             * @type string
+             * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear
+             * @default 'algorithmic'
+             */
+            'leapYearMode': 'algorithmic' // "astronomical"
         },
 
-        gregorian: {
-            locale: 'en',
-            showHint: false
+        'gregorian': {
+
+            /**
+             * @description set locale of calendar available options: 'fa', 'en'
+             * @default 'en'
+             * @type string
+             */
+            'locale': 'en',
+
+            /**
+             * @description if set true, small date hint of this calendars will be shown on another calendar
+             * @type boolean
+             * @default false
+             */
+            'showHint': false
         }
     },
 
 
-    initialCalendar: 'persian',
+    /**
+     * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
+     * @default 'persian'
+     * @type string
+     * @version 0.3.0
+     */
+    'initialCalendar': 'persian',
 
     /**
      * @description if true datepicker render inline
@@ -85,8 +128,8 @@ const Config = {
      *  }
      */
     'formatter': function (unixDate) {
-        let self = this;
-        let pdate = this.model.PersianDate.date(unixDate);
+        let self = this,
+          pdate = this.model.PersianDate.date(unixDate);
         return pdate.format(self.format);
     },
 
@@ -129,8 +172,9 @@ const Config = {
      *  }
      */
     'altFieldFormatter': function (unixDate) {
-        let self = this;
-        let thisAltFormat = self.altFormat.toLowerCase();
+        let self = this,
+          thisAltFormat = self.altFormat.toLowerCase(),
+          pd;
         if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
             return new Date(unixDate);
         }
@@ -138,7 +182,7 @@ const Config = {
             return unixDate;
         }
         else {
-            let pd = this.model.PersianDate.date(unixDate);
+            pd = this.model.PersianDate.date(unixDate);
             return pd.format(self.altFormat);
         }
     },
@@ -217,7 +261,7 @@ const Config = {
          *      //log('navigator next ');
          *  }
          */
-        'onNext': function (navigator) {
+        'onNext': function () {
             //log('navigator next ');
         },
 
@@ -230,7 +274,7 @@ const Config = {
          *      //log('navigator prev ');
          *  }
          */
-        'onPrev': function (navigator) {
+        'onPrev': function () {
             //log('navigator prev ');
         },
 
@@ -243,7 +287,7 @@ const Config = {
                 // console.log('navigator switch ');
          *  }
          */
-        'onSwitch': function (state) {
+        'onSwitch': function () {
             // console.log('navigator switch ');
         }
     },
@@ -281,7 +325,17 @@ const Config = {
         },
 
 
+        /**
+         * @description toolbox calendar switch configuration
+         * @type object
+         * @version 0.3.0
+         */
         calendarSwitch: {
+
+            /**
+             * @type boolean
+             * @default false
+             */
             enabled: false
         },
 
@@ -292,7 +346,7 @@ const Config = {
          *      //log('toolbox today btn');
          *  }
          */
-        onToday: function (toolbox) {
+        onToday: function () {
             //log('toolbox today btn');
         }
     },
@@ -319,7 +373,7 @@ const Config = {
      * @description check date avalibility
      * @type function
      */
-    'checkDate': function (unix) {
+    'checkDate': function () {
         return true;
     },
 
@@ -328,7 +382,7 @@ const Config = {
      * @description check month avalibility
      * @type {function}
      */
-    'checkMonth': function (month) {
+    'checkMonth': function () {
         return true;
     },
 
@@ -337,7 +391,7 @@ const Config = {
      * @description check year avalibility
      * @type {function}
      */
-    'checkYear': function (year) {
+    'checkYear': function () {
         return true;
     },
 

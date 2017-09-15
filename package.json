@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker",
-  "version": "0.5.11",
+  "version": "0.5.12b",
   "description": "jQuery datepicker plugin work with Iranian calendar.",
   "keywords": [
     "jquery-plugin",
@@ -37,9 +37,12 @@
     "hamsterjs": "^1.1.2",
     "jshint": "^2.6.0",
     "load-grunt-tasks": "^3.5.2",
+    "markdown-doctest": "^0.9.1",
+    "markdown-link-check": "^3.1.2",
     "mustache": "=2.3.0",
     "node-sass": "^4.5.2",
     "persian-date": "^0.1.8",
+    "pre-commit": "^1.2.2",
     "sass-lint": "^1.10.2",
     "simple-server": "^1.0.1",
     "sync-pkg": "^0.7.2",
@@ -50,12 +53,17 @@
     "jquery": "2.2.0",
     "persian-date": "0.2.3"
   },
+  "pre-commit": [
+    "test"
+  ],
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server & grunt --dev",
     "build": "rm -fR ./dist/js & rm -fR ./dist/css & rm -fR ./dist/doc & grunt",
     "doc": "grunt --doc",
-    "test": "sass-lint -c .sass-lint.yml --verbose & ./node_modules/jshint/bin/jshint src/es6/*.js & ./node_modules/jshint/bin/jshint bower.json",
+    "test": "sass-lint -c .sass-lint.yml --verbose & ./node_modules/jshint/bin/jshint src/es6/*.js & ./node_modules/jshint/bin/jshint bower.json & ./node_modules/jshint/bin/jshint package.json && npm run eslint & npm run doctest",
     "sync-pkg": "sync-pkg",
-    "pre-dev": "sudo npm install -g sync-pkg babel grunt simple-server versionn sass-lint jshint"
+    "doctest": "./node_modules/markdown-doctest/bin/cmd.js README.md && ./node_modules/markdown-link-check/markdown-link-check README.md",
+    "eslint": "./node_modules/eslint/bin/eslint.js src/es6",
+    "pre-dev": "sudo npm install -g sync-pkg babel grunt sass-lint pre-commit"
   }
 }

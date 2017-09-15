@@ -42,7 +42,6 @@ class Toolbox {
 
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
             that._toggleCalendartype();
-            let unix = that.model.state.view.unixDate;
             that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
             that.model.view.render();

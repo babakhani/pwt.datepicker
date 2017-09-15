@@ -58,6 +58,9 @@ class View {
         return this;
     }
 
+    /**
+     * @desc add css class to handle compatibility ui things
+     */
     addCompatibilityClass () {
         if (Helper.isMobile && this.model.options.responsive) {
             this.$container.addClass('pwt-mobile-view');
@@ -75,9 +78,9 @@ class View {
      * @desc set datepicker container element based on <input/> element position
      */
     setPickerBoxPosition () {
-        let inputPosition = this.model.input.getInputPosition();
-        let inputSize = this.model.input.getInputSize();
-        if (this.model.options.position === "auto") {
+        let inputPosition = this.model.input.getInputPosition(),
+          inputSize = this.model.input.getInputSize();
+        if (this.model.options.position === 'auto') {
             this.$container.css({
                 left: (inputPosition.left) + 'px',
                 top: (inputSize.height + inputPosition.top) + 'px'
@@ -140,8 +143,8 @@ class View {
     checkYearAccess (year) {
         let output = true;
         if (this.model.state.filetredDate) {
-            let startYear = this.model.state.filterDate.start.year;
-            let endYear = this.model.state.filterDate.end.year;
+            let startYear = this.model.state.filterDate.start.year,
+              endYear = this.model.state.filterDate.end.year;
             if (startYear && year < startYear) {
                 return false;
             }
@@ -161,7 +164,7 @@ class View {
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
     _getYearViewModel (viewState) {
-        var isEnabled = this.model.options.yearPicker.enabled;
+        let isEnabled = this.model.options.yearPicker.enabled;
         // Make performance better
         if (!isEnabled) {
             return {
@@ -227,7 +230,7 @@ class View {
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
     _getMonthViewModel () {
-        var isEnaled = this.model.options.monthPicker.enabled;
+        let isEnaled = this.model.options.monthPicker.enabled;
         // Make performance better
         if (!isEnaled) {
             return {
@@ -235,8 +238,7 @@ class View {
             };
         }
 
-        let monthModel = [], that = this,
-          comparisonMonth = this.model.PersianDate.date();
+        let monthModel = [], that = this;
         for (let [index, month] of that.model.PersianDate.date().rangeName().months.entries()) {
             monthModel.push({
                 title: month,
@@ -299,7 +301,7 @@ class View {
         }
 
 
-        var isEnabled = this.model.options.dayPicker.enabled;
+        let isEnabled = this.model.options.dayPicker.enabled;
         // Make performance better
         if (!isEnabled) {
             return {
@@ -309,26 +311,26 @@ class View {
 
         //log('if you see this many time your code has performance issue');
         const viewMonth = this.model.state.view.month, viewYear = this.model.state.view.year;
-        let pdateInstance = this.model.PersianDate.date();
-        let daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
-        let firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
-        let outputList = [];
-        let daysListindex = 0;
-        let nextMonthListIndex = 0;
-        let daysMatrix = [
-            ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-            ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-            ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-            ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-            ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-            ['null', 'null', 'null', 'null', 'null', 'null', 'null']
-        ];
+        let pdateInstance = this.model.PersianDate.date(),
+          daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
+          firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
+          outputList = [],
+          daysListindex = 0,
+          nextMonthListIndex = 0,
+          daysMatrix = [
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null']
+          ];
 
         const anotherCalendar = this._getAnotherCalendar();
         let pdate = this.model.PersianDate.date();
         for (let [rowIndex, daysRow] of daysMatrix.entries()) {
             outputList[rowIndex] = [];
-            for (let [dayIndex, day] of daysRow.entries()) {
+            for (let [dayIndex] of daysRow.entries()) {
                 let calcedDate, otherMonth;
                 if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
                     calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').valueOf() / 1000).subtract('days', ((firstWeekDayOfMonth) - dayIndex ));
@@ -390,7 +392,7 @@ class View {
      */
     _getTimeViewModel () {
 
-        var isEnabled = this.model.options.timePicker.enabled;
+        let isEnabled = this.model.options.timePicker.enabled;
         // Make performance better
         if (!isEnabled) {
             return {

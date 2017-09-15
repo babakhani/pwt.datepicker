@@ -1,6 +1,3 @@
-let DateUtil = require('./date');
-
-
 /**
  * All state set in his object and get from this
  * also this object notify other object to update self or update view or etc.

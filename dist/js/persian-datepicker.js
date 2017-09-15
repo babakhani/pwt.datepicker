@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -90,10 +90,13 @@ var Helper = {
      * @example log('whoooooha')
      */
     log: function log(input) {
+        /*eslint-disable no-console */
         console.log(input);
+        /*eslint-enable no-console */
     },
 
 
+    /* eslint-disable no-useless-escape */
     isMobile: function () {
         var check = false;
         (function (a) {
@@ -101,6 +104,7 @@ var Helper = {
         })(navigator.userAgent || navigator.vendor || window.opera);
         return check;
     }(),
+    /* eslint-enable no-useless-escape */
 
     /**
      * @desc show debug messages if window.persianDatepickerDebug set as true
@@ -110,6 +114,7 @@ var Helper = {
      * debug('element','message');
      */
     debug: function debug(elem, input) {
+        /*eslint-disable no-console */
         if (window.persianDatepickerDebug) {
             if (elem.constructor.name) {
                 console.log('Debug: ' + elem.constructor.name + ' : ' + input);
@@ -117,6 +122,7 @@ var Helper = {
                 console.log('Debug: ' + input);
             }
         }
+        /*eslint-enable no-console */
     },
     delay: function delay(callback, ms) {
         clearTimeout(window.datepickerTimer);
@@ -236,14 +242,14 @@ module.exports = Template;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var State = __webpack_require__(12);
-var Toolbox = __webpack_require__(13);
-var View = __webpack_require__(14);
-var Input = __webpack_require__(8);
+var State = __webpack_require__(11);
+var Toolbox = __webpack_require__(12);
+var View = __webpack_require__(13);
+var Input = __webpack_require__(7);
 var API = __webpack_require__(4);
-var Navigator = __webpack_require__(9);
+var Navigator = __webpack_require__(8);
 var Options = __webpack_require__(1);
-var PersianDateWrapper = __webpack_require__(11);
+var PersianDateWrapper = __webpack_require__(10);
 
 /**
  * Main datepicker object, manage every things
@@ -470,32 +476,75 @@ var Helper = __webpack_require__(0);
 var Config = {
 
   /**
-   *
+   * @description if set true make enable responsive view on mobile devices
+   * @type boolean
+   * @version 0.3.0
+   * @default true
    */
-  inputCalendar: 'gregorian',
+  'responsive': true,
 
   /**
-   * responsive
+   * @description calendar type and localization configuration
+   * @version 0.3.0
+   * @type object
    */
-  responsive: true,
+  'calendar': {
 
-  /**
-   *
-   */
-  calendar: {
-    persian: {
-      locale: 'fa',
-      showHint: false,
-      leapYearMode: "algorithmic" // "astronomical"
+    /**
+     * @description persian calendar configuration
+     * @type object
+     * @version 0.3.0
+     */
+    'persian': {
+
+      /**
+       * @description set locale of calendar available options: 'fa', 'en'
+       * @default 'fa'
+       * @type string
+       */
+      'locale': 'fa',
+
+      /**
+       * @description if set true, small date hint of this calendars will be shown on another calendar
+       * @type boolean
+       * @default false
+       */
+      'showHint': false,
+
+      /**
+       * @description config leap year calculation mode, available options: 'algorithmic', 'astronomical'
+       * @type string
+       * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear
+       * @default 'algorithmic'
+       */
+      'leapYearMode': 'algorithmic' // "astronomical"
     },
 
-    gregorian: {
-      locale: 'en',
-      showHint: false
+    'gregorian': {
+
+      /**
+       * @description set locale of calendar available options: 'fa', 'en'
+       * @default 'en'
+       * @type string
+       */
+      'locale': 'en',
+
+      /**
+       * @description if set true, small date hint of this calendars will be shown on another calendar
+       * @type boolean
+       * @default false
+       */
+      'showHint': false
     }
   },
 
-  initialCalendar: 'persian',
+  /**
+   * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
+   * @default 'persian'
+   * @type string
+   * @version 0.3.0
+   */
+  'initialCalendar': 'persian',
 
   /**
    * @description if true datepicker render inline
@@ -543,8 +592,8 @@ var Config = {
    *  }
    */
   'formatter': function formatter(unixDate) {
-    var self = this;
-    var pdate = this.model.PersianDate.date(unixDate);
+    var self = this,
+        pdate = this.model.PersianDate.date(unixDate);
     return pdate.format(self.format);
   },
 
@@ -584,15 +633,16 @@ var Config = {
    *  }
    */
   'altFieldFormatter': function altFieldFormatter(unixDate) {
-    var self = this;
-    var thisAltFormat = self.altFormat.toLowerCase();
+    var self = this,
+        thisAltFormat = self.altFormat.toLowerCase(),
+        pd = void 0;
     if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
       return new Date(unixDate);
     }
     if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
       return unixDate;
     } else {
-      var pd = this.model.PersianDate.date(unixDate);
+      pd = this.model.PersianDate.date(unixDate);
       return pd.format(self.altFormat);
     }
   },
@@ -665,7 +715,7 @@ var Config = {
      *      //log('navigator next ');
      *  }
      */
-    'onNext': function onNext(navigator) {
+    'onNext': function onNext() {
       //log('navigator next ');
     },
 
@@ -677,7 +727,7 @@ var Config = {
      *      //log('navigator prev ');
      *  }
      */
-    'onPrev': function onPrev(navigator) {
+    'onPrev': function onPrev() {
       //log('navigator prev ');
     },
 
@@ -689,7 +739,7 @@ var Config = {
             // console.log('navigator switch ');
      *  }
      */
-    'onSwitch': function onSwitch(state) {
+    'onSwitch': function onSwitch() {
       // console.log('navigator switch ');
     }
   },
@@ -725,7 +775,17 @@ var Config = {
       btnExit: 'تایید'
     },
 
+    /**
+     * @description toolbox calendar switch configuration
+     * @type object
+     * @version 0.3.0
+     */
     calendarSwitch: {
+
+      /**
+       * @type boolean
+       * @default false
+       */
       enabled: false
     },
 
@@ -736,7 +796,7 @@ var Config = {
      *      //log('toolbox today btn');
      *  }
      */
-    onToday: function onToday(toolbox) {
+    onToday: function onToday() {
       //log('toolbox today btn');
     }
   },
@@ -760,7 +820,7 @@ var Config = {
    * @description check date avalibility
    * @type function
    */
-  'checkDate': function checkDate(unix) {
+  'checkDate': function checkDate() {
     return true;
   },
 
@@ -768,7 +828,7 @@ var Config = {
    * @description check month avalibility
    * @type {function}
    */
-  'checkMonth': function checkMonth(month) {
+  'checkMonth': function checkMonth() {
     return true;
   },
 
@@ -776,7 +836,7 @@ var Config = {
    * @description check year avalibility
    * @type {function}
    */
-  'checkYear': function checkYear(year) {
+  'checkYear': function checkYear() {
     return true;
   },
 
@@ -1193,37 +1253,6 @@ module.exports = Config;
 "use strict";
 
 
-/**
- * Date helper, some useful date method stored here
- * @class
- */
-var DateUtil = {
-
-    /**
-     * @property convert24hTo12
-     * @param hour
-     */
-    convert24hTo12: function convert24hTo12(hour) {
-        var output = hour;
-        if (hour > 12) {
-            output = hour - 12;
-        }
-        if (hour === 0) {
-            output = 0;
-        }
-        return output;
-    }
-};
-
-module.exports = DateUtil;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var Model = __webpack_require__(3);
 
 /**
@@ -1231,20 +1260,21 @@ var Model = __webpack_require__(3);
  * @description jquery plugin initializer
  */
 (function ($) {
+    /*eslint-disable no-unused-vars */
     $.fn.persianDatepicker = $.fn.pDatepicker = function (options) {
         var args = Array.prototype.slice.call(arguments),
             output = null,
             self = this;
         if (!this) {
-            $.error("Invalid selector");
+            $.error('Invalid selector');
         }
         $(this).each(function () {
             // encapsulation Args
             var emptyArr = [],
                 tempArg = args.concat(emptyArr),
-                dp = $(this).data("datepicker"),
+                dp = $(this).data('datepicker'),
                 funcName = null;
-            if (dp && typeof tempArg[0] === "string") {
+            if (dp && typeof tempArg[0] === 'string') {
                 funcName = tempArg[0];
                 output = dp[funcName](tempArg[0]);
             } else {
@@ -1254,10 +1284,11 @@ var Model = __webpack_require__(3);
         $(this).data('datepicker', self.pDatePicker);
         return self.pDatePicker;
     };
+    /*eslint-enable no-unused-vars */
 })(jQuery);
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1268,7 +1299,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Helper = __webpack_require__(0);
-var PersianDateParser = __webpack_require__(10);
+var PersianDateParser = __webpack_require__(9);
 /**
  * Do every thing about input element like get default value, set new value, set alt field input and etc.
  */
@@ -1343,8 +1374,7 @@ var Input = function () {
                 doneTypingInterval = that.model.options.inputDelay,
                 ctrlDown = false,
                 ctrlKey = [17, 91],
-                vKey = 86,
-                cKey = 67;
+                vKey = 86;
 
             $(document).keydown(function (e) {
                 if ($.inArray(e.keyCode, ctrlKey) > 0) ctrlDown = true;
@@ -1352,7 +1382,7 @@ var Input = function () {
                 if ($.inArray(e.keyCode, ctrlKey) > 0) ctrlDown = false;
             });
 
-            $(that.elem).bind("keyup", function (e) {
+            $(that.elem).bind('keyup', function (e) {
                 var $self = $(this);
                 var trueKey = false;
                 if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0)) {
@@ -1536,7 +1566,7 @@ var Input = function () {
 module.exports = Input;
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1546,7 +1576,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Hamster = __webpack_require__(15);
+var Hamster = __webpack_require__(14);
 
 /**
  * This navigator class do every thing about navigate and select date
@@ -1585,7 +1615,7 @@ var Navigator = function () {
             if (this.model.options.navigator.scroll.enabled) {
                 var that = this;
                 var gridPlot = $('#' + that.model.view.id + ' .datepicker-grid-view')[0];
-                Hamster(gridPlot).wheel(function (event, delta, deltaX, deltaY) {
+                Hamster(gridPlot).wheel(function (event, delta) {
                     if (delta > 0) {
                         that.model.state.navigate('next');
                     } else {
@@ -1597,7 +1627,7 @@ var Navigator = function () {
 
                 if (this.model.options.timePicker.enabled) {
                     var timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
-                    Hamster(timePlot).wheel(function (event, delta, deltaX, deltaY) {
+                    Hamster(timePlot).wheel(function (event, delta) {
                         var $target = $(event.target);
                         var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
                         if (key) {
@@ -1827,7 +1857,7 @@ var Navigator = function () {
 module.exports = Navigator;
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1863,7 +1893,9 @@ var PersianDateParser = function () {
             inputString = inputString.toEnglishDigits();
 
             if (jalaliPat.test(inputString)) {
+                /* eslint-disable no-useless-escape */
                 persianDateArray = inputString.split(/\/|-|\,|\./).map(Number);
+                /* eslint-enable no-useless-escape */
                 return persianDateArray;
             } else {
                 return undefined;
@@ -1877,7 +1909,7 @@ var PersianDateParser = function () {
 module.exports = PersianDateParser;
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1923,7 +1955,7 @@ var PersianDateWrapper = function () {
 module.exports = PersianDateWrapper;
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1933,13 +1965,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DateUtil = __webpack_require__(6);
-
 /**
  * All state set in his object and get from this
  * also this object notify other object to update self or update view or etc.
  */
-
 var State = function () {
 
     /**
@@ -2301,7 +2330,7 @@ var State = function () {
 module.exports = State;
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2361,7 +2390,6 @@ var Toolbox = function () {
 
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
                 that._toggleCalendartype();
-                var unix = that.model.state.view.unixDate;
                 that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
                 that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
                 that.model.view.render();
@@ -2381,7 +2409,7 @@ var Toolbox = function () {
 module.exports = Toolbox;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2397,7 +2425,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Template = __webpack_require__(2);
 var Helper = __webpack_require__(0);
-var Mustache = __webpack_require__(16);
+var Mustache = __webpack_require__(15);
 
 /**
  * As its name suggests, all rendering works do in this object
@@ -2454,6 +2482,11 @@ var View = function () {
         return this;
     }
 
+    /**
+     * @desc add css class to handle compatibility ui things
+     */
+
+
     _createClass(View, [{
         key: 'addCompatibilityClass',
         value: function addCompatibilityClass() {
@@ -2479,9 +2512,9 @@ var View = function () {
     }, {
         key: 'setPickerBoxPosition',
         value: function setPickerBoxPosition() {
-            var inputPosition = this.model.input.getInputPosition();
-            var inputSize = this.model.input.getInputSize();
-            if (this.model.options.position === "auto") {
+            var inputPosition = this.model.input.getInputPosition(),
+                inputSize = this.model.input.getInputSize();
+            if (this.model.options.position === 'auto') {
                 this.$container.css({
                     left: inputPosition.left + 'px',
                     top: inputSize.height + inputPosition.top + 'px'
@@ -2557,8 +2590,8 @@ var View = function () {
         value: function checkYearAccess(year) {
             var output = true;
             if (this.model.state.filetredDate) {
-                var startYear = this.model.state.filterDate.start.year;
-                var endYear = this.model.state.filterDate.end.year;
+                var startYear = this.model.state.filterDate.start.year,
+                    endYear = this.model.state.filterDate.end.year;
                 if (startYear && year < startYear) {
                     return false;
                 } else if (endYear && year > endYear) {
@@ -2684,8 +2717,7 @@ var View = function () {
             }
 
             var monthModel = [],
-                that = this,
-                comparisonMonth = this.model.PersianDate.date();
+                that = this;
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
             var _iteratorError2 = undefined;
@@ -2787,13 +2819,13 @@ var View = function () {
             //log('if you see this many time your code has performance issue');
             var viewMonth = this.model.state.view.month,
                 viewYear = this.model.state.view.year;
-            var pdateInstance = this.model.PersianDate.date();
-            var daysCount = pdateInstance.daysInMonth(viewYear, viewMonth);
-            var firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1;
-            var outputList = [];
-            var daysListindex = 0;
-            var nextMonthListIndex = 0;
-            var daysMatrix = [['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null']];
+            var pdateInstance = this.model.PersianDate.date(),
+                daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
+                firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
+                outputList = [],
+                daysListindex = 0,
+                nextMonthListIndex = 0,
+                daysMatrix = [['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null']];
 
             var anotherCalendar = this._getAnotherCalendar();
             var pdate = this.model.PersianDate.date();
@@ -2814,9 +2846,8 @@ var View = function () {
 
                     try {
                         for (var _iterator4 = daysRow.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                            var _step4$value = _slicedToArray(_step4.value, 2),
-                                dayIndex = _step4$value[0],
-                                day = _step4$value[1];
+                            var _step4$value = _slicedToArray(_step4.value, 1),
+                                dayIndex = _step4$value[0];
 
                             var calcedDate = void 0,
                                 otherMonth = void 0;
@@ -3084,7 +3115,7 @@ var View = function () {
 module.exports = View;
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -3417,7 +3448,7 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
