@@ -2,23 +2,26 @@
   .toolbox {
     display: block;
     float: left;
-    padding: 3px 0;
     width: 100%;
+    margin-top: $gridGutter;
 
-    .btn-calendar,
-    .btn-today {
+    .pwt-btn-submit,
+    .pwt-btn-exit,
+    .pwt-btn-calendar,
+    .pwt-btn-today {
       @extend %interactive-item;
       background-color: $button-bg;
-
       float: right;
       display: block;
       font-weight: $strong-font;
       font-size: 11px;
-      height: 20px;
+      height: 24px;
+      line-height: 24px;
       white-space: nowrap;
-      line-height: 18px;
       margin: 0 auto;
-      min-width: 60px;
+      margin-left: $gridGutter;
+      padding: 0 $gridGutter;
+      min-width: 50px;
       &:hover {
         background-color: $button-bg-hover;
       }

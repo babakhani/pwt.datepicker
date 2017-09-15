@@ -1,7 +1,7 @@
 .datepicker-plot-area {
   .datepicker-year-view,
   .datepicker-month-view {
-    padding-top: 10px;
+    padding-top: ($gridGutter*2);
   }
   // sass-lint:disable force-element-nesting
   .datepicker-year-view .year-item,

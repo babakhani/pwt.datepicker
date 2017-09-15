@@ -7,6 +7,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="true"/>
     <!-- Demo Bootstrap Style -->
     <!-- ------------------------------------------------------------------------------------ -->
     <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
@@ -227,13 +230,24 @@
             altFormat: 'LLLL',
             initialValue: false,
             observer: true,
-            format: 'YYYY/MM/DD'
+            format: 'YYYY/MM/DD',
+            timePicker: {
+                enabled: true
+            }
         });
 
         // Timepicker With initial Value
         // --------------------------------------------
         $('#timePicker').persianDatepicker({
             onlyTimePicker: true,
+            timePicker: {
+                meridiem: {
+                    enabled: true
+                },
+                second: {
+                    enabled: false
+                }
+            },
             format: 'HH:mm:ss'
         });
 
@@ -241,7 +255,10 @@
         // --------------------------------------------
         $('#inputGroup').persianDatepicker({
             altField: '#inputGroupAlt,#inputGroupAlt2',
-            altFormat: 'LLLL'
+            altFormat: 'LLLL',
+            timePicker: {
+                enabled: true
+            }
         });
 
 

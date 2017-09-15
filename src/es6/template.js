@@ -132,12 +132,20 @@ const Template = `
     
     {{#toolbox}}
     {{#enabled}}
-    <div class="toolbox ">
-        <div class="btn-today">{{text.btnToday}}</div>
+    <div class="toolbox">
+        <div class="pwt-btn-exit">{{text.btnExit}}</div>
+        <div class="pwt-btn-today">{{text.btnToday}}</div>
         {{#toolbox.calendarSwitch.enabled}}
-            <div class="btn-calendar">{{altCalendarTitle}}</div>
+            <div class="pwt-btn-calendar">{{altCalendarTitle}}</div>
         {{/toolbox.calendarSwitch.enabled}}
     </div>
+    {{/enabled}}
+    {{^enabled}}
+        {{#onlyTimePicker}}
+        <div class="toolbox">
+            <div class="pwt-btn-exit">{{text.btnExit}}</div>
+        </div>
+        {{/onlyTimePicker}}
     {{/enabled}}
     {{/toolbox}}
 </div>

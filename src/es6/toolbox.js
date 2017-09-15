@@ -33,22 +33,26 @@ class Toolbox {
      */
     _attachEvents () {
         let that = this;
-        $(document).on('click', '#' + that.model.view.id + ' .btn-today', function () {
+        $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-today', function () {
             that.model.state.setSelectedDateTime('unix', new Date().valueOf());
             that.model.state.setViewDateTime('unix', new Date().valueOf());
             that.model.options.toolbox.onToday();
             that.model.view.reRender();
         });
 
-        $(document).on('click', '#' + that.model.view.id + ' .btn-calendar', function () {
+        $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
             that._toggleCalendartype();
             let unix = that.model.state.view.unixDate;
             that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
             that.model.view.render();
-            return this.model;
+            return that.model;
         });
 
+        $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-exit', function () {
+            that.model.view.hide();
+            that.model.options.onHide(this);
+        });
     }
 }
 

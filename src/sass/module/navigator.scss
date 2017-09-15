@@ -2,9 +2,7 @@
   .datepicker-navigator {
     display: block;
     width: 100%;
-    height: 30px;
     float: left;
-    padding: 0;
 
     .pwt-btn-next,
     .pwt-btn-switch,
@@ -17,7 +15,6 @@
       background-color: $button-bg;
       color: $button-text-color;
       @extend %interactive-item;
-      padding: 0;
       @extend %small-curve;
 
       &:hover {

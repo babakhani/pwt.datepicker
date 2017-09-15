@@ -51,7 +51,7 @@ class View {
         }
         else {
             this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
-            this.$container.hide();
+            this.hide();
             this.setPickerBoxPosition();
         }
         return this;
@@ -87,7 +87,7 @@ class View {
      * @desc show datepicker container element
      */
     show () {
-        this.$container.show();
+        this.$container.removeClass('pwt-hide');
         this.setPickerBoxPosition();
     }
 
@@ -95,7 +95,7 @@ class View {
      * @desc hide datepicker container element
      */
     hide () {
-        this.$container.hide();
+        this.$container.addClass('pwt-hide');
     }
 
     /**
@@ -443,7 +443,8 @@ class View {
         return [
             this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
             !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : '',
-            this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : ''
+            this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '',
+            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridiem' : '',
         ].join(' ')
     }
 
@@ -471,6 +472,7 @@ class View {
             year: this._getYearViewModel(data),
             toolbox: this.model.options.toolbox,
             cssClass: this.getCssClass(),
+            onlyTimePicker: this.model.options.onlyTimePicker,
             altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('MMMM'),
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint
         };

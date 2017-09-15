@@ -265,7 +265,13 @@ const Config = {
              * @type string
              * @default 'امروز'
              */
-            btnToday: 'امروز'
+            btnToday: 'امروز',
+
+            /**
+             * @type string
+             * @default 'تایید'
+             */
+            btnExit: 'تایید'
         },
 
 

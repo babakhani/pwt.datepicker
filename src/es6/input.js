@@ -133,6 +133,11 @@ class Input {
             if (that.model.state.ui.isInline === false) {
                 $('body').bind('click', closePickerHandler);
             }
+
+            if(Helper.isMobile){
+                $(this).blur();
+            }
+
         });
 
     }
