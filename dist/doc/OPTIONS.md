@@ -6,9 +6,13 @@ This is default config class
 **Kind**: global constant  
 
 * [Config](#Config)
-    * [.inputCalendar](#Config.inputCalendar)
-    * [.responsive](#Config.responsive)
-    * [.calendar](#Config.calendar)
+    * [.responsive](#Config.responsive) : <code>boolean</code>
+    * [.calendar](#Config.calendar) : <code>object</code>
+        * [.persian](#Config.calendar.persian) : <code>object</code>
+            * [.locale](#Config.calendar.persian.locale) : <code>string</code>
+            * [.showHint](#Config.calendar.persian.showHint) : <code>boolean</code>
+            * [.leapYearMode](#Config.calendar.persian.leapYearMode) : <code>string</code>
+    * [.initialCalendar](#Config.initialCalendar) : <code>string</code>
     * [.inline](#Config.inline) : <code>boolean</code>
     * [.initialValue](#Config.initialValue) : <code>boolean</code>
     * [.persianDigit](#Config.persianDigit) : <code>boolean</code>
@@ -33,6 +37,8 @@ This is default config class
         * [.text](#Config.toolbox.text) : <code>object</code>
             * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
             * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+        * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
+            * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
         * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
     * [.onlyTimePicker](#Config.onlyTimePicker) : <code>boolean</code>
     * [.onlySelectOnDate](#Config.onlySelectOnDate) : <code>boolean</code>
@@ -81,20 +87,71 @@ This is default config class
     * ["onShow"](#Config.event_onShow)
     * ["onHide" (self)](#Config.event_onHide)
 
-<a name="Config.inputCalendar"></a>
-
-### Config.inputCalendar
-**Kind**: static property of [<code>Config</code>](#Config)  
 <a name="Config.responsive"></a>
 
-### Config.responsive
-responsive
+### Config.responsive : <code>boolean</code>
+if set true make enable responsive view on mobile devices
 
 **Kind**: static property of [<code>Config</code>](#Config)  
+**Default**: <code>true</code>  
+**Version**: 0.3.0  
 <a name="Config.calendar"></a>
 
-### Config.calendar
+### Config.calendar : <code>object</code>
+calendar type and localization configuration
+
 **Kind**: static property of [<code>Config</code>](#Config)  
+**Version**: 0.3.0  
+
+* [.calendar](#Config.calendar) : <code>object</code>
+    * [.persian](#Config.calendar.persian) : <code>object</code>
+        * [.locale](#Config.calendar.persian.locale) : <code>string</code>
+        * [.showHint](#Config.calendar.persian.showHint) : <code>boolean</code>
+        * [.leapYearMode](#Config.calendar.persian.leapYearMode) : <code>string</code>
+
+<a name="Config.calendar.persian"></a>
+
+#### calendar.persian : <code>object</code>
+persian calendar configuration
+
+**Kind**: static property of [<code>calendar</code>](#Config.calendar)  
+**Version**: 0.3.0  
+
+* [.persian](#Config.calendar.persian) : <code>object</code>
+    * [.locale](#Config.calendar.persian.locale) : <code>string</code>
+    * [.showHint](#Config.calendar.persian.showHint) : <code>boolean</code>
+    * [.leapYearMode](#Config.calendar.persian.leapYearMode) : <code>string</code>
+
+<a name="Config.calendar.persian.locale"></a>
+
+##### persian.locale : <code>string</code>
+set locale of calendar available options: 'fa', 'en'
+
+**Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
+**Default**: <code>&quot;&#x27;fa&#x27;&quot;</code>  
+<a name="Config.calendar.persian.showHint"></a>
+
+##### persian.showHint : <code>boolean</code>
+if set true, small date hint of this calendars will be shown on another calendar
+
+**Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
+**Default**: <code>false</code>  
+<a name="Config.calendar.persian.leapYearMode"></a>
+
+##### persian.leapYearMode : <code>string</code>
+config leap year calculation mode, available options: 'algorithmic', 'astronomical'
+
+**Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
+**Default**: <code>&quot;&#x27;algorithmic&#x27;&quot;</code>  
+**Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear  
+<a name="Config.initialCalendar"></a>
+
+### Config.initialCalendar : <code>string</code>
+set default calendar mode of datepicker, available options: 'persian', 'gregorian'
+
+**Kind**: static property of [<code>Config</code>](#Config)  
+**Default**: <code>&quot;&#x27;persian&#x27;&quot;</code>  
+**Version**: 0.3.0  
 <a name="Config.inline"></a>
 
 ### Config.inline : <code>boolean</code>
@@ -331,6 +388,8 @@ toolbox config object
     * [.text](#Config.toolbox.text) : <code>object</code>
         * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
         * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+    * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
+        * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
     * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
 
 <a name="Config.toolbox.enabled"></a>
@@ -357,6 +416,18 @@ toolbox config object
 ##### text.btnExit : <code>string</code>
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;تایید&#x27;&quot;</code>  
+<a name="Config.toolbox.calendarSwitch"></a>
+
+#### toolbox.calendarSwitch : <code>object</code>
+toolbox calendar switch configuration
+
+**Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
+**Version**: 0.3.0  
+<a name="Config.toolbox.calendarSwitch.enabled"></a>
+
+##### calendarSwitch.enabled : <code>boolean</code>
+**Kind**: static property of [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
+**Default**: <code>false</code>  
 <a name="Config.toolbox.event_onToday"></a>
 
 #### "onToday" (toolbox)

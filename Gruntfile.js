@@ -91,7 +91,7 @@ module.exports = function (grunt) {
         grunt.registerTask('default', ['sass:dev', 'webpack:dev', 'watch']);
     }
     else if (grunt.option("doc") === true) {
-        grunt.registerTask('default', ['jsdoc2md', 'watch:doc']);
+        grunt.registerTask('default', ['jsdoc2md']);
     }
     else {
         grunt.registerTask('default', ['sass', 'webpack', 'jsdoc2md', 'usebanner']);
