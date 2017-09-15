@@ -13,18 +13,16 @@
         margin: 0;
         position: relative;
 
-        &.disabled {
-          span {
-            @extend %date-item-disable
-          }
+        &.disabled span {
+          @extend %date-item-disable
         }
 
         &.selected span {
           @extend %date-item-selected;
+        }
 
-          &:hover {
-            @extend %date-item-hover;
-          }
+        &.selected span &:hover {
+          @extend %date-item-hover;
         }
 
         &.today span {
@@ -37,7 +35,7 @@
           font-size: 8.5px;
           bottom: 0;
           right: 2px;
-          color: #f1f1f1;
+          color: $ultra-light-gray;
         }
 
         span {

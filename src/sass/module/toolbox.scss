@@ -3,7 +3,7 @@
     display: block;
     float: left;
     width: 100%;
-    margin-top: $gridGutter;
+    margin-top: $grid-gutter;
 
     .pwt-btn-submit,
     .pwt-btn-exit,
@@ -19,9 +19,10 @@
       line-height: 24px;
       white-space: nowrap;
       margin: 0 auto;
-      margin-left: $gridGutter;
-      padding: 0 $gridGutter;
+      margin-left: $grid-gutter;
+      padding: 0 $grid-gutter;
       min-width: 50px;
+
       &:hover {
         background-color: $button-bg-hover;
       }

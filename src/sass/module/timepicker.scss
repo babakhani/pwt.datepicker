@@ -3,7 +3,7 @@
   .datepicker-time-view {
     display: block;
     float: left;
-    padding: $gridGutter;
+    padding: $grid-gutter;
     //margin: 3px -5px;
     background: $timepicker-bg;
     border-top: $timepicker-border;
@@ -79,17 +79,19 @@
 
   &.datepicker-state-only-time {
     .datepicker-time-view {
-      padding: 0 $gridGutter;
+      padding: 0 $grid-gutter;
       margin: 0;
+
       & > .time-segment,
       & > .divider {
-        padding:$gridGutter 0;
+        padding: $grid-gutter 0;
       }
     }
   }
 
   &.datepicker-state-no-meridiem {
     .datepicker-time-view {
+
       & > .time-segment {
         width: 31.33%;
       }

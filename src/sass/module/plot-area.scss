@@ -5,7 +5,7 @@
   top: 0;
   direction: ltr;
 
-  &.pwt-hide{
+  &.pwt-hide {
     display: none;
   }
 }
@@ -26,8 +26,8 @@
   @extend %main-box-shadow;
   @extend %unselectable;
 
-  &.datepicker-state-only-time{
-    padding:0;
+  &.datepicker-state-only-time {
+    padding: 0;
   }
 
   table,

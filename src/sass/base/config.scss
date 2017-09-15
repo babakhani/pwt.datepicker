@@ -1,5 +1,5 @@
 
-$gridGutter: 5px;
+$grid-gutter: 5px;
 // Color
 // ===================================================
 $white: #fff !default;
@@ -9,8 +9,9 @@ $light-gray: #eee !default;
 $ultra-light-gray: #f1f1f1 !default;
 $super-light-gray: #f9f9f9 !default;
 $today-color: #006dcc !default;
-$selected-color: darken(#006dcc, 10) !default;
-$hovered-color: lighten(#006dcc, 5) !default;
+$selected-color: darken($today-color, 10) !default;
+$hovered-color: lighten($today-color, 5) !default;
+$transparent-bg: rgba(0, 0, 0, .7);
 
 // Font Style & text
 // ===================================================
@@ -27,8 +28,8 @@ $global-text-align: center !default;
 
 // Layout curve
 // ===================================================
-$layout-big-curve: 0px !default;
-$layout-small-curve: 0px !default;
+$layout-big-curve: 0 !default;
+$layout-small-curve: 0 !default;
 $main-box-shadow: 0 5px 10px rgba(0, 0, 0, .2) !default;
 $animate-duration: all 100ms ease !default;
 

@@ -119,10 +119,10 @@ class Input {
     _attachInputElementEvents () {
         let that = this;
         let closePickerHandler = function (e) {
-            if (!$(e.target).is(that.elem)
-              && !$(e.target).is(that.model.view.$container)
-              && $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0
-              && !$(e.target).is($(that.elem).children())) {
+            if (!$(e.target).is(that.elem) &&
+              !$(e.target).is(that.model.view.$container) &&
+              $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 &&
+              !$(e.target).is($(that.elem).children())) {
                 that.model.view.hide();
                 $('body').unbind('click', closePickerHandler);
             }
@@ -211,7 +211,7 @@ class Input {
      * @return {Number} - unix
      */
     getOnInitState () {
-        const persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$'
+        const persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$';
         let garegurianDate = null,
           $inputElem = $(this.elem),
           inputValue;

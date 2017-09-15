@@ -179,7 +179,7 @@ class View {
         let yearsModel = [],
           yearStr = this.model.PersianDate.date();
         for (let i of list) {
-            yearStr.year([i])
+            yearStr.year([i]);
             yearsModel.push({
                 title: yearStr.format('YYYY'),
                 enabled: this.checkYearAccess(i),
@@ -451,7 +451,7 @@ class View {
             !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : '',
             this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '',
             !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridiem' : ''
-        ].join(' ')
+        ].join(' ');
     }
 
     /**

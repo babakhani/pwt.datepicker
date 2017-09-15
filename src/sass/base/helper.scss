@@ -1,11 +1,11 @@
-// sass-lint:disable no-vendor-prefixes
+// sass-lint:disable no-vendor-prefixes no-misspelled-properties
 %unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
 }
-// sass-lint:enable no-vendor-prefixes
+// sass-lint:enable no-vendor-prefixes no-misspelled-properties
 
 %animation {
   transition: $animate-duration;
