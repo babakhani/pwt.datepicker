@@ -21,6 +21,10 @@
   @extend %main-box-shadow;
   @extend %unselectable;
 
+  &.datepicker-state-only-time{
+    padding:0px ;
+  }
+
   table,
   th,
   td {

@@ -104,6 +104,8 @@
   font: 12px tahoma;
   border: 1px solid #ccc;
   background-color: #fff; }
+  .datepicker-plot-area.datepicker-state-only-time {
+    padding: 0px; }
   .datepicker-plot-area table,
   .datepicker-plot-area th,
   .datepicker-plot-area td {
@@ -137,7 +139,6 @@
   .datepicker-plot-area .datepicker-time-view > .time-segment {
     display: block;
     width: 22%;
-    height: 60px;
     float: left;
     overflow: hidden; }
     .datepicker-plot-area .datepicker-time-view > .time-segment:hover .down-btn,
@@ -176,6 +177,13 @@
     outline: none;
     border: none;
     background: transparent; }
+
+.datepicker-plot-area.datepicker-state-only-time .datepicker-time-view {
+  padding: 0;
+  margin: 0px; }
+  .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view > .time-segment,
+  .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view > .divider {
+    padding: 5px 0; }
 
 .datepicker-plot-area.datepicker-state-no-meridiem .datepicker-time-view > .time-segment {
   width: 31%; }

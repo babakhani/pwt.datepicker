@@ -2935,7 +2935,7 @@ var View = function () {
     }, {
         key: 'getCssClass',
         value: function getCssClass() {
-            return [this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '', !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : ''].join(' ');
+            return [this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '', !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : '', this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : ''].join(' ');
         }
 
         /**
