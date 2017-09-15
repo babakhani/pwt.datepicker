@@ -21,6 +21,58 @@ $('.inline-example').persianDatepicker({
     inline: true,
     altField: '#inlineExampleAlt',
     altFormat: 'LLLL',
+    toolbox:{
+        calendarSwitch:{
+            enabled: true
+        }
+    },
+    navigator:{
+        scroll:{
+            enabled: false
+        }
+    },
+    maxDate: new persianDate().add('month', 3).valueOf(),
+    minDate: new persianDate().subtract('month', 3).valueOf(),
+    timePicker: {
+        enabled: true,
+        meridiem: {
+            enabled: true
+        }
+    }
+});
+```
+```
+
+
+```html
+<input id="inlineExampleAlt" class="datepicker-demo" />
+<div class="inline-example" ></div>
+```
+
+<div class="one-inline-datepicker">
+<label>Datepicker</label>
+<input id="inlineExampleAlt" class="datepicker-demo" />
+<div class="inline-example" ></div>
+</div>
+
+
+## Gregorian Calendar
+
+```javascript
+$('.gregorian-example').persianDatepicker({
+    inline: true,
+    altField: '#gregorianExampleAlt',
+    altFormat: 'LLLL',
+    toolbox:{
+        calendarSwitch:{
+            enabled: true
+        }
+    },
+    navigator:{
+        scroll:{
+            enabled: false
+        }
+    },
     maxDate: new persianDate().add('month', 3).valueOf(),
     minDate: new persianDate().subtract('month', 3).valueOf(),
     timePicker: {
@@ -33,13 +85,88 @@ $('.inline-example').persianDatepicker({
 ```
 
 ```html
-<input id="inlineExampleAlt" class="datepicker-demo" />
-<div class="inline-example" ></div>
+<input id="gregorianExampleAlt" class="datepicker-demo" />
+<div class="gregorian-example" ></div>
 ```
 
+<div class="one-inline-datepicker">
 <label>Datepicker</label>
-<input id="inlineExampleAlt" class="datepicker-demo" />
-<div class="inline-example" ></div>
+<input id="gregorianExampleAlt" class="datepicker-demo" />
+<div class="gregorian-example" ></div>
+</div>
+
+
+
+## Change Leap Year Mode
+
+```javascript
+$('.leapyear-algorithmic').persianDatepicker({
+    inline: true,
+    
+});
+
+$('.leapyear-astronomical').persianDatepicker({
+    inline: true,
+    calendar:{
+        persian: {
+            leapYearMode: 'astronomical'
+        }
+    }
+});
+```
+
+```html
+<div class="leapyear-algorithmic" data-date="2025/3/12" ></div>
+<div class="leapyear-astronomical" data-date="2025/3/12" ></div>
+```
+
+<div class="two-inline-datepicker">
+<div>
+<label>algorithmic</label>
+<div class="leapyear-algorithmic" data-date="2025/3/12" ></div>
+</div>
+<div>
+<label>astronomical</label>
+<div class="leapyear-astronomical" data-date="2025/3/12" ></div>
+</div>
+</div>
+
+
+
+## locale
+
+```javascript
+$('.locale-fa').persianDatepicker({
+    inline: true,
+    
+});
+
+$('.locale-en').persianDatepicker({
+    inline: true,
+    calendar:{
+        persian: {
+            locale: 'en'
+        }
+    }
+});
+```
+
+```html
+<div class="locale-fa" ></div>
+<div class="locale-en" ></div>
+```
+
+<div class="two-inline-datepicker">
+<div>
+<label>fa</label>
+<div class="locale-fa" ></div>
+</div>
+<div>
+<label>en</label>
+<div class="locale-en" ></div>
+</div>
+</div>
+
 
 ## Observer
 
