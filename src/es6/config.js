@@ -1,30 +1,47 @@
 let Helper = require('./helper');
 
 /**
- * This is default config class
+ * @description persian-datepicker configuration document
  */
 const Config = {
 
+
     /**
-     * @description if set true make enable responsive view on mobile devices
-     * @type boolean
-     * @version 0.3.0
-     * @default true
+     * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
+     * @default 'persian'
+     * @type string
+     * @since 0.6.0
      */
-    'responsive': true,
+    'initialCalendar': 'persian',
 
 
     /**
      * @description calendar type and localization configuration
-     * @version 0.3.0
      * @type object
+     * @since 0.6.0
+     * @example
+     * {
+     *     'persian': {
+     *         'locale': 'fa',
+     *         'showHint': false,
+     *         'leapYearMode': 'algorithmic' // "astronomical"
+     *     },
+     *
+     *     'gregorian': {
+     *         'locale': 'en',
+     *         'showHint': false
+     *     }
+     * }
+     *
+     *
+     *
      */
     'calendar': {
 
         /**
-         * @description persian calendar configuration
+         * @description Persian calendar configuration
          * @type object
-         * @version 0.3.0
+         * @since 0.6.0
          */
         'persian': {
 
@@ -32,6 +49,7 @@ const Config = {
              * @description set locale of calendar available options: 'fa', 'en'
              * @default 'fa'
              * @type string
+             * @since 0.6.0
              */
             'locale': 'fa',
 
@@ -39,6 +57,7 @@ const Config = {
              * @description if set true, small date hint of this calendars will be shown on another calendar
              * @type boolean
              * @default false
+             * @since 0.6.0
              */
             'showHint': false,
 
@@ -47,16 +66,24 @@ const Config = {
              * @type string
              * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear
              * @default 'algorithmic'
+             * @since 0.6.0
              */
             'leapYearMode': 'algorithmic' // "astronomical"
         },
 
+
+        /**
+         * @description Gregorian calendar configuration
+         * @type object
+         * @since 0.6.0
+         */
         'gregorian': {
 
             /**
              * @description set locale of calendar available options: 'fa', 'en'
              * @default 'en'
              * @type string
+             * @since 0.6.0
              */
             'locale': 'en',
 
@@ -64,6 +91,7 @@ const Config = {
              * @description if set true, small date hint of this calendars will be shown on another calendar
              * @type boolean
              * @default false
+             * @since 0.6.0
              */
             'showHint': false
         }
@@ -71,12 +99,13 @@ const Config = {
 
 
     /**
-     * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
-     * @default 'persian'
-     * @type string
-     * @version 0.3.0
+     * @description if set true make enable responsive view on mobile devices
+     * @type boolean
+     * @since 0.6.0
+     * @default true
      */
-    'initialCalendar': 'persian',
+    'responsive': true,
+
 
     /**
      * @description if true datepicker render inline
@@ -95,6 +124,7 @@ const Config = {
     /**
      * @type boolean
      * @default true
+     * @deprecated from v0.6.0 this options is deprecated, use calendar.persian.locale instead
      */
     'persianDigit': true,
 
@@ -129,7 +159,7 @@ const Config = {
      */
     'formatter': function (unixDate) {
         let self = this,
-          pdate = this.model.PersianDate.date(unixDate);
+            pdate = this.model.PersianDate.date(unixDate);
         return pdate.format(self.format);
     },
 
@@ -173,8 +203,8 @@ const Config = {
      */
     'altFieldFormatter': function (unixDate) {
         let self = this,
-          thisAltFormat = self.altFormat.toLowerCase(),
-          pd;
+            thisAltFormat = self.altFormat.toLowerCase(),
+            pd;
         if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
             return new Date(unixDate);
         }
@@ -320,6 +350,7 @@ const Config = {
             /**
              * @type string
              * @default 'تایید'
+             * @since 0.6.0
              */
             btnExit: 'تایید'
         },
@@ -328,7 +359,7 @@ const Config = {
         /**
          * @description toolbox calendar switch configuration
          * @type object
-         * @version 0.3.0
+         * @since 0.6.0
          */
         calendarSwitch: {
 

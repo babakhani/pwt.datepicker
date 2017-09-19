@@ -28,6 +28,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 - [Install](#install)
 - [Usage](#usage)
 - [Options](#options)
+- [See Options Full Document](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/options/)
 
 
 ## Dependency
@@ -38,7 +39,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 ## Install
 
 ```bash
-npm install persian-datepicker@beta
+npm install persian-datepicker
 ```
 
 ## Usage
@@ -62,10 +63,24 @@ npm install persian-datepicker@beta
 
 ## options
 
+[See Options Full Document](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/options/)
+
 
 | name                           | type             | default                                         | description  |
 | -------------                  |:-------------:   | :----------------------------------------------:| :----------: |
+| initialCalendar                | string           | 'persian'                                       | set default calendar mode of datepicker, available options: 'persian', 'gregorian' |
+| calendar                       | object           |                                                 | calendar type and localization configuration |
+| calendar.persian               | object           |                                                 | Persian calendar configuration |
+| calendar.persian.locale        | string           | 'fa'                                            | set locale of calendar available options: 'fa', 'en' |
+| calendar.persian.showHint      | boolean          | false                                           | if set true, small date hint of this calendars will be shown on another calendar |
+| calendar.persian.leapYearMode  | string           | algorithmic                                     | config leap year calculation mode, available options: 'algorithmic', 'astronomical' |
+| calendar.gregorian             | object           |                                                 | Gregorian calendar configuration |
+| calendar.gregorian.locale      | string           | 'en'                                            | set locale of calendar available options: 'fa', 'en' |
+| calendar.gregorian.showHint    | boolean          | false                                           | if set true, small date hint of this calendars will be shown on another calendar |
+| responsive                     | boolean          | true                                            | if set true make enable responsive view on mobile devices |
 | initialValue                   | boolean          | true                                            | If set true datepicker init with input value date |
+| inline                         | boolean          | false                                           | if true datepicker render inline |
+| responsive                     | boolean          | true                                            | If set true datepicker init with input value date |
 | persianDigit                   | boolean          | true                                            | If true all digit shows as persian digit |
 | viewMode                       | string           | 'day'                                           | Accept day, motnh, year |
 | format                         | string           | 'LLLL'                                          | Default input value formatt string.|

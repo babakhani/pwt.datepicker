@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0]
+- add gregorian calendar type
+- add locale
+- make better user interface
+
 ## [0.5.10]
 ### Changed
 - hotfix time plot wheel error

@@ -471,29 +471,45 @@ module.exports = API;
 var Helper = __webpack_require__(0);
 
 /**
- * This is default config class
+ * @description persian-datepicker configuration document
  */
 var Config = {
 
   /**
-   * @description if set true make enable responsive view on mobile devices
-   * @type boolean
-   * @version 0.3.0
-   * @default true
+   * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
+   * @default 'persian'
+   * @type string
+   * @since 0.6.0
    */
-  'responsive': true,
+  'initialCalendar': 'persian',
 
   /**
    * @description calendar type and localization configuration
-   * @version 0.3.0
    * @type object
+   * @since 0.6.0
+   * @example
+   * {
+   *     'persian': {
+   *         'locale': 'fa',
+   *         'showHint': false,
+   *         'leapYearMode': 'algorithmic' // "astronomical"
+   *     },
+   *
+   *     'gregorian': {
+   *         'locale': 'en',
+   *         'showHint': false
+   *     }
+   * }
+   *
+   *
+   *
    */
   'calendar': {
 
     /**
-     * @description persian calendar configuration
+     * @description Persian calendar configuration
      * @type object
-     * @version 0.3.0
+     * @since 0.6.0
      */
     'persian': {
 
@@ -501,6 +517,7 @@ var Config = {
        * @description set locale of calendar available options: 'fa', 'en'
        * @default 'fa'
        * @type string
+       * @since 0.6.0
        */
       'locale': 'fa',
 
@@ -508,6 +525,7 @@ var Config = {
        * @description if set true, small date hint of this calendars will be shown on another calendar
        * @type boolean
        * @default false
+       * @since 0.6.0
        */
       'showHint': false,
 
@@ -516,16 +534,23 @@ var Config = {
        * @type string
        * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear
        * @default 'algorithmic'
+       * @since 0.6.0
        */
       'leapYearMode': 'algorithmic' // "astronomical"
     },
 
+    /**
+     * @description Gregorian calendar configuration
+     * @type object
+     * @since 0.6.0
+     */
     'gregorian': {
 
       /**
        * @description set locale of calendar available options: 'fa', 'en'
        * @default 'en'
        * @type string
+       * @since 0.6.0
        */
       'locale': 'en',
 
@@ -533,18 +558,19 @@ var Config = {
        * @description if set true, small date hint of this calendars will be shown on another calendar
        * @type boolean
        * @default false
+       * @since 0.6.0
        */
       'showHint': false
     }
   },
 
   /**
-   * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
-   * @default 'persian'
-   * @type string
-   * @version 0.3.0
+   * @description if set true make enable responsive view on mobile devices
+   * @type boolean
+   * @since 0.6.0
+   * @default true
    */
-  'initialCalendar': 'persian',
+  'responsive': true,
 
   /**
    * @description if true datepicker render inline
@@ -562,6 +588,7 @@ var Config = {
   /**
    * @type boolean
    * @default true
+   * @deprecated from v0.6.0 this options is deprecated, use calendar.persian.locale instead
    */
   'persianDigit': true,
 
@@ -771,6 +798,7 @@ var Config = {
       /**
        * @type string
        * @default 'تایید'
+       * @since 0.6.0
        */
       btnExit: 'تایید'
     },
@@ -778,7 +806,7 @@ var Config = {
     /**
      * @description toolbox calendar switch configuration
      * @type object
-     * @version 0.3.0
+     * @since 0.6.0
      */
     calendarSwitch: {
 
