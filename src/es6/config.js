@@ -344,17 +344,20 @@ const Config = {
         'enabled': true,
 
         /**
+         * @description toolbox button text coniguration
          * @type object
          */
         'text': {
 
             /**
+             * @description text of today button
              * @type string
              * @default 'امروز'
              */
             btnToday: 'امروز',
 
             /**
+             * @description text of submit button (only shown on mobile)
              * @type string
              * @default 'تایید'
              * @since 0.6.0
@@ -371,6 +374,7 @@ const Config = {
         calendarSwitch: {
 
             /**
+             * @description make calendar switch enable or disbale
              * @type boolean
              * @default false
              */
@@ -378,7 +382,7 @@ const Config = {
         },
 
         /**
-         * @event
+         * @event onToday
          * @param toolbox
          * @example function (toolbox) {
          *      //log('toolbox today btn');
