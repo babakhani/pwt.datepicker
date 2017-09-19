@@ -115,6 +115,7 @@ const Config = {
     'inline': false,
 
     /**
+     * @description If set true datepicker init with input value date
      * @type boolean
      * @default true
      */
@@ -122,9 +123,9 @@ const Config = {
 
 
     /**
+     * @deprecated from v0.6.0 this options is deprecated, use calendar.persian.locale instead
      * @type boolean
      * @default true
-     * @deprecated from v0.6.0 this options is deprecated, use calendar.persian.locale instead
      */
     'persianDigit': true,
 
@@ -139,7 +140,7 @@ const Config = {
 
     /**
      * @description the date format, combination of d, dd, m, mm, yy, yyy.
-     * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
+     * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
      * @type {boolean}
      * @default 'LLLL'
      */
@@ -168,13 +169,17 @@ const Config = {
      * @description An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class'
      * @type {boolean}
      * @default false
+     * @example
+     * altField: '#inputAltFirld'
+     *
+     * altField: '.input-alt-field'
      */
     'altField': false,
 
 
     /**
      * @description the date format, combination of d, dd, m, mm, yy, yyy.
-     * {@link http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/}
+     * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
      * @type {string}
      * @default 'unix'
      */
@@ -250,13 +255,14 @@ const Config = {
         'enabled': true,
 
         /**
-         *
+         * @description navigate by scroll configuration
          * @type object
          * @description scroll navigation options
          */
         'scroll': {
 
             /**
+             * @description if you want make disable scroll navigation set this option false
              * @type boolean
              * @default true
              */
@@ -331,6 +337,7 @@ const Config = {
     'toolbox': {
 
         /**
+         * @description boolean option that make toolbar enable or disable
          * @type boolean
          * @default true
          */
@@ -603,7 +610,6 @@ const Config = {
         'titleFormat': 'YYYY',
 
         /**
-         *
          * @param year
          * @return {string}
          */
@@ -615,6 +621,7 @@ const Config = {
         },
 
         /**
+         * @description fire when date select by user
          * @event
          * @param year
          */
@@ -656,21 +663,24 @@ const Config = {
     /**
      * @description A function that takes current datepicker instance. It is called just before the datepicker Hide.
      * @event
-     * @param self
      */
     'onHide': function () {
         Helper.debug(this, 'dayPicker Event: onHide ');
     },
 
+
     /**
-     *
+     * @description on toggle datepicker event
+     * @event
      */
     'onToggle': function () {
         Helper.debug(this, 'dayPicker Event: onToggle ');
     },
 
+
     /**
-     *
+     * @description on destroy datepicker event
+     * @event
      */
     'onDestroy': function () {
         Helper.debug(this, 'dayPicker Event: onDestroy ');
@@ -827,10 +837,10 @@ const Config = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @description observer
+     * @description observer is deprecated, use setDate() method
      * @type {boolean}
      * @default false
-     * @deprecated
+     * @deprecated from 0.5.0
      */
     'observer': false,
 
