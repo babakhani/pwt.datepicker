@@ -2152,11 +2152,19 @@ var State = function () {
                     this.setViewDateTime('year', this.view.year + 12);
                 }
                 if (this.viewMode == 'month') {
-                    this.setViewDateTime('year', this.view.year + 1);
+                    var newYear = this.view.year + 1;
+                    if (newYear === 0) {
+                        newYear = 1;
+                    }
+                    this.setViewDateTime('year', newYear);
                 }
                 if (this.viewMode == 'day') {
+                    var _newYear = this.view.year + 1;
+                    if (_newYear === 0) {
+                        _newYear = 1;
+                    }
                     if (this.view.month + 1 == 13) {
-                        this.setViewDateTime('year', this.view.year + 1);
+                        this.setViewDateTime('year', _newYear);
                         this.setViewDateTime('month', 1);
                     } else {
                         this.setViewDateTime('month', this.view.month + 1);
@@ -2167,11 +2175,19 @@ var State = function () {
                     this.setViewDateTime('year', this.view.year - 12);
                 }
                 if (this.viewMode == 'month') {
-                    this.setViewDateTime('year', this.view.year - 1);
+                    var _newYear2 = this.view.year - 1;
+                    if (_newYear2 === 0) {
+                        _newYear2 = -1;
+                    }
+                    this.setViewDateTime('year', _newYear2);
                 }
                 if (this.viewMode == 'day') {
                     if (this.view.month - 1 <= 0) {
-                        this.setViewDateTime('year', this.view.year - 1);
+                        var _newYear3 = this.view.year - 1;
+                        if (_newYear3 === 0) {
+                            _newYear3 = -1;
+                        }
+                        this.setViewDateTime('year', _newYear3);
                         this.setViewDateTime('month', 12);
                     } else {
                         this.setViewDateTime('month', this.view.month - 1);

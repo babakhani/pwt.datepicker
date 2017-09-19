@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - add gregorian calendar type
 - add locale
 - make better user interface
+- add responsive option
 
 ## [0.5.10]
 ### Changed
