@@ -61,12 +61,13 @@ module.exports = function (grunt) {
                 tasks: ['webpack:dev']
             }
         },
+        // options: https://github.com/jsdoc2md/jsdoc-to-markdown/blob/master/docs/API.md#jsdoc2mdrenderoptions--promise
         jsdoc2md: {
             config: {
                 options: {
                     'no-gfm': true,
-                    'heading-depth': 2,
-                    'example-lang': 'js'
+                    'heading-depth': 1,
+                    'example-lang': 'js',
                 },
                 src: 'src/es6/config.js',
                 dest: 'dist/doc/OPTIONS.md'

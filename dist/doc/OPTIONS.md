@@ -1,6 +1,6 @@
 <a name="Config"></a>
 
-## Config
+# Config
 persian-datepicker configuration document
 
 **Kind**: global constant  
@@ -32,9 +32,9 @@ persian-datepicker configuration document
         * [.text](#Config.navigator.text)
             * [.btnNextText](#Config.navigator.text.btnNextText)
             * [.btnPrevText](#Config.navigator.text.btnPrevText)
-        * ["onNext" (navigator)](#Config.navigator.event_onNext)
-        * ["onPrev" (navigator)](#Config.navigator.event_onPrev)
-        * ["onSwitch" (navigator)](#Config.navigator.event_onSwitch)
+        * ["onNext"](#Config.navigator.event_onNext)
+        * ["onPrev"](#Config.navigator.event_onPrev)
+        * ["onSwitch"](#Config.navigator.event_onSwitch)
     * [.toolbox](#Config.toolbox) : <code>object</code>
         * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
         * [.text](#Config.toolbox.text) : <code>object</code>
@@ -84,15 +84,15 @@ persian-datepicker configuration document
     * [.checkDate()](#Config.checkDate) : <code>function</code>
     * [.checkMonth()](#Config.checkMonth) : <code>function</code>
     * [.checkYear()](#Config.checkYear) : <code>function</code>
-    * [.onToggle()](#Config.onToggle)
-    * [.onDestroy()](#Config.onDestroy)
     * ["onSelect" (unixDate)](#Config.event_onSelect)
     * ["onShow"](#Config.event_onShow)
-    * ["onHide" (self)](#Config.event_onHide)
+    * ["onHide"](#Config.event_onHide)
+    * ["onToggle"](#Config.event_onToggle)
+    * ["onDestroy"](#Config.event_onDestroy)
 
 <a name="Config.initialCalendar"></a>
 
-### Config.initialCalendar : <code>string</code>
+## Config.initialCalendar : <code>string</code>
 set default calendar mode of datepicker, available options: 'persian', 'gregorian'
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -100,7 +100,7 @@ set default calendar mode of datepicker, available options: 'persian', 'gregoria
 **Since**: 0.6.0  
 <a name="Config.calendar"></a>
 
-### Config.calendar : <code>object</code>
+## Config.calendar : <code>object</code>
 calendar type and localization configuration
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -132,7 +132,7 @@ calendar type and localization configuration
 
 <a name="Config.calendar.persian"></a>
 
-#### calendar.persian : <code>object</code>
+### calendar.persian : <code>object</code>
 Persian calendar configuration
 
 **Kind**: static property of [<code>calendar</code>](#Config.calendar)  
@@ -145,7 +145,7 @@ Persian calendar configuration
 
 <a name="Config.calendar.persian.locale"></a>
 
-##### persian.locale : <code>string</code>
+#### persian.locale : <code>string</code>
 set locale of calendar available options: 'fa', 'en'
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
@@ -153,15 +153,15 @@ set locale of calendar available options: 'fa', 'en'
 **Since**: 0.6.0  
 <a name="Config.calendar.persian.showHint"></a>
 
-##### persian.showHint : <code>boolean</code>
-if set true, small date hint of this calendars will be shown on another calendar
+#### persian.showHint : <code>boolean</code>
+if set true, small date hint of this calendar will be shown on another calendar
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
 **Default**: <code>false</code>  
 **Since**: 0.6.0  
 <a name="Config.calendar.persian.leapYearMode"></a>
 
-##### persian.leapYearMode : <code>string</code>
+#### persian.leapYearMode : <code>string</code>
 config leap year calculation mode, available options: 'algorithmic', 'astronomical'
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
@@ -170,7 +170,7 @@ config leap year calculation mode, available options: 'algorithmic', 'astronomic
 **Since**: 0.6.0  
 <a name="Config.calendar.gregorian"></a>
 
-#### calendar.gregorian : <code>object</code>
+### calendar.gregorian : <code>object</code>
 Gregorian calendar configuration
 
 **Kind**: static property of [<code>calendar</code>](#Config.calendar)  
@@ -182,7 +182,7 @@ Gregorian calendar configuration
 
 <a name="Config.calendar.gregorian.locale"></a>
 
-##### gregorian.locale : <code>string</code>
+#### gregorian.locale : <code>string</code>
 set locale of calendar available options: 'fa', 'en'
 
 **Kind**: static property of [<code>gregorian</code>](#Config.calendar.gregorian)  
@@ -190,15 +190,15 @@ set locale of calendar available options: 'fa', 'en'
 **Since**: 0.6.0  
 <a name="Config.calendar.gregorian.showHint"></a>
 
-##### gregorian.showHint : <code>boolean</code>
-if set true, small date hint of this calendars will be shown on another calendar
+#### gregorian.showHint : <code>boolean</code>
+if set true, small date hint of this calendar will be shown on another calendar
 
 **Kind**: static property of [<code>gregorian</code>](#Config.calendar.gregorian)  
 **Default**: <code>false</code>  
 **Since**: 0.6.0  
 <a name="Config.responsive"></a>
 
-### Config.responsive : <code>boolean</code>
+## Config.responsive : <code>boolean</code>
 if set true make enable responsive view on mobile devices
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -206,56 +206,64 @@ if set true make enable responsive view on mobile devices
 **Since**: 0.6.0  
 <a name="Config.inline"></a>
 
-### Config.inline : <code>boolean</code>
+## Config.inline : <code>boolean</code>
 if true datepicker render inline
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.initialValue"></a>
 
-### Config.initialValue : <code>boolean</code>
+## Config.initialValue : <code>boolean</code>
+If set true datepicker init with input value date
+
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
 <a name="Config.persianDigit"></a>
 
-### <del>Config.persianDigit : <code>boolean</code></del>
+## <del>Config.persianDigit : <code>boolean</code></del>
 ***Deprecated***
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
 <a name="Config.viewMode"></a>
 
-### Config.viewMode : <code>string</code>
+## Config.viewMode : <code>string</code>
 Acceptable value : day,month,year
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&quot;&#x27;day&#x27;&quot;</code>  
 <a name="Config.format"></a>
 
-### Config.format : <code>boolean</code>
+## Config.format : <code>boolean</code>
 the date format, combination of d, dd, m, mm, yy, yyy.
-[http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/](http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/)
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&#x27;LLLL&#x27;</code>  
+**Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format  
 <a name="Config.altField"></a>
 
-### Config.altField : <code>boolean</code>
+## Config.altField : <code>boolean</code>
 An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class'
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
+**Example**  
+```js
+altField: '#inputAltFirld'
+
+altField: '.input-alt-field'
+```
 <a name="Config.altFormat"></a>
 
-### Config.altFormat : <code>string</code>
+## Config.altFormat : <code>string</code>
 the date format, combination of d, dd, m, mm, yy, yyy.
-[http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/](http://babakhani.github.io/PersianWebToolkit/doc/persiandate/0.1.8/#/displaying/format/)
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&quot;&#x27;unix&#x27;&quot;</code>  
+**Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format  
 <a name="Config.minDate"></a>
 
-### Config.minDate : <code>Date</code>
+## Config.minDate : <code>Date</code>
 set min date on datepicker
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -276,7 +284,7 @@ set min date on datepicker
 
 <a name="Config.maxDate"></a>
 
-### Config.maxDate : <code>Date</code>
+## Config.maxDate : <code>Date</code>
 set max date on datepicker
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -297,7 +305,7 @@ set max date on datepicker
 
 <a name="Config.navigator"></a>
 
-### Config.navigator : <code>object</code>
+## Config.navigator : <code>object</code>
 navigator config object
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -310,31 +318,33 @@ navigator config object
     * [.text](#Config.navigator.text)
         * [.btnNextText](#Config.navigator.text.btnNextText)
         * [.btnPrevText](#Config.navigator.text.btnPrevText)
-    * ["onNext" (navigator)](#Config.navigator.event_onNext)
-    * ["onPrev" (navigator)](#Config.navigator.event_onPrev)
-    * ["onSwitch" (navigator)](#Config.navigator.event_onSwitch)
+    * ["onNext"](#Config.navigator.event_onNext)
+    * ["onPrev"](#Config.navigator.event_onPrev)
+    * ["onSwitch"](#Config.navigator.event_onSwitch)
 
 <a name="Config.navigator.enabled"></a>
 
-#### navigator.enabled : <code>boolean</code>
+### navigator.enabled : <code>boolean</code>
 Enable or Disable dayPicker
 
 **Kind**: static property of [<code>navigator</code>](#Config.navigator)  
 **Default**: <code>true</code>  
 <a name="Config.navigator.scroll"></a>
 
-#### navigator.scroll : <code>object</code>
+### navigator.scroll : <code>object</code>
 scroll navigation options
 
 **Kind**: static property of [<code>navigator</code>](#Config.navigator)  
 <a name="Config.navigator.scroll.enabled"></a>
 
-##### scroll.enabled : <code>boolean</code>
+#### scroll.enabled : <code>boolean</code>
+if you want make disable scroll navigation set this option false
+
 **Kind**: static property of [<code>scroll</code>](#Config.navigator.scroll)  
 **Default**: <code>true</code>  
 <a name="Config.navigator.text"></a>
 
-#### navigator.text
+### navigator.text
 navigator text config object
 
 **Kind**: static property of [<code>navigator</code>](#Config.navigator)  
@@ -345,36 +355,24 @@ navigator text config object
 
 <a name="Config.navigator.text.btnNextText"></a>
 
-##### text.btnNextText
+#### text.btnNextText
 text of next btn
 
 **Kind**: static property of [<code>text</code>](#Config.navigator.text)  
 **Default**: <code>&#x27;&lt;&#x27;</code>  
 <a name="Config.navigator.text.btnPrevText"></a>
 
-##### text.btnPrevText
+#### text.btnPrevText
 text of prev btn
 
 **Kind**: static property of [<code>text</code>](#Config.navigator.text)  
 **Default:**: '>'  
 <a name="Config.navigator.event_onNext"></a>
 
-#### "onNext" (navigator)
+### "onNext"
 Trigger When Next button clicked
 
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
-<table>
-  <thead>
-    <tr>
-      <th>Param</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>navigator</td>
-    </tr>  </tbody>
-</table>
-
 **Example**  
 ```js
 function (navigator) {
@@ -383,22 +381,10 @@ function (navigator) {
 ```
 <a name="Config.navigator.event_onPrev"></a>
 
-#### "onPrev" (navigator)
+### "onPrev"
 Trigger When Prev button clicked
 
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
-<table>
-  <thead>
-    <tr>
-      <th>Param</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>navigator</td>
-    </tr>  </tbody>
-</table>
-
 **Example**  
 ```js
 function (navigator) {
@@ -407,22 +393,10 @@ function (navigator) {
 ```
 <a name="Config.navigator.event_onSwitch"></a>
 
-#### "onSwitch" (navigator)
+### "onSwitch"
 Trigger When Switch view button clicked
 
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
-<table>
-  <thead>
-    <tr>
-      <th>Param</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>navigator</td>
-    </tr>  </tbody>
-</table>
-
 **Example**  
 ```js
 function (state) {
@@ -431,7 +405,7 @@ function (state) {
 ```
 <a name="Config.toolbox"></a>
 
-### Config.toolbox : <code>object</code>
+## Config.toolbox : <code>object</code>
 toolbox config object
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -448,12 +422,16 @@ toolbox config object
 
 <a name="Config.toolbox.enabled"></a>
 
-#### toolbox.enabled : <code>boolean</code>
+### toolbox.enabled : <code>boolean</code>
+boolean option that make toolbar enable or disable
+
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 **Default**: <code>true</code>  
 <a name="Config.toolbox.text"></a>
 
-#### toolbox.text : <code>object</code>
+### toolbox.text : <code>object</code>
+toolbox button text coniguration
+
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 
 * [.text](#Config.toolbox.text) : <code>object</code>
@@ -462,30 +440,36 @@ toolbox config object
 
 <a name="Config.toolbox.text.btnToday"></a>
 
-##### text.btnToday : <code>string</code>
+#### text.btnToday : <code>string</code>
+text of today button
+
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;امروز&#x27;&quot;</code>  
 <a name="Config.toolbox.text.btnExit"></a>
 
-##### text.btnExit : <code>string</code>
+#### text.btnExit : <code>string</code>
+text of submit button (only shown on mobile)
+
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;تایید&#x27;&quot;</code>  
 **Since**: 0.6.0  
 <a name="Config.toolbox.calendarSwitch"></a>
 
-#### toolbox.calendarSwitch : <code>object</code>
+### toolbox.calendarSwitch : <code>object</code>
 toolbox calendar switch configuration
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 **Since**: 0.6.0  
 <a name="Config.toolbox.calendarSwitch.enabled"></a>
 
-##### calendarSwitch.enabled : <code>boolean</code>
+#### calendarSwitch.enabled : <code>boolean</code>
+make calendar switch enable or disbale
+
 **Kind**: static property of [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
 **Default**: <code>false</code>  
 <a name="Config.toolbox.event_onToday"></a>
 
-#### "onToday" (toolbox)
+### "onToday" (toolbox)
 **Kind**: event emitted by [<code>toolbox</code>](#Config.toolbox)  
 <table>
   <thead>
@@ -507,14 +491,14 @@ function (toolbox) {
 ```
 <a name="Config.onlyTimePicker"></a>
 
-### Config.onlyTimePicker : <code>boolean</code>
+## Config.onlyTimePicker : <code>boolean</code>
 if true all pickers hide and just show timepicker
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.onlySelectOnDate"></a>
 
-### Config.onlySelectOnDate : <code>boolean</code>
+## Config.onlySelectOnDate : <code>boolean</code>
 if true date select just by click on day in month grid
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -535,7 +519,7 @@ if true date select just by click on day in month grid
 
 <a name="Config.timePicker"></a>
 
-### Config.timePicker : <code>object</code>
+## Config.timePicker : <code>object</code>
 timepicker config object
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -557,15 +541,21 @@ timepicker config object
 
 <a name="Config.timePicker.enabled"></a>
 
-#### timePicker.enabled : <code>boolean</code>
+### timePicker.enabled : <code>boolean</code>
+make timepicker enable or disable
+
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.step"></a>
 
-#### timePicker.step : <code>number</code>
+### timePicker.step : <code>number</code>
+The amount that increases or decreases by pressing the button
+
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.hour"></a>
 
-#### timePicker.hour : <code>object</code>
+### timePicker.hour : <code>object</code>
+hour selector configuration
+
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 
 * [.hour](#Config.timePicker.hour) : <code>object</code>
@@ -574,17 +564,21 @@ timepicker config object
 
 <a name="Config.timePicker.hour.enabled"></a>
 
-##### hour.enabled : <code>boolean</code>
+#### hour.enabled : <code>boolean</code>
+make hour selector enable or disable
+
 **Kind**: static property of [<code>hour</code>](#Config.timePicker.hour)  
 <a name="Config.timePicker.hour.step"></a>
 
-##### hour.step : <code>boolean</code>
-overwrite by parent step
+#### hour.step : <code>boolean</code>
+The amount that increases or decreases hour, by pressing the button. overwrite by timepicker.hour
 
 **Kind**: static property of [<code>hour</code>](#Config.timePicker.hour)  
 <a name="Config.timePicker.minute"></a>
 
-#### timePicker.minute : <code>object</code>
+### timePicker.minute : <code>object</code>
+minute selector configuration
+
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 
 * [.minute](#Config.timePicker.minute) : <code>object</code>
@@ -593,17 +587,21 @@ overwrite by parent step
 
 <a name="Config.timePicker.minute.enabled"></a>
 
-##### minute.enabled : <code>boolean</code>
+#### minute.enabled : <code>boolean</code>
+make minute selector enable or disable
+
 **Kind**: static property of [<code>minute</code>](#Config.timePicker.minute)  
 <a name="Config.timePicker.minute.step"></a>
 
-##### minute.step : <code>boolean</code>
+#### minute.step : <code>boolean</code>
 overwrite by parent step
 
 **Kind**: static property of [<code>minute</code>](#Config.timePicker.minute)  
 <a name="Config.timePicker.second"></a>
 
-#### timePicker.second : <code>object</code>
+### timePicker.second : <code>object</code>
+second selector configuration
+
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 
 * [.second](#Config.timePicker.second) : <code>object</code>
@@ -612,28 +610,32 @@ overwrite by parent step
 
 <a name="Config.timePicker.second.enabled"></a>
 
-##### second.enabled : <code>boolean</code>
+#### second.enabled : <code>boolean</code>
+make second selector enable or disable
+
 **Kind**: static property of [<code>second</code>](#Config.timePicker.second)  
 <a name="Config.timePicker.second.step"></a>
 
-##### second.step : <code>boolean</code>
-overwrite by parent step
+#### second.step : <code>boolean</code>
+The amount that increases or decreases second, by pressing the button. overwrite by timepicker.hour
 
 **Kind**: static property of [<code>second</code>](#Config.timePicker.second)  
 <a name="Config.timePicker.meridiem"></a>
 
-#### timePicker.meridiem : <code>object</code>
+### timePicker.meridiem : <code>object</code>
+meridiem selector configuration
+
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.meridiem.enabled"></a>
 
-##### meridiem.enabled : <code>boolean</code>
-if you set this as false, datepicker clock system moved to 24-hour system
+#### meridiem.enabled : <code>boolean</code>
+if you set this as false, datepicker timepicker system moved to 24-hour system
 
 **Kind**: static property of [<code>meridiem</code>](#Config.timePicker.meridiem)  
 <a name="Config.dayPicker"></a>
 
-### Config.dayPicker : <code>object</code>
-dayPicker config object
+## Config.dayPicker : <code>object</code>
+dayPicker configuration
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 
@@ -645,17 +647,24 @@ dayPicker config object
 
 <a name="Config.dayPicker.enabled"></a>
 
-#### dayPicker.enabled : <code>boolean</code>
+### dayPicker.enabled : <code>boolean</code>
+make daypicker enable or disable
+
 **Kind**: static property of [<code>dayPicker</code>](#Config.dayPicker)  
 **Default**: <code>true</code>  
 <a name="Config.dayPicker.titleFormat"></a>
 
-#### dayPicker.titleFormat : <code>string</code>
+### dayPicker.titleFormat : <code>string</code>
+daypicker title format string
+
 **Kind**: static property of [<code>dayPicker</code>](#Config.dayPicker)  
 **Default**: <code>&quot;&#x27;YYYY MMMM&#x27;&quot;</code>  
+**Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format  
 <a name="Config.dayPicker.titleFormatter"></a>
 
-#### dayPicker.titleFormatter(year, month) ⇒ <code>\*</code>
+### dayPicker.titleFormatter(year, month) ⇒ <code>\*</code>
+daypicker title formatter function
+
 **Kind**: static method of [<code>dayPicker</code>](#Config.dayPicker)  
 <table>
   <thead>
@@ -673,7 +682,9 @@ dayPicker config object
 
 <a name="Config.dayPicker.event_onSelect"></a>
 
-#### "onSelect" (selectedDayUnix)
+### "onSelect" (selectedDayUnix)
+fired when user select date
+
 **Kind**: event emitted by [<code>dayPicker</code>](#Config.dayPicker)  
 <table>
   <thead>
@@ -689,8 +700,8 @@ dayPicker config object
 
 <a name="Config.monthPicker"></a>
 
-### Config.monthPicker : <code>object</code>
-monthPicker config object
+## Config.monthPicker : <code>object</code>
+monthPicker configuration
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 
@@ -702,17 +713,23 @@ monthPicker config object
 
 <a name="Config.monthPicker.enabled"></a>
 
-#### monthPicker.enabled : <code>boolean</code>
+### monthPicker.enabled : <code>boolean</code>
+make monthPicker enable or disable
+
 **Kind**: static property of [<code>monthPicker</code>](#Config.monthPicker)  
 **Default**: <code>true</code>  
 <a name="Config.monthPicker.titleFormat"></a>
 
-#### monthPicker.titleFormat : <code>string</code>
+### monthPicker.titleFormat : <code>string</code>
+monthPicker title format string
+
 **Kind**: static property of [<code>monthPicker</code>](#Config.monthPicker)  
 **Default**: <code>&quot;&#x27;YYYY&#x27;&quot;</code>  
 <a name="Config.monthPicker.titleFormatter"></a>
 
-#### monthPicker.titleFormatter(unix) ⇒ <code>\*</code>
+### monthPicker.titleFormatter(unix) ⇒ <code>\*</code>
+monthPicker title formatter function
+
 **Kind**: static method of [<code>monthPicker</code>](#Config.monthPicker)  
 <table>
   <thead>
@@ -728,7 +745,9 @@ monthPicker config object
 
 <a name="Config.monthPicker.event_onSelect"></a>
 
-#### "onSelect" (monthIndex)
+### "onSelect" (monthIndex)
+fired when user select month
+
 **Kind**: event emitted by [<code>monthPicker</code>](#Config.monthPicker)  
 <table>
   <thead>
@@ -744,8 +763,8 @@ monthPicker config object
 
 <a name="Config.yearPicker"></a>
 
-### Config.yearPicker : <code>object</code>
-yearPicker config object
+## Config.yearPicker : <code>object</code>
+yearPicker configuration
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 
@@ -757,17 +776,23 @@ yearPicker config object
 
 <a name="Config.yearPicker.enabled"></a>
 
-#### yearPicker.enabled : <code>boolean</code>
+### yearPicker.enabled : <code>boolean</code>
+make monthPicker enable or disable
+
 **Kind**: static property of [<code>yearPicker</code>](#Config.yearPicker)  
 **Default**: <code>true</code>  
 <a name="Config.yearPicker.titleFormat"></a>
 
-#### yearPicker.titleFormat : <code>string</code>
+### yearPicker.titleFormat : <code>string</code>
+yearPicker title format string
+
 **Kind**: static property of [<code>yearPicker</code>](#Config.yearPicker)  
 **Default**: <code>&quot;&#x27;YYYY&#x27;&quot;</code>  
 <a name="Config.yearPicker.titleFormatter"></a>
 
-#### yearPicker.titleFormatter(year) ⇒ <code>string</code>
+### yearPicker.titleFormatter(year) ⇒ <code>string</code>
+yearPicker title formatter function
+
 **Kind**: static method of [<code>yearPicker</code>](#Config.yearPicker)  
 <table>
   <thead>
@@ -783,7 +808,9 @@ yearPicker config object
 
 <a name="Config.yearPicker.event_onSelect"></a>
 
-#### "onSelect" (year)
+### "onSelect" (year)
+fired when user select year
+
 **Kind**: event emitted by [<code>yearPicker</code>](#Config.yearPicker)  
 <table>
   <thead>
@@ -799,7 +826,7 @@ yearPicker config object
 
 <a name="Config.position"></a>
 
-### Config.position : <code>mix</code>
+## Config.position : <code>mix</code>
 position of datepicker relative to input element
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -811,14 +838,14 @@ position of datepicker relative to input element
 ```
 <a name="Config.autoClose"></a>
 
-### Config.autoClose : <code>boolean</code>
+## Config.autoClose : <code>boolean</code>
 If true picker close When Select day
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.template"></a>
 
-### Config.template : <code>string</code>
+## Config.template : <code>string</code>
 by default datepicker have a template string, and you can overwrite it simply by replace string in config.
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -956,23 +983,23 @@ by default datepicker have a template string, and you can overwrite it simply by
 ```
 <a name="Config.observer"></a>
 
-### <del>Config.observer : <code>boolean</code></del>
+## <del>Config.observer : <code>boolean</code></del>
 ***Deprecated***
 
-observer
+observer is deprecated, use setDate() method
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
 <a name="Config.inputDelay"></a>
 
-### Config.inputDelay : <code>number</code>
+## Config.inputDelay : <code>number</code>
 inputDelay
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>800</code>  
 <a name="Config.formatter"></a>
 
-### Config.formatter(unixDate)
+## Config.formatter(unixDate)
 format value of input
 
 **Kind**: static method of [<code>Config</code>](#Config)  
@@ -1000,7 +1027,7 @@ function (unixDate) {
 ```
 <a name="Config.altFieldFormatter"></a>
 
-### Config.altFieldFormatter(unixDate)
+## Config.altFieldFormatter(unixDate)
 format value of 'altField' input
 
 **Kind**: static method of [<code>Config</code>](#Config)  
@@ -1037,34 +1064,26 @@ function (unixDate) {
 ```
 <a name="Config.checkDate"></a>
 
-### Config.checkDate() : <code>function</code>
-check date avalibility
+## Config.checkDate() : <code>function</code>
+check date availability
 
 **Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.checkMonth"></a>
 
-### Config.checkMonth() : <code>function</code>
-check month avalibility
+## Config.checkMonth() : <code>function</code>
+check month availability
 
 **Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.checkYear"></a>
 
-### Config.checkYear() : <code>function</code>
-check year avalibility
+## Config.checkYear() : <code>function</code>
+check year availability
 
-**Kind**: static method of [<code>Config</code>](#Config)  
-<a name="Config.onToggle"></a>
-
-### Config.onToggle()
-**Kind**: static method of [<code>Config</code>](#Config)  
-<a name="Config.onDestroy"></a>
-
-### Config.onDestroy()
 **Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.event_onSelect"></a>
 
-### "onSelect" (unixDate)
-A function that takes current datepicker unixDate. It is called When Day Select.
+## "onSelect" (unixDate)
+A function that takes current datepicker unixDate. called When date Select.
 
 **Kind**: event emitted by [<code>Config</code>](#Config)  
 <table>
@@ -1081,25 +1100,25 @@ A function that takes current datepicker unixDate. It is called When Day Select.
 
 <a name="Config.event_onShow"></a>
 
-### "onShow"
+## "onShow"
 A function that takes current datepicker instance. It is called just before the datepicker is displayed.
 
 **Kind**: event emitted by [<code>Config</code>](#Config)  
 <a name="Config.event_onHide"></a>
 
-### "onHide" (self)
+## "onHide"
 A function that takes current datepicker instance. It is called just before the datepicker Hide.
 
 **Kind**: event emitted by [<code>Config</code>](#Config)  
-<table>
-  <thead>
-    <tr>
-      <th>Param</th>
-    </tr>
-  </thead>
-  <tbody>
-<tr>
-    <td>self</td>
-    </tr>  </tbody>
-</table>
+<a name="Config.event_onToggle"></a>
 
+## "onToggle"
+on toggle datepicker event
+
+**Kind**: event emitted by [<code>Config</code>](#Config)  
+<a name="Config.event_onDestroy"></a>
+
+## "onDestroy"
+on destroy datepicker event
+
+**Kind**: event emitted by [<code>Config</code>](#Config)  

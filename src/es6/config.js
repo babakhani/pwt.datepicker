@@ -54,7 +54,7 @@ const Config = {
             'locale': 'fa',
 
             /**
-             * @description if set true, small date hint of this calendars will be shown on another calendar
+             * @description if set true, small date hint of this calendar will be shown on another calendar
              * @type boolean
              * @default false
              * @since 0.6.0
@@ -88,7 +88,7 @@ const Config = {
             'locale': 'en',
 
             /**
-             * @description if set true, small date hint of this calendars will be shown on another calendar
+             * @description if set true, small date hint of this calendar will be shown on another calendar
              * @type boolean
              * @default false
              * @since 0.6.0
@@ -292,7 +292,6 @@ const Config = {
         /**
          * @description Trigger When Next button clicked
          * @event
-         * @param navigator
          * @example function (navigator) {
          *      //log('navigator next ');
          *  }
@@ -305,7 +304,6 @@ const Config = {
         /**
          * @description Trigger When Prev button clicked
          * @event
-         * @param navigator
          * @example function (navigator) {
          *      //log('navigator prev ');
          *  }
@@ -318,7 +316,6 @@ const Config = {
         /**
          * @description Trigger When Switch view button clicked
          * @event
-         * @param navigator
          * @example function (state) {
                 // console.log('navigator switch ');
          *  }
@@ -382,7 +379,7 @@ const Config = {
         },
 
         /**
-         * @event onToday
+         * @event
          * @param toolbox
          * @example function (toolbox) {
          *      //log('toolbox today btn');
@@ -412,7 +409,7 @@ const Config = {
 
 
     /**
-     * @description check date avalibility
+     * @description check date availability
      * @type function
      */
     'checkDate': function () {
@@ -421,7 +418,7 @@ const Config = {
 
 
     /**
-     * @description check month avalibility
+     * @description check month availability
      * @type {function}
      */
     'checkMonth': function () {
@@ -430,7 +427,7 @@ const Config = {
 
 
     /**
-     * @description check year avalibility
+     * @description check year availability
      * @type {function}
      */
     'checkYear': function () {
@@ -445,43 +442,50 @@ const Config = {
     'timePicker': {
 
         /**
+         * @description make timepicker enable or disable
          * @type boolean
          */
         'enabled': false,
 
         /**
+         * @description The amount that increases or decreases by pressing the button
          * @type number
          */
         'step': 1,
 
         /**
+         * @description hour selector configuration
          * @type object
          */
         'hour': {
 
             /**
+             * @description make hour selector enable or disable
              * @type boolean
              */
             'enabled': true,
 
             /**
-             * @description overwrite by parent step
+             * @description The amount that increases or decreases hour, by pressing the button. overwrite by timepicker.hour
              * @type boolean
              */
             'step': null
         },
 
         /**
+         * @description minute selector configuration
          * @type object
          */
         'minute': {
 
             /**
+             * @description make minute selector enable or disable
              * @type boolean
              */
             'enabled': true,
 
             /**
+             * @description The amount that increases or decreases minute, by pressing the button. overwrite by timepicker.hour
              * @description overwrite by parent step
              * @type boolean
              */
@@ -489,30 +493,33 @@ const Config = {
         },
 
         /**
+         * @description second selector configuration
          * @type object
          */
         'second': {
 
             /**
+             * @description make second selector enable or disable
              * @type boolean
              */
             'enabled': true,
 
             /**
-             * @description overwrite by parent step
+             * @description The amount that increases or decreases second, by pressing the button. overwrite by timepicker.hour
              * @type boolean
              */
             'step': null
         },
 
         /**
+         * @description meridiem selector configuration
          * @type object
          */
         'meridiem': {
 
             /**
+             * @description if you set this as false, datepicker timepicker system moved to 24-hour system
              * @type boolean
-             * @description if you set this as false, datepicker clock system moved to 24-hour system
              */
             'enabled': false
         }
@@ -520,24 +527,28 @@ const Config = {
 
 
     /**
-     * @description dayPicker config object
+     * @description dayPicker configuration
      * @type {object}
      */
     'dayPicker': {
 
         /**
+         * @description make daypicker enable or disable
          * @type boolean
          * @default true
          */
         'enabled': true,
 
         /**
+         * @description daypicker title format string
          * @type string
          * @default 'YYYY MMMM'
+         * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
          */
         'titleFormat': 'YYYY MMMM',
 
         /**
+         * @description  daypicker title formatter function
          * @param year
          * @param month
          * @return {*}
@@ -548,6 +559,7 @@ const Config = {
         },
 
         /**
+         * @description fired when user select date
          * @event
          * @param selectedDayUnix
          */
@@ -559,24 +571,27 @@ const Config = {
 
 
     /**
-     * @description monthPicker config object
+     * @description monthPicker configuration
      * @type {object}
      */
     'monthPicker': {
 
         /**
+         * @description make monthPicker enable or disable
          * @type boolean
          * @default true
          */
         'enabled': true,
 
         /**
+         * @description monthPicker title format string
          * @type string
          * @default 'YYYY'
          */
         'titleFormat': 'YYYY',
 
         /**
+         * @description monthPicker title formatter function
          * @param unix
          * @return {*}
          */
@@ -586,6 +601,7 @@ const Config = {
         },
 
         /**
+         * @description fired when user select month
          * @event
          * @param monthIndex
          */
@@ -596,24 +612,27 @@ const Config = {
 
 
     /**
-     * @description yearPicker config object
+     * @description yearPicker configuration
      * @type {object}
      */
     'yearPicker': {
 
         /**
+         * @description make monthPicker enable or disable
          * @type boolean
          * @default true
          */
         'enabled': true,
 
         /**
+         * @description yearPicker title format string
          * @type string
          * @default 'YYYY'
          */
         'titleFormat': 'YYYY',
 
         /**
+         * @description yearPicker title formatter function
          * @param year
          * @return {string}
          */
@@ -625,7 +644,7 @@ const Config = {
         },
 
         /**
-         * @description fire when date select by user
+         * @description fired when user select year
          * @event
          * @param year
          */
@@ -636,7 +655,7 @@ const Config = {
 
 
     /**
-     * @description A function that takes current datepicker unixDate. It is called When Day Select.
+     * @description A function that takes current datepicker unixDate. called When date Select.
      * @event
      * @param unixDate
      */
