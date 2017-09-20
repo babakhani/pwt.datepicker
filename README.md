@@ -61,7 +61,7 @@ npm install persian-datepicker
 <input type="text" class="example1" />
 ```
 
-## options
+## options table
 
 [See Options Full Document](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/options/)
 
@@ -82,7 +82,7 @@ npm install persian-datepicker
 | inline                         | boolean          | false                                           | if true datepicker render inline |
 | responsive                     | boolean          | true                                            | If set true datepicker init with input value date |
 | persianDigit                   | boolean          | true                                            | If true all digit shows as persian digit |
-| viewMode                       | string           | 'day'                                           | Accept day, motnh, year |
+| viewMode                       | string           | 'day'                                           | Accept day, month, year |
 | format                         | string           | 'LLLL'                                          | Default input value formatt string.|
 | formatter                      | function         | function(unixDate){return unixDate}             | Format value of input |
 | altField                       | selector         | false                                           | Format value of alt field input |
