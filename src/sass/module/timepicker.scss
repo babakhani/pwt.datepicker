@@ -3,6 +3,7 @@
   .datepicker-time-view {
     display: block;
     float: left;
+    width: 100%;
     padding: $grid-gutter;
     //margin: 3px -5px;
     background: $timepicker-bg;
@@ -102,4 +103,34 @@
 
     }
   }
+
+  &.datepicker-state-no-second {
+    .datepicker-time-view {
+
+      & > .time-segment {
+        width: 31.33%;
+      }
+
+      & > .second-divider {
+        display: none;
+      }
+
+    }
+  }
+
+  &.datepicker-state-no-meridian.datepicker-state-no-second {
+    .datepicker-time-view {
+
+      & > .time-segment {
+        width: 48%;
+      }
+
+      & > .second-divider,
+      & > .meridian-divider {
+        display: none;
+      }
+
+    }
+  }
+
 }
