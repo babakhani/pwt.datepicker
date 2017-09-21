@@ -414,6 +414,7 @@ const Config = {
             /**
              * @description make calendar switch enable or disable
              * @type boolean
+             * @since 0.6.0
              * @default true
              */
             enabled: true,
@@ -423,6 +424,7 @@ const Config = {
              * @description calendar switch text format string
              * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
              * @type string
+             * @since 0.6.0
              * @default MMMM
              */
             format: 'MMMM'
