@@ -481,7 +481,7 @@ class View {
             toolbox: this.model.options.toolbox,
             cssClass: this.getCssClass(),
             onlyTimePicker: this.model.options.onlyTimePicker,
-            altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('MMMM'),
+            altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
             calendarSwitchText: this._getCalendarSwitchText()
         };

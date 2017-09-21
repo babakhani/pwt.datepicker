@@ -835,6 +835,7 @@ var Config = {
          * @description show when current calendar is Persian
          * @since 0.6.0
          * @type object
+         * @default امروز
          */
         fa: 'امروز',
 
@@ -842,6 +843,7 @@ var Config = {
          * @description show when current calendar is Gregorian
          * @since 0.6.0
          * @type object
+         * @default today
          */
         en: 'today'
       }
@@ -857,9 +859,18 @@ var Config = {
       /**
        * @description make calendar switch enable or disable
        * @type boolean
-       * @default false
+       * @default true
        */
-      enabled: false
+      enabled: true,
+
+      /**
+       * @description calendar switch text format string
+       * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
+       * @type string
+       * @default MMMM
+       */
+      format: 'MMMM'
+
     },
 
     /**
@@ -3145,7 +3156,7 @@ var View = function () {
                 toolbox: this.model.options.toolbox,
                 cssClass: this.getCssClass(),
                 onlyTimePicker: this.model.options.onlyTimePicker,
-                altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('MMMM'),
+                altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),
                 altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
                 calendarSwitchText: this._getCalendarSwitchText()
             };

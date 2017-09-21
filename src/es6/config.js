@@ -389,6 +389,7 @@ const Config = {
                  * @description show when current calendar is Persian
                  * @since 0.6.0
                  * @type object
+                 * @default امروز
                  */
                 fa: 'امروز',
 
@@ -396,6 +397,7 @@ const Config = {
                  * @description show when current calendar is Gregorian
                  * @since 0.6.0
                  * @type object
+                 * @default today
                  */
                 en: 'today'
             }
@@ -412,9 +414,19 @@ const Config = {
             /**
              * @description make calendar switch enable or disable
              * @type boolean
-             * @default false
+             * @default true
              */
-            enabled: false,
+            enabled: true,
+
+
+            /**
+             * @description calendar switch text format string
+             * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
+             * @type string
+             * @default MMMM
+             */
+            format: 'MMMM'
+
         },
 
         /**
