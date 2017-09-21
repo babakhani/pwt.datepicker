@@ -71,14 +71,14 @@ class Navigator {
             return;
         }
         let step, t, that = this;
-        if (timekey == 'meridiem') {
+        if (timekey == 'meridian') {
             step = 12;
-            if (this.model.state.view.meridiem == 'PM') {
+            if (this.model.state.view.meridian == 'PM') {
                 t = this.model.PersianDate.date(this.model.state.selected.unixDate).add('hour', step).valueOf();
             } else {
                 t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
             }
-            this.model.state.meridiemToggle();
+            this.model.state.meridianToggle();
         } else {
             step = this.model.options.timePicker[timekey].step;
             t = this.model.PersianDate.date(this.model.state.selected.unixDate).add(timekey, step).valueOf();
@@ -102,14 +102,14 @@ class Navigator {
             return;
         }
         let step, t, that = this;
-        if (timekey == 'meridiem') {
+        if (timekey == 'meridian') {
             step = 12;
-            if (this.model.state.view.meridiem == 'AM') {
+            if (this.model.state.view.meridian == 'AM') {
                 t = this.model.PersianDate.date(this.model.state.selected.unixDate).add('hour', step).valueOf();
             } else {
                 t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
             }
-            this.model.state.meridiemToggle();
+            this.model.state.meridianToggle();
         } else {
             step = this.model.options.timePicker[timekey].step;
             t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();

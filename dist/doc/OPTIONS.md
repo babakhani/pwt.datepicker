@@ -63,8 +63,8 @@ persian-datepicker configuration document
         * [.second](#Config.timePicker.second) : <code>object</code>
             * [.enabled](#Config.timePicker.second.enabled) : <code>boolean</code>
             * [.step](#Config.timePicker.second.step) : <code>boolean</code>
-        * [.meridiem](#Config.timePicker.meridiem) : <code>object</code>
-            * [.enabled](#Config.timePicker.meridiem.enabled) : <code>boolean</code>
+        * [.meridian](#Config.timePicker.meridian) : <code>object</code>
+            * [.enabled](#Config.timePicker.meridian.enabled) : <code>boolean</code>
     * [.dayPicker](#Config.dayPicker) : <code>object</code>
         * [.enabled](#Config.dayPicker.enabled) : <code>boolean</code>
         * [.titleFormat](#Config.dayPicker.titleFormat) : <code>string</code>
@@ -614,8 +614,8 @@ timePicker configuration
     * [.second](#Config.timePicker.second) : <code>object</code>
         * [.enabled](#Config.timePicker.second.enabled) : <code>boolean</code>
         * [.step](#Config.timePicker.second.step) : <code>boolean</code>
-    * [.meridiem](#Config.timePicker.meridiem) : <code>object</code>
-        * [.enabled](#Config.timePicker.meridiem.enabled) : <code>boolean</code>
+    * [.meridian](#Config.timePicker.meridian) : <code>object</code>
+        * [.enabled](#Config.timePicker.meridian.enabled) : <code>boolean</code>
 
 <a name="Config.timePicker.enabled"></a>
 
@@ -698,18 +698,18 @@ make second selector enable or disable
 The amount that increases or decreases second, by pressing the button. overwrite by timepicker.hour
 
 **Kind**: static property of [<code>second</code>](#Config.timePicker.second)  
-<a name="Config.timePicker.meridiem"></a>
+<a name="Config.timePicker.meridian"></a>
 
-### timePicker.meridiem : <code>object</code>
-meridiem selector configuration
+### timePicker.meridian : <code>object</code>
+meridian selector configuration
 
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
-<a name="Config.timePicker.meridiem.enabled"></a>
+<a name="Config.timePicker.meridian.enabled"></a>
 
-#### meridiem.enabled : <code>boolean</code>
+#### meridian.enabled : <code>boolean</code>
 if you set this as false, datepicker timepicker system moved to 24-hour system
 
-**Kind**: static property of [<code>meridiem</code>](#Config.timePicker.meridiem)  
+**Kind**: static property of [<code>meridian</code>](#Config.timePicker.meridian)  
 <a name="Config.dayPicker"></a>
 
 ## Config.dayPicker : <code>object</code>
@@ -1039,13 +1039,13 @@ by default datepicker have a template string, and you can overwrite it simply by
      <div class="divider meridian-divider"></div>
      <div class="divider meridian-divider"></div>
      {{/second.enabled}}
-     {{#meridiem.enabled}}
-     <div class="meridiem time-segment" data-time-key="meridian" >
-     <div class="up-btn" data-time-key="meridiem">▲</div>
-     <input value="{{meridiem.title}}" type="text" class="meridiem-input">
-     <div class="down-btn" data-time-key="meridiem">▼</div>
+     {{#meridian.enabled}}
+     <div class="meridian time-segment" data-time-key="meridian" >
+     <div class="up-btn" data-time-key="meridian">▲</div>
+     <input value="{{meridian.title}}" type="text" class="meridian-input">
+     <div class="down-btn" data-time-key="meridian">▼</div>
      </div>
-     {{/meridiem.enabled}}
+     {{/meridian.enabled}}
      </div>
      {{/enabled}}
      {{/time}}
@@ -1068,7 +1068,7 @@ if true datepicker update self by user inputted date string, accept 'yyyy/mm/dd'
 **Default**: <code>false</code>  
 **Example**  
 ```js
-'1396/10/2', '1396/1/12'
+'1396/10/2', ''
 ```
 <a name="Config.inputDelay"></a>
 

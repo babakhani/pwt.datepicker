@@ -236,7 +236,7 @@ module.exports = Options;
 /**
  * @type {string}
  */
-var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div data-navigator class=\"datepicker-navigator\">\n            <div class=\"pwt-btn pwt-btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"pwt-btn pwt-btn-switch\">{{navigator.switch.text}}</div>\n            <div class=\"pwt-btn pwt-btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}\n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" >\n                                            <span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\">\n                                            <span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridiem.enabled}}\n            <div class=\"meridiem time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridiem\">\u25B2</div>\n                <input disabled value=\"{{meridiem.title}}\" type=\"text\" class=\"meridiem-input\">\n                <div class=\"down-btn\" data-time-key=\"meridiem\">\u25BC</div>\n            </div>\n        {{/meridiem.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox\">\n        <div class=\"pwt-btn-exit\">{{text.btnExit}}</div>\n        \n        {{#toolbox.todayButton.enabled}}\n        <div class=\"pwt-btn-today\">{{calendarSwitchText}}</div>\n        {{/toolbox.todayButton.enabled}}\n        \n        {{#toolbox.calendarSwitch.enabled}}\n            <div class=\"pwt-btn-calendar\">{{altCalendarTitle}}</div>\n        {{/toolbox.calendarSwitch.enabled}}\n    </div>\n    {{/enabled}}\n    {{^enabled}}\n        {{#onlyTimePicker}}\n        <div class=\"toolbox\">\n            <div class=\"pwt-btn-exit\">{{text.btnExit}}</div>\n        </div>\n        {{/onlyTimePicker}}\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
+var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div data-navigator class=\"datepicker-navigator\">\n            <div class=\"pwt-btn pwt-btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"pwt-btn pwt-btn-switch\">{{navigator.switch.text}}</div>\n            <div class=\"pwt-btn pwt-btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}\n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" >\n                                            <span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\">\n                                            <span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridian.enabled}}\n            <div class=\"meridian time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridian\">\u25B2</div>\n                <input disabled value=\"{{meridian.title}}\" type=\"text\" class=\"meridian-input\">\n                <div class=\"down-btn\" data-time-key=\"meridian\">\u25BC</div>\n            </div>\n        {{/meridian.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox\">\n        <div class=\"pwt-btn-exit\">{{text.btnExit}}</div>\n        \n        {{#toolbox.todayButton.enabled}}\n        <div class=\"pwt-btn-today\">{{calendarSwitchText}}</div>\n        {{/toolbox.todayButton.enabled}}\n        \n        {{#toolbox.calendarSwitch.enabled}}\n            <div class=\"pwt-btn-calendar\">{{altCalendarTitle}}</div>\n        {{/toolbox.calendarSwitch.enabled}}\n    </div>\n    {{/enabled}}\n    {{^enabled}}\n        {{#onlyTimePicker}}\n        <div class=\"toolbox\">\n            <div class=\"pwt-btn-exit\">{{text.btnExit}}</div>\n        </div>\n        {{/onlyTimePicker}}\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
 
 module.exports = Template;
 
@@ -1010,10 +1010,10 @@ var Config = {
     },
 
     /**
-     * @description meridiem selector configuration
+     * @description meridian selector configuration
      * @type object
      */
-    'meridiem': {
+    'meridian': {
 
       /**
        * @description if you set this as false, datepicker timepicker system moved to 24-hour system
@@ -1314,13 +1314,13 @@ var Config = {
    <div class="divider meridian-divider"></div>
    <div class="divider meridian-divider"></div>
    {{/second.enabled}}
-   {{#meridiem.enabled}}
-   <div class="meridiem time-segment" data-time-key="meridian" >
-   <div class="up-btn" data-time-key="meridiem">▲</div>
-   <input value="{{meridiem.title}}" type="text" class="meridiem-input">
-   <div class="down-btn" data-time-key="meridiem">▼</div>
+   {{#meridian.enabled}}
+   <div class="meridian time-segment" data-time-key="meridian" >
+   <div class="up-btn" data-time-key="meridian">▲</div>
+   <input value="{{meridian.title}}" type="text" class="meridian-input">
+   <div class="down-btn" data-time-key="meridian">▼</div>
    </div>
-   {{/meridiem.enabled}}
+   {{/meridian.enabled}}
    </div>
    {{/enabled}}
    {{/time}}
@@ -1341,7 +1341,7 @@ var Config = {
 
   /**
    * @description if true datepicker update self by user inputted date string, accept 'yyyy/mm/dd'
-   * @example '1396/10/2', '1396/1/12'
+   * @example '1396/10/2', ''
    * @type {boolean}
    * @default false
    */
@@ -1776,14 +1776,14 @@ var Navigator = function () {
             var step = void 0,
                 t = void 0,
                 that = this;
-            if (timekey == 'meridiem') {
+            if (timekey == 'meridian') {
                 step = 12;
-                if (this.model.state.view.meridiem == 'PM') {
+                if (this.model.state.view.meridian == 'PM') {
                     t = this.model.PersianDate.date(this.model.state.selected.unixDate).add('hour', step).valueOf();
                 } else {
                     t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
                 }
-                this.model.state.meridiemToggle();
+                this.model.state.meridianToggle();
             } else {
                 step = this.model.options.timePicker[timekey].step;
                 t = this.model.PersianDate.date(this.model.state.selected.unixDate).add(timekey, step).valueOf();
@@ -1812,14 +1812,14 @@ var Navigator = function () {
             var step = void 0,
                 t = void 0,
                 that = this;
-            if (timekey == 'meridiem') {
+            if (timekey == 'meridian') {
                 step = 12;
-                if (this.model.state.view.meridiem == 'AM') {
+                if (this.model.state.view.meridian == 'AM') {
                     t = this.model.PersianDate.date(this.model.state.selected.unixDate).add('hour', step).valueOf();
                 } else {
                     t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract('hour', step).valueOf();
                 }
-                this.model.state.meridiemToggle();
+                this.model.state.meridianToggle();
             } else {
                 step = this.model.options.timePicker[timekey].step;
                 t = this.model.PersianDate.date(this.model.state.selected.unixDate).subtract(timekey, step).valueOf();
@@ -2164,7 +2164,7 @@ var State = function () {
             second: 0,
             unixDate: 0,
             dateObject: null,
-            meridiem: 'AM'
+            meridian: 'AM'
         };
 
         /**
@@ -2442,17 +2442,17 @@ var State = function () {
         }
 
         /**
-         * desc change meridiem state
+         * desc change meridian state
          */
 
     }, {
-        key: 'meridiemToggle',
-        value: function meridiemToggle() {
+        key: 'meridianToggle',
+        value: function meridianToggle() {
             var self = this;
-            if (self.view.meridiem === 'AM') {
-                self.view.meridiem = 'PM';
-            } else if (self.view.meridiem === 'PM') {
-                self.view.meridiem = 'AM';
+            if (self.view.meridian === 'AM') {
+                self.view.meridian = 'PM';
+            } else if (self.view.meridian === 'PM') {
+                self.view.meridian = 'AM';
             }
         }
     }]);
@@ -3069,7 +3069,7 @@ var View = function () {
 
         /**
          * @private
-         * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridiem: {title: (meridiem|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridiem|{enabled}|string|string), enabled: boolean}}}
+         * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridian: {title: (meridian|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridian|{enabled}|string|string), enabled: boolean}}}
          */
 
     }, {
@@ -3085,7 +3085,7 @@ var View = function () {
             }
 
             var hourTitle = void 0;
-            if (this.model.options.timePicker.meridiem.enabled) {
+            if (this.model.options.timePicker.meridian.enabled) {
                 hourTitle = this.model.state.view.dateObject.format('hh');
             } else {
                 hourTitle = this.model.state.view.dateObject.format('HH');
@@ -3105,9 +3105,9 @@ var View = function () {
                     title: this.model.state.view.dateObject.format('ss'),
                     enabled: this.model.options.timePicker.second.enabled
                 },
-                meridiem: {
+                meridian: {
                     title: this.model.state.view.dateObject.format('a'),
-                    enabled: this.model.options.timePicker.meridiem.enabled
+                    enabled: this.model.options.timePicker.meridian.enabled
                 }
             };
         }
@@ -3135,7 +3135,7 @@ var View = function () {
     }, {
         key: 'getCssClass',
         value: function getCssClass() {
-            return [this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '', !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : '', this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '', !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridiem' : ''].join(' ');
+            return [this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '', !this.model.options.timePicker.meridian.enabled ? 'datepicker-state-no-meridian' : '', this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '', !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridian' : ''].join(' ');
         }
 
         /**
@@ -3212,7 +3212,7 @@ var View = function () {
             this.$container.find('[data-time-key="hour"] input').val(timeViewModel.hour.title);
             this.$container.find('[data-time-key="minute"] input').val(timeViewModel.minute.title);
             this.$container.find('[data-time-key="second"] input').val(timeViewModel.second.title);
-            this.$container.find('[data-time-key="meridian"] input').val(timeViewModel.meridiem.title);
+            this.$container.find('[data-time-key="meridian"] input').val(timeViewModel.meridian.title);
         }
 
         /**

@@ -79,7 +79,7 @@ class State {
             second: 0,
             unixDate: 0,
             dateObject: null,
-            meridiem: 'AM'
+            meridian: 'AM'
         };
 
         /**
@@ -352,14 +352,14 @@ class State {
 
 
     /**
-     * desc change meridiem state
+     * desc change meridian state
      */
-    meridiemToggle() {
+    meridianToggle() {
         let self = this;
-        if (self.view.meridiem === 'AM') {
-            self.view.meridiem = 'PM';
-        } else if (self.view.meridiem === 'PM') {
-            self.view.meridiem = 'AM';
+        if (self.view.meridian === 'AM') {
+            self.view.meridian = 'PM';
+        } else if (self.view.meridian === 'PM') {
+            self.view.meridian = 'AM';
         }
 
     }

@@ -196,10 +196,10 @@
   .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view > .divider {
     padding: 5px 0; }
 
-.datepicker-plot-area.datepicker-state-no-meridiem .datepicker-time-view > .time-segment {
+.datepicker-plot-area.datepicker-state-no-meridian .datepicker-time-view > .time-segment {
   width: 31.33%; }
 
-.datepicker-plot-area.datepicker-state-no-meridiem .datepicker-time-view > .meridian-divider {
+.datepicker-plot-area.datepicker-state-no-meridian .datepicker-time-view > .meridian-divider {
   display: none; }
 
 .datepicker-plot-area .datepicker-day-view .table-days {

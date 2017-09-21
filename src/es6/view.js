@@ -388,7 +388,7 @@ class View {
 
     /**
      * @private
-     * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridiem: {title: (meridiem|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridiem|{enabled}|string|string), enabled: boolean}}}
+     * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridian: {title: (meridian|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridian|{enabled}|string|string), enabled: boolean}}}
      */
     _getTimeViewModel() {
 
@@ -401,7 +401,7 @@ class View {
         }
 
         let hourTitle;
-        if (this.model.options.timePicker.meridiem.enabled) {
+        if (this.model.options.timePicker.meridian.enabled) {
             hourTitle = this.model.state.view.dateObject.format('hh');
 
         } else {
@@ -422,9 +422,9 @@ class View {
                 title: this.model.state.view.dateObject.format('ss'),
                 enabled: this.model.options.timePicker.second.enabled
             },
-            meridiem: {
+            meridian: {
                 title: this.model.state.view.dateObject.format('a'),
-                enabled: this.model.options.timePicker.meridiem.enabled
+                enabled: this.model.options.timePicker.meridian.enabled
             }
         };
     }
@@ -450,9 +450,9 @@ class View {
     getCssClass() {
         return [
             this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
-            !this.model.options.timePicker.meridiem.enabled ? 'datepicker-state-no-meridiem' : '',
+            !this.model.options.timePicker.meridian.enabled ? 'datepicker-state-no-meridian' : '',
             this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '',
-            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridiem' : ''
+            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-meridian' : ''
         ].join(' ');
     }
 
@@ -524,7 +524,7 @@ class View {
         this.$container.find('[data-time-key="hour"] input').val(timeViewModel.hour.title);
         this.$container.find('[data-time-key="minute"] input').val(timeViewModel.minute.title);
         this.$container.find('[data-time-key="second"] input').val(timeViewModel.second.title);
-        this.$container.find('[data-time-key="meridian"] input').val(timeViewModel.meridiem.title);
+        this.$container.find('[data-time-key="meridian"] input').val(timeViewModel.meridian.title);
     }
 
 
