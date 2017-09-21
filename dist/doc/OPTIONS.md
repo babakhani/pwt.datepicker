@@ -83,7 +83,7 @@ persian-datepicker configuration document
     * [.position](#Config.position) : <code>mix</code>
     * [.autoClose](#Config.autoClose) : <code>boolean</code>
     * [.template](#Config.template) : <code>string</code>
-    * <del>[.observer](#Config.observer) : <code>boolean</code></del>
+    * [.observer](#Config.observer) : <code>boolean</code>
     * [.inputDelay](#Config.inputDelay) : <code>number</code>
     * [.formatter(unixDate)](#Config.formatter)
     * [.altFieldFormatter(unixDate)](#Config.altFieldFormatter)
@@ -1061,17 +1061,19 @@ by default datepicker have a template string, and you can overwrite it simply by
 ```
 <a name="Config.observer"></a>
 
-## <del>Config.observer : <code>boolean</code></del>
-***Deprecated***
-
-observer is deprecated, use setDate() method
+## Config.observer : <code>boolean</code>
+if true datepicker update self by user inputted date string, accept 'yyyy/mm/dd'
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
+**Example**  
+```js
+'1396/10/2', '1396/1/12'
+```
 <a name="Config.inputDelay"></a>
 
 ## Config.inputDelay : <code>number</code>
-inputDelay
+waite time for last user key-down event, accept millisecond
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>800</code>  

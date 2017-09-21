@@ -54,6 +54,7 @@ class Input {
             let pd = this.model.PersianDate.date(parse.parse(inputString)).valueOf();
             that.model.state.setSelectedDateTime('unix', pd);
             that.model.state.setViewDateTime('unix', pd);
+            that.model.view.render();
         }
     }
 

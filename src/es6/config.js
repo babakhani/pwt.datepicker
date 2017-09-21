@@ -913,10 +913,10 @@ const Config = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @description observer is deprecated, use setDate() method
+     * @description if true datepicker update self by user inputted date string, accept 'yyyy/mm/dd'
+     * @example '1396/10/2', '1396/1/12'
      * @type {boolean}
      * @default false
-     * @deprecated from 0.5.0
      */
     'observer': false,
 
@@ -926,7 +926,7 @@ const Config = {
 
 
     /**
-     * @description inputDelay
+     * @description waite time for last user key-down event, accept millisecond
      * @type {number}
      * @default 800
      */

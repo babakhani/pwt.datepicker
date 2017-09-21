@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v0.5.12b
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1333,10 +1340,10 @@ var Config = {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
-   * @description observer is deprecated, use setDate() method
+   * @description if true datepicker update self by user inputted date string, accept 'yyyy/mm/dd'
+   * @example '1396/10/2', '1396/1/12'
    * @type {boolean}
    * @default false
-   * @deprecated from 0.5.0
    */
   'observer': false,
 
@@ -1346,7 +1353,7 @@ var Config = {
 
 
   /**
-   * @description inputDelay
+   * @description waite time for last user key-down event, accept millisecond
    * @type {number}
    * @default 800
    */
@@ -1467,6 +1474,7 @@ var Input = function () {
                 var pd = this.model.PersianDate.date(parse.parse(inputString)).valueOf();
                 that.model.state.setSelectedDateTime('unix', pd);
                 that.model.state.setViewDateTime('unix', pd);
+                that.model.view.render();
             }
         }
     }, {
