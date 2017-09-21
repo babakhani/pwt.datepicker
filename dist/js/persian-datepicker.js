@@ -680,7 +680,7 @@ var Config = {
   },
 
   /**
-   * @description set min date on datepicker
+   * @description set min date on datepicker, prevent user select date before given unix time
    * @property minDate
    * @type Date
    * @default null
@@ -688,7 +688,7 @@ var Config = {
   'minDate': null,
 
   /**
-   * @description set max date on datepicker
+   * @description set max date on datepicker, prevent user select date after given unix time
    * @property maxDate
    * @type Date
    * @default null
@@ -702,7 +702,7 @@ var Config = {
    */
   'navigator': {
     /**
-     * @description Enable or Disable dayPicker
+     * @description make navigator enable or disable
      * @type boolean
      * @default true
      */
@@ -728,13 +728,13 @@ var Config = {
      */
     'text': {
       /**
-       * @description text of next btn
+       * @description text of next button
        * @default '<'
        */
       'btnNextText': '<',
 
       /**
-       * @description text of prev btn
+       * @description text of prev button
        * @default: '>'
        */
       'btnPrevText': '>'
@@ -818,7 +818,7 @@ var Config = {
     calendarSwitch: {
 
       /**
-       * @description make calendar switch enable or disbale
+       * @description make calendar switch enable or disable
        * @type boolean
        * @default false
        */
@@ -877,13 +877,13 @@ var Config = {
   },
 
   /**
-   * @description timepicker config object
+   * @description timePicker configuration
    * @type {object}
    */
   'timePicker': {
 
     /**
-     * @description make timepicker enable or disable
+     * @description make timePicker enable or disable
      * @type boolean
      */
     'enabled': false,
@@ -1056,7 +1056,7 @@ var Config = {
   'yearPicker': {
 
     /**
-     * @description make monthPicker enable or disable
+     * @description make yearPicker enable or disable
      * @type boolean
      * @default true
      */
@@ -1143,7 +1143,7 @@ var Config = {
   },
 
   /**
-   * @description If true picker close When Select day
+   * @description If true picker close When select a date
    * @type {boolean}
    * @default false
    */
