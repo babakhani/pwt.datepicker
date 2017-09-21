@@ -38,10 +38,16 @@ persian-datepicker configuration document
     * [.toolbox](#Config.toolbox) : <code>object</code>
         * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
         * [.text](#Config.toolbox.text) : <code>object</code>
-            * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
+            * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
             * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+        * [.todayButton](#Config.toolbox.todayButton)
+            * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
+            * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
+                * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
+                * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
         * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
             * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
+            * [.format](#Config.toolbox.calendarSwitch.format) : <code>string</code>
         * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
     * [.onlyTimePicker](#Config.onlyTimePicker) : <code>boolean</code>
     * [.onlySelectOnDate](#Config.onlySelectOnDate) : <code>boolean</code>
@@ -264,7 +270,7 @@ the date format, combination of d, dd, m, mm, yy, yyy.
 <a name="Config.minDate"></a>
 
 ## Config.minDate : <code>Date</code>
-set min date on datepicker
+set min date on datepicker, prevent user select date before given unix time
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>null</code>  
@@ -285,7 +291,7 @@ set min date on datepicker
 <a name="Config.maxDate"></a>
 
 ## Config.maxDate : <code>Date</code>
-set max date on datepicker
+set max date on datepicker, prevent user select date after given unix time
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>null</code>  
@@ -325,7 +331,7 @@ navigator config object
 <a name="Config.navigator.enabled"></a>
 
 ### navigator.enabled : <code>boolean</code>
-Enable or Disable dayPicker
+make navigator enable or disable
 
 **Kind**: static property of [<code>navigator</code>](#Config.navigator)  
 **Default**: <code>true</code>  
@@ -356,14 +362,14 @@ navigator text config object
 <a name="Config.navigator.text.btnNextText"></a>
 
 #### text.btnNextText
-text of next btn
+text of next button
 
 **Kind**: static property of [<code>text</code>](#Config.navigator.text)  
 **Default**: <code>&#x27;&lt;&#x27;</code>  
 <a name="Config.navigator.text.btnPrevText"></a>
 
 #### text.btnPrevText
-text of prev btn
+text of prev button
 
 **Kind**: static property of [<code>text</code>](#Config.navigator.text)  
 **Default:**: '>'  
@@ -414,10 +420,16 @@ toolbox config object
 * [.toolbox](#Config.toolbox) : <code>object</code>
     * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
     * [.text](#Config.toolbox.text) : <code>object</code>
-        * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
+        * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
         * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+    * [.todayButton](#Config.toolbox.todayButton)
+        * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
+        * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
+            * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
+            * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
     * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
         * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
+        * [.format](#Config.toolbox.calendarSwitch.format) : <code>string</code>
     * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
 
 <a name="Config.toolbox.enabled"></a>
@@ -435,13 +447,15 @@ toolbox button text coniguration
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 
 * [.text](#Config.toolbox.text) : <code>object</code>
-    * [.btnToday](#Config.toolbox.text.btnToday) : <code>string</code>
+    * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
     * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
 
 <a name="Config.toolbox.text.btnToday"></a>
 
-#### text.btnToday : <code>string</code>
-text of today button
+#### <del>text.btnToday : <code>string</code></del>
+***Deprecated***
+
+text of today button, deprecated from 0.6.0
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;امروز&#x27;&quot;</code>  
@@ -453,6 +467,55 @@ text of submit button (only shown on mobile)
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;تایید&#x27;&quot;</code>  
 **Since**: 0.6.0  
+<a name="Config.toolbox.todayButton"></a>
+
+### toolbox.todayButton
+toolbox today button configuration
+
+**Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
+**Since**: 0.6.0  
+
+* [.todayButton](#Config.toolbox.todayButton)
+    * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
+    * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
+        * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
+        * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
+
+<a name="Config.toolbox.todayButton.enabled"></a>
+
+#### todayButton.enabled : <code>boolean</code>
+make toolbox today button enable or disable
+
+**Kind**: static property of [<code>todayButton</code>](#Config.toolbox.todayButton)  
+**Since**: 0.6.0  
+<a name="Config.toolbox.todayButton.text"></a>
+
+#### todayButton.text : <code>object</code>
+today button text
+
+**Kind**: static property of [<code>todayButton</code>](#Config.toolbox.todayButton)  
+**Since**: 0.6.0  
+
+* [.text](#Config.toolbox.todayButton.text) : <code>object</code>
+    * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
+    * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
+
+<a name="Config.toolbox.todayButton.text.fa"></a>
+
+##### text.fa : <code>object</code>
+show when current calendar is Persian
+
+**Kind**: static property of [<code>text</code>](#Config.toolbox.todayButton.text)  
+**Default**: <code>امروز</code>  
+**Since**: 0.6.0  
+<a name="Config.toolbox.todayButton.text.en"></a>
+
+##### text.en : <code>object</code>
+show when current calendar is Gregorian
+
+**Kind**: static property of [<code>text</code>](#Config.toolbox.todayButton.text)  
+**Default**: <code>today</code>  
+**Since**: 0.6.0  
 <a name="Config.toolbox.calendarSwitch"></a>
 
 ### toolbox.calendarSwitch : <code>object</code>
@@ -460,13 +523,28 @@ toolbox calendar switch configuration
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 **Since**: 0.6.0  
+
+* [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
+    * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
+    * [.format](#Config.toolbox.calendarSwitch.format) : <code>string</code>
+
 <a name="Config.toolbox.calendarSwitch.enabled"></a>
 
 #### calendarSwitch.enabled : <code>boolean</code>
-make calendar switch enable or disbale
+make calendar switch enable or disable
 
 **Kind**: static property of [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
-**Default**: <code>false</code>  
+**Default**: <code>true</code>  
+**Since**: 0.6.0  
+<a name="Config.toolbox.calendarSwitch.format"></a>
+
+#### calendarSwitch.format : <code>string</code>
+calendar switch text format string
+
+**Kind**: static property of [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
+**Default**: <code>&quot;MMMM&quot;</code>  
+**Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format  
+**Since**: 0.6.0  
 <a name="Config.toolbox.event_onToday"></a>
 
 ### "onToday" (toolbox)
@@ -520,7 +598,7 @@ if true date select just by click on day in month grid
 <a name="Config.timePicker"></a>
 
 ## Config.timePicker : <code>object</code>
-timepicker config object
+timePicker configuration
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 
@@ -542,7 +620,7 @@ timepicker config object
 <a name="Config.timePicker.enabled"></a>
 
 ### timePicker.enabled : <code>boolean</code>
-make timepicker enable or disable
+make timePicker enable or disable
 
 **Kind**: static property of [<code>timePicker</code>](#Config.timePicker)  
 <a name="Config.timePicker.step"></a>
@@ -777,7 +855,7 @@ yearPicker configuration
 <a name="Config.yearPicker.enabled"></a>
 
 ### yearPicker.enabled : <code>boolean</code>
-make monthPicker enable or disable
+make yearPicker enable or disable
 
 **Kind**: static property of [<code>yearPicker</code>](#Config.yearPicker)  
 **Default**: <code>true</code>  
@@ -839,7 +917,7 @@ position of datepicker relative to input element
 <a name="Config.autoClose"></a>
 
 ## Config.autoClose : <code>boolean</code>
-If true picker close When Select day
+If true picker close When select a date
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
