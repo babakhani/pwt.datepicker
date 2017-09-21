@@ -134,7 +134,11 @@ const Template = `
     {{#enabled}}
     <div class="toolbox">
         <div class="pwt-btn-exit">{{text.btnExit}}</div>
-        <div class="pwt-btn-today">{{text.btnToday}}</div>
+        
+        {{#toolbox.todayButton.enabled}}
+        <div class="pwt-btn-today">{{calendarSwitchText}}</div>
+        {{/toolbox.todayButton.enabled}}
+        
         {{#toolbox.calendarSwitch.enabled}}
             <div class="pwt-btn-calendar">{{altCalendarTitle}}</div>
         {{/toolbox.calendarSwitch.enabled}}

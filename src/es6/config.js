@@ -347,9 +347,10 @@ const Config = {
         'text': {
 
             /**
-             * @description text of today button
+             * @description text of today button, deprecated from 0.6.0
              * @type string
              * @default 'امروز'
+             * @deprecated from 0.6.0
              */
             btnToday: 'امروز',
 
@@ -360,6 +361,44 @@ const Config = {
              * @since 0.6.0
              */
             btnExit: 'تایید'
+        },
+
+
+        /**
+         * @description toolbox today button configuration
+         * @since 0.6.0
+         */
+        todayButton: {
+
+            /**
+             * @description make toolbox today button enable or disable
+             * @type boolean
+             * @since 0.6.0
+             */
+            enabled: true,
+
+
+            /**
+             * @description today button text
+             * @since 0.6.0
+             * @type object
+             */
+            text: {
+
+                /**
+                 * @description show when current calendar is Persian
+                 * @since 0.6.0
+                 * @type object
+                 */
+                fa: 'امروز',
+
+                /**
+                 * @description show when current calendar is Gregorian
+                 * @since 0.6.0
+                 * @type object
+                 */
+                en: 'today'
+            }
         },
 
 
@@ -375,7 +414,7 @@ const Config = {
              * @type boolean
              * @default false
              */
-            enabled: false
+            enabled: false,
         },
 
         /**
