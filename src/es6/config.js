@@ -131,7 +131,7 @@ const Config = {
 
 
     /**
-     * @description Acceptable value : day,month,year
+     * @description default view mode, Acceptable value : day,month,year
      * @type {string}
      * @default 'day'
      */
@@ -453,7 +453,7 @@ const Config = {
 
 
     /**
-     * @description if true date select just by click on day in month grid
+     * @description  if true date select just by click on day in month grid, and when user select month or year selected date doesnt change
      * @property justSelectOnDate
      * @type boolean
      * @default: true
@@ -764,7 +764,7 @@ const Config = {
 
 
     /**
-     * @description If true picker close When select a date
+     * @description If true datepicker close When select a date
      * @type {boolean}
      * @default false
      */

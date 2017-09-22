@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.12b
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -601,7 +594,7 @@ var Config = {
   'persianDigit': true,
 
   /**
-   * @description Acceptable value : day,month,year
+   * @description default view mode, Acceptable value : day,month,year
    * @type {string}
    * @default 'day'
    */
@@ -902,7 +895,7 @@ var Config = {
   'onlyTimePicker': false,
 
   /**
-   * @description if true date select just by click on day in month grid
+   * @description  if true date select just by click on day in month grid, and when user select month or year selected date doesnt change
    * @property justSelectOnDate
    * @type boolean
    * @default: true
@@ -1200,7 +1193,7 @@ var Config = {
   },
 
   /**
-   * @description If true picker close When select a date
+   * @description If true datepicker close When select a date
    * @type {boolean}
    * @default false
    */
