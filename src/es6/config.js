@@ -46,7 +46,7 @@ const Config = {
         'persian': {
 
             /**
-             * @description set locale of calendar available options: 'fa', 'en'
+             * @description set locale of Persian calendar available options: 'fa', 'en'
              * @default 'fa'
              * @type string
              * @since 0.6.0
@@ -62,7 +62,7 @@ const Config = {
             'showHint': false,
 
             /**
-             * @description config leap year calculation mode, available options: 'algorithmic', 'astronomical'
+             * @description Persian calendar leap year calculation mode, available options: 'algorithmic', 'astronomical'
              * @type string
              * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear
              * @default 'algorithmic'
@@ -80,7 +80,7 @@ const Config = {
         'gregorian': {
 
             /**
-             * @description set locale of calendar available options: 'fa', 'en'
+             * @description set locale of Gregorian calendar available options: 'fa', 'en'
              * @default 'en'
              * @type string
              * @since 0.6.0
@@ -224,7 +224,7 @@ const Config = {
 
 
     /**
-     * @description set min date on datepicker, prevent user select date before given unix time
+     * @description Set min date on datepicker, prevent user select date before given unix time
      * @property minDate
      * @type Date
      * @default null
@@ -233,7 +233,7 @@ const Config = {
 
 
     /**
-     * @description set max date on datepicker, prevent user select date after given unix time
+     * @description Set max date on datepicker, prevent user select date after given unix time
      * @property maxDate
      * @type Date
      * @default null
@@ -290,7 +290,7 @@ const Config = {
 
 
         /**
-         * @description Trigger When Next button clicked
+         * @description Called when navigator goes to next state
          * @event
          * @example function (navigator) {
          *      //log('navigator next ');
@@ -302,7 +302,7 @@ const Config = {
 
 
         /**
-         * @description Trigger When Prev button clicked
+         * @description Called when navigator goes to previews state
          * @event
          * @example function (navigator) {
          *      //log('navigator prev ');
@@ -314,7 +314,7 @@ const Config = {
 
 
         /**
-         * @description Trigger When Switch view button clicked
+         * @description Called when navigator switch
          * @event
          * @example function (state) {
                 // console.log('navigator switch ');
@@ -462,7 +462,7 @@ const Config = {
 
 
     /**
-     * @description check date availability
+     * @description Validate date access before render
      * @type function
      */
     'checkDate': function () {
@@ -471,7 +471,7 @@ const Config = {
 
 
     /**
-     * @description check month availability
+     * @description Validate month access before render
      * @type {function}
      */
     'checkMonth': function () {
@@ -480,7 +480,7 @@ const Config = {
 
 
     /**
-     * @description check year availability
+     * @description Validate year access before render
      * @type {function}
      */
     'checkYear': function () {
@@ -519,7 +519,7 @@ const Config = {
             'enabled': true,
 
             /**
-             * @description The amount that increases or decreases hour, by pressing the button. overwrite by timepicker.hour
+             * @description The amount that increases or decreases hour, by pressing the button. overwrite by timepicker.step
              * @type boolean
              */
             'step': null
@@ -538,7 +538,7 @@ const Config = {
             'enabled': true,
 
             /**
-             * @description The amount that increases or decreases minute, by pressing the button. overwrite by timepicker.hour
+             * @description The amount that increases or decreases minute, by pressing the button. overwrite by timepicker.step
              * @description overwrite by parent step
              * @type boolean
              */
@@ -558,7 +558,7 @@ const Config = {
             'enabled': true,
 
             /**
-             * @description The amount that increases or decreases second, by pressing the button. overwrite by timepicker.hour
+             * @description The amount that increases or decreases second, by pressing the button. overwrite by timepicker.step
              * @type boolean
              */
             'step': null
@@ -601,7 +601,7 @@ const Config = {
         'titleFormat': 'YYYY MMMM',
 
         /**
-         * @description  daypicker title formatter function
+         * @description daypicker title formatter function
          * @param year
          * @param month
          * @return {*}
@@ -718,7 +718,7 @@ const Config = {
 
     /**
      * @description position of datepicker relative to input element
-     * @type mix
+     * @type string | array
      * @default 'auto'
      * @example
      *  'position': 'auto'
