@@ -80,7 +80,7 @@ persian-datepicker configuration document
         * [.titleFormat](#Config.yearPicker.titleFormat) : <code>string</code>
         * [.titleFormatter(year)](#Config.yearPicker.titleFormatter) ⇒ <code>string</code>
         * ["onSelect" (year)](#Config.yearPicker.event_onSelect)
-    * [.position](#Config.position) : <code>mix</code>
+    * [.position](#Config.position) : <code>string</code> \| <code>array</code>
     * [.autoClose](#Config.autoClose) : <code>boolean</code>
     * [.template](#Config.template) : <code>string</code>
     * [.observer](#Config.observer) : <code>boolean</code>
@@ -152,7 +152,7 @@ Persian calendar configuration
 <a name="Config.calendar.persian.locale"></a>
 
 #### persian.locale : <code>string</code>
-set locale of calendar available options: 'fa', 'en'
+set locale of Persian calendar available options: 'fa', 'en'
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
 **Default**: <code>&quot;&#x27;fa&#x27;&quot;</code>  
@@ -168,7 +168,7 @@ if set true, small date hint of this calendar will be shown on another calendar
 <a name="Config.calendar.persian.leapYearMode"></a>
 
 #### persian.leapYearMode : <code>string</code>
-config leap year calculation mode, available options: 'algorithmic', 'astronomical'
+Persian calendar leap year calculation mode, available options: 'algorithmic', 'astronomical'
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
 **Default**: <code>&quot;&#x27;algorithmic&#x27;&quot;</code>  
@@ -189,7 +189,7 @@ Gregorian calendar configuration
 <a name="Config.calendar.gregorian.locale"></a>
 
 #### gregorian.locale : <code>string</code>
-set locale of calendar available options: 'fa', 'en'
+set locale of Gregorian calendar available options: 'fa', 'en'
 
 **Kind**: static property of [<code>gregorian</code>](#Config.calendar.gregorian)  
 **Default**: <code>&quot;&#x27;en&#x27;&quot;</code>  
@@ -234,7 +234,7 @@ If set true datepicker init with input value date
 <a name="Config.viewMode"></a>
 
 ## Config.viewMode : <code>string</code>
-Acceptable value : day,month,year
+default view mode, Acceptable value : day,month,year
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&quot;&#x27;day&#x27;&quot;</code>  
@@ -270,7 +270,7 @@ the date format, combination of d, dd, m, mm, yy, yyy.
 <a name="Config.minDate"></a>
 
 ## Config.minDate : <code>Date</code>
-set min date on datepicker, prevent user select date before given unix time
+Set min date on datepicker, prevent user select date before given unix time
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>null</code>  
@@ -291,7 +291,7 @@ set min date on datepicker, prevent user select date before given unix time
 <a name="Config.maxDate"></a>
 
 ## Config.maxDate : <code>Date</code>
-set max date on datepicker, prevent user select date after given unix time
+Set max date on datepicker, prevent user select date after given unix time
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>null</code>  
@@ -376,7 +376,7 @@ text of prev button
 <a name="Config.navigator.event_onNext"></a>
 
 ### "onNext"
-Trigger When Next button clicked
+Called when navigator goes to next state
 
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 **Example**  
@@ -388,7 +388,7 @@ function (navigator) {
 <a name="Config.navigator.event_onPrev"></a>
 
 ### "onPrev"
-Trigger When Prev button clicked
+Called when navigator goes to previews state
 
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 **Example**  
@@ -400,7 +400,7 @@ function (navigator) {
 <a name="Config.navigator.event_onSwitch"></a>
 
 ### "onSwitch"
-Trigger When Switch view button clicked
+Called when navigator switch
 
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 **Example**  
@@ -577,7 +577,7 @@ if true all pickers hide and just show timepicker
 <a name="Config.onlySelectOnDate"></a>
 
 ## Config.onlySelectOnDate : <code>boolean</code>
-if true date select just by click on day in month grid
+if true date select just by click on day in month grid, and when user select month or year selected date doesnt change
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default:**: true  
@@ -649,7 +649,7 @@ make hour selector enable or disable
 <a name="Config.timePicker.hour.step"></a>
 
 #### hour.step : <code>boolean</code>
-The amount that increases or decreases hour, by pressing the button. overwrite by timepicker.hour
+The amount that increases or decreases hour, by pressing the button. overwrite by timepicker.step
 
 **Kind**: static property of [<code>hour</code>](#Config.timePicker.hour)  
 <a name="Config.timePicker.minute"></a>
@@ -695,7 +695,7 @@ make second selector enable or disable
 <a name="Config.timePicker.second.step"></a>
 
 #### second.step : <code>boolean</code>
-The amount that increases or decreases second, by pressing the button. overwrite by timepicker.hour
+The amount that increases or decreases second, by pressing the button. overwrite by timepicker.step
 
 **Kind**: static property of [<code>second</code>](#Config.timePicker.second)  
 <a name="Config.timePicker.meridian"></a>
@@ -904,11 +904,11 @@ fired when user select year
 
 <a name="Config.position"></a>
 
-## Config.position : <code>mix</code>
+## Config.position : <code>string</code> \| <code>array</code>
 position of datepicker relative to input element
 
 **Kind**: static property of [<code>Config</code>](#Config)  
-**Default**: <code>&#x27;auto&#x27;</code>  
+**Default**: <code>&quot;&#x27;auto&#x27;&quot;</code>  
 **Example**  
 ```js
 'position': 'auto'
@@ -917,7 +917,7 @@ position of datepicker relative to input element
 <a name="Config.autoClose"></a>
 
 ## Config.autoClose : <code>boolean</code>
-If true picker close When select a date
+If true datepicker close When select a date
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>false</code>  
@@ -1145,19 +1145,19 @@ function (unixDate) {
 <a name="Config.checkDate"></a>
 
 ## Config.checkDate() : <code>function</code>
-check date availability
+Validate date access before render
 
 **Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.checkMonth"></a>
 
 ## Config.checkMonth() : <code>function</code>
-check month availability
+Validate month access before render
 
 **Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.checkYear"></a>
 
 ## Config.checkYear() : <code>function</code>
-check year availability
+Validate year access before render
 
 **Kind**: static method of [<code>Config</code>](#Config)  
 <a name="Config.event_onSelect"></a>
