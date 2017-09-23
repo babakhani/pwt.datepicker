@@ -6,7 +6,7 @@
     margin-top: $grid-gutter;
 
     .pwt-btn-submit,
-    .pwt-btn-exit,
+    .pwt-btn-submit,
     .pwt-btn-calendar,
     .pwt-btn-today {
       @extend %interactive-item;
@@ -28,8 +28,8 @@
       }
     }
 
-    .pwt-btn-exit {
-      display: none;
+    .pwt-btn-submit {
+      //display: none;
     }
 
   }

@@ -14,10 +14,6 @@
       height: 0;
     }
 
-    .pwt-btn-exit {
-      display: block;
-    }
-
     //border: 10px solid red;
     .datepicker-plot-area {
       position: absolute;
@@ -57,7 +53,7 @@
         border: 0;
         padding-top: 60%;
 
-        .pwt-btn-exit {
+        .pwt-btn-submit {
           margin-right: $grid-gutter;
         }
 

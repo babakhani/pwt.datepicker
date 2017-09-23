@@ -354,13 +354,48 @@ const Config = {
              */
             btnToday: 'امروز',
 
+        },
+
+
+        /**
+         * @description submit button configuration (only shown on mobile)
+         * @since 0.6.0
+         */
+        submitButton: {
+
             /**
-             * @description text of submit button (only shown on mobile)
-             * @type string
-             * @default 'تایید'
+             * @description make submit button enable or disable
+             * @type boolean
+             * @default false
              * @since 0.6.0
              */
-            btnExit: 'تایید'
+            enabled: false,
+
+
+            /**
+             * @description submit button text
+             * @since 0.6.0
+             * @type object
+             */
+            text: {
+
+                /**
+                 * @description show when current calendar is Persian
+                 * @since 0.6.0
+                 * @type object
+                 * @default تایید
+                 */
+                fa: 'تایید',
+
+
+                /**
+                 * @description show when current calendar is Gregorian
+                 * @since 0.6.0
+                 * @type object
+                 * @default submit
+                 */
+                en: 'submit'
+            }
         },
 
 

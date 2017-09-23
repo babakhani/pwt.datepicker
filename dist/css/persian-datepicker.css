@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.12b
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 .datepicker-plot-area {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -48,7 +41,6 @@
 .datepicker-plot-area .datepicker-time-view .up-btn, .datepicker-plot-area .datepicker-time-view input, .datepicker-plot-area .datepicker-navigator .pwt-btn-next,
 .datepicker-plot-area .datepicker-navigator .pwt-btn-switch,
 .datepicker-plot-area .datepicker-navigator .pwt-btn-prev, .datepicker-plot-area .toolbox .pwt-btn-submit,
-.datepicker-plot-area .toolbox .pwt-btn-exit,
 .datepicker-plot-area .toolbox .pwt-btn-calendar,
 .datepicker-plot-area .toolbox .pwt-btn-today {
   cursor: pointer; }
@@ -318,7 +310,7 @@
   width: 100%;
   margin-top: 5px; }
   .datepicker-plot-area .toolbox .pwt-btn-submit,
-  .datepicker-plot-area .toolbox .pwt-btn-exit,
+  .datepicker-plot-area .toolbox .pwt-btn-submit,
   .datepicker-plot-area .toolbox .pwt-btn-calendar,
   .datepicker-plot-area .toolbox .pwt-btn-today {
     background-color: #fcfcfc;
@@ -334,12 +326,10 @@
     padding: 0 5px;
     min-width: 50px; }
     .datepicker-plot-area .toolbox .pwt-btn-submit:hover,
-    .datepicker-plot-area .toolbox .pwt-btn-exit:hover,
+    .datepicker-plot-area .toolbox .pwt-btn-submit:hover,
     .datepicker-plot-area .toolbox .pwt-btn-calendar:hover,
     .datepicker-plot-area .toolbox .pwt-btn-today:hover {
       background-color: #eee; }
-  .datepicker-plot-area .toolbox .pwt-btn-exit {
-    display: none; }
 
 .datepicker-plot-area .datepicker-navigator {
   display: block;
@@ -386,8 +376,6 @@
     .datepicker-container.pwt-mobile-view.pwt-hide {
       top: 100vh;
       height: 0; }
-    .datepicker-container.pwt-mobile-view .pwt-btn-exit {
-      display: block; }
     .datepicker-container.pwt-mobile-view .datepicker-plot-area {
       position: absolute;
       width: 100%;
@@ -414,7 +402,7 @@
         background: rgba(0, 0, 0, 0.7);
         border: 0;
         padding-top: 60%; }
-        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .pwt-btn-exit {
+        .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .pwt-btn-submit {
           margin-right: 5px; }
         .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .datepicker-time-view input {
           height: 40px;

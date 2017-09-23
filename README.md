@@ -109,10 +109,15 @@ bower install persian-datepicker
 | toolbox.text                   | object           |                                                 | |
 | toolbox.text.btnToday (DEPRECATED Sience 0.6.0)   | string           | 'امروز'                      | Today button text|
 | toolbox.todayButton            | object           |                                                 | Toolbox today button configuration|
-| toolbox.todayButton.enabled    | boolean          | true                                            | Make toolbox today button enable or disable|
+| toolbox.todayButton.enabled    | boolean          | false                                            | Make toolbox today button enable or disable|
 | toolbox.todayButton.text       | object           |                                                 | Today button text|
 | toolbox.todayButton.text.fa    | string           | 'امروز'                                         | Show when current calendar is Persian|
 | toolbox.todayButton.text.en    | string           | 'Today'                                         | Show when current calendar is Gregorian|
+| toolbox.submitButton            | object           |                                                 | Toolbox today button configuration|
+| toolbox.submitButton.enabled    | boolean          | true                                            | Make toolbox submit button enable or disable|
+| toolbox.submitButton.text       | object           |                                                 | Submit button text|
+| toolbox.submitButton.text.fa    | string           | 'تایید'                                         | Show when current calendar is Persian|
+| toolbox.submitButton.text.en    | string           | 'submit'                                         | Show when current calendar is Gregorian|
 | toolbox.calendarSwitch         | object           |                                                 | |
 | toolbox.calendarSwitch.enabled | boolean          | true                                            | Make calendar switch enable or disable |
 | toolbox.calendarSwitch.format  | string           | 'MMMM'                                          | Calendar switch text format string |

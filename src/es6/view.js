@@ -481,19 +481,22 @@ class View {
             toolbox: this.model.options.toolbox,
             cssClass: this.getCssClass(),
             onlyTimePicker: this.model.options.onlyTimePicker,
-            altCalendarTitle: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),
             altCalendarShowHint: this.model.options.calendar[anotherCalendar[0]].showHint,
-            calendarSwitchText: this._getCalendarSwitchText()
+            calendarSwitchText: this.model.state.view.dateObject.toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format(this.model.options.toolbox.calendarSwitch.format),
+            todayButtonText: this._getButtonText().todayButtontext,
+            submitButtonText: this._getButtonText().submitButtonText
         };
     }
 
-    _getCalendarSwitchText() {
-        let output;
+    _getButtonText() {
+        let output = {};
         if (this.model.options.calendar_ == 'persian') {
-            output = this.model.options.toolbox.todayButton.text.fa;
+            output.todayButtontext = this.model.options.toolbox.todayButton.text.fa;
+            output.submitButtonText = this.model.options.toolbox.submitButton.text.fa;
         }
         else {
-            output = this.model.options.toolbox.todayButton.text.en;
+            output.todayButtontext = this.model.options.toolbox.todayButton.text.en;
+            output.submitButtonText = this.model.options.toolbox.submitButton.text.en;
         }
         return output;
     }
