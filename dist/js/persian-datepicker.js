@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v0.5.12b
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -2569,7 +2576,7 @@ var Toolbox = function () {
                 return that.model;
             });
 
-            $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-exit', function () {
+            $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {
                 that.model.view.hide();
                 that.model.options.onHide(this);
             });

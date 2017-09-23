@@ -6,7 +6,7 @@ persian-datepicker configuration document
 **Kind**: global constant  
 
 * [Config](#Config)
-    * [.calendarType__](#Config.calendarType__) : <code>string</code>
+    * [.calendarType](#Config.calendarType) : <code>string</code>
     * [.calendar](#Config.calendar) : <code>object</code>
         * [.persian](#Config.calendar.persian) : <code>object</code>
             * [.locale](#Config.calendar.persian.locale) : <code>string</code>
@@ -101,9 +101,9 @@ persian-datepicker configuration document
     * ["onToggle"](#Config.event_onToggle)
     * ["onDestroy"](#Config.event_onDestroy)
 
-<a name="Config.calendarType__"></a>
+<a name="Config.calendarType"></a>
 
-## Config.calendarType__ : <code>string</code>
+## Config.calendarType : <code>string</code>
 set default calendar mode of datepicker, available options: 'persian', 'gregorian'
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -225,7 +225,7 @@ if true datepicker render inline
 <a name="Config.initialValue"></a>
 
 ## Config.initialValue : <code>boolean</code>
-If set true datepicker init with input value date
+If set true datepicker init with input value date, use data-date property when you want set inline datepicker initial value
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
