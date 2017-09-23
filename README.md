@@ -37,6 +37,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 - [persian date](https://github.com/babakhani/PersianDate)
 - [jquery](http://jquery.com/)
 
+> persian-datepicker 0.6.x need persian-date 0.3.x
 
 ## Install
 
