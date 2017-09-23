@@ -48,7 +48,7 @@ class Toolbox {
             return that.model;
         });
 
-        $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-exit', function () {
+        $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {
             that.model.view.hide();
             that.model.options.onHide(this);
         });
