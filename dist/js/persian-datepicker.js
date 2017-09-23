@@ -176,8 +176,8 @@ var Options = function () {
             if (!options.template) {
                 options.template = Template;
             }
-            persianDate.toCalendar(options.calendarType);
-            persianDate.toLocale(options.calendar[options.calendarType].locale);
+            persianDate.toCalendar(options.calendarType__);
+            persianDate.toLocale(options.calendar[options.calendarType__].locale);
             if (options.onlyTimePicker) {
                 options.dayPicker.enabled = false;
                 options.monthPicker.enabled = false;
@@ -481,7 +481,7 @@ var Config = {
    * @type string
    * @since 0.6.0
    */
-  "calendarType": 'persian',
+  "calendarType__": 'persian',
 
   /**
    * @description calendar type and localization configuration
@@ -2066,8 +2066,8 @@ var PersianDateWrapper = function () {
         _classCallCheck(this, PersianDateWrapper);
 
         this.model = model;
-        this.model.options.calendar_ = this.model.options.calendarType;
-        this.model.options.locale_ = this.model.options.calendar[this.model.options.calendarType].locale;
+        this.model.options.calendar_ = this.model.options.calendarType__;
+        this.model.options.locale_ = this.model.options.calendar[this.model.options.calendarType__].locale;
         return this;
     }
 
@@ -2083,8 +2083,8 @@ var PersianDateWrapper = function () {
             var output = void 0,
                 cp = void 0;
             cp = persianDate.toCalendar(that.model.options.calendar_);
-            if (this.model.options.calendar[this.model.options.calendarType].leapYearMode) {
-                cp.toLeapYearMode(this.model.options.calendar[this.model.options.calendarType].leapYearMode);
+            if (this.model.options.calendar[this.model.options.calendarType__].leapYearMode) {
+                cp.toLeapYearMode(this.model.options.calendar[this.model.options.calendarType__].leapYearMode);
             }
             output = new cp(input);
             return output.toLocale(that.model.options.locale_);
