@@ -10,7 +10,7 @@ class Input {
      * @param {Element}
      * @return {Input}
      */
-    constructor (model, inputElement) {
+    constructor(model, inputElement) {
 
         /**
          * @type {Object}
@@ -43,13 +43,13 @@ class Input {
     }
 
 
-    addInitialClass () {
+    addInitialClass() {
         $(this.elem).addClass('pwt-datepicker-input-element');
     }
 
-    parseInput (inputString) {
+    parseInput(inputString) {
         let parse = new PersianDateParser(),
-          that = this;
+            that = this;
         if (parse.parse(inputString) !== undefined) {
             let pd = this.model.PersianDate.date(parse.parse(inputString)).valueOf();
             that.model.state.setSelectedDateTime('unix', pd);
@@ -58,7 +58,7 @@ class Input {
         }
     }
 
-    observe () {
+    observe() {
         let that = this;
         /////////////////   Manipulate by Copy And paste
         $(that.elem).bind('paste', function (e) {
@@ -67,9 +67,9 @@ class Input {
             }, 60);
         });
         let typingTimer,
-          doneTypingInterval = that.model.options.inputDelay,
-          ctrlDown = false,
-          ctrlKey = [17, 91], vKey = 86;
+            doneTypingInterval = that.model.options.inputDelay,
+            ctrlDown = false,
+            ctrlKey = [17, 91], vKey = 86;
 
         $(document).keydown(function (e) {
             if ($.inArray(e.keyCode, ctrlKey) > 0)
@@ -96,7 +96,7 @@ class Input {
         $(that.elem).on('keydown', function () {
             clearTimeout(typingTimer);
         });
-        function doneTyping ($self) {
+        function doneTyping($self) {
             that.parseInput($self.val());
         }
 
@@ -117,13 +117,11 @@ class Input {
      * @private
      * @desc attach events to input field
      */
-    _attachInputElementEvents () {
+    _attachInputElementEvents() {
         let that = this;
         let closePickerHandler = function (e) {
-            if (!$(e.target).is(that.elem) &&
-              !$(e.target).is(that.model.view.$container) &&
-              $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 &&
-              !$(e.target).is($(that.elem).children())) {
+            if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) &&
+                $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
                 that.model.view.hide();
                 $('body').unbind('click', closePickerHandler);
             }
@@ -135,7 +133,7 @@ class Input {
                 $('body').bind('click', closePickerHandler);
             }
 
-            if(Helper.isMobile){
+            if (Helper.isMobile) {
                 $(this).blur();
             }
 
@@ -149,7 +147,7 @@ class Input {
      * @return {{top: Number, left: Number}}
      * @todo remove jquery
      */
-    getInputPosition () {
+    getInputPosition() {
         return $(this.elem).offset();
     }
 
@@ -159,7 +157,7 @@ class Input {
      * @return {{width: Number, height: Number}}
      * @todo remove jquery
      */
-    getInputSize () {
+    getInputSize() {
         return {
             width: $(this.elem).outerWidth(),
             height: $(this.elem).outerHeight()
@@ -173,7 +171,7 @@ class Input {
      * @todo remove jquery
      * @private
      */
-    _updateAltField (unix) {
+    _updateAltField(unix) {
         let value = this.model.options.altFieldFormatter(unix);
         $(this.model.options.altField).val(value);
     }
@@ -185,7 +183,7 @@ class Input {
      * @todo remove jquery
      * @private
      */
-    _updateInputField (unix) {
+    _updateInputField(unix) {
         let value = this.model.options.formatter(unix);
         if ($(this.elem).val() != value) {
             $(this.elem).val(value);
@@ -196,7 +194,7 @@ class Input {
     /**
      * @param unix
      */
-    update (unix) {
+    update(unix) {
         if (this.model.options.initialValue == false && this._firstUpdate) {
             this._firstUpdate = false;
         } else {
@@ -211,25 +209,25 @@ class Input {
      * @desc return initial value
      * @return {Number} - unix
      */
-    getOnInitState () {
+    getOnInitState() {
         const persianDatePickerTimeRegex = '^([0-1][0-9]|2[0-3]):([0-5][0-9])(?::([0-5][0-9]))?$';
         let garegurianDate = null,
-          $inputElem = $(this.elem),
-          inputValue;
+            $inputElem = $(this.elem),
+            inputValue;
 
         // Define input value by check inline mode and input mode
+
         if ($inputElem[0].nodeName === 'INPUT') {
-            inputValue = $inputElem[0].getAttribute('value');
+            inputValue = $inputElem[0].getAttribute('value')
         }
         else {
-            inputValue = $inputElem.data('date');
+            inputValue = $inputElem.data('date')
         }
-
 
         // Check time string by regex
         if (inputValue && inputValue.match(persianDatePickerTimeRegex)) {
             let timeArray = inputValue.split(':'),
-              tempDate = new Date();
+                tempDate = new Date();
             tempDate.setHours(timeArray[0]);
             tempDate.setMinutes(timeArray[1]);
             if (timeArray[2]) {
@@ -240,7 +238,14 @@ class Input {
             this.initialUnix = tempDate.valueOf();
         }
         else {
-            garegurianDate = new Date(inputValue).valueOf();
+            if (this.model.options.initialValueType === 'persian' && inputValue) {
+                let parse = new PersianDateParser();
+                let pd = new persianDate(parse.parse(inputValue)).valueOf();
+                garegurianDate = new Date(pd).valueOf();
+            } else if (inputValue) {
+                garegurianDate = new Date(inputValue).valueOf();
+            }
+
             if (garegurianDate && garegurianDate != 'undefined') {
                 this.initialUnix = garegurianDate;
             }

@@ -6,7 +6,7 @@ persian-datepicker configuration document
 **Kind**: global constant  
 
 * [Config](#Config)
-    * [.initialCalendar](#Config.initialCalendar) : <code>string</code>
+    * [.calendarType__](#Config.calendarType__) : <code>string</code>
     * [.calendar](#Config.calendar) : <code>object</code>
         * [.persian](#Config.calendar.persian) : <code>object</code>
             * [.locale](#Config.calendar.persian.locale) : <code>string</code>
@@ -18,6 +18,7 @@ persian-datepicker configuration document
     * [.responsive](#Config.responsive) : <code>boolean</code>
     * [.inline](#Config.inline) : <code>boolean</code>
     * [.initialValue](#Config.initialValue) : <code>boolean</code>
+    * [.initialValueType](#Config.initialValueType) : <code>boolean</code>
     * <del>[.persianDigit](#Config.persianDigit) : <code>boolean</code></del>
     * [.viewMode](#Config.viewMode) : <code>string</code>
     * [.format](#Config.format) : <code>boolean</code>
@@ -39,7 +40,11 @@ persian-datepicker configuration document
         * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
         * [.text](#Config.toolbox.text) : <code>object</code>
             * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
-            * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+        * [.submitButton](#Config.toolbox.submitButton)
+            * [.enabled](#Config.toolbox.submitButton.enabled) : <code>boolean</code>
+            * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
+                * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
+                * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
         * [.todayButton](#Config.toolbox.todayButton)
             * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
             * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
@@ -96,9 +101,9 @@ persian-datepicker configuration document
     * ["onToggle"](#Config.event_onToggle)
     * ["onDestroy"](#Config.event_onDestroy)
 
-<a name="Config.initialCalendar"></a>
+<a name="Config.calendarType__"></a>
 
-## Config.initialCalendar : <code>string</code>
+## Config.calendarType__ : <code>string</code>
 set default calendar mode of datepicker, available options: 'persian', 'gregorian'
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -220,6 +225,13 @@ if true datepicker render inline
 <a name="Config.initialValue"></a>
 
 ## Config.initialValue : <code>boolean</code>
+If set true datepicker init with input value date
+
+**Kind**: static property of [<code>Config</code>](#Config)  
+**Default**: <code>true</code>  
+<a name="Config.initialValueType"></a>
+
+## Config.initialValueType : <code>boolean</code>
 If set true datepicker init with input value date
 
 **Kind**: static property of [<code>Config</code>](#Config)  
@@ -421,7 +433,11 @@ toolbox config object
     * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
     * [.text](#Config.toolbox.text) : <code>object</code>
         * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
-        * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
+    * [.submitButton](#Config.toolbox.submitButton)
+        * [.enabled](#Config.toolbox.submitButton.enabled) : <code>boolean</code>
+        * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
+            * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
+            * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
     * [.todayButton](#Config.toolbox.todayButton)
         * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
         * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
@@ -445,11 +461,6 @@ boolean option that make toolbar enable or disable
 toolbox button text coniguration
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
-
-* [.text](#Config.toolbox.text) : <code>object</code>
-    * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
-    * [.btnExit](#Config.toolbox.text.btnExit) : <code>string</code>
-
 <a name="Config.toolbox.text.btnToday"></a>
 
 #### <del>text.btnToday : <code>string</code></del>
@@ -459,13 +470,55 @@ text of today button, deprecated from 0.6.0
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;امروز&#x27;&quot;</code>  
-<a name="Config.toolbox.text.btnExit"></a>
+<a name="Config.toolbox.submitButton"></a>
 
-#### text.btnExit : <code>string</code>
-text of submit button (only shown on mobile)
+### toolbox.submitButton
+submit button configuration (only shown on mobile)
 
-**Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
-**Default**: <code>&quot;&#x27;تایید&#x27;&quot;</code>  
+**Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
+**Since**: 0.6.0  
+
+* [.submitButton](#Config.toolbox.submitButton)
+    * [.enabled](#Config.toolbox.submitButton.enabled) : <code>boolean</code>
+    * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
+        * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
+        * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
+
+<a name="Config.toolbox.submitButton.enabled"></a>
+
+#### submitButton.enabled : <code>boolean</code>
+make submit button enable or disable
+
+**Kind**: static property of [<code>submitButton</code>](#Config.toolbox.submitButton)  
+**Default**: <code>false</code>  
+**Since**: 0.6.0  
+<a name="Config.toolbox.submitButton.text"></a>
+
+#### submitButton.text : <code>object</code>
+submit button text
+
+**Kind**: static property of [<code>submitButton</code>](#Config.toolbox.submitButton)  
+**Since**: 0.6.0  
+
+* [.text](#Config.toolbox.submitButton.text) : <code>object</code>
+    * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
+    * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
+
+<a name="Config.toolbox.submitButton.text.fa"></a>
+
+##### text.fa : <code>object</code>
+show when current calendar is Persian
+
+**Kind**: static property of [<code>text</code>](#Config.toolbox.submitButton.text)  
+**Default**: <code>تایید</code>  
+**Since**: 0.6.0  
+<a name="Config.toolbox.submitButton.text.en"></a>
+
+##### text.en : <code>object</code>
+show when current calendar is Gregorian
+
+**Kind**: static property of [<code>text</code>](#Config.toolbox.submitButton.text)  
+**Default**: <code>submit</code>  
 **Since**: 0.6.0  
 <a name="Config.toolbox.todayButton"></a>
 

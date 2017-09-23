@@ -83,6 +83,7 @@ bower install persian-datepicker
 | calendar.gregorian.showHint    | boolean          | false                                           | If set true, small date hint of this calendar will be shown on another calendar |
 | responsive                     | boolean          | true                                            | If set true make enable responsive view on mobile devices |
 | initialValue                   | boolean          | true                                            | If set true datepicker init with input value date |
+| initialValueType               | string           | 'gregorian'                                     | Initial value calendar type, accept: 'persian', 'gregorian' |
 | inline                         | boolean          | false                                           | If true datepicker render inline |
 | responsive                     | boolean          | true                                            | If set true datepicker init with input value date |
 | persianDigit (DEPRECATED Sience 0.6.0)      | boolean          | true                               | If true all digit shows as persian digit |
@@ -100,10 +101,10 @@ bower install persian-datepicker
 | navigator.scroll.enabled       | boolean          | true                                            | If you want prevent to navigate with mousewheel event make this options false |
 | navigator.text                 | object           |                                                 | Navigator text config object |
 | navigator.text.btnNextText     | string           | '<'                                             | Text of next button|
-| navigator.text.btnPrevText     | string           | '>'                                             | Text of previews button|
-| navigator.text.onNext          | event            | function (navigator) {}                         | Called when navigator goes to next state |
-| navigator.text.onPrev          | event            | function (navigator) {}                         | Called when navigator goes to prev state |
-| navigator.text.onSwitch        | event            | function (state) {}                             | Called when navigator switch |
+| navigator.text.btnPrevText     | string           | '>'                                             | Text of previews butto
+| navigator.onNext               | event            | function (navigator) {}                         | Called when navigator goes to next state |
+| navigator.onPrev               | event            | function (navigator) {}                         | Called when navigator goes to prev state |
+| navigator.onSwitch             | event            | function (state) {}                             | Called when navigator switch |
 | toolbox                        | object           |                                                 | Toolbox object options.|
 | toolbox.enabled                | boolean          | true                                            | Enable/Disable toolbox object |
 | toolbox.text                   | object           |                                                 | |

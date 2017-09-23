@@ -176,8 +176,8 @@ var Options = function () {
             if (!options.template) {
                 options.template = Template;
             }
-            persianDate.toCalendar(options.calendarType__);
-            persianDate.toLocale(options.calendar[options.calendarType__].locale);
+            persianDate.toCalendar(options.calendarType);
+            persianDate.toLocale(options.calendar[options.calendarType].locale);
             if (options.onlyTimePicker) {
                 options.dayPicker.enabled = false;
                 options.monthPicker.enabled = false;
@@ -481,7 +481,7 @@ var Config = {
    * @type string
    * @since 0.6.0
    */
-  "calendarType__": 'persian',
+  "calendarType": 'persian',
 
   /**
    * @description calendar type and localization configuration
@@ -585,6 +585,13 @@ var Config = {
    * @default true
    */
   'initialValue': true,
+
+  /**
+   * @description If set true datepicker init with input value date
+   * @type boolean
+   * @default true
+   */
+  'initialValueType': 'gregorian',
 
   /**
    * @deprecated from v0.6.0 this options is deprecated, use calendar.persian.locale instead
@@ -1672,6 +1679,7 @@ var Input = function () {
                 inputValue = void 0;
 
             // Define input value by check inline mode and input mode
+
             if ($inputElem[0].nodeName === 'INPUT') {
                 inputValue = $inputElem[0].getAttribute('value');
             } else {
@@ -1691,7 +1699,14 @@ var Input = function () {
                 }
                 this.initialUnix = tempDate.valueOf();
             } else {
-                garegurianDate = new Date(inputValue).valueOf();
+                if (this.model.options.initialValueType === 'persian' && inputValue) {
+                    var parse = new PersianDateParser();
+                    var pd = new persianDate(parse.parse(inputValue)).valueOf();
+                    garegurianDate = new Date(pd).valueOf();
+                } else if (inputValue) {
+                    garegurianDate = new Date(inputValue).valueOf();
+                }
+
                 if (garegurianDate && garegurianDate != 'undefined') {
                     this.initialUnix = garegurianDate;
                 } else {
@@ -2066,8 +2081,8 @@ var PersianDateWrapper = function () {
         _classCallCheck(this, PersianDateWrapper);
 
         this.model = model;
-        this.model.options.calendar_ = this.model.options.calendarType__;
-        this.model.options.locale_ = this.model.options.calendar[this.model.options.calendarType__].locale;
+        this.model.options.calendar_ = this.model.options.calendarType;
+        this.model.options.locale_ = this.model.options.calendar[this.model.options.calendarType].locale;
         return this;
     }
 
@@ -2083,8 +2098,8 @@ var PersianDateWrapper = function () {
             var output = void 0,
                 cp = void 0;
             cp = persianDate.toCalendar(that.model.options.calendar_);
-            if (this.model.options.calendar[this.model.options.calendarType__].leapYearMode) {
-                cp.toLeapYearMode(this.model.options.calendar[this.model.options.calendarType__].leapYearMode);
+            if (this.model.options.calendar[this.model.options.calendarType].leapYearMode) {
+                cp.toLeapYearMode(this.model.options.calendar[this.model.options.calendarType].leapYearMode);
             }
             output = new cp(input);
             return output.toLocale(that.model.options.locale_);

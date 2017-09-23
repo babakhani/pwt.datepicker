@@ -12,7 +12,7 @@ const Config = {
      * @type string
      * @since 0.6.0
      */
-    'calendarType__': 'persian',
+    "calendarType": 'persian',
 
 
     /**
@@ -120,6 +120,14 @@ const Config = {
      * @default true
      */
     'initialValue': true,
+
+
+    /**
+     * @description If set true datepicker init with input value date
+     * @type boolean
+     * @default true
+     */
+    'initialValueType': 'gregorian',
 
 
     /**
