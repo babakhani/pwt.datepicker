@@ -481,7 +481,7 @@ var Config = {
    * @type string
    * @since 0.6.0
    */
-  "calendarType": 'persian',
+  'calendarType': 'persian',
 
   /**
    * @description calendar type and localization configuration

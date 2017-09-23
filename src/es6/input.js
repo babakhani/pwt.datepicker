@@ -218,10 +218,10 @@ class Input {
         // Define input value by check inline mode and input mode
 
         if ($inputElem[0].nodeName === 'INPUT') {
-            inputValue = $inputElem[0].getAttribute('value')
+            inputValue = $inputElem[0].getAttribute('value');
         }
         else {
-            inputValue = $inputElem.data('date')
+            inputValue = $inputElem.data('date');
         }
 
         // Check time string by regex

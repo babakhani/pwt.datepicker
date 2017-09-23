@@ -12,7 +12,7 @@ const Config = {
      * @type string
      * @since 0.6.0
      */
-    "calendarType": 'persian',
+    'calendarType': 'persian',
 
 
     /**
