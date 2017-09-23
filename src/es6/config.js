@@ -114,8 +114,9 @@ const Config = {
      */
     'inline': false,
 
+
     /**
-     * @description If set true datepicker init with input value date
+     * @description If set true datepicker init with input value date, use data-date property when you want set inline datepicker initial value
      * @type boolean
      * @default true
      */

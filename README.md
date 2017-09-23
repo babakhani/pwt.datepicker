@@ -83,11 +83,10 @@ bower install persian-datepicker
 | calendar.gregorian.locale      | string           | 'en'                                            | set locale of Gregorian calendar available options: 'fa', 'en' |
 | calendar.gregorian.showHint    | boolean          | false                                           | If set true, small date hint of this calendar will be shown on another calendar |
 | responsive                     | boolean          | true                                            | If set true make enable responsive view on mobile devices |
-| initialValue                   | boolean          | true                                            | If set true datepicker init with input value date |
+| initialValue                   | boolean          | true                                            | If set true datepicker init with input value date, use data-date property when you want set inline datepicker initial value |
 | initialValueType               | string           | 'gregorian'                                     | Initial value calendar type, accept: 'persian', 'gregorian' |
-| inline                         | boolean          | false                                           | If true datepicker render inline |
-| responsive                     | boolean          | true                                            | If set true datepicker init with input value date |
-| persianDigit (DEPRECATED Sience 0.6.0)      | boolean          | true                               | If true all digit shows as persian digit |
+| inline                         | boolean          | false                                           | If set true datepicker render inline |
+| persianDigit (DEPRECATED Sience 0.6.0)      | boolean          | true                               | If set true all digit shows as persian digit |
 | viewMode                       | string           | 'day'                                           | Accept day, month, year |
 | format                         | string           | 'LLLL'                                          | The date format, combination of d, dd, m, mm, yy, yyy |
 | formatter                      | function         | function(unixDate){return unixDate}             | Main Input value formatter function |
