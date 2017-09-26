@@ -3223,10 +3223,10 @@ var View = function () {
         key: '_getButtonText',
         value: function _getButtonText() {
             var output = {};
-            if (this.model.options.calendar_ == 'persian') {
+            if (this.model.options.locale_ == 'fa') {
                 output.todayButtontext = this.model.options.toolbox.todayButton.text.fa;
                 output.submitButtonText = this.model.options.toolbox.submitButton.text.fa;
-            } else {
+            } else if (this.model.options.locale_ == 'en') {
                 output.todayButtontext = this.model.options.toolbox.todayButton.text.en;
                 output.submitButtonText = this.model.options.toolbox.submitButton.text.en;
             }
@@ -3240,12 +3240,9 @@ var View = function () {
                 loc = void 0;
             if (that.model.options.calendar_ == 'persian') {
                 cal = 'gregorian';
-            } else {
-                cal = 'persian';
-            }
-            if (that.model.options.locale_ == 'fa') {
                 loc = that.model.options.calendar.gregorian.locale;
             } else {
+                cal = 'persian';
                 loc = that.model.options.calendar.persian.locale;
             }
             return [cal, loc];
