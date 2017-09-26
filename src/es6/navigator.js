@@ -10,7 +10,7 @@ class Navigator {
      * @param {object} datepicker
      * @return {Navigator}
      */
-    constructor (model) {
+    constructor(model) {
 
         /**
          * @type {Datepicker}
@@ -27,7 +27,7 @@ class Navigator {
      * @public
      * @todo attach as a live way
      */
-    liveAttach () {
+    liveAttach() {
         // Check options
         if (this.model.options.navigator.scroll.enabled) {
             let that = this;
@@ -66,7 +66,7 @@ class Navigator {
      * @param {String} timekey - accept hour, minute,second
      * @public
      */
-    timeUp (timekey) {
+    timeUp(timekey) {
         if (this.model.options.timePicker[timekey] == undefined) {
             return;
         }
@@ -97,7 +97,7 @@ class Navigator {
      * @param {String} timekey - accept hour, minute,second
      * @public
      */
-    timeDown (timekey) {
+    timeDown(timekey) {
         if (this.model.options.timePicker[timekey] == undefined) {
             return;
         }
@@ -129,7 +129,7 @@ class Navigator {
      * @todo remove jquery
      * @private
      */
-    _attachEvents () {
+    _attachEvents() {
         let that = this;
 
         if (this.model.options.navigator.enabled) {

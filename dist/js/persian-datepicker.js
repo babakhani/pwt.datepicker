@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.12b
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -91,6 +84,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 var Helper = {
+
+    // leading edge, instead of the trailing.
+    debounce: function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this,
+                args = arguments;
+            var later = function later() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    },
+
+
     /**
      * @desc normal log
      * @param input
@@ -180,6 +192,11 @@ var Options = function () {
     _createClass(Options, [{
         key: '_compatibility',
         value: function _compatibility(options) {
+
+            if (options.inline) {
+                options.toolbox.submitButton.enabled = false;
+            }
+
             if (!options.template) {
                 options.template = Template;
             }
@@ -302,6 +319,8 @@ function Model(inputElement, options) {
    */
   this.state = new State(this);
 
+  this.api = new API(this);
+
   /**
    * @desc handle works about input and alt field input element
    * @type {Input}
@@ -338,7 +357,7 @@ function Model(inputElement, options) {
    */
   this.navigator = new Navigator(this);
 
-  return new API(this);
+  return this.api;
 };
 
 module.exports = Model;
@@ -1100,7 +1119,7 @@ var Config = {
      * @param selectedDayUnix
      */
     'onSelect': function onSelect(selectedDayUnix) {
-      Helper.debug('dayPicker Event: onSelect : ' + selectedDayUnix);
+      Helper.debug(this, 'dayPicker Event: onSelect : ' + selectedDayUnix);
     }
 
   },
@@ -1141,7 +1160,7 @@ var Config = {
      * @param monthIndex
      */
     'onSelect': function onSelect(monthIndex) {
-      Helper.debug('monthPicker Event: onSelect : ' + monthIndex);
+      Helper.debug(this, 'monthPicker Event: onSelect : ' + monthIndex);
     }
   },
 
@@ -1183,7 +1202,7 @@ var Config = {
      * @param year
      */
     'onSelect': function onSelect(year) {
-      Helper.debug('yearPicker Event: onSelect : ' + year);
+      Helper.debug(this, 'yearPicker Event: onSelect : ' + year);
     }
   },
 
@@ -1583,21 +1602,22 @@ var Input = function () {
             var that = this;
             var closePickerHandler = function closePickerHandler(e) {
                 if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) && $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
-                    that.model.view.hide();
+                    that.model.api.hide();
                     $('body').unbind('click', closePickerHandler);
                 }
             };
 
-            $(this.elem).on('focus click', function () {
-                that.model.view.show();
+            $(this.elem).on('focus click', Helper.debounce(function (evt) {
+                that.model.api.show();
                 if (that.model.state.ui.isInline === false) {
-                    $('body').bind('click', closePickerHandler);
+                    $('body').unbind('click', closePickerHandler).bind('click', closePickerHandler);
                 }
-
                 if (Helper.isMobile) {
                     $(this).blur();
                 }
-            });
+                evt.stopPropagation();
+                return false;
+            }, 100));
         }
 
         /**

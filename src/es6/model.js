@@ -18,7 +18,7 @@ class Model {
      * @param options
      * @private
      */
-    constructor (inputElement, options) {
+    constructor(inputElement, options) {
 
 
         /**
@@ -53,6 +53,8 @@ class Model {
          */
         this.state = new State(this);
 
+
+        this.api = new API(this);
 
         /**
          * @desc handle works about input and alt field input element
@@ -91,7 +93,7 @@ class Model {
          */
         this.navigator = new Navigator(this);
 
-        return new API(this);
+        return this.api;
     }
 }
 

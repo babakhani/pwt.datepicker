@@ -11,10 +11,10 @@ class Options {
      * @return {object}
      * @todo remove jquery
      */
-    constructor (options, model) {
+    constructor(options, model) {
         this.model = model;
         return this._compatibility(
-          $.extend(true, this, Config, options)
+            $.extend(true, this, Config, options)
         );
     }
 
@@ -22,7 +22,12 @@ class Options {
      * @private
      * @param options
      */
-    _compatibility (options) {
+    _compatibility(options) {
+
+        if (options.inline) {
+            options.toolbox.submitButton.enabled = false;
+        }
+
         if (!options.template) {
             options.template = Template;
         }

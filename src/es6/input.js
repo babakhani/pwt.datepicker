@@ -122,22 +122,22 @@ class Input {
         let closePickerHandler = function (e) {
             if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) &&
                 $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
-                that.model.view.hide();
+                that.model.api.hide();
                 $('body').unbind('click', closePickerHandler);
             }
         };
 
-        $(this.elem).on('focus click', function () {
-            that.model.view.show();
+        $(this.elem).on('focus click', Helper.debounce(function (evt) {
+            that.model.api.show();
             if (that.model.state.ui.isInline === false) {
-                $('body').bind('click', closePickerHandler);
+                $('body').unbind('click', closePickerHandler).bind('click', closePickerHandler);
             }
-
             if (Helper.isMobile) {
                 $(this).blur();
             }
-
-        });
+            evt.stopPropagation();
+            return false;
+        }, 100));
 
     }
 

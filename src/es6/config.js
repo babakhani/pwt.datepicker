@@ -661,7 +661,7 @@ const Config = {
          * @param selectedDayUnix
          */
         'onSelect': function (selectedDayUnix) {
-            Helper.debug('dayPicker Event: onSelect : ' + selectedDayUnix);
+            Helper.debug(this, 'dayPicker Event: onSelect : ' + selectedDayUnix);
         }
 
     },
@@ -703,7 +703,7 @@ const Config = {
          * @param monthIndex
          */
         'onSelect': function (monthIndex) {
-            Helper.debug('monthPicker Event: onSelect : ' + monthIndex);
+            Helper.debug(this, 'monthPicker Event: onSelect : ' + monthIndex);
         }
     },
 
@@ -746,7 +746,7 @@ const Config = {
          * @param year
          */
         'onSelect': function (year) {
-            Helper.debug('yearPicker Event: onSelect : ' + year);
+            Helper.debug(this, 'yearPicker Event: onSelect : ' + year);
         }
     },
 
