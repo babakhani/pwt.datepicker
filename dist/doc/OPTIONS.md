@@ -530,7 +530,7 @@ show when current calendar is Gregorian
 <a name="Config.toolbox.submitButton.event_onSubmit"></a>
 
 #### "onSubmit"
-submit button event
+Called when submit button clicked
 
 **Kind**: event emitted by [<code>submitButton</code>](#Config.toolbox.submitButton)  
 **Since**: 0.6.0  
@@ -587,7 +587,7 @@ show when current calendar is Gregorian
 <a name="Config.toolbox.todayButton.event_onToday"></a>
 
 #### "onToday"
-Called when calendar calendar switch click
+Called when today button clicked
 
 **Kind**: event emitted by [<code>todayButton</code>](#Config.toolbox.todayButton)  
 **Since**: 0.6.0  
@@ -624,7 +624,7 @@ calendar switch text format string
 <a name="Config.toolbox.calendarSwitch.event_onSwitch"></a>
 
 #### "onSwitch"
-Called when calendar switch click
+Called when calendar switch clicked
 
 **Kind**: event emitted by [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
 **Since**: 0.6.0  

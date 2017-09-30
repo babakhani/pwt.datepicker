@@ -27,10 +27,10 @@ $animate-duration: all 100ms ease;
 $plot-area-bg: $white;
 $plot-area-border: 1px solid $gray;
 
-// Bottom
-$bottom-bg: $white;
-$bottom-bg-hover: $light-gray;
-$bottom-text-color: $dark;
+// Button
+$button-bg: $white;
+$button-bg-hover: $light-gray;
+$button-text-color: #ffffff;
 
 // Date Item
 $date-item-font: 14px;
@@ -72,6 +72,11 @@ $timepicker-bg: $super-light-gray;
 $timepicker-segment-divider-font: 12px bold;
 $timepicker-input-bg: $super-light-gray;
 $timepicker-input-border: none;
+
+
+// alter calendar hint
+// ===================================================
+$alter-calendar-hint-color: #ffffff;
 
 @import '../base/helper';
 @import '../layout/default';

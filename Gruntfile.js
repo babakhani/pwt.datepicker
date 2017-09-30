@@ -18,7 +18,7 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    src: ['dist/**/*.js', 'dist/**/*.css','dist/js/<%= pkg.name %>.js', 'dist/css/<%= pkg.name %>.css']
+                    src: ['dist/**/*.js', 'dist/**/*.css', 'dist/js/<%= pkg.name %>.js', 'dist/css/<%= pkg.name %>.css']
                 }
             }
         },
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
     });
 
     if (grunt.option("dev") === true) {
-        grunt.registerTask('default', ['sass:dev', 'webpack:dev', 'watch']);
+        grunt.registerTask('default', ['sass', 'webpack:dev', 'watch']);
     }
     else if (grunt.option("doc") === true) {
         grunt.registerTask('default', ['jsdoc2md']);

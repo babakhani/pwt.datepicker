@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v0.5.12b
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 .datepicker-plot-area {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -170,7 +177,7 @@
     color: #ccc; }
     .datepicker-plot-area .datepicker-time-view .down-btn:hover,
     .datepicker-plot-area .datepicker-time-view .up-btn:hover {
-      background-color: #eee;
+      background-color: rgba(250, 250, 250, 0.3);
       color: #807f7f; }
   .datepicker-plot-area .datepicker-time-view input {
     display: block;
@@ -284,12 +291,12 @@
     height: 28px;
     line-height: 28px;
     font-weight: bold;
-    background-color: #fcfcfc;
+    background-color: rgba(250, 250, 250, 0.1);
     color: #333; }
     .datepicker-plot-area .datepicker-navigator .pwt-btn-next:hover,
     .datepicker-plot-area .datepicker-navigator .pwt-btn-switch:hover,
     .datepicker-plot-area .datepicker-navigator .pwt-btn-prev:hover {
-      background-color: #eee; }
+      background-color: rgba(250, 250, 250, 0.3); }
   .datepicker-plot-area .datepicker-navigator .pwt-btn-next {
     display: block;
     width: 15%;
@@ -313,7 +320,7 @@
   .datepicker-plot-area .toolbox .pwt-btn-submit,
   .datepicker-plot-area .toolbox .pwt-btn-calendar,
   .datepicker-plot-area .toolbox .pwt-btn-today {
-    background-color: #fcfcfc;
+    background-color: rgba(250, 250, 250, 0.1);
     float: right;
     display: block;
     font-weight: bold;
@@ -329,7 +336,7 @@
     .datepicker-plot-area .toolbox .pwt-btn-submit:hover,
     .datepicker-plot-area .toolbox .pwt-btn-calendar:hover,
     .datepicker-plot-area .toolbox .pwt-btn-today:hover {
-      background-color: #eee; }
+      background-color: rgba(250, 250, 250, 0.3); }
 
 .datepicker-plot-area .datepicker-navigator {
   display: block;
@@ -343,12 +350,12 @@
     height: 28px;
     line-height: 28px;
     font-weight: bold;
-    background-color: #fcfcfc;
+    background-color: rgba(250, 250, 250, 0.1);
     color: #333; }
     .datepicker-plot-area .datepicker-navigator .pwt-btn-next:hover,
     .datepicker-plot-area .datepicker-navigator .pwt-btn-switch:hover,
     .datepicker-plot-area .datepicker-navigator .pwt-btn-prev:hover {
-      background-color: #eee; }
+      background-color: rgba(250, 250, 250, 0.3); }
   .datepicker-plot-area .datepicker-navigator .pwt-btn-next {
     display: block;
     width: 15%;
