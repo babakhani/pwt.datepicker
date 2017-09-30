@@ -38,7 +38,11 @@ class Input {
          * @type {Number}
          */
         this.initialUnix = null;
-        this._attachInputElementEvents();
+
+        if (this.model.options.inline == false) {
+            this._attachInputElementEvents();
+        }
+
         return this;
     }
 
@@ -137,7 +141,7 @@ class Input {
             }
             evt.stopPropagation();
             return false;
-        }, 100));
+        }, 200));
 
     }
 

@@ -7,7 +7,7 @@ class Toolbox {
      * @param {Datepicker} datepicker
      * @return {Toolbox}
      */
-    constructor (model) {
+    constructor(model) {
         /**
          * @type {Datepicker}
          */
@@ -16,7 +16,7 @@ class Toolbox {
         return this;
     }
 
-    _toggleCalendartype () {
+    _toggleCalendartype() {
         let that = this;
         if (that.model.options.calendar_ == 'persian') {
             that.model.options.calendar_ = 'gregorian';
@@ -31,12 +31,17 @@ class Toolbox {
     /**
      * attach all events about toolbox
      */
-    _attachEvents () {
+    _attachEvents() {
         let that = this;
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-today', function () {
             that.model.state.setSelectedDateTime('unix', new Date().valueOf());
             that.model.state.setViewDateTime('unix', new Date().valueOf());
+            /**
+             * @deprecated
+             * @todo remove this
+             */
             that.model.options.toolbox.onToday();
+            that.model.options.toolbox.todayButton.onToday();
             that.model.view.reRender();
         });
 
@@ -44,12 +49,14 @@ class Toolbox {
             that._toggleCalendartype();
             that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
+            that.model.options.toolbox.calendarSwitch.onSwitch();
             that.model.view.render();
             return that.model;
         });
 
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {
             that.model.view.hide();
+            that.model.options.toolbox.submitButton.onSubmit();
             that.model.options.onHide(this);
         });
     }

@@ -873,7 +873,15 @@ var Config = {
          * @default submit
          */
         en: 'submit'
-      }
+      },
+
+      /**
+       * @description submit button event
+       * @since 0.6.0
+       * @type function
+       * @event
+       */
+      onSubmit: function onSubmit() {}
     },
 
     /**
@@ -911,7 +919,15 @@ var Config = {
          * @default today
          */
         en: 'today'
-      }
+      },
+
+      /**
+       * @description today button event
+       * @since 0.6.0
+       * @type function
+       * @event
+       */
+      onToday: function onToday() {}
     },
 
     /**
@@ -936,8 +952,15 @@ var Config = {
        * @since 0.6.0
        * @default MMMM
        */
-      format: 'MMMM'
+      format: 'MMMM',
 
+      /**
+       * @description calendar switch event
+       * @since 0.6.0
+       * @type function
+       * @event
+       */
+      onSwitch: function onSwitch() {}
     },
 
     /**
@@ -946,6 +969,7 @@ var Config = {
      * @example function (toolbox) {
      *      //log('toolbox today btn');
      *  }
+     *  @deprecated 0.6.0
      */
     onToday: function onToday() {
       //log('toolbox today btn');
@@ -1230,7 +1254,7 @@ var Config = {
    * @event
    */
   'onShow': function onShow() {
-    Helper.debug(this, 'dayPicker Event: onShow ');
+    Helper.debug(this, 'Event: onShow ');
   },
 
   /**
@@ -1238,7 +1262,7 @@ var Config = {
    * @event
    */
   'onHide': function onHide() {
-    Helper.debug(this, 'dayPicker Event: onHide ');
+    Helper.debug(this, 'Event: onHide ');
   },
 
   /**
@@ -1246,7 +1270,7 @@ var Config = {
    * @event
    */
   'onToggle': function onToggle() {
-    Helper.debug(this, 'dayPicker Event: onToggle ');
+    Helper.debug(this, 'Event: onToggle ');
   },
 
   /**
@@ -1254,7 +1278,7 @@ var Config = {
    * @event
    */
   'onDestroy': function onDestroy() {
-    Helper.debug(this, 'dayPicker Event: onDestroy ');
+    Helper.debug(this, 'Event: onDestroy ');
   },
 
   /**
@@ -1514,7 +1538,11 @@ var Input = function () {
          * @type {Number}
          */
         this.initialUnix = null;
-        this._attachInputElementEvents();
+
+        if (this.model.options.inline == false) {
+            this._attachInputElementEvents();
+        }
+
         return this;
     }
 
@@ -1617,7 +1645,7 @@ var Input = function () {
                 }
                 evt.stopPropagation();
                 return false;
-            }, 100));
+            }, 200));
         }
 
         /**
@@ -2584,7 +2612,12 @@ var Toolbox = function () {
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-today', function () {
                 that.model.state.setSelectedDateTime('unix', new Date().valueOf());
                 that.model.state.setViewDateTime('unix', new Date().valueOf());
+                /**
+                 * @deprecated
+                 * @todo remove this
+                 */
                 that.model.options.toolbox.onToday();
+                that.model.options.toolbox.todayButton.onToday();
                 that.model.view.reRender();
             });
 
@@ -2592,12 +2625,14 @@ var Toolbox = function () {
                 that._toggleCalendartype();
                 that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
                 that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
+                that.model.options.toolbox.calendarSwitch.onSwitch();
                 that.model.view.render();
                 return that.model;
             });
 
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {
                 that.model.view.hide();
+                that.model.options.toolbox.submitButton.onSubmit();
                 that.model.options.onHide(this);
             });
         }

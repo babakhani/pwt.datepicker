@@ -404,6 +404,16 @@ const Config = {
                  * @default submit
                  */
                 en: 'submit'
+            },
+
+
+            /**
+             * @description submit button event
+             * @since 0.6.0
+             * @type function
+             * @event
+             */
+            onSubmit: function () {
             }
         },
 
@@ -444,6 +454,15 @@ const Config = {
                  * @default today
                  */
                 en: 'today'
+            },
+
+            /**
+             * @description today button event
+             * @since 0.6.0
+             * @type function
+             * @event
+             */
+            onToday: function () {
             }
         },
 
@@ -471,8 +490,17 @@ const Config = {
              * @since 0.6.0
              * @default MMMM
              */
-            format: 'MMMM'
+            format: 'MMMM',
 
+
+            /**
+             * @description calendar switch event
+             * @since 0.6.0
+             * @type function
+             * @event
+             */
+            onSwitch: function () {
+            }
         },
 
         /**
@@ -481,6 +509,7 @@ const Config = {
          * @example function (toolbox) {
          *      //log('toolbox today btn');
          *  }
+         *  @deprecated 0.6.0
          */
         onToday: function () {
             //log('toolbox today btn');
@@ -776,7 +805,7 @@ const Config = {
      * @event
      */
     'onShow': function () {
-        Helper.debug(this, 'dayPicker Event: onShow ');
+        Helper.debug(this, 'Event: onShow ');
     },
 
 
@@ -785,7 +814,7 @@ const Config = {
      * @event
      */
     'onHide': function () {
-        Helper.debug(this, 'dayPicker Event: onHide ');
+        Helper.debug(this, 'Event: onHide ');
     },
 
 
@@ -794,7 +823,7 @@ const Config = {
      * @event
      */
     'onToggle': function () {
-        Helper.debug(this, 'dayPicker Event: onToggle ');
+        Helper.debug(this, 'Event: onToggle ');
     },
 
 
@@ -803,7 +832,7 @@ const Config = {
      * @event
      */
     'onDestroy': function () {
-        Helper.debug(this, 'dayPicker Event: onDestroy ');
+        Helper.debug(this, 'Event: onDestroy ');
     },
 
 
