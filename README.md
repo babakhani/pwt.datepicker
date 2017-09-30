@@ -21,6 +21,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 
 - [Documents](http://babakhani.github.io/PersianWebToolkit/doc/datepicker)
 - [Example/Demo](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/example)
+- [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)
 
 
 ## Table of content:
@@ -66,9 +67,9 @@ bower install persian-datepicker
 <input type="text" class="example1" />
 ```
 
-## options table
+## Options table
 
-[See Options Full Document](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/options/)
+[Options full document](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/options/)
 
 
 | name                           | type             | default                                         | description  |
@@ -170,3 +171,12 @@ bower install persian-datepicker
 | observer                       | boolean          | false                                           | If true datepicker update self by user inputted date string, accept 'yyyy/mm/dd' |
 | inputDelay                     | int              | 800  (millisecond)                              | Time for last user key-down event, accept millisecond |
 | template                       | string           | null                                            | By default datepicker have a template string, and you can overwrite it simply by replace string in config. |
+
+<!--## Thanks and appreciation-->
+<!--- Thanks to [vahid Mardani](https://github.com/pylover) my best friend and also my best teacher, for everything that I learned from him.-->
+<!--- Thanks to [Behrooz Bahrami](behance.net/behroozbahrami) for designing the logo.-->
+<!--- Thanks to [Bita Edalati](github.com/bitaedalati) for create amazing [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)-->
+
+## license
+
+- [WTFPL](http://www.wtfpl.net/)
