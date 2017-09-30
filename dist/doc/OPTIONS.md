@@ -45,15 +45,18 @@ persian-datepicker configuration document
             * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
                 * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
                 * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
+            * ["onSubmit"](#Config.toolbox.submitButton.event_onSubmit)
         * [.todayButton](#Config.toolbox.todayButton)
             * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
             * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
                 * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
                 * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
+            * ["onToday"](#Config.toolbox.todayButton.event_onToday)
         * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
             * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
             * [.format](#Config.toolbox.calendarSwitch.format) : <code>string</code>
-        * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
+            * ["onSwitch"](#Config.toolbox.calendarSwitch.event_onSwitch)
+        * <del>["onToday" (toolbox)](#Config.toolbox.event_onToday)</del>
     * [.onlyTimePicker](#Config.onlyTimePicker) : <code>boolean</code>
     * [.onlySelectOnDate](#Config.onlySelectOnDate) : <code>boolean</code>
     * [.timePicker](#Config.timePicker) : <code>object</code>
@@ -438,15 +441,18 @@ toolbox config object
         * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
             * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
             * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
+        * ["onSubmit"](#Config.toolbox.submitButton.event_onSubmit)
     * [.todayButton](#Config.toolbox.todayButton)
         * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
         * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
             * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
             * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
+        * ["onToday"](#Config.toolbox.todayButton.event_onToday)
     * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
         * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
         * [.format](#Config.toolbox.calendarSwitch.format) : <code>string</code>
-    * ["onToday" (toolbox)](#Config.toolbox.event_onToday)
+        * ["onSwitch"](#Config.toolbox.calendarSwitch.event_onSwitch)
+    * <del>["onToday" (toolbox)](#Config.toolbox.event_onToday)</del>
 
 <a name="Config.toolbox.enabled"></a>
 
@@ -483,6 +489,7 @@ submit button configuration (only shown on mobile)
     * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
         * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
         * [.en](#Config.toolbox.submitButton.text.en) : <code>object</code>
+    * ["onSubmit"](#Config.toolbox.submitButton.event_onSubmit)
 
 <a name="Config.toolbox.submitButton.enabled"></a>
 
@@ -520,6 +527,13 @@ show when current calendar is Gregorian
 **Kind**: static property of [<code>text</code>](#Config.toolbox.submitButton.text)  
 **Default**: <code>submit</code>  
 **Since**: 0.6.0  
+<a name="Config.toolbox.submitButton.event_onSubmit"></a>
+
+#### "onSubmit"
+submit button event
+
+**Kind**: event emitted by [<code>submitButton</code>](#Config.toolbox.submitButton)  
+**Since**: 0.6.0  
 <a name="Config.toolbox.todayButton"></a>
 
 ### toolbox.todayButton
@@ -533,6 +547,7 @@ toolbox today button configuration
     * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
         * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
         * [.en](#Config.toolbox.todayButton.text.en) : <code>object</code>
+    * ["onToday"](#Config.toolbox.todayButton.event_onToday)
 
 <a name="Config.toolbox.todayButton.enabled"></a>
 
@@ -569,6 +584,13 @@ show when current calendar is Gregorian
 **Kind**: static property of [<code>text</code>](#Config.toolbox.todayButton.text)  
 **Default**: <code>today</code>  
 **Since**: 0.6.0  
+<a name="Config.toolbox.todayButton.event_onToday"></a>
+
+#### "onToday"
+Called when calendar calendar switch click
+
+**Kind**: event emitted by [<code>todayButton</code>](#Config.toolbox.todayButton)  
+**Since**: 0.6.0  
 <a name="Config.toolbox.calendarSwitch"></a>
 
 ### toolbox.calendarSwitch : <code>object</code>
@@ -580,6 +602,7 @@ toolbox calendar switch configuration
 * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
     * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
     * [.format](#Config.toolbox.calendarSwitch.format) : <code>string</code>
+    * ["onSwitch"](#Config.toolbox.calendarSwitch.event_onSwitch)
 
 <a name="Config.toolbox.calendarSwitch.enabled"></a>
 
@@ -598,9 +621,18 @@ calendar switch text format string
 **Default**: <code>&quot;MMMM&quot;</code>  
 **Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format  
 **Since**: 0.6.0  
+<a name="Config.toolbox.calendarSwitch.event_onSwitch"></a>
+
+#### "onSwitch"
+Called when calendar switch click
+
+**Kind**: event emitted by [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
+**Since**: 0.6.0  
 <a name="Config.toolbox.event_onToday"></a>
 
-### "onToday" (toolbox)
+### <del>"onToday" (toolbox)</del>
+***Deprecated***
+
 **Kind**: event emitted by [<code>toolbox</code>](#Config.toolbox)  
 <table>
   <thead>
@@ -619,6 +651,7 @@ calendar switch text format string
 function (toolbox) {
      //log('toolbox today btn');
  }
+ 
 ```
 <a name="Config.onlyTimePicker"></a>
 

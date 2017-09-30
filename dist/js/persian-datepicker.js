@@ -922,7 +922,7 @@ var Config = {
       },
 
       /**
-       * @description today button event
+       * @description Called when calendar calendar switch click
        * @since 0.6.0
        * @type function
        * @event
@@ -955,7 +955,7 @@ var Config = {
       format: 'MMMM',
 
       /**
-       * @description calendar switch event
+       * @description Called when calendar switch click
        * @since 0.6.0
        * @type function
        * @event
