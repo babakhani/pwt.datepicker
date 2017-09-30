@@ -6,7 +6,6 @@
     margin-top: $grid-gutter;
 
     .pwt-btn-submit,
-    .pwt-btn-submit,
     .pwt-btn-calendar,
     .pwt-btn-today {
       @extend %interactive-item;
@@ -26,10 +25,6 @@
       &:hover {
         background-color: $button-bg-hover;
       }
-    }
-
-    .pwt-btn-submit {
-      //display: none;
     }
 
   }

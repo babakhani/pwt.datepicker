@@ -30,7 +30,7 @@ $plot-area-border: 1px solid $gray;
 // Button
 $button-bg: $white;
 $button-bg-hover: $light-gray;
-$button-text-color: #ffffff;
+$button-text-color: #fff;
 
 // Date Item
 $date-item-font: 14px;
@@ -76,7 +76,7 @@ $timepicker-input-border: none;
 
 // alter calendar hint
 // ===================================================
-$alter-calendar-hint-color: #ffffff;
+$alter-calendar-hint-color: #fff;
 
 @import '../base/helper';
 @import '../layout/default';
