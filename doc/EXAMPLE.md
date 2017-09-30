@@ -240,22 +240,6 @@ $('.alt-field-example').persianDatepicker({
 <label>Datepicker</label>
 <input class="datepicker-demo alt-field-example" />
 
-
-## persianDigit
-
-```javascript
-$('.persian-digit-example').persianDatepicker({
-    persianDigit: false
-});
-```
-
-```html
-<input class="persian-digit-example" />
-```
-<label>Datepicker</label>
-<input class="datepicker-demo persian-digit-example" />
-
-
 ## viewMode
 
 ```javascript

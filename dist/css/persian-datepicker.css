@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.12b
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 .datepicker-plot-area {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -317,7 +310,6 @@
   width: 100%;
   margin-top: 5px; }
   .datepicker-plot-area .toolbox .pwt-btn-submit,
-  .datepicker-plot-area .toolbox .pwt-btn-submit,
   .datepicker-plot-area .toolbox .pwt-btn-calendar,
   .datepicker-plot-area .toolbox .pwt-btn-today {
     background-color: rgba(250, 250, 250, 0.1);
@@ -332,7 +324,6 @@
     margin-left: 5px;
     padding: 0 5px;
     min-width: 50px; }
-    .datepicker-plot-area .toolbox .pwt-btn-submit:hover,
     .datepicker-plot-area .toolbox .pwt-btn-submit:hover,
     .datepicker-plot-area .toolbox .pwt-btn-calendar:hover,
     .datepicker-plot-area .toolbox .pwt-btn-today:hover {
