@@ -36,22 +36,21 @@ class Toolbox {
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-today', function () {
             that.model.state.setSelectedDateTime('unix', new Date().valueOf());
             that.model.state.setViewDateTime('unix', new Date().valueOf());
+            that.model.view.reRender();
             /**
              * @deprecated
              * @todo remove this
              */
             that.model.options.toolbox.onToday();
             that.model.options.toolbox.todayButton.onToday();
-            that.model.view.reRender();
         });
 
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
             that._toggleCalendartype();
             that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
-            that.model.options.toolbox.calendarSwitch.onSwitch();
             that.model.view.render();
-            return that.model;
+            that.model.options.toolbox.calendarSwitch.onSwitch();
         });
 
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {

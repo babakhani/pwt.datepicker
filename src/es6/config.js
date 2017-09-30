@@ -408,7 +408,7 @@ const Config = {
 
 
             /**
-             * @description submit button event
+             * @description Called when submit button clicked
              * @since 0.6.0
              * @type function
              * @event
@@ -457,7 +457,7 @@ const Config = {
             },
 
             /**
-             * @description Called when calendar calendar switch click
+             * @description Called when today button clicked
              * @since 0.6.0
              * @type function
              * @event
@@ -494,7 +494,7 @@ const Config = {
 
 
             /**
-             * @description Called when calendar switch click
+             * @description Called when calendar switch clicked
              * @since 0.6.0
              * @type function
              * @event

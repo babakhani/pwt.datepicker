@@ -114,17 +114,17 @@ bower install persian-datepicker
 | toolbox.todayButton.text       | object           |                                                 | Today button text|
 | toolbox.todayButton.text.fa    | string           | 'امروز'                                         | Show when current calendar is Persian|
 | toolbox.todayButton.text.en    | string           | 'Today'                                         | Show when current calendar is Gregorian|
-| toolbox.todayButton.onToday    | event            | function () {}                                  | Called on today button click |
+| toolbox.todayButton.onToday    | event            | function () {}                                  | Called when today button clicked |
 | toolbox.submitButton           | object           |                                                 | Toolbox today button configuration|
 | toolbox.submitButton.enabled   | boolean          | true                                            | Make toolbox submit button enable or disable|
 | toolbox.submitButton.text      | object           |                                                 | Submit button text|
 | toolbox.submitButton.text.fa   | string           | 'تایید'                                         | Show when current calendar is Persian|
 | toolbox.submitButton.text.en   | string           | 'submit'                                         | Show when current calendar is Gregorian|
-| toolbox.submitButton.onSubmit  | event            | function () {}                                  | Called on submit button click |
+| toolbox.submitButton.onSubmit  | event            | function () {}                                  | Called when submit button clicked |
 | toolbox.calendarSwitch         | object           |                                                 | |
 | toolbox.calendarSwitch.enabled | boolean          | true                                            | Make calendar switch enable or disable |
 | toolbox.calendarSwitch.format  | string           | 'MMMM'                                          | Calendar switch text format string |
-| toolbox.calendarSwitch.onSwitch| event            | function () {}                                  | Called on calendar switch click |
+| toolbox.calendarSwitch.onSwitch| event            | function () {}                                  | Called when calendar switch clicked |
 | toolbox.onToday (DEPRECATED Sience 0.6.0)                | event            | function(toolbox){return unixDate}              | Event called when today btn clicked|
 | onlyTimePicker (mode)          | boolean          | false                                           | If true, all pickers hide and just show timepicker |
 | onlySelectOnDate               | boolean          | true                                            | If true, date select just by click on day in month grid, and when user select month or year selected date doesnt change |

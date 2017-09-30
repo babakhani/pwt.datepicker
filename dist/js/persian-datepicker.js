@@ -876,7 +876,7 @@ var Config = {
       },
 
       /**
-       * @description submit button event
+       * @description Called when submit button clicked
        * @since 0.6.0
        * @type function
        * @event
@@ -922,7 +922,7 @@ var Config = {
       },
 
       /**
-       * @description Called when calendar calendar switch click
+       * @description Called when today button clicked
        * @since 0.6.0
        * @type function
        * @event
@@ -955,7 +955,7 @@ var Config = {
       format: 'MMMM',
 
       /**
-       * @description Called when calendar switch click
+       * @description Called when calendar switch clicked
        * @since 0.6.0
        * @type function
        * @event
@@ -1946,16 +1946,16 @@ var Navigator = function () {
                 $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
                     if ($(this).is('.pwt-btn-next')) {
                         that.model.state.navigate('next');
-                        that.model.options.navigator.onNext(that);
                         that.model.view.render();
+                        that.model.options.navigator.onNext(that);
                     } else if ($(this).is('.pwt-btn-switch')) {
                         that.model.state.switchViewMode();
-                        that.model.options.navigator.onSwitch(that);
                         that.model.view.render();
+                        that.model.options.navigator.onSwitch(that);
                     } else if ($(this).is('.pwt-btn-prev')) {
                         that.model.state.navigate('prev');
-                        that.model.options.navigator.onPrev(that);
                         that.model.view.render();
+                        that.model.options.navigator.onPrev(that);
                     }
                 });
             }
@@ -2612,22 +2612,21 @@ var Toolbox = function () {
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-today', function () {
                 that.model.state.setSelectedDateTime('unix', new Date().valueOf());
                 that.model.state.setViewDateTime('unix', new Date().valueOf());
+                that.model.view.reRender();
                 /**
                  * @deprecated
                  * @todo remove this
                  */
                 that.model.options.toolbox.onToday();
                 that.model.options.toolbox.todayButton.onToday();
-                that.model.view.reRender();
             });
 
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
                 that._toggleCalendartype();
                 that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
                 that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
-                that.model.options.toolbox.calendarSwitch.onSwitch();
                 that.model.view.render();
-                return that.model;
+                that.model.options.toolbox.calendarSwitch.onSwitch();
             });
 
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {

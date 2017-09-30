@@ -139,18 +139,18 @@ class Navigator {
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn', function () {
                 if ($(this).is('.pwt-btn-next')) {
                     that.model.state.navigate('next');
-                    that.model.options.navigator.onNext(that);
                     that.model.view.render();
+                    that.model.options.navigator.onNext(that);
                 }
                 else if ($(this).is('.pwt-btn-switch')) {
                     that.model.state.switchViewMode();
-                    that.model.options.navigator.onSwitch(that);
                     that.model.view.render();
+                    that.model.options.navigator.onSwitch(that);
                 }
                 else if ($(this).is('.pwt-btn-prev')) {
                     that.model.state.navigate('prev');
-                    that.model.options.navigator.onPrev(that);
                     that.model.view.render();
+                    that.model.options.navigator.onPrev(that);
                 }
             });
         }
