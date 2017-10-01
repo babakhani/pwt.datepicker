@@ -1,5 +1,5 @@
 /*
-** persian-datepicker - v1.0.0
+** persian-datepicker - v1.0.1
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under WTFPL license 
