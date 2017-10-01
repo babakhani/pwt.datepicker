@@ -35,6 +35,18 @@ class API {
         return this.model;
     }
 
+    /**
+     * @description return datepicker current state
+     * @example var pd = $('.selector').persianDatepicker();
+     * var state = pd.getState();
+     *
+     * console.log(state.selected);
+     * console.log(state.view);
+     * */
+    getState() {
+        return this.model.state;
+
+    }
 
     /**
      * @description make datepicker invisible
@@ -82,8 +94,8 @@ class API {
         this.model.state.setSelectedDateTime('unix', unix);
         this.model.state.setViewDateTime('unix', unix);
         this.model.state.setSelectedDateTime('unix', unix);
-        this.model.options.dayPicker.onSelect(unix);
         this.model.view.render(this.view);
+        this.model.options.onSet(unix);
         return this.model;
     }
 

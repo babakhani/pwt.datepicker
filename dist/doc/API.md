@@ -8,6 +8,7 @@ This is default API class
 * [API](#API)
     * [.options](#API+options)
     * [.show()](#API+show)
+    * [.getState()](#API+getState)
     * [.hide()](#API+hide)
     * [.toggle()](#API+toggle)
     * [.destroy()](#API+destroy)
@@ -37,6 +38,20 @@ make datepicker visible
 ```js
 var pd = $('.selector').persianDatepicker();
 pd.show();
+```
+<a name="API+getState"></a>
+
+### apI.getState()
+return datepicker current state
+
+**Kind**: instance method of [<code>API</code>](#API)  
+**Example**  
+```js
+var pd = $('.selector').persianDatepicker();
+var state = pd.getState();
+
+console.log(state.selected);
+console.log(state.view);
 ```
 <a name="API+hide"></a>
 

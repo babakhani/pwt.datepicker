@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - add locale
 - make better user interface
 - add responsive option
+- add onSet event, that called when selected date changed by api
+- expose datepicker state with api (getState())
+- Add range selector with order validation example in doc
+- improve options set method to make better live configuration
+- separate select event of user (click touch etc) and api
 
 ## [0.5.10]
 ### Changed

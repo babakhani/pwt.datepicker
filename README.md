@@ -161,7 +161,8 @@ bower install persian-datepicker
 | yearPicker.titleFormat         | string           | 'YYYY'                                          | YearPicker title format string |
 | yearPicker.titleFormatter      | function         | function (year) {}                              | YearPicker title formatter function |
 | yearPicker.onSelect            | event            | function (year) {}                              | Called when year select |
-| onSelect                       | event            | function (unixDate) {}                          | Called when datepicker selected date change |
+| onSelect                       | event            | function (unixDate) {}                          | Called when date Select by user. |
+| onSet                          | event            | function (unixDate) {}                          | Called when date Select by api. |
 | onShow                         | event            | function () {}                                  | Called when datePicker shown |
 | onHide                         | event            | function () {}                                  | Called when datePicker hidden |
 | onToggle                       | event            | function () {}                                  | Called when datePicker visibility toggle |

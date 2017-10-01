@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v0.5.12b
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -319,6 +326,21 @@ var API = function () {
         }
 
         /**
+         * @description return datepicker current state
+         * @example var pd = $('.selector').persianDatepicker();
+         * var state = pd.getState();
+         *
+         * console.log(state.selected);
+         * console.log(state.view);
+         * */
+
+    }, {
+        key: 'getState',
+        value: function getState() {
+            return this.model.state;
+        }
+
+        /**
          * @description make datepicker invisible
          * @example var pd = $('.selector').persianDatepicker();
          * pd.show();
@@ -374,8 +396,8 @@ var API = function () {
             this.model.state.setSelectedDateTime('unix', unix);
             this.model.state.setViewDateTime('unix', unix);
             this.model.state.setSelectedDateTime('unix', unix);
-            this.model.options.dayPicker.onSelect(unix);
             this.model.view.render(this.view);
+            this.model.options.onSet(unix);
             return this.model;
         }
     }, {
@@ -1149,12 +1171,21 @@ var Config = {
   },
 
   /**
-   * @description A function that takes current datepicker unixDate. called When date Select.
+   * @description Called when date Select by user.
    * @event
    * @param unixDate
    */
   'onSelect': function onSelect(unixDate) {
     Helper.debug(this, 'datepicker Event: onSelect : ' + unixDate);
+  },
+
+  /**
+   * @description Called when date Select by api.
+   * @event
+   * @param unixDate
+   */
+  'onSet': function onSet(unixDate) {
+    Helper.debug(this, 'datepicker Event: onSet : ' + unixDate);
   },
 
   /**
@@ -1928,6 +1959,7 @@ var Navigator = function () {
                         that.model.view.markSelectedDay();
                     }
                     that.model.options.dayPicker.onSelect(thisUnix);
+                    that.model.options.onSelect(thisUnix);
                 });
             }
 
@@ -1952,6 +1984,7 @@ var Navigator = function () {
                     that.model.state.setViewDateTime('month', month);
                     that.model.view.render();
                     that.model.options.monthPicker.onSelect(month);
+                    that.model.options.onSelect(that.state.selected.unix);
                 });
             }
 
@@ -1976,6 +2009,7 @@ var Navigator = function () {
                     that.model.state.setViewDateTime('year', year);
                     that.model.view.render();
                     that.model.options.yearPicker.onSelect(year);
+                    that.model.options.onSelect(that.state.selected.unix);
                 });
             }
         }
@@ -2309,10 +2343,10 @@ var State = function () {
         value: function _setFilterDate(minDate, maxDate) {
             var self = this;
             if (!minDate) {
-                minDate = -999999999999999999;
+                minDate = -2000000000000000;
             }
             if (!maxDate) {
-                maxDate = 999999999999999999;
+                maxDate = 2000000000000000;
             }
             var pd = self.model.PersianDate.date(minDate);
             self.filterDate.start.unixDate = minDate;
@@ -2477,7 +2511,6 @@ var State = function () {
             this.selected.dateObject = this.model.PersianDate.date([this.selected.year, this.selected.month, this.selected.date, this.view.hour, this.view.minute, this.view.second]);
             this.selected.unixDate = this.selected.dateObject.valueOf();
             this.model.updateInput(this.selected.unixDate);
-            this.model.options.onSelect(this.selected.unixDate);
             return this;
         }
 

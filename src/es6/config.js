@@ -781,12 +781,22 @@ const Config = {
 
 
     /**
-     * @description A function that takes current datepicker unixDate. called When date Select.
+     * @description Called when date Select by user.
      * @event
      * @param unixDate
      */
     'onSelect': function (unixDate) {
         Helper.debug(this, 'datepicker Event: onSelect : ' + unixDate);
+    },
+
+
+    /**
+     * @description Called when date Select by api.
+     * @event
+     * @param unixDate
+     */
+    'onSet': function (unixDate) {
+        Helper.debug(this, 'datepicker Event: onSet : ' + unixDate);
     },
 
     /**

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Persian Datepicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <!-- Demo Bootstrap Style -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <!-- Demo Font Embed -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <link href="../assets/css/fontiran.css" rel="stylesheet"/>
+
+    <!-- Persian Datepicker Style -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <link id="datepickerTheme" href="./css/persian-datepicker.css" rel="stylesheet"/>
+
+    <!-- Theme Switcher -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <script type="text/javascript">
+        function swapStyleSheet(sheet) {
+            document.getElementById('datepickerTheme').setAttribute('href', sheet);
+        }
+    </script>
+
+    <!-- Demo Style -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <style type="text/css">
+        *,
+        body {
+            font-family: IRANSans, tahoma;
+        }
+
+        body {
+            padding-bottom: 300px;
+        }
+
+        .input-group-addon {
+            cursor: pointer;
+        }
+
+        .navbar-right {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Persian Date Picker <span class="badge">Beta Version 0.5.10</span>
+            </a>
+        </div>
+        <nav class="navbar-right">
+            <span>
+            theme:
+                </span>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/persian-datepicker.css')">
+                Default
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-blue.min.css')">
+                Blue
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-cheerup.min.css')">
+                Cheerup
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-dark.min.css')">
+                Dark
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-redblack.min.css')">
+                Redblack
+            </button>
+        </nav><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    <h6>Range Selector that make sure 'to' date is after 'from' date and also 'from' is before 'to' date.</h6>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">From </h3>
+                            <span>maxDate change by 'to' datepicker</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input id="fromAlt" class="form-control" disabled/>
+                                <br/>
+                                <div id="from">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">To</h3>
+                            <span>minDate change by 'from' datepicker</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input id="toAlt" class="form-control" disabled/>
+                                <br/>
+                                <div id="to">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery (required dependency) -->
+<!-- ------------------------------------------------------------------------------------ -->
+<!--<script-->
+<!--src="https://code.jquery.com/jquery-3.2.1.min.js"-->
+<!--integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="-->
+<!--crossorigin="anonymous"></script>-->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+
+<!-- ------------------------------------------------------------------------------------ -->
+<script src="../assets/persian-date.min.js"></script>
+
+<!-- Datepicker main script -->
+<!-- ------------------------------------------------------------------------------------ -->
+<!--<script src="./js/persian-datepicker.js"></script>-->
+<script src="./js/persian-datepicker.js"></script>
+
+<!-- Init datepicker -->
+<!-- ------------------------------------------------------------------------------------ -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Debug mode
+        // --------------------------------------------
+//        window.persianDatepickerDebug = true;
+
+//         Inline Sample
+//         --------------------------------------------
+        // Inline Sample
+        // --------------------------------------------
+        window.to = $("#to").persianDatepicker({
+            inline: true,
+            altField: '#toAlt',
+            altFormat: 'LLLL',
+            initialValue: false,
+//            minDate: new persianDate().subtract('day', 3).valueOf(),
+//            maxDate: new persianDate().add('day', 10).valueOf(),
+            onSelect: function (unix) {
+                to.touched = true;
+                if (from && from.options && from.options.maxDate != unix) {
+                    var cachedValue = from.getState().selected.unixDate;
+                    from.options = {maxDate: unix};
+                    if (from.touched) {
+                        from.setDate(cachedValue);
+                    }
+                }
+            }
+        });
+        window.from = $("#from").persianDatepicker({
+            inline: true,
+            altField: '#fromAlt',
+            altFormat: 'LLLL',
+            initialValue: false,
+//            minDate: new persianDate().subtract('day', 3).valueOf(),
+//            maxDate: new persianDate().add('day', 10).valueOf(),
+            onSelect: function (unix) {
+                from.touched = true;
+                if (to && to.options && to.options.minDate != unix) {
+                    var cachedValue = to.getState().selected.unixDate;
+                    to.options = {minDate: unix};
+                    if (to.touched) {
+                        to.setDate(cachedValue);
+                    }
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

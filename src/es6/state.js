@@ -115,10 +115,10 @@ class State {
     _setFilterDate(minDate, maxDate) {
         let self = this;
         if (!minDate) {
-            minDate = -999999999999999999;
+            minDate = -2000000000000000;
         }
         if (!maxDate) {
-            maxDate = 999999999999999999;
+            maxDate = 2000000000000000;
         }
         let pd = self.model.PersianDate.date(minDate);
         self.filterDate.start.unixDate = minDate;
@@ -279,7 +279,6 @@ class State {
         ]);
         this.selected.unixDate = this.selected.dateObject.valueOf();
         this.model.updateInput(this.selected.unixDate);
-        this.model.options.onSelect(this.selected.unixDate);
         return this;
     }
 

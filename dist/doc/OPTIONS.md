@@ -99,6 +99,7 @@ persian-datepicker configuration document
     * [.checkMonth()](#Config.checkMonth) : <code>function</code>
     * [.checkYear()](#Config.checkYear) : <code>function</code>
     * ["onSelect" (unixDate)](#Config.event_onSelect)
+    * ["onSet" (unixDate)](#Config.event_onSet)
     * ["onShow"](#Config.event_onShow)
     * ["onHide"](#Config.event_onHide)
     * ["onToggle"](#Config.event_onToggle)
@@ -1249,7 +1250,25 @@ Validate year access before render
 <a name="Config.event_onSelect"></a>
 
 ## "onSelect" (unixDate)
-A function that takes current datepicker unixDate. called When date Select.
+Called when date Select by user.
+
+**Kind**: event emitted by [<code>Config</code>](#Config)  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>unixDate</td>
+    </tr>  </tbody>
+</table>
+
+<a name="Config.event_onSet"></a>
+
+## "onSet" (unixDate)
+Called when date Select by api.
 
 **Kind**: event emitted by [<code>Config</code>](#Config)  
 <table>

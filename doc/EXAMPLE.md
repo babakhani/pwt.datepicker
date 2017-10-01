@@ -389,9 +389,65 @@ $('.on-select-example').persianDatepicker({
 
 
 
+## Range selector
 
+Range Selector that make sure 'to' date is after 'from' date and also 'from' is before 'to' date.
 
+```javascript
 
+var to, from;
+to = $(".range-to-example").persianDatepicker({
+    inline: true,
+    altField: '.range-to-example-alt',
+    altFormat: 'LLLL',
+    initialValue: false,
+    onSelect: function (unix) {
+        to.touched = true;
+        if (from && from.options && from.options.maxDate != unix) {
+            var cachedValue = from.getState().selected.unixDate;
+            from.options = {maxDate: unix};
+            if (from.touched) {
+                from.setDate(cachedValue);
+            }
+        }
+    }
+});
+from = $(".range-from-example").persianDatepicker({
+    inline: true,
+    altField: '.range-from-example-alt',
+    altFormat: 'LLLL',
+    initialValue: false,
+    onSelect: function (unix) {
+        from.touched = true;
+        if (to && to.options && to.options.minDate != unix) {
+            var cachedValue = to.getState().selected.unixDate;
+            to.options = {minDate: unix};
+            if (to.touched) {
+                to.setDate(cachedValue);
+            }
+        }
+    }
+});
+
+```
+
+```html
+<div class="range-from-example"></div>
+<div class="range-to-example"></div>
+```
+
+<div class="two-inline-datepicker">
+<div>
+<label>to</label>
+<input  class='datepicker-demo range-to-example-alt' />
+<div class="datepicker-demo range-to-example" ></div>
+</div>
+<div>
+<label>From</label>
+<input  class='datepicker-demo range-from-example-alt' />
+<div class="datepicker-demo range-from-example" ></div>
+</div>
+</div>
 
 
 
