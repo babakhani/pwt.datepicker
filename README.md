@@ -174,7 +174,7 @@ bower install persian-datepicker
 | template                       | string           | null                                            | By default datepicker have a template string, and you can overwrite it simply by replace string in config. |
 
 ## Thanks and appreciation
-Thanks to [vahid Mardani](https://github.com/pylover) for everything that I learned from him
+Thanks to [Vahid Mardani](https://github.com/pylover) for everything that I learned from him
 , [Behrooz Bahrami](http://behance.net/behroozbahrami) for designing the logo.
 , [Bita Edalati](http://github.com/bitaedalati) for create amazing [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)
 
