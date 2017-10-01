@@ -12,7 +12,7 @@ class View {
      * @param {Datepicker} model
      * @return {View}
      */
-    constructor(model) {
+    constructor (model) {
 
         /**
          * @type {number}
@@ -61,7 +61,7 @@ class View {
     /**
      * @desc add css class to handle compatibility ui things
      */
-    addCompatibilityClass() {
+    addCompatibilityClass () {
         if (Helper.isMobile && this.model.options.responsive) {
             this.$container.addClass('pwt-mobile-view');
         }
@@ -70,16 +70,16 @@ class View {
     /**
      * @desc remove datepicker container element from dom
      */
-    destroy() {
+    destroy () {
         this.$container.remove();
     }
 
     /**
      * @desc set datepicker container element based on <input/> element position
      */
-    setPickerBoxPosition() {
+    setPickerBoxPosition () {
         let inputPosition = this.model.input.getInputPosition(),
-            inputSize = this.model.input.getInputSize();
+          inputSize = this.model.input.getInputSize();
         if (this.model.options.position === 'auto') {
             this.$container.css({
                 left: (inputPosition.left) + 'px',
@@ -96,7 +96,7 @@ class View {
     /**
      * @desc show datepicker container element
      */
-    show() {
+    show () {
         this.$container.removeClass('pwt-hide');
         this.setPickerBoxPosition();
     }
@@ -104,14 +104,14 @@ class View {
     /**
      * @desc hide datepicker container element
      */
-    hide() {
+    hide () {
         this.$container.addClass('pwt-hide');
     }
 
     /**
      * @desc toggle datepicker container element
      */
-    toggle() {
+    toggle () {
         this.$container.toggle();
     }
 
@@ -121,7 +121,7 @@ class View {
      * @private
      * @return {String}
      */
-    _getNavSwitchText(data) {
+    _getNavSwitchText (data) {
         let output;
         if (this.model.state.viewMode == 'day') {
             output = this.model.options.dayPicker.titleFormatter.call(this, data.year, data.month);
@@ -140,11 +140,11 @@ class View {
      * @param {Number} year - year number
      * @return {Boolean}
      */
-    checkYearAccess(year) {
+    checkYearAccess (year) {
         let output = true;
         if (this.model.state.filetredDate) {
             let startYear = this.model.state.filterDate.start.year,
-                endYear = this.model.state.filterDate.end.year;
+              endYear = this.model.state.filterDate.end.year;
             if (startYear && year < startYear) {
                 return false;
             }
@@ -163,7 +163,7 @@ class View {
      * @param viewState
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
-    _getYearViewModel(viewState) {
+    _getYearViewModel (viewState) {
         let isEnabled = this.model.options.yearPicker.enabled;
         // Make performance better
         if (!isEnabled) {
@@ -180,7 +180,7 @@ class View {
          * @description Generate years object based on list
          */
         let yearsModel = [],
-            yearStr = this.model.PersianDate.date();
+          yearStr = this.model.PersianDate.date();
         for (let i of list) {
             yearStr.year([i]);
             yearsModel.push({
@@ -202,14 +202,15 @@ class View {
      * @param {Number} month - month number
      * @return {Boolean}
      */
-    checkMonthAccess(month) {
+    checkMonthAccess (month) {
+        month = month + 1;
         let output = true,
-            y = this.model.state.view.year;
+          y = this.model.state.view.year;
         if (this.model.state.filetredDate) {
             let startMonth = this.model.state.filterDate.start.month,
-                endMonth = this.model.state.filterDate.end.month,
-                startYear = this.model.state.filterDate.start.year,
-                endYear = this.model.state.filterDate.end.year;
+              endMonth = this.model.state.filterDate.end.month,
+              startYear = this.model.state.filterDate.start.year,
+              endYear = this.model.state.filterDate.end.year;
             if (startMonth && endMonth && ((y == endYear && month > endMonth) || y > endYear) || ((y == startYear && month < startMonth) || y < startYear)) {
                 return false;
             }
@@ -229,7 +230,7 @@ class View {
      * @private
      * @return {{enabled: boolean, viewMode: boolean, list: Array}}
      */
-    _getMonthViewModel() {
+    _getMonthViewModel () {
         let isEnaled = this.model.options.monthPicker.enabled;
         // Make performance better
         if (!isEnaled) {
@@ -260,9 +261,9 @@ class View {
      * @param {Number} thisUnix - month number
      * @return {Boolean}
      */
-    checkDayAccess(unixtimespan) {
+    checkDayAccess (unixtimespan) {
         let self = this,
-            output = true;
+          output = true;
         self.minDate = this.model.options.minDate;
         self.maxDate = this.model.options.maxDate;
 
@@ -295,7 +296,7 @@ class View {
      * @private
      * @return {object}
      */
-    _getDayViewModel() {
+    _getDayViewModel () {
         if (this.model.state.viewMode != 'day') {
             return [];
         }
@@ -312,19 +313,19 @@ class View {
         //log('if you see this many time your code has performance issue');
         const viewMonth = this.model.state.view.month, viewYear = this.model.state.view.year;
         let pdateInstance = this.model.PersianDate.date(),
-            daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
-            firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
-            outputList = [],
-            daysListindex = 0,
-            nextMonthListIndex = 0,
-            daysMatrix = [
-                ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-                ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-                ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-                ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-                ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
-                ['null', 'null', 'null', 'null', 'null', 'null', 'null']
-            ];
+          daysCount = pdateInstance.daysInMonth(viewYear, viewMonth),
+          firstWeekDayOfMonth = pdateInstance.getFirstWeekDayOfMonth(viewYear, viewMonth) - 1,
+          outputList = [],
+          daysListindex = 0,
+          nextMonthListIndex = 0,
+          daysMatrix = [
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null'],
+              ['null', 'null', 'null', 'null', 'null', 'null', 'null']
+          ];
 
         const anotherCalendar = this._getAnotherCalendar();
         let pdate = this.model.PersianDate.date();
@@ -364,7 +365,7 @@ class View {
         };
     }
 
-    markSelectedDay() {
+    markSelectedDay () {
         const selected = this.model.state.selected;
         this.$container.find('.table-days td').each(function () {
             if ($(this).data('date') == [selected.year, selected.month, selected.date].join(',')) {
@@ -375,7 +376,7 @@ class View {
         });
     }
 
-    markToday() {
+    markToday () {
         const today = new persianDate();
         this.$container.find('.table-days td').each(function () {
             if ($(this).data('date') == [today.year(), today.month(), today.date()].join(',')) {
@@ -390,7 +391,7 @@ class View {
      * @private
      * @return {{enabled: boolean, hour: {title, enabled: boolean}, minute: {title, enabled: boolean}, second: {title, enabled: boolean}, meridian: {title: (meridian|{title, enabled}|ClassDatepicker.ClassConfig.timePicker.meridian|{enabled}|string|string), enabled: boolean}}}
      */
-    _getTimeViewModel() {
+    _getTimeViewModel () {
 
         let isEnabled = this.model.options.timePicker.enabled;
         // Make performance better
@@ -435,7 +436,7 @@ class View {
      * @return {{enabled: boolean, list: (*|Array)}}
      * @private
      */
-    _getWeekViewModel() {
+    _getWeekViewModel () {
         return {
             enabled: true,
             list: this.model.PersianDate.date().rangeName().weekdaysMin
@@ -447,7 +448,7 @@ class View {
      *
      * @return {string}
      */
-    getCssClass() {
+    getCssClass () {
         return [
             this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
             !this.model.options.timePicker.meridian.enabled ? 'datepicker-state-no-meridian' : '',
@@ -460,7 +461,7 @@ class View {
      * @param data
      * @return {*}
      */
-    getViewModel(data) {
+    getViewModel (data) {
         const anotherCalendar = this._getAnotherCalendar();
         return {
             plotId: '',
@@ -488,7 +489,7 @@ class View {
         };
     }
 
-    _getButtonText() {
+    _getButtonText () {
         let output = {};
         if (this.model.options.locale_ == 'fa') {
             output.todayButtontext = this.model.options.toolbox.todayButton.text.fa;
@@ -502,7 +503,7 @@ class View {
     }
 
 
-    _getAnotherCalendar() {
+    _getAnotherCalendar () {
         let that = this, cal, loc;
         if (that.model.options.calendar_ == 'persian') {
             cal = 'gregorian';
@@ -518,7 +519,7 @@ class View {
     /**
      * @desc render times area, prevent performance issue with scroll and time section
      */
-    renderTimePartial() {
+    renderTimePartial () {
         const timeViewModel = this._getTimeViewModel(this.model.state.view);
         this.$container.find('[data-time-key="hour"] input').val(timeViewModel.hour.title);
         this.$container.find('[data-time-key="minute"] input').val(timeViewModel.minute.title);
@@ -531,7 +532,7 @@ class View {
      * @render datepicker view element
      * @param data
      */
-    render(data) {
+    render (data) {
         if (!data) {
             data = this.model.state.view;
         }
@@ -545,7 +546,7 @@ class View {
     }
 
 
-    reRender() {
+    reRender () {
         let data = this.model.state.view;
         this.render(data);
     }
@@ -553,7 +554,7 @@ class View {
     /**
      * @desc do after render work like attache events
      */
-    afterRender() {
+    afterRender () {
         if (this.model.navigator) {
             this.model.navigator.liveAttach();
         }

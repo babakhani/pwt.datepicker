@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v0.5.12b
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1984,7 +1977,7 @@ var Navigator = function () {
                     that.model.state.setViewDateTime('month', month);
                     that.model.view.render();
                     that.model.options.monthPicker.onSelect(month);
-                    that.model.options.onSelect(that.state.selected.unix);
+                    that.model.options.onSelect(that.model.state.selected.unix);
                 });
             }
 
@@ -2009,7 +2002,7 @@ var Navigator = function () {
                     that.model.state.setViewDateTime('year', year);
                     that.model.view.render();
                     that.model.options.yearPicker.onSelect(year);
-                    that.model.options.onSelect(that.state.selected.unix);
+                    that.model.options.onSelect(that.model.state.selected.unix);
                 });
             }
         }
@@ -2957,6 +2950,7 @@ var View = function () {
     }, {
         key: 'checkMonthAccess',
         value: function checkMonthAccess(month) {
+            month = month + 1;
             var output = true,
                 y = this.model.state.view.year;
             if (this.model.state.filetredDate) {
