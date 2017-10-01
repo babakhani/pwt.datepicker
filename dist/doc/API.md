@@ -1,11 +1,12 @@
 <a name="API"></a>
 
 ## API
-This is default API class
+Default API class
 
 **Kind**: global class  
 
 * [API](#API)
+    * [.options](#API+options)
     * [.options](#API+options)
     * [.show()](#API+show)
     * [.getState()](#API+getState)
@@ -14,6 +15,17 @@ This is default API class
     * [.destroy()](#API+destroy)
     * [.setDate(unix)](#API+setDate)
 
+<a name="API+options"></a>
+
+### apI.options
+get current option object
+
+**Kind**: instance property of [<code>API</code>](#API)  
+**Example**  
+```js
+var pd = $('.selector').persianDatepicker();
+console.log(pd.options);
+```
 <a name="API+options"></a>
 
 ### apI.options
@@ -45,6 +57,7 @@ pd.show();
 return datepicker current state
 
 **Kind**: instance method of [<code>API</code>](#API)  
+**Since**: 1.0.0  
 **Example**  
 ```js
 var pd = $('.selector').persianDatepicker();

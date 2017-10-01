@@ -38,7 +38,7 @@ persian-datepicker configuration document
         * ["onSwitch"](#Config.navigator.event_onSwitch)
     * [.toolbox](#Config.toolbox) : <code>object</code>
         * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
-        * [.text](#Config.toolbox.text) : <code>object</code>
+        * <del>[.text](#Config.toolbox.text) : <code>object</code></del>
             * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
         * [.submitButton](#Config.toolbox.submitButton)
             * [.enabled](#Config.toolbox.submitButton.enabled) : <code>boolean</code>
@@ -112,14 +112,14 @@ set default calendar mode of datepicker, available options: 'persian', 'gregoria
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>&quot;&#x27;persian&#x27;&quot;</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.calendar"></a>
 
 ## Config.calendar : <code>object</code>
 calendar type and localization configuration
 
 **Kind**: static property of [<code>Config</code>](#Config)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 **Example**  
 ```js
 {
@@ -151,7 +151,7 @@ calendar type and localization configuration
 Persian calendar configuration
 
 **Kind**: static property of [<code>calendar</code>](#Config.calendar)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.persian](#Config.calendar.persian) : <code>object</code>
     * [.locale](#Config.calendar.persian.locale) : <code>string</code>
@@ -165,7 +165,7 @@ set locale of Persian calendar available options: 'fa', 'en'
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
 **Default**: <code>&quot;&#x27;fa&#x27;&quot;</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.calendar.persian.showHint"></a>
 
 #### persian.showHint : <code>boolean</code>
@@ -173,7 +173,7 @@ if set true, small date hint of this calendar will be shown on another calendar
 
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
 **Default**: <code>false</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.calendar.persian.leapYearMode"></a>
 
 #### persian.leapYearMode : <code>string</code>
@@ -182,14 +182,14 @@ Persian calendar leap year calculation mode, available options: 'algorithmic', '
 **Kind**: static property of [<code>persian</code>](#Config.calendar.persian)  
 **Default**: <code>&quot;&#x27;algorithmic&#x27;&quot;</code>  
 **Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.calendar.gregorian"></a>
 
 ### calendar.gregorian : <code>object</code>
 Gregorian calendar configuration
 
 **Kind**: static property of [<code>calendar</code>](#Config.calendar)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.gregorian](#Config.calendar.gregorian) : <code>object</code>
     * [.locale](#Config.calendar.gregorian.locale) : <code>string</code>
@@ -202,7 +202,7 @@ set locale of Gregorian calendar available options: 'fa', 'en'
 
 **Kind**: static property of [<code>gregorian</code>](#Config.calendar.gregorian)  
 **Default**: <code>&quot;&#x27;en&#x27;&quot;</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.calendar.gregorian.showHint"></a>
 
 #### gregorian.showHint : <code>boolean</code>
@@ -210,7 +210,7 @@ if set true, small date hint of this calendar will be shown on another calendar
 
 **Kind**: static property of [<code>gregorian</code>](#Config.calendar.gregorian)  
 **Default**: <code>false</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.responsive"></a>
 
 ## Config.responsive : <code>boolean</code>
@@ -218,7 +218,7 @@ if set true make enable responsive view on mobile devices
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.inline"></a>
 
 ## Config.inline : <code>boolean</code>
@@ -435,7 +435,7 @@ toolbox config object
 
 * [.toolbox](#Config.toolbox) : <code>object</code>
     * [.enabled](#Config.toolbox.enabled) : <code>boolean</code>
-    * [.text](#Config.toolbox.text) : <code>object</code>
+    * <del>[.text](#Config.toolbox.text) : <code>object</code></del>
         * <del>[.btnToday](#Config.toolbox.text.btnToday) : <code>string</code></del>
     * [.submitButton](#Config.toolbox.submitButton)
         * [.enabled](#Config.toolbox.submitButton.enabled) : <code>boolean</code>
@@ -464,8 +464,10 @@ boolean option that make toolbar enable or disable
 **Default**: <code>true</code>  
 <a name="Config.toolbox.text"></a>
 
-### toolbox.text : <code>object</code>
-toolbox button text coniguration
+### <del>toolbox.text : <code>object</code></del>
+***Deprecated***
+
+toolbox button text configuration
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
 <a name="Config.toolbox.text.btnToday"></a>
@@ -473,7 +475,7 @@ toolbox button text coniguration
 #### <del>text.btnToday : <code>string</code></del>
 ***Deprecated***
 
-text of today button, deprecated from 0.6.0
+text of today button, deprecated from 1.0.0
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.text)  
 **Default**: <code>&quot;&#x27;امروز&#x27;&quot;</code>  
@@ -483,7 +485,7 @@ text of today button, deprecated from 0.6.0
 submit button configuration (only shown on mobile)
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.submitButton](#Config.toolbox.submitButton)
     * [.enabled](#Config.toolbox.submitButton.enabled) : <code>boolean</code>
@@ -499,14 +501,14 @@ make submit button enable or disable
 
 **Kind**: static property of [<code>submitButton</code>](#Config.toolbox.submitButton)  
 **Default**: <code>false</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.submitButton.text"></a>
 
 #### submitButton.text : <code>object</code>
 submit button text
 
 **Kind**: static property of [<code>submitButton</code>](#Config.toolbox.submitButton)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.text](#Config.toolbox.submitButton.text) : <code>object</code>
     * [.fa](#Config.toolbox.submitButton.text.fa) : <code>object</code>
@@ -519,7 +521,7 @@ show when current calendar is Persian
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.submitButton.text)  
 **Default**: <code>تایید</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.submitButton.text.en"></a>
 
 ##### text.en : <code>object</code>
@@ -527,21 +529,21 @@ show when current calendar is Gregorian
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.submitButton.text)  
 **Default**: <code>submit</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.submitButton.event_onSubmit"></a>
 
 #### "onSubmit"
 Called when submit button clicked
 
 **Kind**: event emitted by [<code>submitButton</code>](#Config.toolbox.submitButton)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.todayButton"></a>
 
 ### toolbox.todayButton
 toolbox today button configuration
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.todayButton](#Config.toolbox.todayButton)
     * [.enabled](#Config.toolbox.todayButton.enabled) : <code>boolean</code>
@@ -556,14 +558,14 @@ toolbox today button configuration
 make toolbox today button enable or disable
 
 **Kind**: static property of [<code>todayButton</code>](#Config.toolbox.todayButton)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.todayButton.text"></a>
 
 #### todayButton.text : <code>object</code>
 today button text
 
 **Kind**: static property of [<code>todayButton</code>](#Config.toolbox.todayButton)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.text](#Config.toolbox.todayButton.text) : <code>object</code>
     * [.fa](#Config.toolbox.todayButton.text.fa) : <code>object</code>
@@ -576,7 +578,7 @@ show when current calendar is Persian
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.todayButton.text)  
 **Default**: <code>امروز</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.todayButton.text.en"></a>
 
 ##### text.en : <code>object</code>
@@ -584,21 +586,21 @@ show when current calendar is Gregorian
 
 **Kind**: static property of [<code>text</code>](#Config.toolbox.todayButton.text)  
 **Default**: <code>today</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.todayButton.event_onToday"></a>
 
 #### "onToday"
 Called when today button clicked
 
 **Kind**: event emitted by [<code>todayButton</code>](#Config.toolbox.todayButton)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.calendarSwitch"></a>
 
 ### toolbox.calendarSwitch : <code>object</code>
 toolbox calendar switch configuration
 
 **Kind**: static property of [<code>toolbox</code>](#Config.toolbox)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 
 * [.calendarSwitch](#Config.toolbox.calendarSwitch) : <code>object</code>
     * [.enabled](#Config.toolbox.calendarSwitch.enabled) : <code>boolean</code>
@@ -612,7 +614,7 @@ make calendar switch enable or disable
 
 **Kind**: static property of [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
 **Default**: <code>true</code>  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.calendarSwitch.format"></a>
 
 #### calendarSwitch.format : <code>string</code>
@@ -621,14 +623,14 @@ calendar switch text format string
 **Kind**: static property of [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
 **Default**: <code>&quot;MMMM&quot;</code>  
 **Link**: http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.calendarSwitch.event_onSwitch"></a>
 
 #### "onSwitch"
 Called when calendar switch clicked
 
 **Kind**: event emitted by [<code>calendarSwitch</code>](#Config.toolbox.calendarSwitch)  
-**Since**: 0.6.0  
+**Since**: 1.0.0  
 <a name="Config.toolbox.event_onToday"></a>
 
 ### <del>"onToday" (toolbox)</del>

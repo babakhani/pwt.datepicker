@@ -14,7 +14,53 @@ $('.normal-example').persianDatepicker();
 <input class="datepicker-demo normal-example" />
 
 
-## inline example
+## without initialValue
+
+```javascript
+$('.initial-value-example').persianDatepicker({
+    initialValue: false
+});
+```
+
+```html
+<input class="initial-value-example" />
+```
+<label>Datepicker</label>
+<input class="datepicker-demo initial-value-example" />
+
+
+
+## initialValueType
+
+```javascript
+$('.initial-value-type-example').persianDatepicker({
+    initialValueType: 'persian'
+});
+```
+
+```html
+<input class="initial-value-type-example" value="1396-10-12" />
+```
+<label>Datepicker</label>
+<input class="datepicker-demo initial-value-type-example" value="1396-10-12" />
+
+
+
+```javascript
+$('.initial-value-type-gregorian-example').persianDatepicker({
+    initialValueType: 'gregorian'
+});
+```
+
+```html
+<input class="initial-value-type-gregorian-example" value="2017-1-1" />
+```
+<label>Datepicker</label>
+<input class="datepicker-demo initial-value-type-gregorian-example" value="2017-1-1" />
+
+
+
+## inline
 
 ```javascript
 $('.inline-example').persianDatepicker({

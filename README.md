@@ -8,7 +8,7 @@ Jalali calendar datepicker, which depends on [persianDate](https://github.com/ba
 
 More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 
-> Note: from v0.6.0 persianDatepicker support gregorian calendar
+> Note: from v1.0.0 persianDatepicker support gregorian calendar
 
 [![npm version](https://badge.fury.io/js/persian-datepicker.svg)](https://badge.fury.io/js/persian-datepicker)
 [![Bower version](https://badge.fury.io/bo/persian-datepicker.svg)](https://badge.fury.io/bo/persian-datepicker)
@@ -38,7 +38,7 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 - [persian date](https://github.com/babakhani/PersianDate)
 - [jquery](http://jquery.com/)
 
-> persian-datepicker 0.6.x need persian-date 0.3.x
+> persian-datepicker 1.x.x need persian-date 1.x.x
 
 ## Install
 
@@ -87,33 +87,33 @@ bower install persian-datepicker
 | initialValue                   | boolean          | true                                            | If set true datepicker init with input value date, use data-date property when you want set inline datepicker initial value |
 | initialValueType               | string           | 'gregorian'                                     | Initial value calendar type, accept: 'persian', 'gregorian' |
 | inline                         | boolean          | false                                           | If set true datepicker render inline |
-| persianDigit (DEPRECATED Sience 0.6.0)      | boolean          | true                               | If set true all digit shows as persian digit |
-| viewMode                       | string           | 'day'                                           | Accept day, month, year |
-| format                         | string           | 'LLLL'                                          | The date format, combination of d, dd, m, mm, yy, yyy |
+| persianDigit (DEPRECATED from 1.0.0)      | boolean          | true                               | If set true all digit shows as persian digit |
+| viewMode                       | string           | 'day'                                           | Accept 'day', 'month', 'year' |
+| format                         | string           | 'LLLL'                                          | The date format, combination of d, dd, m, mm, yy, yyy. [format document](http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format) |
 | formatter                      | function         | function(unixDate){return unixDate}             | Main Input value formatter function |
 | altField                       | string           | null                                            | An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field. acceptable value: : '#elementId','.element-class' |
-| altFormat                      | string           | 'unix'                                          | The date format, combination of d, dd, m, mm, yy, yyy. |
+| altFormat                      | string           | 'unix'                                          | The date format, combination of d, dd, m, mm, yy, yyy. [format document](http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format) |
 | altFieldFormatter              | function         | function(unixDate){return unixDate}             | Format value of alt field input input |
 | minDate                        | Unix Offset      | null                                            | Set min date on datepicker, prevent user select date before given unix time |
 | maxDate                        | Unix Offset      | null                                            | Set max date on datepicker, prevent user select date after given unix time |
 | navigator                      | object           |                                                 | Navigator config object |
 | navigator.enabled              | boolean          | true                                            | Make navigator enable or disable |
 | navigator.scroll               | object           |                                                 | Navigate by scroll configuration |
-| navigator.scroll.enabled       | boolean          | true                                            | If you want prevent to navigate with mousewheel event make this options false |
+| navigator.scroll.enabled       | boolean          | true                                            | If you want prevent to navigate with mouse-wheel event make this option false |
 | navigator.text                 | object           |                                                 | Navigator text config object |
 | navigator.text.btnNextText     | string           | '<'                                             | Text of next button|
-| navigator.text.btnPrevText     | string           | '>'                                             | Text of previews butto
+| navigator.text.btnPrevText     | string           | '>'                                             | Text of previews button |
 | navigator.onNext               | event            | function (navigator) {}                         | Called when navigator goes to next state |
 | navigator.onPrev               | event            | function (navigator) {}                         | Called when navigator goes to prev state |
 | navigator.onSwitch             | event            | function (state) {}                             | Called when navigator switch |
 | toolbox                        | object           |                                                 | Toolbox object options.|
 | toolbox.enabled                | boolean          | true                                            | Enable/Disable toolbox object |
-| toolbox.text                   | object           |                                                 | |
-| toolbox.text.btnToday (DEPRECATED Sience 0.6.0)   | string           | 'امروز'                      | Today button text|
+| toolbox.text (DEPRECATED from 1.0.0)              | object           |                              | |
+| toolbox.text.btnToday (DEPRECATED from 1.0.0)     | string          | 'امروز'                      | Today button text|
 | toolbox.todayButton            | object           |                                                 | Toolbox today button configuration|
-| toolbox.todayButton.enabled    | boolean          | false                                            | Make toolbox today button enable or disable|
+| toolbox.todayButton.enabled    | boolean          | false                                           | Make toolbox today button enable or disable|
 | toolbox.todayButton.text       | object           |                                                 | Today button text|
-| toolbox.todayButton.text.fa    | string           | 'امروز'                                         | Show when current calendar is Persian|
+| toolbox.todayButton.text.fa    | string           | 'امروز'                                        | Show when current calendar is Persian|
 | toolbox.todayButton.text.en    | string           | 'Today'                                         | Show when current calendar is Gregorian|
 | toolbox.todayButton.onToday    | event            | function () {}                                  | Called when today button clicked |
 | toolbox.submitButton           | object           |                                                 | Toolbox today button configuration|
@@ -126,7 +126,7 @@ bower install persian-datepicker
 | toolbox.calendarSwitch.enabled | boolean          | true                                            | Make calendar switch enable or disable |
 | toolbox.calendarSwitch.format  | string           | 'MMMM'                                          | Calendar switch text format string |
 | toolbox.calendarSwitch.onSwitch| event            | function () {}                                  | Called when calendar switch clicked |
-| toolbox.onToday (DEPRECATED Sience 0.6.0)                | event            | function(toolbox){return unixDate}              | Event called when today btn clicked|
+| toolbox.onToday (DEPRECATED from 0.6.0)                | event            | function(toolbox){return unixDate}              | Event called when today btn clicked|
 | onlyTimePicker (mode)          | boolean          | false                                           | If true, all pickers hide and just show timepicker |
 | onlySelectOnDate               | boolean          | true                                            | If true, date select just by click on day in month grid, and when user select month or year selected date doesnt change |
 | checkDate                      | function         | function (unix)  { return true; }               | Validate date access before render|
@@ -150,17 +150,17 @@ bower install persian-datepicker
 | dayPicker.enabled              | boolean          | true                                            | Enable/Disable dayPicker object |
 | dayPicker.titleFormat          | string           | 'YYYY MMMM'                                     | DayPicker title format string |
 | dayPicker.titleFormatter       | function         | function (year, month) {}                       | DayPicker title formatter function |
-| dayPicker.onSelect             | event            | function (selectedDayUnix) {}                   | Called when date select |
+| dayPicker.onSelect             | event            | function (selectedDayUnix) {}                   | Called when date select by user |
 | monthPicker                    | object           |                                                 | |
 | monthPicker.enabled            | boolean          | true                                            | Enable/Disable monthPicker object |
 | monthPicker.titleFormat        | string           | 'YYYY'                                          | MonthPicker title format string |
 | monthPicker.titleFormatter     | function         | function (unix) {}                              | MonthPicker title formatter function |
-| monthPicker.onSelect           | event            | function (monthIndex) {}                        | Called when month select |
+| monthPicker.onSelect           | event            | function (monthIndex) {}                        | Called when month select by user |
 | yearPicker                     | object           |                                                 | |
 | yearPicker.enabled             | boolean          | true                                            | Enable/Disable yearPicker object |
 | yearPicker.titleFormat         | string           | 'YYYY'                                          | YearPicker title format string |
 | yearPicker.titleFormatter      | function         | function (year) {}                              | YearPicker title formatter function |
-| yearPicker.onSelect            | event            | function (year) {}                              | Called when year select |
+| yearPicker.onSelect            | event            | function (year) {}                              | Called when year select by user |
 | onSelect                       | event            | function (unixDate) {}                          | Called when date Select by user. |
 | onSet                          | event            | function (unixDate) {}                          | Called when date Select by api. |
 | onShow                         | event            | function () {}                                  | Called when datePicker shown |
@@ -173,11 +173,11 @@ bower install persian-datepicker
 | inputDelay                     | int              | 800  (millisecond)                              | Time for last user key-down event, accept millisecond |
 | template                       | string           | null                                            | By default datepicker have a template string, and you can overwrite it simply by replace string in config. |
 
-<!--## Thanks and appreciation-->
-<!--- Thanks to [vahid Mardani](https://github.com/pylover) my best friend and also my best teacher, for everything that I learned from him.-->
-<!--- Thanks to [Behrooz Bahrami](behance.net/behroozbahrami) for designing the logo.-->
-<!--- Thanks to [Bita Edalati](github.com/bitaedalati) for create amazing [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)-->
+## Thanks and appreciation
+Thanks to [vahid Mardani](https://github.com/pylover) for everything that I learned from him
+, [Behrooz Bahrami](http://behance.net/behroozbahrami) for designing the logo.
+, [Bita Edalati](http://github.com/bitaedalati) for create amazing [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)
 
 ## license
 
-- [WTFPL](http://www.wtfpl.net/)
+[WTFPL](http://www.wtfpl.net/)

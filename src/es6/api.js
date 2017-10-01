@@ -1,11 +1,16 @@
 /**
- * This is default API class
+ * Default API class
  */
 class API {
     constructor(model) {
         this.model = model;
     }
 
+    /**
+     * @description get current option object
+     * @example var pd = $('.selector').persianDatepicker();
+     * console.log(pd.options);
+     */
     get options() {
         return this.model.options;
     }
@@ -37,6 +42,7 @@ class API {
 
     /**
      * @description return datepicker current state
+     * @since 1.0.0
      * @example var pd = $('.selector').persianDatepicker();
      * var state = pd.getState();
      *

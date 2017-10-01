@@ -1,3 +1,10 @@
+/*
+** persian-datepicker - v1.0.0
+** Reza Babakhani <babakhani.reza@gmail.com>
+** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
+** Under WTFPL license 
+*/ 
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -294,7 +301,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * This is default API class
+ * Default API class
  */
 var API = function () {
     function API(model) {
@@ -302,6 +309,13 @@ var API = function () {
 
         this.model = model;
     }
+
+    /**
+     * @description get current option object
+     * @example var pd = $('.selector').persianDatepicker();
+     * console.log(pd.options);
+     */
+
 
     _createClass(API, [{
         key: 'show',
@@ -320,6 +334,7 @@ var API = function () {
 
         /**
          * @description return datepicker current state
+         * @since 1.0.0
          * @example var pd = $('.selector').persianDatepicker();
          * var state = pd.getState();
          *
@@ -438,14 +453,14 @@ var Config = {
    * @description set default calendar mode of datepicker, available options: 'persian', 'gregorian'
    * @default 'persian'
    * @type string
-   * @since 0.6.0
+   * @since 1.0.0
    */
   'calendarType': 'persian',
 
   /**
    * @description calendar type and localization configuration
    * @type object
-   * @since 0.6.0
+   * @since 1.0.0
    * @example
    * {
    *     'persian': {
@@ -468,7 +483,7 @@ var Config = {
     /**
      * @description Persian calendar configuration
      * @type object
-     * @since 0.6.0
+     * @since 1.0.0
      */
     'persian': {
 
@@ -476,7 +491,7 @@ var Config = {
        * @description set locale of Persian calendar available options: 'fa', 'en'
        * @default 'fa'
        * @type string
-       * @since 0.6.0
+       * @since 1.0.0
        */
       'locale': 'fa',
 
@@ -484,7 +499,7 @@ var Config = {
        * @description if set true, small date hint of this calendar will be shown on another calendar
        * @type boolean
        * @default false
-       * @since 0.6.0
+       * @since 1.0.0
        */
       'showHint': false,
 
@@ -493,7 +508,7 @@ var Config = {
        * @type string
        * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear
        * @default 'algorithmic'
-       * @since 0.6.0
+       * @since 1.0.0
        */
       'leapYearMode': 'algorithmic' // "astronomical"
     },
@@ -501,7 +516,7 @@ var Config = {
     /**
      * @description Gregorian calendar configuration
      * @type object
-     * @since 0.6.0
+     * @since 1.0.0
      */
     'gregorian': {
 
@@ -509,7 +524,7 @@ var Config = {
        * @description set locale of Gregorian calendar available options: 'fa', 'en'
        * @default 'en'
        * @type string
-       * @since 0.6.0
+       * @since 1.0.0
        */
       'locale': 'en',
 
@@ -517,7 +532,7 @@ var Config = {
        * @description if set true, small date hint of this calendar will be shown on another calendar
        * @type boolean
        * @default false
-       * @since 0.6.0
+       * @since 1.0.0
        */
       'showHint': false
     }
@@ -526,7 +541,7 @@ var Config = {
   /**
    * @description if set true make enable responsive view on mobile devices
    * @type boolean
-   * @since 0.6.0
+   * @since 1.0.0
    * @default true
    */
   'responsive': true,
@@ -553,7 +568,7 @@ var Config = {
   'initialValueType': 'gregorian',
 
   /**
-   * @deprecated from v0.6.0 this options is deprecated, use calendar.persian.locale instead
+   * @deprecated from v1.0.0 this options is deprecated, use calendar.persian.locale instead
    * @type boolean
    * @default true
    */
@@ -755,16 +770,17 @@ var Config = {
     'enabled': true,
 
     /**
-     * @description toolbox button text coniguration
+     * @description toolbox button text configuration
      * @type object
+     * @deprecated from 1.0.0
      */
     'text': {
 
       /**
-       * @description text of today button, deprecated from 0.6.0
+       * @description text of today button, deprecated from 1.0.0
        * @type string
        * @default 'امروز'
-       * @deprecated from 0.6.0
+       * @deprecated from 1.0.0
        */
       btnToday: 'امروز'
 
@@ -772,7 +788,7 @@ var Config = {
 
     /**
      * @description submit button configuration (only shown on mobile)
-     * @since 0.6.0
+     * @since 1.0.0
      */
     submitButton: {
 
@@ -780,20 +796,20 @@ var Config = {
        * @description make submit button enable or disable
        * @type boolean
        * @default false
-       * @since 0.6.0
+       * @since 1.0.0
        */
       enabled: false,
 
       /**
        * @description submit button text
-       * @since 0.6.0
+       * @since 1.0.0
        * @type object
        */
       text: {
 
         /**
          * @description show when current calendar is Persian
-         * @since 0.6.0
+         * @since 1.0.0
          * @type object
          * @default تایید
          */
@@ -801,7 +817,7 @@ var Config = {
 
         /**
          * @description show when current calendar is Gregorian
-         * @since 0.6.0
+         * @since 1.0.0
          * @type object
          * @default submit
          */
@@ -810,7 +826,7 @@ var Config = {
 
       /**
        * @description Called when submit button clicked
-       * @since 0.6.0
+       * @since 1.0.0
        * @type function
        * @event
        */
@@ -819,27 +835,27 @@ var Config = {
 
     /**
      * @description toolbox today button configuration
-     * @since 0.6.0
+     * @since 1.0.0
      */
     todayButton: {
 
       /**
        * @description make toolbox today button enable or disable
        * @type boolean
-       * @since 0.6.0
+       * @since 1.0.0
        */
       enabled: true,
 
       /**
        * @description today button text
-       * @since 0.6.0
+       * @since 1.0.0
        * @type object
        */
       text: {
 
         /**
          * @description show when current calendar is Persian
-         * @since 0.6.0
+         * @since 1.0.0
          * @type object
          * @default امروز
          */
@@ -847,7 +863,7 @@ var Config = {
 
         /**
          * @description show when current calendar is Gregorian
-         * @since 0.6.0
+         * @since 1.0.0
          * @type object
          * @default today
          */
@@ -856,7 +872,7 @@ var Config = {
 
       /**
        * @description Called when today button clicked
-       * @since 0.6.0
+       * @since 1.0.0
        * @type function
        * @event
        */
@@ -866,14 +882,14 @@ var Config = {
     /**
      * @description toolbox calendar switch configuration
      * @type object
-     * @since 0.6.0
+     * @since 1.0.0
      */
     calendarSwitch: {
 
       /**
        * @description make calendar switch enable or disable
        * @type boolean
-       * @since 0.6.0
+       * @since 1.0.0
        * @default true
        */
       enabled: true,
@@ -882,14 +898,14 @@ var Config = {
        * @description calendar switch text format string
        * @link http://babakhani.github.io/PersianWebToolkit/doc/persian-date/#format
        * @type string
-       * @since 0.6.0
+       * @since 1.0.0
        * @default MMMM
        */
       format: 'MMMM',
 
       /**
        * @description Called when calendar switch clicked
-       * @since 0.6.0
+       * @since 1.0.0
        * @type function
        * @event
        */
@@ -902,7 +918,7 @@ var Config = {
      * @example function (toolbox) {
      *      //log('toolbox today btn');
      *  }
-     *  @deprecated 0.6.0
+     *  @deprecated 1.0.0
      */
     onToday: function onToday() {
       //log('toolbox today btn');
