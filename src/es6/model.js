@@ -19,8 +19,10 @@ class Model {
      * @private
      */
     constructor(inputElement, options) {
+        return this.components(inputElement, options);
+    }
 
-
+    components(inputElement, options) {
         /**
          * @desc [initialUnix=null]
          * @type {unix}
@@ -95,6 +97,7 @@ class Model {
 
         return this.api;
     }
+
 }
 
 module.exports = Model;

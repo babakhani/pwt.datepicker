@@ -74,7 +74,7 @@ bower install persian-datepicker
 
 | name                           | type             | default                                         | description  |
 | -------------                  |:-------------:   | :----------------------------------------------:| :----------: |
-| initialCalendar                | string           | 'persian'                                       | Set default calendar mode of datepicker, available options: 'persian', 'gregorian' |
+| calendarType                   | string           | 'persian'                                       | Set default calendar mode of datepicker, available options: 'persian', 'gregorian' |
 | calendar                       | object           |                                                 | Calendar type and localization configuration |
 | calendar.persian               | object           |                                                 | Persian calendar configuration |
 | calendar.persian.locale        | string           | 'fa'                                            | Set locale of Persian calendar available options: 'fa', 'en' |

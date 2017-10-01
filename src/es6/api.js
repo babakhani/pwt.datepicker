@@ -1,5 +1,3 @@
-let Options = require('./options');
-
 /**
  * This is default API class
  */
@@ -21,10 +19,10 @@ class API {
      * // set options and render datepicker with new options
      */
     set options(inputOptions) {
-        this.model.options = new Options(inputOptions);
-        this.model.view.reRender();
+        let opt = $.extend(true, this.model.options, inputOptions);
+        this.destroy();
+        this.model.components(this.model.inputElement, opt);
     }
-
 
     /**
      * @description make datepicker visible
