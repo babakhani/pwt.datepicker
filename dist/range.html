@@ -164,37 +164,37 @@
             altField: '#toAlt',
             altFormat: 'LLLL',
             initialValue: false,
-            minDate: new persianDate().subtract('day', 3).valueOf(),
-            maxDate: new persianDate().add('day', 10).valueOf(),
+//            minDate: new persianDate().subtract('day', 3).valueOf(),
+//            maxDate: new persianDate().add('day', 10).valueOf(),
             onSelect: function (unix) {
-//                to.touched = true;
-//                if (from && from.options && from.options.maxDate != unix) {
-//                    var cachedValue = from.getState().selected.unixDate;
-//                    from.options = {maxDate: unix};
-//                    if (from.touched) {
-//                        from.setDate(cachedValue);
-//                    }
-//                }
+                to.touched = true;
+                if (from && from.options && from.options.maxDate != unix) {
+                    var cachedValue = from.getState().selected.unixDate;
+                    from.options = {maxDate: unix};
+                    if (from.touched) {
+                        from.setDate(cachedValue);
+                    }
+                }
             }
         });
-//        window.from = $("#from").persianDatepicker({
-//            inline: true,
-//            altField: '#fromAlt',
-//            altFormat: 'LLLL',
-//            initialValue: false,
-////            minDate: new persianDate().subtract('day', 3).valueOf(),
-////            maxDate: new persianDate().add('day', 10).valueOf(),
-//            onSelect: function (unix) {
-//                from.touched = true;
-//                if (to && to.options && to.options.minDate != unix) {
-//                    var cachedValue = to.getState().selected.unixDate;
-//                    to.options = {minDate: unix};
-//                    if (to.touched) {
-//                        to.setDate(cachedValue);
-//                    }
-//                }
-//            }
-//        });
+        window.from = $("#from").persianDatepicker({
+            inline: true,
+            altField: '#fromAlt',
+            altFormat: 'LLLL',
+            initialValue: false,
+//            minDate: new persianDate().subtract('day', 3).valueOf(),
+//            maxDate: new persianDate().add('day', 10).valueOf(),
+            onSelect: function (unix) {
+                from.touched = true;
+                if (to && to.options && to.options.minDate != unix) {
+                    var cachedValue = to.getState().selected.unixDate;
+                    to.options = {minDate: unix};
+                    if (to.touched) {
+                        to.setDate(cachedValue);
+                    }
+                }
+            }
+        });
 
     });
 </script>
