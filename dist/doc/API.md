@@ -1,7 +1,7 @@
 <a name="API"></a>
 
 ## API
-Default API class
+This is the API documentation for persian-datepicker
 
 **Kind**: global class  
 

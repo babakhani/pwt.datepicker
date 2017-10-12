@@ -179,5 +179,5 @@ Thanks to [Vahid Mardani](https://github.com/pylover) for everything that I lear
 , [Bita Edalati](http://github.com/bitaedalati) for create amazing [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)
 
 ## license
+Freely distributable under the terms of the [WTFPL](http://www.wtfpl.net/) license. 
 
-[WTFPL](http://www.wtfpl.net/)

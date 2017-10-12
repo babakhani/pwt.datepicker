@@ -1,8 +1,8 @@
 /**
- * Default API class
+ * This is the API documentation for persian-datepicker
  */
 class API {
-    constructor(model) {
+    constructor (model) {
         this.model = model;
     }
 
@@ -11,7 +11,7 @@ class API {
      * @example var pd = $('.selector').persianDatepicker();
      * console.log(pd.options);
      */
-    get options() {
+    get options () {
         return this.model.options;
     }
 
@@ -23,7 +23,7 @@ class API {
      * pd.options = {};
      * // set options and render datepicker with new options
      */
-    set options(inputOptions) {
+    set options (inputOptions) {
         let opt = $.extend(true, this.model.options, inputOptions);
         this.destroy();
         this.model.components(this.model.inputElement, opt);
@@ -34,7 +34,7 @@ class API {
      * @example var pd = $('.selector').persianDatepicker();
      * pd.show();
      */
-    show() {
+    show () {
         this.model.view.show();
         this.model.options.onShow(this);
         return this.model;
@@ -49,7 +49,7 @@ class API {
      * console.log(state.selected);
      * console.log(state.view);
      * */
-    getState() {
+    getState () {
         return this.model.state;
 
     }
@@ -59,7 +59,7 @@ class API {
      * @example var pd = $('.selector').persianDatepicker();
      * pd.show();
      */
-    hide() {
+    hide () {
         this.model.view.hide();
         this.model.options.onHide(this);
         return this.model;
@@ -70,7 +70,7 @@ class API {
      * @example var pd = $('.selector').persianDatepicker();
      * pd.toggle();
      */
-    toggle() {
+    toggle () {
         this.model.view.toggle();
         this.model.options.onToggle(this.model);
         return this.model;
@@ -82,7 +82,7 @@ class API {
      * @example var pd = $('.selector').persianDatepicker();
      * pd.destroy();
      */
-    destroy() {
+    destroy () {
         // TODO: destroy every thing
         this.model.view.destroy();
         this.model.options.onDestroy(this.model);
@@ -96,7 +96,7 @@ class API {
      * @example var pd = $('.selector').persianDatepicker();
      * pd.setDate(1382276091100)
      */
-    setDate(unix) {
+    setDate (unix) {
         this.model.state.setSelectedDateTime('unix', unix);
         this.model.state.setViewDateTime('unix', unix);
         this.model.state.setSelectedDateTime('unix', unix);

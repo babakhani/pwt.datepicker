@@ -236,7 +236,7 @@ If set true datepicker init with input value date, use data-date property when y
 <a name="Config.initialValueType"></a>
 
 ## Config.initialValueType : <code>boolean</code>
-If set true datepicker init with input value date
+Initial value calendar type, accept: 'persian', 'gregorian'
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  
@@ -244,6 +244,8 @@ If set true datepicker init with input value date
 
 ## <del>Config.persianDigit : <code>boolean</code></del>
 ***Deprecated***
+
+from v1.0.0 this options is deprecated, use calendar.persian.locale instead
 
 **Kind**: static property of [<code>Config</code>](#Config)  
 **Default**: <code>true</code>  

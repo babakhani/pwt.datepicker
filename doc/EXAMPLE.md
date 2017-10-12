@@ -109,6 +109,7 @@ $('.gregorian-example').persianDatepicker({
     inline: true,
     altField: '#gregorianExampleAlt',
     altFormat: 'LLLL',
+    calendarType: 'gregorian',
     toolbox:{
         calendarSwitch:{
             enabled: true

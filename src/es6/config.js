@@ -124,7 +124,7 @@ const Config = {
 
 
     /**
-     * @description If set true datepicker init with input value date
+     * @description Initial value calendar type, accept: 'persian', 'gregorian'
      * @type boolean
      * @default true
      */
@@ -132,7 +132,8 @@ const Config = {
 
 
     /**
-     * @deprecated from v1.0.0 this options is deprecated, use calendar.persian.locale instead
+     * @description from v1.0.0 this options is deprecated, use calendar.persian.locale instead
+     * @deprecated
      * @type boolean
      * @default true
      */
@@ -169,7 +170,7 @@ const Config = {
      */
     'formatter': function (unixDate) {
         let self = this,
-            pdate = this.model.PersianDate.date(unixDate);
+          pdate = this.model.PersianDate.date(unixDate);
         return pdate.format(self.format);
     },
 
@@ -217,8 +218,8 @@ const Config = {
      */
     'altFieldFormatter': function (unixDate) {
         let self = this,
-            thisAltFormat = self.altFormat.toLowerCase(),
-            pd;
+          thisAltFormat = self.altFormat.toLowerCase(),
+          pd;
         if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
             return new Date(unixDate);
         }
