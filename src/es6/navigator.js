@@ -43,19 +43,20 @@ class Navigator {
             });
 
             if (this.model.options.timePicker.enabled) {
-                let timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
-                Hamster(timePlot).wheel(function (event, delta) {
-                    let $target = $(event.target);
-                    let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
-                    if (key) {
-                        if (delta > 0) {
-                            that.timeUp(key);
-                        } else {
-                            that.timeDown(key);
+                $('#' + that.model.view.id + ' .time-segment').each(function(){
+                    Hamster(this).wheel(function (event, delta) {
+                        let $target = $(event.target);
+                        let key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
+                        if (key) {
+                            if (delta > 0) {
+                                that.timeUp(key);
+                            } else {
+                                that.timeDown(key);
+                            }
                         }
-                    }
-                    that.model.view.render();
-                    event.preventDefault();
+                        that.model.view.render();
+                        event.preventDefault();
+                    });
                 });
             }
         }
@@ -140,17 +141,17 @@ class Navigator {
                 if ($(this).is('.pwt-btn-next')) {
                     that.model.state.navigate('next');
                     that.model.view.render();
-                    that.model.options.navigator.onNext(that);
+                    that.model.options.navigator.onNext(that.model);
                 }
                 else if ($(this).is('.pwt-btn-switch')) {
                     that.model.state.switchViewMode();
                     that.model.view.render();
-                    that.model.options.navigator.onSwitch(that);
+                    that.model.options.navigator.onSwitch(that.model);
                 }
                 else if ($(this).is('.pwt-btn-prev')) {
                     that.model.state.navigate('prev');
                     that.model.view.render();
-                    that.model.options.navigator.onPrev(that);
+                    that.model.options.navigator.onPrev(that.model);
                 }
             });
         }

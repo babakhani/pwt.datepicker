@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "jQuery datepicker plugin work with Iranian calendar.",
   "keywords": [
     "jquery-plugin",
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "jquery": "2.2.0",
-    "persian-date": "1.0.1"
+    "persian-date": "^1.0.3"
   },
   "pre-commit": [
     "test"

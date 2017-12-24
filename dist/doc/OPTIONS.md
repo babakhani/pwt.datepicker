@@ -423,7 +423,7 @@ Called when navigator switch
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 **Example**  
 ```js
-function (state) {
+function (datepickerObject) {
                 // console.log('navigator switch ');
  }
 ```

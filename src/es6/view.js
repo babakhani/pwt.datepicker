@@ -453,7 +453,8 @@ class View {
             this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '',
             !this.model.options.timePicker.meridian.enabled ? 'datepicker-state-no-meridian' : '',
             this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '',
-            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-second' : ''
+            !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-second' : '',
+            (this.model.options.calendar_ == 'gregorian') ? 'datepicker-gregorian' : 'datepicker-persian'
         ].join(' ');
     }
 

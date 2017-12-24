@@ -25,7 +25,7 @@ class API {
      */
     set options (inputOptions) {
         let opt = $.extend(true, this.model.options, inputOptions);
-        this.destroy();
+        this.model.view.destroy();
         this.model.components(this.model.inputElement, opt);
     }
 
@@ -36,7 +36,7 @@ class API {
      */
     show () {
         this.model.view.show();
-        this.model.options.onShow(this);
+        this.model.options.onShow(this.model);
         return this.model;
     }
 
@@ -61,7 +61,7 @@ class API {
      */
     hide () {
         this.model.view.hide();
-        this.model.options.onHide(this);
+        this.model.options.onHide(this.model);
         return this.model;
     }
 
@@ -83,10 +83,11 @@ class API {
      * pd.destroy();
      */
     destroy () {
-        // TODO: destroy every thing
-        this.model.view.destroy();
-        this.model.options.onDestroy(this.model);
-        return this.model;
+        if(this.model){
+            this.model.view.destroy();
+            this.model.options.onDestroy(this.model);
+            delete this.model;
+        }
     }
 
 

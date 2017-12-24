@@ -41,8 +41,8 @@ class Toolbox {
              * @deprecated
              * @todo remove this
              */
-            that.model.options.toolbox.onToday();
-            that.model.options.toolbox.todayButton.onToday();
+            that.model.options.toolbox.onToday(that.model);
+            that.model.options.toolbox.todayButton.onToday(that.model);
         });
 
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
@@ -50,12 +50,12 @@ class Toolbox {
             that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
             that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
             that.model.view.render();
-            that.model.options.toolbox.calendarSwitch.onSwitch();
+            that.model.options.toolbox.calendarSwitch.onSwitch(that.model);
         });
 
         $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {
             that.model.view.hide();
-            that.model.options.toolbox.submitButton.onSubmit();
+            that.model.options.toolbox.submitButton.onSubmit(that.model);
             that.model.options.onHide(this);
         });
     }

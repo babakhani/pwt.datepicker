@@ -306,8 +306,8 @@ const Config = {
          *      //log('navigator next ');
          *  }
          */
-        'onNext': function () {
-            //log('navigator next ');
+        'onNext': function (datepickerObject) {
+            Helper.debug(datepickerObject, 'Event: onNext');
         },
 
 
@@ -318,20 +318,20 @@ const Config = {
          *      //log('navigator prev ');
          *  }
          */
-        'onPrev': function () {
-            //log('navigator prev ');
+        'onPrev': function (datepickerObject) {
+            Helper.debug(datepickerObject, 'Event: onPrev');
         },
 
 
         /**
          * @description Called when navigator switch
          * @event
-         * @example function (state) {
+         * @example function (datepickerObject) {
                 // console.log('navigator switch ');
          *  }
          */
-        'onSwitch': function () {
-            // console.log('navigator switch ');
+        'onSwitch': function (datepickerObject) {
+            Helper.debug(datepickerObject, 'dayPicker Event: onSwitch');
         }
     },
 
@@ -415,7 +415,8 @@ const Config = {
              * @type function
              * @event
              */
-            onSubmit: function () {
+            onSubmit: function (datepickerObject) {
+                Helper.debug(datepickerObject, 'dayPicker Event: onSubmit');
             }
         },
 
@@ -464,7 +465,8 @@ const Config = {
              * @type function
              * @event
              */
-            onToday: function () {
+            onToday: function (datepickerObject) {
+                Helper.debug(datepickerObject, 'dayPicker Event: onToday');
             }
         },
 
@@ -501,7 +503,8 @@ const Config = {
              * @type function
              * @event
              */
-            onSwitch: function () {
+            onSwitch: function (datepickerObject) {
+                Helper.debug(datepickerObject, 'dayPicker Event: onSwitch');
             }
         },
 
@@ -513,8 +516,8 @@ const Config = {
          *  }
          *  @deprecated 1.0.0
          */
-        onToday: function () {
-            //log('toolbox today btn');
+        onToday: function (datepickerObject) {
+            Helper.debug(datepickerObject, 'dayPicker Event: onToday');
         }
     },
 
@@ -816,8 +819,8 @@ const Config = {
      * @description A function that takes current datepicker instance. It is called just before the datepicker is displayed.
      * @event
      */
-    'onShow': function () {
-        Helper.debug(this, 'Event: onShow ');
+    'onShow': function (datepickerObject) {
+        Helper.debug(datepickerObject, 'Event: onShow ');
     },
 
 
@@ -825,8 +828,8 @@ const Config = {
      * @description A function that takes current datepicker instance. It is called just before the datepicker Hide.
      * @event
      */
-    'onHide': function () {
-        Helper.debug(this, 'Event: onHide ');
+    'onHide': function (datepickerObject) {
+        Helper.debug(datepickerObject, 'Event: onHide ');
     },
 
 
@@ -834,8 +837,8 @@ const Config = {
      * @description on toggle datepicker event
      * @event
      */
-    'onToggle': function () {
-        Helper.debug(this, 'Event: onToggle ');
+    'onToggle': function (datepickerObject) {
+        Helper.debug(datepickerObject, 'Event: onToggle ');
     },
 
 
@@ -843,8 +846,8 @@ const Config = {
      * @description on destroy datepicker event
      * @event
      */
-    'onDestroy': function () {
-        Helper.debug(this, 'Event: onDestroy ');
+    'onDestroy': function (datepickerObject) {
+        Helper.debug(datepickerObject, 'Event: onDestroy ');
     },
 
 

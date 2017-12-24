@@ -1,5 +1,5 @@
 /*
-** persian-datepicker - v1.0.2
+** persian-datepicker - v1.1.0
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under WTFPL license 
@@ -301,7 +301,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Default API class
+ * This is the API documentation for persian-datepicker
  */
 var API = function () {
     function API(model) {
@@ -328,7 +328,7 @@ var API = function () {
          */
         value: function show() {
             this.model.view.show();
-            this.model.options.onShow(this);
+            this.model.options.onShow(this.model);
             return this.model;
         }
 
@@ -358,7 +358,7 @@ var API = function () {
         key: 'hide',
         value: function hide() {
             this.model.view.hide();
-            this.model.options.onHide(this);
+            this.model.options.onHide(this.model);
             return this.model;
         }
 
@@ -385,10 +385,11 @@ var API = function () {
     }, {
         key: 'destroy',
         value: function destroy() {
-            // TODO: destroy every thing
-            this.model.view.destroy();
-            this.model.options.onDestroy(this.model);
-            return this.model;
+            if (this.model) {
+                this.model.view.destroy();
+                this.model.options.onDestroy(this.model);
+                delete this.model;
+            }
         }
 
         /**
@@ -425,7 +426,7 @@ var API = function () {
         ,
         set: function set(inputOptions) {
             var opt = $.extend(true, this.model.options, inputOptions);
-            this.destroy();
+            this.model.view.destroy();
             this.model.components(this.model.inputElement, opt);
         }
     }]);
@@ -561,14 +562,15 @@ var Config = {
   'initialValue': true,
 
   /**
-   * @description If set true datepicker init with input value date
+   * @description Initial value calendar type, accept: 'persian', 'gregorian'
    * @type boolean
    * @default true
    */
   'initialValueType': 'gregorian',
 
   /**
-   * @deprecated from v1.0.0 this options is deprecated, use calendar.persian.locale instead
+   * @description from v1.0.0 this options is deprecated, use calendar.persian.locale instead
+   * @deprecated
    * @type boolean
    * @default true
    */
@@ -728,8 +730,8 @@ var Config = {
      *      //log('navigator next ');
      *  }
      */
-    'onNext': function onNext() {
-      //log('navigator next ');
+    'onNext': function onNext(datepickerObject) {
+      Helper.debug(datepickerObject, 'Event: onNext');
     },
 
     /**
@@ -739,19 +741,19 @@ var Config = {
      *      //log('navigator prev ');
      *  }
      */
-    'onPrev': function onPrev() {
-      //log('navigator prev ');
+    'onPrev': function onPrev(datepickerObject) {
+      Helper.debug(datepickerObject, 'Event: onPrev');
     },
 
     /**
      * @description Called when navigator switch
      * @event
-     * @example function (state) {
+     * @example function (datepickerObject) {
             // console.log('navigator switch ');
      *  }
      */
-    'onSwitch': function onSwitch() {
-      // console.log('navigator switch ');
+    'onSwitch': function onSwitch(datepickerObject) {
+      Helper.debug(datepickerObject, 'dayPicker Event: onSwitch');
     }
   },
 
@@ -830,7 +832,9 @@ var Config = {
        * @type function
        * @event
        */
-      onSubmit: function onSubmit() {}
+      onSubmit: function onSubmit(datepickerObject) {
+        Helper.debug(datepickerObject, 'dayPicker Event: onSubmit');
+      }
     },
 
     /**
@@ -876,7 +880,9 @@ var Config = {
        * @type function
        * @event
        */
-      onToday: function onToday() {}
+      onToday: function onToday(datepickerObject) {
+        Helper.debug(datepickerObject, 'dayPicker Event: onToday');
+      }
     },
 
     /**
@@ -909,7 +915,9 @@ var Config = {
        * @type function
        * @event
        */
-      onSwitch: function onSwitch() {}
+      onSwitch: function onSwitch(datepickerObject) {
+        Helper.debug(datepickerObject, 'dayPicker Event: onSwitch');
+      }
     },
 
     /**
@@ -920,8 +928,8 @@ var Config = {
      *  }
      *  @deprecated 1.0.0
      */
-    onToday: function onToday() {
-      //log('toolbox today btn');
+    onToday: function onToday(datepickerObject) {
+      Helper.debug(datepickerObject, 'dayPicker Event: onToday');
     }
   },
 
@@ -1211,32 +1219,32 @@ var Config = {
    * @description A function that takes current datepicker instance. It is called just before the datepicker is displayed.
    * @event
    */
-  'onShow': function onShow() {
-    Helper.debug(this, 'Event: onShow ');
+  'onShow': function onShow(datepickerObject) {
+    Helper.debug(datepickerObject, 'Event: onShow ');
   },
 
   /**
    * @description A function that takes current datepicker instance. It is called just before the datepicker Hide.
    * @event
    */
-  'onHide': function onHide() {
-    Helper.debug(this, 'Event: onHide ');
+  'onHide': function onHide(datepickerObject) {
+    Helper.debug(datepickerObject, 'Event: onHide ');
   },
 
   /**
    * @description on toggle datepicker event
    * @event
    */
-  'onToggle': function onToggle() {
-    Helper.debug(this, 'Event: onToggle ');
+  'onToggle': function onToggle(datepickerObject) {
+    Helper.debug(datepickerObject, 'Event: onToggle ');
   },
 
   /**
    * @description on destroy datepicker event
    * @event
    */
-  'onDestroy': function onDestroy() {
-    Helper.debug(this, 'Event: onDestroy ');
+  'onDestroy': function onDestroy(datepickerObject) {
+    Helper.debug(datepickerObject, 'Event: onDestroy ');
   },
 
   /**
@@ -1796,19 +1804,20 @@ var Navigator = function () {
                 });
 
                 if (this.model.options.timePicker.enabled) {
-                    var timePlot = $('#' + that.model.view.id + ' .datepicker-time-view')[0];
-                    Hamster(timePlot).wheel(function (event, delta) {
-                        var $target = $(event.target);
-                        var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
-                        if (key) {
-                            if (delta > 0) {
-                                that.timeUp(key);
-                            } else {
-                                that.timeDown(key);
+                    $('#' + that.model.view.id + ' .time-segment').each(function () {
+                        Hamster(this).wheel(function (event, delta) {
+                            var $target = $(event.target);
+                            var key = $target.data('time-key') ? $target.data('time-key') : $target.parents('[data-time-key]').data('time-key');
+                            if (key) {
+                                if (delta > 0) {
+                                    that.timeUp(key);
+                                } else {
+                                    that.timeDown(key);
+                                }
                             }
-                        }
-                        that.model.view.render();
-                        event.preventDefault();
+                            that.model.view.render();
+                            event.preventDefault();
+                        });
                     });
                 }
             }
@@ -1905,15 +1914,15 @@ var Navigator = function () {
                     if ($(this).is('.pwt-btn-next')) {
                         that.model.state.navigate('next');
                         that.model.view.render();
-                        that.model.options.navigator.onNext(that);
+                        that.model.options.navigator.onNext(that.model);
                     } else if ($(this).is('.pwt-btn-switch')) {
                         that.model.state.switchViewMode();
                         that.model.view.render();
-                        that.model.options.navigator.onSwitch(that);
+                        that.model.options.navigator.onSwitch(that.model);
                     } else if ($(this).is('.pwt-btn-prev')) {
                         that.model.state.navigate('prev');
                         that.model.view.render();
-                        that.model.options.navigator.onPrev(that);
+                        that.model.options.navigator.onPrev(that.model);
                     }
                 });
             }
@@ -2669,8 +2678,8 @@ var Toolbox = function () {
                  * @deprecated
                  * @todo remove this
                  */
-                that.model.options.toolbox.onToday();
-                that.model.options.toolbox.todayButton.onToday();
+                that.model.options.toolbox.onToday(that.model);
+                that.model.options.toolbox.todayButton.onToday(that.model);
             });
 
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-calendar', function () {
@@ -2678,12 +2687,12 @@ var Toolbox = function () {
                 that.model.state.setSelectedDateTime('unix', that.model.state.selected.unixDate);
                 that.model.state.setViewDateTime('unix', that.model.state.view.unixDate);
                 that.model.view.render();
-                that.model.options.toolbox.calendarSwitch.onSwitch();
+                that.model.options.toolbox.calendarSwitch.onSwitch(that.model);
             });
 
             $(document).on('click', '#' + that.model.view.id + ' .pwt-btn-submit', function () {
                 that.model.view.hide();
-                that.model.options.toolbox.submitButton.onSubmit();
+                that.model.options.toolbox.submitButton.onSubmit(that.model);
                 that.model.options.onHide(this);
             });
         }
@@ -3289,7 +3298,7 @@ var View = function () {
     }, {
         key: 'getCssClass',
         value: function getCssClass() {
-            return [this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '', !this.model.options.timePicker.meridian.enabled ? 'datepicker-state-no-meridian' : '', this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '', !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-second' : ''].join(' ');
+            return [this.model.state.ui.isInline ? 'datepicker-plot-area-inline-view' : '', !this.model.options.timePicker.meridian.enabled ? 'datepicker-state-no-meridian' : '', this.model.options.onlyTimePicker ? 'datepicker-state-only-time' : '', !this.model.options.timePicker.second.enabled ? 'datepicker-state-no-second' : '', this.model.options.calendar_ == 'gregorian' ? 'datepicker-gregorian' : 'datepicker-persian'].join(' ');
         }
 
         /**
