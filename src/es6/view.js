@@ -112,7 +112,7 @@ class View {
      * @desc toggle datepicker container element
      */
     toggle () {
-        this.$container.toggle();
+        this.$container.toggleClass('pwt-hide');
     }
 
     /**

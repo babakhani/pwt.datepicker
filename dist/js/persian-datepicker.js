@@ -1,5 +1,5 @@
 /*
-** persian-datepicker - v1.1.0
+** persian-datepicker - v1.1.1
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under WTFPL license 
@@ -2850,7 +2850,7 @@ var View = function () {
     }, {
         key: 'toggle',
         value: function toggle() {
-            this.$container.toggle();
+            this.$container.toggleClass('pwt-hide');
         }
 
         /**

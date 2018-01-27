@@ -58,7 +58,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                Persian Date Picker <span class="badge">Version 1.1.0</span>
+                Persian Date Picker <span class="badge">Version 1.1.1</span>
             </a>
         </div>
         <nav class="navbar-right">
@@ -225,7 +225,7 @@
 
         // Normal Sample
         // --------------------------------------------
-        $('#normal').persianDatepicker({
+        window.pd = $('#normal').persianDatepicker({
             altField: '#normalAlt',
             altFormat: 'LLLL',
             initialValue: false,
@@ -298,7 +298,7 @@
 
         // Inline Sample
         // --------------------------------------------
-        window.pd = $("#inline").persianDatepicker({
+        $("#inline").persianDatepicker({
             initialValueType: 'persian',
             minDate: 1506550581778,
             calendar: {
