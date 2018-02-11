@@ -1,5 +1,5 @@
 /*
-** persian-datepicker - v1.1.1
+** persian-datepicker - v1.1.2
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under WTFPL license 
@@ -1938,6 +1938,7 @@ var Navigator = function () {
                 $(document).on('click', '#' + that.model.view.id + ' .up-btn', function () {
                     var timekey = $(this).data('time-key');
                     that.timeUp(timekey);
+                    that.model.options.onSelect(that.model.state.selected.unix);
                 });
 
                 /**
@@ -1946,6 +1947,7 @@ var Navigator = function () {
                 $(document).on('click', '#' + that.model.view.id + ' .down-btn', function () {
                     var timekey = $(this).data('time-key');
                     that.timeDown(timekey);
+                    that.model.options.onSelect(that.model.state.selected.unix);
                 });
             }
 
