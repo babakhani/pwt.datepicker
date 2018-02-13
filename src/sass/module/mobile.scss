@@ -1,109 +1,113 @@
-@media only screen and (max-device-width: 480px) {
-  .datepicker-container.pwt-mobile-view {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+.datepicker-container.pwt-mobile-view {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  transition: all 1s;
+
+  &.pwt-hide {
+    top: 100vh;
+    height: 0;
+  }
+
+  .datepicker-plot-area.datepicker-state-only-time {
+    .pwt-btn-submit {
+      color: $white;
+      background: $gray;
+    }
+  }
+
+  //border: 10px solid red;
+  .datepicker-plot-area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
+    right: 0;
     bottom: 0;
-    overflow: hidden;
-    transition: all 1s;
 
-    &.pwt-hide {
-      top: 100vh;
-      height: 0;
-    }
-
-    //border: 10px solid red;
-    .datepicker-plot-area {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      .table-days {
-        td,
-        td span {
-          height: 44px;
-          line-height: 44px;
-          font-size: 14px;
-        }
-      }
-
-      .datepicker-year-view .year-item,
-      .datepicker-month-view .month-item {
-        height: 70px;
-        line-height: 70px;
-      }
-
-      [class*='pwt-btn'] {
-        height: 48px;
-        line-height: 48px;
-      }
-
-      .pwt-btn-today {
-        float: left;
-      }
-
-      &.datepicker-state-only-time {
-        background: $transparent-bg;
-        border: 0;
-        padding-top: 60%;
-
-        .pwt-btn-submit {
-          margin-right: $grid-gutter;
-        }
-
-        .datepicker-time-view {
-
-          input {
-            height: 40px;
-            line-height: 40px;
-            font-size: 24px;
-            margin: $grid-gutter 0;
-          }
-
-          .divider,
-          .divider span {
-            font-size: 16px;
-            display: block;
-            height: 48 * 3px;
-            line-height: 48 * 3px;
-          }
-
-          .down-btn,
-          .up-btn {
-            height: 48px;
-            line-height: 48px;
-          }
-        }
-
+    .table-days {
+      td,
+      td span {
+        height: 44px;
+        line-height: 44px;
+        font-size: 14px;
       }
     }
 
-    .datepicker-time-view {
-
-      input {
-        height: 32px;
-        line-height: 34px;
-        font-size: 18px;
-      }
-
-      .divider,
-      .divider span {
-        height: 40 * 3px;
-        line-height: 40 * 3px;
-      }
-
-      .down-btn,
-      .up-btn {
-        height: 40px;
-        line-height: 40px;
-      }
+    .datepicker-year-view .year-item,
+    .datepicker-month-view .month-item {
+      height: 70px;
+      line-height: 70px;
     }
 
+    [class*='pwt-btn'] {
+      height: 48px;
+      line-height: 48px;
+    }
+
+    .pwt-btn-today {
+      float: left;
+    }
+
+    &.datepicker-state-only-time {
+      background: $transparent-bg;
+      border: 0;
+      padding-top: 60%;
+
+      .pwt-btn-submit {
+        margin-right: $grid-gutter;
+      }
+
+      .datepicker-time-view {
+
+        input {
+          height: 40px;
+          line-height: 40px;
+          font-size: 24px;
+          margin: $grid-gutter 0;
+        }
+
+        .divider,
+        .divider span {
+          font-size: 16px;
+          display: block;
+          height: 48 * 3px;
+          line-height: 48 * 3px;
+        }
+
+        .down-btn,
+        .up-btn {
+          height: 48px;
+          line-height: 48px;
+        }
+      }
+
+    }
+  }
+
+  .datepicker-time-view {
+
+    input {
+      height: 32px;
+      line-height: 34px;
+      font-size: 18px;
+    }
+
+    .divider,
+    .divider span {
+      height: 40 * 3px;
+      line-height: 40 * 3px;
+    }
+
+    .down-btn,
+    .up-btn {
+      height: 40px;
+      line-height: 40px;
+    }
   }
 }

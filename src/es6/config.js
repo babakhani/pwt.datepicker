@@ -380,7 +380,7 @@ const Config = {
              * @default false
              * @since 1.0.0
              */
-            enabled: false,
+            enabled: Helper.isMobile,
 
 
             /**

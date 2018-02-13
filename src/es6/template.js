@@ -147,7 +147,7 @@ const Template = `
     {{^enabled}}
         {{#onlyTimePicker}}
         <div class="toolbox">
-            <div class="pwt-btn-exit">{{text.btnExit}}</div>
+            <div class="pwt-btn-submit">{{submitButtonText}}</div>
         </div>
         {{/onlyTimePicker}}
     {{/enabled}}

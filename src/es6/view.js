@@ -80,6 +80,11 @@ class View {
     setPickerBoxPosition () {
         let inputPosition = this.model.input.getInputPosition(),
           inputSize = this.model.input.getInputSize();
+
+        if (Helper.isMobile && this.model.options.responsive) {
+            return false;
+        }
+
         if (this.model.options.position === 'auto') {
             this.$container.css({
                 left: (inputPosition.left) + 'px',
