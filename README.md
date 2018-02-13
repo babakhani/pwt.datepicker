@@ -33,6 +33,13 @@ More info at [Wikipedia](http://en.wikipedia.org/wiki/Iranian_calendar)
 - [See Options Full Document](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/options/)
 
 
+## CDN
+
+- persian-date.js [uncompressed](https://unpkg.com/persian-date@latest/dist/persian-date.js) | [minified](https://unpkg.com/persian-date@latest/dist/persian-date.min.js)
+- persian-datepicker.js [uncompressed](https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.js) | [minified](https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.min.js)
+- persian-datepicker.css [uncompressed](https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.css) | [minified](https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.min.css)
+
+
 ## Dependency
 
 - [persian date](https://github.com/babakhani/PersianDate)
