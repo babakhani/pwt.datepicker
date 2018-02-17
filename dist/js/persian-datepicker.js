@@ -2,8 +2,8 @@
 ** persian-datepicker - v1.1.3
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
-*/ 
+** Under WTFPL license
+*/
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -2808,7 +2808,7 @@ var View = function () {
 
     }, {
         key: 'setPickerBoxPosition',
-        value: function setPickerBoxPosition() {
+		value: function setPickerBoxPosition() {
             var inputPosition = this.model.input.getInputPosition(),
                 inputSize = this.model.input.getInputSize();
 
@@ -2818,12 +2818,12 @@ var View = function () {
 
             if (this.model.options.position === 'auto') {
                 this.$container.css({
-                    left: inputPosition.left + 'px',
+                    right: ($(window).width() - inputPosition.left-inputSize.width+200) + 'px',
                     top: inputSize.height + inputPosition.top + 'px'
                 });
             } else {
                 this.$container.css({
-                    left: this.model.options.position[1] + inputPosition.left + 'px',
+                    right: ($(window).width()-this.model.options.position[1]-inputPosition.left+200) + 'px',
                     top: this.model.options.position[0] + inputPosition.top + 'px'
                 });
             }
