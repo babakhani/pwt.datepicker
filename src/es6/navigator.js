@@ -168,7 +168,7 @@ class Navigator {
             $(document).on('click', '#' + that.model.view.id + ' .up-btn', function () {
                 let timekey = $(this).data('time-key');
                 that.timeUp(timekey);
-                that.model.options.onSelect(that.model.state.selected.unix);
+                that.model.options.onSelect(that.model.state.selected.unixDate);
             });
 
             /**
@@ -177,7 +177,7 @@ class Navigator {
             $(document).on('click', '#' + that.model.view.id + ' .down-btn', function () {
                 let timekey = $(this).data('time-key');
                 that.timeDown(timekey);
-                that.model.options.onSelect(that.model.state.selected.unix);
+                that.model.options.onSelect(that.model.state.selected.unixDate);
             });
 
         }
