@@ -44,7 +44,6 @@
     "persian-date": "^0.1.8",
     "pre-commit": "^1.2.2",
     "sass-lint": "^1.10.2",
-    "simple-server": "^1.0.1",
     "sync-pkg": "^0.7.2",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2"
