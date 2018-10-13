@@ -142,6 +142,13 @@ class Input {
             evt.stopPropagation();
             return false;
         }, 200));
+       
+        $(this.elem).on('keydown', Helper.debounce(function (evt) {
+            if (evt.which === 9){
+              that.model.api.hide();
+              return false;
+            }
+        }, 200));
 
     }
 
