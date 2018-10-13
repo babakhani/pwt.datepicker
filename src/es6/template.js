@@ -93,7 +93,7 @@ const Template = `
         {{#hour.enabled}}
             <div class="hour time-segment" data-time-key="hour">
                 <div class="up-btn" data-time-key="hour">▲</div>
-                <input value="{{hour.title}}" type="text" placeholder="hour" class="hour-input">
+                <input disabled value="{{hour.title}}" type="text" placeholder="hour" class="hour-input">
                 <div class="down-btn" data-time-key="hour">▼</div>                    
             </div>       
             <div class="divider">
