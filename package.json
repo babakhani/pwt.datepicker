@@ -10,7 +10,7 @@
     "bootstrap-datetimepicker",
     "persian-date"
   ],
-  "license": "WTFPL",
+  "license": "MIT",
   "author": "Reza Babakhani <babakhani.reza@gmail.com>",
   "contributors": [
     {

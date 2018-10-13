@@ -180,11 +180,6 @@ bower install persian-datepicker
 | inputDelay                     | int              | 800  (millisecond)                              | Time for last user key-down event, accept millisecond |
 | template                       | string           | null                                            | By default datepicker have a template string, and you can overwrite it simply by replace string in config. |
 
-## Thanks and appreciation
-Thanks to [Vahid Mardani](https://github.com/pylover) for everything that I learned from him
-, [Behrooz Bahrami](http://behance.net/behroozbahrami) for designing the logo.
-, [Bita Edalati](http://github.com/bitaedalati) for create amazing [Playground](http://babakhani.github.io/PersianWebToolkit/doc/datepicker/playground.html)
-
 ## license
-Freely distributable under the terms of the [WTFPL](http://www.wtfpl.net/) license. 
+Freely distributable under the terms of the [MIT](https://opensource.org/licenses/MIT) license. 
 
