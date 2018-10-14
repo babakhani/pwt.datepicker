@@ -253,10 +253,11 @@ class Input {
                 let parse = new PersianDateParser();
                 let pd = new persianDate(parse.parse(inputValue)).valueOf();
                 garegurianDate = new Date(pd).valueOf();
+            } else if (this.model.options.initialValueType === 'unix' && inputValue) {
+                garegurianDate = parseInt(inputValue);
             } else if (inputValue) {
                 garegurianDate = new Date(inputValue).valueOf();
             }
-
             if (garegurianDate && garegurianDate != 'undefined') {
                 this.initialUnix = garegurianDate;
             }

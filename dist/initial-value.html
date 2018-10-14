@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Persian Datepicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="true"/>
+    <!-- Demo Bootstrap Style -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <!-- Demo Font Embed -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <link href="../assets/css/fontiran.css" rel="stylesheet"/>
+
+    <!-- Persian Datepicker Style -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <link id="datepickerTheme" href="./css/persian-datepicker.css" rel="stylesheet"/>
+
+    <!-- Theme Switcher -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <script type="text/javascript">
+        function swapStyleSheet(sheet) {
+            document.getElementById('datepickerTheme').setAttribute('href', sheet);
+        }
+    </script>
+
+    <!-- Demo Style -->
+    <!-- ------------------------------------------------------------------------------------ -->
+    <style type="text/css">
+        *,
+        body {
+            font-family: IRANSans, tahoma;
+        }
+
+        body {
+            padding-bottom: 300px;
+        }
+
+        .input-group-addon {
+            cursor: pointer;
+        }
+
+        .navbar-right {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Persian Date Picker <span class="badge">Version 1.1.3</span>
+            </a>
+        </div>
+        <nav class="navbar-right">
+            <span>
+            theme:
+                </span>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/persian-datepicker.css')">
+                Default
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-blue.min.css')">
+                Blue
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-cheerup.min.css')">
+                Cheerup
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-dark.min.css')">
+                Dark
+            </button>
+            <button class="btn btn-xs btn-primary"
+                    onclick="swapStyleSheet('css/theme/persian-datepicker-redblack.min.css')">
+                Redblack
+            </button>
+        </nav><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Input Sample without intial value observer true</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <input id="normalAlt" class="form-control" disabled/>
+          </div>
+          <div class="form-group">
+            <input class="form-control" 
+                   id="normal" 
+                   value="1551602532000" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Input Sample without intial value observer true</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <input id="normalAlt1" class="form-control" disabled/>
+          </div>
+          <div class="form-group">
+            <input class="form-control" 
+                   id="normal1" 
+                   value="1397-12-13T14:15:16" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Input Sample without intial value observer true</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <input id="normalAlt2" class="form-control" disabled/>
+          </div>
+          <div class="form-group">
+            <input class="form-control" 
+                   id="normal2" 
+                   value="2018-12-13T14:15:16" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../assets/persian-date.min.js"></script>
+<script src="./js/persian-datepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+       window.persianDatepickerDebug = true;
+      //  window.pd = $('#normal').persianDatepicker({
+      //       initialValue: true,
+      //       initialValueType: 'unix',
+      //       altField: '#normalAlt',
+      //       altFormat: 'LLLL',
+      //       observer: true,
+      //       format: 'YYYY/MM/DD',
+      //       timePicker: {
+      //           enabled: true
+      //       }
+      //   });
+
+      window.pd = $('#normal1').persianDatepicker({
+        initialValue: true,
+        initialValueType: 'persian',
+        altField: '#normalAlt1',
+        altFormat: 'LLLL',
+        observer: true,
+        format: 'YYYY/MM/DD',
+        timePicker: {
+            enabled: true
+        }
+      });
+
+      window.pd = $('#normal2').persianDatepicker({
+        initialValue: true,
+        initialValueType: 'gregorian',
+        altField: '#normalAlt2',
+        altFormat: 'LLLL',
+        observer: true,
+        format: 'YYYY/MM/DD',
+        timePicker: {
+            enabled: true
+        }
+      });
+
+    });
+</script>
+</body>
+</html>
