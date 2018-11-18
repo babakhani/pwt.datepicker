@@ -712,7 +712,7 @@ var TEMPLATE = {
         "</div>" + //
         "<table cellspacing='0' class='{{css.daysTable}}'  ><tbody><tr><td /><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr><tr><td/><td/><td/><td/><td/><td/><td/></tr></tbody></table>" + //
         "</div>"
-}
+};
 'use strict';
 /**
  * @class ClassBase
@@ -1495,7 +1495,7 @@ MonthGrid = function (options) {
     //this.pcal = options.parent.pcal;
     inherit(this, [ClassSprite, ViewsMonthGrid, ClassDateRange, ClassMonthGrid, options]);
     return this;
-}
+};
 
 'use strict';
 /**
