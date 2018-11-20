@@ -1612,6 +1612,12 @@ var Input = function () {
                 evt.stopPropagation();
                 return false;
             }, 200));
+		
+            $(this.elem).on('blur', Helper.debounce(function (evt) {
+                that.model.api.hide();
+		evt.stopPropagation();
+                return false;
+            }, 200));
         }
 
         /**
