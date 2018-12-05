@@ -1554,7 +1554,7 @@ var Input = function () {
             $(that.elem).bind('keyup', function (e) {
                 var $self = $(this);
                 var trueKey = false;
-                if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0)) {
+                if (e.keyCode === 8 || e.keyCode <= 105 && e.keyCode >= 96 || e.keyCode < 58 && e.keyCode > 47 || ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0)) {
                     trueKey = true;
                 }
                 if (trueKey) {
@@ -1612,6 +1612,14 @@ var Input = function () {
                 evt.stopPropagation();
                 return false;
             }, 200));
+		
+            // hide when tab out
+            $(this.elem).on('keydown', function (e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode == 9) {
+                    that.model.api.hide();
+                }
+            });
         }
 
         /**
