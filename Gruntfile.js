@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         sass: {
             dev: {
                 files: {
-                    'dist/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss',
+                    'dist/css/<%= pkg.name %>.css': 'src/sass/persian-datepicker.scss'
                 }
             },
             prod: {

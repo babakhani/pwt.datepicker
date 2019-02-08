@@ -363,7 +363,7 @@ const Config = {
              * @default 'امروز'
              * @deprecated from 1.0.0
              */
-            btnToday: 'امروز',
+            btnToday: 'امروز'
 
         },
 
