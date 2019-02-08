@@ -1,8 +1,8 @@
 /*
-** persian-datepicker - v1.1.3
+** persian-datepicker - v1.1.4b
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
+** Under MIT license 
 */ 
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -168,7 +168,7 @@ module.exports = Helper;
 /**
  * @type {string}
  */
-var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div data-navigator class=\"datepicker-navigator\">\n            <div class=\"pwt-btn pwt-btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"pwt-btn pwt-btn-switch\">{{navigator.switch.text}}</div>\n            <div class=\"pwt-btn pwt-btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}\n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" >\n                                            <span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\">\n                                            <span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridian.enabled}}\n            <div class=\"meridian time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridian\">\u25B2</div>\n                <input disabled value=\"{{meridian.title}}\" type=\"text\" class=\"meridian-input\">\n                <div class=\"down-btn\" data-time-key=\"meridian\">\u25BC</div>\n            </div>\n        {{/meridian.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox\">\n        {{#toolbox.submitButton.enabled}}\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        {{/toolbox.submitButton.enabled}}        \n        {{#toolbox.todayButton.enabled}}\n            <div class=\"pwt-btn-today\">{{todayButtonText}}</div>\n        {{/toolbox.todayButton.enabled}}        \n        {{#toolbox.calendarSwitch.enabled}}\n            <div class=\"pwt-btn-calendar\">{{calendarSwitchText}}</div>\n        {{/toolbox.calendarSwitch.enabled}}\n    </div>\n    {{/enabled}}\n    {{^enabled}}\n        {{#onlyTimePicker}}\n        <div class=\"toolbox\">\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        </div>\n        {{/onlyTimePicker}}\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
+var Template = "\n<div id=\"plotId\" class=\"datepicker-plot-area {{cssClass}}\">\n    {{#navigator.enabled}}\n        <div data-navigator class=\"datepicker-navigator\">\n            <div class=\"pwt-btn pwt-btn-next\">{{navigator.text.btnNextText}}</div>\n            <div class=\"pwt-btn pwt-btn-switch\">{{navigator.switch.text}}</div>\n            <div class=\"pwt-btn pwt-btn-prev\">{{navigator.text.btnPrevText}}</div>\n        </div>\n    {{/navigator.enabled}}\n    <div class=\"datepicker-grid-view\" >\n    {{#days.enabled}}\n        {{#days.viewMode}}\n        <div class=\"datepicker-day-view\" >    \n            <div class=\"month-grid-box\">\n                <div class=\"header\">\n                    <div class=\"title\"></div>\n                    <div class=\"header-row\">\n                        {{#weekdays.list}}\n                            <div class=\"header-row-cell\">{{.}}</div>\n                        {{/weekdays.list}}\n                    </div>\n                </div>    \n                <table cellspacing=\"0\" class=\"table-days\">\n                    <tbody>\n                        {{#days.list}}\n                           \n                            <tr>\n                                {{#.}}\n                                    {{#enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" >\n                                            <span  class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    {{^enabled}}\n                                        <td data-date=\"{{dataDate}}\" data-unix=\"{{dataUnix}}\" class=\"disabled\">\n                                            <span class=\"{{#otherMonth}}other-month{{/otherMonth}}\">{{title}}</span>\n                                            {{#altCalendarShowHint}}\n                                            <i  class=\"alter-calendar-day\">{{alterCalTitle}}</i>\n                                            {{/altCalendarShowHint}}\n                                        </td>\n                                    {{/enabled}}\n                                    \n                                {{/.}}\n                            </tr>\n                        {{/days.list}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n        {{/days.viewMode}}\n    {{/days.enabled}}\n    \n    {{#month.enabled}}\n        {{#month.viewMode}}\n            <div class=\"datepicker-month-view\">\n                {{#month.list}}\n                    {{#enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                    {{^enabled}}               \n                        <div data-month=\"{{dataMonth}}\" class=\"month-item month-item-disable {{#selected}}selected{{/selected}}\">{{title}}</small></div>\n                    {{/enabled}}\n                {{/month.list}}\n            </div>\n        {{/month.viewMode}}\n    {{/month.enabled}}\n    \n    {{#year.enabled }}\n        {{#year.viewMode }}\n            <div class=\"datepicker-year-view\" >\n                {{#year.list}}\n                    {{#enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}\n                    {{^enabled}}\n                        <div data-year=\"{{dataYear}}\" class=\"year-item year-item-disable {{#selected}}selected{{/selected}}\">{{title}}</div>\n                    {{/enabled}}                    \n                {{/year.list}}\n            </div>\n        {{/year.viewMode }}\n    {{/year.enabled }}\n    \n    </div>\n    {{#time}}\n    {{#enabled}}\n    <div class=\"datepicker-time-view\">\n        {{#hour.enabled}}\n            <div class=\"hour time-segment\" data-time-key=\"hour\">\n                <div class=\"up-btn\" data-time-key=\"hour\">\u25B2</div>\n                <input disabled value=\"{{hour.title}}\" type=\"text\" placeholder=\"hour\" class=\"hour-input\">\n                <div class=\"down-btn\" data-time-key=\"hour\">\u25BC</div>                    \n            </div>       \n            <div class=\"divider\">\n                <span>:</span>\n            </div>\n        {{/hour.enabled}}\n        {{#minute.enabled}}\n            <div class=\"minute time-segment\" data-time-key=\"minute\" >\n                <div class=\"up-btn\" data-time-key=\"minute\">\u25B2</div>\n                <input disabled value=\"{{minute.title}}\" type=\"text\" placeholder=\"minute\" class=\"minute-input\">\n                <div class=\"down-btn\" data-time-key=\"minute\">\u25BC</div>\n            </div>        \n            <div class=\"divider second-divider\">\n                <span>:</span>\n            </div>\n        {{/minute.enabled}}\n        {{#second.enabled}}\n            <div class=\"second time-segment\" data-time-key=\"second\"  >\n                <div class=\"up-btn\" data-time-key=\"second\" >\u25B2</div>\n                <input disabled value=\"{{second.title}}\"  type=\"text\" placeholder=\"second\" class=\"second-input\">\n                <div class=\"down-btn\" data-time-key=\"second\" >\u25BC</div>\n            </div>\n            <div class=\"divider meridian-divider\"></div>\n            <div class=\"divider meridian-divider\"></div>\n        {{/second.enabled}}\n        {{#meridian.enabled}}\n            <div class=\"meridian time-segment\" data-time-key=\"meridian\" >\n                <div class=\"up-btn\" data-time-key=\"meridian\">\u25B2</div>\n                <input disabled value=\"{{meridian.title}}\" type=\"text\" class=\"meridian-input\">\n                <div class=\"down-btn\" data-time-key=\"meridian\">\u25BC</div>\n            </div>\n        {{/meridian.enabled}}\n    </div>\n    {{/enabled}}\n    {{/time}}\n    \n    {{#toolbox}}\n    {{#enabled}}\n    <div class=\"toolbox\">\n        {{#toolbox.submitButton.enabled}}\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        {{/toolbox.submitButton.enabled}}        \n        {{#toolbox.todayButton.enabled}}\n            <div class=\"pwt-btn-today\">{{todayButtonText}}</div>\n        {{/toolbox.todayButton.enabled}}        \n        {{#toolbox.calendarSwitch.enabled}}\n            <div class=\"pwt-btn-calendar\">{{calendarSwitchText}}</div>\n        {{/toolbox.calendarSwitch.enabled}}\n    </div>\n    {{/enabled}}\n    {{^enabled}}\n        {{#onlyTimePicker}}\n        <div class=\"toolbox\">\n            <div class=\"pwt-btn-submit\">{{submitButtonText}}</div>\n        </div>\n        {{/onlyTimePicker}}\n    {{/enabled}}\n    {{/toolbox}}\n</div>\n";
 
 module.exports = Template;
 
@@ -1612,6 +1612,13 @@ var Input = function () {
                 evt.stopPropagation();
                 return false;
             }, 200));
+
+            $(this.elem).on('keydown', Helper.debounce(function (evt) {
+                if (evt.which === 9) {
+                    that.model.api.hide();
+                    return false;
+                }
+            }, 200));
         }
 
         /**
@@ -1724,10 +1731,11 @@ var Input = function () {
                     var parse = new PersianDateParser();
                     var pd = new persianDate(parse.parse(inputValue)).valueOf();
                     garegurianDate = new Date(pd).valueOf();
+                } else if (this.model.options.initialValueType === 'unix' && inputValue) {
+                    garegurianDate = parseInt(inputValue);
                 } else if (inputValue) {
                     garegurianDate = new Date(inputValue).valueOf();
                 }
-
                 if (garegurianDate && garegurianDate != 'undefined') {
                     this.initialUnix = garegurianDate;
                 } else {
@@ -1938,7 +1946,7 @@ var Navigator = function () {
                 $(document).on('click', '#' + that.model.view.id + ' .up-btn', function () {
                     var timekey = $(this).data('time-key');
                     that.timeUp(timekey);
-                    that.model.options.onSelect(that.model.state.selected.unix);
+                    that.model.options.onSelect(that.model.state.selected.unixDate);
                 });
 
                 /**
@@ -1947,7 +1955,7 @@ var Navigator = function () {
                 $(document).on('click', '#' + that.model.view.id + ' .down-btn', function () {
                     var timekey = $(this).data('time-key');
                     that.timeDown(timekey);
-                    that.model.options.onSelect(that.model.state.selected.unix);
+                    that.model.options.onSelect(that.model.state.selected.unixDate);
                 });
             }
 
@@ -2148,6 +2156,7 @@ var PersianDateParser = function () {
         _classCallCheck(this, PersianDateParser);
 
         this.pattern = {
+            iso: /^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z)?$/g,
             jalali: /^[1-4]\d{3}(\/|-|\.)((0?[1-6](\/|-|\.)((3[0-1])|([1-2][0-9])|(0?[1-9])))|((1[0-2]|(0?[7-9]))(\/|-|\.)(30|([1-2][0-9])|(0?[1-9]))))$/g
         };
     }
@@ -2157,6 +2166,7 @@ var PersianDateParser = function () {
         value: function parse(inputString) {
             var that = this,
                 persianDateArray = void 0,
+                isoPat = new RegExp(that.pattern.iso),
                 jalaliPat = new RegExp(that.pattern.jalali);
 
             String.prototype.toEnglishDigits = function () {
@@ -2167,12 +2177,16 @@ var PersianDateParser = function () {
             };
 
             inputString = inputString.toEnglishDigits();
-
             if (jalaliPat.test(inputString)) {
                 /* eslint-disable no-useless-escape */
                 persianDateArray = inputString.split(/\/|-|\,|\./).map(Number);
                 /* eslint-enable no-useless-escape */
                 return persianDateArray;
+            } else if (isoPat.test(inputString)) {
+                /* eslint-disable no-useless-escape */
+                persianDateArray = inputString.split(/\/|-|\,|\:|\T|\Z/g).map(Number);
+                return persianDateArray;
+                /* eslint-enable no-useless-escape */
             } else {
                 return undefined;
             }
@@ -3643,7 +3657,7 @@ Hamster.normalise = {
           type: 'wheel',
           deltaMode: originalEvent.type === 'MozMousePixelScroll' ? 0 : 1,
           deltaX: 0,
-          delatZ: 0,
+          deltaZ: 0,
           preventDefault: function(){
             if (originalEvent.preventDefault) {
               originalEvent.preventDefault();
@@ -3814,6 +3828,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
    */
   function hasProperty (obj, propName) {
     return obj != null && typeof obj === 'object' && (propName in obj);
+  }
+
+  /**
+   * Safe way of detecting whether or not the given thing is a primitive and
+   * whether it has the given property
+   */
+  function primitiveHasOwnProperty (primitive, propName) {  
+    return (
+      primitive != null
+      && typeof primitive !== 'object'
+      && primitive.hasOwnProperty
+      && primitive.hasOwnProperty(propName)
+    );
   }
 
   // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
@@ -4148,11 +4175,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if (cache.hasOwnProperty(name)) {
       value = cache[name];
     } else {
-      var context = this, names, index, lookupHit = false;
+      var context = this, intermediateValue, names, index, lookupHit = false;
 
       while (context) {
         if (name.indexOf('.') > 0) {
-          value = context.view;
+          intermediateValue = context.view;
           names = name.split('.');
           index = 0;
 
@@ -4166,20 +4193,51 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
            *
            * This is specially necessary for when the value has been set to
            * `undefined` and we want to avoid looking up parent contexts.
+           *
+           * In the case where dot notation is used, we consider the lookup
+           * to be successful even if the last "object" in the path is
+           * not actually an object but a primitive (e.g., a string, or an
+           * integer), because it is sometimes useful to access a property
+           * of an autoboxed primitive, such as the length of a string.
            **/
-          while (value != null && index < names.length) {
+          while (intermediateValue != null && index < names.length) {
             if (index === names.length - 1)
-              lookupHit = hasProperty(value, names[index]);
+              lookupHit = (
+                hasProperty(intermediateValue, names[index]) 
+                || primitiveHasOwnProperty(intermediateValue, names[index])
+              );
 
-            value = value[names[index++]];
+            intermediateValue = intermediateValue[names[index++]];
           }
         } else {
-          value = context.view[name];
+          intermediateValue = context.view[name];
+
+          /**
+           * Only checking against `hasProperty`, which always returns `false` if
+           * `context.view` is not an object. Deliberately omitting the check
+           * against `primitiveHasOwnProperty` if dot notation is not used.
+           *
+           * Consider this example:
+           * ```
+           * Mustache.render("The length of a football field is {{#length}}{{length}}{{/length}}.", {length: "100 yards"})
+           * ```
+           *
+           * If we were to check also against `primitiveHasOwnProperty`, as we do
+           * in the dot notation case, then render call would return:
+           *
+           * "The length of a football field is 9."
+           *
+           * rather than the expected:
+           *
+           * "The length of a football field is 100 yards."
+           **/
           lookupHit = hasProperty(context.view, name);
         }
 
-        if (lookupHit)
+        if (lookupHit) {
+          value = intermediateValue;
           break;
+        }
 
         context = context.parent;
       }
@@ -4210,15 +4268,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   /**
-   * Parses and caches the given `template` and returns the array of tokens
+   * Parses and caches the given `template` according to the given `tags` or
+   * `mustache.tags` if `tags` is omitted,  and returns the array of tokens
    * that is generated from the parse.
    */
   Writer.prototype.parse = function parse (template, tags) {
     var cache = this.cache;
-    var tokens = cache[template];
+    var cacheKey = template + ':' + (tags || mustache.tags).join(':');
+    var tokens = cache[cacheKey];
 
     if (tokens == null)
-      tokens = cache[template] = parseTemplate(template, tags);
+      tokens = cache[cacheKey] = parseTemplate(template, tags);
 
     return tokens;
   };
@@ -4231,11 +4291,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
    * names and templates of partials that are used in the template. It may
    * also be a function that is used to load partial templates on the fly
    * that takes a single argument: the name of the partial.
+   *
+   * If the optional `tags` argument is given here it must be an array with two
+   * string values: the opening and closing tags used in the template (e.g.
+   * [ "<%", "%>" ]). The default is to mustache.tags.
    */
-  Writer.prototype.render = function render (template, view, partials) {
-    var tokens = this.parse(template);
+  Writer.prototype.render = function render (template, view, partials, tags) {
+    var tokens = this.parse(template, tags);
     var context = (view instanceof Context) ? view : new Context(view);
-    return this.renderTokens(tokens, context, partials, template);
+    return this.renderTokens(tokens, context, partials, template, tags);
   };
 
   /**
@@ -4247,7 +4311,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
    * If the template doesn't use higher-order sections, this argument may
    * be omitted.
    */
-  Writer.prototype.renderTokens = function renderTokens (tokens, context, partials, originalTemplate) {
+  Writer.prototype.renderTokens = function renderTokens (tokens, context, partials, originalTemplate, tags) {
     var buffer = '';
 
     var token, symbol, value;
@@ -4258,7 +4322,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       if (symbol === '#') value = this.renderSection(token, context, partials, originalTemplate);
       else if (symbol === '^') value = this.renderInverted(token, context, partials, originalTemplate);
-      else if (symbol === '>') value = this.renderPartial(token, context, partials, originalTemplate);
+      else if (symbol === '>') value = this.renderPartial(token, context, partials, tags);
       else if (symbol === '&') value = this.unescapedValue(token, context);
       else if (symbol === 'name') value = this.escapedValue(token, context);
       else if (symbol === 'text') value = this.rawValue(token);
@@ -4313,12 +4377,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return this.renderTokens(token[4], context, partials, originalTemplate);
   };
 
-  Writer.prototype.renderPartial = function renderPartial (token, context, partials) {
+  Writer.prototype.renderPartial = function renderPartial (token, context, partials, tags) {
     if (!partials) return;
 
     var value = isFunction(partials) ? partials(token[1]) : partials[token[1]];
     if (value != null)
-      return this.renderTokens(this.parse(value), context, partials, value);
+      return this.renderTokens(this.parse(value, tags), context, partials, value);
   };
 
   Writer.prototype.unescapedValue = function unescapedValue (token, context) {
@@ -4338,7 +4402,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   mustache.name = 'mustache.js';
-  mustache.version = '2.3.0';
+  mustache.version = '3.0.1';
   mustache.tags = [ '{{', '}}' ];
 
   // All high-level mustache.* functions use this writer.
@@ -4362,16 +4426,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   /**
    * Renders the `template` with the given `view` and `partials` using the
-   * default writer.
+   * default writer. If the optional `tags` argument is given here it must be an
+   * array with two string values: the opening and closing tags used in the
+   * template (e.g. [ "<%", "%>" ]). The default is to mustache.tags.
    */
-  mustache.render = function render (template, view, partials) {
+  mustache.render = function render (template, view, partials, tags) {
     if (typeof template !== 'string') {
       throw new TypeError('Invalid template! Template should be a "string" ' +
                           'but "' + typeStr(template) + '" was given as the first ' +
                           'argument for mustache#render(template, view, partials)');
     }
 
-    return defaultWriter.render(template, view, partials);
+    return defaultWriter.render(template, view, partials, tags);
   };
 
   // This is here for backwards compatibility with 0.4.x.,

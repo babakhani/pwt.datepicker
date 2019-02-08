@@ -1,5 +1,6 @@
 const webpackConfig = require('./webpack.config.js');
 const webpackDevConfig = require('./webpack.config.dev.js');
+const sass = require('node-sass');
 
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
@@ -31,6 +32,7 @@ module.exports = function (grunt) {
             },
             prod: {
                 options: {
+                    implementation: sass,
                     outputStyle: 'compressed',
                     sourceMap: true
                 },

@@ -1,8 +1,8 @@
 /*
-** persian-datepicker - v1.1.3
+** persian-datepicker - v1.1.4b
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under WTFPL license 
+** Under MIT license 
 */ 
 
 .datepicker-plot-area {
@@ -381,8 +381,8 @@
     top: 100vh;
     height: 0; }
   .datepicker-container.pwt-mobile-view .datepicker-plot-area.datepicker-state-only-time .pwt-btn-submit {
-    color: white;
-    background: gray; }
+    color: #fff;
+    background: #ccc; }
   .datepicker-container.pwt-mobile-view .datepicker-plot-area {
     position: absolute;
     width: 100%;
