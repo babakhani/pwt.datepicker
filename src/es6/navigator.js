@@ -236,7 +236,7 @@ class Navigator {
                 that.model.state.setViewDateTime('month', month);
                 that.model.view.render();
                 that.model.options.monthPicker.onSelect(month);
-                that.model.options.onSelect(that.model.state.selected.unix);
+                that.model.options.onSelect(that.model.state.selected.unixDate);
             });
         }
 
@@ -262,7 +262,7 @@ class Navigator {
                 that.model.state.setViewDateTime('year', year);
                 that.model.view.render();
                 that.model.options.yearPicker.onSelect(year);
-                that.model.options.onSelect(that.model.state.selected.unix);
+                that.model.options.onSelect(that.model.state.selected.unixDate);
             });
         }
     }
