@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.4] - 2018-2-20
+- Fix [#275](https://github.com/babakhani/pwt.datepicker/issues/257)
+- Fix [#276](https://github.com/babakhani/pwt.datepicker/issues/256)
+- Fix [#245](https://github.com/babakhani/pwt.datepicker/issues/245)
+- Fix [#172](https://github.com/babakhani/pwt.datepicker/issues/172)
+- Fix [#238](https://github.com/babakhani/pwt.datepicker/issues/238)
+- Fix [#216](https://github.com/babakhani/pwt.datepicker/issues/216)
+- Fix [#177](https://github.com/babakhani/pwt.datepicker/issues/177)
+- Fix [#259](https://github.com/babakhani/pwt.datepicker/issues/259)
+
 ## [1.1.3] - 2018-2-13
 - Fix [#207](https://github.com/babakhani/pwt.datepicker/issues/207)
 
