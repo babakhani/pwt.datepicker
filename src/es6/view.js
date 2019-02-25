@@ -339,7 +339,7 @@ class View {
             for (let [dayIndex] of daysRow.entries()) {
                 let calcedDate, otherMonth;
                 if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                    calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').valueOf() / 1000).subtract('days', ((firstWeekDayOfMonth) - dayIndex ));
+                    calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').startOf('day').valueOf() / 1000).subtract('days', ((firstWeekDayOfMonth) - dayIndex ));
                     otherMonth = true;
                 }
                 else if ((rowIndex === 0 && dayIndex >= firstWeekDayOfMonth) || (rowIndex <= 5 && daysListindex < daysCount)) {
@@ -349,7 +349,7 @@ class View {
                 }
                 else {
                     nextMonthListIndex += 1;
-                    calcedDate = pdate.unix(this.model.state.view.dateObject.endOf('month').valueOf() / 1000).add('days', nextMonthListIndex);
+                    calcedDate = pdate.unix(this.model.state.view.dateObject.endOf('month').startOf('day').valueOf() / 1000).add('days', nextMonthListIndex);
                     otherMonth = true;
                 }
                 outputList[rowIndex].push({

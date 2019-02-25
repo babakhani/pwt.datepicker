@@ -1,5 +1,5 @@
 /*
-** persian-datepicker - v1.1.4
+** persian-datepicker - v1.1.5
 ** Reza Babakhani <babakhani.reza@gmail.com>
 ** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
 ** Under MIT license 
@@ -3169,7 +3169,7 @@ var View = function () {
                             var calcedDate = void 0,
                                 otherMonth = void 0;
                             if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                                calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').valueOf() / 1000).subtract('days', firstWeekDayOfMonth - dayIndex);
+                                calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').startOf('day').valueOf() / 1000).subtract('days', firstWeekDayOfMonth - dayIndex);
                                 otherMonth = true;
                             } else if (rowIndex === 0 && dayIndex >= firstWeekDayOfMonth || rowIndex <= 5 && daysListindex < daysCount) {
                                 daysListindex += 1;
@@ -3177,7 +3177,7 @@ var View = function () {
                                 otherMonth = false;
                             } else {
                                 nextMonthListIndex += 1;
-                                calcedDate = pdate.unix(this.model.state.view.dateObject.endOf('month').valueOf() / 1000).add('days', nextMonthListIndex);
+                                calcedDate = pdate.unix(this.model.state.view.dateObject.endOf('month').startOf('day').valueOf() / 1000).add('days', nextMonthListIndex);
                                 otherMonth = true;
                             }
                             outputList[rowIndex].push({
