@@ -1,10 +1,3 @@
-/*
-** persian-datepicker - v1.1.5
-** Reza Babakhani <babakhani.reza@gmail.com>
-** http://babakhani.github.io/PersianWebToolkit/docs/datepicker
-** Under MIT license 
-*/ 
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -2557,6 +2550,10 @@ var State = function () {
     }, {
         key: '_setViewDateTimeUnix',
         value: function _setViewDateTimeUnix() {
+            var daysInMonth = new persianDate().daysInMonth(this.view.year, this.view.month);
+            if (this.view.date > daysInMonth) {
+                this.view.date = daysInMonth;
+            }
             this.view.dateObject = this.model.PersianDate.date([this.view.year, this.view.month, this.view.date, this.view.hour, this.view.minute, this.view.second]);
             this.view.year = this.view.dateObject.year();
             this.view.month = this.view.dateObject.month();
@@ -3145,7 +3142,6 @@ var View = function () {
                 daysMatrix = [['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null'], ['null', 'null', 'null', 'null', 'null', 'null', 'null']];
 
             var anotherCalendar = this._getAnotherCalendar();
-            var pdate = this.model.PersianDate.date();
             var _iteratorNormalCompletion3 = true;
             var _didIteratorError3 = false;
             var _iteratorError3 = undefined;
@@ -3168,23 +3164,24 @@ var View = function () {
 
                             var calcedDate = void 0,
                                 otherMonth = void 0;
+                            // Set hour 12 prevent issues with DST times
                             if (rowIndex === 0 && dayIndex < firstWeekDayOfMonth) {
-                                calcedDate = pdate.unix(this.model.state.view.dateObject.startOf('month').startOf('day').valueOf() / 1000).subtract('days', firstWeekDayOfMonth - dayIndex);
+                                calcedDate = this.model.state.view.dateObject.startOf('month').hour(12).subtract('days', firstWeekDayOfMonth - dayIndex);
                                 otherMonth = true;
                             } else if (rowIndex === 0 && dayIndex >= firstWeekDayOfMonth || rowIndex <= 5 && daysListindex < daysCount) {
                                 daysListindex += 1;
-                                calcedDate = pdate.year(this.model.state.view.year).month(this.model.state.view.month).date(daysListindex);
+                                calcedDate = new persianDate([this.model.state.view.year, this.model.state.view.month, daysListindex]);
                                 otherMonth = false;
                             } else {
                                 nextMonthListIndex += 1;
-                                calcedDate = pdate.unix(this.model.state.view.dateObject.endOf('month').startOf('day').valueOf() / 1000).add('days', nextMonthListIndex);
+                                calcedDate = this.model.state.view.dateObject.endOf('month').hour(12).add('days', nextMonthListIndex);
                                 otherMonth = true;
                             }
                             outputList[rowIndex].push({
                                 title: calcedDate.format('D'),
                                 alterCalTitle: new persianDate(calcedDate.valueOf()).toCalendar(anotherCalendar[0]).toLocale(anotherCalendar[1]).format('D'),
                                 dataDate: [calcedDate.year(), calcedDate.month(), calcedDate.date()].join(','),
-                                dataUnix: calcedDate.valueOf(),
+                                dataUnix: calcedDate.hour(12).valueOf(),
                                 otherMonth: otherMonth,
                                 // TODO: make configurable
                                 enabled: this.checkDayAccess(calcedDate.valueOf())

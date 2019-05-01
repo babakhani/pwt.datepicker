@@ -289,6 +289,10 @@ class State {
      * @private
      */
     _setViewDateTimeUnix() {
+        let daysInMonth = new persianDate().daysInMonth(this.view.year, this.view.month);
+        if (this.view.date > daysInMonth) {
+            this.view.date = daysInMonth;
+        }
         this.view.dateObject = this.model.PersianDate.date([
             this.view.year,
             this.view.month,
