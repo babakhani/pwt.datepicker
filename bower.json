@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker",
-  "version": "1.1.5",
+  "version": "1.2.0-rc1",
   "main": [
     "dist/css/persian-datepicker.min.css",
     "dist/js/persian-datepicker.min.js"
@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "jquery": ">=3.3.1",
-    "persian-date": ">=1.0.5"
+    "persian-date": ">=1.1.0-rc1"
   },
   "keywords": [
     "bootstrap-datetimepicker",
@@ -24,7 +24,7 @@
     "persian-date",
     "persian-datepicker"
   ],
-  "license": "WTFPL",
+  "license": "MIT",
   "contributors": [
     "Reza Babakhani <babakhani.reza@gmail.com>"
   ],
