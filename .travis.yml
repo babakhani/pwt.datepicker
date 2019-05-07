@@ -1,18 +1,15 @@
 language: node_js
 node_js:
-- '6'
-- '6.1'
-- '8'
 - '10'
 
 before_script:
   npm install grunt-release --save-dev
 
-deploy:
-  provider: npm
-  email: babakhani.reza@gmail.com
-  api_key:
-    secure: PrDeLDu6vZNBarhnDMOisNBvaaRRWKHiZmbbzAoHobRnOSfnCBgeAoR30rdtf7ztd7x69oacLBjW6wMhi1NQO+DfQjIQwrmXJrTFIDPZ36ycY1KJd5NvIiE1Tk0iVmwVTgaQ22QzCijDNSHD2ioq7b2dP897IQJ+UZnlRVQ5997hns8cw7DlfrU8rmv9HQPBnuZL1mwwEIt6PdNwMuYN15svQ6ypH+INz/xGMV8FvSMS7jxsOXzLpXgzDqh5sNk2DgL6UmZvA8VShr7zSOeKXG9CLeDzQIQqVQdwiVhBO5Efo7E4ZkI8gg/VfHIcGPPwJ66xQMi5vSZoMisXAOoFMTVshI8UoeilHFmnzJ3iB7u4eJfVyNQE/jUfonl9h4emeMstv2EXaQz8nSMaL0MpZcmRgq5/42e8KmzqMQpBIgg2A3DZ5FIn8OLhBSqzGKO3+jn0OJop8V9zxKk+tPeO3p2X5Zu/6I9UqVtQJ/Vd0p59PJnnnAXoDWVEKFxXwTPsenV8CSLtcJXYguvOt8pxZKpUtVesh7nHuh0ClnFyq/gJCmDaP6q/1Xb7t/CgBGvLoMDmJNyONlF68c7I+gcEjv80cc9t2d45T2/0arIr5nAOTFzzXy+Pa4ZrMRmXnjJhZlQSGlmhfDcCVQ4rx5OgLPQCNQKvnnENn0bcVpMfwKk=
-  on:
-    tags: true
-    repo: babakhani/pwt.datepicker
+# deploy:
+#   provider: npm
+#   email: babakhani.reza@gmail.com
+#   api_key:
+#     secure: PrDeLDu6vZNBarhnDMOisNBvaaRRWKHiZmbbzAoHobRnOSfnCBgeAoR30rdtf7ztd7x69oacLBjW6wMhi1NQO+DfQjIQwrmXJrTFIDPZ36ycY1KJd5NvIiE1Tk0iVmwVTgaQ22QzCijDNSHD2ioq7b2dP897IQJ+UZnlRVQ5997hns8cw7DlfrU8rmv9HQPBnuZL1mwwEIt6PdNwMuYN15svQ6ypH+INz/xGMV8FvSMS7jxsOXzLpXgzDqh5sNk2DgL6UmZvA8VShr7zSOeKXG9CLeDzQIQqVQdwiVhBO5Efo7E4ZkI8gg/VfHIcGPPwJ66xQMi5vSZoMisXAOoFMTVshI8UoeilHFmnzJ3iB7u4eJfVyNQE/jUfonl9h4emeMstv2EXaQz8nSMaL0MpZcmRgq5/42e8KmzqMQpBIgg2A3DZ5FIn8OLhBSqzGKO3+jn0OJop8V9zxKk+tPeO3p2X5Zu/6I9UqVtQJ/Vd0p59PJnnnAXoDWVEKFxXwTPsenV8CSLtcJXYguvOt8pxZKpUtVesh7nHuh0ClnFyq/gJCmDaP6q/1Xb7t/CgBGvLoMDmJNyONlF68c7I+gcEjv80cc9t2d45T2/0arIr5nAOTFzzXy+Pa4ZrMRmXnjJhZlQSGlmhfDcCVQ4rx5OgLPQCNQKvnnENn0bcVpMfwKk=
+#   on:
+#     tags: true
+#     repo: babakhani/pwt.datepicker
