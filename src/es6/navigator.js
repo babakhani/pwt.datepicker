@@ -225,8 +225,10 @@ class Navigator {
              */
             $(document).on('click', '#' + that.model.view.id + ' .datepicker-month-view .month-item:not(.month-item-disable)', function () {
                 let month = $(this).data('month');
+                let year = $(this).data('year');
                 that.model.state.switchViewModeTo('day');
                 if (!that.model.options.onlySelectOnDate) {
+                    that.model.state.setSelectedDateTime('year', year);
                     that.model.state.setSelectedDateTime('month', month);
                     if (that.model.options.autoClose) {
                         that.model.view.hide();

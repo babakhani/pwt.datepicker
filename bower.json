@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker",
-  "version": "1.2.0-rc3",
+  "version": "1.2.0-rc4",
   "main": [
     "dist/css/persian-datepicker.min.css",
     "dist/js/persian-datepicker.min.js"

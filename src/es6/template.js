@@ -61,10 +61,10 @@ const Template = `
             <div class="datepicker-month-view">
                 {{#month.list}}
                     {{#enabled}}               
-                        <div data-month="{{dataMonth}}" class="month-item {{#selected}}selected{{/selected}}">{{title}}</small></div>
+                        <div data-year="{{year}}" data-month="{{dataMonth}}" class="month-item {{#selected}}selected{{/selected}}">{{title}}</small></div>
                     {{/enabled}}
                     {{^enabled}}               
-                        <div data-month="{{dataMonth}}" class="month-item month-item-disable {{#selected}}selected{{/selected}}">{{title}}</small></div>
+                        <div data-year="{{year}}"data-month="{{dataMonth}}" class="month-item month-item-disable {{#selected}}selected{{/selected}}">{{title}}</small></div>
                     {{/enabled}}
                 {{/month.list}}
             </div>

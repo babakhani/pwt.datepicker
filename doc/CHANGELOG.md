@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.0-rc4] - 2019-06-01
+- Fix issue in month selector that cause selecting month in other years doesnt
+    affect selected date year
+
 ## [1.2.0-rc3] - 2018-04-07
 - Fix [#279](https://github.com/babakhani/pwt.datepicker/issues/279)
 - Fix [#288](https://github.com/babakhani/pwt.datepicker/issues/288)
