@@ -1,6 +1,6 @@
-Your issue may already be reported!
-Please search on the issues list before creating one.  
-Please use the English language to describe your issue.  
+<!--- Your issue may already be reported! -->
+<!--- Please search on the issues list before creating one. -->
+<!--- Please use the English language to describe your issue. -->
 
 ## Expected Behavior
 <!--- If you're describing a bug, tell us what should happen -->
@@ -15,12 +15,9 @@ Please use the English language to describe your issue.
 <!--- or ideas how to implement the addition or change -->
 
 ## Steps to Reproduce (for bugs)
-<!--- Provide a link to a live example (you can use http://jsfiddle.net), or a simple set of steps to. -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
+<!--- Provide a link to a live example (you can use http://jsfiddle.net), or a simple set of steps to reproduce this bug. -->
 1.
 2.
-3.
-4.
 
 ## Context
 <!-- How has this issue affected you? What are you trying to accomplish? -->
