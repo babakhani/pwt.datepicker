@@ -2837,14 +2837,18 @@ var View = function () {
             }
 
             if (this.model.options.position === 'auto') {
+                var elementTop = inputPosition.top - $(window).scrollTop();
+                var containerTop = 0;
+                var containerHeight = $(".datepicker-plot-area", this.$container).outerHeight();
+
+                if ($(window).height() - elementTop > containerHeight) {
+                    containerTop = inputPosition.top + inputSize.height;
+                } else {
+                    containerTop = inputPosition.top - containerHeight;
+                }
+
                 this.$container.css({
-                    left: inputPosition.left + 'px',
-                    top: inputSize.height + inputPosition.top + 'px'
-                });
-            } else {
-                this.$container.css({
-                    left: this.model.options.position[1] + inputPosition.left + 'px',
-                    top: this.model.options.position[0] + inputPosition.top + 'px'
+                    top: containerTop + "px"
                 });
             }
         }
