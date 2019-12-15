@@ -86,15 +86,22 @@ class View {
         }
 
         if (this.model.options.position === 'auto') {
+            let elementTop = inputPosition.top - $(window).scrollTop();
+            let containerTop = 0;
+            let containerHeight = $(
+              '.datepicker-plot-area',
+              this.$container
+            ).outerHeight();
+            
+            if ($(window).height() - elementTop > containerHeight) {
+              containerTop = inputPosition.top + inputSize.height;
+            } else {
+              containerTop = inputPosition.top - containerHeight;
+            }
+        
             this.$container.css({
-                left: (inputPosition.left) + 'px',
-                top: (inputSize.height + inputPosition.top) + 'px'
-            });
-        } else {
-            this.$container.css({
-                left: (this.model.options.position[1] + inputPosition.left) + 'px',
-                top: (this.model.options.position[0] + inputPosition.top) + 'px'
-            });
+              top: containerTop + 'px'
+            });        
         }
     }
 
