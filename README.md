@@ -59,10 +59,10 @@ bower install persian-datepicker
 
 ```html
 <head>
-  <link rel="stylesheet" href="css/persian.datepicker.css"/>
+  <link rel="stylesheet" href="css/persian-datepicker.css"/>
   <script src="js/jquery.js"></script>
-  <script src="js/persian.date.js"></script>
-  <script src="js/persian.datepicker.js"></script>
+  <script src="js/persian-date.js"></script>
+  <script src="js/persian-datepicker.js"></script>
 </head>
 
 <script type="text/javascript">
