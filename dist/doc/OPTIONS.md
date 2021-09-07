@@ -122,18 +122,7 @@ calendar type and localization configuration
 **Since**: 1.0.0  
 **Example**  
 ```js
-{
-    'persian': {
-        'locale': 'fa',
-        'showHint': false,
-        'leapYearMode': 'algorithmic' // "astronomical"
-    },
-
-    'gregorian': {
-        'locale': 'en',
-        'showHint': false
-    }
-}
+{    'persian': {        'locale': 'fa',        'showHint': false,        'leapYearMode': 'algorithmic' // "astronomical"    },    'gregorian': {        'locale': 'en',        'showHint': false    }}
 ```
 
 * [.calendar](#Config.calendar) : <code>object</code>
@@ -273,9 +262,7 @@ An input element that is to be updated with the selected date from the datepicke
 **Default**: <code>false</code>  
 **Example**  
 ```js
-altField: '#inputAltFirld'
-
-altField: '.input-alt-field'
+altField: '#inputAltFirld'altField: '.input-alt-field'
 ```
 <a name="Config.altFormat"></a>
 
@@ -399,9 +386,7 @@ Called when navigator goes to next state
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 **Example**  
 ```js
-function (navigator) {
-     //log('navigator next ');
- }
+function (navigator) {     //log('navigator next '); }
 ```
 <a name="Config.navigator.event_onPrev"></a>
 
@@ -411,9 +396,7 @@ Called when navigator goes to previews state
 **Kind**: event emitted by [<code>navigator</code>](#Config.navigator)  
 **Example**  
 ```js
-function (navigator) {
-     //log('navigator prev ');
- }
+function (navigator) {     //log('navigator prev '); }
 ```
 <a name="Config.navigator.event_onSwitch"></a>
 
@@ -424,8 +407,7 @@ Called when navigator switch
 **Example**  
 ```js
 function (datepickerObject) {
-                // console.log('navigator switch ');
- }
+                // console.log('navigator switch '); }
 ```
 <a name="Config.toolbox"></a>
 
@@ -653,10 +635,7 @@ Called when calendar switch clicked
 
 **Example**  
 ```js
-function (toolbox) {
-     //log('toolbox today btn');
- }
- 
+function (toolbox) {     //log('toolbox today btn'); } 
 ```
 <a name="Config.onlyTimePicker"></a>
 
@@ -1002,8 +981,7 @@ position of datepicker relative to input element
 **Default**: <code>&quot;&#x27;auto&#x27;&quot;</code>  
 **Example**  
 ```js
-'position': 'auto'
-'position': [10,10]
+'position': 'auto''position': [10,10]
 ```
 <a name="Config.autoClose"></a>
 
@@ -1189,12 +1167,7 @@ format value of input
 
 **Example**  
 ```js
-function (unixDate) {
-     var self = this;
-     var pdate = new persianDate(unixDate);
-     pdate.formatPersian = this.persianDigit;
-     return pdate.format(self.format);
- }
+function (unixDate) {     var self = this;     var pdate = new persianDate(unixDate);     pdate.formatPersian = this.persianDigit;     return pdate.format(self.format); }
 ```
 <a name="Config.altFieldFormatter"></a>
 
@@ -1217,21 +1190,7 @@ format value of 'altField' input
 
 **Example**  
 ```js
-function (unixDate) {
-     var self = this;
-     var thisAltFormat = self.altFormat.toLowerCase();
-     if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {
-         return new Date(unixDate);
-     }
-     if (thisAltFormat === 'unix' || thisAltFormat === 'u') {
-         return unixDate;
-     }
-     else {
-         var pd = new persianDate(unixDate);
-         pd.formatPersian = this.persianDigit;
-         return pd.format(self.altFormat);
-     }
- }
+function (unixDate) {     var self = this;     var thisAltFormat = self.altFormat.toLowerCase();     if (thisAltFormat === 'gregorian' || thisAltFormat === 'g') {         return new Date(unixDate);     }     if (thisAltFormat === 'unix' || thisAltFormat === 'u') {         return unixDate;     }     else {         var pd = new persianDate(unixDate);         pd.formatPersian = this.persianDigit;         return pd.format(self.altFormat);     } }
 ```
 <a name="Config.checkDate"></a>
 

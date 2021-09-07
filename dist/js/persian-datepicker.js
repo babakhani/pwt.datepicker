@@ -386,6 +386,24 @@ var API = function () {
         key: 'destroy',
         value: function destroy() {
             if (this.model) {
+                // hide openned popup
+                this.model.api.hide();
+
+                // deattach events handler
+                var ElemID = this.model.view.id;
+                $(this.model.inputElement).off();
+                $('#' + ElemID).off();
+                $(document).off('click', '#' + ElemID + ' .pwt-btn-today');
+                $(document).off('click', '#' + ElemID + ' .pwt-btn-calendar');
+                $(document).off('click', '#' + ElemID + ' .pwt-btn-submit');
+                $(document).off('click', '#' + ElemID + ' .pwt-btn');
+                $(document).off('click', '#' + ElemID + ' .up-btn');
+                $(document).off('click', '#' + ElemID + ' .down-btn');
+                $(document).off('click', '#' + ElemID + ' .datepicker-day-view td:not(.disabled)');
+                $(document).off('click', '#' + ElemID + ' .datepicker-month-view .month-item:not(.month-item-disable)');
+                $(document).off('click', '#' + ElemID + ' .datepicker-year-view .year-item:not(.year-item-disable)');
+                $('body').off('click', this.model.input._closePickerHandler);
+
                 this.model.view.destroy();
                 this.model.options.onDestroy(this.model);
                 delete this.model;
@@ -1288,15 +1306,15 @@ var Config = {
    <table cellspacing="0" class="table-days">
    <tbody>
    {{#days.list}}
-    <tr>
+     <tr>
    {{#.}}
-    {{#enabled}}
+     {{#enabled}}
    <td data-unix="{{dataUnix}}" ><span  class="{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}}">{{title}}</span></td>
    {{/enabled}}
    {{^enabled}}
    <td data-unix="{{dataUnix}}" class="disabled"><span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
    {{/enabled}}
-    {{/.}}
+     {{/.}}
    </tr>
    {{/days.list}}
    </tbody>
@@ -1305,7 +1323,7 @@ var Config = {
    </div>
    {{/days.viewMode}}
    {{/days.enabled}}
-    {{#month.enabled}}
+     {{#month.enabled}}
    {{#month.viewMode}}
    <div class="datepicker-month-view">
    {{#month.list}}
@@ -1319,7 +1337,7 @@ var Config = {
    </div>
    {{/month.viewMode}}
    {{/month.enabled}}
-    {{#year.enabled }}
+     {{#year.enabled }}
    {{#year.viewMode }}
    <div class="datepicker-year-view" >
    {{#year.list}}
@@ -1333,7 +1351,7 @@ var Config = {
    </div>
    {{/year.viewMode }}
    {{/year.enabled }}
-    </div>
+     </div>
    {{#time}}
    {{#enabled}}
    <div class="datepicker-time-view">
@@ -1372,7 +1390,7 @@ var Config = {
    </div>
    {{/enabled}}
    {{/time}}
-    {{#toolbox}}
+     {{#toolbox}}
    {{#enabled}}
    <div class="toolbox ">
    <div class="btn-today">{{text.btnToday}}</div>
@@ -1597,14 +1615,15 @@ var Input = function () {
             var closePickerHandler = function closePickerHandler(e) {
                 if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) && $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
                     that.model.api.hide();
-                    $('body').unbind('click', closePickerHandler);
+                    $('body').unbind('click', that._closePickerHandler);
                 }
             };
+            that._closePickerHandler = closePickerHandler;
 
             $(this.elem).on('focus click', Helper.debounce(function (evt) {
                 that.model.api.show();
                 if (that.model.state.ui.isInline === false) {
-                    $('body').unbind('click', closePickerHandler).bind('click', closePickerHandler);
+                    $('body').unbind('click', that._closePickerHandler).bind('click', that._closePickerHandler);
                 }
                 if (Helper.isMobile) {
                     $(this).blur();
