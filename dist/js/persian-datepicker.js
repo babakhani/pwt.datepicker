@@ -1288,15 +1288,15 @@ var Config = {
    <table cellspacing="0" class="table-days">
    <tbody>
    {{#days.list}}
-    <tr>
+     <tr>
    {{#.}}
-    {{#enabled}}
+     {{#enabled}}
    <td data-unix="{{dataUnix}}" ><span  class="{{#otherMonth}}other-month{{/otherMonth}} {{#selected}}selected{{/selected}}">{{title}}</span></td>
    {{/enabled}}
    {{^enabled}}
    <td data-unix="{{dataUnix}}" class="disabled"><span class="{{#otherMonth}}other-month{{/otherMonth}}">{{title}}</span></td>
    {{/enabled}}
-    {{/.}}
+     {{/.}}
    </tr>
    {{/days.list}}
    </tbody>
@@ -1305,7 +1305,7 @@ var Config = {
    </div>
    {{/days.viewMode}}
    {{/days.enabled}}
-    {{#month.enabled}}
+     {{#month.enabled}}
    {{#month.viewMode}}
    <div class="datepicker-month-view">
    {{#month.list}}
@@ -1319,7 +1319,7 @@ var Config = {
    </div>
    {{/month.viewMode}}
    {{/month.enabled}}
-    {{#year.enabled }}
+     {{#year.enabled }}
    {{#year.viewMode }}
    <div class="datepicker-year-view" >
    {{#year.list}}
@@ -1333,7 +1333,7 @@ var Config = {
    </div>
    {{/year.viewMode }}
    {{/year.enabled }}
-    </div>
+     </div>
    {{#time}}
    {{#enabled}}
    <div class="datepicker-time-view">
@@ -1372,7 +1372,7 @@ var Config = {
    </div>
    {{/enabled}}
    {{/time}}
-    {{#toolbox}}
+     {{#toolbox}}
    {{#enabled}}
    <div class="toolbox ">
    <div class="btn-today">{{text.btnToday}}</div>
@@ -2789,9 +2789,9 @@ var View = function () {
         var that = this;
 
         if (this.model.state.ui.isInline) {
-            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').appendTo(that.model.inputElement);
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container-inline"></div>').insertAfter(that.model.inputElement);
         } else {
-            this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').appendTo('body');
+            this.$container = $('<div  id="' + this.id + '" class="datepicker-container"></div>').insertAfter(that.model.inputElement);
             this.hide();
             this.setPickerBoxPosition();
             this.addCompatibilityClass();
@@ -2837,9 +2837,20 @@ var View = function () {
             }
 
             if (this.model.options.position === 'auto') {
+
+                var inputTopRelativeToWindow = inputPosition.top - $(window).scrollTop();
+                var containerTop = 0;
+                var containerHeight = $('.datepicker-plot-area', this.$container).outerHeight();
+
+                if (inputTopRelativeToWindow < $(window).height() / 2) {
+                    containerTop = inputSize.height;
+                } else {
+                    containerTop = -containerHeight;
+                }
+
                 this.$container.css({
-                    left: inputPosition.left + 'px',
-                    top: inputSize.height + inputPosition.top + 'px'
+                    left: 0,
+                    top: containerTop + 'px'
                 });
             } else {
                 this.$container.css({
