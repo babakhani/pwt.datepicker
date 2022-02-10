@@ -41,7 +41,7 @@
     "markdown-doctest": "^0.9.1",
     "markdown-link-check": "^3.1.2",
     "mustache": "=3.0.1",
-    "node-sass": "^4.5.2",
+    "node-sass": "^7.0.0",
     "pre-commit": "^1.2.2",
     "sass-lint": "^1.10.2",
     "sync-pkg": "^0.7.2",
