@@ -86,7 +86,7 @@ class Input {
         $(that.elem).bind('keyup', function (e) {
             let $self = $(this);
             let trueKey = false;
-            if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode > 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {
+            if (e.keyCode === 8 || e.keyCode < 105 && e.keyCode >= 96 || e.keyCode < 58 && e.keyCode > 47 || (ctrlDown && (e.keyCode == vKey || $.inArray(e.keyCode, ctrlKey) > 0  ))) {
                 trueKey = true;
             }
             if (trueKey) {
