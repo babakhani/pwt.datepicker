@@ -84,6 +84,24 @@ class API {
      */
     destroy () {
         if(this.model){
+            // hide openned popup
+            this.model.api.hide();
+
+            // deattach eventHandlers
+            const ElemID = this.model.view.id;
+            $(this.model.inputElement).off();
+            $('#' + ElemID).off();
+            $(document).off('click', '#' + ElemID + ' .pwt-btn-today');
+            $(document).off('click', '#' + ElemID + ' .pwt-btn-calendar');
+            $(document).off('click', '#' + ElemID + ' .pwt-btn-submit');
+            $(document).off('click', '#' + ElemID + ' .pwt-btn');
+            $(document).off('click', '#' + ElemID + ' .up-btn');
+            $(document).off('click', '#' + ElemID + ' .down-btn');
+            $(document).off('click', '#' + ElemID + ' .datepicker-day-view td:not(.disabled)');
+            $(document).off('click', '#' + ElemID + ' .datepicker-month-view .month-item:not(.month-item-disable)');
+            $(document).off('click', '#' + ElemID + ' .datepicker-year-view .year-item:not(.year-item-disable)');
+            $('body').off('click', this.model.input._closePickerHandler);
+
             this.model.view.destroy();
             this.model.options.onDestroy(this.model);
             delete this.model;
