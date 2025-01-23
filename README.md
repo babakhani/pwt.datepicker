@@ -1,6 +1,12 @@
 Persian Date Picker
 ==============
 
+Important Notice: Project Deprecation
+I will no longer be maintaining or supporting this package. While the code remains accessible, please be advised that you use it at your own risk.
+
+Leap Year Issues
+If you encounter problems related to leap year handling, please review the dedicated discussion in GitHub Issue #421. This thread contains valuable community-contributed insights that may help resolve calendar-related edge cases.
+
 
 This Date picker work with Iranian calendar.
 
