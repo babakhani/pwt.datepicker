@@ -5,8 +5,7 @@ Persian Date Picker
 I will no longer be maintaining or supporting this package. While the code remains accessible, please be advised that you use it at your own risk.
 
 ### Leap Year Issues
-If you encounter problems related to leap year handling, please review the dedicated discussion in GitHub Issue #421. This thread contains valuable community-contributed insights that may help resolve calendar-related edge cases.
-
+If you encounter problems related to leap year handling, please review the dedicated discussion in GitHub Issue [#421](https://github.com/babakhani/pwt.datepicker/issues/421). 
 
 This Date picker work with Iranian calendar.
 
