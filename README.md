@@ -1,11 +1,19 @@
 Persian Date Picker
-==============
+===================
 
 ### Important Notice: Project Deprecation
+
 I will no longer be maintaining or supporting this package. While the code remains accessible, please be advised that you use it at your own risk.
 
+This package is deprecated primarily due to the deprecation of jQuery. jQuery is no longer a viable technology for modern web development, and it is not wise to continue adding features to projects that rely on it.
+
 ### Leap Year Issues
-If you encounter problems related to leap year handling, please review the dedicated discussion in GitHub Issue [#421](https://github.com/babakhani/pwt.datepicker/issues/421). 
+
+If you encounter problems related to leap year handling, please review the dedicated discussion in GitHub Issue [#421](https://github.com/babakhani/pwt.datepicker/issues/421).
+
+The leap year issue was resolved at the beginning of the project. For more details on the research and solution, refer to the documentation here: [Leap Year Research](https://babakhani.github.io/PersianWebToolkit/doc/persian-date/leapyear/).
+
+Additionally, the main configuration for leap year handling in the Persian Date library can be found in the documentation: [Leap Year Mode Configuration](https://babakhani.github.io/PersianWebToolkit/doc/persian-date/#toleapyearmode).
 
 -------------------
 
