@@ -127,14 +127,15 @@ class Input {
             if (!$(e.target).is(that.elem) && !$(e.target).is(that.model.view.$container) &&
                 $(e.target).closest('#' + that.model.view.$container.attr('id')).length == 0 && !$(e.target).is($(that.elem).children())) {
                 that.model.api.hide();
-                $('body').unbind('click', closePickerHandler);
+                $('body').unbind('click', that._closePickerHandler);
             }
         };
+        that._closePickerHandler = closePickerHandler;
 
         $(this.elem).on('focus click', Helper.debounce(function (evt) {
             that.model.api.show();
             if (that.model.state.ui.isInline === false) {
-                $('body').unbind('click', closePickerHandler).bind('click', closePickerHandler);
+                $('body').unbind('click', that._closePickerHandler).bind('click', that._closePickerHandler);
             }
             if (Helper.isMobile) {
                 $(this).blur();
